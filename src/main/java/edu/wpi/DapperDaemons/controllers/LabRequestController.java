@@ -43,7 +43,6 @@ public class LabRequestController extends UIController {
 
     try {
       labReqTable.getItems().addAll(dao.getAll());
-      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");

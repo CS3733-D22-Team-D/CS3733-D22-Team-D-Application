@@ -13,11 +13,6 @@ public abstract class MainHandler {
 
   public MainHandler() {
     DAO<Location> dao = DAOPouch.getLocationDAO();
-    try {
-    } catch (Exception e) {
-      System.err.print("Error, table was unable to be created\n");
-      return;
-    }
     /* Used the DAO object to get list */
     try {
       this.locations = dao.getAll();

@@ -72,7 +72,6 @@ public class MealController extends UIController {
 
     try {
       mealRequestsTable.getItems().addAll(dao.getAll());
-      System.out.println("Created Table");
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error, Mead Delivery table was unable to be created");
