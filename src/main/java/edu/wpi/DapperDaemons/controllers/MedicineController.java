@@ -2,14 +2,16 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -19,25 +21,30 @@ public class MedicineController extends UIController {
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
-  @FXML private ChoiceBox<String> priorityIn;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
-  @FXML private TextField patientDOB;
+  @FXML private DatePicker patientDOB;
 
-  DAO<MedicineRequest> dao;
-
+  DAO<MedicineRequest> medicineRequestDAO;
+  DAO<Patient> patientDAO;
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+
     super.initialize(location, resources);
     MedicineRequestInitializer init = new MedicineRequestInitializer();
 
-    init.initalizeInputs();
+
+    //initialize elements
+    init.initializeInputs();
     init.initializeRequests();
     init.initializeTable();
 
     try {
-      dao = new DAO<>(new MedicineRequest());
-      medicineRequests.getItems().addAll(dao.getAll());
+      medicineRequestDAO = new DAO<>(new MedicineRequest());
+      patientDAO = new DAO<>(new Patient());
+      medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
       System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
@@ -45,6 +52,10 @@ public class MedicineController extends UIController {
     }
   }
 
+
+  /**
+   * Clears the fields when clicked
+   */
   @FXML
   public void onClearClicked() {
     medNameIn.setValue("");
@@ -52,49 +63,91 @@ public class MedicineController extends UIController {
     priorityIn.setValue("");
     patientName.clear();
     patientLastName.clear();
-    patientDOB.clear();
+    patientDOB.setValue(null);
   }
+
+
+  /**
+   * first checks if the request is formed correctly, the checks for user clearance, then
+   */
 
   @FXML
   public void onSubmitClicked() {
-    if (!(medNameIn.getValue().trim().equals("")
-        || quantityIn.getText().trim().equals("")
-        || priorityIn.getValue().equals("")
-        || patientName.getText().equals("")
-        || patientLastName.getText().equals("")
-        || patientDOB.getText().equals(""))) {
 
-      int tempQuan;
+    //declare all request fields
+    Request.Priority priority;
+    int quantity;
+    String medName;
+    String patientID;
+    String requesterID;
+    String assigneeID;
+    String roomID;
+
+    //Check if all fields have a value if so, proceed
+    if (!(medNameIn.getValue().trim().equals("") || quantityIn.getText().trim().equals("") || priorityIn.getValue().equals("") || patientName.getText().equals("") || patientLastName.getText().equals("") || patientDOB.getValue().toString().equals(""))) {
+
+      //check if quantity is an int and not letters
+      boolean isAnInt = true;
       try {
-        tempQuan = Integer.parseInt(quantityIn.getText());
-      } catch (Exception e) {
-        quantityIn.clear();
-        return;
+        quantity = Integer.parseInt(quantityIn.getText());
+      }catch(Exception e) {
+        e.printStackTrace();
+        isAnInt = false;
       }
+      if(isAnInt){
 
-      String medName = medNameIn.getValue();
-      String requesterID = "TEST";
-      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
-      String patientID = patientName.getText() + patientLastName.getText() + patientDOB.getText();
 
-      addItem(
-          new MedicineRequest(
-              priority,
-              "ROOMIDofPATIENT",
-              "REQUESTERID",
-              "ASSIGNEEID",
-              patientID,
-              medName,
-              tempQuan));
-      onClearClicked();
+        //check if the patient info points to a real patient
+        boolean isAPatient = true;
+        patientID = patientName.getText() + patientLastName.getText() + patientDOB.getValue().getMonthValue() + patientDOB.getValue().getDayOfMonth() + patientDOB.getValue().getYear();
+        Patient patient = new Patient();
+        try {
+         patient = patientDAO.get(patientID);
+        } catch (SQLException e) {
+          e.printStackTrace();
+          isAPatient = false;
+        }
+        if(isAPatient){
+
+
+          //now we can create the request and send it
+
+          roomID = patient.getLocationID();
+          requesterID = "";
+          assigneeID
+
+        }else{
+          //TODO throw an error message saying that the patient doesnt exist
+        }
+      }else{
+        //TODO throw error message about quantity not being a number
+      }
+    }else {
+    //TODO: throw error message about empty fields
     }
+
+    onClearClicked();
+
+
+  }
+  @FXML
+  private boolean addItem(MedicineRequest request) {
+    boolean hasClearance = false;
+    try {
+      hasClearance = medicineRequestDAO.add(request);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    if(hasClearance)
+      medicineRequests.getItems().add(request);
+
+
+    return hasClearance;
   }
 
-  @FXML
-  private void addItem(MedicineRequest request) {
-    medicineRequests.getItems().add(request);
-    // TODO: Add request to database
-  }
+
+
+
 
   private class MedicineRequestInitializer {
     private void initializeTable() {
@@ -102,7 +155,7 @@ public class MedicineController extends UIController {
       helper.linkColumns(MedicineRequest.class);
     }
 
-    private void initalizeInputs() {
+    private void initializeInputs() {
       medNameIn.setItems(FXCollections.observableArrayList("One", "Two", "Three"));
       priorityIn.getItems().addAll("LOW", "MEDIUM", "HIGH");
     }

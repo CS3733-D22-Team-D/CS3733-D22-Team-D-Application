@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons.map;
 
 import edu.wpi.DapperDaemons.controllers.MapController;
-import edu.wpi.DapperDaemons.map.PositionInfo;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.ImageView;
