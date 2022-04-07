@@ -84,7 +84,6 @@ dSTOR00303,1680,1041,3,Tower,STOR,Bed and Recliner Parking,BRP
 dSTOR00403,1680,812,3,Tower,STOR,Bed and Recliner Parking,BRP
 dEXIT00401,1512,929,1,Tower,EXIT,West Plaza Entrance/Exit,WP
 dSTOR001L1,1668,855,L1,Tower,STOR,OR Bed Park,ORBP
-LOC1,-1,-1,SKY,HELL,DUNGEON,BUNGALOO,BUN
 FDEPT00101,1617,825,1,Tower,DEPT,Center for International Medicine,CIM
 FDEPT00201,1610,1120,1,Tower,DEPT,Bretholtz Center for Patients and Families,Bretholtz WR
 FDEPT00301,1721,931,1,Tower,DEPT,Multifaith Chapel,Chapel
