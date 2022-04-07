@@ -34,7 +34,7 @@ public class DefaultController extends UIController {
     }
     if (count == 10 & (System.currentTimeMillis() - startTime) < 10000) {
       count = 0;
-      switchScene("wongman.fxml", 761, 626);
+      switchScene("easterEgg.fxml", 761, 626);
     }
   }
 
