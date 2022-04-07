@@ -53,7 +53,6 @@ public class DAO<T extends TableObject> {
    */
   public T get(String primaryKey) throws SQLException {
     return orm.get(primaryKey);
-
   }
 
   /**
@@ -64,11 +63,11 @@ public class DAO<T extends TableObject> {
    */
   public boolean update(T type) throws SQLException {
     boolean hasClearance = SecurityController.getInstance().permissionToUpdate(type);
-if(hasClearance) {
-  orm.update(type);
-}
+    if (hasClearance) {
+      orm.update(type);
+    }
 
-return hasClearance;
+    return hasClearance;
   }
 
   /**
@@ -79,7 +78,7 @@ return hasClearance;
    */
   public boolean delete(T type) throws SQLException {
     boolean hasClearance = SecurityController.getInstance().permissionToDelete(type);
-    if(hasClearance) {
+    if (hasClearance) {
       orm.delete(type.getAttribute(1));
     }
     return hasClearance;
@@ -93,11 +92,10 @@ return hasClearance;
    */
   public boolean add(T type) throws SQLException {
     boolean hasClearance = SecurityController.getInstance().permissionToAdd(type);
-    if(hasClearance) {
+    if (hasClearance) {
       orm.add(type);
     }
     return hasClearance;
-
   }
 
   /**
