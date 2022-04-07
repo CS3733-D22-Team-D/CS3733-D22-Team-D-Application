@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,8 @@ public abstract class MainHandler {
   List<Location> locations;
 
   public MainHandler() {
-    DAO<Location> dao;
+    DAO<Location> dao = DAOPouch.getLocationDAO();
     try {
-      dao = new DAO<Location>(new Location());
     } catch (Exception e) {
       System.err.print("Error, table was unable to be created\n");
       return;
