@@ -67,7 +67,12 @@ public class MedicineController extends UIController {
   @FXML
   void onEditPriority(TableColumn.CellEditEvent<MedicineRequest, String> event) {
     event.getRowValue().setPriority(Request.Priority.valueOf(event.getNewValue()));
-    boolean worked = medicineRequestDAO.update(event.getRowValue());
+    boolean worked = false;
+    try {
+      medicineRequestDAO.update(event.getRowValue());
+    }catch(Exception e){
+      
+    }
   }
 
   /**
