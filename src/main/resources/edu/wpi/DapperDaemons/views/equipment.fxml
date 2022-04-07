@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.EquipmentRequestController">
+    <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+              <HBox prefHeight="46.0" prefWidth="301.0">
+                  <children>
+                      <VBox maxHeight="-Infinity" maxWidth="245.0" prefHeight="400.0" prefWidth="100.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                          <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                                  <children>
+                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule Requests">
+                                          <font>
+                                              <Font name="System Bold" size="23.0" />
+                                          </font>
+                                      </Text>
+                                  </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                  <children>
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room ID:">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </Text>
+                                      <TextField fx:id="roomNumber" style="-fx-background-color: #f1f0f0; -fx-background-radius: 7.5;" />
+                              <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin></Text>
+                              <ChoiceBox fx:id="priorityChoiceBox" prefHeight="40.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Type:">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </Text>
+                                      <CheckBox fx:id="IPCheck" mnemonicParsing="false" text="Infusion Pumps">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </CheckBox>
+                                      <CheckBox fx:id="BedsCheck" mnemonicParsing="false" text="Beds">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </CheckBox>
+                                      <CheckBox fx:id="PRCheck" mnemonicParsing="false" text="Patient Recliner">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </CheckBox>
+                                      <CheckBox fx:id="XRayCheck" mnemonicParsing="false" text="X-Ray">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </CheckBox>
+                                      <CheckBox fx:id="COCheck" mnemonicParsing="false" text="Clean Only">
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </CheckBox>
+                              <Label fx:id="errorLabel" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                  </children>
+                                  <padding>
+                                      <Insets left="30.0" right="30.0" />
+                                  </padding>
+                              </VBox>
+                        <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
+                           <children>
+                              <Button mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4; -fx-background-radius: 7.5;" text="Clear" textFill="WHITE" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Submit" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                          </children>
+                          <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="20.0" top="20.0" />
+                          </HBox.margin>
+                          <effect>
+                              <DropShadow>
+                                  <color>
+                                      <Color opacity="0.15000000596046448" />
+                                  </color>
+                              </DropShadow>
+                          </effect>
+                      </VBox>
+                      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: fffefe;" HBox.hgrow="ALWAYS">
+                          <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                                  <children>
+                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Requests">
+                                          <font>
+                                              <Font name="System Bold" size="23.0" />
+                                          </font>
+                                      </Text>
+                                  </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                  <children>
+                                      <TableView fx:id="equipmentRequestsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                                          <columnResizePolicy>
+                                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                          </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="reqID" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn fx:id="priority" prefWidth="75.0" text="Priority" />
+                                    <TableColumn fx:id="roomID" prefWidth="75.0" text="RoomID" />
+                                    <TableColumn fx:id="requester" prefWidth="75.0" text="Requester" />
+                                    <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn fx:id="equipID" prefWidth="75.0" text="EquipID" />
+                                    <TableColumn fx:id="equipType" prefWidth="75.0" text="EquipType" />
+                                    <TableColumn fx:id="cleanStatus" prefWidth="75.0" text="CleanStatus" />
+                                 </columns>
+                                      </TableView>
+                                  </children>
+                                  <VBox.margin>
+                                      <Insets />
+                                  </VBox.margin>
+                              </VBox>
+                          </children>
+                          <HBox.margin>
+                              <Insets bottom="30.0" left="20.0" right="30.0" top="20.0" />
+                          </HBox.margin>
+                          <effect>
+                              <DropShadow>
+                                  <color>
+                                      <Color opacity="0.15000000596046448" />
+                                  </color>
+                              </DropShadow>
+                          </effect>
+                      </VBox>
+                  </children>
+               <StackPane.margin>
+                  <Insets top="50.0" />
+               </StackPane.margin>
+              </HBox>
+            <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/home.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/rx.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/operating_room.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/dish.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/patient.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/shower.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/blood_bag.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#switchToMap" onMouseClicked="#switchToMap" text="Map" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/route_map.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/exit.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </left>
+               <top>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
+                           <children>
+                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/BrighamLogoWithBG.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" minWidth="30.0" prefHeight="51.0" prefWidth="34.0">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXHamburger fx:id="burg" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6">
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </JFXHamburger>
+                                    <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </JFXHamburger>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
+                           <children>
+                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/exitWithBG.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="32.0">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchToEquipmentDark" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Glyphs/moonWithBG.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="8.0">
+                           <children>
+                              <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Delivery" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="28.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="-10.0" right="50.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="7.0">
+                           <children>
+                              <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
+                              <Circle fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Circle>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </children>
+      </StackPane>
+    </children>
+</VBox>
