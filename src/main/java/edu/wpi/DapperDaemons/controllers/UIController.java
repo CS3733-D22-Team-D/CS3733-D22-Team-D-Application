@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -96,7 +97,8 @@ public abstract class UIController implements Initializable {
   }
 
   @FXML
-  public void goHome() throws IOException {
+  public void goHome(MouseEvent click) throws IOException {
+    System.out.println(click.getClickCount());
     switchScene("default.fxml", 635, 510);
   }
 
