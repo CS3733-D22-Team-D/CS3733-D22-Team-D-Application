@@ -54,6 +54,10 @@ public class PositionInfo {
     return loc.getBuilding();
   }
 
+  public String getLongName() {
+    return loc.getLongName();
+  }
+
   @Override
   public String toString() {
     return "("
