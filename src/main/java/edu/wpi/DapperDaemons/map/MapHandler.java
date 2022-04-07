@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.controllers;
+package edu.wpi.DapperDaemons.map;
 
 import java.util.ArrayList;
 import java.util.Arrays;
