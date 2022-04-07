@@ -5,10 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.map.GlyphHandler;
-import edu.wpi.DapperDaemons.map.LocationInfo;
-import edu.wpi.DapperDaemons.map.MapHandler;
-import edu.wpi.DapperDaemons.map.PositionInfo;
+import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -42,13 +38,15 @@ public class MapController extends UIController implements Initializable {
   @FXML private StackPane mapAssets;
 
   /* Labels for Room Information */
+  private RoomInfoBox infoBox;
+  @FXML private VBox roomInfoBox;
   @FXML private TextField floorLabel;
   @FXML private TextField nameLabel;
   @FXML private TextField nodeTypeLabel;
   @FXML private TextField buildingLabel;
 
   /* Create Location */
-  @FXML private Label createTitle;
+  private CreateBox createLocation;
   @FXML private Label selectLocationText;
   @FXML private VBox createBox;
   @FXML private TextField roomNameIn;
@@ -58,57 +56,61 @@ public class MapController extends UIController implements Initializable {
   /* Map Handlers */
   private MapHandler maps;
   private GlyphHandler glyphs;
-  public final double ZOOM_PROP = 0.025;
-  private boolean createActive = false;
-  private ImageView pin;
-  private PositionInfo selected;
+  private PositionHandler positions;
+  private PinHandler pin;
 
   /* Database stuff */
   private DAO<Location> dao;
   private DAO<MedicalEquipment> equipmentDAO;
   private DAO<Patient> patientDAO;
-  private List<PositionInfo> iconPositions;
 
   /* Info Assets */
   @FXML private Button closeButton;
-  @FXML private VBox roomInfoBox;
 
   @FXML private ImageView equipList;
   @FXML private ImageView personList;
   @FXML private ImageView requestList;
   @FXML private VBox tableContainer;
-  @FXML private TableView<MedicalEquipment> listTable;
   private TableHelper<MedicalEquipment> equipHelper;
 
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // Initialize default page
     super.initialize(location, resources);
+
+    List<PositionInfo> origPositions = new ArrayList<>();
+    // Initialize DAO objects
     try {
       dao = new DAO<>(new Location());
       equipmentDAO = new DAO<>(new MedicalEquipment());
       patientDAO = new DAO<>(new Patient());
-      iconPositions = new ArrayList<>();
-      dao.getAll().forEach(l -> iconPositions.add(new PositionInfo(l)));
+
+      dao.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
-      e.printStackTrace();
       System.err.println("DAO could not be created in MapController\n");
     }
-    this.maps = new MapHandler(mapFloorL2, mapFloorL1, mapFloorG, mapFloor1, mapFloor2, mapFloor3);
+
+    this.maps =
+        new MapHandler(
+            mapAssets, mapFloorL2, mapFloorL1, mapFloorG, mapFloor1, mapFloor2, mapFloor3);
     maps.setMap(mapFloor1);
 
-    this.glyphs = new GlyphHandler(glyphsLayer, iconPositions, this);
+    this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
     glyphs.filterByFloor("1");
 
-    pin = new ImageView(glyphs.GLYPH_PATH + "pin.png");
-    pinPane.getChildren().add(pin);
-    pin.setVisible(false);
+    this.positions = new PositionHandler(origPositions);
 
-    equipHelper = new TableHelper<MedicalEquipment>(listTable, 1);
-    equipHelper.linkColumns(MedicalEquipment.class);
+    this.pin = new PinHandler(new ImageView(glyphs.GLYPH_PATH + "pin.png"), pinPane);
 
-    disableCreateLocationPopup();
-    disableRoomInfoPopup();
+    this.infoBox =
+        new RoomInfoBox(
+            roomInfoBox, tableContainer, nameLabel, floorLabel, nodeTypeLabel, buildingLabel);
+    this.createLocation =
+        new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
+
+    closeCreate();
+    closeRoom();
   }
 
   /**
@@ -118,200 +120,131 @@ public class MapController extends UIController implements Initializable {
    */
   @FXML
   public void onMapClicked(MouseEvent click) {
-    if (!createActive) {
-      PositionInfo pos = getPositionInfo((int) click.getX(), (int) click.getY());
-      if (pos == null || !click.isStillSincePress()) {
-        closeRoomInfoPopUp();
-        tableContainer.setVisible(false);
-      } else {
-        // System.out.println("Clicking on: (" + (int) click.getX() + ", " + (int) click.getY() +
-        // ")"); // For debug
-        List<MedicalEquipment> equipment = new ArrayList<>();
-        try {
-          equipment = equipmentDAO.filter(6, pos.getId());
-        } catch (Exception e) {
-          System.err.println("Could not filter equipmentDAO");
-        }
-        listTable.getItems().addAll(equipment);
-        System.out.println(equipment);
-        LocationInfo lloc = new LocationInfo(pos);
-        this.selected = pos;
-        initRoomInfoPopUp();
-        // System.out.println("Location Found!");
-        nameLabel.setText(lloc.getLongName());
-        floorLabel.setText(lloc.getFloor());
-        nodeTypeLabel.setText(lloc.getNodeType());
-        buildingLabel.setText(lloc.getBuilding());
-      }
-    } else {
-      selectLocationText.setText("Valid location selected");
+    // Stops drag clicking
+    if (!click.isStillSincePress()) return;
 
-      pin.setX((int) click.getX() - 16);
-      pin.setY((int) click.getY() - 32);
+    // Location of click
+    int x = (int) click.getX();
+    int y = (int) click.getY();
+    String floor = maps.getFloor();
 
-      pin.setVisible(true);
+    // Check if clicking should place pins
+    if (createBox.isVisible()) {
+      pin.move(x, y);
+      createLocation.select();
+      return;
     }
-  }
 
-  /** Removes all data from the popup window when the close button is pressed */
-  @FXML
-  public void onRoomInfoClose() {
-    disableRoomInfoPopup();
-    tableContainer.setVisible(false);
-  }
+    PositionInfo pos = positions.get(x, y, floor);
 
-  /** Initializes the popup for room info */
-  @FXML
-  public void initRoomInfoPopUp() {
-    // Enable Vbox
-    roomInfoBox.setVisible(true);
-    // Add Text for title
-  }
-  /** Closes the popup for room info */
-  private void closeRoomInfoPopUp() {
-    nameLabel.setText("");
-    floorLabel.setText("");
-    nodeTypeLabel.setText("");
-    roomInfoBox.setVisible(false);
+    // Close tabs if nothing selected
+    if (pos == null) {
+      infoBox.close();
+      return;
+    }
+
+    // Gather data of location
+    List<MedicalEquipment> equipment = new ArrayList<>();
+    List<Patient> patients = new ArrayList<>();
+    try {
+      equipment = equipmentDAO.filter(6, pos.getId());
+      patients = patientDAO.filter(6, pos.getId());
+    } catch (Exception e) {
+      System.err.println("Could not filter through DAO");
+    }
+    System.out.println(patients);
+    infoBox.openLoc(pos, equipment, patients);
+    infoBox.open();
   }
 
   /** Disables the pop-up for room info */
   @FXML
-  public void disableRoomInfoPopup() {
-    // Disable Vbox
-    roomInfoBox.setVisible(false);
-    // Remove Text
-    nameLabel.setText("");
-    floorLabel.setText("");
-    nodeTypeLabel.setText("");
+  public void closeRoom() {
+    infoBox.close();
   }
 
   @FXML
-  public void openCreateLocation() {
-    if (!createActive) {
-      initCreateLocationPopUp();
-      createActive = true;
-    }
+  public void openCreate() {
+    createLocation.open();
   }
 
-  /** Removes all data from the create popup window when the close button is pressed */
+  /** Disables the pop-up for create location */
   @FXML
-  public void onCreateLocationClose() {
-    disableCreateLocationPopup();
+  public void closeCreate() {
+    createLocation.close();
+    pin.clear();
   }
 
   @FXML
   void onSubmitCreate() {
-    if (!roomNameIn.getText().trim().equals("")
-        && !roomNumberIn.getText().trim().equals("")
-        && !typeIn.getValue().equals("")
-        && !selectLocationText.getText().equals("Please select a valid location")) {
-      int xcoord = (int) pin.getX();
-      int ycoord = (int) pin.getY();
-      String floor = getFloor(maps.getFloor());
-      String building = "TOWER";
-      String nodeType = typeIn.getValue();
-      String longName = roomNameIn.getText();
-      String shortName;
-      if (longName.length() > 3) {
-        shortName = floor + roomNameIn.getText().substring(0, 3);
-      } else {
-        shortName = floor + longName;
-      }
-      String nodeID = building + shortName + nodeType;
-
-      Location create =
-          new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+    if (createLocation.allFilled()) {
+      Location create = createLocation.create(pin.getX(), pin.getY(), maps.getFloor());
       try {
         dao.add(create);
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
-        iconPositions.add(p);
-        disableCreateLocationPopup();
+        closeCreate();
       } catch (Exception e) {
-        selectLocationText.setText("Create Location Error");
+        System.err.println("Could not add to DAO");
       }
     }
   }
 
   @FXML
   public void onConfirmChanges() {
-    if (!nameLabel.getText().trim().equals("")
-        && !nodeTypeLabel.getText().trim().equals("")
-        && !buildingLabel.getText().trim().equals("")) {
-      String type = nodeTypeLabel.getText();
-      String building = buildingLabel.getText();
-      String longName = nameLabel.getText();
-      String shortName;
-      if (longName.length() > 3) {
-        shortName = longName.substring(0, 3);
-      } else shortName = longName;
-      Location editedLoc =
-          new Location(
-              selected.getId(),
-              selected.getX(),
-              selected.getY(),
-              selected.getFloor(),
-              building,
-              type,
-              longName,
-              shortName);
+    if (infoBox.allFilled()) {
+      Location editedLoc = infoBox.change(positions.getSelected());
       try {
-        //        dao.delete(selected.getLoc());
-        //        dao.add(editedLoc);
         dao.update(editedLoc);
-        PositionInfo p = new PositionInfo(editedLoc);
-        glyphs.remove(selected);
-        glyphs.addPosition(p);
-        iconPositions.add(p);
+        glyphs.update(positions.getSelected(), new PositionInfo(editedLoc));
       } catch (Exception e) {
         System.err.println("Location could not be updated");
       }
-      closeRoomInfoPopUp();
+      infoBox.close();
     }
-  }
-
-  /** Initializes the popup for room info */
-  @FXML
-  public void initCreateLocationPopUp() {
-    // Enable Vbox
-    createBox.setVisible(true);
-    // Add Text for title
-    createTitle.setText("Create Location");
-  }
-
-  /** Disables the pop-up for create location */
-  @FXML
-  public void disableCreateLocationPopup() {
-    createBox.setVisible(false);
-    createActive = false;
-    roomNameIn.setText("");
-    roomNumberIn.setText("");
-    typeIn.setValue("");
-    selectLocationText.setText("Please select a valid location");
-    pin.setVisible(false);
   }
 
   @FXML
   public void zoomIn(MouseEvent click) {
-    zoom(ZOOM_PROP * 3);
+    maps.zoom(3);
   }
 
   @FXML
   public void zoomOut(MouseEvent click) {
-    zoom(-ZOOM_PROP * 3);
+    maps.zoom(-3);
   }
 
   @FXML
   public void scrollMap(ScrollEvent scroll) {
-    zoom(ZOOM_PROP * scroll.getDeltaY() / scroll.getMultiplierY());
-    closeRoomInfoPopUp();
+    maps.zoom(scroll.getDeltaY() / scroll.getMultiplierY());
+    infoBox.close();
     scroll.consume();
   }
 
-  private void zoom(double value) {
-    mapAssets.setScaleX(mapAssets.getScaleX() + value);
-    mapAssets.setScaleY(mapAssets.getScaleY() + value);
+  @FXML
+  public void onDeleteLocation(MouseEvent event) {
+    try {
+      dao.delete(positions.getSelected().getLoc());
+      glyphs.remove(positions.getSelected());
+    } catch (Exception e) {
+      System.err.println("Failed to remove location.");
+    }
+    infoBox.close();
+  }
+
+  @FXML
+  void showEquipList(MouseEvent event) {
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.EQUIPMENT);
+  }
+
+  @FXML
+  void showPersonList(MouseEvent event) {
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.PATIENT);
+  }
+
+  @FXML
+  void showReqList(MouseEvent event) {
+    // infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
   }
 
   @FXML
@@ -348,72 +281,5 @@ public class MapController extends UIController implements Initializable {
   public void setFloorL2(MouseEvent event) {
     maps.setMap(mapFloorL2);
     glyphs.filterByFloor("L2");
-  }
-
-  @FXML
-  public void onDeleteLocation(MouseEvent event) {
-    try {
-      dao.delete(selected.getLoc());
-      glyphs.remove(selected);
-    } catch (Exception e) {
-      System.err.println("Failed to remove location.");
-    }
-    selected = null;
-    closeRoomInfoPopUp();
-  }
-
-  /**
-   * Searches array list of positions for a nearby location
-   *
-   * @param x position to look on x-axis
-   * @param y position to look on y-axis
-   * @return The nearby position info, null otherwise
-   */
-  private PositionInfo getPositionInfo(int x, int y) {
-    for (PositionInfo p : iconPositions) {
-      if (p.isNear(x, y, getFloor(maps.getFloor()))) return p;
-    }
-    return null;
-  }
-
-  /**
-   * Gets the floor num based on the mapNum
-   *
-   * @param mapNum floor int
-   * @return floor name as string
-   */
-  private String getFloor(int mapNum) {
-    switch (mapNum) {
-      case 0:
-        return "L2";
-      case 1:
-        return "L1";
-      case 2:
-        return "G";
-      case 3:
-        return "1";
-      case 4:
-        return "2";
-      case 5:
-        return "3";
-      default:
-        return "ERROR";
-    }
-  }
-
-  @FXML
-  void showEquipList(MouseEvent event) {
-    if (tableContainer.isVisible()) tableContainer.setVisible(false);
-    else tableContainer.setVisible(true);
-  }
-
-  @FXML
-  void showPersonList(MouseEvent event) {
-    tableContainer.setVisible(true);
-  }
-
-  @FXML
-  void showReqList(MouseEvent event) {
-    tableContainer.setVisible(true);
   }
 }
