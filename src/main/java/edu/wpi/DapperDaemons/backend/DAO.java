@@ -53,6 +53,7 @@ public class DAO<T extends TableObject> {
    */
   public T get(String primaryKey) throws SQLException {
     return orm.get(primaryKey);
+
   }
 
   /**
@@ -61,8 +62,13 @@ public class DAO<T extends TableObject> {
    * @param type : the object you wish to update
    * @throws SQLException
    */
-  public void update(T type) throws SQLException {
-    orm.update(type);
+  public boolean update(T type) throws SQLException {
+    boolean hasClearance = SecurityController.getInstance().permissionToUpdate(type);
+if(hasClearance) {
+  orm.update(type);
+}
+
+return hasClearance;
   }
 
   /**
@@ -71,8 +77,12 @@ public class DAO<T extends TableObject> {
    * @param type : the TableObject you wish to delete
    * @throws SQLException
    */
-  public void delete(T type) throws SQLException {
-    orm.delete(type.getAttribute(1));
+  public boolean delete(T type) throws SQLException {
+    boolean hasClearance = SecurityController.getInstance().permissionToDelete(type);
+    if(hasClearance) {
+      orm.delete(type.getAttribute(1));
+    }
+    return hasClearance;
   }
 
   /**
@@ -81,8 +91,13 @@ public class DAO<T extends TableObject> {
    * @param type
    * @throws SQLException
    */
-  public void add(T type) throws SQLException {
-    orm.add(type);
+  public boolean add(T type) throws SQLException {
+    boolean hasClearance = SecurityController.getInstance().permissionToAdd(type);
+    if(hasClearance) {
+      orm.add(type);
+    }
+    return hasClearance;
+
   }
 
   /**
