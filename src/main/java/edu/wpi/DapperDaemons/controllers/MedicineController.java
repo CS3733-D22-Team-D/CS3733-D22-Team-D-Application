@@ -13,12 +13,14 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class MedicineController extends UIController {
   @FXML private TableView<MedicineRequest> medicineRequests;
   private TableHelper<MedicineRequest> helper;
+  @FXML private TableColumn<MedicineRequest, String> priorityCol;
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
@@ -60,6 +62,12 @@ public class MedicineController extends UIController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+  }
+
+  @FXML
+  void onEditPriority(TableColumn.CellEditEvent<MedicineRequest, String> event) {
+    event.getRowValue().setPriority(Request.Priority.valueOf(event.getNewValue()));
+    boolean worked = medicineRequestDAO.update(event.getRowValue());
   }
 
   /**
@@ -162,6 +170,8 @@ public class MedicineController extends UIController {
     private void initializeTable() {
       helper = new TableHelper<>(medicineRequests, 0);
       helper.linkColumns(MedicineRequest.class);
+
+      helper.addEnumEditProperty(priorityCol, Request.Priority.class);
     }
 
     private void initializeInputs() {

@@ -190,7 +190,7 @@
                                           </columnResizePolicy>
                                  <columns>
                                     <TableColumn fx:id="ReqID" prefWidth="75.0" text="ReqID" />
-                                    <TableColumn fx:id="Priority" prefWidth="75.0" text="Priority" />
+                                    <TableColumn fx:id="priorityCol" onEditCommit="#onEditPriority" prefWidth="75.0" text="Priority" />
                                     <TableColumn fx:id="RoomID" prefWidth="75.0" text="RoomID" />
                                     <TableColumn fx:id="Requester" prefWidth="75.0" text="Requester" />
                                     <TableColumn fx:id="Assignee" prefWidth="75.0" text="Assignee" />
