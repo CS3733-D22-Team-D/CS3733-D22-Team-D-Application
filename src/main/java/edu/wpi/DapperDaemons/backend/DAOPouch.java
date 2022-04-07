@@ -17,6 +17,7 @@ public class DAOPouch {
   private static DAO<Location> locationDAO;
   private static DAO<MedicalEquipment> medicalEquipmentDAO;
   private static DAO<Patient> patientDAO;
+  private static DAO<LocationNodeConnections> nodeDAO;
 
   private DAOPouch() {}
 
@@ -76,5 +77,9 @@ public class DAOPouch {
 
   public static DAO<Patient> getPatientDAO() {
     return patientDAO;
+  }
+
+  public static DAO<LocationNodeConnections> getNodeDAO() {
+    return nodeDAO;
   }
 }

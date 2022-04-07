@@ -21,13 +21,13 @@ public class csvLoader {
     filenames.put("LabRequest", new LabRequest());
     filenames.put("Employee", new Employee());
     filenames.put("MealDeliveryRequest", new MealDeliveryRequest());
-    filenames.put("PatientTransportRequest", new PatientTransportRequest()); // Currently not
-    // working but I don't really care
+    filenames.put("PatientTransportRequest", new PatientTransportRequest());
     filenames.put("SanitationRequest", new SanitationRequest());
     filenames.put("MedicalEquipment", new MedicalEquipment());
     filenames.put("Patient", new Patient());
     filenames.put("MedicineRequest", new MedicineRequest());
     filenames.put("Accounts", new Account());
+    filenames.put("AllEdges", new LocationNodeConnections());
   }
 
   private csvLoader() {}
