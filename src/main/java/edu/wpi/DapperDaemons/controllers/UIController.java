@@ -107,7 +107,7 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void switchToLabRequest() throws IOException {
-    //TODO: Revert this switch back to labRequest.fxml
+    // TODO: Revert this switch back to labRequest.fxml
     switchScene("errorMessage.fxml", 575, 575);
   }
 

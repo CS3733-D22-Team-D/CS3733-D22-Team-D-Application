@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -28,17 +29,15 @@ public class MedicineController extends UIController {
 
   DAO<MedicineRequest> medicineRequestDAO;
   DAO<Patient> patientDAO;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
 
     super.initialize(location, resources);
     MedicineRequestInitializer init = new MedicineRequestInitializer();
 
-
-    //initialize elements
+    // initialize elements
     init.initializeInputs();
-    init.initializeRequests();
     init.initializeTable();
 
     try {
@@ -52,10 +51,7 @@ public class MedicineController extends UIController {
     }
   }
 
-
-  /**
-   * Clears the fields when clicked
-   */
+  /** Clears the fields when clicked */
   @FXML
   public void onClearClicked() {
     medNameIn.setValue("");
@@ -66,70 +62,89 @@ public class MedicineController extends UIController {
     patientDOB.setValue(null);
   }
 
-
   /**
-   * first checks if the request is formed correctly, the checks for user clearance, then
+   * first checks if the request is formed correctly, then checks for user clearance, then sends the
+   * request
    */
-
   @FXML
   public void onSubmitClicked() {
 
-    //declare all request fields
+    // declare all request fields
     Request.Priority priority;
-    int quantity;
+    int quantity = 0;
     String medName;
     String patientID;
     String requesterID;
     String assigneeID;
     String roomID;
 
-    //Check if all fields have a value if so, proceed
-    if (!(medNameIn.getValue().trim().equals("") || quantityIn.getText().trim().equals("") || priorityIn.getValue().equals("") || patientName.getText().equals("") || patientLastName.getText().equals("") || patientDOB.getValue().toString().equals(""))) {
+    // Check if all fields have a value if so, proceed
+    if (!(medNameIn.getValue().trim().equals("")
+        || quantityIn.getText().trim().equals("")
+        || priorityIn.getValue().equals("")
+        || patientName.getText().equals("")
+        || patientLastName.getText().equals("")
+        || patientDOB.getValue().toString().equals(""))) {
 
-      //check if quantity is an int and not letters
+      // check if quantity is an int and not letters
       boolean isAnInt = true;
       try {
         quantity = Integer.parseInt(quantityIn.getText());
-      }catch(Exception e) {
+      } catch (Exception e) {
         e.printStackTrace();
         isAnInt = false;
       }
-      if(isAnInt){
+      if (isAnInt) {
 
-
-        //check if the patient info points to a real patient
+        // check if the patient info points to a real patient
         boolean isAPatient = true;
-        patientID = patientName.getText() + patientLastName.getText() + patientDOB.getValue().getMonthValue() + patientDOB.getValue().getDayOfMonth() + patientDOB.getValue().getYear();
+        patientID =
+            patientName.getText()
+                + patientLastName.getText()
+                + patientDOB.getValue().getMonthValue()
+                + patientDOB.getValue().getDayOfMonth()
+                + patientDOB.getValue().getYear();
         Patient patient = new Patient();
         try {
-         patient = patientDAO.get(patientID);
+          patient = patientDAO.get(patientID);
         } catch (SQLException e) {
           e.printStackTrace();
           isAPatient = false;
         }
-        if(isAPatient){
+        if (isAPatient) {
 
-
-          //now we can create the request and send it
+          // now we can create the request and send it
 
           roomID = patient.getLocationID();
-          requesterID = "";
-          assigneeID
+          requesterID = SecurityController.getInstance().getUser().getNodeID();
+          assigneeID = "null";
+          priority = Request.Priority.valueOf(priorityIn.getValue());
+          medName = medNameIn.getValue();
 
-        }else{
-          //TODO throw an error message saying that the patient doesnt exist
+          boolean wentThrough =
+              addItem(
+                  new MedicineRequest(
+                      priority, roomID, requesterID, assigneeID, patientID, medName, quantity));
+
+          if (!wentThrough) {
+
+            // TODO throw error saying no clearance allowed
+
+          }
+
+        } else {
+          // TODO throw an error message saying that the patient doesnt exist
         }
-      }else{
-        //TODO throw error message about quantity not being a number
+      } else {
+        // TODO throw error message about quantity not being a number
       }
-    }else {
-    //TODO: throw error message about empty fields
+    } else {
+      // TODO: throw error message about empty fields
     }
 
     onClearClicked();
-
-
   }
+
   @FXML
   private boolean addItem(MedicineRequest request) {
     boolean hasClearance = false;
@@ -138,16 +153,10 @@ public class MedicineController extends UIController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    if(hasClearance)
-      medicineRequests.getItems().add(request);
-
+    if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
   }
-
-
-
-
 
   private class MedicineRequestInitializer {
     private void initializeTable() {
@@ -156,12 +165,8 @@ public class MedicineController extends UIController {
     }
 
     private void initializeInputs() {
-      medNameIn.setItems(FXCollections.observableArrayList("One", "Two", "Three"));
+      medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
       priorityIn.getItems().addAll("LOW", "MEDIUM", "HIGH");
-    }
-
-    private void initializeRequests() {
-      // TODO: Pull data from database
     }
   }
 }
