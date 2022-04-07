@@ -22,11 +22,11 @@ public class ORM<T extends TableObject> {
     tableName = type.getTableName();
 
     Statement stmt = conn.createStatement();
-    try {
-      stmt.execute(initString);
-    } catch (SQLException e) {
-      System.out.println("Table already created");
-    }
+    //    try {
+    //      stmt.execute(initString);
+    //    } catch (SQLException e) {
+    //      System.out.println("Table already created");
+    //    }
     String query = "SELECT * FROM " + tableName;
     ResultSet resultSet = stmt.executeQuery(query);
     ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
@@ -43,11 +43,11 @@ public class ORM<T extends TableObject> {
     tableName = type.getTableName();
 
     Statement stmt = conn.createStatement();
-    try {
-      stmt.execute(initString);
-    } catch (SQLException e) {
-      System.out.printf("%s table already created\n", tableName);
-    }
+    //    try {
+    //      stmt.execute(initString);
+    //    } catch (SQLException e) {
+    //      System.out.printf("%s table already created\n", tableName);
+    //    }
     String query = "SELECT * FROM " + tableName;
     ResultSet resultSet = stmt.executeQuery(query);
     ResultSetMetaData resultSetMetaData = resultSet.getMetaData();

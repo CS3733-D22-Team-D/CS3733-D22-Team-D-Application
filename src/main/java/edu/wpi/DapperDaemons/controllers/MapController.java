@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -64,9 +65,9 @@ public class MapController extends UIController implements Initializable {
   private PositionInfo selected;
 
   /* Database stuff */
-  private DAO<Location> dao;
-  private DAO<MedicalEquipment> equipmentDAO;
-  private DAO<Patient> patientDAO;
+  private DAO<Location> dao = DAOPouch.getLocationDAO();
+  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   private List<PositionInfo> iconPositions;
 
   /* Info Assets */
@@ -85,9 +86,6 @@ public class MapController extends UIController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      dao = new DAO<>(new Location());
-      equipmentDAO = new DAO<>(new MedicalEquipment());
-      patientDAO = new DAO<>(new Patient());
       iconPositions = new ArrayList<>();
       dao.getAll().forEach(l -> iconPositions.add(new PositionInfo(l)));
     } catch (Exception e) {

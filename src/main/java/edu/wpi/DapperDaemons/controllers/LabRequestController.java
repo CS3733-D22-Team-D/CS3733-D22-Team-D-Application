@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -28,7 +29,7 @@ public class LabRequestController extends UIController {
   @FXML private JFXComboBox<String> procedureComboBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> dao;
+  private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
@@ -41,7 +42,6 @@ public class LabRequestController extends UIController {
     init.initializeRequests();
 
     try {
-      dao = new DAO<LabRequest>(new LabRequest());
       labReqTable.getItems().addAll(dao.getAll());
       System.out.println("Created table");
     } catch (Exception e) {
