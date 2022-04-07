@@ -11,37 +11,48 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class AStar {
-  private DAO<Location> locationDAO;
   private List<Location> locations;
-  private DAO<LocationNodeConnections> nodeConnectionsDAO;
   private List<LocationNodeConnections> nodeConnections;
+
+  /**
+   * Creates an AStar helper class!!
+   *
+   * @throws SQLException only throws exception when the getAll calls no work
+   */
+  public AStar() throws SQLException {
+    locations = DAOPouch.getLocationDAO().getAll();
+    nodeConnections = DAOPouch.getLocationNodeDAO().getAll();
+  }
 
   /**
    * Returns a list of location nodeID's for the path from one place to the next
    *
    * @param startLocation the starting location's nodeID
    * @param endLocation the ending location's nodeID
-   * @throws SQLException only throws when locationDAO.getAll() doesn't work
    */
-  public AStar(String startLocation, String endLocation) throws SQLException {
+  public List<String> getPath(String startLocation, String endLocation) {
     PriorityQueue<WalkableNode> queue = new PriorityQueue<>();
-    HashMap<String, WalkableNode> moveOrder = new HashMap<>();
+    HashMap<String, WalkableNode> moveOrder = new HashMap<>(); // The path actually taken
     // Uses the location's nodeID as a key for the previous node's WalkableNode
     HashMap<String, Double> costSoFar = new HashMap<>();
     // Uses the location's nodeID as a key for the previous node's WalkableNode
-    locations = locationDAO.getAll();
-    nodeConnections = nodeConnectionsDAO.getAll();
 
     queue.add(new WalkableNode(startLocation, 0.0));
+    moveOrder.put(startLocation, null);
+    costSoFar.put(startLocation, 0.0);
 
     while (!queue.isEmpty()) {
       WalkableNode current = queue.remove(); // Grab the next node
+      System.out.println("Currently at " + current.getLocationName());
 
-      if (current.getLocationName().equals(endLocation)) break;
+      if (current.getLocationName().equals(endLocation)) {
+        System.out.println("It Reached the goal!!");
+        break;
+      }
 
       for (String nextLocation : getNeighbors(current)) {
         Double new_cost =
-            costSoFar.get(current)
+            costSoFar.get(current.getLocationName())
                 + getDistance(
                     current.getLocationName(),
                     nextLocation); // add the distance from current to next
@@ -50,6 +61,7 @@ public class AStar {
                 && !moveOrder
                     .keySet()
                     .contains(nextLocation)) { // If nextLocation isn't in the queue,
+          System.out.println("Saving the location " + nextLocation + " in the path");
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
           Double priority = new_cost + getDistance(nextLocation, endLocation);
@@ -59,16 +71,40 @@ public class AStar {
         }
       }
     }
+
+    List<String> path = new ArrayList<>();
+    String current = endLocation;
+    if (moveOrder.get(current) != null) {
+      while (moveOrder.get(current) != null) {
+        path.add(current);
+        current = moveOrder.get(current).getLocationName();
+      }
+    }
+
+    List<String> forwardPath = new ArrayList<>();
+    for (int i = 0, j = path.size() - 1; i < j; i++) {
+      path.add(i, path.remove(j));
+    }
+    if (path.isEmpty()) {
+      path.add("Path Not Found");
+    }
+    return path;
   }
 
   private List<String> getNeighbors(WalkableNode currentLocation) {
     List<LocationNodeConnections> connected;
     List<String> walkableNode = new ArrayList<>();
     // List of walkable connected nodes as strings using their nodeID
-    connected = nodeConnectionsDAO.filter(nodeConnections, 2, currentLocation.getLocationName());
+    boolean flipFlop = true;
+    connected =
+        DAOPouch.getLocationNodeDAO().filter(nodeConnections, 3, currentLocation.getLocationName());
+    if(connected.isEmpty()){
+
+    }
     for (LocationNodeConnections location : connected) {
-      String nodeID = location.getConnectionTwo();
+      String nodeID = location.getConnectionOne();
       walkableNode.add(nodeID); // Gets the connected node as a String
+      System.out.println("Neighbor node " + nodeID); // For letting me see stuff
     }
     return walkableNode; // returns connected nodeID's
   }

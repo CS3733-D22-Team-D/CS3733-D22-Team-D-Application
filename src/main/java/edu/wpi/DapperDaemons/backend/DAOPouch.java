@@ -33,6 +33,7 @@ public class DAOPouch {
     locationDAO = new DAO(new Location());
     medicalEquipmentDAO = new DAO(new MedicalEquipment());
     patientDAO = new DAO(new Patient());
+    nodeDAO = new DAO(new LocationNodeConnections());
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -79,7 +80,7 @@ public class DAOPouch {
     return patientDAO;
   }
 
-  public static DAO<LocationNodeConnections> getNodeDAO() {
+  public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
   }
 }
