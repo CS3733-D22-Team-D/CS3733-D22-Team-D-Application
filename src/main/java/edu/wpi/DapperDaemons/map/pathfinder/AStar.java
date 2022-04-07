@@ -5,10 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.LocationNodeConnections;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class AStar {
   private List<Location> locations;
@@ -43,7 +40,7 @@ public class AStar {
 
     while (!queue.isEmpty()) {
       WalkableNode current = queue.remove(); // Grab the next node
-      System.out.println("Currently at " + current.getLocationName());
+      //      System.out.println("Currently at " + current.getLocationName());
 
       if (current.getLocationName().equals(endLocation)) {
         System.out.println("It Reached the goal!!");
@@ -61,7 +58,7 @@ public class AStar {
                 && !moveOrder
                     .keySet()
                     .contains(nextLocation)) { // If nextLocation isn't in the queue,
-          System.out.println("Saving the location " + nextLocation + " in the path");
+          //          System.out.println("Saving the location " + nextLocation + " in the path");
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
           Double priority = new_cost + getDistance(nextLocation, endLocation);
@@ -95,16 +92,21 @@ public class AStar {
     List<LocationNodeConnections> connected;
     List<String> walkableNode = new ArrayList<>();
     // List of walkable connected nodes as strings using their nodeID
-    boolean flipFlop = true;
     connected =
         DAOPouch.getLocationNodeDAO().filter(nodeConnections, 3, currentLocation.getLocationName());
-    if(connected.isEmpty()){
-
+    List<Boolean> flipFlop = new ArrayList<>(Arrays.asList(new Boolean[connected.size()]));
+    Collections.fill(flipFlop, Boolean.FALSE); // Helps the program decide which column to look in
+    for (LocationNodeConnections connection :
+        DAOPouch.getLocationNodeDAO()
+            .filter(nodeConnections, 2, currentLocation.getLocationName())) {
+      flipFlop.add(Boolean.TRUE); // Switches the column to the second one to look in
+      connected.add(connection);
     }
     for (LocationNodeConnections location : connected) {
       String nodeID = location.getConnectionOne();
+      if (flipFlop.get(connected.indexOf(location))) nodeID = location.getConnectionTwo();
       walkableNode.add(nodeID); // Gets the connected node as a String
-      System.out.println("Neighbor node " + nodeID); // For letting me see stuff
+      //      System.out.println("Neighbor node " + nodeID); // For letting me see stuff
     }
     return walkableNode; // returns connected nodeID's
   }
@@ -122,7 +124,7 @@ public class AStar {
       current = locationDAO.filter(locations, 1, currentLocation).get(0);
       next = locationDAO.filter(locations, 1, nextLocation).get(0);
     } catch (Exception e) {
-      e.printStackTrace();
+      //      e.printStackTrace();
       System.out.println("Couldn't find location in table");
     }
     Double distance =
