@@ -6,14 +6,12 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.map.*;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -65,13 +63,7 @@ public class MapController extends UIController implements Initializable {
   private DAO<Patient> patientDAO;
 
   /* Info Assets */
-  @FXML private Button closeButton;
-
-  @FXML private ImageView equipList;
-  @FXML private ImageView personList;
-  @FXML private ImageView requestList;
   @FXML private VBox tableContainer;
-  private TableHelper<MedicalEquipment> equipHelper;
 
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
