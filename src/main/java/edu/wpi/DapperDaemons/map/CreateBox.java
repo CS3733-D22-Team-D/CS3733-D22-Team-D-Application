@@ -42,6 +42,7 @@ public class CreateBox {
   }
 
   public void select() {
+    selectLoc.setText("Valid location selected");
     validLocSelected = true;
   }
 

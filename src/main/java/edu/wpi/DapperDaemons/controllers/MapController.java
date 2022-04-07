@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -72,7 +71,6 @@ public class MapController extends UIController implements Initializable {
   @FXML private ImageView personList;
   @FXML private ImageView requestList;
   @FXML private VBox tableContainer;
-  @FXML private TableView<MedicalEquipment> listTable;
   private TableHelper<MedicalEquipment> equipHelper;
 
   // TODO: Initialize table with a DAO<Location>, fill values automagically
@@ -111,9 +109,6 @@ public class MapController extends UIController implements Initializable {
     this.createLocation =
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
 
-    equipHelper = new TableHelper<MedicalEquipment>(listTable, 1);
-    equipHelper.linkColumns(MedicalEquipment.class);
-
     closeCreate();
     closeRoom();
   }
@@ -135,8 +130,8 @@ public class MapController extends UIController implements Initializable {
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
-      selectLocationText.setText("Valid location selected");
       pin.move(x, y);
+      createLocation.select();
       return;
     }
 
@@ -157,7 +152,7 @@ public class MapController extends UIController implements Initializable {
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
-
+    System.out.println(patients);
     infoBox.openLoc(pos, equipment, patients);
     infoBox.open();
   }
@@ -239,17 +234,17 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   void showEquipList(MouseEvent event) {
-    infoBox.toggleTable(0);
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.EQUIPMENT);
   }
 
   @FXML
   void showPersonList(MouseEvent event) {
-    infoBox.toggleTable(0);
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.PATIENT);
   }
 
   @FXML
   void showReqList(MouseEvent event) {
-    infoBox.toggleTable(0);
+    // infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
   }
 
   @FXML
