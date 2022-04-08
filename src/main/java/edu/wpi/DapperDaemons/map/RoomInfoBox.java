@@ -53,6 +53,7 @@ public class RoomInfoBox {
 
     new TableHelper<>(equipTable, 1).linkColumns(MedicalEquipment.class);
     new TableHelper<>(patientTable, 1).linkColumns(Patient.class);
+    new TableHelper<>(requestTable, 0).linkColumns(Request.class);
   }
 
   public void open() {
@@ -104,7 +105,11 @@ public class RoomInfoBox {
     infoTables.setVisible(false);
   }
 
-  public void openLoc(PositionInfo pos, List<MedicalEquipment> equipment, List<Patient> patients) {
+  public void openLoc(
+      PositionInfo pos,
+      List<MedicalEquipment> equipment,
+      List<Patient> patients,
+      List<Request> requests) {
     nameTxt.setText(pos.getLongName());
     floorTxt.setText(pos.getFloor());
     typeTxt.setText(pos.getType());
@@ -115,6 +120,9 @@ public class RoomInfoBox {
 
     patientTable.getItems().clear();
     patientTable.getItems().addAll(patients);
+
+    requestTable.getItems().clear();
+    requestTable.getItems().addAll(requests);
   }
 
   public Location change(PositionInfo selected) {

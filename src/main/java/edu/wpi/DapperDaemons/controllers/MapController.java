@@ -6,9 +6,11 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -69,6 +71,11 @@ public class MapController extends UIController implements Initializable {
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    /* Database stuff */
+    dao = DAOPouch.getLocationDAO();
+    equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+    patientDAO = DAOPouch.getPatientDAO();
+
     // Initialize default page
     super.initialize(location, resources);
 
@@ -135,14 +142,17 @@ public class MapController extends UIController implements Initializable {
     // Gather data of location
     List<MedicalEquipment> equipment = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
+    List<Request> requests = new LinkedList<>();
+    RequestHandler reqHelper = new RequestHandler();
     try {
       equipment = equipmentDAO.filter(6, pos.getId());
       patients = patientDAO.filter(6, pos.getId());
+      requests = reqHelper.getAllRequests();
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
     System.out.println(patients);
-    infoBox.openLoc(pos, equipment, patients);
+    infoBox.openLoc(pos, equipment, patients, requests);
     infoBox.open();
   }
 
@@ -233,7 +243,7 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   void showReqList(MouseEvent event) {
-    // infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
   }
 
   @FXML
