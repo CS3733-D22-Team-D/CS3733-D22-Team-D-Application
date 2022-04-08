@@ -2,8 +2,8 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -149,16 +149,16 @@ public class EquipmentRequestController extends UIController {
   public void initBoxes() {
     priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
   }
-
-  // TODO: Determine how to write to a certain address, ask backend
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
     FileChooser fileSys = new FileChooser();
     Stage window = (Stage) equipmentRequestsTable.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
-    DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
-    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
-    dao.save(csv.getName());
+    try {
+      csvSaver.save((new MedicalEquipmentRequest()), csv.getAbsolutePath());
+    } catch (Exception e) {
+      System.err.println("Unable to Save CSV");
+    }
   }
 }

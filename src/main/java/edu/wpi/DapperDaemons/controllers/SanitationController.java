@@ -3,13 +3,13 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -90,16 +90,17 @@ public class SanitationController extends UIController {
       onClearClicked();
     }
   }
-  // TODO: Determine how to write to a certain address, ask backend
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
     FileChooser fileSys = new FileChooser();
     Stage window = (Stage) pendingRequests.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
-    DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
-    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
-    dao.save(csv.getName());
+    try {
+      csvSaver.save((new SanitationRequest()), csv.getAbsolutePath());
+    } catch (Exception e) {
+      System.err.println("Unable to Save CSV");
+    }
   }
 
   /** Adds new sanitationRequest to table of pending requests * */
