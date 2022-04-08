@@ -45,32 +45,29 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientLastName;
   @FXML private TextField patientDOB;
 
-  List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
-  DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
+  private final DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    PatientTransportInitializer init = new PatientTransportInitializer();
-    init.initializeTable();
-    init.initializeInputs();
-    init.initializeRequests();
+    tableHelper = new TableHelper<>(transportRequests, 0);
+    tableHelper.linkColumns(PatientTransportRequest.class);
+
+    pBox.setItems(
+            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
 
     try {
       transportRequests.getItems().addAll(dao.getAll());
     } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("Something went wrong making Patient Transport Req table");
+      System.err.println("Something went wrong making Patient Transport Req table");
     }
-  }
 
-  @FXML
-  public void editStatus(TableColumn.CellEditEvent<PatientTransportRequest, String> editEvent) {
-    editEvent.getRowValue().setStatus(Request.RequestStatus.valueOf(editEvent.getNewValue()));
-    tableHelper.update(); // Commented out so it can run
+    onClearClicked();
   }
 
   @FXML
@@ -106,28 +103,11 @@ public class PatientTransportController extends UIController implements Initiali
   }
 
   private void addItem(PatientTransportRequest request) {
-    transportRequests.getItems().add(request);
     try {
       dao.add(request);
+      transportRequests.getItems().add(request);
     } catch (SQLException e) {
       System.err.println("Patient Transport Request could not be added to DAO");
     }
-  }
-
-  private class PatientTransportInitializer {
-    private void initializeTable() {
-      tableHelper = new TableHelper<>(transportRequests, 0);
-      tableHelper.linkColumns(PatientTransportRequest.class);
-    }
-
-    // TODO: Pull inputs for drop-down from database
-    private void initializeInputs() {
-      pBox.setItems(
-          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-      roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
-    }
-
-    // TODO: Pull transport requests from database
-    private void initializeRequests() {}
   }
 }

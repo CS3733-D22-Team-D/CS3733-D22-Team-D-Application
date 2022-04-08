@@ -62,9 +62,9 @@ public class MapController extends UIController implements Initializable {
   private PinHandler pin;
 
   /* Database stuff */
-  private DAO<Location> dao = DAOPouch.getLocationDAO();
-  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<Location> dao = DAOPouch.getLocationDAO();
+  private final DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /* Info Assets */
   @FXML private VBox tableContainer;
@@ -72,12 +72,6 @@ public class MapController extends UIController implements Initializable {
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    /* Database stuff */
-    dao = DAOPouch.getLocationDAO();
-    equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-    patientDAO = DAOPouch.getPatientDAO();
-
-    // Initialize default page
     super.initialize(location, resources);
 
     List<PositionInfo> origPositions = new ArrayList<>();
@@ -89,7 +83,7 @@ public class MapController extends UIController implements Initializable {
     }
 
     this.maps =
-        new MapHandler(
+            new MapHandler(
             mapAssets,
             mapFloorL2,
             mapFloorL1,

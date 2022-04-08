@@ -65,7 +65,7 @@ public class MealController extends UIController {
     super.initialize(location, resources);
 
     /* Init Request table */
-    helper = new TableHelper<MealDeliveryRequest>(mealRequestsTable, 0);
+    helper = new TableHelper<>(mealRequestsTable, 0);
     helper.linkColumns(MealDeliveryRequest.class);
     initBoxes();
     onClear();

@@ -38,16 +38,20 @@ public class SanitationController extends UIController {
   /* Text Field */
   @FXML private TextField locationText;
 
-  DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
+  private final DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     onClearClicked();
-    SanitationServiceInitializer init = new SanitationServiceInitializer();
-    init.initializeInputs();
-    init.initializeTable();
-    init.initializeRequests();
+    helper = new TableHelper<>(pendingRequests, 0);
+    helper.linkColumns(SanitationRequest.class);
+
+    priorityBox.setItems(
+            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    sanitationBox.setItems(
+            FXCollections.observableArrayList(
+                    "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
 
     try {
       pendingRequests.getItems().addAll(dao.getAll());
@@ -55,6 +59,8 @@ public class SanitationController extends UIController {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
     }
+
+    onClearClicked();
   }
 
   /** clear the current information * */
@@ -92,29 +98,11 @@ public class SanitationController extends UIController {
 
   /** Adds new sanitationRequest to table of pending requests * */
   private void addItem(SanitationRequest request) {
-    pendingRequests.getItems().add(request);
     try {
       dao.add(request);
+      pendingRequests.getItems().add(request);
     } catch (SQLException e) {
       System.err.println("Sanitation request could not be added to DAO");
     }
-  }
-
-  private class SanitationServiceInitializer {
-    private void initializeTable() {
-      helper = new TableHelper<>(pendingRequests, 0);
-      helper.linkColumns(SanitationRequest.class);
-    }
-
-    private void initializeInputs() {
-      priorityBox.setItems(
-          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-      sanitationBox.setItems(
-          FXCollections.observableArrayList(
-              "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
-    }
-
-    // TODO: Pull Sanitation requests from database
-    private void initializeRequests() {}
   }
 }
