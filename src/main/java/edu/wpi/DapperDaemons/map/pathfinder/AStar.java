@@ -86,6 +86,11 @@ public class AStar {
     return path;
   }
 
+  /**
+   * gets all neighbors by doing some fancy pancy flip flops and utilizing ALlEdges / Location Node database thingy
+   * @param currentLocation
+   * @return
+   */
   private List<String> getNeighbors(WalkableNode currentLocation) {
     List<LocationNodeConnections> connected;
     List<String> walkableNode = new ArrayList<>();
@@ -109,6 +114,12 @@ public class AStar {
     return walkableNode; // returns connected nodeID's
   }
 
+  /**
+   * Gets the distance utilizing the Location database and the XCoord and YCoord
+   * @param currentLocation
+   * @param nextLocation
+   * @return
+   */
   private Double getDistance(String currentLocation, String nextLocation) {
     DAO<Location> locationDAO = DAOPouch.getLocationDAO();
     // If it can't find the position, then this is basically saying that the node parser won't let
