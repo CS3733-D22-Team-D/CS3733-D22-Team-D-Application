@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -44,9 +45,9 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientDOB;
 
   List<String> names;
-  PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
+  // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
-  DAO<PatientTransportRequest> dao;
+  DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
@@ -58,7 +59,6 @@ public class PatientTransportController extends UIController implements Initiali
     init.initializeRequests();
 
     try {
-      dao = new DAO<>(new PatientTransportRequest());
       transportRequests.getItems().addAll(dao.getAll());
     } catch (Exception e) {
       e.printStackTrace();
@@ -87,14 +87,14 @@ public class PatientTransportController extends UIController implements Initiali
       Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
 
       addItem(
-          new PatientTransportRequest(
-              priority,
-              "CURRENTROOM OF PATIENT",
-              "REQUESTERID",
-              "ASSIGNEEID",
-              patientFirstName.getText() + patientLastName.getText() + patientDOB.getText(),
-              roomBox.getValue(),
-              Request.RequestStatus.REQUESTED));
+              new PatientTransportRequest(
+                      priority,
+                      "CURRENTROOM OF PATIENT",
+                      "REQUESTERID",
+                      "ASSIGNEEID",
+                      patientFirstName.getText() + patientLastName.getText() + patientDOB.getText(),
+                      roomBox.getValue(),
+                      Request.RequestStatus.REQUESTED));
 
       onClearClicked();
     }
@@ -114,7 +114,7 @@ public class PatientTransportController extends UIController implements Initiali
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-      roomBox.setItems(FXCollections.observableArrayList(handler.getAllLongNames()));
+      roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
     }
 
     // TODO: Pull transport requests from database

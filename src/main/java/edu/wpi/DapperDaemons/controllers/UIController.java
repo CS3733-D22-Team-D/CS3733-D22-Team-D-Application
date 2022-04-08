@@ -3,11 +3,13 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -18,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -26,16 +29,27 @@ import javafx.util.Duration;
 Contains methods needed for all UI pages
  */
 public abstract class UIController implements Initializable {
-  @FXML private ImageView homeIcon;
 
+  /* JFX Variable */
+  @FXML private ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
-
   @FXML private VBox sceneBox;
+
+  /* DAO Object to access all room numbers */
+  List<Location> locations;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    DAO<Location> dao = DAOPouch.getLocationDAO();
+    /* Used the DAO object to get list */
+    try {
+      this.locations = dao.getAll();
+    } catch (Exception e) {
+      this.locations = new ArrayList<>();
+    }
     menuSlider(slider, burg, burgBack);
   }
 
@@ -43,15 +57,15 @@ public abstract class UIController implements Initializable {
   public void quitProgram() {
     Stage window = (Stage) homeIcon.getScene().getWindow();
 
-    try {
-      DAO<Location> closer = new DAO<>(new Location());
-      DAO<MedicalEquipmentRequest> closer2 = new DAO<>(new MedicalEquipmentRequest());
-      closer.save("TowerLocationsSave.csv");
-      closer2.save("MedEquipReqSave.csv");
-      System.out.println("Saving CSV Files");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    //    try {
+    //      DAO<Location> closer = DAOPouch.getLocationDAO();
+    //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
+    //      closer.save("TowerLocationsSave.csv");
+    //      closer2.save("MedEquipReqSave.csv");
+    //      System.out.println("Saving CSV Files");
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //    }
     csvSaver.saveAll();
     window.close();
   }
@@ -59,44 +73,45 @@ public abstract class UIController implements Initializable {
   static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
     slider.setTranslateX(-225);
     burg.setOnMouseClicked(
-        event -> {
-          TranslateTransition slide = new TranslateTransition();
-          slide.setDuration(Duration.seconds(0.4));
-          slide.setNode(slider);
+            event -> {
+              TranslateTransition slide = new TranslateTransition();
+              slide.setDuration(Duration.seconds(0.4));
+              slide.setNode(slider);
 
-          slide.setToX(0);
-          slide.play();
+              slide.setToX(0);
+              slide.play();
 
-          slider.setTranslateX(-225);
+              slider.setTranslateX(-225);
 
-          slide.setOnFinished(
-              (ActionEvent e) -> {
-                burg.setVisible(false);
-                burgBack.setVisible(true);
-              });
-        });
+              slide.setOnFinished(
+                      (ActionEvent e) -> {
+                        burg.setVisible(false);
+                        burgBack.setVisible(true);
+                      });
+            });
 
     burgBack.setOnMouseClicked(
-        event -> {
-          TranslateTransition slide = new TranslateTransition();
-          slide.setDuration(Duration.seconds(0.4));
-          slide.setNode(slider);
+            event -> {
+              TranslateTransition slide = new TranslateTransition();
+              slide.setDuration(Duration.seconds(0.4));
+              slide.setNode(slider);
 
-          slide.setToX(-225);
-          slide.play();
+              slide.setToX(-225);
+              slide.play();
 
-          slider.setTranslateX(0);
+              slider.setTranslateX(0);
 
-          slide.setOnFinished(
-              (ActionEvent e) -> {
-                burg.setVisible(true);
-                burgBack.setVisible(false);
-              });
-        });
+              slide.setOnFinished(
+                      (ActionEvent e) -> {
+                        burg.setVisible(true);
+                        burgBack.setVisible(false);
+                      });
+            });
   }
 
   @FXML
-  public void goHome() throws IOException {
+  public void goHome(MouseEvent click) throws IOException {
+    System.out.println(click.getClickCount());
     switchScene("default.fxml", 635, 510);
   }
 
@@ -107,8 +122,7 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void switchToLabRequest() throws IOException {
-    // TODO: Revert this switch back to labRequest.fxml
-    switchScene("errorMessage.fxml", 575, 575);
+    switchScene("labRequest.fxml", 575, 575);
   }
 
   @FXML
@@ -143,7 +157,7 @@ public abstract class UIController implements Initializable {
 
   private void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
+            FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) homeIcon.getScene().getWindow();
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
@@ -200,5 +214,17 @@ public abstract class UIController implements Initializable {
   @FXML
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
+  }
+  /**
+   * Gets all long names
+   *
+   * @return a list of long names
+   */
+  public List<String> getAllLongNames() {
+    List<String> names = new ArrayList<String>();
+    for (Location loc : this.locations) {
+      names.add(loc.getLongName());
+    }
+    return names;
   }
 }

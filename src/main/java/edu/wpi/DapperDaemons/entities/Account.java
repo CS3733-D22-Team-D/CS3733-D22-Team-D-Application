@@ -26,7 +26,7 @@ public class Account extends TableObject {
     this.settingsFile = fileName;
   }
 
-  private Account() {}
+  public Account() {}
 
   @Override
   public String getTableInit() {
