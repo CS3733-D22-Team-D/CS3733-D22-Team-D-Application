@@ -89,7 +89,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
 
   @Override
   public String getRequestType() {
-    return this.getClass().toString();
+    return "Medical Equipment Request";
   }
 
   @Override

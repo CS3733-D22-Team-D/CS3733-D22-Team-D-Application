@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
@@ -29,8 +30,8 @@ public class MedicineController extends UIController {
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
 
-  DAO<MedicineRequest> medicineRequestDAO;
-  DAO<Patient> patientDAO;
+  DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
+  DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -43,10 +44,8 @@ public class MedicineController extends UIController {
     init.initializeTable();
 
     try {
-      medicineRequestDAO = new DAO<>(new MedicineRequest());
-      patientDAO = new DAO<>(new Patient());
       medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
-      System.out.println("Created table");
+      //      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Medicine Requesst table was unable to be created\n");

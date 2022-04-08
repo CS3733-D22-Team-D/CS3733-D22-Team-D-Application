@@ -45,7 +45,7 @@ public class DAOTest {
     assertTrue(checker);
   }
 
-  @Test
+  /*@Test
   public void testAddDelete() throws SQLException {
     List<Location> all;
     locationDAO.add(addDeleteLocation);
@@ -62,7 +62,7 @@ public class DAOTest {
       }
     }
     assertTrue(checker);
-  }
+  } */
 
   @Test
   public void testDaoGet() throws SQLException {

@@ -6,6 +6,9 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.util.List;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -53,6 +56,20 @@ public class RoomInfoBox {
 
     new TableHelper<>(equipTable, 1).linkColumns(MedicalEquipment.class);
     new TableHelper<>(patientTable, 1).linkColumns(Patient.class);
+
+    TableColumn<Request, String> col1 =
+        (TableColumn<Request, String>) requestTable.getColumns().get(0);
+    TableColumn<Request, String> col2 =
+        (TableColumn<Request, String>) requestTable.getColumns().get(1);
+    TableColumn<Request, Boolean> col3 =
+        (TableColumn<Request, Boolean>) requestTable.getColumns().get(2);
+
+    col1.setCellValueFactory(
+        request -> new SimpleStringProperty(request.getValue().getPriority().toString()));
+    col2.setCellValueFactory(
+        request -> new SimpleStringProperty(request.getValue().getRequestType().toString()));
+    col3.setCellValueFactory(
+        request -> new SimpleBooleanProperty(request.getValue().requiresTransport()));
   }
 
   public void open() {
@@ -104,7 +121,11 @@ public class RoomInfoBox {
     infoTables.setVisible(false);
   }
 
-  public void openLoc(PositionInfo pos, List<MedicalEquipment> equipment, List<Patient> patients) {
+  public void openLoc(
+      PositionInfo pos,
+      List<MedicalEquipment> equipment,
+      List<Patient> patients,
+      List<Request> requests) {
     nameTxt.setText(pos.getLongName());
     floorTxt.setText(pos.getFloor());
     typeTxt.setText(pos.getType());
@@ -115,6 +136,9 @@ public class RoomInfoBox {
 
     patientTable.getItems().clear();
     patientTable.getItems().addAll(patients);
+
+    requestTable.getItems().clear();
+    requestTable.getItems().addAll(requests);
   }
 
   public Location change(PositionInfo selected) {

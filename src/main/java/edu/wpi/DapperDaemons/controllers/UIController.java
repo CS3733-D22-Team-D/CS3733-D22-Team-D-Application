@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -110,8 +109,7 @@ public abstract class UIController implements Initializable {
   }
 
   @FXML
-  public void goHome(MouseEvent click) throws IOException {
-    System.out.println(click.getClickCount());
+  public void goHome() throws IOException {
     switchScene("default.fxml", 635, 510);
   }
 
@@ -167,7 +165,7 @@ public abstract class UIController implements Initializable {
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.001); // To update size
+    window.setWidth(window.getWidth() + 0.0); // To update size
     window.setHeight(window.getHeight());
   }
 
@@ -227,4 +225,6 @@ public abstract class UIController implements Initializable {
     }
     return names;
   }
+
+  public void saveToCSV() {}
 }
