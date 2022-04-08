@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -58,9 +59,9 @@ public class MapController extends UIController implements Initializable {
   private PinHandler pin;
 
   /* Database stuff */
-  private DAO<Location> dao;
-  private DAO<MedicalEquipment> equipmentDAO;
-  private DAO<Patient> patientDAO;
+  private DAO<Location> dao = DAOPouch.getLocationDAO();
+  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /* Info Assets */
   @FXML private VBox tableContainer;
@@ -74,10 +75,6 @@ public class MapController extends UIController implements Initializable {
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      dao = new DAO<>(new Location());
-      equipmentDAO = new DAO<>(new MedicalEquipment());
-      patientDAO = new DAO<>(new Patient());
-
       dao.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");

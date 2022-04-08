@@ -3,9 +3,9 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,13 +43,7 @@ public abstract class UIController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    DAO<Location> dao;
-    try {
-      dao = new DAO<Location>(new Location());
-    } catch (Exception e) {
-      System.err.print("Error, table was unable to be created\n");
-      return;
-    }
+    DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
     try {
       this.locations = dao.getAll();
@@ -63,15 +57,15 @@ public abstract class UIController implements Initializable {
   public void quitProgram() {
     Stage window = (Stage) homeIcon.getScene().getWindow();
 
-    try {
-      DAO<Location> closer = new DAO<>(new Location());
-      DAO<MedicalEquipmentRequest> closer2 = new DAO<>(new MedicalEquipmentRequest());
-      closer.save("TowerLocationsSave.csv");
-      closer2.save("MedEquipReqSave.csv");
-      System.out.println("Saving CSV Files");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    //    try {
+    //      DAO<Location> closer = DAOPouch.getLocationDAO();
+    //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
+    //      closer.save("TowerLocationsSave.csv");
+    //      closer2.save("MedEquipReqSave.csv");
+    //      System.out.println("Saving CSV Files");
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //    }
     csvSaver.saveAll();
     window.close();
   }
