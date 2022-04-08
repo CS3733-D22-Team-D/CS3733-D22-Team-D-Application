@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -50,7 +51,7 @@ public class MealController extends UIController {
   /* Unknown room label */
   @FXML private Label errorLabel;
 
-  private DAO<MealDeliveryRequest> dao;
+  private DAO<MealDeliveryRequest> dao = DAOPouch.getMealDeliveryRequestDAO();
 
   /**
    * Runs at compile time, specified from Initializable interface Sets up meal request table and
@@ -70,9 +71,7 @@ public class MealController extends UIController {
     onClear();
 
     try {
-      dao = new DAO<MealDeliveryRequest>(new MealDeliveryRequest());
       mealRequestsTable.getItems().addAll(dao.getAll());
-      System.out.println("Created Table");
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error, Mead Delivery table was unable to be created");
@@ -105,7 +104,7 @@ public class MealController extends UIController {
               dessert));
 
     } else {
-      errorLabel.setText("Error! One or more fields are empty!");
+      errorLabel.setText("Error: One or more fields are empty!");
       return;
     }
     onClear();
@@ -129,7 +128,12 @@ public class MealController extends UIController {
    * @param request request object to be added
    */
   public void addMealRequest(MealDeliveryRequest request) {
-    mealRequestsTable.getItems().add(request);
+    try {
+      dao.add(request);
+      mealRequestsTable.getItems().add(request);
+    } catch (Exception e) {
+      System.err.println("Could not add MealDeliveryRequest to dao");
+    }
   }
 
   /** Initializes the options for JFX boxes */
@@ -153,5 +157,9 @@ public class MealController extends UIController {
         || patientName.getText().equals("")
         || patientDOB.getText().equals("")
         || patientLastName.getText().equals("")));
+  }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new MealDeliveryRequest());
   }
 }

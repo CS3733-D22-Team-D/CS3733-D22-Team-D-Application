@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.map;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -26,6 +27,9 @@ public class CreateBox {
     this.roomNumTxt = roomNumTxt;
     this.typeBox = typeBox;
     this.selectLoc = selectLoc;
+
+    typeBox.setEditable(false);
+    typeBox.getItems().addAll(TableHelper.convertEnum(PositionInfo.RoomType.class));
   }
 
   public void close() {

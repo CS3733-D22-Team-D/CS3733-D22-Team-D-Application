@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -9,10 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class LabRequestController extends UIController {
 
@@ -28,11 +26,15 @@ public class LabRequestController extends UIController {
   @FXML private JFXComboBox<String> procedureComboBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> dao;
+  private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
+
+  /* Labels */
+  @FXML private Label errorLabel;
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    onClearClicked();
     super.initialize(location, resources);
     LabRequestInitializer init = new LabRequestInitializer();
 
@@ -41,9 +43,7 @@ public class LabRequestController extends UIController {
     init.initializeRequests();
 
     try {
-      dao = new DAO<LabRequest>(new LabRequest());
       labReqTable.getItems().addAll(dao.getAll());
-      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
@@ -73,11 +73,11 @@ public class LabRequestController extends UIController {
     patientLastName.clear();
     patientDOB.clear();
     priorityChoiceBox.setValue("");
+    errorLabel.setText("");
   }
 
   @FXML
   public void onSubmitClicked() {
-    // TODO : What does this mean? Could you comment it?
     if (!(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
@@ -99,6 +99,8 @@ public class LabRequestController extends UIController {
               Request.RequestStatus.REQUESTED));
 
       onClearClicked();
+    } else {
+      errorLabel.setText("Error: One or more fields are empty!");
     }
   }
 
@@ -112,6 +114,10 @@ public class LabRequestController extends UIController {
       // TODO : show an error on the screen since adding went wrong
     }
   }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new LabRequest());
+  }
 
   private class LabRequestInitializer {
     private void initializeTable() {
@@ -122,8 +128,10 @@ public class LabRequestController extends UIController {
 
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
-      procedureComboBox.setItems(FXCollections.observableArrayList("BLOOD_DRAW", "X_RAY"));
-      priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+      procedureComboBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
+      priorityChoiceBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     }
 
     // TODO: Pull lab requests from database

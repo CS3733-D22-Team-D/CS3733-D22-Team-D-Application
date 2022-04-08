@@ -21,12 +21,13 @@ public class csvLoader {
     filenames.put("LabRequest", new LabRequest());
     filenames.put("Employee", new Employee());
     filenames.put("MealDeliveryRequest", new MealDeliveryRequest());
-    filenames.put("PatientTransportRequest", new PatientTransportRequest()); // Currently not
-    // working but I don't really care
+    filenames.put("PatientTransportRequest", new PatientTransportRequest());
     filenames.put("SanitationRequest", new SanitationRequest());
     filenames.put("MedicalEquipment", new MedicalEquipment());
     filenames.put("Patient", new Patient());
     filenames.put("MedicineRequest", new MedicineRequest());
+    filenames.put("Accounts", new Account());
+    filenames.put("AllEdges", new LocationNodeConnections());
   }
 
   private csvLoader() {}
@@ -58,6 +59,7 @@ public class csvLoader {
             Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
+    if (entries.size() < 1) return;
     entries.remove(0);
     String tableName = type.getTableName();
     String query = "SELECT * FROM " + tableName;

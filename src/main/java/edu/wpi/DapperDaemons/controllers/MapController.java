@@ -2,18 +2,19 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -61,32 +62,27 @@ public class MapController extends UIController implements Initializable {
   private PinHandler pin;
 
   /* Database stuff */
-  private DAO<Location> dao;
-  private DAO<MedicalEquipment> equipmentDAO;
-  private DAO<Patient> patientDAO;
+  private DAO<Location> dao = DAOPouch.getLocationDAO();
+  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /* Info Assets */
-  @FXML private Button closeButton;
-
-  @FXML private ImageView equipList;
-  @FXML private ImageView personList;
-  @FXML private ImageView requestList;
   @FXML private VBox tableContainer;
-  private TableHelper<MedicalEquipment> equipHelper;
 
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    /* Database stuff */
+    dao = DAOPouch.getLocationDAO();
+    equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+    patientDAO = DAOPouch.getPatientDAO();
+
     // Initialize default page
     super.initialize(location, resources);
 
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      dao = new DAO<>(new Location());
-      equipmentDAO = new DAO<>(new MedicalEquipment());
-      patientDAO = new DAO<>(new Patient());
-
       dao.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
@@ -154,14 +150,17 @@ public class MapController extends UIController implements Initializable {
     // Gather data of location
     List<MedicalEquipment> equipment = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
+    List<Request> requests = new LinkedList<>();
+    RequestHandler reqHelper = new RequestHandler();
     try {
       equipment = equipmentDAO.filter(6, pos.getId());
       patients = patientDAO.filter(6, pos.getId());
+      requests = reqHelper.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
     System.out.println(patients);
-    infoBox.openLoc(pos, equipment, patients);
+    infoBox.openLoc(pos, equipment, patients, requests);
     infoBox.open();
   }
 
@@ -252,7 +251,7 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   void showReqList(MouseEvent event) {
-    // infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
+    infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
   }
 
   @FXML

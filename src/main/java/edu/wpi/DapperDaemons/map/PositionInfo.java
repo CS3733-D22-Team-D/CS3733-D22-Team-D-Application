@@ -5,6 +5,23 @@ import edu.wpi.DapperDaemons.entities.Location;
 /** Manages general map locations */
 public class PositionInfo {
 
+  public enum RoomType {
+    DEPT,
+    EXIT,
+    HALL,
+    INFO,
+    LABS,
+    REST,
+    BATH,
+    RETL,
+    SERV,
+    STAI,
+    ELEV,
+    STOR,
+    PATI,
+    DIRT
+  }
+
   private Location loc;
 
   public PositionInfo(Location l) {

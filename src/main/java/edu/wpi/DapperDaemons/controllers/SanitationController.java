@@ -2,12 +2,13 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
-import edu.wpi.DapperDaemons.entities.MedicalEquipment;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -37,7 +38,7 @@ public class SanitationController extends UIController {
   /* Text Field */
   @FXML private TextField locationText;
 
-  DAO<SanitationRequest> dao;
+  DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +50,6 @@ public class SanitationController extends UIController {
     init.initializeRequests();
 
     try {
-      dao = new DAO<>(new SanitationRequest());
       pendingRequests.getItems().addAll(dao.getAll());
     } catch (Exception e) {
       e.printStackTrace();
@@ -81,14 +81,23 @@ public class SanitationController extends UIController {
               "REQUESTERID",
               "ASSIGNEEID",
               sanitationBox.getValue(),
-              MedicalEquipment.CleanStatus.INPROGRESS));
+              Request.RequestStatus.REQUESTED));
       onClearClicked();
     }
+  }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new SanitationRequest());
   }
 
   /** Adds new sanitationRequest to table of pending requests * */
   private void addItem(SanitationRequest request) {
     pendingRequests.getItems().add(request);
+    try {
+      dao.add(request);
+    } catch (SQLException e) {
+      System.err.println("Sanitation request could not be added to DAO");
+    }
   }
 
   private class SanitationServiceInitializer {
@@ -98,7 +107,8 @@ public class SanitationController extends UIController {
     }
 
     private void initializeInputs() {
-      priorityBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+      priorityBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
       sanitationBox.setItems(
           FXCollections.observableArrayList(
               "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
