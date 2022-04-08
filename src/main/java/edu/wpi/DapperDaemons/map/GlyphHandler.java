@@ -11,6 +11,7 @@ public class GlyphHandler {
   private List<PositionInfo> imageLocs;
   private AnchorPane glyphLayer;
   private MapController controller;
+  private PositionInfo selected;
   public final String GLYPH_PATH =
       getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/assets/Glyphs/MapIcons") + "/";
 
@@ -42,6 +43,10 @@ public class GlyphHandler {
   public void update(PositionInfo old, PositionInfo next) {
     remove(old);
     addPosition(next);
+  }
+
+  public void select(PositionInfo selected) {
+    this.selected = selected;
   }
 
   private ImageView getIconImage(String type) {
