@@ -18,8 +18,9 @@ public class GlyphHandler {
       AnchorPane glyphLayer, List<PositionInfo> imageLocs, MapController controller) {
     this.glyphLayer = glyphLayer;
     this.controller = controller;
+    this.imageLocs = new ArrayList<>();
+    imageLocs.forEach(this::addPosition);
     this.imageLocs = imageLocs;
-    new ArrayList<>(imageLocs).forEach(this::addPosition);
   }
 
   public void addPosition(PositionInfo pos) {
@@ -29,12 +30,18 @@ public class GlyphHandler {
     image.setY(pos.getY() - 16);
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
+    imageLocs.add(pos);
   }
 
   public void remove(PositionInfo pos) {
     int rmIndex = imageLocs.indexOf(pos);
     imageLocs.remove(rmIndex);
     glyphLayer.getChildren().remove(rmIndex);
+  }
+
+  public void update(PositionInfo old, PositionInfo next) {
+    remove(old);
+    addPosition(next);
   }
 
   private ImageView getIconImage(String type) {

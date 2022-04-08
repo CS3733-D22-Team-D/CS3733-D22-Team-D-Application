@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.lang.reflect.Array;
 
 public class Location extends TableObject {
+
   @TableHandler(table = 0, col = 0)
   private String nodeID;
 

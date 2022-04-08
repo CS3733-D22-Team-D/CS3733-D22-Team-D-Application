@@ -418,7 +418,7 @@
                         </VBox>
                         <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreateLocation" style="-fx-background-color: #059DA7; -fx-background-radius: 5;" text="Create" textFill="WHITE">
+                              <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreate" style="-fx-background-color: #059DA7; -fx-background-radius: 5;" text="Create" textFill="WHITE">
                                  <effect>
                                     <DropShadow>
                                        <color>

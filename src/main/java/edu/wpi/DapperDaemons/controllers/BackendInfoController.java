@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
@@ -31,10 +32,10 @@ public class BackendInfoController extends UIController {
   private TableHelper<MedicalEquipment> equipmentTableHelper;
 
   /* DAO Objects */
-  private DAO<Location> locationDAO;
-  private DAO<Patient> patientDAO;
-  private DAO<Employee> employeeDAO;
-  private DAO<MedicalEquipment> medicalEquipmentDAO;
+  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+  private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -54,17 +55,13 @@ public class BackendInfoController extends UIController {
     equipmentTableHelper.linkColumns(MedicalEquipment.class);
 
     try {
-      locationDAO = new DAO<Location>(new Location());
       locationsTable.getItems().addAll(locationDAO.getAll());
 
-      employeeDAO = new DAO<Employee>(new Employee());
       employeesTable.getItems().addAll(employeeDAO.getAll());
 
-      medicalEquipmentDAO = new DAO<MedicalEquipment>(new MedicalEquipment());
       equipmentTable.getItems().addAll(medicalEquipmentDAO.getAll());
 
-      patientDAO = new DAO<Patient>(new Patient());
-      System.out.println(patientDAO.getAll());
+      //      System.out.println(patientDAO.getAll());
       patientsTable.getItems().addAll(patientDAO.getAll());
 
     } catch (Exception e) {

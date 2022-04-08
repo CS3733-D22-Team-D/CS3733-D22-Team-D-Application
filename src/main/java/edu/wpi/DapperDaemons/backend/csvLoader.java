@@ -27,6 +27,7 @@ public class csvLoader {
     filenames.put("MedicalEquipment", new MedicalEquipment());
     filenames.put("Patient", new Patient());
     filenames.put("MedicineRequest", new MedicineRequest());
+    filenames.put("Accounts", new Account());
   }
 
   private csvLoader() {}
@@ -58,6 +59,7 @@ public class csvLoader {
             Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
+    if (entries.size() < 1) return;
     entries.remove(0);
     String tableName = type.getTableName();
     String query = "SELECT * FROM " + tableName;

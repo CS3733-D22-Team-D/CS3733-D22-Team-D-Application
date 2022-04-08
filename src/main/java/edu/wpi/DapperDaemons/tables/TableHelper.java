@@ -1,7 +1,9 @@
 package edu.wpi.DapperDaemons.tables;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -78,6 +80,12 @@ public class TableHelper<R> {
       TableColumn<R, String> column, Class<E> enumClass) {
     addDropDownEditProperty(
         column, Arrays.stream(enumClass.getEnumConstants()).map(Enum::name).toArray(String[]::new));
+  }
+
+  public static <E extends Enum<E>> List<String> convertEnum(Class<E> e) {
+    ArrayList<String> values = new ArrayList<>();
+    Arrays.stream(e.getEnumConstants()).map(Enum::name).forEach(values::add);
+    return values;
   }
 
   /** Adds a combo box of values as a drop-down for editing cells of the column */
