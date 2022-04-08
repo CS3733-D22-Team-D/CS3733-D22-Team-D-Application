@@ -31,7 +31,8 @@ public class MapController extends UIController implements Initializable {
   @FXML private ImageView mapFloor1;
   @FXML private ImageView mapFloor2;
   @FXML private ImageView mapFloor3;
-  @FXML private ImageView mapFloorG;
+  @FXML private ImageView mapFloor4;
+  @FXML private ImageView mapFloor5;
   @FXML private ImageView mapFloorL1;
   @FXML private ImageView mapFloorL2;
   @FXML private AnchorPane glyphsLayer;
@@ -89,7 +90,14 @@ public class MapController extends UIController implements Initializable {
 
     this.maps =
         new MapHandler(
-            mapAssets, mapFloorL2, mapFloorL1, mapFloorG, mapFloor1, mapFloor2, mapFloor3);
+            mapAssets,
+            mapFloorL2,
+            mapFloorL1,
+            mapFloor1,
+            mapFloor2,
+            mapFloor3,
+            mapFloor4,
+            mapFloor5);
     maps.setMap(mapFloor1);
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
@@ -265,9 +273,15 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  public void setFloorG(MouseEvent event) {
-    maps.setMap(mapFloorG);
-    glyphs.filterByFloor("G");
+  public void setFloor4(MouseEvent event) {
+    maps.setMap(mapFloor4);
+    glyphs.filterByFloor("4");
+  }
+
+  @FXML
+  public void setFloor5(MouseEvent event) {
+    maps.setMap(mapFloor5);
+    glyphs.filterByFloor("5");
   }
 
   @FXML

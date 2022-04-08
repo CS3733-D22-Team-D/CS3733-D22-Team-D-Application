@@ -1,17 +1,12 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -75,22 +70,6 @@ public class easterEggController extends UIController {
   @FXML
   public void stopEasterEgg() {
     sound.interrupt();
-  }
-
-  private void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) homeIcon.getScene().getWindow();
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-
-    double width = sceneBox.getPrefWidth();
-    double height = sceneBox.getPrefHeight();
-    window.setScene(new Scene(root));
-    sceneBox.setPrefWidth(width);
-    sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
-    window.setHeight(window.getHeight());
   }
 
   @FXML

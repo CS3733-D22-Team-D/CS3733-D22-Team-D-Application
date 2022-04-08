@@ -57,20 +57,25 @@ public class MapHandler {
       case 1:
         return "L1";
       case 2:
-        return "G";
-      case 3:
         return "1";
-      case 4:
+      case 3:
         return "2";
-      case 5:
+      case 4:
         return "3";
+      case 5:
+        return "4";
+      case 6:
+        return "5";
       default:
         return "ERROR";
     }
   }
 
   public void zoom(double multiplier) {
-    mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
-    mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+    if (((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) > 0.12)
+        && ((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) < 1.00)) {
+      mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
+      mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+    }
   }
 }
