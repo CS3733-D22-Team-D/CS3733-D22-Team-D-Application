@@ -147,7 +147,7 @@ public class MapController extends UIController implements Initializable {
     try {
       equipment = equipmentDAO.filter(6, pos.getId());
       patients = patientDAO.filter(6, pos.getId());
-      requests = reqHelper.getAllRequests();
+      requests = reqHelper.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }

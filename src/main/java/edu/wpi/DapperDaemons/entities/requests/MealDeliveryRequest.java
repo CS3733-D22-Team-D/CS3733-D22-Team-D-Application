@@ -107,7 +107,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   @Override
   public String getRequestType() {
-    return this.getClass().toString();
+    return "Meal Delivery Request";
   }
 
   @Override

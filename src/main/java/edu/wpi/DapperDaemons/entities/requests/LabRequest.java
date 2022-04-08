@@ -115,7 +115,7 @@ public class LabRequest extends TableObject implements Request {
 
   @Override
   public String getRequestType() {
-    return this.getClass().toString();
+    return "Lab Request";
   }
 
   @Override
