@@ -30,9 +30,7 @@ public class Account extends TableObject {
 
   @Override
   public String getTableInit() {
-    return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,"
-        + "employeeID varchar(20) UNIQUE,"
-        + "password varchar(255))";
+    return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,employeeID varchar(20) UNIQUE,password varchar(255))";
   }
 
   @Override

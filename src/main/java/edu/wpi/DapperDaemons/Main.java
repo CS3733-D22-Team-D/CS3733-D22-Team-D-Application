@@ -1,6 +1,9 @@
 package edu.wpi.DapperDaemons;
 
+import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.csvLoader;
+import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -13,6 +16,9 @@ public class Main {
 
   public static void main(String[] args) throws IOException, SQLException {
     csvLoader.loadAll();
+    DAOPouch.init();
+    Employee admin = DAOPouch.getEmployeeDAO().get("admin");
+    SecurityController.getInstance().setUser(admin);
     App.launch(App.class, args);
 
     // Backend stuff

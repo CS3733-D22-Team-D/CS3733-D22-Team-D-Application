@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -37,7 +38,7 @@ public class SanitationController extends UIController {
   /* Text Field */
   @FXML private TextField locationText;
 
-  DAO<SanitationRequest> dao;
+  DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +50,6 @@ public class SanitationController extends UIController {
     init.initializeRequests();
 
     try {
-      dao = new DAO<>(new SanitationRequest());
       pendingRequests.getItems().addAll(dao.getAll());
     } catch (Exception e) {
       e.printStackTrace();

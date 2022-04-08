@@ -4,7 +4,7 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.TableObject;
 
 public class SecurityController {
-  private Employee user;
+  Employee user;
   static SecurityController instance;
 
   private SecurityController() {}
@@ -21,13 +21,10 @@ public class SecurityController {
     this.user = user;
   }
 
-  public Employee getUser() {
+  public Employee getUser(){return user;}
 
-    return user;
-  }
 
   public boolean permissionToAdd(TableObject type) {
-
     String className = type.getClass().getSimpleName();
     int clearance = user.getSecurityClearance();
     if (className.equals("")) {
