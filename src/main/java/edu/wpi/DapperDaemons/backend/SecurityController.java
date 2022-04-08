@@ -21,6 +21,10 @@ public class SecurityController {
     this.user = user;
   }
 
+  public Employee getUser() {
+    return user;
+  }
+
   public boolean permissionToAdd(TableObject type) {
     String className = type.getClass().getSimpleName();
     int clearance = user.getSecurityClearance();

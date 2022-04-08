@@ -7,9 +7,11 @@ public class Patient extends TableObject {
   @TableHandler(table = 0, col = 0)
   private String nodeID;
 
+  @TableHandler(table = 1, col = 0)
   @TableHandler(table = 0, col = 1)
   private String firstName;
 
+  @TableHandler(table = 1, col = 1)
   @TableHandler(table = 0, col = 2)
   private String lastName;
 

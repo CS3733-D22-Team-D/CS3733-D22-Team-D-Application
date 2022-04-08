@@ -10,10 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class LabRequestController extends UIController {
 
@@ -31,9 +28,13 @@ public class LabRequestController extends UIController {
   /* Lab request DAO */
   private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
 
+  /* Labels */
+  @FXML private Label errorLabel;
+
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    onClearClicked();
     super.initialize(location, resources);
     LabRequestInitializer init = new LabRequestInitializer();
 
@@ -72,11 +73,11 @@ public class LabRequestController extends UIController {
     patientLastName.clear();
     patientDOB.clear();
     priorityChoiceBox.setValue("");
+    errorLabel.setText("");
   }
 
   @FXML
   public void onSubmitClicked() {
-    // TODO : What does this mean? Could you comment it?
     if (!(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
@@ -98,6 +99,8 @@ public class LabRequestController extends UIController {
               Request.RequestStatus.REQUESTED));
 
       onClearClicked();
+    } else {
+      errorLabel.setText("Error: One or more fields are empty!");
     }
   }
 
