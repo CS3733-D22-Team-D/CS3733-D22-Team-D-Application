@@ -44,7 +44,7 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientDOB;
 
   List<String> names;
-  //PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
+  // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
   DAO<PatientTransportRequest> dao;
 
