@@ -132,7 +132,12 @@ public class MealController extends UIController {
    * @param request request object to be added
    */
   public void addMealRequest(MealDeliveryRequest request) {
-    mealRequestsTable.getItems().add(request);
+    try {
+      dao.add(request);
+      mealRequestsTable.getItems().add(request);
+    } catch (Exception e) {
+      System.err.println("Could not add MealDeliveryRequest to dao");
+    }
   }
 
   /** Initializes the options for JFX boxes */
