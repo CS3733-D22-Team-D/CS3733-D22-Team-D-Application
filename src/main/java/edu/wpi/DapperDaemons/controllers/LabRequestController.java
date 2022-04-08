@@ -139,7 +139,7 @@ public class LabRequestController extends UIController {
   }
   // TODO: Determine how to write to a certain address, ask backend
   /** Saves a given service request to a CSV by opening the CSV window */
-  public <T extends TableObject> void saveToCSV() {
+  public void saveToCSV() {
     FileChooser fileSys = new FileChooser();
     Stage window = (Stage) labReqTable.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
