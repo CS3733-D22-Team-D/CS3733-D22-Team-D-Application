@@ -1,3 +1,4 @@
+admin,admin,admin,12345678,ADMINISTRATOR,5
 ADMIN1,Chandler,Garcia,Aug28 2001,ADMINISTRATOR,5
 ADMIN2,Tyler,Evans,Sometime,ADMINISTRATOR,5
 DOC1,Shafath,Zaman,Sometime,DOCTOR,4
@@ -8,4 +9,3 @@ JAN1,Jacob,Adams,Sometime,JANITOR,2
 JAN2,Alpay,Ariyak,Sometime,JANITOR,2
 KIT1,Cole,Ouellette,Sometime,KITCHEN,1
 KIT2,Luke,Gardone,Sometime,KITCHEN,1
-admin,admin,admin,12345678,ADMINISTRATOR,5
