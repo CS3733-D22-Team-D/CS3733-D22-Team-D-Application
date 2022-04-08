@@ -54,14 +54,12 @@ public class AStar {
                     current.getLocationName(),
                     nextLocation); // add the distance from current to next
         if (!costSoFar.keySet().contains(nextLocation)
-            || new_cost < costSoFar.get(nextLocation)
-                && !moveOrder
-                    .keySet()
-                    .contains(nextLocation)) { // If nextLocation isn't in the queue,
+            || new_cost < costSoFar.get(nextLocation)) { // If nextLocation isn't in the queue,
           //          System.out.println("Saving the location " + nextLocation + " in the path");
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
-          Double priority = new_cost + getDistance(nextLocation, endLocation);
+          Double priority =
+              Math.sqrt(new_cost) + Math.pow(getDistance(nextLocation, endLocation), 3);
           // Priority is the distance from this node to the goal + costSoFar of this node
           queue.add(new WalkableNode(nextLocation, priority));
           moveOrder.put(nextLocation, current);
@@ -125,7 +123,7 @@ public class AStar {
       next = locationDAO.filter(locations, 1, nextLocation).get(0);
     } catch (Exception e) {
       //      e.printStackTrace();
-      System.out.println("Couldn't find location in table");
+      //      System.out.println("Couldn't find location in table");
     }
     Double distance =
         Math.sqrt(
