@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.PatientTransportController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/buttons.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.PatientTransportController">
     <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -132,12 +132,12 @@
                                       </VBox>
                                       <HBox alignment="CENTER" prefHeight="82.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                                           <children>
-                                              <Button mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="38.0" prefWidth="83.0" style="-fx-background-color: #C1C5D4; -fx-background-radius: 7.5;" text="Clear" textFill="WHITE">
+                                              <Button id="cancel" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="38.0" prefWidth="83.0" style="-fx-background-radius: 7.5;" text="Clear" textFill="WHITE">
                                                   <HBox.margin>
                                                       <Insets right="30.0" />
                                                   </HBox.margin>
                                               </Button>
-                                              <Button mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Submit" textFill="WHITE">
+                                              <Button id="action" mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="85.0" style="-fx-background-radius: 7.5;" text="Submit" textFill="WHITE">
                                                   <HBox.margin>
                                                       <Insets left="30.0" />
                                                   </HBox.margin>
@@ -212,7 +212,7 @@
                       </VBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="542.0" prefWidth="96.0">
                      <children>
-                        <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Save to CSV" textFill="WHITE">
+                        <Button id="action" fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 7.5;" text="Save to CSV" textFill="WHITE">
                            <HBox.margin>
                               <Insets bottom="10.0" right="10.0" />
                            </HBox.margin>
