@@ -105,7 +105,7 @@ public class MealController extends UIController {
               dessert));
 
     } else {
-      errorLabel.setText("Error! One or more fields are empty!");
+      errorLabel.setText("Error: One or more fields are empty!");
       return;
     }
     onClear();
