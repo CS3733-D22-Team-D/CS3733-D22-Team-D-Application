@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
-import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
@@ -16,7 +15,8 @@ public class SanitationRequest extends TableObject implements Request {
         + "roomID varchar(60),"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
-        + "sanitationType varchar(20))";
+        + "sanitationType varchar(20),"
+        + "cleanStatus varchar(20))";
   }
 
   @Override
@@ -70,7 +70,7 @@ public class SanitationRequest extends TableObject implements Request {
         sanitationType = newAttribute;
         break;
       case 7:
-        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        cleanStatus = RequestStatus.valueOf(newAttribute);
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -117,7 +117,7 @@ public class SanitationRequest extends TableObject implements Request {
   private String sanitationType;
 
   @TableHandler(table = 0, col = 6)
-  private MedicalEquipment.CleanStatus cleanStatus;
+  private RequestStatus cleanStatus;
 
   // CONSTRUCTOR
 
@@ -127,7 +127,7 @@ public class SanitationRequest extends TableObject implements Request {
       String requesterID,
       String assigneeID,
       String sanitationType,
-      MedicalEquipment.CleanStatus cleanStatus) {
+      RequestStatus cleanStatus) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
@@ -187,11 +187,11 @@ public class SanitationRequest extends TableObject implements Request {
     this.sanitationType = sanitationType;
   }
 
-  public MedicalEquipment.CleanStatus getCleanStatus() {
+  public RequestStatus getCleanStatus() {
     return cleanStatus;
   }
 
-  public void setCleanStatus(MedicalEquipment.CleanStatus cleanStatus) {
+  public void setCleanStatus(RequestStatus cleanStatus) {
     this.cleanStatus = cleanStatus;
   }
 }

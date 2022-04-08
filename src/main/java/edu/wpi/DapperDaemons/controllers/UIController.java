@@ -225,6 +225,4 @@ public abstract class UIController implements Initializable {
     }
     return names;
   }
-
-  public void saveToCSV() {}
 }
