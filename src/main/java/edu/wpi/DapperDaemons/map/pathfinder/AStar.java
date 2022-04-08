@@ -87,7 +87,9 @@ public class AStar {
   }
 
   /**
-   * gets all neighbors by doing some fancy pancy flip flops and utilizing ALlEdges / Location Node database thingy
+   * gets all neighbors by doing some fancy pancy flip flops and utilizing ALlEdges / Location Node
+   * database thingy
+   *
    * @param currentLocation
    * @return
    */
@@ -116,6 +118,7 @@ public class AStar {
 
   /**
    * Gets the distance utilizing the Location database and the XCoord and YCoord
+   *
    * @param currentLocation
    * @param nextLocation
    * @return

@@ -106,7 +106,7 @@
                                                       <Insets left="50.0" right="50.0" />
                                                   </VBox.margin>
                                     </Text>
-                                              <JFXComboBox fx:id="roomBox" editable="true" onInputMethodTextChanged="#filterRooms" prefHeight="34.0" prefWidth="353.0" style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-color: #f1f0f0; -fx-background-radius: 7.5 7.5 0 0;" visibleRowCount="3">
+                                              <JFXComboBox fx:id="roomBox" editable="true" prefHeight="34.0" prefWidth="353.0" style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-color: #f1f0f0; -fx-background-radius: 7.5 7.5 0 0;" visibleRowCount="3">
                                                   <VBox.margin>
                                                       <Insets left="50.0" right="50.0" />
                                                   </VBox.margin>
@@ -223,7 +223,7 @@
               </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" visible="false" BorderPane.alignment="CENTER">
+                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
                         <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
                            <font>

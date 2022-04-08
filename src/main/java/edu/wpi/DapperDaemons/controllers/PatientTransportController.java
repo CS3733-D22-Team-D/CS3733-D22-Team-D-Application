@@ -19,7 +19,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
@@ -88,7 +87,6 @@ public class PatientTransportController extends UIController implements Initiali
     patientDOB.setValue(null);
   }
 
-
   @FXML
   public void onSubmitClicked() {}
 
@@ -107,13 +105,13 @@ public class PatientTransportController extends UIController implements Initiali
     return hasClearance;
   }
 
-  private void filterRoomsDropDown() {
+  private void searchRoomsDropDown() {
 
     ArrayList<Location> locations = new ArrayList<>();
     ArrayList<String> locationNames = new ArrayList<>();
 
     try {
-      locations = (ArrayList) locationDAO.filter(7, roomBox.getValue());
+      locations = (ArrayList) locationDAO.search(7, roomBox.getValue());
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -135,7 +133,7 @@ public class PatientTransportController extends UIController implements Initiali
 
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
       roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
-      roomBox.getEditor().setOnKeyPressed(E -> filterRoomsDropDown());
+      roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
     }
   }
 }
