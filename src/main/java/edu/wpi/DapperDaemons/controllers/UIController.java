@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -24,16 +26,33 @@ import javafx.util.Duration;
 Contains methods needed for all UI pages
  */
 public abstract class UIController implements Initializable {
-  @FXML private ImageView homeIcon;
 
+  /* JFX Variable */
+  @FXML private ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
-
   @FXML private VBox sceneBox;
+
+  /* DAO Object to access all room numbers */
+  List<Location> locations;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    DAO<Location> dao;
+    try {
+      dao = new DAO<Location>(new Location());
+    } catch (Exception e) {
+      System.err.print("Error, table was unable to be created\n");
+      return;
+    }
+    /* Used the DAO object to get list */
+    try {
+      this.locations = dao.getAll();
+    } catch (Exception e) {
+      this.locations = new ArrayList<>();
+    }
     menuSlider(slider, burg, burgBack);
   }
 
@@ -198,5 +217,17 @@ public abstract class UIController implements Initializable {
   @FXML
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
+  }
+  /**
+   * Gets all long names
+   *
+   * @return a list of long names
+   */
+  public List<String> getAllLongNames() {
+    List<String> names = new ArrayList<String>();
+    for (Location loc : this.locations) {
+      names.add(loc.getLongName());
+    }
+    return names;
   }
 }

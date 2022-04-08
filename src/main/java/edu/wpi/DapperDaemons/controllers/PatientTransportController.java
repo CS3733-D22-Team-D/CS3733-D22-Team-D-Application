@@ -45,7 +45,7 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientDOB;
 
   List<String> names;
-  PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
+  //PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
   DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
 
@@ -114,7 +114,7 @@ public class PatientTransportController extends UIController implements Initiali
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-      roomBox.setItems(FXCollections.observableArrayList(handler.getAllLongNames()));
+      roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
     }
 
     // TODO: Pull transport requests from database
