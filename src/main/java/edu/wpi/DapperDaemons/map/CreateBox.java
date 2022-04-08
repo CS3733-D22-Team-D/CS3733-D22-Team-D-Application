@@ -4,11 +4,10 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.util.List;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-
-import java.util.List;
 
 public class CreateBox {
 
@@ -77,7 +76,7 @@ public class CreateBox {
     try {
       List<Location> locationList = DAOPouch.getLocationDAO().filter(6, nodeType);
       String numberRoomTypes =
-          Integer.toString(DAOPouch.getLocationDAO().filter(locationList,4,floor).size() + 1);
+          Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, floor).size());
       numberRoomTypes = "000" + numberRoomTypes;
       numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
       floor = "00" + floor;
