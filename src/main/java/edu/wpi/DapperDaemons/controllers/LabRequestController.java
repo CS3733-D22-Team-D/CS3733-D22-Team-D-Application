@@ -140,8 +140,10 @@ public class LabRequestController extends UIController {
 
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
-      procedureComboBox.setItems(FXCollections.observableArrayList("BLOOD_DRAW", "X_RAY"));
-      priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+      procedureComboBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
+      priorityChoiceBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     }
 
     // TODO: Pull lab requests from database

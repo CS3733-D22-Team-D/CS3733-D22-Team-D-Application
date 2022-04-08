@@ -196,7 +196,7 @@ public class MedicineController extends UIController {
 
     private void initializeInputs() {
       medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-      priorityIn.getItems().addAll("LOW", "MEDIUM", "HIGH");
+      priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
     }
   }
 }

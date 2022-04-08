@@ -147,7 +147,8 @@ public class EquipmentRequestController extends UIController {
   }
 
   public void initBoxes() {
-    priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+    priorityChoiceBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
