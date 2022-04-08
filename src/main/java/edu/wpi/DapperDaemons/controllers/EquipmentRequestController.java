@@ -3,15 +3,19 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
+import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 // import edu.wpi.Dapper_Daemons.requests.PatientTransportRequest;
 
@@ -144,5 +148,15 @@ public class EquipmentRequestController extends UIController {
 
   public void initBoxes() {
     priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+  }
+
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public <T extends TableObject> void saveToCSV() {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) equipmentRequestsTable.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
+    dao.save(csv.getName());
   }
 }
