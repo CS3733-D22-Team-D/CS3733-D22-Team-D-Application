@@ -122,8 +122,8 @@ public class MedicineController extends UIController {
           patient = patientDAO.get(patientID);
         } catch (SQLException e) {
           e.printStackTrace();
-          isAPatient = false;
         }
+        isAPatient = patient.getFirstName().equals(patientName.getText());
         if (isAPatient) {
 
           // now we can create the request and send it

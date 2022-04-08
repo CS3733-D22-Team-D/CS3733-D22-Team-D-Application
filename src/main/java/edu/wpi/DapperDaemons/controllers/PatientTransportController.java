@@ -3,18 +3,23 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
@@ -42,12 +47,15 @@ public class PatientTransportController extends UIController implements Initiali
   /* Text Boxes */
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
-  @FXML private TextField patientDOB;
+  @FXML private DatePicker patientDOB;
 
   List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
-  DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
+  DAO<PatientTransportRequest> patientTransportRequestDAO =
+      DAOPouch.getPatientTransportRequestDAO();
+  DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
+  DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
@@ -56,10 +64,9 @@ public class PatientTransportController extends UIController implements Initiali
     PatientTransportInitializer init = new PatientTransportInitializer();
     init.initializeTable();
     init.initializeInputs();
-    init.initializeRequests();
 
     try {
-      transportRequests.getItems().addAll(dao.getAll());
+      transportRequests.getItems().addAll(patientTransportRequestDAO.getAll());
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
@@ -78,46 +85,57 @@ public class PatientTransportController extends UIController implements Initiali
     pBox.setValue("");
     patientFirstName.setText("");
     patientLastName.setText("");
-    patientDOB.setText("");
+    patientDOB.setValue(null);
   }
+
 
   @FXML
-  public void onSubmitClicked() {
-    if (!(roomBox.getValue().trim().equals("") || pBox.getValue().trim().equals(""))) {
-      Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+  public void onSubmitClicked() {}
 
-      addItem(
-          new PatientTransportRequest(
-              priority,
-              "CURRENTROOM OF PATIENT",
-              "REQUESTERID",
-              "ASSIGNEEID",
-              patientFirstName.getText() + patientLastName.getText() + patientDOB.getText(),
-              roomBox.getValue(),
-              Request.RequestStatus.REQUESTED));
+  private boolean addItem(PatientTransportRequest request) {
+    boolean hasClearance = false;
 
-      onClearClicked();
+    try {
+      hasClearance = patientTransportRequestDAO.add(request);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+
+    if (hasClearance) {
+      transportRequests.getItems().add(request);
+    }
+    return hasClearance;
   }
 
-  private void addItem(PatientTransportRequest request) {
-    transportRequests.getItems().add(request);
-    // TODO: Add request to database
+  private void filterRoomsDropDown() {
+
+    ArrayList<Location> locations = new ArrayList<>();
+    ArrayList<String> locationNames = new ArrayList<>();
+
+    try {
+      locations = (ArrayList) locationDAO.filter(7, roomBox.getValue());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    for (Location l : locations) {
+      locationNames.add(l.getAttribute(7));
+    }
+    System.out.println(locationNames);
+    roomBox.setItems(FXCollections.observableArrayList(locationNames));
   }
 
   private class PatientTransportInitializer {
+
     private void initializeTable() {
       tableHelper = new TableHelper<>(transportRequests, 0);
       tableHelper.linkColumns(PatientTransportRequest.class);
     }
 
-    // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
+
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
       roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+      roomBox.getEditor().setOnKeyPressed(E -> filterRoomsDropDown());
     }
-
-    // TODO: Pull transport requests from database
-    private void initializeRequests() {}
   }
 }

@@ -348,7 +348,7 @@
                   </HBox>
                </top>
                <left>
-                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" visible="false" BorderPane.alignment="CENTER">
+                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
                         <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
                            <font>

@@ -55,8 +55,7 @@ public class MealController extends UIController {
   @FXML private Label errorLabel;
 
   private DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
-  private DAO<Patient>  patientDAO = DAOPouch.getPatientDAO();
-
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /**
    * Runs at compile time, specified from Initializable interface Sets up meal request table and
@@ -93,46 +92,57 @@ public class MealController extends UIController {
     String patientID;
     String entree = entreeBox.getValue();
     String side = sideBox.getValue();
-    String  drink = drinkBox.getValue();
+    String drink = drinkBox.getValue();
     String dessert = dessertBox.getValue();
 
-
-    //Check if all inputs are filled
+    // Check if all inputs are filled
     if (allFilled()) {
 
-      //Check if the patient exists
-      patientID = patientName.getText() + patientLastName.getText() + patientDOB.getValue().getMonthValue() + patientDOB.getValue().getDayOfMonth() + patientDOB.getValue().getYear();
+      // Check if the patient exists
+      patientID =
+          patientName.getText()
+              + patientLastName.getText()
+              + patientDOB.getValue().getMonthValue()
+              + patientDOB.getValue().getDayOfMonth()
+              + patientDOB.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = true;
       try {
         patient = patientDAO.get(patientID);
       } catch (SQLException e) {
         e.printStackTrace();
-        isAPatient = false;
       }
-      if(isAPatient){
+      isAPatient = patient.getFirstName().equals(patientName.getText());
+      if (isAPatient) {
+
+        // request is formed correctly and the patient exists send it and check for clearance
         roomID = patient.getLocationID();
         requesterID = SecurityController.getInstance().getUser().getNodeID();
-        boolean hadClearance = addMealRequest(new MealDeliveryRequest(priority, roomID,requesterID,assigneeID,patientID,entree,side,drink,dessert));
+        boolean hadClearance =
+            addMealRequest(
+                new MealDeliveryRequest(
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    patientID,
+                    entree,
+                    side,
+                    drink,
+                    dessert));
 
-                if(!hadClearance){
+        if (!hadClearance) {
 
-                  //TODO send error message that the user does not have proper clearance
-                }
+          // TODO send error message that the user does not have proper clearance
+        }
 
-
-
-
-      }else{
-        //TODO send error message that the patient doesnt exist
+      } else {
+        // TODO send error message that the patient doesnt exist
 
       }
 
-
-
-
-    }else{
-      //TODO display error message that not all fields are filled;
+    } else {
+      // TODO display error message that not all fields are filled;
 
     }
     onClear();
@@ -140,16 +150,14 @@ public class MealController extends UIController {
 
   /** clears all options for creating service request, executes when clear button is pressed */
   public void onClear() {
-      entreeBox.setValue("");
-      sideBox.setValue("");
-      drinkBox.setValue("");
-      dessertBox.setValue("");
-      errorLabel.setText("");
-      patientName.clear();
-      patientLastName.clear();
-      patientDOB.setValue(null);
-
-
+    entreeBox.setValue("");
+    sideBox.setValue("");
+    drinkBox.setValue("");
+    dessertBox.setValue("");
+    errorLabel.setText("");
+    patientName.clear();
+    patientLastName.clear();
+    patientDOB.setValue(null);
   }
 
   /**
@@ -164,10 +172,9 @@ public class MealController extends UIController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    if(hadClearance)
-      mealRequestsTable.getItems().add(request);
+    if (hadClearance) mealRequestsTable.getItems().add(request);
 
-  return hadClearance;
+    return hadClearance;
   }
 
   /** Initializes the options for JFX boxes */
