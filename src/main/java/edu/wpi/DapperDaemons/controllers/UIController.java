@@ -6,6 +6,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.TableObject;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -224,5 +227,17 @@ public abstract class UIController implements Initializable {
       names.add(loc.getLongName());
     }
     return names;
+  }
+
+  protected void saveToCSV(TableObject type) {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) homeIcon.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    try {
+      csvSaver.save(type, csv.getAbsolutePath());
+    } catch (Exception e) {
+      System.err.println("Unable to Save CSV of type: " + type);
+    }
   }
 }

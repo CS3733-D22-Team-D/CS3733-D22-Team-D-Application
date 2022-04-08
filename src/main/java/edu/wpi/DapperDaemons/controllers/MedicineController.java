@@ -4,12 +4,10 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -19,8 +17,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class MedicineController extends UIController {
   @FXML private TableView<MedicineRequest> medicineRequests;
@@ -162,15 +158,7 @@ public class MedicineController extends UIController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) medicineRequests.getScene().getWindow();
-    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    File csv = fileSys.showSaveDialog(window);
-    try {
-      csvSaver.save((new MedicineRequest()), csv.getAbsolutePath());
-    } catch (Exception e) {
-      System.err.println("Unable to Save CSV");
-    }
+    super.saveToCSV(new MedicineRequest());
   }
 
   @FXML
@@ -196,7 +184,7 @@ public class MedicineController extends UIController {
 
     private void initializeInputs() {
       medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-      priorityIn.getItems().addAll("LOW", "MEDIUM", "HIGH");
+      priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
     }
   }
 }

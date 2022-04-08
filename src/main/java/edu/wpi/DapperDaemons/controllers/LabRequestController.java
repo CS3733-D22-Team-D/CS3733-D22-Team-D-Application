@@ -3,18 +3,14 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class LabRequestController extends UIController {
 
@@ -120,15 +116,7 @@ public class LabRequestController extends UIController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) labReqTable.getScene().getWindow();
-    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    File csv = fileSys.showSaveDialog(window);
-    try {
-      csvSaver.save((new LabRequest()), csv.getAbsolutePath());
-    } catch (Exception e) {
-      System.err.println("Unable to Save CSV");
-    }
+    super.saveToCSV(new LabRequest());
   }
 
   private class LabRequestInitializer {
@@ -140,8 +128,10 @@ public class LabRequestController extends UIController {
 
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
-      procedureComboBox.setItems(FXCollections.observableArrayList("BLOOD_DRAW", "X_RAY"));
-      priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+      procedureComboBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
+      priorityChoiceBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     }
 
     // TODO: Pull lab requests from database

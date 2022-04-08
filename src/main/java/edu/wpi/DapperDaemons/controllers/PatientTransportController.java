@@ -3,12 +3,11 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,8 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
@@ -105,20 +102,16 @@ public class PatientTransportController extends UIController implements Initiali
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) transportRequests.getScene().getWindow();
-    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    File csv = fileSys.showSaveDialog(window);
-    try {
-      csvSaver.save((new PatientTransportRequest()), csv.getAbsolutePath());
-    } catch (Exception e) {
-      System.err.println("Unable to Save CSV");
-    }
+    super.saveToCSV(new PatientTransportRequest());
   }
 
   private void addItem(PatientTransportRequest request) {
     transportRequests.getItems().add(request);
-    // TODO: Add request to database
+    try {
+      dao.add(request);
+    } catch (SQLException e) {
+      System.err.println("Patient Transport Request could not be added to DAO");
+    }
   }
 
   private class PatientTransportInitializer {
@@ -129,7 +122,8 @@ public class PatientTransportController extends UIController implements Initiali
 
     // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
-      pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+      pBox.setItems(
+          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
       roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
     }
 
