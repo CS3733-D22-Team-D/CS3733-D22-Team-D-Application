@@ -150,6 +150,7 @@ public class EquipmentRequestController extends UIController {
     priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
   }
 
+  // TODO: Determine how to write to a certain address, ask backend
   /** Saves a given service request to a CSV by opening the CSV window */
   public <T extends TableObject> void saveToCSV() {
     FileChooser fileSys = new FileChooser();
@@ -157,6 +158,7 @@ public class EquipmentRequestController extends UIController {
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
+    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
     dao.save(csv.getName());
   }
 }
