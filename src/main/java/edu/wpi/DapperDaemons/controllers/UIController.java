@@ -2,9 +2,14 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.csvSaver;
+import edu.wpi.DapperDaemons.entities.Location;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -23,16 +28,27 @@ import javafx.util.Duration;
 Contains methods needed for all UI pages
  */
 public abstract class UIController implements Initializable {
-  @FXML private ImageView homeIcon;
 
+  /* JFX Variable */
+  @FXML private ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
-
   @FXML private VBox sceneBox;
+
+  /* DAO Object to access all room numbers */
+  List<Location> locations;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    DAO<Location> dao = DAOPouch.getLocationDAO();
+    /* Used the DAO object to get list */
+    try {
+      this.locations = dao.getAll();
+    } catch (Exception e) {
+      this.locations = new ArrayList<>();
+    }
     menuSlider(slider, burg, burgBack);
   }
 
@@ -149,7 +165,7 @@ public abstract class UIController implements Initializable {
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.001); // To update size
+    window.setWidth(window.getWidth() + 0.0); // To update size
     window.setHeight(window.getHeight());
   }
 
@@ -196,5 +212,17 @@ public abstract class UIController implements Initializable {
   @FXML
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
+  }
+  /**
+   * Gets all long names
+   *
+   * @return a list of long names
+   */
+  public List<String> getAllLongNames() {
+    List<String> names = new ArrayList<String>();
+    for (Location loc : this.locations) {
+      names.add(loc.getLongName());
+    }
+    return names;
   }
 }

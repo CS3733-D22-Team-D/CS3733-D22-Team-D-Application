@@ -3,17 +3,18 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class LabRequestController extends UIController {
 
@@ -31,9 +32,13 @@ public class LabRequestController extends UIController {
   /* Lab request DAO */
   private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
 
+  /* Labels */
+  @FXML private Label errorLabel;
+
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    onClearClicked();
     super.initialize(location, resources);
     LabRequestInitializer init = new LabRequestInitializer();
 
@@ -43,7 +48,6 @@ public class LabRequestController extends UIController {
 
     try {
       labReqTable.getItems().addAll(dao.getAll());
-      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
@@ -73,11 +77,11 @@ public class LabRequestController extends UIController {
     patientLastName.clear();
     patientDOB.clear();
     priorityChoiceBox.setValue("");
+    errorLabel.setText("");
   }
 
   @FXML
   public void onSubmitClicked() {
-    // TODO : What does this mean? Could you comment it?
     if (!(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
@@ -99,6 +103,8 @@ public class LabRequestController extends UIController {
               Request.RequestStatus.REQUESTED));
 
       onClearClicked();
+    } else {
+      errorLabel.setText("Error: One or more fields are empty!");
     }
   }
 
@@ -110,6 +116,18 @@ public class LabRequestController extends UIController {
     } catch (Exception e) {
       e.printStackTrace();
       // TODO : show an error on the screen since adding went wrong
+    }
+  }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) labReqTable.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    try {
+      csvSaver.save((new LabRequest()), csv.getAbsolutePath());
+    } catch (Exception e) {
+      System.err.println("Unable to Save CSV");
     }
   }
 

@@ -84,7 +84,7 @@ public class SanitationRequest extends TableObject implements Request {
 
   @Override
   public String getRequestType() {
-    return this.getClass().toString();
+    return "Sanitation Request";
   }
 
   @Override
