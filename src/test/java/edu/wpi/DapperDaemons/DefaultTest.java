@@ -7,9 +7,7 @@ package edu.wpi.DapperDaemons;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.DapperDaemons.backend.*;
-import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.entities.*;
-import java.io.IOException;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +37,7 @@ public class DefaultTest {
     assertTrue(check1 && check2 && check3 && check4 && check5 && check6 && check7 && check8);
   }
 
-  @Test
+  /*@Test
   public void checkDaoAdd() throws SQLException, IOException {
     DAO<Location> locationDAO = new DAO<>(new Location());
     Location testLocation =
@@ -47,5 +45,5 @@ public class DefaultTest {
     locationDAO.add(testLocation);
     Location savedLocation = locationDAO.get("LOC1");
     assertTrue(savedLocation.equals(testLocation));
-  }
+  } */
 }
