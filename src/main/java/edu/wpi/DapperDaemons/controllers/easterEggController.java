@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import java.io.IOException;
 import java.net.URL;
@@ -68,11 +69,7 @@ public class easterEggController extends UIController {
 
   @FXML
   public void stopEasterEgg() {
-    try {
-      sound.interrupt();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    sound.interrupt();
   }
 
   private void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
