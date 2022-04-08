@@ -44,7 +44,7 @@ public class MedicineController extends UIController {
     init.initializeTable();
 
     try {
-      medicineRequests.getItems().addAll(dao.getAll());
+      medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
       //      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
