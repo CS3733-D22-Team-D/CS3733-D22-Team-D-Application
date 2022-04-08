@@ -99,8 +99,8 @@
                               </VBox>
                         <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4; -fx-background-radius: 7.5;" text="Clear" textFill="WHITE" />
-                              <Button mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Submit" textFill="WHITE">
+                              <Button id="cancel" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />
+                              <Button id="action" mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="30.0" />
                                  </HBox.margin>
@@ -166,7 +166,7 @@
                       </VBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="542.0" prefWidth="96.0">
                      <children>
-                        <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Save to CSV" textFill="WHITE">
+                        <Button id="action" fx:id="csvButton" cache="true" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" text="Save to CSV" textFill="WHITE">
                            <HBox.margin>
                               <Insets bottom="10.0" right="10.0" />
                            </HBox.margin>

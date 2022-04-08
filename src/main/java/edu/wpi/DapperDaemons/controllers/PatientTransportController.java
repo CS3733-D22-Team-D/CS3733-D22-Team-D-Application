@@ -8,7 +8,6 @@ import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -57,7 +56,7 @@ public class PatientTransportController extends UIController implements Initiali
     tableHelper.linkColumns(PatientTransportRequest.class);
 
     pBox.setItems(
-            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
 
     try {

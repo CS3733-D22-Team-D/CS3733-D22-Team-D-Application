@@ -38,8 +38,10 @@ public class LabRequestController extends UIController {
     tableHelper = new TableHelper<>(labReqTable, 0);
     tableHelper.linkColumns(LabRequest.class);
 
-    procedureComboBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
-    priorityChoiceBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    procedureComboBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
+    priorityChoiceBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
 
     try {
       labReqTable.getItems().addAll(dao.getAll());
@@ -72,7 +74,8 @@ public class LabRequestController extends UIController {
       String patientID = patientName.getText() + patientLastName.getText() + patientDOB.getText();
       Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
 
-      addItem(new LabRequest(
+      addItem(
+          new LabRequest(
               priority,
               "LAB ROOM ID",
               "REQUESTERID",

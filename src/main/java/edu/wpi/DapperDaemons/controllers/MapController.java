@@ -83,7 +83,7 @@ public class MapController extends UIController implements Initializable {
     }
 
     this.maps =
-            new MapHandler(
+        new MapHandler(
             mapAssets,
             mapFloorL2,
             mapFloorL1,

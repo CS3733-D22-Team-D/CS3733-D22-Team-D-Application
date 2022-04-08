@@ -1,0 +1,23 @@
+#action.button{
+    -fx-background-color: #059DA7;
+    -fx-border-width: 0;
+}
+#action.button:hover {
+    -fx-background-color: #42a28c;
+    -fx-border-color: #059DA7;
+    -fx-border-width: 3;
+    -fx-border-radius: 4;
+    -fx-background-insets: 1;
+}
+#cancel.button {
+    -fx-background-color: #C1C5D4;
+    -fx-border-width: 0;
+}
+#cancel.button:hover {
+    /*-fx-background-color: #A3A9BF;*/
+    -fx-background-color: #d0afa3;
+    -fx-border-color: #C1C5D4;
+    -fx-border-width: 3;
+    -fx-border-radius: 4;
+    -fx-background-insets: 1;
+}

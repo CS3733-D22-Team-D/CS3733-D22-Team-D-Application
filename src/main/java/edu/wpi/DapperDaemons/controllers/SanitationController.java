@@ -48,10 +48,10 @@ public class SanitationController extends UIController {
     helper.linkColumns(SanitationRequest.class);
 
     priorityBox.setItems(
-            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     sanitationBox.setItems(
-            FXCollections.observableArrayList(
-                    "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
+        FXCollections.observableArrayList(
+            "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
 
     try {
       pendingRequests.getItems().addAll(dao.getAll());
