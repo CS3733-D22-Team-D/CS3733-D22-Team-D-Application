@@ -199,4 +199,8 @@ public class MealController extends UIController {
         || patientDOB.getValue().toString().equals("")
         || patientLastName.getText().equals("")));
   }
+
+  public void saveToCSV() {
+    super.saveToCSV(new MealDeliveryRequest());
+  }
 }

@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -88,7 +89,71 @@ public class PatientTransportController extends UIController implements Initiali
   }
 
   @FXML
-  public void onSubmitClicked() {}
+  public void onSubmitClicked() {
+    Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+    String roomID;
+    String requesterID = SecurityController.getInstance().getUser().getNodeID();
+    String assigneeID = "null";
+    String patientID;
+    String nextRoomID;
+    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
+    if(fieldsNonEmpty()){
+      //Determine if the next Location exists
+      ArrayList<Location> locations = new ArrayList<>();
+      boolean nextLocationExists = false;
+      try {
+        locations = (ArrayList<Location>) locationDAO.getAll();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      for(Location l: locations){
+        if(l.getAttribute(7).equals(roomBox.getValue())){
+          roomID = l.getNodeID();
+          nextLocationExists = true;
+        }
+      }
+      if(nextLocationExists){
+        boolean patientExists = false;
+
+
+
+        if(patientExists){
+
+
+
+        }else{
+         //TODO display error that patient does not exist
+        }
+      }else{
+        //TODO display error that location does not exist
+      }
+    }else{
+      //TODO display error message not all fields filled
+    }
+
+
+
+
+
+
+
+
+
+
+  }
+  public boolean fieldsNonEmpty(){
+
+
+    return false;
+
+
+
+  }
+
+
+
+
 
   private boolean addItem(PatientTransportRequest request) {
     boolean hasClearance = false;
@@ -109,9 +174,10 @@ public class PatientTransportController extends UIController implements Initiali
 
     ArrayList<Location> locations = new ArrayList<>();
     ArrayList<String> locationNames = new ArrayList<>();
+    String value = roomBox.getValue() + "";
 
     try {
-      locations = (ArrayList) locationDAO.search(7, roomBox.getValue());
+      locations = (ArrayList) locationDAO.search(locationDAO.getAll(), 7, value);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -119,7 +185,7 @@ public class PatientTransportController extends UIController implements Initiali
       locationNames.add(l.getAttribute(7));
     }
     System.out.println(locationNames);
-    roomBox.setItems(FXCollections.observableArrayList(locationNames));
+    roomBox.setValue(String.valueOf(locationNames));
   }
 
   private class PatientTransportInitializer {
@@ -133,7 +199,15 @@ public class PatientTransportController extends UIController implements Initiali
 
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
       roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
-      roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
+
+
+      //TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
+      //roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
+      roomBox.setEditable(true);
     }
+  }
+
+  public void saveToCSV() {
+    super.saveToCSV(new PatientTransportRequest());
   }
 }
