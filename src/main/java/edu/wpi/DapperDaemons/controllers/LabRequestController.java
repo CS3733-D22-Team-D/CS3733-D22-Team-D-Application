@@ -3,14 +3,20 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class LabRequestController extends UIController {
 
@@ -130,5 +136,16 @@ public class LabRequestController extends UIController {
 
     // TODO: Pull lab requests from database
     private void initializeRequests() {}
+  }
+  // TODO: Determine how to write to a certain address, ask backend
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public <T extends TableObject> void saveToCSV() {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) labReqTable.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
+    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
+    dao.save(csv.getName());
   }
 }
