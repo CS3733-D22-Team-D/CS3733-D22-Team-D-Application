@@ -2,7 +2,10 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.csvSaver;
+import edu.wpi.DapperDaemons.entities.Location;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,13 +43,7 @@ public abstract class UIController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    DAO<Location> dao;
-    try {
-      dao = new DAO<Location>(new Location());
-    } catch (Exception e) {
-      System.err.print("Error, table was unable to be created\n");
-      return;
-    }
+    DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
     try {
       this.locations = dao.getAll();

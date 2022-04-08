@@ -38,7 +38,7 @@ public class MedicineController extends UIController {
 
     try {
       medicineRequests.getItems().addAll(dao.getAll());
-//      System.out.println("Created table");
+      //      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Unable to get all from DAO \n");
