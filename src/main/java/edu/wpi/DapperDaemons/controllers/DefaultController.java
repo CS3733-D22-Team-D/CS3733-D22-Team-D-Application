@@ -28,43 +28,18 @@ public class DefaultController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    easterEggSequence.add(KeyCode.U);
-    easterEggSequence.add(KeyCode.P);
-    easterEggSequence.add(KeyCode.U);
-    easterEggSequence.add(KeyCode.P);
-    easterEggSequence.add(KeyCode.D);
-    easterEggSequence.add(KeyCode.O);
-    easterEggSequence.add(KeyCode.W);
-    easterEggSequence.add(KeyCode.N);
-    easterEggSequence.add(KeyCode.D);
-    easterEggSequence.add(KeyCode.O);
-    easterEggSequence.add(KeyCode.W);
-    easterEggSequence.add(KeyCode.N);
-    easterEggSequence.add(KeyCode.L);
-    easterEggSequence.add(KeyCode.E);
-    easterEggSequence.add(KeyCode.F);
-    easterEggSequence.add(KeyCode.T);
-    easterEggSequence.add(KeyCode.R);
-    easterEggSequence.add(KeyCode.I);
-    easterEggSequence.add(KeyCode.G);
-    easterEggSequence.add(KeyCode.H);
-    easterEggSequence.add(KeyCode.T);
-    easterEggSequence.add(KeyCode.L);
-    easterEggSequence.add(KeyCode.E);
-    easterEggSequence.add(KeyCode.F);
-    easterEggSequence.add(KeyCode.T);
-    easterEggSequence.add(KeyCode.R);
-    easterEggSequence.add(KeyCode.I);
-    easterEggSequence.add(KeyCode.G);
-    easterEggSequence.add(KeyCode.H);
-    easterEggSequence.add(KeyCode.T);
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
     easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.B);
-    easterEggSequence.add(KeyCode.S);
-    easterEggSequence.add(KeyCode.T);
-    easterEggSequence.add(KeyCode.A);
-    easterEggSequence.add(KeyCode.R);
-    easterEggSequence.add(KeyCode.T);
+    easterEggSequence.add(KeyCode.SHIFT);
+    easterEggSequence.add(KeyCode.ENTER);
   }
 
   @FXML
