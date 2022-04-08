@@ -255,9 +255,6 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  public void setFloorG() {}
-
-  @FXML
   public void setFloor1(MouseEvent event) {
     maps.setMap(mapFloor1);
     glyphs.filterByFloor("1");

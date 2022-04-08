@@ -72,7 +72,10 @@ public class MapHandler {
   }
 
   public void zoom(double multiplier) {
-    mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
-    mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+    if (((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) > 0.12)
+        && ((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) < 1.00)) {
+      mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
+      mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+    }
   }
 }
