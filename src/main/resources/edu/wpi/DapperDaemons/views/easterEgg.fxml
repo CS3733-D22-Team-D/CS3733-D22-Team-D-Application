@@ -19,7 +19,7 @@
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox prefHeight="46.0" prefWidth="301.0">
+            <HBox prefHeight="46.0" prefWidth="301.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/easterEgg.gif); -fx-background-size: 100% 100%;">
                <opaqueInsets>
                   <Insets top="50.0" />
                </opaqueInsets>
@@ -171,7 +171,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#stopEasterEgg" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/BrighamLogoWithBG.png" />
                                  </image>
@@ -278,13 +278,6 @@
                      </children>
                   </HBox>
                </top>
-               <center>
-                  <ImageView fitHeight="541.0" fitWidth="639.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                     <image>
-                        <Image url="@../assets/easterEgg.gif" />
-                     </image>
-                  </ImageView>
-               </center>
             </BorderPane>
          </children>
       </StackPane>
