@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
@@ -51,8 +52,7 @@ public class EquipmentRequestController extends UIController {
   @FXML private Label errorLabel;
 
   /* DAO Object */
-  private DAO<MedicalEquipmentRequest>
-      dao; // TODO: Move this elsewhere (we dont want DAOs in controller classes)
+  private DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -62,10 +62,7 @@ public class EquipmentRequestController extends UIController {
     tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
     tableHelper.linkColumns(MedicalEquipmentRequest.class);
 
-    try {
-      dao =
-          new DAO<MedicalEquipmentRequest>(
-              new MedicalEquipmentRequest()); // Removed second field (filename) since everything is
+    try { // Removed second field (filename) since everything is
       // loaded on startup
       equipmentRequestsTable.getItems().addAll(dao.getAll());
     } catch (Exception e) {
