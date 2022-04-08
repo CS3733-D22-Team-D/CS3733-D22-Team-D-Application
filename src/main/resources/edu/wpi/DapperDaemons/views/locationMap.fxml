@@ -29,41 +29,46 @@
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane hbarPolicy="NEVER" hvalue="0.28" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.19">
+            <ScrollPane hbarPolicy="NEVER" hvalue="0.62" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.34">
                <content>
-                  <StackPane fx:id="mapAssets" prefHeight="150.0" prefWidth="200.0">
+                  <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0">
                      <children>
-                        <ImageView fx:id="mapFloorL2" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true" visible="false">
+                        <ImageView fx:id="mapFloorL2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel2.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapFloorL1" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true" visible="false">
+                        <ImageView fx:id="mapFloorL1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel1.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapFloorG" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/00_thegroundfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor1" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true" visible="false">
+                        <ImageView fx:id="mapFloor1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/01_thefirstfloor.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapFloor2" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true" visible="false">
+                        <ImageView fx:id="mapFloor2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/02_thesecondfloor.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapFloor3" fitHeight="3400.0" fitWidth="5000.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true" visible="false">
+                        <ImageView fx:id="mapFloor3" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/03_thethirdfloor.png" />
                            </image>
                         </ImageView>
-                        <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="3400.0" prefWidth="5000.0" />
+                        <ImageView fx:id="mapFloor4" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/Maps/04_thefourthfloor.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="mapFloor5" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/Maps/05_thefifthfloor.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
@@ -328,7 +333,17 @@
                      <children>
                         <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 7.5 7.5 0 0;" text=" 3" textFill="WHITE">
+                              <Button mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 7.5 7.5 0 0;" text="5" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text="4" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text="3" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -339,11 +354,6 @@
                                  </font>
                               </Button>
                               <Button mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text=" 1" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloorG" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text=" G" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
