@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +30,12 @@ public class easterEggController extends UIController {
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
+  }
+
+  @FXML
+  public void quitProgram() {
+    stopEasterEgg();
+    super.quitProgram();
   }
 
   public static synchronized void playSound(final String url) throws LineUnavailableException {
