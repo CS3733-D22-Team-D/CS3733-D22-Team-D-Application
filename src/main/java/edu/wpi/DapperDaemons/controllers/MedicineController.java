@@ -70,8 +70,8 @@ public class MedicineController extends UIController {
     boolean worked = false;
     try {
       medicineRequestDAO.update(event.getRowValue());
-    }catch(Exception e){
-      
+    } catch (Exception e) {
+
     }
   }
 

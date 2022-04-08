@@ -87,14 +87,14 @@ public class PatientTransportController extends UIController implements Initiali
       Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
 
       addItem(
-              new PatientTransportRequest(
-                      priority,
-                      "CURRENTROOM OF PATIENT",
-                      "REQUESTERID",
-                      "ASSIGNEEID",
-                      patientFirstName.getText() + patientLastName.getText() + patientDOB.getText(),
-                      roomBox.getValue(),
-                      Request.RequestStatus.REQUESTED));
+          new PatientTransportRequest(
+              priority,
+              "CURRENTROOM OF PATIENT",
+              "REQUESTERID",
+              "ASSIGNEEID",
+              patientFirstName.getText() + patientLastName.getText() + patientDOB.getText(),
+              roomBox.getValue(),
+              Request.RequestStatus.REQUESTED));
 
       onClearClicked();
     }

@@ -73,40 +73,40 @@ public abstract class UIController implements Initializable {
   static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
     slider.setTranslateX(-225);
     burg.setOnMouseClicked(
-            event -> {
-              TranslateTransition slide = new TranslateTransition();
-              slide.setDuration(Duration.seconds(0.4));
-              slide.setNode(slider);
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
 
-              slide.setToX(0);
-              slide.play();
+          slide.setToX(0);
+          slide.play();
 
-              slider.setTranslateX(-225);
+          slider.setTranslateX(-225);
 
-              slide.setOnFinished(
-                      (ActionEvent e) -> {
-                        burg.setVisible(false);
-                        burgBack.setVisible(true);
-                      });
-            });
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(false);
+                burgBack.setVisible(true);
+              });
+        });
 
     burgBack.setOnMouseClicked(
-            event -> {
-              TranslateTransition slide = new TranslateTransition();
-              slide.setDuration(Duration.seconds(0.4));
-              slide.setNode(slider);
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
 
-              slide.setToX(-225);
-              slide.play();
+          slide.setToX(-225);
+          slide.play();
 
-              slider.setTranslateX(0);
+          slider.setTranslateX(0);
 
-              slide.setOnFinished(
-                      (ActionEvent e) -> {
-                        burg.setVisible(true);
-                        burgBack.setVisible(false);
-                      });
-            });
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(true);
+                burgBack.setVisible(false);
+              });
+        });
   }
 
   @FXML
@@ -157,7 +157,7 @@ public abstract class UIController implements Initializable {
 
   private void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Parent root =
-            FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
+        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) homeIcon.getScene().getWindow();
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
