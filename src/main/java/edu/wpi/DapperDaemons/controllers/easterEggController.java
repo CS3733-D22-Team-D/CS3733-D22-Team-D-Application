@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,8 +26,12 @@ public class easterEggController extends UIController {
                   Clip clip = AudioSystem.getClip();
                   AudioInputStream inputStream =
                       AudioSystem.getAudioInputStream(
-                          easterEggController.class.getResourceAsStream(
-                              "/resources/edu/wpi/DapperDaemons/assets" + url));
+                          Objects.requireNonNull(
+                              easterEggController
+                                  .class
+                                  .getClassLoader()
+                                  .getResourceAsStream(
+                                      "edu/wpi/DapperDaemons/assets/easterEgg.wav")));
                   clip.open(inputStream);
                   clip.start();
                 } catch (Exception e) {
