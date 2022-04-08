@@ -120,7 +120,17 @@ public class LabRequestController extends UIController {
       // TODO : show an error on the screen since adding went wrong
     }
   }
-
+  // TODO: Determine how to write to a certain address, ask backend
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) labReqTable.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
+    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
+    dao.save(csv.getName());
+  }
   private class LabRequestInitializer {
     private void initializeTable() {
       // Bind values to column values
@@ -136,16 +146,5 @@ public class LabRequestController extends UIController {
 
     // TODO: Pull lab requests from database
     private void initializeRequests() {}
-  }
-  // TODO: Determine how to write to a certain address, ask backend
-  /** Saves a given service request to a CSV by opening the CSV window */
-  public void saveToCSV() {
-    FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) labReqTable.getScene().getWindow();
-    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    File csv = fileSys.showSaveDialog(window);
-    DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
-    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
-    dao.save(csv.getName());
   }
 }

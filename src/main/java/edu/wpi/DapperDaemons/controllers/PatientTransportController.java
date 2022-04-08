@@ -3,9 +3,12 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
@@ -98,6 +103,17 @@ public class PatientTransportController extends UIController implements Initiali
 
       onClearClicked();
     }
+  }
+  // TODO: Determine how to write to a certain address, ask backend
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) transportRequests.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    DAO<PatientTransportRequest> dao = DAOPouch.getPatientTransportRequestDAO();
+    String address = csv.getAbsolutePath(); // TODO : WRITE TO THIS ADDRESS ASK JACOB
+    dao.save(csv.getName());
   }
 
   private void addItem(PatientTransportRequest request) {
