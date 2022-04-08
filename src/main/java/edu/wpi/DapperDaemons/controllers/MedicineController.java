@@ -71,7 +71,7 @@ public class MedicineController extends UIController {
     try {
       medicineRequestDAO.update(event.getRowValue());
     }catch(Exception e){
-      
+
     }
   }
 
