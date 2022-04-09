@@ -7,6 +7,8 @@ import java.util.List;
 /** Manages general map locations */
 public class PositionInfo {
 
+  public final int IMAGE_RADIUS = 40;
+
   public enum RoomType {
     DEPT,
     EXIT,
@@ -39,10 +41,10 @@ public class PositionInfo {
     // int ymin = y-40;
     return loc.getFloor().equals(curFloor)
         && // On right floor
-        getX() <= (x + 25)
-        && getX() >= (x - 25)
-        && getY() <= (y + 25)
-        && getY() >= (y - 25);
+        getX() <= (x + IMAGE_RADIUS)
+        && getX() >= (x - IMAGE_RADIUS)
+        && getY() <= (y + IMAGE_RADIUS)
+        && getY() >= (y - IMAGE_RADIUS);
   }
 
   public String getId() {
