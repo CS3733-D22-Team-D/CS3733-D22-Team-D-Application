@@ -298,4 +298,58 @@ public class MapController extends UIController implements Initializable {
   public void toggleEXIT(MouseEvent event) {
     glyphs.filterByDisplay(maps.getFloor(), "EXIT");
   }
+
+  @FXML public void toggleDEPT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "DEPT");
+  }
+  
+  @FXML public void toggleHALL(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "HALL");
+  }
+
+  @FXML public void toggleINFO(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "INFO");
+  }
+
+
+  @FXML public void toggleLABS(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "LABS");
+  }
+
+  @FXML public void toggleREST(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "REST");
+  }
+
+  @FXML public void toggleBATH(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "BATH");
+  }
+
+  @FXML public void toggleRETL(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "RETL");
+  }
+
+  @FXML public void toggleSERV(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "SERV");
+  }
+  @FXML public void toggleSTAI(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "STAI");
+  }
+
+  @FXML public void toggleELEV(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "ELEV");
+  }
+
+  @FXML public void toggleSTOR(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "STOR");
+  }
+
+  @FXML public void togglePATI(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "PATI");
+  }
+
+  @FXML public void toggleDIRT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "DIRT");
+  }
+
 }
+
