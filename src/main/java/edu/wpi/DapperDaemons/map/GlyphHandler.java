@@ -3,8 +3,11 @@ package edu.wpi.DapperDaemons.map;
 import edu.wpi.DapperDaemons.controllers.MapController;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 public class GlyphHandler {
 
@@ -47,6 +50,25 @@ public class GlyphHandler {
 
   public void select(PositionInfo selected) {
     this.selected = selected;
+    Node node = glyphLayer.getChildren().get(imageLocs.indexOf(selected));
+
+    DropShadow borderGlow = new DropShadow();
+    borderGlow.setColor(Color.web("0x012D5A").brighter());
+    borderGlow.setOffsetX(0f);
+    borderGlow.setOffsetY(0f);
+    node.setEffect(borderGlow);
+    node.setScaleX(node.getScaleX() + 1);
+    node.setScaleY(node.getScaleY() + 1);
+  }
+
+  public void deselect() {
+    if (selected != null && imageLocs.contains(selected)) {
+      Node node = glyphLayer.getChildren().get(imageLocs.indexOf(selected));
+      node.setEffect(null);
+      node.setScaleX(1);
+      node.setScaleY(1);
+    }
+    this.selected = null;
   }
 
   private ImageView getIconImage(String type) {

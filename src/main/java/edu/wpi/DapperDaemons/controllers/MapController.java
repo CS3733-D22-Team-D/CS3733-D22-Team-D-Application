@@ -138,12 +138,13 @@ public class MapController extends UIController implements Initializable {
     }
 
     PositionInfo pos = positions.get(x, y, floor);
-
+    glyphs.deselect();
     // Close tabs if nothing selected
     if (pos == null) {
       infoBox.close();
       return;
     }
+    glyphs.select(pos);
 
     // Gather data of location
     List<MedicalEquipment> equipment = new ArrayList<>();
@@ -165,6 +166,7 @@ public class MapController extends UIController implements Initializable {
   /** Disables the pop-up for room info */
   @FXML
   public void closeRoom() {
+    glyphs.deselect();
     infoBox.close();
   }
 
@@ -222,6 +224,7 @@ public class MapController extends UIController implements Initializable {
   @FXML
   public void scrollMap(ScrollEvent scroll) {
     maps.zoom(scroll.getDeltaY() / scroll.getMultiplierY());
+    glyphs.deselect();
     infoBox.close();
     scroll.consume();
   }
