@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -28,13 +29,9 @@ import javafx.scene.layout.VBox;
 public class MapController extends UIController implements Initializable {
 
   /* UI Assets */
-  @FXML private ImageView mapFloor1;
-  @FXML private ImageView mapFloor2;
-  @FXML private ImageView mapFloor3;
-  @FXML private ImageView mapFloor4;
-  @FXML private ImageView mapFloor5;
-  @FXML private ImageView mapFloorL1;
-  @FXML private ImageView mapFloorL2;
+  @FXML private ImageView mapView;
+  public final String MAP_PATH =
+      getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/assets/Maps") + "/";
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
@@ -72,8 +69,14 @@ public class MapController extends UIController implements Initializable {
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
+    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
+    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
+    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
+    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
+    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
+    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
     super.initialize(location, resources);
-
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
@@ -85,6 +88,7 @@ public class MapController extends UIController implements Initializable {
     this.maps =
         new MapHandler(
             mapAssets,
+            mapView,
             mapFloorL2,
             mapFloorL1,
             mapFloor1,
@@ -92,7 +96,7 @@ public class MapController extends UIController implements Initializable {
             mapFloor3,
             mapFloor4,
             mapFloor5);
-    maps.setMap(mapFloor1);
+    maps.setMap("1");
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
     glyphs.filterByFloor("1");
@@ -250,47 +254,48 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   public void setFloor1(MouseEvent event) {
-    maps.setMap(mapFloor1);
+    maps.setMap("1");
     glyphs.filterByFloor("1");
   }
 
   @FXML
   public void setFloor2(MouseEvent event) {
-    maps.setMap(mapFloor2);
+    maps.setMap("2");
     glyphs.filterByFloor("2");
   }
 
   @FXML
   public void setFloor3(MouseEvent event) {
-    maps.setMap(mapFloor3);
+    maps.setMap("3");
     glyphs.filterByFloor("3");
   }
 
   @FXML
   public void setFloor4(MouseEvent event) {
-    maps.setMap(mapFloor4);
+    maps.setMap("4");
     glyphs.filterByFloor("4");
   }
 
   @FXML
   public void setFloor5(MouseEvent event) {
-    maps.setMap(mapFloor5);
+    maps.setMap("5");
     glyphs.filterByFloor("5");
   }
 
   @FXML
   public void setFloorL1(MouseEvent event) {
-    maps.setMap(mapFloorL1);
+    maps.setMap("L1");
     glyphs.filterByFloor("L1");
   }
 
   @FXML
   public void setFloorL2(MouseEvent event) {
-    maps.setMap(mapFloorL2);
+    maps.setMap("L2");
     glyphs.filterByFloor("L2");
   }
 
-  @FXML public void toggleEXIT(MouseEvent event) {
+  @FXML
+  public void toggleEXIT(MouseEvent event) {
     glyphs.filterByDisplay(maps.getFloor(), "EXIT");
   }
 }

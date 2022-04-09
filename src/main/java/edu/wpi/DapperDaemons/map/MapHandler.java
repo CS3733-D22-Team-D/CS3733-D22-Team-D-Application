@@ -3,41 +3,38 @@ package edu.wpi.DapperDaemons.map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class MapHandler {
 
   private StackPane mapAssets;
-  private List<ImageView> maps;
+  private ImageView mapView;
+  private List<Image> maps;
   private int currentMap;
   public final double ZOOM_PROP = 0.025;
 
   /** Handles several map icons */
-  public MapHandler(StackPane mapPane, ImageView... maps) {
+  public MapHandler(StackPane mapAssets, ImageView mapView, Image... maps) {
+    this.mapAssets = mapAssets;
     this.maps = new ArrayList<>(Arrays.asList(maps));
     currentMap = 0;
-    this.mapAssets = mapPane;
+    this.mapView = mapView;
   }
 
-  public void setMap(ImageView map) {
-    maps.forEach(m -> m.setVisible(false));
-    map.setVisible(true);
-    //    map.setScaleX(getCurrentMap().getScaleX());
-    //    map.setScaleY(getCurrentMap().getScaleY());
-    currentMap = maps.indexOf(map);
+  public void setMap(String floor) {
+    mapView.setImage(maps.get(mapStringToNum(floor)));
+    currentMap = mapStringToNum(floor);
   }
 
-  public ImageView getCurrentMap() {
+  public Image getCurrentMap() {
     return maps.get(currentMap);
   }
 
   public void resetScales() {
-    maps.forEach(
-        map -> {
-          map.setScaleX(1);
-          map.setScaleY(1);
-        });
+    mapView.setScaleX(1);
+    mapView.setScaleY(1);
   }
 
   public String getFloor() {
@@ -68,6 +65,27 @@ public class MapHandler {
         return "5";
       default:
         return "ERROR";
+    }
+  }
+
+  private int mapStringToNum(String map) {
+    switch (map) {
+      case "L2":
+        return 0;
+      case "L1":
+        return 1;
+      case "1":
+        return 2;
+      case "2":
+        return 3;
+      case "3":
+        return 4;
+      case "4":
+        return 5;
+      case "5":
+        return 6;
+      default:
+        return -1;
     }
   }
 

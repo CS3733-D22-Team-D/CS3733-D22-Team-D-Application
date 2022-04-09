@@ -33,39 +33,9 @@
                <content>
                   <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0">
                      <children>
-                        <ImageView fx:id="mapFloorL2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloorL1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/00_thelowerlevel1.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/01_thefirstfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/02_thesecondfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor3" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/03_thethirdfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor4" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/04_thefourthfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor5" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/05_thefifthfloor.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
