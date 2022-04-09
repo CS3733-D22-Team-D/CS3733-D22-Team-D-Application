@@ -99,8 +99,8 @@ public class PatientTransportController extends UIController implements Initiali
     String nextRoomID = "";
     Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
-    if(fieldsNonEmpty()){
-      //Determine if the next Location exists
+    if (fieldsNonEmpty()) {
+      // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
       boolean nextLocationExists = false;
       try {
@@ -108,19 +108,23 @@ public class PatientTransportController extends UIController implements Initiali
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      for(Location l: locations){
-        if(l.getAttribute(7).equals(roomBox.getValue())){
+      for (Location l : locations) {
+        if (l.getAttribute(7).equals(roomBox.getValue())) {
           nextRoomID = l.getNodeID();
           nextLocationExists = true;
         }
       }
-      if(nextLocationExists){
+      if (nextLocationExists) {
 
-
-        //Now Check of the patient exists
+        // Now Check of the patient exists
         boolean patientExists = false;
         Patient patient = new Patient();
-        patientID = patientFirstName.getText() + patientLastName.getText() + patientDOB.getValue().getMonthValue() +  patientDOB.getValue().getDayOfMonth() + patientDOB.getValue().getYear();
+        patientID =
+            patientFirstName.getText()
+                + patientLastName.getText()
+                + patientDOB.getValue().getMonthValue()
+                + patientDOB.getValue().getDayOfMonth()
+                + patientDOB.getValue().getYear();
 
         try {
           patient = patientDAO.get(patientID);
@@ -129,47 +133,37 @@ public class PatientTransportController extends UIController implements Initiali
         }
         patientExists = patient.getFirstName().equals(patientFirstName.getText());
 
-        if(patientExists){
+        if (patientExists) {
 
-          //now send request and get back whether it went through.
+          // now send request and get back whether it went through.
 
-        roomID = patient.getLocationID();
-        boolean hadPermission = addItem(new PatientTransportRequest(priority,roomID,requesterID,assigneeID,patientID,nextRoomID,status));
-                if(!hadPermission){
-                  //TODO display error that employee does not have permission
-                }
-        }else{
-         //TODO display error that patient does not exist
+          roomID = patient.getLocationID();
+          boolean hadPermission =
+              addItem(
+                  new PatientTransportRequest(
+                      priority, roomID, requesterID, assigneeID, patientID, nextRoomID, status));
+          if (!hadPermission) {
+            // TODO display error that employee does not have permission
+          }
+        } else {
+          // TODO display error that patient does not exist
         }
-      }else{
-        //TODO display error that location does not exist
+      } else {
+        // TODO display error that location does not exist
       }
-    }else{
-      //TODO display error message not all fields filled
+    } else {
+      // TODO display error message not all fields filled
     }
-
-
-
-
-
-
-
-
-
-
-  }
-  public boolean fieldsNonEmpty(){
-
-    return !(roomBox.getValue().equals("") ||
-             pBox.getValue().equals("") ||
-             patientFirstName.getText().equals("") ||
-             patientLastName.getText().equals("") ||
-             patientDOB.getValue() == null);
   }
 
+  public boolean fieldsNonEmpty() {
 
-
-
+    return !(roomBox.getValue().equals("")
+        || pBox.getValue().equals("")
+        || patientFirstName.getText().equals("")
+        || patientLastName.getText().equals("")
+        || patientDOB.getValue() == null);
+  }
 
   private boolean addItem(PatientTransportRequest request) {
     boolean hasClearance = false;
@@ -216,9 +210,9 @@ public class PatientTransportController extends UIController implements Initiali
       pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
       roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
 
-
-      //TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
-      //roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
+      // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
+      // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
+      // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
       roomBox.setEditable(true);
     }
   }

@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -28,7 +27,7 @@
          <children>
               <HBox prefHeight="46.0" prefWidth="301.0">
                   <children>
-                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                           <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                   <children>
@@ -39,18 +38,18 @@
                                       </Text>
                                   </children>
                               </VBox>
-                              <VBox maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox maxHeight="-Infinity" prefHeight="220.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="-Infinity" prefHeight="131.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
+                              <VBox maxHeight="-Infinity" prefHeight="220.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Sanitation Service:">
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="20.0" right="30.0" top="10.0" />
+                                          <Insets bottom="5.0" left="30.0" right="30.0" top="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <JFXComboBox fx:id="sanitationBox" prefHeight="40.0" prefWidth="258.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;">
+                                    <JFXComboBox fx:id="sanitationBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
                                        <VBox.margin>
-                                          <Insets left="20.0" right="30.0" />
+                                          <Insets left="30.0" right="30.0" />
                                        </VBox.margin>
                                        <opaqueInsets>
                                           <Insets />
@@ -58,29 +57,33 @@
                                     </JFXComboBox>
                                     <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                                        <VBox.margin>
-                                          <Insets left="20.0" top="10.0" />
+                                          <Insets bottom="5.0" left="30.0" top="15.0" />
                                        </VBox.margin></Text>
-                                    <JFXComboBox fx:id="priorityBox" prefHeight="40.0" prefWidth="258.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;">
+                                    <JFXComboBox fx:id="priorityBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
                                        <VBox.margin>
-                                          <Insets left="20.0" right="30.0" />
+                                          <Insets left="30.0" right="30.0" />
                                        </VBox.margin>
                                     </JFXComboBox>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location ID:">
                                        <VBox.margin>
-                                          <Insets left="20.0" top="10.0" />
+                                          <Insets bottom="5.0" left="30.0" top="15.0" />
                                        </VBox.margin></Text>
-                                    <TextField fx:id="locationText" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #f1f0f0; -fx-background-radius: 7.5;">
+                                    <JFXComboBox fx:id="priorityBox1" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
                                        <VBox.margin>
-                                          <Insets left="20.0" />
-                                       </VBox.margin></TextField>
+                                          <Insets left="30.0" right="30.0" />
+                                       </VBox.margin>
+                                    </JFXComboBox>
                                  </children>
                               </VBox>
                            </children>
                               </VBox>
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="66.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
                                   <children>
                                       <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4; -fx-background-radius: 7.5;" text="Clear" textFill="WHITE" />
                                       <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Submit" textFill="WHITE">
@@ -90,12 +93,12 @@
                                       </Button>
                                   </children>
                                   <VBox.margin>
-                                      <Insets bottom="30.0" />
+                                      <Insets />
                                   </VBox.margin>
                               </HBox>
                           </children>
                           <HBox.margin>
-                              <Insets bottom="30.0" left="10.0" right="10.0" top="20.0" />
+                              <Insets bottom="30.0" left="20.0" right="10.0" top="20.0" />
                           </HBox.margin>
                           <effect>
                               <DropShadow>
@@ -105,38 +108,62 @@
                               </DropShadow>
                           </effect>
                       </VBox>
-                      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                           <children>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
-                                  <children>
-                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Requests">
-                                          <font>
-                                              <Font name="System Bold" size="23.0" />
-                                          </font>
-                                      </Text>
-                                  </children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                           <children>
+                                    <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                        <children>
+                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Requests">
+                                                <font>
+                                                    <Font name="System Bold" size="23.0" />
+                                                </font>
+                                            </Text>
+                                        </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                            <TableView fx:id="pendingRequests" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" HBox.hgrow="ALWAYS">
+                                                <columnResizePolicy>
+                                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
+                                       <columns>
+                                          <TableColumn fx:id="ReqID" prefWidth="75.0" text="ReqID" />
+                                          <TableColumn fx:id="Priority" prefWidth="75.0" text="Priority" />
+                                          <TableColumn fx:id="RoomID" prefWidth="75.0" text="RoomID" />
+                                          <TableColumn fx:id="Requester" prefWidth="75.0" text="Requester" />
+                                          <TableColumn fx:id="Assignee" prefWidth="75.0" text="Assignee" />
+                                          <TableColumn fx:id="Service" prefWidth="75.0" text="Service" />
+                                          <TableColumn fx:id="Status" prefWidth="75.0" text="Status" />
+                                       </columns>
+                                            </TableView>
+                                        </children>
+                                    </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="100.0">
+                           <children>
+                              <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="96.0">
+                                 <children>
+                                    <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Save to CSV" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </Button>
+                                 </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                  <children>
-                                      <TableView fx:id="pendingRequests" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" HBox.hgrow="ALWAYS">
-                                          <columnResizePolicy>
-                                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                          </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="ReqID" prefWidth="75.0" text="ReqID" />
-                                    <TableColumn fx:id="Priority" prefWidth="75.0" text="Priority" />
-                                    <TableColumn fx:id="RoomID" prefWidth="75.0" text="RoomID" />
-                                    <TableColumn fx:id="Requester" prefWidth="75.0" text="Requester" />
-                                    <TableColumn fx:id="Assignee" prefWidth="75.0" text="Assignee" />
-                                    <TableColumn fx:id="Service" prefWidth="75.0" text="Service" />
-                                    <TableColumn fx:id="Status" prefWidth="75.0" text="Status" />
-                                 </columns>
-                                      </TableView>
-                                  </children>
-                              </HBox>
+                           </children>
+                        </VBox>
                           </children>
                           <HBox.margin>
-                              <Insets bottom="30.0" left="20.0" right="10.0" top="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
                           </HBox.margin>
                           <effect>
                               <DropShadow>
@@ -146,15 +173,6 @@
                               </DropShadow>
                           </effect>
                       </VBox>
-                  <HBox alignment="BOTTOM_RIGHT" prefHeight="542.0" prefWidth="96.0">
-                     <children>
-                        <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Save to CSV" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets bottom="10.0" right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
                   </children>
                <StackPane.margin>
                   <Insets top="50.0" />

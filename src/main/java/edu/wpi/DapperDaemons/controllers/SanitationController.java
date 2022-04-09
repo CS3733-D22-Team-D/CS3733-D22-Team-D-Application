@@ -11,6 +11,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -34,9 +35,8 @@ public class SanitationController extends UIController {
   /* Dropdown Boxes */
   @FXML private JFXComboBox<String> sanitationBox;
   @FXML private JFXComboBox<String> priorityBox;
-
+  @FXML private JFXComboBox<String> locationText;
   /* Text Field */
-  @FXML private TextField locationText;
 
   DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
 
@@ -62,7 +62,7 @@ public class SanitationController extends UIController {
   public void onClearClicked() {
     sanitationBox.setValue("");
     priorityBox.setValue("");
-    locationText.setText("");
+    locationText.setValue("");
   }
 
   /** What happens when the submit button is clicked * */
@@ -70,14 +70,14 @@ public class SanitationController extends UIController {
   public void onSubmitClicked() {
     if (!((sanitationBox.getValue().equals(""))
         || priorityBox.getValue().equals("")
-        || locationText.getText().equals(""))) {
+        || locationText.getValue().equals(""))) {
 
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
 
       addItem(
           new SanitationRequest(
               priority,
-              locationText.getText(),
+              locationText.getValue(),
               "REQUESTERID",
               "ASSIGNEEID",
               sanitationBox.getValue(),
@@ -112,6 +112,8 @@ public class SanitationController extends UIController {
       sanitationBox.setItems(
           FXCollections.observableArrayList(
               "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
+
+      locationText.setItems((ObservableList<String>) getAllLongNames());
     }
 
     // TODO: Pull Sanitation requests from database

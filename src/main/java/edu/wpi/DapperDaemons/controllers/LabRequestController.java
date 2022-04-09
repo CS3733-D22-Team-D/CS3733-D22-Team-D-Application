@@ -21,12 +21,12 @@ public class LabRequestController extends UIController {
   /* UI Fields */
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
-  @FXML private TextField patientDOB;
-  @FXML private ChoiceBox<String> priorityChoiceBox;
+  @FXML private DatePicker patientDOB;
+  @FXML private JFXComboBox<String> priorityChoiceBox;
   @FXML private JFXComboBox<String> procedureComboBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
+  private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
 
   /* Labels */
   @FXML private Label errorLabel;
@@ -40,10 +40,9 @@ public class LabRequestController extends UIController {
 
     init.initializeTable();
     init.initializeInputs();
-    init.initializeRequests();
 
     try {
-      labReqTable.getItems().addAll(dao.getAll());
+      labReqTable.getItems().addAll(labRequestDAO.getAll());
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
@@ -63,7 +62,7 @@ public class LabRequestController extends UIController {
   @FXML
   public void editStatus(TableColumn.CellEditEvent<LabRequest, String> editEvent) {
     editEvent.getRowValue().setStatus(editEvent.getNewValue());
-    tableHelper.update(); // Commented this out so the program can run
+    tableHelper.update();
   }
 
   @FXML
@@ -71,49 +70,24 @@ public class LabRequestController extends UIController {
     procedureComboBox.setValue("");
     patientName.clear();
     patientLastName.clear();
-    patientDOB.clear();
+    patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
     errorLabel.setText("");
   }
 
   @FXML
-  public void onSubmitClicked() {
-    if (!(procedureComboBox.getValue().trim().equals("")
+  public void onSubmitClicked() {}
+
+  private boolean allItemsFilled() {
+    return !(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
-        || patientDOB.getText().trim().equals("")
-        || priorityChoiceBox.getValue().trim().equals(""))) {
-
-      LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
-      String patientID = patientName.getText() + patientLastName.getText() + patientDOB.getText();
-      Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
-
-      addItem(
-          new LabRequest(
-              priority,
-              "LAB ROOM ID",
-              "REQUESTERID",
-              "ASSIGNEEID",
-              patientID,
-              labType,
-              Request.RequestStatus.REQUESTED));
-
-      onClearClicked();
-    } else {
-      errorLabel.setText("Error: One or more fields are empty!");
-    }
+        || patientDOB.getValue() == null
+        || priorityChoiceBox.getValue().trim().equals(""));
   }
 
-  // TODO : The table probably has to be updated for the new LabRequest thing
-  private void addItem(LabRequest request) {
-    try {
-      dao.add(request);
-      labReqTable.getItems().add(request);
-    } catch (Exception e) {
-      e.printStackTrace();
-      // TODO : show an error on the screen since adding went wrong
-    }
-  }
+  private void addItem(LabRequest request) {}
+
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
     super.saveToCSV(new LabRequest());
@@ -126,15 +100,11 @@ public class LabRequestController extends UIController {
       tableHelper.linkColumns(LabRequest.class);
     }
 
-    // TODO: Pull inputs for drop-down from database
     private void initializeInputs() {
       procedureComboBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
       priorityChoiceBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     }
-
-    // TODO: Pull lab requests from database
-    private void initializeRequests() {}
   }
 }
