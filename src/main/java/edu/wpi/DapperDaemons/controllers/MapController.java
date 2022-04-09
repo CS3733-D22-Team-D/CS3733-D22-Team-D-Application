@@ -289,4 +289,8 @@ public class MapController extends UIController implements Initializable {
     maps.setMap(mapFloorL2);
     glyphs.filterByFloor("L2");
   }
+
+  @FXML public void toggleEXIT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "EXIT");
+  }
 }
