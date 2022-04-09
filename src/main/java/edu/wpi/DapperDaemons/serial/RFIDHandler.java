@@ -13,16 +13,13 @@ import java.util.List;
  */
 public class RFIDHandler {
 
-  private final SerialCOM reader;
-  private final String portCOM;
+  private String COM;
   private Employee user;
   private List<String> UIDs; //TODO: Try to integrate with Backend
 
-  public RFIDHandler(Employee user, String portCOM) {
-    if(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)) this.user = user;
-    else this.user = null;
-    this.portCOM = portCOM;
-    this.reader = new SerialCOM();
+  public RFIDHandler(Employee user, String COM) {
+    this.user = user;
+    this.COM = COM;
     this.UIDs = new ArrayList<String>();
     this.UIDs.add("354");
   }
@@ -32,10 +29,12 @@ public class RFIDHandler {
    * @return true if the scan was valid, false otherwise
    */
   public boolean scan() throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException {
-    if(this.user == null) throw new UserNotAuthorizedException(user.getEmployeeType());
+    SerialCOM reader = new SerialCOM(this.COM);
+    String inputID;
+    if(!(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)))
+      throw new UserNotAuthorizedException(user.getEmployeeType());
     else {
-      String inputID = "";
-      inputID = reader.readData(this.portCOM);
+      inputID = reader.readData();
       return UIDs.contains(inputID);
     }
   }
