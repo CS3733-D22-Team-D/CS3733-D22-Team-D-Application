@@ -1,4 +1,3 @@
 package edu.wpi.DapperDaemons.controllers;
 
-public class RFIDPageController {
-}
+public class RFIDPageController {}
