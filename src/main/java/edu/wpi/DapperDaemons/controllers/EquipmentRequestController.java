@@ -13,8 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-// import edu.wpi.Dapper_Daemons.requests.PatientTransportRequest;
-
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends UIController {
 
@@ -52,12 +50,11 @@ public class EquipmentRequestController extends UIController {
   @FXML private Label errorLabel;
 
   /* DAO Object */
-  private DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
+  private final DAO<MedicalEquipmentRequest> dao = DAOPouch.getMedicalEquipmentRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
-    onClearClicked();
     super.initialize(location, resources);
     tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
     tableHelper.linkColumns(MedicalEquipmentRequest.class);
@@ -70,16 +67,7 @@ public class EquipmentRequestController extends UIController {
       System.err.print("Error, table was unable to be created\n");
     }
 
-    // tableHelper.addEnumEditProperty(cleanStatus, MedicalEquipment.CleanStatus.class);
-  }
-
-  @FXML
-  public void onEditCleanStatus(
-      TableColumn.CellEditEvent<MedicalEquipmentRequest, String> editEvent) {
-    editEvent
-        .getRowValue()
-        .setCleanStatus(MedicalEquipment.CleanStatus.valueOf(editEvent.getNewValue()));
-    tableHelper.update();
+    onClearClicked();
   }
 
   public void addItem(MedicalEquipmentRequest requests) {
