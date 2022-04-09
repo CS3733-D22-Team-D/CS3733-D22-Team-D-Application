@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.serial.CheckScan;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -91,6 +92,11 @@ public class MealController extends UIController {
       String drink = drinkBox.getValue();
       String dessert = dessertBox.getValue();
 
+      CheckScan checkScan = new CheckScan();
+      if (!checkScan.scan()) {
+        System.out.println("Invalid");
+        return;
+      }
       addMealRequest(
           new MealDeliveryRequest(
               Request.Priority.LOW,

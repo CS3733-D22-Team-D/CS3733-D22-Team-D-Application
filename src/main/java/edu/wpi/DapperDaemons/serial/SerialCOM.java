@@ -2,7 +2,7 @@ package edu.wpi.DapperDaemons.serial;
 
 import arduino.*;
 
-public class serialCOM {
+public class SerialCOM {
   Arduino arduino;
 
   public String readData() {
@@ -13,10 +13,12 @@ public class serialCOM {
       System.err.println("Error: Unable to Connect to serial port");
     } else {
       while (input.equals("")) {
-        input = arduino.serialRead();
+        input = arduino.serialRead(10000);
       }
     }
-    System.out.println(input);
+    System.out.println("Received input: " + input);
+    input = input.trim();
+    arduino.closeConnection();
     return input;
   }
 }
