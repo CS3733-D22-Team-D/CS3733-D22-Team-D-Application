@@ -1,5 +1,8 @@
 package edu.wpi.DapperDaemons.serial;
 
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +26,10 @@ public class RFIDHandler {
    * Opens serial communication to get incoming UID and checks if it is valid
    * @return true if the scan was valid, false otherwise
    */
-  public boolean scan() {
-    String inputID = reader.readData(this.portCOM);
+  public boolean scan() throws UnableToConnectException, ArduinoTimeOutException {
+    String inputID = "";
+    inputID = reader.readData(this.portCOM);
+
     for (String uid : this.validUIDs) {
       if (inputID.equals(uid)) return true;
     }
