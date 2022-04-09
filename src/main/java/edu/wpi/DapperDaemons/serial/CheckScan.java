@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CheckScan {
 
-  private List<String> validUIDs;
+  private List<String> validUIDs; // TODO: Get this from a DAO (ask backend)
   private SerialCOM reader;
 
   public CheckScan() {
