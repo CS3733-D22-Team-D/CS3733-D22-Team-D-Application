@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -26,81 +27,18 @@
                   <Insets top="50.0" />
                </opaqueInsets>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="302.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="1.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <content>
-                              <ImageView fitHeight="1343.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/MapDash/SideView.png" />
-                                 </image>
-                              </ImageView>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="447.0" style="-fx-background-radius: 7.5;">
-                     <children>
-                        <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 7.5;" vbarPolicy="NEVER" vvalue="0.91" VBox.vgrow="ALWAYS">
-                           <content>
-                              <VBox alignment="TOP_CENTER" prefHeight="3414.0" prefWidth="447.0">
+                              <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <ImageView fitHeight="2161.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/sky.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="120.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/5.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="146.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/4.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="143.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/3.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="147.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="146.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/1.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="147.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/L1.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="146.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/L2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="254.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/MapDash/floorLayers/ground.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                                  </children>
                               </VBox>
                            </content>
                         </ScrollPane>
                      </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </HBox.margin>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                      <children>
