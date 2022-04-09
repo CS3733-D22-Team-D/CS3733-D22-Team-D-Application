@@ -92,11 +92,6 @@ public class MealController extends UIController {
       String drink = drinkBox.getValue();
       String dessert = dessertBox.getValue();
 
-      CheckScan checkScan = new CheckScan();
-      if (!checkScan.scan()) {
-        System.out.println("Invalid");
-        return;
-      }
       addMealRequest(
           new MealDeliveryRequest(
               Request.Priority.LOW,
