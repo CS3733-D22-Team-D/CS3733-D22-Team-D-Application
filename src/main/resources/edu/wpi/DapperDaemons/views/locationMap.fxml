@@ -33,7 +33,7 @@
                <content>
                   <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0">
                      <children>
-                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel2.png" />
                            </image>
