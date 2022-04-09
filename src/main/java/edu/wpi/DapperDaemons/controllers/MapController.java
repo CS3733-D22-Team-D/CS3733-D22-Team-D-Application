@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -28,13 +29,9 @@ import javafx.scene.layout.VBox;
 public class MapController extends UIController implements Initializable {
 
   /* UI Assets */
-  @FXML private ImageView mapFloor1;
-  @FXML private ImageView mapFloor2;
-  @FXML private ImageView mapFloor3;
-  @FXML private ImageView mapFloor4;
-  @FXML private ImageView mapFloor5;
-  @FXML private ImageView mapFloorL1;
-  @FXML private ImageView mapFloorL2;
+  @FXML private ImageView mapView;
+  public final String MAP_PATH =
+      getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/assets/Maps") + "/";
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
@@ -62,9 +59,9 @@ public class MapController extends UIController implements Initializable {
   private PinHandler pin;
 
   /* Database stuff */
-  private DAO<Location> dao = DAOPouch.getLocationDAO();
-  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<Location> dao = DAOPouch.getLocationDAO();
+  private final DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /* Info Assets */
   @FXML private VBox tableContainer;
@@ -72,14 +69,14 @@ public class MapController extends UIController implements Initializable {
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    /* Database stuff */
-    dao = DAOPouch.getLocationDAO();
-    equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-    patientDAO = DAOPouch.getPatientDAO();
-
-    // Initialize default page
+    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
+    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
+    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
+    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
+    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
+    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
+    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
     super.initialize(location, resources);
-
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
@@ -91,6 +88,7 @@ public class MapController extends UIController implements Initializable {
     this.maps =
         new MapHandler(
             mapAssets,
+            mapView,
             mapFloorL2,
             mapFloorL1,
             mapFloor1,
@@ -98,7 +96,7 @@ public class MapController extends UIController implements Initializable {
             mapFloor3,
             mapFloor4,
             mapFloor5);
-    maps.setMap(mapFloor1);
+    maps.setMap("1");
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
     glyphs.filterByFloor("1");
@@ -140,12 +138,13 @@ public class MapController extends UIController implements Initializable {
     }
 
     PositionInfo pos = positions.get(x, y, floor);
-
+    glyphs.deselect();
     // Close tabs if nothing selected
     if (pos == null) {
       infoBox.close();
       return;
     }
+    glyphs.select(pos);
 
     // Gather data of location
     List<MedicalEquipment> equipment = new ArrayList<>();
@@ -167,6 +166,7 @@ public class MapController extends UIController implements Initializable {
   /** Disables the pop-up for room info */
   @FXML
   public void closeRoom() {
+    glyphs.deselect();
     infoBox.close();
   }
 
@@ -224,6 +224,7 @@ public class MapController extends UIController implements Initializable {
   @FXML
   public void scrollMap(ScrollEvent scroll) {
     maps.zoom(scroll.getDeltaY() / scroll.getMultiplierY());
+    glyphs.deselect();
     infoBox.close();
     scroll.consume();
   }
@@ -256,43 +257,113 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   public void setFloor1(MouseEvent event) {
-    maps.setMap(mapFloor1);
+    maps.setMap("1");
     glyphs.filterByFloor("1");
   }
 
   @FXML
   public void setFloor2(MouseEvent event) {
-    maps.setMap(mapFloor2);
+    maps.setMap("2");
     glyphs.filterByFloor("2");
   }
 
   @FXML
   public void setFloor3(MouseEvent event) {
-    maps.setMap(mapFloor3);
+    maps.setMap("3");
     glyphs.filterByFloor("3");
   }
 
   @FXML
   public void setFloor4(MouseEvent event) {
-    maps.setMap(mapFloor4);
+    maps.setMap("4");
     glyphs.filterByFloor("4");
   }
 
   @FXML
   public void setFloor5(MouseEvent event) {
-    maps.setMap(mapFloor5);
+    maps.setMap("5");
     glyphs.filterByFloor("5");
   }
 
   @FXML
   public void setFloorL1(MouseEvent event) {
-    maps.setMap(mapFloorL1);
+    maps.setMap("L1");
     glyphs.filterByFloor("L1");
   }
 
   @FXML
   public void setFloorL2(MouseEvent event) {
-    maps.setMap(mapFloorL2);
+    maps.setMap("L2");
     glyphs.filterByFloor("L2");
+  }
+
+  @FXML
+  public void toggleEXIT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "EXIT");
+  }
+
+  @FXML
+  public void toggleDEPT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "DEPT");
+  }
+
+  @FXML
+  public void toggleHALL(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "HALL");
+  }
+
+  @FXML
+  public void toggleINFO(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "INFO");
+  }
+
+  @FXML
+  public void toggleLABS(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "LABS");
+  }
+
+  @FXML
+  public void toggleREST(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "REST");
+  }
+
+  @FXML
+  public void toggleBATH(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "BATH");
+  }
+
+  @FXML
+  public void toggleRETL(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "RETL");
+  }
+
+  @FXML
+  public void toggleSERV(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "SERV");
+  }
+
+  @FXML
+  public void toggleSTAI(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "STAI");
+  }
+
+  @FXML
+  public void toggleELEV(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "ELEV");
+  }
+
+  @FXML
+  public void toggleSTOR(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "STOR");
+  }
+
+  @FXML
+  public void togglePATI(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "PATI");
+  }
+
+  @FXML
+  public void toggleDIRT(MouseEvent event) {
+    glyphs.filterByDisplay(maps.getFloor(), "DIRT");
   }
 }
