@@ -2,12 +2,20 @@ package edu.wpi.DapperDaemons.serial;
 
 import arduino.*;
 
+/**
+ * Handles interaction with Arduino
+ */
 public class SerialCOM {
   Arduino arduino;
 
-  public String readData() {
+  /**
+   * Opens connection to Arduino
+   * @param serialPort indicates the name of the serial port that the Arduino is using
+   * @return the data received from the serial port
+   */
+  public String readData(String serialPort) {
     String input = "";
-    arduino = new Arduino("COM4", 9600); // this is where you specify your COM
+    arduino = new Arduino(serialPort, 9600); // this is where you specify your COM
     boolean connection = arduino.openConnection();
     if (!connection) {
       System.err.println("Error: Unable to Connect to serial port");
