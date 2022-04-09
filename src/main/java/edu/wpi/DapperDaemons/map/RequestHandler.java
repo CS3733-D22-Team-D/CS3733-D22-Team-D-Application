@@ -8,9 +8,7 @@ import java.util.List;
 
 public class RequestHandler {
 
-  public RequestHandler() {}
-
-  public List<Request> getAllRequests() throws SQLException {
+  public static List<Request> getAllRequests() throws SQLException {
     LinkedList<Request> allReq = new LinkedList<Request>();
     allReq.addAll(DAOPouch.getLabRequestDAO().getAll());
     allReq.addAll(DAOPouch.getMealDeliveryRequestDAO().getAll());
@@ -22,7 +20,7 @@ public class RequestHandler {
     return allReq;
   }
 
-  public List<Request> getFilteredRequests(String locationID) throws SQLException {
+  public static List<Request> getFilteredRequests(String locationID) throws SQLException {
     LinkedList<Request> allReq = new LinkedList<Request>();
     allReq.addAll(DAOPouch.getLabRequestDAO().filter(3, locationID));
     allReq.addAll(DAOPouch.getMealDeliveryRequestDAO().filter(3, locationID));

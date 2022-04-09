@@ -1,6 +1,8 @@
 package edu.wpi.DapperDaemons.map;
 
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.requests.Request;
+import java.util.List;
 
 /** Manages general map locations */
 public class PositionInfo {
@@ -90,5 +92,19 @@ public class PositionInfo {
         + loc.getFloor()
         + " T: "
         + loc.getNodeType();
+  }
+
+  public Request.Priority getHighestPriority() {
+    Request.Priority highestPriority = Request.Priority.LOW;
+    try {
+      List<Request> filteredRequests = RequestHandler.getFilteredRequests(getId());
+      for (Request r : filteredRequests) {
+        if (r.getPriority().compareTo(highestPriority) > 0) {
+          highestPriority = r.getPriority();
+        }
+      }
+    } catch (Exception e) {
+    }
+    return highestPriority;
   }
 }

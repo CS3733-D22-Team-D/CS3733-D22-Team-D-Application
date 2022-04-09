@@ -3,8 +3,14 @@ package edu.wpi.DapperDaemons.map;
 import edu.wpi.DapperDaemons.controllers.MapController;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.Node;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 public class GlyphHandler {
 
@@ -29,9 +35,22 @@ public class GlyphHandler {
     image.setVisible(true);
     image.setX(pos.getX() - 16);
     image.setY(pos.getY() - 16);
+    image.setEffect(getPriorityColor(pos));
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
     imageLocs.add(pos);
+  }
+
+  private ColorAdjust getPriorityColor(PositionInfo pos) {
+    switch (pos.getHighestPriority()) {
+      case LOW:
+        return new ColorAdjust(0.5, 1, -0.6, 0.5);
+      case MEDIUM:
+        return new ColorAdjust(0.3333, 1, -0.2, 0.5);
+      case HIGH:
+        return new ColorAdjust(0, 1, -0.5, 0.5);
+    }
+    return new ColorAdjust();
   }
 
   public void remove(PositionInfo pos) {
@@ -47,6 +66,26 @@ public class GlyphHandler {
 
   public void select(PositionInfo selected) {
     this.selected = selected;
+    Node node = glyphLayer.getChildren().get(imageLocs.indexOf(selected));
+
+    DropShadow borderGlow = new DropShadow();
+    borderGlow.setColor(Color.web("0x000000").brighter());
+    borderGlow.setOffsetX(0f);
+    borderGlow.setOffsetY(0f);
+    Blend multiEffect = new Blend(BlendMode.SRC_OVER, borderGlow, node.getEffect());
+    node.setEffect(multiEffect);
+    node.setScaleX(node.getScaleX() + 1);
+    node.setScaleY(node.getScaleY() + 1);
+  }
+
+  public void deselect() {
+    if (selected != null && imageLocs.contains(selected)) {
+      Node node = glyphLayer.getChildren().get(imageLocs.indexOf(selected));
+      node.setEffect(((Blend) node.getEffect()).getTopInput());
+      node.setScaleX(1);
+      node.setScaleY(1);
+    }
+    this.selected = null;
   }
 
   private ImageView getIconImage(String type) {
