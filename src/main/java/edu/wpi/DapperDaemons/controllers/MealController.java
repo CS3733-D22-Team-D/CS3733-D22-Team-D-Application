@@ -5,7 +5,6 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.serial.CheckScan;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
