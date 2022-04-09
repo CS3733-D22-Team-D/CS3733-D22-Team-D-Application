@@ -154,6 +154,7 @@ public class PatientTransportController extends UIController implements Initiali
     } else {
       // TODO display error message not all fields filled
     }
+    onClearClicked();
   }
 
   public boolean fieldsNonEmpty() {
@@ -213,7 +214,6 @@ public class PatientTransportController extends UIController implements Initiali
       // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
       // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
       // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
-      roomBox.setEditable(true);
     }
   }
 

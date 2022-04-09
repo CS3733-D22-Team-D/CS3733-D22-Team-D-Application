@@ -3,9 +3,7 @@ package edu.wpi.DapperDaemons.serial;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Handles RFID scan and determines validity
- */
+/** Handles RFID scan and determines validity */
 public class RFIDHandler {
 
   private List<String> validUIDs; // TODO: Get this from a DAO (ask backend)
@@ -21,6 +19,7 @@ public class RFIDHandler {
 
   /**
    * Opens serial communication to get incoming UID and checks if it is valid
+   *
    * @return true if the scan was valid, false otherwise
    */
   public boolean scan() {

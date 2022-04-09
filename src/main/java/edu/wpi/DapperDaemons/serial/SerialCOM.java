@@ -2,14 +2,13 @@ package edu.wpi.DapperDaemons.serial;
 
 import arduino.*;
 
-/**
- * Handles interaction with Arduino
- */
+/** Handles interaction with Arduino */
 public class SerialCOM {
   Arduino arduino;
 
   /**
    * Opens connection to Arduino
+   *
    * @param serialPort indicates the name of the serial port that the Arduino is using
    * @return the data received from the serial port
    */

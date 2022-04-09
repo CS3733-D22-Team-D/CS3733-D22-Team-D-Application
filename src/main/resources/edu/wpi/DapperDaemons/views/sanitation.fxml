@@ -67,11 +67,11 @@
                                           <Insets left="30.0" right="30.0" />
                                        </VBox.margin>
                                     </JFXComboBox>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location ID:">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="30.0" top="15.0" />
                                        </VBox.margin></Text>
-                                    <JFXComboBox fx:id="priorityBox1" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
+                                    <JFXComboBox fx:id="locationBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
