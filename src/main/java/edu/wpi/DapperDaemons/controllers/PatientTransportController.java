@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -95,7 +96,7 @@ public class PatientTransportController extends UIController implements Initiali
     String requesterID = SecurityController.getInstance().getUser().getNodeID();
     String assigneeID = "null";
     String patientID;
-    String nextRoomID;
+    String nextRoomID = "";
     Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
     if(fieldsNonEmpty()){
@@ -109,19 +110,34 @@ public class PatientTransportController extends UIController implements Initiali
       }
       for(Location l: locations){
         if(l.getAttribute(7).equals(roomBox.getValue())){
-          roomID = l.getNodeID();
+          nextRoomID = l.getNodeID();
           nextLocationExists = true;
         }
       }
       if(nextLocationExists){
+
+
+        //Now Check of the patient exists
         boolean patientExists = false;
+        Patient patient = new Patient();
+        patientID = patientFirstName.getText() + patientLastName.getText() + patientDOB.getValue().getMonthValue() +  patientDOB.getValue().getDayOfMonth() + patientDOB.getValue().getYear();
 
-
+        try {
+          patient = patientDAO.get(patientID);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        patientExists = patient.getFirstName().equals(patientFirstName.getText());
 
         if(patientExists){
 
+          //now send request and get back whether it went through.
 
-
+        roomID = patient.getLocationID();
+        boolean hadPermission = addItem(new PatientTransportRequest(priority,roomID,requesterID,assigneeID,patientID,nextRoomID,status));
+                if(!hadPermission){
+                  //TODO display error that employee does not have permission
+                }
         }else{
          //TODO display error that patient does not exist
         }
@@ -144,11 +160,11 @@ public class PatientTransportController extends UIController implements Initiali
   }
   public boolean fieldsNonEmpty(){
 
-
-    return false;
-
-
-
+    return !(roomBox.getValue().equals("") ||
+             pBox.getValue().equals("") ||
+             patientFirstName.getText().equals("") ||
+             patientLastName.getText().equals("") ||
+             patientDOB.getValue() == null);
   }
 
 
