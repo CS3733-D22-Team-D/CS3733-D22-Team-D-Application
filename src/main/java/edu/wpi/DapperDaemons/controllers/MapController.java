@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -68,6 +69,10 @@ public class MapController extends UIController implements Initializable {
   /* Info Assets */
   @FXML private VBox tableContainer;
 
+  /* Request filter stuff */
+  @FXML private TextField searchLongName;
+  @FXML private JFXComboBox<String> searchReqLongName;
+
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -93,7 +98,7 @@ public class MapController extends UIController implements Initializable {
     maps.setMap(mapFloor1);
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
-    glyphs.filterByFloor("1");
+    glyphs.setFloorFilter("1");
 
     this.positions = new PositionHandler(origPositions);
 
@@ -105,6 +110,19 @@ public class MapController extends UIController implements Initializable {
     this.createLocation =
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
 
+    // Initialize search request box
+    searchReqLongName.setItems(
+        FXCollections.observableArrayList(
+            "Search Request...",
+            "Lab Request",
+            "Meal Delivery Request",
+            "Medical Equipment Request",
+            "Medicine Request",
+            "Patient Transport Request",
+            "Sanitation Request"));
+
+    searchLongName.setOnKeyPressed(e -> onSearchLocation());
+    searchReqLongName.setOnAction(e -> onFilterRequestType());
     closeCreate();
     closeRoom();
   }
@@ -247,38 +265,126 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
+  void onFilterRequestType() {
+    try {
+      RequestHandler reqHelper = new RequestHandler();
+      List<Request> searchReq =
+          reqHelper.getSearchedRequestsByLongName(searchReqLongName.getValue());
+      glyphs.filterByReqType(maps.getFloor(), searchReq);
+    } catch (Exception e) {
+      System.out.println("Error in search by request type");
+    }
+  }
+
+  @FXML
+  void onSearchLocation() {
+    try {
+      RequestHandler reqHelper = new RequestHandler();
+      glyphs.searchByLongName(maps.getFloor(), searchLongName.getText());
+    } catch (Exception e) {
+      System.out.println("Error in search location");
+    }
+  }
+
+  @FXML
   public void setFloor1(MouseEvent event) {
     maps.setMap(mapFloor1);
-    glyphs.filterByFloor("1");
+    glyphs.setFloorFilter("1");
   }
 
   @FXML
   public void setFloor2(MouseEvent event) {
     maps.setMap(mapFloor2);
-    glyphs.filterByFloor("2");
+    glyphs.setFloorFilter("2");
   }
 
   @FXML
   public void setFloor3(MouseEvent event) {
     maps.setMap(mapFloor3);
-    glyphs.filterByFloor("3");
+    glyphs.setFloorFilter("3");
   }
 
   @FXML
   public void setFloorG(MouseEvent event) {
     maps.setMap(mapFloorG);
-    glyphs.filterByFloor("G");
+    glyphs.setFloorFilter("G");
   }
 
   @FXML
   public void setFloorL1(MouseEvent event) {
     maps.setMap(mapFloorL1);
-    glyphs.filterByFloor("L1");
+    glyphs.setFloorFilter("L1");
   }
 
   @FXML
   public void setFloorL2(MouseEvent event) {
     maps.setMap(mapFloorL2);
-    glyphs.filterByFloor("L2");
+    glyphs.setFloorFilter("L2");
+  }
+
+  @FXML
+  public void filterDept() {
+    glyphs.setNodeTypeFilter("DEPT");
+  }
+
+  @FXML
+  public void filterExit() {
+    glyphs.setNodeTypeFilter("EXIT");
+  }
+
+  @FXML
+  public void filterHall() {
+    glyphs.setNodeTypeFilter("HALL");
+  }
+
+  @FXML
+  public void filterInfo() {
+    glyphs.setNodeTypeFilter("INFO");
+  }
+
+  @FXML
+  public void filterLabs() {
+    glyphs.setNodeTypeFilter("LABS");
+  }
+
+  @FXML
+  public void filterToilet() {
+    glyphs.setNodeTypeFilter("BATH");
+    glyphs.addNodeTypeFilter("REST");
+  }
+
+  @FXML
+  public void filterRetl() {
+    glyphs.setNodeTypeFilter("RETL");
+  }
+
+  @FXML
+  public void filterServ() {
+    glyphs.setNodeTypeFilter("SERV");
+  }
+
+  @FXML
+  public void filterStai() {
+    glyphs.setNodeTypeFilter("STAI");
+  }
+
+  @FXML
+  public void filterElev() {
+    glyphs.setNodeTypeFilter("ELEV");
+  }
+
+  @FXML
+  public void filterStor() {
+    glyphs.setNodeTypeFilter("STOR");
+  }
+
+  @FXML
+  public void filterPati() {
+    glyphs.setNodeTypeFilter("PATI");
+  }
+
+  @FXML
+  public void filterDirt() {
+    glyphs.setNodeTypeFilter("DIRT");
   }
 }

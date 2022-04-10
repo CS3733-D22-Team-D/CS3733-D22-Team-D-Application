@@ -23,7 +23,7 @@ public class RequestHandler {
   }
 
   public List<Request> getFilteredRequests(String locationID) throws SQLException {
-    LinkedList<Request> allReq = new LinkedList<Request>();
+    LinkedList<Request> allReq = new LinkedList<>();
     allReq.addAll(DAOPouch.getLabRequestDAO().filter(3, locationID));
     allReq.addAll(DAOPouch.getMealDeliveryRequestDAO().filter(3, locationID));
     allReq.addAll(DAOPouch.getMedicalEquipmentRequestDAO().filter(3, locationID));
@@ -32,5 +32,16 @@ public class RequestHandler {
     allReq.addAll(DAOPouch.getMedicineRequestDAO().filter(3, locationID));
 
     return allReq;
+  }
+
+  public List<Request> getSearchedRequestsByLongName(String reqType) throws SQLException {
+    List<Request> allReq = getAllRequests();
+    LinkedList<Request> searchReq = new LinkedList<>();
+    for (int i = 0; i < allReq.size(); i++) {
+      if (allReq.get(i).getRequestType().equals(reqType)) {
+        searchReq.add(allReq.get(i));
+      }
+    }
+    return searchReq;
   }
 }

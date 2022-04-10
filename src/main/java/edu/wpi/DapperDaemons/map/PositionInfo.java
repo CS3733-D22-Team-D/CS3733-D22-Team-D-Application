@@ -75,6 +75,10 @@ public class PositionInfo {
     return loc.getLongName();
   }
 
+  public String getShortName() {
+    return loc.getShortName();
+  }
+
   @Override
   public String toString() {
     return "("
