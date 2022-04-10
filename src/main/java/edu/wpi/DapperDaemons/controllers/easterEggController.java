@@ -27,12 +27,6 @@ public class easterEggController extends UIController {
     }
   }
 
-  @FXML
-  public void quitProgram() {
-    stopEasterEgg();
-    super.quitProgram();
-  }
-
   public static synchronized void playSound(final String url) throws LineUnavailableException {
     sound =
         new Thread(

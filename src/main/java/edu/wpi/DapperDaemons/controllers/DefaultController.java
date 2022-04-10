@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /*
 Manages Default Page Navigation
@@ -38,7 +40,6 @@ public class DefaultController extends UIController {
     easterEggSequence.add(KeyCode.RIGHT);
     easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.B);
-    easterEggSequence.add(KeyCode.SHIFT);
     easterEggSequence.add(KeyCode.ENTER);
   }
 
@@ -49,8 +50,12 @@ public class DefaultController extends UIController {
       if (easterEggInd == easterEggSequence.size()) {
         easterEggInd = 0;
         try {
-          switchScene("konami.fxml", 700, 500);
+          //          switchScene("konami.fxml", 700, 500);
+          MinesweeperZN ms = new MinesweeperZN();
+          ms.begin((Stage) new Stage());
         } catch (IOException ex) {
+          ex.printStackTrace();
+        } catch (Exception ex) {
           ex.printStackTrace();
         }
       }

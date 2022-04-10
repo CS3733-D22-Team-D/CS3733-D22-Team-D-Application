@@ -33,6 +33,7 @@ dependencies {
             'org.apache.derby:derbyclient:10.15.2.0',
             'org.apache.derby:derbytools:10.15.2.0',
 
+            "com.twilio.sdk:twilio:8.28.0",
 
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
@@ -40,6 +41,8 @@ dependencies {
             // https://mvnrepository.com/artifact/com.opencsv/opencsv
             [group: 'com.opencsv', name: 'opencsv', version: '3.7']
     )
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

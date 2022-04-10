@@ -30,18 +30,19 @@ public class MedicineController extends UIController {
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
 
-  DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
-  DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     super.initialize(location, resources);
-    MedicineRequestInitializer init = new MedicineRequestInitializer();
+    helper = new TableHelper<>(medicineRequests, 0);
+    helper.linkColumns(MedicineRequest.class);
 
-    // initialize elements
-    init.initializeInputs();
-    init.initializeTable();
+    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
+
+    medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
+    priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
 
     try {
       medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
@@ -50,6 +51,8 @@ public class MedicineController extends UIController {
       e.printStackTrace();
       System.err.print("Error, Medicine Requesst table was unable to be created\n");
     }
+
+    onClearClicked();
   }
 
   /** Clears the fields when clicked */
@@ -121,14 +124,14 @@ public class MedicineController extends UIController {
           patient = patientDAO.get(patientID);
         } catch (SQLException e) {
           e.printStackTrace();
-          isAPatient = false;
         }
+        isAPatient = patient.getFirstName().equals(patientName.getText());
         if (isAPatient) {
 
           // now we can create the request and send it
 
           roomID = patient.getLocationID();
-          requesterID = SecurityController.getInstance().getUser().getNodeID();
+          requesterID = SecurityController.getUser().getNodeID();
           assigneeID = "null";
           priority = Request.Priority.valueOf(priorityIn.getValue());
           medName = medNameIn.getValue();
@@ -172,19 +175,5 @@ public class MedicineController extends UIController {
     if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
-  }
-
-  private class MedicineRequestInitializer {
-    private void initializeTable() {
-      helper = new TableHelper<>(medicineRequests, 0);
-      helper.linkColumns(MedicineRequest.class);
-
-      helper.addEnumEditProperty(priorityCol, Request.Priority.class);
-    }
-
-    private void initializeInputs() {
-      medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-      priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
-    }
   }
 }
