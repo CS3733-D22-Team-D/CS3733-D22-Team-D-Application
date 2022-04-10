@@ -65,14 +65,13 @@ public class MealController extends UIController {
     super.initialize(location, resources);
 
     /* Init Request table */
-    helper = new TableHelper<MealDeliveryRequest>(mealRequestsTable, 0);
+    helper = new TableHelper<>(mealRequestsTable, 0);
     helper.linkColumns(MealDeliveryRequest.class);
     initBoxes();
     onClear();
 
     try {
       mealRequestsTable.getItems().addAll(dao.getAll());
-      System.out.println("Created Table");
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error, Mead Delivery table was unable to be created");
@@ -129,7 +128,12 @@ public class MealController extends UIController {
    * @param request request object to be added
    */
   public void addMealRequest(MealDeliveryRequest request) {
-    mealRequestsTable.getItems().add(request);
+    try {
+      dao.add(request);
+      mealRequestsTable.getItems().add(request);
+    } catch (Exception e) {
+      System.err.println("Could not add MealDeliveryRequest to dao");
+    }
   }
 
   /** Initializes the options for JFX boxes */
@@ -153,5 +157,9 @@ public class MealController extends UIController {
         || patientName.getText().equals("")
         || patientDOB.getText().equals("")
         || patientLastName.getText().equals("")));
+  }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new MealDeliveryRequest());
   }
 }

@@ -8,9 +8,7 @@ import java.util.List;
 
 public class RequestHandler {
 
-  public RequestHandler() {}
-
-  public List<Request> getAllRequests() throws SQLException {
+  public static List<Request> getAllRequests() throws SQLException {
     LinkedList<Request> allReq = new LinkedList<Request>();
     allReq.addAll(DAOPouch.getLabRequestDAO().getAll());
     allReq.addAll(DAOPouch.getMealDeliveryRequestDAO().getAll());
@@ -22,8 +20,8 @@ public class RequestHandler {
     return allReq;
   }
 
-  public List<Request> getFilteredRequests(String locationID) throws SQLException {
-    LinkedList<Request> allReq = new LinkedList<>();
+  public static List<Request> getFilteredRequests(String locationID) throws SQLException {
+    LinkedList<Request> allReq = new LinkedList<Request>();
     allReq.addAll(DAOPouch.getLabRequestDAO().filter(3, locationID));
     allReq.addAll(DAOPouch.getMealDeliveryRequestDAO().filter(3, locationID));
     allReq.addAll(DAOPouch.getMedicalEquipmentRequestDAO().filter(3, locationID));
@@ -32,16 +30,5 @@ public class RequestHandler {
     allReq.addAll(DAOPouch.getMedicineRequestDAO().filter(3, locationID));
 
     return allReq;
-  }
-
-  public List<Request> getSearchedRequestsByLongName(String reqType) throws SQLException {
-    List<Request> allReq = getAllRequests();
-    LinkedList<Request> searchReq = new LinkedList<>();
-    for (int i = 0; i < allReq.size(); i++) {
-      if (allReq.get(i).getRequestType().equals(reqType)) {
-        searchReq.add(allReq.get(i));
-      }
-    }
-    return searchReq;
   }
 }

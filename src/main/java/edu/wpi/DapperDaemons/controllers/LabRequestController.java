@@ -26,7 +26,7 @@ public class LabRequestController extends UIController {
   @FXML private JFXComboBox<String> procedureComboBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
+  private final DAO<LabRequest> dao = DAOPouch.getLabRequestDAO();
 
   /* Labels */
   @FXML private Label errorLabel;
@@ -34,37 +34,22 @@ public class LabRequestController extends UIController {
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    onClearClicked();
     super.initialize(location, resources);
-    LabRequestInitializer init = new LabRequestInitializer();
+    tableHelper = new TableHelper<>(labReqTable, 0);
+    tableHelper.linkColumns(LabRequest.class);
 
-    init.initializeTable();
-    init.initializeInputs();
-    init.initializeRequests();
+    procedureComboBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
+    priorityChoiceBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
 
     try {
       labReqTable.getItems().addAll(dao.getAll());
-      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
     }
-  }
-
-  @FXML
-  public void editTechnician(TableColumn.CellEditEvent<LabRequest, String> editEvent) {
-    editEvent
-        .getRowValue()
-        .setAssigneeID(
-            editEvent.getNewValue()); // TODO : Need to link this to person database since its an ID
-    tableHelper.update();
-  }
-
-  // TODO : Either change this to Priority, add a Status to LabRequest, or delete it
-  @FXML
-  public void editStatus(TableColumn.CellEditEvent<LabRequest, String> editEvent) {
-    editEvent.getRowValue().setStatus(editEvent.getNewValue());
-    tableHelper.update(); // Commented this out so the program can run
+    onClearClicked();
   }
 
   @FXML
@@ -115,21 +100,8 @@ public class LabRequestController extends UIController {
       // TODO : show an error on the screen since adding went wrong
     }
   }
-
-  private class LabRequestInitializer {
-    private void initializeTable() {
-      // Bind values to column values
-      tableHelper = new TableHelper<>(labReqTable, 0);
-      tableHelper.linkColumns(LabRequest.class);
-    }
-
-    // TODO: Pull inputs for drop-down from database
-    private void initializeInputs() {
-      procedureComboBox.setItems(FXCollections.observableArrayList("BLOOD_DRAW", "X_RAY"));
-      priorityChoiceBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-    }
-
-    // TODO: Pull lab requests from database
-    private void initializeRequests() {}
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new LabRequest());
   }
 }

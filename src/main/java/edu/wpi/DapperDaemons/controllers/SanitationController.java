@@ -3,12 +3,12 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -38,16 +38,20 @@ public class SanitationController extends UIController {
   /* Text Field */
   @FXML private TextField locationText;
 
-  DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
+  private final DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     onClearClicked();
-    SanitationServiceInitializer init = new SanitationServiceInitializer();
-    init.initializeInputs();
-    init.initializeTable();
-    init.initializeRequests();
+    helper = new TableHelper<>(pendingRequests, 0);
+    helper.linkColumns(SanitationRequest.class);
+
+    priorityBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    sanitationBox.setItems(
+        FXCollections.observableArrayList(
+            "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
 
     try {
       pendingRequests.getItems().addAll(dao.getAll());
@@ -55,6 +59,8 @@ public class SanitationController extends UIController {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
     }
+
+    onClearClicked();
   }
 
   /** clear the current information * */
@@ -81,30 +87,22 @@ public class SanitationController extends UIController {
               "REQUESTERID",
               "ASSIGNEEID",
               sanitationBox.getValue(),
-              MedicalEquipment.CleanStatus.INPROGRESS));
+              Request.RequestStatus.REQUESTED));
       onClearClicked();
     }
+  }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new SanitationRequest());
   }
 
   /** Adds new sanitationRequest to table of pending requests * */
   private void addItem(SanitationRequest request) {
-    pendingRequests.getItems().add(request);
-  }
-
-  private class SanitationServiceInitializer {
-    private void initializeTable() {
-      helper = new TableHelper<>(pendingRequests, 0);
-      helper.linkColumns(SanitationRequest.class);
+    try {
+      dao.add(request);
+      pendingRequests.getItems().add(request);
+    } catch (SQLException e) {
+      System.err.println("Sanitation request could not be added to DAO");
     }
-
-    private void initializeInputs() {
-      priorityBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-      sanitationBox.setItems(
-          FXCollections.observableArrayList(
-              "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
-    }
-
-    // TODO: Pull Sanitation requests from database
-    private void initializeRequests() {}
   }
 }

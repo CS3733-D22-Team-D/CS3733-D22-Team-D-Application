@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
@@ -29,28 +30,29 @@ public class MedicineController extends UIController {
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
 
-  DAO<MedicineRequest> medicineRequestDAO;
-  DAO<Patient> patientDAO;
+  private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     super.initialize(location, resources);
-    MedicineRequestInitializer init = new MedicineRequestInitializer();
+    helper = new TableHelper<>(medicineRequests, 0);
+    helper.linkColumns(MedicineRequest.class);
 
-    // initialize elements
-    init.initializeInputs();
-    init.initializeTable();
+    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
+
+    medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
+    priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
 
     try {
-      medicineRequestDAO = new DAO<>(new MedicineRequest());
-      patientDAO = new DAO<>(new Patient());
       medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
-      System.out.println("Created table");
+      //      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Medicine Requesst table was unable to be created\n");
     }
+
+    onClearClicked();
   }
 
   /** Clears the fields when clicked */
@@ -157,6 +159,10 @@ public class MedicineController extends UIController {
 
     onClearClicked();
   }
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new MedicineRequest());
+  }
 
   @FXML
   private boolean addItem(MedicineRequest request) {
@@ -169,19 +175,5 @@ public class MedicineController extends UIController {
     if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
-  }
-
-  private class MedicineRequestInitializer {
-    private void initializeTable() {
-      helper = new TableHelper<>(medicineRequests, 0);
-      helper.linkColumns(MedicineRequest.class);
-
-      helper.addEnumEditProperty(priorityCol, Request.Priority.class);
-    }
-
-    private void initializeInputs() {
-      medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-      priorityIn.getItems().addAll("LOW", "MEDIUM", "HIGH");
-    }
   }
 }
