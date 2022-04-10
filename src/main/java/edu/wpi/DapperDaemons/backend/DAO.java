@@ -32,6 +32,7 @@ public class DAO<T extends TableObject> {
    */
   public DAO(T type, String filename) throws SQLException, IOException {
     orm = new ORM<T>(type, filename);
+    this.type = type;
   }
 
   /**

@@ -31,7 +31,11 @@ public class Authentication {
 
   public static boolean authenticate(int code) {
     if (code != -1) {
-      return code == authCode;
+      if (code == authCode) {
+        authCode = -1;
+        return true;
+      }
+      return false;
     }
     return false;
   }
@@ -46,6 +50,6 @@ public class Authentication {
                 "Your verification code is:\n" + authCode)
             .create();
 
-    System.out.println(message.getSid());
+//    System.out.println(message.getSid());
   }
 }

@@ -2,7 +2,7 @@ package edu.wpi.DapperDaemons;
 
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.csvLoader;
+import edu.wpi.DapperDaemons.backend.connectionHandler;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,8 +15,8 @@ public class Main {
   private static final String password = "admin";
 
   public static void main(String[] args) throws IOException, SQLException {
-    csvLoader.loadAll();
-    DAOPouch.init();
+    connectionHandler.init();
+    connectionHandler.switchToClientServer();
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
     SecurityController.setUser(admin);
     App.launch(App.class, args);
