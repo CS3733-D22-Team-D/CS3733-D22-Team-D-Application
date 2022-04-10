@@ -10,10 +10,11 @@ import java.net.URL;
 import org.json.*;
 
 public class weather {
-  public static void main(String[] args) throws IOException {
+
+  public void getWeather() throws Exception {
     URL url =
-        new URL(
-            "https://api.openweathermap.org/data/2.5/weather?lat=42.3601&lon=71.0589&appid=5214edbc18dc7cbd8c4c7abd482b6120&units=imperial");
+            new URL(
+                    "https://api.openweathermap.org/data/2.5/weather?lat=42.3601&lon=71.0589&appid=5214edbc18dc7cbd8c4c7abd482b6120&units=imperial");
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
 
