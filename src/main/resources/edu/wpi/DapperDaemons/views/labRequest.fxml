@@ -47,7 +47,7 @@
                                                 <Insets bottom="5.0" left="30.0" right="30.0" />
                                             </VBox.margin>
                                         </Text>
-                              <JFXComboBox fx:id="procedureComboBox1" focusColor="#059da7" minHeight="-Infinity" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
+                              <JFXComboBox fx:id="procedureComboBox" focusColor="#059da7" minHeight="-Infinity" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -57,7 +57,7 @@
                               </JFXComboBox>
                                     </children>
                                     <VBox.margin>
-                                        <Insets />
+                                        <Insets bottom="5.0" />
                                     </VBox.margin>
                            <padding>
                               <Insets bottom="15.0" top="10.0" />
@@ -65,11 +65,11 @@
                                 </VBox>
                         <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="307.0">
                            <children>
-                                      <VBox alignment="CENTER" prefHeight="61.0" prefWidth="307.0">
+                                      <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                                           <children>
                                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                                                   <VBox.margin>
-                                                      <Insets />
+                                                      <Insets bottom="5.0" />
                                                   </VBox.margin>
                                               </Text>
                                               <TextField fx:id="patientName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
@@ -86,7 +86,7 @@
                                  <children>
                                     <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Text>
                                     <TextField fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
@@ -99,11 +99,11 @@
                                     <Insets left="5.0" right="5.0" />
                                  </padding>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="61.0" prefWidth="307.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                                  <children>
                                     <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Text>
                                     <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
@@ -124,7 +124,7 @@
                                     <children>
                                         <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                                             <VBox.margin>
-                                                <Insets left="30.0" right="30.0" />
+                                                <Insets bottom="5.0" left="30.0" right="30.0" />
                                             </VBox.margin>
                                         </Text>
                                         <JFXComboBox fx:id="priorityChoiceBox" focusColor="#059da7" minHeight="-Infinity" prefHeight="34.0" prefWidth="250.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-radius: 7.5 7.5 0 0; -fx-background-color: #f1f0f0;" unFocusColor="#4b5b81">

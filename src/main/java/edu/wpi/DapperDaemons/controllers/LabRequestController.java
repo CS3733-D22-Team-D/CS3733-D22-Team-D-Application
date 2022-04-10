@@ -3,10 +3,13 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -27,6 +30,7 @@ public class LabRequestController extends UIController {
 
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /* Labels */
   @FXML private Label errorLabel;
@@ -50,33 +54,59 @@ public class LabRequestController extends UIController {
   }
 
   @FXML
-  public void editTechnician(TableColumn.CellEditEvent<LabRequest, String> editEvent) {
-    editEvent
-        .getRowValue()
-        .setAssigneeID(
-            editEvent.getNewValue()); // TODO : Need to link this to person database since its an ID
-    tableHelper.update();
-  }
-
-  // TODO : Either change this to Priority, add a Status to LabRequest, or delete it
-  @FXML
-  public void editStatus(TableColumn.CellEditEvent<LabRequest, String> editEvent) {
-    editEvent.getRowValue().setStatus(editEvent.getNewValue());
-    tableHelper.update();
-  }
-
-  @FXML
   public void onClearClicked() {
     procedureComboBox.setValue("");
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
-    errorLabel.setText("");
   }
 
   @FXML
-  public void onSubmitClicked() {}
+  public void onSubmitClicked() {
+    Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
+    String roomID = "";
+    String requesterID = SecurityController.getInstance().getUser().getNodeID();
+    String assigneeID = "null";
+    String patientID =
+        patientName.getText()
+            + patientLastName.getText()
+            + patientDOB.getValue().getMonthValue()
+            + patientDOB.getValue().getDayOfMonth()
+            + patientDOB.getValue().getYear();
+    LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
+    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+    if (allItemsFilled()) {
+
+      // Check if the patient info points to a real patient
+      boolean isAPatient = false;
+      Patient patient = new Patient();
+      try {
+        patient = patientDAO.get(patientID);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      isAPatient = patient.getFirstName().equals(patientName.getText());
+      if (isAPatient) {
+        roomID = patient.getLocationID();
+
+        boolean hadClearance =
+            addItem(
+                new LabRequest(
+                    priority, roomID, requesterID, assigneeID, patientID, labType, status));
+
+        if (!hadClearance) {
+          // TODO throw error saying that the user does not have clearance yada yada
+        }
+
+      } else {
+        // TODO throw error saying that the patient does not exist
+      }
+    } else {
+      // TODO throw error saying one or more fields are empty
+    }
+    onClearClicked();
+  }
 
   private boolean allItemsFilled() {
     return !(procedureComboBox.getValue().trim().equals("")
@@ -86,7 +116,19 @@ public class LabRequestController extends UIController {
         || priorityChoiceBox.getValue().trim().equals(""));
   }
 
-  private void addItem(LabRequest request) {}
+  private boolean addItem(LabRequest request) {
+    boolean hadClearance = false;
+    try {
+      hadClearance = labRequestDAO.add(request);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    if (hadClearance) {
+      labReqTable.getItems().add(request);
+    }
+
+    return hadClearance;
+  }
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

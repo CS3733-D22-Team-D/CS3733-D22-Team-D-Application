@@ -76,7 +76,7 @@ public class SanitationController extends UIController {
     String assigneeID = "null";
     String sanitationType = sanitationBox.getValue().toString();
     Request.RequestStatus status = Request.RequestStatus.REQUESTED;
-    if(allFieldsFilled()){
+    if (allFieldsFilled()) {
       /*Make sure the room exists*/
       boolean isALocation = false;
       Location location = new Location();
@@ -87,24 +87,27 @@ public class SanitationController extends UIController {
         e.printStackTrace();
       }
 
-      location = locationDAO.filter(locations,7,roomID).get(0);
+      location = locationDAO.filter(locations, 7, roomID).get(0);
 
       isALocation = location.getAttribute(7).equals(roomID);
-      if(isALocation){
+      if (isALocation) {
 
-        boolean hadClearance = addItem(new SanitationRequest(priority,roomID,requesterID,assigneeID,sanitationType,status));
+        boolean hadClearance =
+            addItem(
+                new SanitationRequest(
+                    priority, roomID, requesterID, assigneeID, sanitationType, status));
 
-        if(!hadClearance){
-          //TODO throw error saying that the user does not have permission to make the request.
+        if (!hadClearance) {
+          // TODO throw error saying that the user does not have permission to make the request.
         }
-      }else{
-        //TODO throw an error that the location does not exist
+      } else {
+        // TODO throw an error that the location does not exist
       }
-    }else{
-      //TODO throw error message that all fields need to be filled
+    } else {
+      // TODO throw error message that all fields need to be filled
     }
-    //clear the fields
-  onClearClicked();
+    // clear the fields
+    onClearClicked();
   }
 
   private boolean allFieldsFilled() {
