@@ -3,10 +3,13 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -36,7 +39,7 @@ public class MealController extends UIController {
   /* Text Fields */
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
-  @FXML private TextField patientDOB;
+  @FXML private DatePicker patientDOB;
 
   /* Buttons */
   @FXML private Button clearButton;
@@ -51,7 +54,8 @@ public class MealController extends UIController {
   /* Unknown room label */
   @FXML private Label errorLabel;
 
-  private DAO<MealDeliveryRequest> dao = DAOPouch.getMealDeliveryRequestDAO();
+  private DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
+  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
   /**
    * Runs at compile time, specified from Initializable interface Sets up meal request table and
@@ -71,7 +75,8 @@ public class MealController extends UIController {
     onClear();
 
     try {
-      mealRequestsTable.getItems().addAll(dao.getAll());
+      mealRequestsTable.getItems().addAll(mealDeliveryRequestDAO.getAll());
+      System.out.println("Created Table");
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error, Mead Delivery table was unable to be created");
@@ -80,32 +85,65 @@ public class MealController extends UIController {
 
   /** Creates service request, executes when submit button is pressed */
   public void onSubmit() {
+    Request.Priority priority = Request.Priority.LOW;
+    String roomID;
+    String requesterID;
+    String assigneeID = "null";
+    String patientID;
+    String entree = entreeBox.getValue();
+    String side = sideBox.getValue();
+    String drink = drinkBox.getValue();
+    String dessert = dessertBox.getValue();
+
+    // Check if all inputs are filled
     if (allFilled()) {
-      String patientID =
+
+      // Check if the patient exists
+      patientID =
           patientName.getText()
               + patientLastName.getText()
-              + patientDOB.getText(); // TODO : WHat is patientID
-      String roomID = "A Room"; // TODO : Determine from backend
-      String entree = entreeBox.getValue();
-      String side = sideBox.getValue();
-      String drink = drinkBox.getValue();
-      String dessert = dessertBox.getValue();
+              + patientDOB.getValue().getMonthValue()
+              + patientDOB.getValue().getDayOfMonth()
+              + patientDOB.getValue().getYear();
+      Patient patient = new Patient();
+      boolean isAPatient = true;
+      try {
+        patient = patientDAO.get(patientID);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      isAPatient = patient.getFirstName().equals(patientName.getText());
+      if (isAPatient) {
 
-      addMealRequest(
-          new MealDeliveryRequest(
-              Request.Priority.LOW,
-              roomID,
-              "RequesterID",
-              "AssigneeID",
-              patientID,
-              entree,
-              side,
-              drink,
-              dessert));
+        // request is formed correctly and the patient exists send it and check for clearance
+        roomID = patient.getLocationID();
+        requesterID = SecurityController.getInstance().getUser().getNodeID();
+        boolean hadClearance =
+            addMealRequest(
+                new MealDeliveryRequest(
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    patientID,
+                    entree,
+                    side,
+                    drink,
+                    dessert));
+
+        if (!hadClearance) {
+
+          // TODO send error message that the user does not have proper clearance
+        }
+
+      } else {
+        // TODO send error message that the patient doesnt exist
+
+      }
 
     } else {
-      errorLabel.setText("Error: One or more fields are empty!");
-      return;
+      // TODO display error message that not all fields are filled;
+
     }
     onClear();
   }
@@ -119,7 +157,7 @@ public class MealController extends UIController {
     errorLabel.setText("");
     patientName.clear();
     patientLastName.clear();
-    patientDOB.clear();
+    patientDOB.setValue(null);
   }
 
   /**
@@ -127,13 +165,16 @@ public class MealController extends UIController {
    *
    * @param request request object to be added
    */
-  public void addMealRequest(MealDeliveryRequest request) {
+  public boolean addMealRequest(MealDeliveryRequest request) {
+    boolean hadClearance = false;
     try {
-      dao.add(request);
-      mealRequestsTable.getItems().add(request);
-    } catch (Exception e) {
-      System.err.println("Could not add MealDeliveryRequest to dao");
+      hadClearance = mealDeliveryRequestDAO.add(request);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+    if (hadClearance) mealRequestsTable.getItems().add(request);
+
+    return hadClearance;
   }
 
   /** Initializes the options for JFX boxes */
@@ -155,10 +196,10 @@ public class MealController extends UIController {
         || drinkBox.getValue().equals("")
         || dessertBox.getValue().equals("")
         || patientName.getText().equals("")
-        || patientDOB.getText().equals("")
+        || patientDOB.getValue().toString().equals("")
         || patientLastName.getText().equals("")));
   }
-  /** Saves a given service request to a CSV by opening the CSV window */
+
   public void saveToCSV() {
     super.saveToCSV(new MealDeliveryRequest());
   }

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -18,425 +19,464 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/Brigham-Blurred.jpg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/Brigham-Blurred.jpg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
+                  <HBox maxHeight="700.0" maxWidth="1400.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox fx:id="medBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/medicineDeliveryIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ImageView fx:id="medIMG" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/medicineDeliveryIcon.png" />
-                                       </image>
-                                    </ImageView>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox fx:id="medBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/medicineDeliveryIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fx:id="medIMG" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/medicineDeliveryIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="158.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label text="Medication Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a medication delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="158.0" VBox.vgrow="ALWAYS">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/sanitationIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/sanitationIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Sanitation Service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a sanitation service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/labRequestIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/labRequestIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label text="Lab Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a lab test" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
+                                 </children>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label text="Medication Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/equipmentIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/equipmentIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Equipment Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request medical equipment" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
                                  </children>
-                              </HBox>
-                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a medication delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="7.5" left="20.0" right="7.5" top="20.0" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
                         </VBox>
-                        <VBox onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/sanitationIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/sanitationIcon.png" />
-                                       </image>
-                                    </ImageView>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mealIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/mealIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label text="Meal Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a meal delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label text="Sanitation Service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mapIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/mapIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Interactive Map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
                                  </children>
-                              </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a sanitation service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="20.0" right="7.5" top="7.5" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/patientTransportIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label text="Patient Transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a patient transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/databaseIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label text="Backend Info Display" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                             <children>
+                                                <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
                         </VBox>
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/labRequestIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/labRequestIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label text="Lab Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a lab test" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="7.5" left="15.0" right="7.5" top="20.0" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                        <VBox onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/equipmentIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/equipmentIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="Equipment Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request medical equipment" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="15.0" right="7.5" top="7.5" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mealIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/mealIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label text="Meal Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a meal delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="7.5" left="15.0" right="7.5" top="20.0" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                        <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mapIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/mapIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="Interactive Map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="15.0" right="7.5" top="7.5" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/patientTransportIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label text="Patient Transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a patient transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="7.5" left="15.0" right="20.0" top="20.0" />
-                           </VBox.margin>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                        <VBox onMouseClicked="#switchToDB" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/databaseIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label text="Backend Info Display" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
-                                 <children>
-                                    <Label prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="15.0" right="20.0" top="7.5" />
-                           </VBox.margin>
-                        </VBox>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
                <StackPane.margin>
                   <Insets top="50.0" />
@@ -446,7 +486,7 @@
                <left>
                   <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#goHome" stylesheets="@../assets/buttons.css" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -461,7 +501,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMedicine" stylesheets="@../assets/buttons.css" text="Medication Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -476,7 +516,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToLabRequest" stylesheets="@../assets/buttons.css" text="Lab Request" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -491,7 +531,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMeal" stylesheets="@../assets/buttons.css" text="Meal Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -506,7 +546,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -521,7 +561,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToSanitation" stylesheets="@../assets/buttons.css" text="Sanitation Service" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -536,7 +576,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToEquipment" stylesheets="@../assets/buttons.css" text="Equipment Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -551,7 +591,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#switchToMap" onMouseClicked="#switchToMap" text="Map" textFill="WHITE">
+                        <JFXButton id="slider" onAction="#switchToMap" onMouseClicked="#switchToMap" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -566,7 +606,13 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
+
+                        <JFXButton id="slider" onAction="#switchToAboutUs" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -596,6 +642,9 @@
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                            <HBox.margin>
@@ -610,6 +659,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                     <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
                                        <effect>
@@ -632,6 +684,9 @@
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                         </HBox>
@@ -643,6 +698,9 @@
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </children>
                               </StackPane>
@@ -676,6 +734,14 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">

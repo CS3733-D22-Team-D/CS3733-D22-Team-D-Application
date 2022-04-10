@@ -155,4 +155,27 @@ public class DAO<T extends TableObject> {
   public List<T> filter(int column, String attribute) throws SQLException {
     return filter(orm.getAll(), column, attribute);
   }
+
+  public List<T> search(List<T> list, int column, String attribute) {
+    List<T> ret = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getAttribute(column).contains(attribute)) {
+        ret.add(list.get(i));
+      }
+    }
+    return ret;
+  }
+
+  /**
+   * Sorts the entire database and returns a List of TableObjects in which the attribute occurs in
+   * the specific column you are looking in Heavy emphasis on ENTIRE DATABASE
+   *
+   * @param column : The column you wish to sort
+   * @param attribute : the key / attribute you are searching for
+   * @return : a List of all TableObjects in which the attribute occurs
+   * @throws SQLException
+   */
+  public List<T> search(int column, String attribute) throws SQLException {
+    return search(orm.getAll(), column, attribute);
+  }
 }
