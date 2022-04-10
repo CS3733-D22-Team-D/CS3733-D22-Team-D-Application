@@ -3,12 +3,15 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -34,11 +37,11 @@ public class SanitationController extends UIController {
   /* Dropdown Boxes */
   @FXML private JFXComboBox<String> sanitationBox;
   @FXML private JFXComboBox<String> priorityBox;
-
+  @FXML private JFXComboBox<String> locationBox;
   /* Text Field */
-  @FXML private TextField locationText;
 
-  DAO<SanitationRequest> dao = DAOPouch.getSanitationRequestDAO();
+  DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
+  DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -47,10 +50,9 @@ public class SanitationController extends UIController {
     SanitationServiceInitializer init = new SanitationServiceInitializer();
     init.initializeInputs();
     init.initializeTable();
-    init.initializeRequests();
 
     try {
-      pendingRequests.getItems().addAll(dao.getAll());
+      pendingRequests.getItems().addAll(sanitationRequestDAO.getAll());
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
@@ -62,42 +64,78 @@ public class SanitationController extends UIController {
   public void onClearClicked() {
     sanitationBox.setValue("");
     priorityBox.setValue("");
-    locationText.setText("");
+    locationBox.setValue("");
   }
 
   /** What happens when the submit button is clicked * */
   @FXML
   public void onSubmitClicked() {
-    if (!((sanitationBox.getValue().equals(""))
-        || priorityBox.getValue().equals("")
-        || locationText.getText().equals(""))) {
+    Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+    String roomID = locationBox.getValue();
+    String requesterID = SecurityController.getUser().getNodeID();
+    String assigneeID = "null";
+    String sanitationType = sanitationBox.getValue().toString();
+    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+    if (allFieldsFilled()) {
+      /*Make sure the room exists*/
+      boolean isALocation = false;
+      Location location = new Location();
+      ArrayList<Location> locations = new ArrayList<>();
+      try {
+        locations = (ArrayList<Location>) locationDAO.getAll();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
 
-      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      location = locationDAO.filter(locations, 7, roomID).get(0);
 
-      addItem(
-          new SanitationRequest(
-              priority,
-              locationText.getText(),
-              "REQUESTERID",
-              "ASSIGNEEID",
-              sanitationBox.getValue(),
-              Request.RequestStatus.REQUESTED));
-      onClearClicked();
+      isALocation = location.getAttribute(7).equals(roomID);
+      if (isALocation) {
+
+        boolean hadClearance =
+            addItem(
+                new SanitationRequest(
+                    priority, roomID, requesterID, assigneeID, sanitationType, status));
+
+        if (!hadClearance) {
+          // TODO throw error saying that the user does not have permission to make the request.
+        }
+      } else {
+        // TODO throw an error that the location does not exist
+      }
+    } else {
+      // TODO throw error message that all fields need to be filled
     }
+    // clear the fields
+    onClearClicked();
   }
-  /** Saves a given service request to a CSV by opening the CSV window */
-  public void saveToCSV() {
-    super.saveToCSV(new SanitationRequest());
+
+  private boolean allFieldsFilled() {
+    return !((sanitationBox.getValue().equals(""))
+        || priorityBox.getValue().equals("")
+        || locationBox.getValue().equals(""));
   }
 
   /** Adds new sanitationRequest to table of pending requests * */
-  private void addItem(SanitationRequest request) {
-    pendingRequests.getItems().add(request);
+  private boolean addItem(SanitationRequest request) {
+    boolean hasClearance = false;
     try {
-      dao.add(request);
+      hasClearance = sanitationRequestDAO.add(request);
     } catch (SQLException e) {
-      System.err.println("Sanitation request could not be added to DAO");
+      e.printStackTrace();
     }
+
+    if (hasClearance) {
+      pendingRequests.getItems().add(request);
+    }
+    return hasClearance;
+  }
+
+  public enum SanitationTypes {
+    MoppingSweeping,
+    Sterilize,
+    Trash,
+    BioHazard;
   }
 
   private class SanitationServiceInitializer {
@@ -110,11 +148,16 @@ public class SanitationController extends UIController {
       priorityBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
       sanitationBox.setItems(
-          FXCollections.observableArrayList(
-              "Mopping/Sweeping", "Sterilize", "Trash", "Bio-Hazard Contamination"));
-    }
+          FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
 
-    // TODO: Pull Sanitation requests from database
-    private void initializeRequests() {}
+      locationBox.setItems((FXCollections.observableArrayList(getAllLongNames())));
+
+      // locationBox.getItems().removeAll();
+    }
+  }
+
+  /** Saves a given service request to a CSV by opening the CSV window */
+  public void saveToCSV() {
+    super.saveToCSV(new SanitationRequest());
   }
 }

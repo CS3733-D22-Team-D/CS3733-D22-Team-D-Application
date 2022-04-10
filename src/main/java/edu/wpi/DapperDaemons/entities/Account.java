@@ -6,23 +6,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Account extends TableObject {
-  private String employeeID;
   private String username;
+  private String employeeID;
   private String password;
-  private String settingsFile;
+  private String phoneNumber;
+  private String settingsFile = "none";
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
-    this.employeeID = employeeID;
     this.username = username;
+    this.employeeID = employeeID;
     this.password = toHexString(getSHA(password));
   }
 
-  public Account(String employeeID, String username, String password, String fileName)
+  public Account(
+      String employeeID, String username, String password, String phoneNumber, String fileName)
       throws NoSuchAlgorithmException {
-    this.employeeID = employeeID;
     this.username = username;
+    this.employeeID = employeeID;
     this.password = toHexString(getSHA(password));
+    this.phoneNumber = phoneNumber;
     this.settingsFile = fileName;
   }
 
@@ -30,7 +33,11 @@ public class Account extends TableObject {
 
   @Override
   public String getTableInit() {
-    return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,employeeID varchar(20) UNIQUE,password varchar(255))";
+    return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,"
+        + "employeeID varchar(20) UNIQUE,"
+        + "password varchar(255),"
+        + "phoneNumber varchar(12),"
+        + "settingsFile varchar(255))";
   }
 
   @Override
@@ -42,12 +49,14 @@ public class Account extends TableObject {
   public String getAttribute(int columnNumber) {
     switch (columnNumber) {
       case 1:
-        return this.employeeID;
-      case 2:
         return this.username;
+      case 2:
+        return this.employeeID;
       case 3:
         return this.password;
       case 4:
+        return this.phoneNumber;
+      case 5:
         return this.settingsFile;
       default:
         break;
@@ -65,6 +74,8 @@ public class Account extends TableObject {
       case 3:
         this.password = newAttribute;
       case 4:
+        this.phoneNumber = newAttribute;
+      case 5:
         this.settingsFile = newAttribute;
       default:
         break;
@@ -76,7 +87,7 @@ public class Account extends TableObject {
     return new Account();
   }
 
-  private static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+  public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
     // Static getInstance method is called with hashing SHA
     MessageDigest md = MessageDigest.getInstance("SHA-256");
 
@@ -86,7 +97,7 @@ public class Account extends TableObject {
     return md.digest(input.getBytes(StandardCharsets.UTF_8));
   }
 
-  private static String toHexString(byte[] hash) {
+  public static String toHexString(byte[] hash) {
     // Convert byte array into signum representation
     BigInteger number = new BigInteger(1, hash);
 

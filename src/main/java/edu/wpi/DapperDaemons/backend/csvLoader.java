@@ -13,7 +13,6 @@ import java.util.Objects;
 public class csvLoader {
 
   static HashMap<String, TableObject> filenames = new HashMap<>();
-  static Connection conn = connectionHandler.getConnection();
 
   static {
     filenames.put("TowerLocations", new Location());
@@ -33,7 +32,7 @@ public class csvLoader {
   private csvLoader() {}
 
   public static void loadAll() throws SQLException {
-    Statement stmt = conn.createStatement();
+    Statement stmt = connectionHandler.getConnection().createStatement();
     filenames.forEach(
         (k, v) -> {
           System.out.println("Currently on " + v.getTableName());
