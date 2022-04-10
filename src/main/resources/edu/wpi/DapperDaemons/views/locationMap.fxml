@@ -575,7 +575,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="createBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5;">
+                        <VBox fx:id="createBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5; -fx-translate-x: -260;">
                            <children>
                               <Label fx:id="createTitle" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="230.0" style="-fx-background-color: #4B5b81; -fx-background-radius: 7.5 7.5 0 0;" text="Create Location" textFill="WHITE">
                                  <font>
