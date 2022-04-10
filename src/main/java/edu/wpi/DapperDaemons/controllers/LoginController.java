@@ -36,6 +36,9 @@ public class LoginController {
     if (username.getText().equals("admin") && password.getText().equals("admin")) {
       switchScene("default.fxml", 635, 510);
       return;
+    } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
+      switchScene("RFIDScanPage.fxml", 635, 510);
+      return;
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {

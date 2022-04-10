@@ -156,6 +156,11 @@ public abstract class UIController implements Initializable {
     switchScene("sanitation.fxml", 780, 548);
   }
 
+  @FXML
+  public void goToLogin() throws IOException {
+    switchScene("login.fxml", 780, 548);
+  }
+
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
