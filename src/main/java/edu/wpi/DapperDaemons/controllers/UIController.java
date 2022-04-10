@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,18 +59,12 @@ public abstract class UIController implements Initializable {
   @FXML
   public void quitProgram() {
     Stage window = (Stage) homeIcon.getScene().getWindow();
-
-    //    try {
-    //      DAO<Location> closer = DAOPouch.getLocationDAO();
-    //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
-    //      closer.save("TowerLocationsSave.csv");
-    //      closer2.save("MedEquipReqSave.csv");
-    //      System.out.println("Saving CSV Files");
-    //    } catch (Exception e) {
-    //      e.printStackTrace();
-    //    }
     csvSaver.saveAll();
-    window.close();
+    if (window != null) {
+      window.close();
+    }
+    Platform.exit();
+    System.exit(0);
   }
 
   static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
@@ -170,6 +165,7 @@ public abstract class UIController implements Initializable {
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) homeIcon.getScene().getWindow();
+    window.setOnCloseRequest(e -> quitProgram());
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
 
