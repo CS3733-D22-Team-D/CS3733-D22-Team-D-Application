@@ -117,7 +117,7 @@ public class MealController extends UIController {
 
         // request is formed correctly and the patient exists send it and check for clearance
         roomID = patient.getLocationID();
-        requesterID = SecurityController.getInstance().getUser().getNodeID();
+        requesterID = SecurityController.getUser().getNodeID();
         boolean hadClearance =
             addMealRequest(
                 new MealDeliveryRequest(

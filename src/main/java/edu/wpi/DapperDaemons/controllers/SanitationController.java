@@ -72,7 +72,7 @@ public class SanitationController extends UIController {
   public void onSubmitClicked() {
     Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
     String roomID = locationBox.getValue();
-    String requesterID = SecurityController.getInstance().getUser().getNodeID();
+    String requesterID = SecurityController.getUser().getNodeID();
     String assigneeID = "null";
     String sanitationType = sanitationBox.getValue().toString();
     Request.RequestStatus status = Request.RequestStatus.REQUESTED;

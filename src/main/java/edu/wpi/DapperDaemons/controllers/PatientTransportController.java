@@ -93,7 +93,7 @@ public class PatientTransportController extends UIController implements Initiali
   public void onSubmitClicked() {
     Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
     String roomID;
-    String requesterID = SecurityController.getInstance().getUser().getNodeID();
+    String requesterID = SecurityController.getUser().getNodeID();
     String assigneeID = "null";
     String patientID;
     String nextRoomID = "";

@@ -13,7 +13,6 @@ public class Authentication {
   public static final String ACCOUNT_SID = "ACc520cab845f2d60e76a26710d8035182";
   public static final String AUTH_TOKEN = "f1836f6191de387f2c5979f4f463fc7d";
   private static int authCode;
-  private static DAO<Account> accounts = DAOPouch.getAccountDAO();
 
   private static void generateCode(){
     authCode = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -34,9 +33,8 @@ public class Authentication {
     return false;
   }
 
-  public static void sendAuthCode() throws SQLException {
+  public static void sendAuthCode(Account acc) throws SQLException {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    Account acc = accounts.get(SecurityController.user.getAttribute(1));
     generateCode();
     Message message =
             Message.creator(

@@ -13,18 +13,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png); -fx-background-size: 100% 100%; -fx-background-color: #012d5a;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.LoginController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png); -fx-background-size: 100% 100%; -fx-background-color: #012d5a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.LoginController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox prefHeight="46.0" prefWidth="301.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="301.0">
                <opaqueInsets>
                   <Insets top="50.0" />
                </opaqueInsets>
-            </HBox>
-            <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -129,7 +127,16 @@
                         </HBox>
                      </children>
                   </VBox>
-               </center>
+               </children>
+            </HBox>
+            <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <VBox fx:id="popup" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
+               </left>
             </BorderPane>
          </children>
       </StackPane>

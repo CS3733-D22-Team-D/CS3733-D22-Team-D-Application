@@ -92,7 +92,7 @@ public class EquipmentRequestController extends UIController {
     // get all the variables ready to go
     Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
     String roomID = "";
-    String requesterID = SecurityController.getInstance().getUser().getNodeID();
+    String requesterID = SecurityController.getUser().getNodeID();
     String assigneeID = "null";
     MedicalEquipment.EquipmentType equipmentType =
         MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
