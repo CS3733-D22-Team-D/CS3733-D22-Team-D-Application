@@ -11,14 +11,7 @@ class connectionHandler {
   private static Connection connection;
 
   static {
-    try {
-      Class.forName("org.apache.derby.jdbc.ClientDriver");
-      connection = DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database");
-    } catch (SQLException e) {
-      //      System.out.println("Database already created, continuing");
-    } catch (ClassNotFoundException e) {
-      System.out.println("Driver error, try making sure you don't have any other instances open!");
-    }
+    switchToEmbedded();
   }
 
   private connectionHandler() {}
@@ -28,9 +21,15 @@ class connectionHandler {
   }
 
   static Connection switchToClientServer() throws IOException {
-    ServerSocket ss = new ServerSocket(1527);
-    Socket server = ss.accept();
-    Socket client = new Socket("localhost",1527);
+    try {
+      Class.forName("org.apache.derby.jdbc.ClientDriver");
+      connection = DriverManager.getConnection(    "jdbc:derby://localhost:1527/BaW_Database");
+      System.out.println("Connected to the client server");
+    } catch (SQLException e) {
+      //      System.out.println("Database already created, continuing");
+    } catch (ClassNotFoundException e) {
+      System.out.println("Driver error, try making sure you don't have any other instances open!");
+    }
     return connection;
   }
 
@@ -38,11 +37,11 @@ class connectionHandler {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       connection = DriverManager.getConnection("jdbc:derby:BaW_database;create = true");
+      System.out.println("Connected to the embedded server");
     } catch (SQLException e) {
       //      System.out.println("Database already created, continuing");
     } catch (ClassNotFoundException e) {
-      //      System.out.println("Driver error, try making sure you don't have any other instances
-      // open!");
+//      System.out.println("Driver error, try making sure you don't have any other instances open!");
     }
     return connection;
   }
