@@ -131,7 +131,7 @@ public class MedicineController extends UIController {
           // now we can create the request and send it
 
           roomID = patient.getLocationID();
-          requesterID = SecurityController.getInstance().getUser().getNodeID();
+          requesterID = SecurityController.getUser().getNodeID();
           assigneeID = "null";
           priority = Request.Priority.valueOf(priorityIn.getValue());
           medName = medNameIn.getValue();

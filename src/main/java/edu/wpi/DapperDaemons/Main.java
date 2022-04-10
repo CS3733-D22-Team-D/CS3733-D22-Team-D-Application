@@ -18,7 +18,7 @@ public class Main {
     csvLoader.loadAll();
     DAOPouch.init();
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
-    SecurityController.getInstance().setUser(admin);
+    SecurityController.setUser(admin);
     App.launch(App.class, args);
 
     // Backend stuff
