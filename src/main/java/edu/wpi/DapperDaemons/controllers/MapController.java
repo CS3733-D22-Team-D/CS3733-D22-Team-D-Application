@@ -117,18 +117,18 @@ public class MapController extends UIController implements Initializable {
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
 
     // Initialize search request box
-    searchReqLongName.setItems(
-        FXCollections.observableArrayList(
-            "Search Request...",
-            "Lab Request",
-            "Meal Delivery Request",
-            "Medical Equipment Request",
-            "Medicine Request",
-            "Patient Transport Request",
-            "Sanitation Request"));
+//    searchReqLongName.setItems(
+//        FXCollections.observableArrayList(
+//            "Search Request...",
+//            "Lab Request",
+//            "Meal Delivery Request",
+//            "Medical Equipment Request",
+//            "Medicine Request",
+//            "Patient Transport Request",
+//            "Sanitation Request"));
 
-    searchLongName.setOnKeyPressed(e -> onSearchLocation());
-    searchReqLongName.setOnAction(e -> onFilterRequestType());
+    //searchLongName.setOnKeyPressed(e -> onSearchLocation());
+    //searchReqLongName.setOnAction(e -> onFilterRequestType());
     closeCreate();
     closeRoom();
   }
