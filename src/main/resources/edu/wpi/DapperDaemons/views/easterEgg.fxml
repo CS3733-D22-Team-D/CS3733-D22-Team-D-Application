@@ -26,7 +26,7 @@
             </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
+                  <VBox fx:id="slider1" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
                         <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
                            <font>
@@ -148,6 +148,11 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton onAction="#switchToAboutUs" onMouseClicked="#quitProgram" text=" ?   About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -171,7 +176,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#easterEgg" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/BrighamLogoWithBG.png" />
                                  </image>
@@ -188,12 +193,12 @@
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <JFXHamburger fx:id="burg" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6">
+                                    <JFXHamburger fx:id="burg1" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6">
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
                                     </JFXHamburger>
-                                    <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
+                                    <JFXHamburger fx:id="burgBack1" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
@@ -207,7 +212,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon11" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/Glyphs/exitWithBG.png" />
                                  </image>
@@ -221,7 +226,7 @@
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#goHomeDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch1" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#goHomeDark" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -243,7 +248,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Name" HBox.hgrow="ALWAYS">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="28.0" />
                                  </font>
@@ -258,6 +263,11 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </JFXButton>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">

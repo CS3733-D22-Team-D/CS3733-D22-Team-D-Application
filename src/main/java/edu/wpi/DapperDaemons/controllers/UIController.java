@@ -157,6 +157,11 @@ public abstract class UIController implements Initializable {
   }
 
   @FXML
+  public void switchToAboutUs() throws IOException {
+    switchScene("aboutUs.fxml", 780, 548);
+  }
+
+  @FXML
   public void goToLogin() throws IOException {
     switchScene("login.fxml", 780, 548);
   }
