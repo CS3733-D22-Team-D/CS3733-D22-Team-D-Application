@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.RFIDPageController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.RFIDPageController">
     <children>
         <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <children>
@@ -52,6 +53,9 @@
                            <image>
                               <Image url="@../assets/rfidIcon.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets left="35.0" />
+                           </VBox.margin>
                         </ImageView>
                      </children>
                      <VBox.margin>
@@ -60,7 +64,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="61.0" prefWidth="941.0">
                      <children>
-                        <Button fx:id="sButton" mnemonicParsing="false" onMouseClicked="#loginRFID" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="SCAN NOW" textFill="WHITE">
+                        <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMouseClicked="#loginRFID" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -254,6 +258,9 @@
                                             <HBox.margin>
                                                 <Insets left="12.0" />
                                             </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                                         </ImageView>
                                     </children>
                                     <HBox.margin>
@@ -268,6 +275,9 @@
                                                     <effect>
                                                         <ColorAdjust brightness="1.0" />
                                                     </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                                 </JFXHamburger>
                                                 <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
                                                     <effect>
@@ -290,6 +300,9 @@
                                             <HBox.margin>
                                                 <Insets left="12.0" />
                                             </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                                         </ImageView>
                                     </children>
                                 </HBox>
@@ -301,6 +314,9 @@
                                                     <image>
                                                         <Image url="@../assets/Glyphs/moonWithBG.png" />
                                                     </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                                 </ImageView>
                                             </children>
                                         </StackPane>

@@ -1,10 +1,18 @@
 #defaultButton.button{
-    -fx-border-radius: 7.5;
+    -fx-background-radius: 7.5;
     -fx-cursor: hand;
 }
 
 #defaultButton.button:hover {
     -fx-opacity: 85%;
+}
+
+#jButton {
+    -fx-background-color: #f1f0f0;
+    -jfx-focus-color: #aaaaaa;
+    -jfx-unfocus-color: #aaaaaa;
+    -fx-background-radius: 7.5;
+    -fx-cursor: hand;
 }
 
 #slider.button{

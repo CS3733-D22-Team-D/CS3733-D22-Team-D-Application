@@ -44,4 +44,3 @@ public class RFIDPageController extends UIController {
     sLabel.setText("Waiting for scan...");
   }
 }
-

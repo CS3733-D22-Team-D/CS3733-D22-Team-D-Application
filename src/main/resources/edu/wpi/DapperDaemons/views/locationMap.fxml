@@ -627,7 +627,7 @@
                                           <Insets bottom="5.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <JFXComboBox fx:id="typeIn" editable="true" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-color: #f1f0f0; -fx-background-radius: 7.5 7.5 0 0;" visibleRowCount="3">
+                                    <JFXComboBox id="jButton" fx:id="typeIn" editable="true" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." stylesheets="@../assets/buttons.css" visibleRowCount="3">
                                        <VBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </VBox.margin>
