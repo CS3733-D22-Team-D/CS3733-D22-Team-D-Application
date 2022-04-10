@@ -31,7 +31,6 @@ public class LoginController {
 
   @FXML
   void login() throws Exception {
-    System.out.println("Login");
     if (username.getText().equals("") && password.getText().equals("")) {
       switchScene("default.fxml", 635, 510);
       return;
@@ -42,12 +41,12 @@ public class LoginController {
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
       TwoFactor.setVisible(true);
+      Authentication.sendAuthCode(acc);
     }
   }
 
   @FXML
   void authenticate() throws Exception {
-    Authentication.sendAuthCode(accountDAO.get(username.getText()));
     try {
       int authCode = Integer.valueOf(code.getText());
       if (Authentication.authenticate(authCode)) {

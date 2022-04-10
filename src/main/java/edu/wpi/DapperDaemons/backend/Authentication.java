@@ -12,6 +12,7 @@ public class Authentication {
   public static final String ACCOUNT_SID = "ACc520cab845f2d60e76a26710d8035182";
   public static final String AUTH_TOKEN = "f1836f6191de387f2c5979f4f463fc7d";
   private static int authCode;
+  private static int timeout = 20;
 
   private static void generateCode() {
     authCode = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -21,10 +22,11 @@ public class Authentication {
               @Override
               public void run() {
                 long start = System.currentTimeMillis();
-                while (System.currentTimeMillis() - start < 5000) ;
+                while (System.currentTimeMillis() - start < (timeout*1000)) ;
                 authCode = -1;
               }
             });
+    timer.start();
   }
 
   public static boolean authenticate(int code) {
