@@ -32,6 +32,11 @@ public class LoginController {
 
   @FXML
   void login(MouseEvent event) throws Exception {
+    // TODO for final product remove admin bypass
+    if (username.getText().equals("admin") && password.getText().equals("admin")) {
+      switchScene("default.fxml", 635, 510);
+      return;
+    }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
       List<Employee> user =
