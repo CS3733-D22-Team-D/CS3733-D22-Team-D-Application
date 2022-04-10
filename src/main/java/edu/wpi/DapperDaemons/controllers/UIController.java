@@ -156,6 +156,11 @@ public abstract class UIController implements Initializable {
     switchScene("sanitation.fxml", 780, 548);
   }
 
+  @FXML
+  public void switchToAboutUs() throws IOException {
+    switchScene("aboutUs.fxml", 780, 548);
+  }
+
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
@@ -168,7 +173,7 @@ public abstract class UIController implements Initializable {
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
+    window.setWidth(window.getWidth() + 0.001); // To update size
     window.setHeight(window.getHeight());
   }
 

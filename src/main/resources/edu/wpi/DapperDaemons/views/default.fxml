@@ -566,6 +566,11 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton onAction="#switchToAboutUs" onMouseClicked="#quitProgram" text=" ?   About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -676,6 +681,11 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </JFXButton>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
