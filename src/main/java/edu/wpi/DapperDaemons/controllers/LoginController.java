@@ -16,7 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -31,7 +32,8 @@ public class LoginController {
   DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
   @FXML
-  void login(MouseEvent event) throws Exception {
+  void login() throws Exception {
+    if (username.getText().equals("") || password.getText().equals("")) return;
     // TODO for final product remove admin bypass
     if (username.getText().equals("admin") && password.getText().equals("admin")) {
       switchScene("default.fxml", 635, 510);
@@ -48,6 +50,13 @@ public class LoginController {
         throw new Exception(
             "More than one user with the same username?"); // theoretically this is unreachable
       }
+    }
+  }
+
+  @FXML
+  public void keyPressed(KeyEvent event) throws Exception {
+    if (event.getCode().equals(KeyCode.ENTER)) {
+      login();
     }
   }
 
