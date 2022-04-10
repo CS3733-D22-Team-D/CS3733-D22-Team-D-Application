@@ -1,12 +1,11 @@
 package edu.wpi.DapperDaemons.backend;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-class connectionHandler {
-  private static Connection connection;
+public class connectionHandler {
+  static Connection connection;
 
   static {
     switchToEmbedded();
@@ -14,11 +13,13 @@ class connectionHandler {
 
   private connectionHandler() {}
 
+  public static void init() {}
+
   static Connection getConnection() {
     return connection;
   }
 
-  static Connection switchToClientServer() throws IOException {
+  public static Connection switchToClientServer() {
     try {
       csvSaver.saveAll();
       Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -31,10 +32,15 @@ class connectionHandler {
     } catch (ClassNotFoundException e) {
       System.out.println("Driver error, try making sure you don't have any other instances open!");
     }
+    try {
+      DAOPouch.init();
+    } catch (Exception e) {
+      System.out.println("DAOPouch could not initialize");
+    }
     return connection;
   }
 
-  static Connection switchToEmbedded() {
+  public static Connection switchToEmbedded() {
     try {
       if (connection != null) {
         csvSaver.saveAll();
@@ -48,6 +54,11 @@ class connectionHandler {
     } catch (ClassNotFoundException e) {
       //      System.out.println("Driver error, try making sure you don't have any other instances
       // open!");
+    }
+    try {
+      DAOPouch.init();
+    } catch (Exception e) {
+      System.out.println("DAOPouch could not initialize");
     }
     return connection;
   }
