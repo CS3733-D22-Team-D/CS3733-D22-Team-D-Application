@@ -1,23 +1,41 @@
-#action.button{
-    -fx-background-color: #059DA7;
-    -fx-border-width: 0;
+#defaultButton.button{
+    -fx-background-radius: 7.5;
+    -fx-cursor: hand;
 }
-#action.button:hover {
-    -fx-background-color: #42a28c;
-    -fx-border-color: #059DA7;
-    -fx-border-width: 3;
-    -fx-border-radius: 4;
-    -fx-background-insets: 1;
+
+#defaultButton.button:hover {
+    -fx-opacity: 85%;
 }
-#cancel.button {
-    -fx-background-color: #C1C5D4;
-    -fx-border-width: 0;
+
+#jButton {
+    -fx-background-color: #f1f0f0;
+    -jfx-focus-color: #aaaaaa;
+    -jfx-unfocus-color: #aaaaaa;
+    -fx-background-radius: 7.5;
+    -fx-cursor: hand;
 }
-#cancel.button:hover {
-    /*-fx-background-color: #A3A9BF;*/
-    -fx-background-color: #d0afa3;
-    -fx-border-color: #C1C5D4;
-    -fx-border-width: 3;
-    -fx-border-radius: 4;
-    -fx-background-insets: 1;
+
+#slider.button{
+    -fx-cursor: hand;
+}
+
+#slider.button:hover {
+    -fx-translate-x: 6;
+}
+
+#default{
+    -fx-cursor: hand;
+}
+
+#default:hover {
+    -fx-translate-y: -5;
+}
+
+#mapButton{
+    -fx-cursor: hand;
+    -fx-opacity: 75%;
+}
+
+#mapButton:hover{
+    -fx-opacity: 90%;
 }

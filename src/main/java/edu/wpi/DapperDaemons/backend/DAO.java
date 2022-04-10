@@ -62,7 +62,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean update(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToUpdate(type);
+    boolean hasClearance = SecurityController.permissionToUpdate(type);
     if (hasClearance) {
       orm.update(type);
     }
@@ -77,7 +77,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean delete(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToDelete(type);
+    boolean hasClearance = SecurityController.permissionToDelete(type);
     if (hasClearance) {
       orm.delete(type.getAttribute(1));
     }
@@ -91,7 +91,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean add(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToAdd(type);
+    boolean hasClearance = SecurityController.permissionToAdd(type);
     if (hasClearance) {
       orm.add(type);
     }
@@ -154,5 +154,28 @@ public class DAO<T extends TableObject> {
    */
   public List<T> filter(int column, String attribute) throws SQLException {
     return filter(orm.getAll(), column, attribute);
+  }
+
+  public List<T> search(List<T> list, int column, String attribute) {
+    List<T> ret = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getAttribute(column).contains(attribute)) {
+        ret.add(list.get(i));
+      }
+    }
+    return ret;
+  }
+
+  /**
+   * Sorts the entire database and returns a List of TableObjects in which the attribute occurs in
+   * the specific column you are looking in Heavy emphasis on ENTIRE DATABASE
+   *
+   * @param column : The column you wish to sort
+   * @param attribute : the key / attribute you are searching for
+   * @return : a List of all TableObjects in which the attribute occurs
+   * @throws SQLException
+   */
+  public List<T> search(int column, String attribute) throws SQLException {
+    return search(orm.getAll(), column, attribute);
   }
 }
