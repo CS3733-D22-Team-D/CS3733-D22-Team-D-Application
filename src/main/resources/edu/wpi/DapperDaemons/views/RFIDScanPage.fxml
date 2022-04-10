@@ -3,20 +3,23 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.RFIDPageController">
     <children>
         <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <children>
@@ -55,19 +58,35 @@
                         <Insets left="150.0" right="150.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="941.0">
+                  <VBox alignment="CENTER" prefHeight="61.0" prefWidth="941.0">
                      <children>
-                        <Label text="LOGIN STATUS: ">
+                        <Button fx:id="sButton" mnemonicParsing="false" onMouseClicked="#loginRFID" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="SCAN NOW" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="53.0" prefWidth="941.0">
+                     <children>
+                        <Label fx:id="sLabel" text="LABEL">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="150.0" />
+                              <Insets />
                            </VBox.margin>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_LEFT" prefHeight="162.0" prefWidth="941.0">
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="109.0" prefWidth="941.0">
                      <children>
                         <Text fill="#e20404" strokeType="OUTSIDE" strokeWidth="0.0" text="UNAUTHROIZED ACCESS IS PROHIBITED ">
                            <font>
@@ -228,7 +247,7 @@
                             <children>
                                 <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                                     <children>
-                                        <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                        <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../assets/BrighamLogoWithBG.png" />
                                             </image>
@@ -278,7 +297,7 @@
                                     <children>
                                         <StackPane prefHeight="150.0" prefWidth="200.0">
                                             <children>
-                                                <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchLight" preserveRatio="true">
+                                                <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                                     <image>
                                                         <Image url="@../assets/Glyphs/moonWithBG.png" />
                                                     </image>
