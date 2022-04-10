@@ -1,9 +1,11 @@
 package edu.wpi.DapperDaemons.serial;
 
+import edu.wpi.DapperDaemons.backend.SHA;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UserNotAuthorizedException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class RFIDHandler {
     this.user = user;
     this.COM = COM;
     this.UIDs = new ArrayList<String>();
-    this.UIDs.add("354");
+    this.UIDs.add("9a1b036b82baba3177d83c27c1f7d0beacaac6de1c5fdcc9680c49f638c5fb9");
   }
 
   /**
@@ -27,14 +29,15 @@ public class RFIDHandler {
    * @return true if the scan was valid, false otherwise
    */
   public boolean scan()
-      throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException {
+      throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException,
+          NoSuchAlgorithmException {
     SerialCOM reader = new SerialCOM(this.COM);
     String inputID;
     if (!(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)))
       throw new UserNotAuthorizedException(user.getEmployeeType());
     else {
       inputID = reader.readData();
-      return UIDs.contains(inputID);
+      return UIDs.contains(SHA.toHexString(SHA.getSHA(inputID)));
     }
   }
 }
