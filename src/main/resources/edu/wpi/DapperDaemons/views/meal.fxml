@@ -30,7 +30,7 @@
          <children>
             <HBox prefHeight="46.0" prefWidth="301.0">
                <children>
-                  <VBox maxHeight="-Infinity" prefHeight="475.0" prefWidth="290.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;">
+                  <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="290.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>

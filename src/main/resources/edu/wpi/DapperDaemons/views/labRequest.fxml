@@ -165,7 +165,7 @@
                         <Insets bottom="30.0" left="20.0" right="10.0" top="30.0" />
                      </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                        <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
                             <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                            <children>
