@@ -384,7 +384,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/BrighamLogoWithBG.png" />
                                  </image>
@@ -468,7 +468,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" HBox.hgrow="ALWAYS">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="28.0" />
                                  </font>
