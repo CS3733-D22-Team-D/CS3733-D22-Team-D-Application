@@ -166,6 +166,9 @@ public class MinesweeperZN extends Application {
     return neighbors;
   }
 
+  @Override
+  public void start(Stage primaryStage) throws Exception {}
+
   /** The tile class defines tiles in the game grid. */
   private class Tile extends StackPane {
     private final int x, y;
@@ -362,8 +365,7 @@ public class MinesweeperZN extends Application {
    * @param stage The application stage.
    * @throws Exception Exceptions should not be thrown.
    */
-  @Override
-  public static void start(Stage stage) throws Exception {
+  public void begin(Stage stage) throws Exception {
     stage.setMinWidth(Screen.getPrimary().getVisualBounds().getWidth() * 0.50);
     stage.setMinHeight(Screen.getPrimary().getVisualBounds().getHeight() * 0.65);
 
