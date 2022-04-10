@@ -1,31 +1,52 @@
 package edu.wpi.DapperDaemons.serial;
 
 import arduino.*;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 
 /** Handles interaction with Arduino */
 public class SerialCOM {
-  Arduino arduino;
+  String COM;
+  String input;
+
+  public SerialCOM(String COM) {
+    this.COM = COM;
+    this.input = "";
+  }
 
   /**
-   * Opens connection to Arduino
+   * Opens connection to Arduino and reads data from the port
    *
-   * @param serialPort indicates the name of the serial port that the Arduino is using
    * @return the data received from the serial port
    */
-  public String readData(String serialPort) {
-    String input = "";
-    arduino = new Arduino(serialPort, 9600); // this is where you specify your COM
+  public String readData() throws ArduinoTimeOutException, UnableToConnectException {
+    // Collect System time
+    long startTime = System.currentTimeMillis();
+
+    // Init arduino at the specified COM port
+    Arduino arduino = new Arduino(this.COM, 9600);
+
+    // Open Connection
     boolean connection = arduino.openConnection();
+
+    // Throw exception if unable to connect to serial port
     if (!connection) {
-      System.err.println("Error: Unable to Connect to serial port");
-    } else {
-      while (input.equals("")) {
-        input = arduino.serialRead(10000);
-      }
+      arduino.closeConnection();
+      throw new UnableToConnectException();
     }
-    System.out.println("Received input: " + input);
-    input = input.trim();
-    arduino.closeConnection();
+    // otherwise, attempt to collect data, timeout if it has been over 10 seconds
+    else {
+      while (this.input.equals("")) {
+        input = arduino.serialRead();
+        if (input.equals("TIMEOUT")) {
+          arduino.closeConnection();
+          throw new ArduinoTimeOutException();
+        }
+      }
+      System.out.println("Received input: " + input);
+      input = input.trim();
+      arduino.closeConnection();
+    }
     return input;
   }
 }

@@ -1,20 +1,24 @@
 package edu.wpi.DapperDaemons.serial;
 
+import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UserNotAuthorizedException;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Handles RFID scan and determines validity */
 public class RFIDHandler {
 
-  private List<String> validUIDs; // TODO: Get this from a DAO (ask backend)
-  private SerialCOM reader;
-  private String portCOM;
+  private String COM;
+  private Employee user;
+  private List<String> UIDs; // TODO: Try to integrate with Backend
 
-  public RFIDHandler(String portCOM) {
-    reader = new SerialCOM();
-    validUIDs = new ArrayList<>();
-    validUIDs.add("354");
-    this.portCOM = portCOM;
+  public RFIDHandler(Employee user, String COM) {
+    this.user = user;
+    this.COM = COM;
+    this.UIDs = new ArrayList<String>();
+    this.UIDs.add("354");
   }
 
   /**
@@ -22,11 +26,15 @@ public class RFIDHandler {
    *
    * @return true if the scan was valid, false otherwise
    */
-  public boolean scan() {
-    String inputID = reader.readData(this.portCOM);
-    for (String uid : this.validUIDs) {
-      if (inputID.equals(uid)) return true;
+  public boolean scan()
+      throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException {
+    SerialCOM reader = new SerialCOM(this.COM);
+    String inputID;
+    if (!(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)))
+      throw new UserNotAuthorizedException(user.getEmployeeType());
+    else {
+      inputID = reader.readData();
+      return UIDs.contains(inputID);
     }
-    return false;
   }
 }

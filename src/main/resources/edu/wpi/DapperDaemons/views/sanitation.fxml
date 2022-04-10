@@ -182,7 +182,7 @@
                <left>
                   <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
+                        <JFXButton fx:id="goHome" onMouseClicked="#goHome" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -197,7 +197,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
+                        <JFXButton onAction="#switchToMedicine" onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -212,7 +212,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
+                        <JFXButton onAction="#switchToLabRequest" onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -227,7 +227,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
+                        <JFXButton onAction="#switchToMeal" onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -242,7 +242,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
+                        <JFXButton onAction="#switchToPatientTransport" onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -257,7 +257,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
+                        <JFXButton onAction="#switchToSanitation" onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -272,7 +272,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
+                        <JFXButton onAction="#switchToEquipment" onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -302,7 +302,12 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
+                        <JFXButton onAction="#switchToAboutUs" onMouseClicked="#switchToAboutUs" text=" ?   About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#quitProgram" onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -361,7 +366,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/Glyphs/exitWithBG.png" />
                                  </image>
@@ -412,6 +417,11 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </JFXButton>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
