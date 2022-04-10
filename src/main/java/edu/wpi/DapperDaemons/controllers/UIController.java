@@ -20,9 +20,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -32,6 +35,10 @@ import javafx.util.Duration;
 Contains methods needed for all UI pages
  */
 public abstract class UIController implements Initializable {
+
+  /* Variables for error messages */
+  @FXML private StackPane windowContents;
+  @FXML private VBox error;
 
   /* JFX Variable */
   @FXML private ImageView homeIcon;
@@ -53,7 +60,34 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
+
+    URL fileURL =
+        getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/views/errorMessage.fxml");
+    VBox message = null;
+    try {
+      error = FXMLLoader.load(fileURL);
+      error.setVisible(false);
+      error.setPickOnBounds(false);
+      windowContents.getChildren().add(error);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     menuSlider(slider, burg, burgBack);
+  }
+
+  @FXML
+  void showError(String errorMessage) {
+    error.setVisible(true);
+
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
   }
 
   @FXML
@@ -235,8 +269,6 @@ public abstract class UIController implements Initializable {
     return names;
   }
 
-
-
   protected void saveToCSV(TableObject type) {
     FileChooser fileSys = new FileChooser();
     Stage window = (Stage) homeIcon.getScene().getWindow();
@@ -248,8 +280,4 @@ public abstract class UIController implements Initializable {
       System.err.println("Unable to Save CSV of type: " + type);
     }
   }
-
-
-
-
 }
