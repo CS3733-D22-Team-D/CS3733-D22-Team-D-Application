@@ -3,16 +3,18 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -27,49 +29,257 @@
                   <Insets top="50.0" />
                </opaqueInsets>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="1630.0" prefWidth="200.0" style="-fx-border-color: transparent;" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="199.0" spacing="15.0">
                                  <children>
-                                    <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                                    <ToggleButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL2">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="floors" />
+                                       </toggleGroup>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL1" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L1" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L2" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L3" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="4" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="5" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="6" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="218.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="MECHANICAL 1" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M2" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="7" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="8" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="9" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="10" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="374.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="11" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="12" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="14" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="15" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
+                                    <ToggleButton layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="16" toggleGroup="$floors">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </ToggleButton>
                                  </children>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" top="15.0" />
+                                 </padding>
                               </VBox>
                            </content>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </ScrollPane>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
-                           <children>
-                              <Label text="Floor Name" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="23.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
-                           <children>
-                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/Glyphs/MapIcons/wrench.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/Glyphs/MapIcons/person.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/Glyphs/MapIcons/clipboard.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                      </children></VBox>
                </children>
