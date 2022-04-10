@@ -235,6 +235,8 @@ public abstract class UIController implements Initializable {
     return names;
   }
 
+
+
   protected void saveToCSV(TableObject type) {
     FileChooser fileSys = new FileChooser();
     Stage window = (Stage) homeIcon.getScene().getWindow();
@@ -246,4 +248,8 @@ public abstract class UIController implements Initializable {
       System.err.println("Unable to Save CSV of type: " + type);
     }
   }
+
+
+
+
 }
