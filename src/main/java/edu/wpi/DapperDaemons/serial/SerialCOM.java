@@ -1,8 +1,11 @@
 package edu.wpi.DapperDaemons.serial;
 
 import arduino.*;
+import com.fazecast.jSerialComm.SerialPort;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Handles interaction with Arduino */
 public class SerialCOM {
@@ -49,5 +52,20 @@ public class SerialCOM {
     System.out.println("Received input: " + input);
     input = input.trim();
     return input;
+  }
+
+  /**
+   * Obtains all available COM ports on a host computer
+   *
+   * @return a list of strings pertaining to all available COM ports
+   */
+  public List<String> getAvailableCOMs() {
+    List<String> available = new ArrayList<>();
+    SerialPort[] ports = SerialPort.getCommPorts();
+    for (SerialPort s : ports) {
+      available.add(s.getSystemPortName().trim());
+      System.out.println(s.getSystemPortName().trim());
+    }
+    return available;
   }
 }
