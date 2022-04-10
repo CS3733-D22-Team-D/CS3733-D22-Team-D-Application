@@ -38,7 +38,8 @@ public class SerialCOM {
     else {
       while (this.input.equals("")) {
         input = arduino.serialRead();
-        if (input.equals("TIMEOUT")) {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime == startTime + 10000) {
           arduino.closeConnection();
           throw new ArduinoTimeOutException();
         }

@@ -112,7 +112,10 @@ public class MealController extends UIController {
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      isAPatient = patient.getFirstName().equals(patientName.getText()); // TODO : This creates a NULL pointer exception
+      isAPatient =
+          patient
+              .getFirstName()
+              .equals(patientName.getText()); // TODO : This creates a NULL pointer exception
       if (isAPatient) {
 
         // request is formed correctly and the patient exists send it and check for clearance
