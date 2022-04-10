@@ -334,7 +334,7 @@ public class MinesweeperZN extends Application {
     VBox aboutBox = new VBox();
     aboutBox.setAlignment(Pos.TOP_LEFT);
     try {
-      InputStream in = ClassLoader.getSystemResourceAsStream("README.txt");
+      InputStream in = ClassLoader.getSystemResourceAsStream("wongSweeperREADME.txt");
       BufferedReader aboutReader = new BufferedReader(new InputStreamReader(in));
       List<Text> aboutTextArray = new ArrayList<>();
       String line;
