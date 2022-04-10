@@ -3,149 +3,176 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.BackendInfoController">
-   <children>
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox prefHeight="46.0" prefWidth="301.0">
-               <opaqueInsets>
-                  <Insets top="50.0" />
-               </opaqueInsets>
+              <HBox prefHeight="46.0" prefWidth="301.0">
+                  <children>
+                      <VBox prefHeight="542.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                           <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meet The Team">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                              <VBox maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="131.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="174.0" stroke="BLACK" strokeType="INSIDE" width="211.0">
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </Rectangle>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shaffath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label prefHeight="142.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <VBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                      </VBox>
+                  <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Us">
+                                             <font>
+                                                <Font name="System Bold" size="23.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please do not contact us.">
+                                             <VBox.margin>
+                                                <Insets top="40.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
+                                             <font>
+                                                <Font name="System Bold" size="23.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Today we ask you to defend our team's independence.We're a non-profit that depends on donations to stay online and thriving, but 98% of our readers don't give; they simply look the other way. If everyone who uses our app gave just a little, we could keep our team thriving for years to come. The price of a cup of coffee is all we ask." textAlignment="CENTER" wrapText="true">
+                                             <padding>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="Venmo: @Rosemaryshel">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <HBox.margin>
+                                    <Insets bottom="30.0" left="30.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  </children>
                <StackPane.margin>
-                  <Insets />
-               </StackPane.margin>
-               <padding>
                   <Insets top="50.0" />
-               </padding>
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="305.0" style="-fx-background-color: #4B5B81;">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Patients">
-                                       <font>
-                                          <Font name="System Bold" size="23.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <TableView fx:id="patientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="PatientID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="PatientFirst" prefWidth="75.0" text="First" />
-                                    <TableColumn fx:id="PatientLast" prefWidth="75.0" text="Last" />
-                                    <TableColumn fx:id="PatientDOB" prefWidth="75.0" text="DOB" />
-                                    <TableColumn fx:id="PatientBT" prefWidth="75.0" text="BloodType" />
-                                    <TableColumn fx:id="PatientRoomID" prefWidth="75.0" text="RoomID" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="305.0" style="-fx-background-color: #4B5B81;">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Locations">
-                                       <font>
-                                          <Font name="System Bold" size="23.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <TableView fx:id="locationsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="LocationID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="LocationX" prefWidth="75.0" text="X" />
-                                    <TableColumn fx:id="LocationY" prefWidth="75.0" text="Y" />
-                                    <TableColumn fx:id="LocationFloor" prefWidth="75.0" text="Floor" />
-                                    <TableColumn fx:id="LocationBuilding" prefWidth="75.0" text="Building" />
-                                    <TableColumn fx:id="LocationType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="LocationLongName" prefWidth="75.0" text="LongName" />
-                                    <TableColumn fx:id="LocationShortName" prefWidth="75.0" text="ShortName" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="305.0" style="-fx-background-color: #4B5B81;">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees">
-                                       <font>
-                                          <Font name="System Bold" size="23.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <TableView fx:id="employeesTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="EmployeeID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="EmployeeFirst" prefWidth="75.0" text="First" />
-                                    <TableColumn fx:id="EmployeeLast" prefWidth="75.0" text="Last" />
-                                    <TableColumn fx:id="EmployeeDOB" prefWidth="75.0" text="DOB" />
-                                    <TableColumn fx:id="EmployeeType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="EmployeeClearance" prefWidth="75.0" text="Clearance" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="305.0" style="-fx-background-color: #4B5B81;">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment">
-                                       <font>
-                                          <Font name="System Bold" size="23.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <TableView fx:id="equipmentTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="EquipmentID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="EquipmentName" prefWidth="75.0" text="Name" />
-                                    <TableColumn fx:id="EquipmentType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="EquipmentSerialNum" prefWidth="75.0" text="SerialNum" />
-                                    <TableColumn fx:id="EquipmentCleanStatus" prefWidth="75.0" text="CleanStatus" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-               </children>
+               </StackPane.margin>
             </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
@@ -349,7 +376,7 @@
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchToDBDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#goHomeDark" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -371,7 +398,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Backend Info" HBox.hgrow="ALWAYS">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="28.0" />
                                  </font>
@@ -414,5 +441,5 @@
             </BorderPane>
          </children>
       </StackPane>
-   </children>
+    </children>
 </VBox>
