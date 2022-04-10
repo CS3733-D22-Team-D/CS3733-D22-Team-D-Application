@@ -34,8 +34,7 @@ public abstract class UIController implements Initializable {
 
   /* JFX Variable */
   @FXML private ImageView homeIcon;
-  @FXML private JFXHamburger burg;
-  @FXML private JFXHamburger burgBack;
+
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
 
@@ -52,7 +51,7 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
-    menuSlider(slider, burg, burgBack);
+    //    menuSlider(slider, burg, burgBack);
   }
 
   @FXML

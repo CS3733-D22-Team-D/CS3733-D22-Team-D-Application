@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -13,17 +14,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /** Controller Class for interactive Map Page */
 public class MapController extends UIController implements Initializable {
@@ -35,6 +41,24 @@ public class MapController extends UIController implements Initializable {
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
+
+  /* Map Filter */
+  @FXML private HBox mapFilter;
+  @FXML private JFXHamburger burg;
+  @FXML private JFXHamburger burgBack;
+  @FXML private ToggleButton deptTG;
+  @FXML private ToggleButton dirtTG;
+  @FXML private ToggleButton elevTG;
+  @FXML private ToggleButton exitTG;
+  @FXML private ToggleButton hallTG;
+  @FXML private ToggleButton infoTG;
+  @FXML private ToggleButton labsTG;
+  @FXML private ToggleButton patiTG;
+  @FXML private ToggleButton restTG;
+  @FXML private ToggleButton retlTG;
+  @FXML private ToggleButton servTG;
+  @FXML private ToggleButton staiTG;
+  @FXML private ToggleButton storTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -103,7 +127,7 @@ public class MapController extends UIController implements Initializable {
     maps.setMap("1");
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
-    glyphs.setFloorFilter("1");
+    //    glyphs.setFloorFilter("1");
 
     this.positions = new PositionHandler(origPositions);
 
@@ -130,6 +154,8 @@ public class MapController extends UIController implements Initializable {
     // searchReqLongName.setOnAction(e -> onFilterRequestType());
     closeCreate();
     closeRoom();
+
+    filterSlider(mapFilter, burg, burgBack);
   }
 
   /**
@@ -336,69 +362,161 @@ public class MapController extends UIController implements Initializable {
     glyphs.setFloorFilter("L2");
   }
 
-  @FXML
-  public void filterDept() {
-    glyphs.setNodeTypeFilter("DEPT");
+  static void filterSlider(HBox mapFilter, JFXHamburger burg, JFXHamburger burgBack) {
+    mapFilter.setTranslateX(160);
+    burg.setOnMouseClicked(
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(mapFilter);
+
+          slide.setToX(0);
+          slide.play();
+
+          mapFilter.setTranslateX(160);
+
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(false);
+                burgBack.setVisible(true);
+              });
+        });
+
+    burgBack.setOnMouseClicked(
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(mapFilter);
+
+          slide.setToX(160);
+          slide.play();
+
+          mapFilter.setTranslateX(0);
+
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(true);
+                burgBack.setVisible(false);
+              });
+        });
   }
 
   @FXML
-  public void filterExit() {
-    glyphs.setNodeTypeFilter("EXIT");
+  void deptToggle(ActionEvent event) {
+    if (deptTG.isSelected()) {
+      glyphs.addNodeTypeFilter("DEPT");
+    } else {
+      glyphs.removeNodeTypeFilter("DEPT");
+    }
   }
 
   @FXML
-  public void filterHall() {
-    glyphs.setNodeTypeFilter("HALL");
+  void dirtToggle(ActionEvent event) {
+    if (dirtTG.isSelected()) {
+      glyphs.addNodeTypeFilter("DIRT");
+    } else {
+      glyphs.removeNodeTypeFilter("DIRT");
+    }
   }
 
   @FXML
-  public void filterInfo() {
-    glyphs.setNodeTypeFilter("INFO");
+  void elevToggle(ActionEvent event) {
+    if (elevTG.isSelected()) {
+      glyphs.addNodeTypeFilter("ELEV");
+    } else {
+      glyphs.removeNodeTypeFilter("ELEV");
+    }
   }
 
   @FXML
-  public void filterLabs() {
-    glyphs.setNodeTypeFilter("LABS");
+  void exitToggle(ActionEvent event) {
+    if (exitTG.isSelected()) {
+      glyphs.addNodeTypeFilter("EXIT");
+    } else {
+      glyphs.removeNodeTypeFilter("EXIT");
+    }
   }
 
   @FXML
-  public void filterToilet() {
-    glyphs.setNodeTypeFilter("BATH");
-    glyphs.addNodeTypeFilter("REST");
+  void hallToggle(ActionEvent event) {
+    if (hallTG.isSelected()) {
+      glyphs.addNodeTypeFilter("HALL");
+    } else {
+      glyphs.removeNodeTypeFilter("HALL");
+    }
   }
 
   @FXML
-  public void filterRetl() {
-    glyphs.setNodeTypeFilter("RETL");
+  void infoToggle(ActionEvent event) {
+    if (infoTG.isSelected()) {
+      glyphs.addNodeTypeFilter("INFO");
+    } else {
+      glyphs.removeNodeTypeFilter("INFO");
+    }
   }
 
   @FXML
-  public void filterServ() {
-    glyphs.setNodeTypeFilter("SERV");
+  void labsToggle(ActionEvent event) {
+    if (labsTG.isSelected()) {
+      glyphs.addNodeTypeFilter("LABS");
+    } else {
+      glyphs.removeNodeTypeFilter("LABS");
+    }
   }
 
   @FXML
-  public void filterStai() {
-    glyphs.setNodeTypeFilter("STAI");
+  void patiToggle(ActionEvent event) {
+    if (patiTG.isSelected()) {
+      glyphs.addNodeTypeFilter("PATI");
+    } else {
+      glyphs.removeNodeTypeFilter("PATI");
+    }
   }
 
   @FXML
-  public void filterElev() {
-    glyphs.setNodeTypeFilter("ELEV");
+  void restToggle(ActionEvent event) {
+    if (restTG.isSelected()) {
+      glyphs.addNodeTypeFilter("REST");
+      glyphs.addNodeTypeFilter("BATH");
+    } else {
+      glyphs.removeNodeTypeFilter("REST");
+      glyphs.addNodeTypeFilter("BATH");
+    }
   }
 
   @FXML
-  public void filterStor() {
-    glyphs.setNodeTypeFilter("STOR");
+  void retlToggle(ActionEvent event) {
+    if (retlTG.isSelected()) {
+      glyphs.addNodeTypeFilter("RETL");
+    } else {
+      glyphs.removeNodeTypeFilter("RETL");
+    }
   }
 
   @FXML
-  public void filterPati() {
-    glyphs.setNodeTypeFilter("PATI");
+  void servToggle(ActionEvent event) {
+    if (servTG.isSelected()) {
+      glyphs.addNodeTypeFilter("SERV");
+    } else {
+      glyphs.removeNodeTypeFilter("SERV");
+    }
   }
 
   @FXML
-  public void filterDirt() {
-    glyphs.setNodeTypeFilter("DIRT");
+  void staiToggle(ActionEvent event) {
+    if (staiTG.isSelected()) {
+      glyphs.addNodeTypeFilter("STAI");
+    } else {
+      glyphs.removeNodeTypeFilter("STAI");
+    }
+  }
+
+  @FXML
+  void storToggle(ActionEvent event) {
+    if (storTG.isSelected()) {
+      glyphs.addNodeTypeFilter("STOR");
+    } else {
+      glyphs.removeNodeTypeFilter("STOR");
+    }
   }
 }

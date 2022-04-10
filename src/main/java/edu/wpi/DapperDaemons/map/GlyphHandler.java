@@ -254,6 +254,11 @@ public class GlyphHandler {
     filter();
   }
 
+  public void removeNodeTypeFilter(String nodeTypeFilter) {
+    this.nodeTypeFilter.remove(nodeTypeFilter);
+    filter();
+  }
+
   public void addLongNameFilter(String longNameFilter) {
     this.longNameFilter.add(longNameFilter);
     filter();

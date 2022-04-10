@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -26,7 +27,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="848.0" prefWidth="1091.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -40,8 +41,10 @@
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
-                        <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
-                        <AnchorPane fx:id="pinPane1" layoutX="10.0" layoutY="10.0" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane fx:id="pinPane1" layoutX="880.0" layoutY="-104.0" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
+                           </children></AnchorPane>
                      </children>
                   </StackPane>
                </content>
@@ -312,71 +315,6 @@
                      </children>
                   </HBox>
                </top>
-               <right>
-                  <VBox alignment="CENTER_RIGHT" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../assets/buttons.css" text="5" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="4" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="3" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 2" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 1" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="L1" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" stylesheets="@../assets/buttons.css" text="L2" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                           <padding>
-                              <Insets right="15.0" />
-                           </padding>
-                        </VBox>
-                        <HBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomIn" style="-fx-background-color: #535353; -fx-background-radius: 7.5 0 0 7.5;" stylesheets="@../assets/buttons.css" text="+" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Button>
-                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomOut" style="-fx-background-color: #535353; -fx-background-radius: 0 7.5 7.5 0;" stylesheets="@../assets/buttons.css" text="-" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                           <padding>
-                              <Insets bottom="15.0" right="15.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </right>
                <center>
                   <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -686,28 +624,292 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button id="defaultButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreate" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Create" textFill="WHITE">
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="22.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                        </VBox>
                      </children>
                      <padding>
                         <Insets left="15.0" top="15.0" />
                      </padding>
                   </HBox>
                </center>
+               <right>
+                  <HBox fx:id="mapFilter" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT" minWidth="-Infinity" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../assets/buttons.css" text="5" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="4" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="3" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 2" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 1" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="L1" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" stylesheets="@../assets/buttons.css" text="L2" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets right="15.0" />
+                                 </padding>
+                              </VBox>
+                              <HBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Button id="defaultButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Create" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomIn" style="-fx-background-color: #535353; -fx-background-radius: 7.5 0 0 7.5;" stylesheets="@../assets/buttons.css" text="+" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomOut" style="-fx-background-color: #535353; -fx-background-radius: 0 7.5 7.5 0;" stylesheets="@../assets/buttons.css" text="-" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" right="15.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <ScrollPane hbarPolicy="NEVER" hmax="0.0" minWidth="-Infinity" pannable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #fffefe;" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 0 2; -fx-background-color: #FFFEFE;">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/zoom.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="0.43" />
+                                             </effect>
+                                          </ImageView>
+                                          <JFXComboBox editable="true" labelFloat="true" promptText="Location/Request" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="17.0" right="17.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="200.0" prefWidth="220.0">
+                                       <children>
+                                          <ToggleButton fx:id="infoTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#infoToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Information Desk">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/infoDesk.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="retlTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#retlToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Retail">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/retail.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="servTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#servToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Services">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/service.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="staiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#staiToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Stairs">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/stairs.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="elevTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#elevToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Elevators">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/elevator.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="restTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#restToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Restrooms">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/toilet.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="dirtTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirtToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Dirty Equipment Storage">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/dirty.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="storTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#storToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Storage">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/storage.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="patiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#patiToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Patient Rooms">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/patientRoom.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="deptTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#deptToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Departments">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/dept.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="hallTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#hallToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Hallways">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/hall.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="labsTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#labsToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Labs">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/laboratory.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="exitTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Exits">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/MapIcons/exit.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="-0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </ToggleButton>
+                                          <Button alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Get Directions">
+                                             <graphic>
+                                                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/Glyphs/route_map.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <ColorAdjust brightness="0.43" />
+                                                   </effect>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+               </right>
             </BorderPane>
          </children>
       </StackPane>
