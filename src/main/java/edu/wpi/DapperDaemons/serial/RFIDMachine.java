@@ -17,11 +17,9 @@ public class RFIDMachine {
   }
 
   private Employee employee;
-  private String COM;
 
-  public RFIDMachine(Employee employee, String COM) {
+  public RFIDMachine(Employee employee) {
     this.employee = employee;
-    this.COM = COM;
   }
 
   /**
@@ -31,7 +29,7 @@ public class RFIDMachine {
    * @return a login state representing the result of the attempt
    */
   public LoginState login() {
-    RFIDHandler handler = new RFIDHandler(this.employee, this.COM);
+    RFIDHandler handler = new RFIDHandler(this.employee);
     boolean loginAttempt;
     try {
       loginAttempt = handler.scan();

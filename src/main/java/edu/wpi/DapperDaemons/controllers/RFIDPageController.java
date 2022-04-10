@@ -31,8 +31,8 @@ public class RFIDPageController extends UIController {
   public void loginRFID() throws IOException {
     RFIDMachine rfid =
         new RFIDMachine(
-            new Employee("RFID", "Test", "Jan2 2002", Employee.EmployeeType.ADMINISTRATOR, 5),
-            "COM4");
+            new Employee("RFID", "Test", "Jan2 2002",
+                    Employee.EmployeeType.ADMINISTRATOR, 5));
     RFIDMachine.LoginState state = rfid.login();
     if (state.equals(RFIDMachine.LoginState.SUCCESS)) {
       sLabel.setText(
