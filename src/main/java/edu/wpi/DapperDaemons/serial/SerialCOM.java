@@ -37,17 +37,17 @@ public class SerialCOM {
     // otherwise, attempt to collect data, timeout if it has been over 10 seconds
     else {
       while (this.input.equals("")) {
-        input = arduino.serialRead();
+        input = arduino.serialRead(5);
         long currentTime = System.currentTimeMillis();
-        if (currentTime == startTime + 10000) {
+        if (currentTime >= startTime + 10000) {
           arduino.closeConnection();
           throw new ArduinoTimeOutException();
         }
       }
-      System.out.println("Received input: " + input);
-      input = input.trim();
-      arduino.closeConnection();
     }
+    arduino.closeConnection();
+    System.out.println("Received input: " + input);
+    input = input.trim();
     return input;
   }
 }

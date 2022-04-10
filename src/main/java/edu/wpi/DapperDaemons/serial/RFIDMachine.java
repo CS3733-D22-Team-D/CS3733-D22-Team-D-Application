@@ -47,4 +47,8 @@ public class RFIDMachine {
     if (loginAttempt) return LoginState.SUCCESS;
     else return LoginState.INVALIDUSER;
   }
+
+  public Employee getEmployee() {
+    return this.employee;
+  }
 }
