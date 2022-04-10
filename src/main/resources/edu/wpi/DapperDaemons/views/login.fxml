@@ -116,6 +116,43 @@
             </HBox>
             <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0">
                <children>
+                  <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <VBox fx:id="TwoFactor" alignment="CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" visible="false" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" spacing="13.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                                 <children>
+                                    <Label pickOnBounds="false" text="Please enter your Two-Factor Authentication Code:" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="code" pickOnBounds="false" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0; -fx-border-color: #646564; -fx-border-radius: 7.5;">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Button id="defaultButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onMouseClicked="#authenticate" pickOnBounds="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
                   <ImageView fitHeight="75.0" fitWidth="40.0" preserveRatio="true">
                      <image>
                         <Image url="@../assets/BrighamLogo.png" />
@@ -126,43 +163,6 @@
                   </ImageView>
                </children>
             </VBox>
-            <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <VBox fx:id="TwoFactor" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" spacing="13.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
-                           <children>
-                              <Label text="Please enter your Two-Factor Authentication Code:" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0; -fx-border-color: #646564; -fx-border-radius: 7.5;">
-                                 <VBox.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <Button id="defaultButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                  </VBox>
-               </center>
-            </BorderPane>
          </children>
       </StackPane>
    </children>

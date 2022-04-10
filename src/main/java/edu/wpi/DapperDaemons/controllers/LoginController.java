@@ -5,7 +5,6 @@ import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import javafx.fxml.FXML;
@@ -24,12 +23,15 @@ public class LoginController {
   @FXML private TextField username;
   @FXML private PasswordField password;
   @FXML private VBox sceneBox;
+  @FXML private VBox TwoFactor;
+  @FXML private TextField code;
 
   DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
   @FXML
   void login() throws Exception {
+    System.out.println("Login");
     if (username.getText().equals("") && password.getText().equals("")) {
       switchScene("default.fxml", 635, 510);
       return;
@@ -39,25 +41,29 @@ public class LoginController {
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
-
+      TwoFactor.setVisible(true);
     }
   }
 
   @FXML
-  private boolean authenticate(Account acc) throws Exception {
-    Authentication.sendAuthCode(acc);
-    if(authenticate(acc)) {
-      List<Employee> user =
-              employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
-      if (user.size() == 1) {
-        SecurityController.setUser(user.get(0));
-        switchScene("default.fxml", 635, 510);
-      } else {
-        throw new Exception(
-                "More than one user with the same username?"); // theoretically this is unreachable
+  void authenticate() throws Exception {
+    Authentication.sendAuthCode(accountDAO.get(username.getText()));
+    try {
+      int authCode = Integer.valueOf(code.getText());
+      if (Authentication.authenticate(authCode)) {
+        List<Employee> user =
+            employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
+        if (user.size() == 1) {
+          SecurityController.setUser(user.get(0));
+          switchScene("default.fxml", 635, 510);
+        } else {
+          throw new Exception(
+              "More than one user with the same username?"); // theoretically this is unreachable
+        }
       }
+    } catch (NumberFormatException e) {
+      System.out.println("int was not entered");
     }
-    return true;
   }
 
   @FXML
