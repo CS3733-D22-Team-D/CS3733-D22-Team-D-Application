@@ -41,6 +41,7 @@ public class RFIDPageController extends UIController {
               + " "
               + rfid.getEmployee().getLastName());
       sButton.setVisible(false);
+      backButton.setVisible(false);
       continueButton.setVisible(true);
     } else if (state.equals(RFIDMachine.LoginState.INVALIDUSER)) {
       sLabel.setText("Access Denied");
@@ -49,6 +50,7 @@ public class RFIDPageController extends UIController {
     } else if (state.equals(RFIDMachine.LoginState.TIMEOUT)) {
       sLabel.setText("RFID Scan Timeout: Please Try Again");
       backButton.setVisible(true);
+      continueButton.setVisible(false);
     } else if (state.equals(RFIDMachine.LoginState.UNABLETOCONNECT)) {
       sLabel.setText(
           "Unable to Connect to RFID Sensor"); // TODO: Get list of COM Ports to attempt to
