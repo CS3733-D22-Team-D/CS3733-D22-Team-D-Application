@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UserNotAuthorizedException;
+import java.security.NoSuchAlgorithmException;
 
 /** Handles login of user using RFID, to interact directly with UI */
 public class RFIDMachine {
@@ -42,6 +43,9 @@ public class RFIDMachine {
       return LoginState.TIMEOUT;
     } catch (UnableToConnectException e) {
       System.err.println("ERROR: UNABLE TO CONNECT TO RFID SCANNER");
+      return LoginState.UNABLETOCONNECT;
+    } catch (NoSuchAlgorithmException e) {
+      System.err.println("Unable to Hash UID");
       return LoginState.UNABLETOCONNECT;
     }
     if (loginAttempt) return LoginState.SUCCESS;
