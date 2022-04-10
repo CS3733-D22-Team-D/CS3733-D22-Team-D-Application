@@ -112,7 +112,7 @@
                                     </VBox>
                                     <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button mnemonicParsing="false" onMouseClicked="#login" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Login" textFill="WHITE">
+                                          <Button id="defaultButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onMouseClicked="#login" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Login" textFill="WHITE">
                                              <VBox.margin>
                                                 <Insets bottom="35.0" />
                                              </VBox.margin>
