@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -120,35 +121,51 @@
                      <center>
                         <VBox fx:id="TwoFactor" alignment="CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" visible="false" BorderPane.alignment="CENTER">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" spacing="13.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <Label pickOnBounds="false" text="Please enter your Two-Factor Authentication Code:" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="code" pickOnBounds="false" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0; -fx-border-color: #646564; -fx-border-radius: 7.5;">
-                                       <VBox.margin>
-                                          <Insets left="20.0" right="20.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Button id="defaultButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onMouseClicked="#authenticate" pickOnBounds="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="20.0" />
-                                       </VBox.margin>
-                                    </Button>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" spacing="13.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                                       <children>
+                                          <Label pickOnBounds="false" text="Please enter your Two-Factor Authentication Code:" textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="code" pickOnBounds="false" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0; -fx-border-color: #646564; -fx-border-radius: 7.5;">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <Button id="defaultButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onMouseClicked="#authenticate" pickOnBounds="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </VBox>
+                                    <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" onMouseClicked="#hidePopup" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/error.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="-0.43" />
+                                             </effect>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
                                  </children>
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </VBox>
+                              </StackPane>
                            </children>
                         </VBox>
                      </center>

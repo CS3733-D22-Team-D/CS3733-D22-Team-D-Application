@@ -46,6 +46,11 @@ public class LoginController {
   }
 
   @FXML
+  void hidePopup() {
+    TwoFactor.setVisible(false);
+  }
+
+  @FXML
   void authenticate() throws Exception {
     try {
       int authCode = Integer.valueOf(code.getText());
