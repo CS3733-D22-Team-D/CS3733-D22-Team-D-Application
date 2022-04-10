@@ -112,7 +112,7 @@ public class MealController extends UIController {
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      isAPatient = patient.getFirstName().equals(patientName.getText());
+      isAPatient = patient.getFirstName().equals(patientName.getText()); // TODO : This creates a NULL pointer exception
       if (isAPatient) {
 
         // request is formed correctly and the patient exists send it and check for clearance
@@ -132,18 +132,15 @@ public class MealController extends UIController {
                     dessert));
 
         if (!hadClearance) {
-
-          // TODO send error message that the user does not have proper clearance
+          errorLabel.setText("Error: Access Denied");
         }
 
       } else {
-        // TODO send error message that the patient doesnt exist
-
+        errorLabel.setText("Error: Patient Does Not Exist");
       }
 
     } else {
-      // TODO display error message that not all fields are filled;
-
+      errorLabel.setText("Error: One or More Fields were left empty");
     }
     onClear();
   }
