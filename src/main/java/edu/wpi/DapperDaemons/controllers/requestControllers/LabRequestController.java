@@ -65,19 +65,20 @@ public class LabRequestController extends UIController {
 
   @FXML
   public void onSubmitClicked() {
-    Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
-    String roomID = "";
-    String requesterID = SecurityController.getUser().getNodeID();
-    String assigneeID = "null";
-    String patientID =
-        patientName.getText()
-            + patientLastName.getText()
-            + patientDOB.getValue().getMonthValue()
-            + patientDOB.getValue().getDayOfMonth()
-            + patientDOB.getValue().getYear();
-    LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
-    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
     if (allItemsFilled()) {
+      Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
+      String roomID = "";
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assigneeID = "null";
+      String patientID =
+          patientName.getText()
+              + patientLastName.getText()
+              + patientDOB.getValue().getMonthValue()
+              + patientDOB.getValue().getDayOfMonth()
+              + patientDOB.getValue().getYear();
+      LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
+      Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
       // Check if the patient info points to a real patient
       boolean isAPatient = false;
@@ -87,7 +88,11 @@ public class LabRequestController extends UIController {
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      isAPatient = patient.getFirstName().equals(patientName.getText());
+      try {
+        isAPatient = patient.getFirstName().equals(patientName.getText());
+      } catch (NullPointerException e) {
+        e.printStackTrace();
+      }
       if (isAPatient) {
         roomID = patient.getLocationID();
 
@@ -97,14 +102,18 @@ public class LabRequestController extends UIController {
                     priority, roomID, requesterID, assigneeID, patientID, labType, status));
 
         if (!hadClearance) {
-          // TODO throw error saying that the user does not have clearance yada yada
+          //  throw error saying that the user does not have clearance yada yada
+
+          showError("You do not have permission to do this.");
         }
 
       } else {
-        // TODO throw error saying that the patient does not exist
+        // throw error saying that the patient does not exist
+        showError("Could not find a patient that matches.");
       }
     } else {
-      // TODO throw error saying one or more fields are empty
+      // throws error saying that all fields must be filled
+      showError("All fields must be filled.");
     }
     onClearClicked();
   }

@@ -61,25 +61,24 @@ public abstract class UIController implements Initializable {
       this.locations = new ArrayList<>();
     }
 
-    URL fileURL =
-        getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/views/errorMessage.fxml");
-    VBox message = null;
     try {
-      error = FXMLLoader.load(fileURL);
-      error.setVisible(false);
-      error.setPickOnBounds(false);
-      windowContents.getChildren().add(error);
+      error =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    error.setVisible(false);
+    error.setPickOnBounds(false);
+    windowContents.getChildren().add(error);
 
     menuSlider(slider, burg, burgBack);
   }
 
   @FXML
-  void showError(String errorMessage) {
+  protected void showError(String errorMessage) {
     error.setVisible(true);
-
     Node nodeOut = error.getChildren().get(1);
     if (nodeOut instanceof VBox) {
       for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
@@ -261,7 +260,7 @@ public abstract class UIController implements Initializable {
    *
    * @return a list of long names
    */
-  public List<String> getAllLongNames() {
+  protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<String>();
     for (Location loc : this.locations) {
       names.add(loc.getLongName());

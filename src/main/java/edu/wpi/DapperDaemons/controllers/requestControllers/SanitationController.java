@@ -71,13 +71,15 @@ public class SanitationController extends UIController {
   /** What happens when the submit button is clicked * */
   @FXML
   public void onSubmitClicked() {
-    Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
-    String roomID = locationBox.getValue();
-    String requesterID = SecurityController.getUser().getNodeID();
-    String assigneeID = "null";
-    String sanitationType = sanitationBox.getValue().toString();
-    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
     if (allFieldsFilled()) {
+      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      String roomID = locationBox.getValue();
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assigneeID = "null";
+      String sanitationType = sanitationBox.getValue().toString();
+      Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
       /*Make sure the room exists*/
       boolean isALocation = false;
       Location location = new Location();
@@ -99,13 +101,16 @@ public class SanitationController extends UIController {
                     priority, roomID, requesterID, assigneeID, sanitationType, status));
 
         if (!hadClearance) {
-          // TODO throw error saying that the user does not have permission to make the request.
+          // throw error saying that the user does not have permission to make the request.
+          showError("You do not have permission to do this.");
         }
       } else {
-        // TODO throw an error that the location does not exist
+        // throw an error that the location does not exist
+        showError("A room with that name does not exist.");
       }
     } else {
-      // TODO throw error message that all fields need to be filled
+      //  throw error message that all fields need to be filled
+      showError("All fields must be filled.");
     }
     // clear the fields
     onClearClicked();

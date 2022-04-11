@@ -1,13 +1,12 @@
 package edu.wpi.DapperDaemons.controllers.requestControllers;
 
-import edu.wpi.DapperDaemons.controllers.UIController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class ErrorController extends UIController {
+public class ErrorController {
   /*ErrorPopup*/
   @FXML VBox errorPopup;
 
