@@ -2,10 +2,15 @@ package edu.wpi.DapperDaemons.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class AccountTest {
@@ -14,6 +19,15 @@ class AccountTest {
   void printSHA() throws NoSuchAlgorithmException {
     String password = "345";
     System.out.println(toHexString(getSHA(password)));
+  }
+
+  @Test
+  void testAccountFilter() throws SQLException, IOException {
+    DAOPouch.init();
+    DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+    DAO<Account> accountDAO = DAOPouch.getAccountDAO();
+    List<Employee> user = employeeDAO.filter(1, accountDAO.get("tkevans").getAttribute(2));
+    System.out.println(user);
   }
 
   @Test

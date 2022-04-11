@@ -26,9 +26,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -53,13 +56,19 @@ public abstract class UIController implements Initializable {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private Text accountName;
+  @FXML Circle profilePic;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    profilePic.setFill(
+        new ImagePattern(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/easterEgg.gif"))));
     DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
     try {
