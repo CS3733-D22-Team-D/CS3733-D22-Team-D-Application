@@ -1,45 +1,27 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 
-public class LoginController implements Initializable {
-  /* Variables for error messages */
-  @FXML private StackPane windowContents;
-  @FXML private VBox error;
+public class LoginController extends AppController {
 
   @FXML private TextField username;
   @FXML private PasswordField password;
-  @FXML private VBox sceneBox;
   @FXML private VBox TwoFactor;
   @FXML private TextField code;
 
@@ -50,13 +32,7 @@ public class LoginController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    try {
-      error =
-          FXMLLoader.load(
-              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    super.initialize(location, resources);
 
     code.setOnKeyPressed(
         e -> {
@@ -66,28 +42,6 @@ public class LoginController implements Initializable {
             ex.printStackTrace();
           }
         });
-    error.setVisible(false);
-    error.setPickOnBounds(false);
-    HBox errorContainer = new HBox();
-    errorContainer.setPickOnBounds(false);
-    windowContents.getChildren().add(errorContainer);
-    errorContainer.getChildren().add(error);
-    errorContainer.setAlignment(Pos.TOP_CENTER);
-    errorContainer.setPadding(new Insets(20, 20, 20, 20));
-  }
-
-  // showing an error message
-  @FXML
-  protected void showError(String errorMessage) {
-    error.setVisible(true);
-    Node nodeOut = error.getChildren().get(1);
-    if (nodeOut instanceof VBox) {
-      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
-        if (nodeIn instanceof Label) {
-          ((Label) nodeIn).setText(errorMessage);
-        }
-      }
-    }
   }
 
   @FXML
@@ -188,39 +142,5 @@ public class LoginController implements Initializable {
     if (event.getCode().equals(KeyCode.ENTER)) {
       authenticate();
     }
-  }
-
-  protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) username.getScene().getWindow();
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-
-    double width = sceneBox.getPrefWidth();
-    double height = sceneBox.getPrefHeight();
-    window.setScene(new Scene(root));
-    sceneBox.setPrefWidth(width);
-    sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
-    window.setHeight(window.getHeight());
-  }
-
-  @FXML
-  public void quitProgram() {
-    Stage window = (Stage) username.getScene().getWindow();
-    //    try {
-    //      DAO<Location> closer = DAOPouch.getLocationDAO();
-    //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
-    //      closer.save("TowerLocationsSave.csv");
-    //      closer2.save("MedEquipReqSave.csv");
-    //      System.out.println("Saving CSV Files");
-    //    } catch (Exception e) {
-    //      e.printStackTrace();
-    //    }
-    csvSaver.saveAll();
-    window.close();
-    Platform.exit();
-    System.exit(0);
   }
 }
