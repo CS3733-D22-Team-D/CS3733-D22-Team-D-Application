@@ -23,4 +23,7 @@ public interface Request {
 
   /** @return whether or not this is a request that requires things to be moved */
   public boolean requiresTransport();
+
+  /** @return roomID of a given request */
+  public String getRoomID();
 }

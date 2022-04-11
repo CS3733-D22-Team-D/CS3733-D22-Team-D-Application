@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -33,43 +34,14 @@
                <content>
                   <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0">
                      <children>
-                        <ImageView fx:id="mapFloorL2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel2.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapFloorL1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/00_thelowerlevel1.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor1" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/01_thefirstfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor2" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/02_thesecondfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor3" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/03_thethirdfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor4" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/04_thefourthfloor.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="mapFloor5" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Maps/05_thefifthfloor.png" />
-                           </image>
-                        </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane fx:id="pinPane1" layoutX="10.0" layoutY="10.0" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </content>
@@ -78,7 +50,7 @@
                <left>
                   <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#goHome" stylesheets="@../assets/buttons.css" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -93,7 +65,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMedicine" stylesheets="@../assets/buttons.css" text="Medication Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -108,7 +80,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToLabRequest" stylesheets="@../assets/buttons.css" text="Lab Request" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -123,7 +95,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMeal" stylesheets="@../assets/buttons.css" text="Meal Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -138,7 +110,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -153,7 +125,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToSanitation" stylesheets="@../assets/buttons.css" text="Sanitation Service" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -168,7 +140,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToEquipment" stylesheets="@../assets/buttons.css" text="Equipment Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -183,7 +155,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#switchToMap" onMouseClicked="#switchToMap" text="Map" textFill="WHITE">
+                        <JFXButton id="slider" onAction="#switchToMap" onMouseClicked="#switchToMap" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -198,7 +170,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -228,6 +200,9 @@
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                            <HBox.margin>
@@ -242,6 +217,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                     <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
                                        <effect>
@@ -264,6 +242,9 @@
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                         </HBox>
@@ -275,6 +256,9 @@
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </children>
                               </StackPane>
@@ -333,37 +317,37 @@
                      <children>
                         <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 7.5 7.5 0 0;" text="5" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../assets/buttons.css" text="5" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text="4" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="4" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text="3" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="3" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text=" 2" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 2" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text=" 1" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 1" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0;" text="L1" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="L1" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0 0 7.5 7.5;" text="L2" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" stylesheets="@../assets/buttons.css" text="L2" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -375,12 +359,12 @@
                         </VBox>
                         <HBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#zoomIn" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 7.5 0 0 7.5;" text="+" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomIn" style="-fx-background-color: #535353; -fx-background-radius: 7.5 0 0 7.5;" stylesheets="@../assets/buttons.css" text="+" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="19.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onMouseClicked="#zoomOut" style="-fx-background-color: #535353; -fx-opacity: .7; -fx-background-radius: 0 7.5 7.5 0;" text="-" textFill="WHITE">
+                              <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#zoomOut" style="-fx-background-color: #535353; -fx-background-radius: 0 7.5 7.5 0;" stylesheets="@../assets/buttons.css" text="-" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="19.0" />
                                  </font>
@@ -484,7 +468,7 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" onMouseClicked="#onConfirmChanges" style="-fx-background-color: #80A1C1; -fx-background-radius: 4;" text="Confirm Changes" textFill="WHITE">
+                                                <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onConfirmChanges" style="-fx-background-color: #80A1C1;" stylesheets="@../assets/buttons.css" text="Confirm Changes" textFill="WHITE">
                                                    <effect>
                                                       <DropShadow>
                                                          <color>
@@ -503,7 +487,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Button mnemonicParsing="false" onMouseClicked="#onDeleteLocation" style="-fx-background-color: #eb4034; -fx-background-radius: 5;" text="Delete" textFill="WHITE">
+                                                <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onDeleteLocation" style="-fx-background-color: #eb4034;" stylesheets="@../assets/buttons.css" text="Delete" textFill="WHITE">
                                                    <effect>
                                                       <DropShadow>
                                                          <color>
@@ -515,7 +499,7 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onMouseClicked="#closeRoom" style="-fx-background-color: #C1C5D4; -fx-background-radius: 5;" text="Close" textFill="WHITE">
+                                                <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#closeRoom" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Close" textFill="WHITE">
                                                    <effect>
                                                       <DropShadow>
                                                          <color>
@@ -591,7 +575,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="createBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5;">
+                        <VBox fx:id="createBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5; -fx-translate-x: -260;">
                            <children>
                               <Label fx:id="createTitle" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="230.0" style="-fx-background-color: #4B5b81; -fx-background-radius: 7.5 7.5 0 0;" text="Create Location" textFill="WHITE">
                                  <font>
@@ -643,7 +627,7 @@
                                           <Insets bottom="5.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <JFXComboBox fx:id="typeIn" editable="true" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." style="-jfx-focus-color: #aaaaaa; -jfx-unfocus-color: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-background-color: #f1f0f0; -fx-background-radius: 7.5 7.5 0 0;" visibleRowCount="3">
+                                    <JFXComboBox id="jButton" fx:id="typeIn" editable="true" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." stylesheets="@../assets/buttons.css" visibleRowCount="3">
                                        <VBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </VBox.margin>
@@ -664,7 +648,7 @@
                               </HBox>
                               <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#closeCreate" style="-fx-background-color: #C1C5D4; -fx-background-radius: 5;" text="Cancel" textFill="WHITE">
+                                    <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#closeCreate" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Cancel" textFill="WHITE">
                                        <effect>
                                           <DropShadow>
                                              <color>
@@ -676,7 +660,7 @@
                                           <Insets bottom="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onMouseClicked="#onSubmitCreate" style="-fx-background-color: #059DA7; -fx-background-radius: 5;" text="Create" textFill="WHITE">
+                                    <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onSubmitCreate" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Create" textFill="WHITE">
                                        <effect>
                                           <DropShadow>
                                              <color>
@@ -704,7 +688,7 @@
                         </VBox>
                         <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreate" style="-fx-background-color: #059DA7; -fx-background-radius: 5;" text="Create" textFill="WHITE">
+                              <Button id="defaultButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openCreate" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Create" textFill="WHITE">
                                  <effect>
                                     <DropShadow>
                                        <color>

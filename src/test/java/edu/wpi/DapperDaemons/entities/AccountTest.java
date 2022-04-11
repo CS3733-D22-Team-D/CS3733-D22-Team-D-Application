@@ -11,6 +11,12 @@ import org.junit.jupiter.api.Test;
 class AccountTest {
 
   @Test
+  void printSHA() throws NoSuchAlgorithmException {
+    String password = "354";
+    System.out.println(toHexString(getSHA(password)));
+  }
+
+  @Test
   void checkPassword() throws NoSuchAlgorithmException {
     Account test = new Account("test", "1", "password");
     assertFalse(test.checkPassword("admin"));

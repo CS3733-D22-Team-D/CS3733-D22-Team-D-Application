@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -151,7 +152,7 @@
                <left>
                   <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton onMouseClicked="#goHome" text="Home" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#goHome" stylesheets="@../assets/buttons.css" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -166,7 +167,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMedicine" text="Medication Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMedicine" stylesheets="@../assets/buttons.css" text="Medication Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -181,7 +182,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToLabRequest" text="Lab Request" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToLabRequest" stylesheets="@../assets/buttons.css" text="Lab Request" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -196,7 +197,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToMeal" text="Meal Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToMeal" stylesheets="@../assets/buttons.css" text="Meal Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -211,7 +212,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToPatientTransport" text="Patient Transport" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -226,7 +227,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToSanitation" text="Sanitation Service" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToSanitation" stylesheets="@../assets/buttons.css" text="Sanitation Service" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -241,7 +242,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToEquipment" text="Equipment Delivery" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToEquipment" stylesheets="@../assets/buttons.css" text="Equipment Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -256,7 +257,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#switchToMap" onMouseClicked="#switchToMap" text="Map" textFill="WHITE">
+                        <JFXButton id="slider" onAction="#switchToMap" onMouseClicked="#switchToMap" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -271,7 +272,12 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#quitProgram" text="Quit" textFill="WHITE">
+                        <JFXButton id="slider" onAction="#switchToAboutUs" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -301,6 +307,9 @@
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                            <HBox.margin>
@@ -315,6 +324,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                     <JFXHamburger fx:id="burgBack" alignment="CENTER" prefHeight="51.0" prefWidth="38.0" scaleX="0.6" scaleY="0.6" visible="false">
                                        <effect>
@@ -330,13 +342,16 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/Glyphs/exitWithBG.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="12.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                         </HBox>
@@ -348,6 +363,9 @@
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </children>
                               </StackPane>
@@ -381,6 +399,14 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
