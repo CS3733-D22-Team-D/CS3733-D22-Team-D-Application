@@ -168,6 +168,8 @@ public class LoginController implements Initializable {
           throw new Exception(
               "More than one user with the same username?"); // theoretically this is unreachable
         }
+      } else {
+        showError("Invalid code");
       }
     } catch (NumberFormatException e) {
       System.out.println("int was not entered");
