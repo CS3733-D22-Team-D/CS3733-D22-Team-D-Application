@@ -5,17 +5,23 @@ import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.sound.sampled.AudioInputStream;
@@ -23,7 +29,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 
-public class LoginController {
+public class LoginController implements Initializable {
+  /* Variables for error messages */
+  @FXML private StackPane windowContents;
+  @FXML private VBox error;
 
   @FXML private TextField username;
   @FXML private PasswordField password;
@@ -35,6 +44,34 @@ public class LoginController {
   DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
   static Thread sound;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    try {
+      error =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    error.setVisible(false);
+    error.setPickOnBounds(false);
+    windowContents.getChildren().add(error);
+  }
+
+  // showing an error message
+  @FXML
+  protected void showError(String errorMessage) {
+    error.setVisible(true);
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
+  }
 
   @FXML
   void login() throws Exception {
@@ -54,6 +91,8 @@ public class LoginController {
     if (acc != null && acc.checkPassword(password.getText())) {
       TwoFactor.setVisible(true);
       Authentication.sendAuthCode(acc);
+    } else {
+      showError("Either your username or Password is incorrect.");
     }
   }
 

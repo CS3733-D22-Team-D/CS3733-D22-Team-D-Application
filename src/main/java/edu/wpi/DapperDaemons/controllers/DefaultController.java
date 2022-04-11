@@ -8,12 +8,7 @@ import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -82,9 +77,10 @@ public class DefaultController extends UIController {
     }
     weatherIcon.setImage(
         new Image(
-            DefaultController.class
-                .getClassLoader()
-                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+            Objects.requireNonNull(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
     if (timer != null) timer.cancel();
     timer = new Timer();
     timer.schedule(
@@ -96,7 +92,7 @@ public class DefaultController extends UIController {
             Platform.runLater(
                 new Runnable() {
                   public void run() {
-                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyy HH:mm:ss");
+                    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
                     Date now = new Date();
                     if (time != null) {
                       time.setText(formatter.format(now));

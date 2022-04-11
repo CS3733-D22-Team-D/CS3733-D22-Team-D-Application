@@ -17,7 +17,7 @@ class AccountTest {
 
   @Test
   void printSHA() throws NoSuchAlgorithmException {
-    String password = "345";
+    String password = "wongdrip";
     System.out.println(toHexString(getSHA(password)));
   }
 
