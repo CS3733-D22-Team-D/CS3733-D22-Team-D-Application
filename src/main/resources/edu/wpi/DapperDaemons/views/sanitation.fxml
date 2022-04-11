@@ -443,7 +443,7 @@
                            <graphic>
                               <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="113.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
+                                    <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
