@@ -194,12 +194,12 @@ public class PatientTransportController extends UIController implements Initiali
 
   private void searchRoomsDropDown() {
 
-    ArrayList<Location> locations = new ArrayList<>();
+    List<Location> locations = new ArrayList<>();
     ArrayList<String> locationNames = new ArrayList<>();
     String value = roomBox.getValue() + "";
 
     try {
-      locations = (ArrayList) locationDAO.search(locationDAO.getAll(), 7, value);
+      locations = locationDAO.search(locationDAO.getAll(), 7, value);
     } catch (SQLException e) {
       e.printStackTrace();
     }
