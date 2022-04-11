@@ -120,11 +120,6 @@ public class DefaultController extends UIController {
     Thread serverChange =
         new Thread(
             () -> {
-              try {
-                Thread.sleep(2000);
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
               if (!tryChange()) {
                 Platform.runLater(() -> showError("Failed to switch connection"));
               }
