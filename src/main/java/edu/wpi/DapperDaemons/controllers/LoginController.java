@@ -5,7 +5,6 @@ import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -13,10 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 
 public class LoginController extends AppController {
 
@@ -28,7 +23,7 @@ public class LoginController extends AppController {
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  private static Thread sound;
+  private soundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +51,8 @@ public class LoginController extends AppController {
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
     } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
-      playSound("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player.play();
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
@@ -67,40 +63,6 @@ public class LoginController extends AppController {
       // incorrect username or password
       showError("Either your username or password is incorrect.");
     }
-  }
-
-  public void stopSound() {
-    sound.interrupt();
-  }
-
-  public static synchronized void playSound(final String url) throws LineUnavailableException {
-    sound =
-        new Thread(
-            new Runnable() {
-              // The wrapper thread is unnecessary, unless it blocks on the
-              // Clip finishing; see comments.
-              private final Clip clip = AudioSystem.getClip();
-
-              public void stop() {
-                clip.stop();
-              }
-
-              public void run() {
-                try {
-                  AudioInputStream inputStream =
-                      AudioSystem.getAudioInputStream(
-                          Objects.requireNonNull(
-                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
-                  clip.open(inputStream);
-                  clip.start();
-                } catch (Exception e) {
-                  System.err.println(e.getMessage());
-                }
-                while (!Thread.interrupted()) ;
-                stop();
-              }
-            });
-    sound.start();
   }
 
   @FXML

@@ -262,9 +262,4 @@ public abstract class UIController extends AppController {
       System.err.println("Unable to Save CSV of type: " + type);
     }
   }
-
-  public void bindImage(ImageView pageImage, Pane parent) {
-    pageImage.fitHeightProperty().bind(parent.heightProperty());
-    pageImage.fitWidthProperty().bind(parent.widthProperty());
-  }
 }
