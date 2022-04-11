@@ -87,36 +87,28 @@ public class DefaultController extends UIController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
 
-    initConnectionImage();
+    initGraphics();
+
     updateDate();
     updateWeather();
 
-    if (serverIcon != null) {
-      bindImage(BGImage, BGContainer);
-      bindImage(labPageImage, labPageContainer);
-      bindImage(equipmentPageImage, equipmentPageContainer);
-      bindImage(sanitationPageImage, sanitationPageContainer);
-      bindImage(medicinePageImage, medicinePageContainer);
-      bindImage(mealPageImage, mealPageContainer);
-      bindImage(mapPageImage, mapPageContainer);
-      bindImage(patientPageImage, patientPageContainer);
-      bindImage(backendPageImage, backendPageContainer);
-    }
-
-    easterEggSequence.add(KeyCode.UP);
-    easterEggSequence.add(KeyCode.UP);
-    easterEggSequence.add(KeyCode.DOWN);
-    easterEggSequence.add(KeyCode.DOWN);
-    easterEggSequence.add(KeyCode.LEFT);
-    easterEggSequence.add(KeyCode.RIGHT);
-    easterEggSequence.add(KeyCode.LEFT);
-    easterEggSequence.add(KeyCode.RIGHT);
-    easterEggSequence.add(KeyCode.A);
-    easterEggSequence.add(KeyCode.B);
-    easterEggSequence.add(KeyCode.ENTER);
+    initSequence();
   }
 
-  void setLoad() {
+  private void initGraphics() {
+    bindImage(BGImage, BGContainer);
+    bindImage(labPageImage, labPageContainer);
+    bindImage(equipmentPageImage, equipmentPageContainer);
+    bindImage(sanitationPageImage, sanitationPageContainer);
+    bindImage(medicinePageImage, medicinePageContainer);
+    bindImage(mealPageImage, mealPageContainer);
+    bindImage(mapPageImage, mapPageContainer);
+    bindImage(patientPageImage, patientPageContainer);
+    bindImage(backendPageImage, backendPageContainer);
+    initConnectionImage();
+  }
+
+  private void setLoad() {
     serverIcon.setImage(
         new Image(
             Objects.requireNonNull(
@@ -132,21 +124,15 @@ public class DefaultController extends UIController {
   }
 
   private void initConnectionImage() {
-    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
-      return;
-    if (serverBox != null) {
-      serverBox.setVisible(true);
-      serverIcon.setVisible(true);
-      ColorAdjust ca = new ColorAdjust();
-      ca.setBrightness(1.0);
-      serverIcon.setEffect(ca);
+    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)) return;
+    serverBox.setVisible(true);
+    serverIcon.setVisible(true);
+    ColorAdjust ca = new ColorAdjust();
+    ca.setBrightness(1.0);
+    serverIcon.setEffect(ca);
 
-      if (connectionHandler.getConnection() instanceof EmbedConnection) {
-        serverIcon.setImage(EMBEDDED);
-      } else {
-        serverIcon.setImage(SERVER);
-      }
-    }
+    if (connectionHandler.getConnection() instanceof EmbedConnection) serverIcon.setImage(EMBEDDED);
+    else serverIcon.setImage(SERVER);
   }
 
   private void tryChange() {
@@ -225,6 +211,20 @@ public class DefaultController extends UIController {
         },
         0,
         weatherUpdate * 1000); // Every 1 second
+  }
+
+  private void initSequence() {
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
+    easterEggSequence.add(KeyCode.A);
+    easterEggSequence.add(KeyCode.B);
+    easterEggSequence.add(KeyCode.ENTER);
   }
 
   @FXML
