@@ -120,6 +120,12 @@ public class DefaultController extends UIController {
   @FXML
   void changeServer() {
     if (connectionHandler.getConnection() instanceof EmbedConnection) {
+      serverIcon.setImage(
+          new Image(
+              Objects.requireNonNull(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
       if (connectionHandler.switchToClientServer()) {
         serverIcon.setImage(
             new Image(
@@ -127,9 +133,20 @@ public class DefaultController extends UIController {
                     .getClassLoader()
                     .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
       } else {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
         showError("Connection could not be switched");
       }
     } else {
+      serverIcon.setImage(
+          new Image(
+              Objects.requireNonNull(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
       if (connectionHandler.switchToEmbedded()) {
         serverIcon.setImage(
             new Image(
@@ -137,6 +154,11 @@ public class DefaultController extends UIController {
                     .getClassLoader()
                     .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
       } else {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
         showError("Connection could not be switched");
       }
     }
