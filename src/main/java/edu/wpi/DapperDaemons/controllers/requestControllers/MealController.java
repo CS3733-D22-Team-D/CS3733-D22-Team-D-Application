@@ -203,7 +203,7 @@ public class MealController extends UIController {
         || drinkBox.getValue().equals("")
         || dessertBox.getValue().equals("")
         || patientName.getText().equals("")
-        || patientDOB.getValue().toString().equals("")
+        || patientDOB.getValue() == null
         || patientLastName.getText().equals("")));
   }
 

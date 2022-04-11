@@ -18,36 +18,31 @@
 
 <VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png); -fx-background-size: 100% 100%; -fx-background-color: #012d5a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.LoginController">
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="301.0">
                <opaqueInsets>
                   <Insets top="50.0" />
                </opaqueInsets>
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" prefHeight="225.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#quitProgram" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                       <VBox.margin>
-                                          <Insets right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                 </children>
-                              </VBox>
+                              <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Brigham_and_Womens_Hospital_logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Sign In" textFill="#003da6">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" top="20.0" />
+                           </padding>
                         </VBox>
                         <VBox prefHeight="225.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -112,6 +107,13 @@
                      <HBox.margin>
                         <Insets left="40.0" right="40.0" />
                      </HBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.30000001192092896" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </VBox>
                </children>
             </HBox>
@@ -119,7 +121,7 @@
                <children>
                   <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <VBox fx:id="TwoFactor" alignment="CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" visible="false" BorderPane.alignment="CENTER">
+                        <VBox fx:id="TwoFactor" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" visible="false" BorderPane.alignment="CENTER">
                            <children>
                               <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -156,7 +158,7 @@
                                        <children>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" onMouseClicked="#hidePopup" preserveRatio="true">
                                              <image>
-                                                <Image url="@../assets/Glyphs/MapIcons/error.png" />
+                                                <Image url="@../assets/close.png" />
                                              </image>
                                              <effect>
                                                 <ColorAdjust brightness="-0.43" />

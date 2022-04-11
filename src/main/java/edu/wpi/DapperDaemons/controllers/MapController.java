@@ -59,7 +59,7 @@ public class MapController extends UIController implements Initializable {
   private PinHandler pin;
 
   /* Database stuff */
-  private final DAO<Location> dao = DAOPouch.getLocationDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private final DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
 
@@ -84,7 +84,7 @@ public class MapController extends UIController implements Initializable {
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      dao.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
+      locationDAO.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
     }
@@ -204,7 +204,7 @@ public class MapController extends UIController implements Initializable {
     if (createLocation.allFilled()) {
       Location create = createLocation.create(pin.getX(), pin.getY(), maps.getFloor());
       try {
-        dao.add(create);
+        locationDAO.add(create);
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
         closeCreate();
@@ -219,7 +219,7 @@ public class MapController extends UIController implements Initializable {
     if (infoBox.allFilled()) {
       Location editedLoc = infoBox.change(positions.getSelected());
       try {
-        dao.update(editedLoc);
+        locationDAO.update(editedLoc);
         glyphs.update(positions.getSelected(), new PositionInfo(editedLoc));
       } catch (Exception e) {
         System.err.println("Location could not be updated");
@@ -249,7 +249,7 @@ public class MapController extends UIController implements Initializable {
   @FXML
   public void onDeleteLocation(MouseEvent event) {
     try {
-      dao.delete(positions.getSelected().getLoc());
+      locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());
     } catch (Exception e) {
       System.err.println("Failed to remove location.");

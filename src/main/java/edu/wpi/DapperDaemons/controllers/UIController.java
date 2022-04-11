@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.TableObject;
@@ -20,13 +21,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -46,6 +56,10 @@ public abstract class UIController implements Initializable {
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
+  @FXML private VBox userDropdown;
+  @FXML private ToggleButton userSettingsToggle;
+  @FXML private Text accountName;
+  @FXML Circle profilePic;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
@@ -60,7 +74,12 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
-
+    String employeeName =
+        SecurityController.getUser().getFirstName()
+            + " "
+            + SecurityController.getUser().getLastName();
+    accountName.setText(employeeName);
+    accountName.setFont(Font.font("Comic Sans", 14));
     try {
       error =
           FXMLLoader.load(
@@ -71,9 +90,30 @@ public abstract class UIController implements Initializable {
 
     error.setVisible(false);
     error.setPickOnBounds(false);
-    windowContents.getChildren().add(error);
-
+    HBox errorContainer = new HBox();
+    errorContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(errorContainer);
+    errorContainer.getChildren().add(error);
+    errorContainer.setAlignment(Pos.CENTER);
+    errorContainer.setPadding(new Insets(20, 20, 20, 20));
     menuSlider(slider, burg, burgBack);
+    try {
+
+      profilePic.setFill(
+          new ImagePattern(
+              new Image(
+                  Objects.requireNonNull(
+                      DefaultController.class
+                          .getClassLoader()
+                          .getResourceAsStream(
+                              "edu/wpi/DapperDaemons/profilepictures/"
+                                  + SecurityController.getUser().getNodeID()
+                                  + ".png")))));
+
+    } catch (Exception e) {
+
+      showError("We could not find your profile picture");
+    }
   }
 
   @FXML
@@ -88,6 +128,23 @@ public abstract class UIController implements Initializable {
       }
     }
   }
+
+  @FXML
+  protected void showError(String errorMessage, Pos pos) {
+
+
+    ((HBox)error.getParent()).setAlignment(pos);
+    error.setVisible(true);
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
+  }
+
 
   @FXML
   public void quitProgram() {
@@ -137,6 +194,24 @@ public abstract class UIController implements Initializable {
                 burgBack.setVisible(false);
               });
         });
+  }
+
+  @FXML
+  public void openUserDropdown() {
+    if (userSettingsToggle.isSelected()) userDropdown.setVisible(true);
+    else userDropdown.setVisible(false);
+  }
+
+  @FXML
+  public void openUserSettings() {
+    // TODO : Create a userSettings.fxml page
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
+    // TODO : Logout the current user (set the user as something else or just remove it entirely)
   }
 
   @FXML

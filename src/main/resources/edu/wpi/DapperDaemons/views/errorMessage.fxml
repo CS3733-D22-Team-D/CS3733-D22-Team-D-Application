@@ -37,7 +37,7 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
-            <Button id="defaultButton" fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#hideError" prefHeight="36.0" prefWidth="246.0" style="-fx-background-color: #999DAF;" stylesheets="@../assets/buttons.css" text="Try again" textFill="WHITE">
+            <Button id="defaultButton" fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#hideError" prefHeight="36.0" prefWidth="246.0" style="-fx-background-color: #999DAF;" stylesheets="@../assets/buttons.css" text="Close" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" />
                </VBox.margin>

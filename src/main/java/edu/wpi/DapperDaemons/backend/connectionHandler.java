@@ -15,11 +15,11 @@ public class connectionHandler {
 
   public static void init() {}
 
-  static Connection getConnection() {
+  public static Connection getConnection() {
     return connection;
   }
 
-  public static Connection switchToClientServer() {
+  public static boolean switchToClientServer() {
     try {
       csvSaver.saveAll();
       Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -29,18 +29,20 @@ public class connectionHandler {
       csvLoader.loadAll();
     } catch (SQLException e) {
       //      System.out.println("Database already created, continuing");
+      return false;
     } catch (ClassNotFoundException e) {
       System.out.println("Driver error, try making sure you don't have any other instances open!");
+      return false;
     }
     try {
       DAOPouch.init();
     } catch (Exception e) {
       System.out.println("DAOPouch could not initialize");
     }
-    return connection;
+    return true;
   }
 
-  public static Connection switchToEmbedded() {
+  public static boolean switchToEmbedded() {
     try {
       if (connection != null) {
         csvSaver.saveAll();
@@ -51,15 +53,17 @@ public class connectionHandler {
       System.out.println("Connected to the embedded server");
     } catch (SQLException e) {
       //      System.out.println("Database already created, continuing");
+      return false;
     } catch (ClassNotFoundException e) {
       //      System.out.println("Driver error, try making sure you don't have any other instances
       // open!");
+      return false;
     }
     try {
       DAOPouch.init();
     } catch (Exception e) {
       System.out.println("DAOPouch could not initialize");
     }
-    return connection;
+    return true;
   }
 }

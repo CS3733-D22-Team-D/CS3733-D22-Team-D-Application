@@ -5,20 +5,37 @@ import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 
-public class LoginController {
+public class LoginController implements Initializable {
+  /* Variables for error messages */
+  @FXML private StackPane windowContents;
+  @FXML private VBox error;
 
   @FXML private TextField username;
   @FXML private PasswordField password;
@@ -29,20 +46,107 @@ public class LoginController {
   DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
+  static Thread sound;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    try {
+      error =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    code.setOnKeyPressed(
+        e -> {
+          try {
+            keyPressedAuth(e);
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        });
+    error.setVisible(false);
+    error.setPickOnBounds(false);
+    HBox errorContainer = new HBox();
+    errorContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(errorContainer);
+    errorContainer.getChildren().add(error);
+    errorContainer.setAlignment(Pos.TOP_CENTER);
+    errorContainer.setPadding(new Insets(20, 20, 20, 20));
+  }
+
+  // showing an error message
+  @FXML
+  protected void showError(String errorMessage) {
+    error.setVisible(true);
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
+  }
+
   @FXML
   void login() throws Exception {
+    Employee admin = DAOPouch.getEmployeeDAO().get("admin");
     if (username.getText().equals("") && password.getText().equals("")) {
+      SecurityController.setUser(admin);
       switchScene("default.fxml", 635, 510);
       return;
     } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
+      SecurityController.setUser(admin);
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
+    } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
+      playSound("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
       TwoFactor.setVisible(true);
       Authentication.sendAuthCode(acc);
+    } else {
+
+      // incorrect username or password
+      showError("Either your username or password is incorrect.");
     }
+  }
+
+  public void stopSound() {
+    sound.interrupt();
+  }
+
+  public static synchronized void playSound(final String url) throws LineUnavailableException {
+    sound =
+        new Thread(
+            new Runnable() {
+              // The wrapper thread is unnecessary, unless it blocks on the
+              // Clip finishing; see comments.
+              Clip clip = AudioSystem.getClip();
+
+              public void stop() {
+                clip.stop();
+              }
+
+              public void run() {
+                try {
+                  AudioInputStream inputStream =
+                      AudioSystem.getAudioInputStream(
+                          Objects.requireNonNull(
+                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
+                  clip.open(inputStream);
+                  clip.start();
+                } catch (Exception e) {
+                  System.err.println(e.getMessage());
+                }
+                while (!Thread.interrupted()) ;
+                stop();
+              }
+            });
+    sound.start();
   }
 
   @FXML
@@ -77,6 +181,13 @@ public class LoginController {
     }
   }
 
+  @FXML
+  public void keyPressedAuth(KeyEvent event) throws Exception {
+    if (event.getCode().equals(KeyCode.ENTER)) {
+      authenticate();
+    }
+  }
+
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
@@ -96,7 +207,6 @@ public class LoginController {
   @FXML
   public void quitProgram() {
     Stage window = (Stage) username.getScene().getWindow();
-
     //    try {
     //      DAO<Location> closer = DAOPouch.getLocationDAO();
     //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
@@ -108,5 +218,7 @@ public class LoginController {
     //    }
     csvSaver.saveAll();
     window.close();
+    Platform.exit();
+    System.exit(0);
   }
 }
