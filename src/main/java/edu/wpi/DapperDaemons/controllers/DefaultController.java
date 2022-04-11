@@ -19,7 +19,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.derby.impl.jdbc.EmbedConnection;
 
@@ -28,8 +27,7 @@ Manages Default Page Navigation
  */
 public class DefaultController extends UIController {
 
-  @FXML private ImageView homeIcon;
-  @FXML private VBox sceneBox;
+  /* Time, Weather, and Database */
   @FXML private Label time;
   @FXML private ImageView weatherIcon;
   @FXML private Label Temp;
@@ -64,7 +62,7 @@ public class DefaultController extends UIController {
   private static Timer weatherTimer;
   private static final int weatherUpdate = 300;
 
-  private List<KeyCode> easterEggSequence = new ArrayList<>();
+  private final List<KeyCode> easterEggSequence = new ArrayList<>();
   private int easterEggInd = 0;
 
   private long startTime;
@@ -177,6 +175,7 @@ public class DefaultController extends UIController {
   @FXML
   private void updateWeather() {
     // TODO: animate on refresh
+    if (weatherTimer != null) weatherTimer.cancel();
     weatherTimer = new Timer();
     weatherTimer.schedule(
         new TimerTask() { // timer task to update the seconds
@@ -194,7 +193,7 @@ public class DefaultController extends UIController {
                       e.printStackTrace();
                     }
                     if (Temp != null && temp != -1) {
-                      Temp.setText(String.valueOf(temp) + "\u00B0F");
+                      Temp.setText(temp + "\u00B0F");
                     }
                     Image icon = null;
                     try {
@@ -236,9 +235,7 @@ public class DefaultController extends UIController {
         try {
           //          switchScene("konami.fxml", 700, 500);
           MinesweeperZN ms = new MinesweeperZN();
-          ms.begin((Stage) new Stage());
-        } catch (IOException ex) {
-          ex.printStackTrace();
+          ms.begin(new Stage());
         } catch (Exception ex) {
           ex.printStackTrace();
         }
