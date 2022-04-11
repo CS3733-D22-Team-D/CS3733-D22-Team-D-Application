@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.TableObject;
@@ -156,6 +157,7 @@ public abstract class UIController implements Initializable {
   @FXML
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
     // TODO : Logout the current user (set the user as something else or just remove it entirely)
   }
 
