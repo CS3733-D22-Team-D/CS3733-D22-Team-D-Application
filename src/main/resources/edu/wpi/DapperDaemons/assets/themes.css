@@ -1,6 +1,6 @@
 .backgroundDark{
     -fx-background-color: #121212 !important;
-    -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png) !important;
+    /*TODO support home background*/
 }
 
 .switchDark{
@@ -22,5 +22,22 @@
 }
 
 .textDark{
-    -fx-fill: white !important
+    -fx-fill: white !important;
+    -fx-text-fill: white !important;
+}
+
+.tableDark {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #6c6c6c;
+    -fx-text-fill: white;
+}
+
+.tableDark.table-view{
+    -fx-background-color: #6c6c6c;
+}
+
+.tableDark.column-header{
+    /*-fx-text-fill: white !important;*/
+    -fx-border-width: 0;
+    -fx-background-color: #d2d2d2;
 }

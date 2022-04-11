@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
     <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -28,7 +28,7 @@
                   <children>
                       <VBox prefHeight="542.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                        <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                  <children>
@@ -54,7 +54,7 @@
                               </VBox>
                               <VBox prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shaffath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                    <Label id="label" prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shaffath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -62,7 +62,7 @@
                                           <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label prefHeight="142.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                    <Label id="label" prefHeight="142.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                                        <padding>
                                           <Insets left="10.0" right="10.0" />
                                        </padding>
@@ -85,9 +85,9 @@
                       </VBox>
                   <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                              <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                        <children>
@@ -100,7 +100,7 @@
                                     </VBox>
                                     <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please do not contact us.">
+                                          <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Please do not contact us.">
                                              <VBox.margin>
                                                 <Insets top="40.0" />
                                              </VBox.margin>
@@ -129,11 +129,11 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                              <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
+                                          <Text id="label" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
                                              <font>
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
@@ -142,12 +142,12 @@
                                     </VBox>
                                     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="Today we ask you to defend our team's independence.We're a non-profit that depends on donations to stay online and thriving, but 98% of our readers don't give; they simply look the other way. If everyone who uses our app gave just a little, we could keep our team thriving for years to come. The price of a cup of coffee is all we ask." textAlignment="CENTER" wrapText="true">
+                                          <Label id="label" text="Today we ask you to defend our team's independence.We're a non-profit that depends on donations to stay online and thriving, but 98% of our readers don't give; they simply look the other way. If everyone who uses our app gave just a little, we could keep our team thriving for years to come. The price of a cup of coffee is all we ask." textAlignment="CENTER" wrapText="true">
                                              <padding>
                                                 <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="Venmo: @Rosemaryshel">
+                                          <Label id="label" text="Venmo: @Rosemaryshel">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -359,6 +359,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                  </children>
                               </StackPane>
@@ -384,9 +387,9 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#goHomeDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -395,6 +398,9 @@
                                        </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>

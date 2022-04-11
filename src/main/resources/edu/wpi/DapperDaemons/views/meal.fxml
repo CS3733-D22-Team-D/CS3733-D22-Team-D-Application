@@ -25,13 +25,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MealController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MealController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <HBox prefHeight="46.0" prefWidth="301.0">
                <children>
-                  <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="290.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;">
+                  <VBox id="foreground" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="290.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
@@ -51,25 +51,25 @@
                         </VBox>
                         <VBox prefHeight="271.0" prefWidth="465.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entree:" />
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Entree:" />
                               <JFXComboBox id="jButton" fx:id="entreeBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Side: " />
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Side: " />
                               <JFXComboBox id="jButton" fx:id="sideBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
                               <JFXComboBox id="jButton" fx:id="drinkBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert:" />
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert:" />
                               <JFXComboBox id="jButton" fx:id="dessertBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
@@ -84,12 +84,12 @@
                                  <children>
                                     <VBox prefHeight="61.0" prefWidth="307.0">
                                        <children>
-                                          <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+                                          <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
                                           </Text>
-                                          <TextField fx:id="patientName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                          <TextField id="field" fx:id="patientName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
@@ -101,12 +101,12 @@
                                     </VBox>
                                     <VBox prefHeight="61.0" prefWidth="307.0">
                                        <children>
-                                          <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
+                                          <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
                                           </Text>
-                                          <TextField fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                          <TextField id="field" fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
@@ -118,12 +118,12 @@
                                     </VBox>
                                     <VBox prefHeight="61.0" prefWidth="307.0">
                                        <children>
-                                          <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
+                                          <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
                                           </Text>
-                                          <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                                          <DatePicker id="specialField" fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" />
@@ -187,7 +187,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView fx:id="mealRequestsTable" prefHeight="449.0" prefWidth="416.0" style="-fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                                    <TableView id="table" fx:id="mealRequestsTable" prefHeight="449.0" prefWidth="416.0" style="-fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                                        <effect>
                                           <DropShadow>
                                              <color>
@@ -199,16 +199,16 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                        <columns>
-                                          <TableColumn fx:id="reqID" prefWidth="75.0" text="ReqID" />
-                                          <TableColumn fx:id="priority" prefWidth="75.0" text="Priority" />
-                                          <TableColumn fx:id="roomID" prefWidth="75.0" text="RoomID" />
-                                          <TableColumn fx:id="requester" prefWidth="75.0" text="Requester" />
-                                          <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
-                                          <TableColumn fx:id="patient" prefWidth="75.0" text="Patient" />
-                                          <TableColumn fx:id="entree" prefWidth="75.0" text="Entree" />
-                                          <TableColumn fx:id="side" prefWidth="75.0" text="Side" />
-                                          <TableColumn fx:id="drink" prefWidth="75.0" text="Drink" />
-                                          <TableColumn fx:id="dessert" prefWidth="75.0" text="Dessert" />
+                                          <TableColumn id="col" fx:id="reqID" prefWidth="75.0" text="ReqID" />
+                                          <TableColumn id="col" fx:id="priority" prefWidth="75.0" text="Priority" />
+                                          <TableColumn id="col" fx:id="roomID" prefWidth="75.0" text="RoomID" />
+                                          <TableColumn id="col" fx:id="requester" prefWidth="75.0" text="Requester" />
+                                          <TableColumn id="col" fx:id="assignee" prefWidth="75.0" text="Assignee" />
+                                          <TableColumn id="col" fx:id="patient" prefWidth="75.0" text="Patient" />
+                                          <TableColumn id="col" fx:id="entree" prefWidth="75.0" text="Entree" />
+                                          <TableColumn id="col" fx:id="side" prefWidth="75.0" text="Side" />
+                                          <TableColumn id="col" fx:id="drink" prefWidth="75.0" text="Drink" />
+                                          <TableColumn id="col" fx:id="dessert" prefWidth="75.0" text="Dessert" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -435,6 +435,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                  </children>
                               </StackPane>
@@ -460,9 +463,9 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchToMealDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -471,6 +474,9 @@
                                        </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>

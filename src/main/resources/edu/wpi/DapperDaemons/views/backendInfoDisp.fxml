@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.BackendInfoController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.BackendInfoController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -46,17 +46,17 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <TableView fx:id="patientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <TableView id="table" fx:id="patientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn fx:id="PatientID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="PatientFirst" prefWidth="75.0" text="First" />
-                                    <TableColumn fx:id="PatientLast" prefWidth="75.0" text="Last" />
-                                    <TableColumn fx:id="PatientDOB" prefWidth="75.0" text="DOB" />
-                                    <TableColumn fx:id="PatientBT" prefWidth="75.0" text="BloodType" />
-                                    <TableColumn fx:id="PatientRoomID" prefWidth="75.0" text="RoomID" />
+                                    <TableColumn id="col" fx:id="PatientID" prefWidth="75.0" text="ID" />
+                                    <TableColumn id="col" fx:id="PatientFirst" prefWidth="75.0" text="First" />
+                                    <TableColumn id="col" fx:id="PatientLast" prefWidth="75.0" text="Last" />
+                                    <TableColumn id="col" fx:id="PatientDOB" prefWidth="75.0" text="DOB" />
+                                    <TableColumn id="col" fx:id="PatientBT" prefWidth="75.0" text="BloodType" />
+                                    <TableColumn id="col" fx:id="PatientRoomID" prefWidth="75.0" text="RoomID" />
                                  </columns>
                               </TableView>
                            </children>
@@ -72,19 +72,19 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <TableView fx:id="locationsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <TableView id="table" fx:id="locationsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn fx:id="LocationID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="LocationX" prefWidth="75.0" text="X" />
-                                    <TableColumn fx:id="LocationY" prefWidth="75.0" text="Y" />
-                                    <TableColumn fx:id="LocationFloor" prefWidth="75.0" text="Floor" />
-                                    <TableColumn fx:id="LocationBuilding" prefWidth="75.0" text="Building" />
-                                    <TableColumn fx:id="LocationType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="LocationLongName" prefWidth="75.0" text="LongName" />
-                                    <TableColumn fx:id="LocationShortName" prefWidth="75.0" text="ShortName" />
+                                    <TableColumn id="col" fx:id="LocationID" prefWidth="75.0" text="ID" />
+                                    <TableColumn id="col" fx:id="LocationX" prefWidth="75.0" text="X" />
+                                    <TableColumn id="col" fx:id="LocationY" prefWidth="75.0" text="Y" />
+                                    <TableColumn id="col" fx:id="LocationFloor" prefWidth="75.0" text="Floor" />
+                                    <TableColumn id="col" fx:id="LocationBuilding" prefWidth="75.0" text="Building" />
+                                    <TableColumn id="col" fx:id="LocationType" prefWidth="75.0" text="Type" />
+                                    <TableColumn id="col" fx:id="LocationLongName" prefWidth="75.0" text="LongName" />
+                                    <TableColumn id="col" fx:id="LocationShortName" prefWidth="75.0" text="ShortName" />
                                  </columns>
                               </TableView>
                            </children>
@@ -104,17 +104,17 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <TableView fx:id="employeesTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <TableView id="table" fx:id="employeesTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn fx:id="EmployeeID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="EmployeeFirst" prefWidth="75.0" text="First" />
-                                    <TableColumn fx:id="EmployeeLast" prefWidth="75.0" text="Last" />
-                                    <TableColumn fx:id="EmployeeDOB" prefWidth="75.0" text="DOB" />
-                                    <TableColumn fx:id="EmployeeType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="EmployeeClearance" prefWidth="75.0" text="Clearance" />
+                                    <TableColumn id="col" fx:id="EmployeeID" prefWidth="75.0" text="ID" />
+                                    <TableColumn id="col" fx:id="EmployeeFirst" prefWidth="75.0" text="First" />
+                                    <TableColumn id="col" fx:id="EmployeeLast" prefWidth="75.0" text="Last" />
+                                    <TableColumn id="col" fx:id="EmployeeDOB" prefWidth="75.0" text="DOB" />
+                                    <TableColumn id="col" fx:id="EmployeeType" prefWidth="75.0" text="Type" />
+                                    <TableColumn id="col" fx:id="EmployeeClearance" prefWidth="75.0" text="Clearance" />
                                  </columns>
                               </TableView>
                            </children>
@@ -130,16 +130,16 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <TableView fx:id="equipmentTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <TableView id="table" fx:id="equipmentTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn fx:id="EquipmentID" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="EquipmentName" prefWidth="75.0" text="Name" />
-                                    <TableColumn fx:id="EquipmentType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="EquipmentSerialNum" prefWidth="75.0" text="SerialNum" />
-                                    <TableColumn fx:id="EquipmentCleanStatus" prefWidth="75.0" text="CleanStatus" />
+                                    <TableColumn id="col" fx:id="EquipmentID" prefWidth="75.0" text="ID" />
+                                    <TableColumn id="col" fx:id="EquipmentName" prefWidth="75.0" text="Name" />
+                                    <TableColumn id="col" fx:id="EquipmentType" prefWidth="75.0" text="Type" />
+                                    <TableColumn id="col" fx:id="EquipmentSerialNum" prefWidth="75.0" text="SerialNum" />
+                                    <TableColumn id="col" fx:id="EquipmentCleanStatus" prefWidth="75.0" text="CleanStatus" />
                                  </columns>
                               </TableView>
                            </children>
@@ -332,6 +332,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                  </children>
                               </StackPane>
@@ -357,9 +360,9 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchToDBDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -368,6 +371,9 @@
                                        </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>

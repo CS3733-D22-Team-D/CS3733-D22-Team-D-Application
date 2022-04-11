@@ -115,7 +115,20 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void toggleTheme() {
+    setTheme();
+    isDark = !isDark;
+  }
+
+  public void setTheme() {
     Node back = homeIcon.getScene().lookup("#background");
+
+    Set<Node> fields = back.lookupAll("#field");
+    Set<Node> fores = back.lookupAll("#foreground");
+    Set<Node> jButtons = back.lookupAll("#jButton");
+    Set<Node> specialFields = back.lookupAll("#specialField");
+    Set<Node> texts = back.lookupAll("#label");
+    Set<Node> tableCols = back.lookupAll("#col");
+
     if (!isDark) {
       darkSwitch.setImage(
           new Image(
@@ -125,12 +138,6 @@ public abstract class UIController implements Initializable {
                   .toString()));
 
       back.getStyleClass().add("backgroundDark");
-
-      Set<Node> fields = back.lookupAll("#field");
-      Set<Node> fores = back.lookupAll("#foreground");
-      Set<Node> jButtons = back.lookupAll("#jButton");
-      Set<Node> specialFields = back.lookupAll("#specialField");
-      Set<Node> texts = back.lookupAll("#label");
 
       for (Node field : fields) {
         field.getStyleClass().add("fieldDark");
@@ -152,6 +159,10 @@ public abstract class UIController implements Initializable {
         text.getStyleClass().add("textDark");
       }
 
+      for (Node col : tableCols) {
+        col.getStyleClass().add("tableDark");
+      }
+
     } else {
       darkSwitch.setImage(
           new Image(
@@ -161,12 +172,6 @@ public abstract class UIController implements Initializable {
                   .toString()));
 
       back.getStyleClass().remove("backgroundDark");
-
-      Set<Node> fields = back.lookupAll("#field");
-      Set<Node> fores = back.lookupAll("#foreground");
-      Set<Node> jButtons = back.lookupAll("#jButton");
-      Set<Node> specialFields = back.lookupAll("#specialField");
-      Set<Node> texts = back.lookupAll("#label");
 
       for (Node field : fields) {
         field.getStyleClass().remove("fieldDark");
@@ -187,8 +192,11 @@ public abstract class UIController implements Initializable {
       for (Node text : texts) {
         text.getStyleClass().remove("textDark");
       }
+
+      for (Node col : tableCols) {
+        col.getStyleClass().remove("tableDark");
+      }
     }
-    isDark = !isDark;
   }
 
   @FXML
@@ -260,21 +268,6 @@ public abstract class UIController implements Initializable {
     sceneBox.setPrefHeight(height);
     window.setWidth(window.getWidth() + 0.0); // To update size
     window.setHeight(window.getHeight());
-  }
-
-  @FXML
-  public void goHomeDark() throws IOException {
-    switchScene("defaultDark.fxml", 635, 510);
-  }
-
-  @FXML
-  public void switchToMedicineDark() throws IOException {
-    switchScene("medicineDark.fxml", 842, 530);
-  }
-
-  @FXML
-  public void switchToMapDark() throws IOException {
-    switchScene("locationMapDark.fxml", 100, 100);
   }
 
   /**

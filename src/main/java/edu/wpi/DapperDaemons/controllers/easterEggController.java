@@ -125,22 +125,4 @@ public class easterEggController extends UIController {
     stopEasterEgg();
     switchScene("sanitation.fxml", 780, 548);
   }
-
-  @FXML
-  public void goHomeDark() throws IOException {
-    stopEasterEgg();
-    switchScene("defaultDark.fxml", 635, 510);
-  }
-
-  @FXML
-  public void switchToMedicineDark() throws IOException {
-    stopEasterEgg();
-    switchScene("medicineDark.fxml", 842, 530);
-  }
-
-  @FXML
-  public void switchToMapDark() throws IOException {
-    stopEasterEgg();
-    switchScene("locationMapDark.fxml", 100, 100);
-  }
 }
