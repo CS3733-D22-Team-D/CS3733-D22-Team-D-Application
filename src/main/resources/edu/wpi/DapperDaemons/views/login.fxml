@@ -40,11 +40,24 @@
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Brigham_and_Womens_Hospital_logo.png" />
+                                             </image>
+                                          </ImageView>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label text="Sign In" textFill="#003da6">
+                                                   <font>
+                                                      <Font size="37.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>
@@ -119,7 +132,7 @@
                <children>
                   <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <VBox fx:id="TwoFactor" alignment="CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" visible="false" BorderPane.alignment="CENTER">
+                        <VBox fx:id="TwoFactor" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" visible="false" BorderPane.alignment="CENTER">
                            <children>
                               <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -156,7 +169,7 @@
                                        <children>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" onMouseClicked="#hidePopup" preserveRatio="true">
                                              <image>
-                                                <Image url="@../assets/Glyphs/MapIcons/error.png" />
+                                                <Image url="@../assets/close.png" />
                                              </image>
                                              <effect>
                                                 <ColorAdjust brightness="-0.43" />
