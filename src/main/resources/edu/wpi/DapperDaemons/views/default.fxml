@@ -735,7 +735,7 @@
                                  <children>
                                     <VBox prefHeight="50.0" prefWidth="141.0">
                                        <children>
-                                          <Label fx:id="time" prefHeight="17.0" prefWidth="147.0" text="Time" textFill="WHITE" />
+                                          <Label fx:id="time" prefHeight="17.0" prefWidth="147.0" textFill="WHITE" />
                                        </children>
                                     </VBox>
                                  </children>

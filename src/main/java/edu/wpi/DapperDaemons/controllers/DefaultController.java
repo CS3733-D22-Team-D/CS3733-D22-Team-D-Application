@@ -5,10 +5,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,10 +21,7 @@ public class DefaultController extends UIController {
   @FXML private VBox sceneBox;
   @FXML private Label time;
 
-  private SimpleStringProperty currentTime = new SimpleStringProperty("Something Broke :(");
-  private String currTime;
-
-  Thread timeThread;
+  private static Timer timer;
 
   long startTime;
   int count = 0;
@@ -33,30 +29,26 @@ public class DefaultController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-        time.textProperty().bind(currentTime);
-//    Bindings.bindBidirectional(time.textProperty(), currentTime);
-    timeThread =
-        new Thread(
-            () -> {
-              SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyy HH:mm:ss");
-              while (!Thread.interrupted()) {
-                Date now = new Date();
-                now.getTime();
-
-//                currentTime = new SimpleStringProperty(formatter.format(now));
-//                System.out.println(currentTime);
-
-                //                                time.textProperty().bind(currentTime);
-                //                currTime = formatter.format(now);
-                //                time.textProperty().bind(new SimpleStringProperty(currTime));
-                //                time.setText(formatter.format(now));
-                try {
-                  TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
-                }
-              }
-            });
+    if (timer != null) timer.cancel();
+    timer = new Timer();
+    timer.schedule(
+        new TimerTask() { // timer task to update the seconds
+          @Override
+          public void run() {
+            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
+            // non-GUI thread.
+            Platform.runLater(
+                new Runnable() {
+                  public void run() {
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyy HH:mm:ss");
+                    Date now = new Date();
+                    time.setText(formatter.format(now));
+                  }
+                });
+          }
+        },
+        0,
+        1000); // Every 1 second
   }
 
   @FXML
