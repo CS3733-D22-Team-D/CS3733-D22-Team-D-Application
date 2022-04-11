@@ -75,12 +75,12 @@ public class DefaultController extends UIController {
       serverBox.setVisible(false);
       serverIcon.setVisible(false);
     }
-    weatherIcon.setImage(
-        new Image(
-            Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
+    //    weatherIcon.setImage(
+    //        new Image(
+    //            Objects.requireNonNull(
+    //                DefaultController.class
+    //                    .getClassLoader()
+    //                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
     if (timer != null) timer.cancel();
     timer = new Timer();
     timer.schedule(
@@ -117,15 +117,32 @@ public class DefaultController extends UIController {
     easterEggSequence.add(KeyCode.ENTER);
   }
 
+  void setLoad() {
+    serverIcon.setImage(
+        new Image(
+            Objects.requireNonNull(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
+  }
+
   @FXML
   void changeServer() {
+    setLoad();
+    Thread t =
+        new Thread(
+            new Runnable() {
+
+              @Override
+              public void run() {
+                tryChange();
+              }
+            });
+    t.start();
+  }
+
+  void tryChange() {
     if (connectionHandler.getConnection() instanceof EmbedConnection) {
-      serverIcon.setImage(
-          new Image(
-              Objects.requireNonNull(
-                  DefaultController.class
-                      .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
       if (connectionHandler.switchToClientServer()) {
         serverIcon.setImage(
             new Image(
@@ -141,12 +158,6 @@ public class DefaultController extends UIController {
         showError("Connection could not be switched");
       }
     } else {
-      serverIcon.setImage(
-          new Image(
-              Objects.requireNonNull(
-                  DefaultController.class
-                      .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
       if (connectionHandler.switchToEmbedded()) {
         serverIcon.setImage(
             new Image(
