@@ -24,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -46,6 +47,8 @@ public abstract class UIController implements Initializable {
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
+  @FXML private VBox userDropdown;
+  @FXML private ToggleButton userSettingsToggle;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
@@ -137,6 +140,23 @@ public abstract class UIController implements Initializable {
                 burgBack.setVisible(false);
               });
         });
+  }
+
+  @FXML
+  public void openUserDropdown() {
+    if (userSettingsToggle.isSelected()) userDropdown.setVisible(true);
+    else userDropdown.setVisible(false);
+  }
+
+  @FXML
+  public void openUserSettings() {
+    // TODO : Create a userSettings.fxml page
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    // TODO : Logout the current user (set the user as something else or just remove it entirely)
   }
 
   @FXML
