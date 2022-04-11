@@ -54,6 +54,15 @@ public class LoginController implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    code.setOnKeyPressed(
+        e -> {
+          try {
+            keyPressedAuth(e);
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        });
     error.setVisible(false);
     error.setPickOnBounds(false);
     windowContents.getChildren().add(error);
@@ -159,6 +168,13 @@ public class LoginController implements Initializable {
   public void keyPressed(KeyEvent event) throws Exception {
     if (event.getCode().equals(KeyCode.ENTER)) {
       login();
+    }
+  }
+
+  @FXML
+  public void keyPressedAuth(KeyEvent event) throws Exception {
+    if (event.getCode().equals(KeyCode.ENTER)) {
+      authenticate();
     }
   }
 
