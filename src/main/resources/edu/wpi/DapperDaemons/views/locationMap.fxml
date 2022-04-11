@@ -27,7 +27,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="848.0" prefWidth="1091.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1110.0" prefWidth="1321.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -316,7 +316,7 @@
                   </HBox>
                </top>
                <center>
-                  <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="397.0" BorderPane.alignment="CENTER">
                      <children>
                         <VBox maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="260.0" prefWidth="260.0" HBox.hgrow="ALWAYS">
                            <children>
@@ -710,7 +710,7 @@
                         </VBox>
                         <ScrollPane hbarPolicy="NEVER" hmax="0.0" minWidth="-Infinity" pannable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #fffefe;" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 0 2; -fx-background-color: #FFFEFE;">
+                              <VBox fx:id="filterMenu" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 0 2; -fx-background-color: #FFFEFE;">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
@@ -889,7 +889,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </ToggleButton>
-                                          <Button alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Get Directions">
+                                          <ToggleButton fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Get Directions">
                                              <graphic>
                                                 <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -900,7 +900,7 @@
                                                    </effect>
                                                 </ImageView>
                                              </graphic>
-                                          </Button>
+                                          </ToggleButton>
                                        </children>
                                     </VBox>
                                  </children>

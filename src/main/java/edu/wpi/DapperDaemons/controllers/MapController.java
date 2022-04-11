@@ -44,6 +44,7 @@ public class MapController extends UIController implements Initializable {
 
   /* Map Filter */
   @FXML private HBox mapFilter;
+  @FXML private VBox filterMenu;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private ToggleButton deptTG;
@@ -59,6 +60,7 @@ public class MapController extends UIController implements Initializable {
   @FXML private ToggleButton servTG;
   @FXML private ToggleButton staiTG;
   @FXML private ToggleButton storTG;
+  @FXML private ToggleButton directionTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -517,6 +519,15 @@ public class MapController extends UIController implements Initializable {
       glyphs.addNodeTypeFilter("STOR");
     } else {
       glyphs.removeNodeTypeFilter("STOR");
+    }
+  }
+
+  @FXML
+  void dirToggle(ActionEvent event) {
+    if (directionTG.isSelected()) {
+      filterMenu.getChildren().add();
+    } else {
+      filterMenu.getChildren().remove(3);
     }
   }
 }
