@@ -11,7 +11,7 @@ public class weather {
 
   private weather() {}
 
-  public static Float getTemp(String location) throws Exception {
+  public static int getTemp(String location) throws Exception {
     URL url =
         new URL(
             "https://api.openweathermap.org/data/2.5/weather?q="
@@ -31,7 +31,7 @@ public class weather {
 
     String jsonString = content.toString(); // assign your JSON String here
     JSONObject obj = new JSONObject(jsonString);
-    return obj.getJSONObject("main").getFloat("temp");
+    return obj.getJSONObject("main").getInt("temp");
   }
 
   public static Image getIcon(String location) throws Exception {

@@ -74,41 +74,7 @@ public class DefaultController extends UIController {
         },
         0,
         timeUpdate * 1000); // Every 1 second
-    if (weatherTimer != null) weatherTimer.cancel();
-    weatherTimer = new Timer();
-    weatherTimer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            Platform.runLater(
-                new Runnable() {
-                  public void run() {
-                    Float temp = null;
-                    try {
-                      temp = weather.getTemp("boston");
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    }
-                    if (Temp != null && temp != null) {
-                      Temp.setText(String.valueOf(temp) + "°F");
-                    }
-                    Image icon = null;
-                    try {
-                      icon = weather.getIcon("boston");
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    }
-                    if (weatherIcon != null && icon != null) {
-                      weatherIcon.setImage(icon);
-                    }
-                  }
-                });
-          }
-        },
-        0,
-        weatherUpdate * 1000); // Every 1 second
+    updateWeather();
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.DOWN);
@@ -140,14 +106,14 @@ public class DefaultController extends UIController {
             Platform.runLater(
                 new Runnable() {
                   public void run() {
-                    Float temp = null;
+                    int temp = -1;
                     try {
                       temp = weather.getTemp("boston");
                     } catch (Exception e) {
                       e.printStackTrace();
                     }
-                    if (Temp != null && temp != null) {
-                      Temp.setText(String.valueOf(temp) + "°F");
+                    if (Temp != null && temp != -1) {
+                      Temp.setText(String.valueOf(temp) + "\u00B0F");
                     }
                     Image icon = null;
                     try {
