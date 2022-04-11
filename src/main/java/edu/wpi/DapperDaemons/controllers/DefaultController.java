@@ -67,8 +67,6 @@ public class DefaultController extends UIController {
   private long startTime;
   private int count = 0;
 
-  private static boolean serverChangeFlag;
-
   public final Image EMBEDDED =
       new Image(
           Objects.requireNonNull(
