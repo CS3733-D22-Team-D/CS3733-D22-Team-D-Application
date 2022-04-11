@@ -718,9 +718,9 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
-                              <ImageView fx:id="weatherIcon" fitHeight="49.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="Temp" text="Temp" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
@@ -730,7 +730,7 @@
                         </HBox>
                         <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" visible="false">
                            <children>
-                              <ImageView fx:id="serverIcon" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#changeServer" preserveRatio="true" />
+                              <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#changeServer" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
