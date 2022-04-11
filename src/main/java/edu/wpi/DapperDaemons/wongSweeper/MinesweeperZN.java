@@ -441,7 +441,7 @@ public class MinesweeperZN extends Application {
             setHardDifficulty);
 
     Menu aboutMenu = new Menu("About");
-    MenuItem aboutItem = new MenuItem("About Minesweeper ZN");
+    MenuItem aboutItem = new MenuItem("About Wongsweeper");
     aboutItem.setOnAction(e -> getAboutScreen());
     aboutMenu.getItems().addAll(aboutItem);
     menuBar.getMenus().addAll(options, aboutMenu);
@@ -450,7 +450,7 @@ public class MinesweeperZN extends Application {
     vBox.setAlignment(Pos.CENTER);
     vBox.setPadding(new Insets(0, 50, 0, 0));
 
-    Text logoText = new Text("Minesweeper ZN");
+    Text logoText = new Text("Wongsweeper");
     logoText.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 30));
     logoText.setFill(Color.BLACK);
     logoText.setVisible(true);
@@ -486,7 +486,7 @@ public class MinesweeperZN extends Application {
             MinesweeperZN.class.getClassLoader().getResource("MinesweeperZN.css").toExternalForm());
 
     stage.setScene(scene);
-    stage.setTitle("Minesweeper ZN");
+    stage.setTitle("Wongsweeper");
     stage.show();
 
     stage.setOnCloseRequest(e -> sound.interrupt());
