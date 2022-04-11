@@ -212,6 +212,7 @@ public class DefaultController extends UIController {
     //            DefaultController.class
     //                .getClassLoader()
     //                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+    // TODO: animate on refresh
     weatherTimer = new Timer();
     weatherTimer.schedule(
         new TimerTask() { // timer task to update the seconds
