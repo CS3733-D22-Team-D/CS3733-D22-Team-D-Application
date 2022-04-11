@@ -31,7 +31,7 @@ public class weather {
 
     String jsonString = content.toString(); // assign your JSON String here
     JSONObject obj = new JSONObject(jsonString);
-    return obj.getJSONObject("main").getInt("temp");
+    return (int) obj.getJSONObject("main").getFloat("temp");
   }
 
   public static Image getIcon(String location) throws Exception {

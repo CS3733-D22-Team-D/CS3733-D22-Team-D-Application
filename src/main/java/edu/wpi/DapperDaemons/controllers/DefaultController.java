@@ -1,6 +1,9 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.backend.connectionHandler;
 import edu.wpi.DapperDaemons.backend.weather;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
@@ -14,12 +17,15 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.derby.impl.jdbc.EmbedConnection;
 
 /*
 Manages Default Page Navigation
@@ -31,6 +37,8 @@ public class DefaultController extends UIController {
   @FXML private Label time;
   @FXML private ImageView weatherIcon;
   @FXML private Label Temp;
+  @FXML private ImageView serverIcon;
+  @FXML private HBox serverBox;
 
   private static Timer timer;
   private static final int timeUpdate = 1;
@@ -47,6 +55,31 @@ public class DefaultController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    if (SecurityController.getUser()
+        .getEmployeeType()
+        .equals(Employee.EmployeeType.ADMINISTRATOR)) {
+      serverBox.setVisible(true);
+      serverIcon.setVisible(true);
+      ColorAdjust ca = new ColorAdjust();
+      ca.setBrightness(1.0);
+      serverIcon.setEffect(ca);
+      if (connectionHandler.getConnection() instanceof EmbedConnection) {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+      } else {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+      }
+    } else {
+      serverBox.setVisible(false);
+      serverIcon.setVisible(false);
+    }
     weatherIcon.setImage(
         new Image(
             DefaultController.class
@@ -86,6 +119,31 @@ public class DefaultController extends UIController {
     easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.B);
     easterEggSequence.add(KeyCode.ENTER);
+  }
+
+  @FXML
+  void changeServer() {
+    if (connectionHandler.getConnection() instanceof EmbedConnection) {
+      if (connectionHandler.switchToClientServer()) {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+      } else {
+        showError("Connection could not be switched");
+      }
+    } else {
+      if (connectionHandler.switchToEmbedded()) {
+        serverIcon.setImage(
+            new Image(
+                DefaultController.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+      } else {
+        showError("Connection could not be switched");
+      }
+    }
   }
 
   @FXML
