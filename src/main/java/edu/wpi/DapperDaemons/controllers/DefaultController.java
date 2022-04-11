@@ -20,7 +20,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.apache.derby.impl.jdbc.EmbedConnection;
 
 /*
 Manages Default Page Navigation
@@ -67,6 +66,8 @@ public class DefaultController extends UIController {
 
   private long startTime;
   private int count = 0;
+
+  private static boolean serverChangeFlag;
 
   public final Image EMBEDDED =
       new Image(
@@ -116,9 +117,19 @@ public class DefaultController extends UIController {
   }
 
   @FXML
-  void changeServer() {
+  private void changeServer() {
     setLoad();
-    Platform.runLater(this::tryChange);
+    Thread serverChange =
+        new Thread(
+            new Runnable() {
+              @Override
+              public void run() {
+                if (!tryChange()) {
+                  Platform.runLater(() -> showError("Failed to switch connection"));
+                }
+              }
+            });
+    serverChange.start();
   }
 
   private void initConnectionImage() {
@@ -130,24 +141,27 @@ public class DefaultController extends UIController {
     ca.setBrightness(1.0);
     serverIcon.setEffect(ca);
 
-    if (connectionHandler.getConnection() instanceof EmbedConnection) serverIcon.setImage(EMBEDDED);
+    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED))
+      serverIcon.setImage(EMBEDDED);
     else serverIcon.setImage(SERVER);
   }
 
-  private void tryChange() {
-    if (connectionHandler.getConnection() instanceof EmbedConnection) {
+  private boolean tryChange() {
+    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED)) {
       if (connectionHandler.switchToClientServer()) {
         serverIcon.setImage(SERVER);
+        return true;
       } else {
         serverIcon.setImage(EMBEDDED);
-        showError("Connection could not be switched");
+        return false;
       }
     } else {
       if (connectionHandler.switchToEmbedded()) {
         serverIcon.setImage(EMBEDDED);
+        return true;
       } else {
         serverIcon.setImage(SERVER);
-        showError("Connection could not be switched");
+        return false;
       }
     }
   }
