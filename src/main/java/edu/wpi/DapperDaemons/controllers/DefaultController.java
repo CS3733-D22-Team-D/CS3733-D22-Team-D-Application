@@ -36,6 +36,10 @@ public class DefaultController extends UIController {
   @FXML private ImageView serverIcon;
   @FXML private HBox serverBox;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   /* Menu Button images */
   @FXML private Pane labPageContainer;
   @FXML private ImageView labPageImage;
@@ -124,6 +128,7 @@ public class DefaultController extends UIController {
         timeUpdate * 1000); // Every 1 second
     updateWeather();
 
+    bindImage(BGImage, BGContainer);
     bindImage(labPageImage, labPageContainer);
     bindImage(equipmentPageImage, equipmentPageContainer);
     bindImage(sanitationPageImage, sanitationPageContainer);
