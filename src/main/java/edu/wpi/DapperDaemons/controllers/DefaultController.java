@@ -67,8 +67,6 @@ public class DefaultController extends UIController {
   private long startTime;
   private int count = 0;
 
-  private static boolean serverChangeFlag;
-
   public final Image EMBEDDED =
       new Image(
           Objects.requireNonNull(
@@ -121,14 +119,14 @@ public class DefaultController extends UIController {
     setLoad();
     Thread serverChange =
         new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                if (!tryChange()) {
-                  Platform.runLater(() -> showError("Failed to switch connection"));
-                }
-              }
-            });
+                () -> {
+                  if (!tryChange()) {
+                    try {
+                      Thread.sleep(2000);
+                    } catch (InterruptedException ignored) {}
+                    Platform.runLater(() -> showError("Failed to switch connection"));
+                  }
+                });
     serverChange.start();
   }
 
