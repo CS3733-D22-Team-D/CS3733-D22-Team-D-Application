@@ -66,9 +66,13 @@ public abstract class UIController implements Initializable {
     profilePic.setFill(
         new ImagePattern(
             new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/easterEgg.gif"))));
+                Objects.requireNonNull(
+                    DefaultController.class
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/profilepictures/"
+                                + SecurityController.getUser().getNodeID()
+                                + ".png")))));
     DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
     try {
