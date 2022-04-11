@@ -42,7 +42,7 @@
                         <Insets left="150.0" right="150.0" top="25.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="169.0" prefWidth="641.0">
                      <children>
                         <ImageView fitHeight="118.0" fitWidth="200.0">
                            <image>
@@ -57,11 +57,20 @@
                         <Insets left="150.0" right="150.0" />
                      </VBox.margin>
                   </VBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="942.0">
+                        <VBox alignment="CENTER" prefHeight="43.0" prefWidth="941.0">
                            <children>
-                              <Button id="defaultButton" fx:id="initButton" mnemonicParsing="false" onAction="#initScanner" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="CONNECT TO SENSOR" textFill="WHITE">
+                              <Label fx:id="helpLabel" text="In order to process the RFID scan, the RFID Sensor needs to be initialized.  Click below to initialze the sensor.">
+                                 <font>
+                                    <Font name="System Italic" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button id="defaultButton" fx:id="initButton" mnemonicParsing="false" onMousePressed="#initText" onMouseReleased="#initScanner" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="CONNECT TO SENSOR" textFill="WHITE">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -73,9 +82,20 @@
                                     </DropShadow>
                                  </effect>
                               </Button>
+                              <Label fx:id="initLabel" text="LABEL">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="942.0">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
                                  <font>
@@ -89,25 +109,24 @@
                                     </DropShadow>
                                  </effect>
                               </Button>
+                              <Label fx:id="sLabel" text="LABEL">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
                            </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <VBox alignment="CENTER" prefHeight="53.0" prefWidth="941.0">
-                     <children>
-                        <Label fx:id="sLabel" text="LABEL">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
                            <VBox.margin>
-                              <Insets />
+                              <Insets left="15.0" />
                            </VBox.margin>
-                        </Label>
+                        </HBox>
                      </children>
                   </VBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="71.0" prefWidth="242.0">
                            <children>
                               <Button fx:id="backButton" mnemonicParsing="false" onMouseClicked="#goToLogin" style="-fx-background-color: #eb4034; -fx-background-radius: 7.5;" text="Back to Login " textFill="WHITE">
                                  <font>
@@ -126,8 +145,18 @@
                               <Insets bottom="20.0" left="20.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="535.0" />
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="535.0">
+                           <children>
+                              <Label fx:id="resultLabel" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" right="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children></HBox>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="71.0" prefWidth="228.0">
                            <children>
                               <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#goHome" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #059DA7; -fx-background-radius: 7.5;" text="Continue" textFill="WHITE">
                                  <font>

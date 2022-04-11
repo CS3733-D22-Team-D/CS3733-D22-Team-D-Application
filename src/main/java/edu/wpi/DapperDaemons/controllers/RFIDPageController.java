@@ -12,10 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 public class RFIDPageController extends UIController {
 
   @FXML private Label sLabel;
+  @FXML private Label initLabel;
+  @FXML private Label resultLabel;
+  @FXML private Label helpLabel;
   @FXML private Button sButton;
   @FXML private ImageView homeIcon;
   @FXML private VBox sceneBox;
@@ -27,6 +31,8 @@ public class RFIDPageController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     sLabel.setText("");
+    initLabel.setText("");
+    resultLabel.setText("");
     sButton.setVisible(false);
     continueButton.setVisible(false);
     backButton.setVisible(false);
@@ -39,13 +45,19 @@ public class RFIDPageController extends UIController {
     try {
       arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
     } catch (UnableToConnectException e) {
-      sLabel.setText("Unable to Connect");
+      resultLabel.setText("Unable to Connect");
+      initLabel.setText("Initialization Error!");
+      backButton.setVisible(true);
       return;
     }
     this.COM = arduino.getPortDescription();
     System.out.println(this.COM);
     initButton.setVisible(false);
     sButton.setVisible(true);
+    initLabel.setVisible(false);
+    sLabel.setText("Initialization Complete : Click to Scan!");
+    helpLabel.setText(
+        "The sensor has successfully initialized, you may press the button below to scan you RFID card");
   }
 
   @FXML
@@ -55,24 +67,36 @@ public class RFIDPageController extends UIController {
             new Employee("RFID", "Test", "Jan2 2002", Employee.EmployeeType.ADMINISTRATOR, 5));
     RFIDMachine.LoginState state = rfid.login(this.COM);
     if (state.equals(RFIDMachine.LoginState.SUCCESS)) {
-      sLabel.setText(
+      resultLabel.setText(
           "Access Granted: Hello "
               + rfid.getEmployee().getFirstName()
               + " "
               + rfid.getEmployee().getLastName());
+      sLabel.setText("");
+      helpLabel.setText("");
+      resultLabel.setTextFill(Paint.valueOf("#059DA7"));
       sButton.setVisible(false);
       backButton.setVisible(false);
       continueButton.setVisible(true);
     } else if (state.equals(RFIDMachine.LoginState.INVALIDUSER)) {
-      sLabel.setText("Access Denied");
+      sLabel.setText("");
+      helpLabel.setText("");
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
+      resultLabel.setText("Access Denied");
       sButton.setVisible(false);
       backButton.setVisible(true);
     } else if (state.equals(RFIDMachine.LoginState.TIMEOUT)) {
-      sLabel.setText("RFID Scan Timeout: Please Try Again");
+      sLabel.setText("");
+      helpLabel.setText("");
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
+      resultLabel.setText("RFID Scan Timeout: Please Try Again");
       backButton.setVisible(true);
       continueButton.setVisible(false);
     } else if (state.equals(RFIDMachine.LoginState.UNABLETOCONNECT)) {
-      sLabel.setText("Unable to Connect to RFID Sensor");
+      sLabel.setText("");
+      helpLabel.setText("");
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
+      resultLabel.setText("Unable to Connect to RFID Sensor");
       backButton.setVisible(true);
     }
   }
@@ -80,5 +104,10 @@ public class RFIDPageController extends UIController {
   @FXML
   public void setScanning() {
     sLabel.setText("Waiting for scan...");
+  }
+
+  @FXML
+  public void initText() {
+    initLabel.setText("Initializing Sensor...");
   }
 }
