@@ -10,6 +10,7 @@ package edu.wpi.DapperDaemons.wongSweeper;
  * @version 1.01
  * @since 2017-08-24
  */
+import edu.wpi.DapperDaemons.backend.soundPlayer;
 import edu.wpi.DapperDaemons.controllers.easterEggController;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,14 +37,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 
 public class MinesweeperZN extends Application {
-
-  private static Thread sound;
 
   private final int TILE_SIZE = (int) Screen.getPrimary().getVisualBounds().getHeight() / 30;
   private final int WIDTH = (int) (Screen.getPrimary().getVisualBounds().getWidth() * 0.50);
@@ -367,37 +362,6 @@ public class MinesweeperZN extends Application {
     window.setCenter(root);
   }
 
-  public static synchronized void playSound(final String url) throws LineUnavailableException {
-    sound =
-        new Thread(
-            new Runnable() {
-              // The wrapper thread is unnecessary, unless it blocks on the
-              // Clip finishing; see comments.
-              Clip clip = AudioSystem.getClip();
-
-              public void stop() {
-                clip.stop();
-              }
-
-              public void run() {
-                try {
-                  AudioInputStream inputStream =
-                      AudioSystem.getAudioInputStream(
-                          Objects.requireNonNull(
-                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
-                  clip.open(inputStream);
-                  clip.start();
-                  clip.loop(1000000);
-                } catch (Exception e) {
-                  System.err.println(e.getMessage());
-                }
-                while (!Thread.interrupted()) ;
-                stop();
-              }
-            });
-    sound.start();
-  }
-
   /**
    * The start method sets up the application.
    *
@@ -405,7 +369,8 @@ public class MinesweeperZN extends Application {
    * @throws Exception Exceptions should not be thrown.
    */
   public void begin(Stage stage) throws Exception {
-    playSound("edu/wpi/DapperDaemons/assets/Smash.wav");
+    soundPlayer player = new soundPlayer("edu/wpi/DapperDaemons/assets/Smash.wav");
+    player.play(Float.valueOf(100));
 
     stage.setMinWidth(Screen.getPrimary().getVisualBounds().getWidth() * 0.50);
     stage.setMinHeight(Screen.getPrimary().getVisualBounds().getHeight() * 0.65);
@@ -489,6 +454,6 @@ public class MinesweeperZN extends Application {
     stage.setTitle("Wongsweeper");
     stage.show();
 
-    stage.setOnCloseRequest(e -> sound.interrupt());
+    stage.setOnCloseRequest(e -> player.stop());
   }
 }

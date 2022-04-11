@@ -28,7 +28,7 @@ public class LoginController extends AppController {
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  private static Thread sound;
+  private soundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +56,8 @@ public class LoginController extends AppController {
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
     } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
-      playSound("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player.play(Float.valueOf(100));
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
@@ -67,40 +68,6 @@ public class LoginController extends AppController {
       // incorrect username or password
       showError("Either your username or password is incorrect.");
     }
-  }
-
-  public void stopSound() {
-    sound.interrupt();
-  }
-
-  public static synchronized void playSound(final String url) throws LineUnavailableException {
-    sound =
-        new Thread(
-            new Runnable() {
-              // The wrapper thread is unnecessary, unless it blocks on the
-              // Clip finishing; see comments.
-              private final Clip clip = AudioSystem.getClip();
-
-              public void stop() {
-                clip.stop();
-              }
-
-              public void run() {
-                try {
-                  AudioInputStream inputStream =
-                      AudioSystem.getAudioInputStream(
-                          Objects.requireNonNull(
-                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
-                  clip.open(inputStream);
-                  clip.start();
-                } catch (Exception e) {
-                  System.err.println(e.getMessage());
-                }
-                while (!Thread.interrupted()) ;
-                stop();
-              }
-            });
-    sound.start();
   }
 
   @FXML

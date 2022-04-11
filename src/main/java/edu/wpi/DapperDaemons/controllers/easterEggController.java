@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import edu.wpi.DapperDaemons.backend.soundPlayer;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -15,51 +17,53 @@ import javax.sound.sampled.LineUnavailableException;
 public class easterEggController extends UIController {
   @FXML ImageView homeIcon;
   @FXML private VBox sceneBox;
-  static Thread sound;
+  private soundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      playSound("edu/wpi/DapperDaemons/assets/easterEgg.wav");
+//      player = new soundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
+      play();
     } catch (LineUnavailableException e) {
-      e.printStackTrace();
+      System.out.println("Something went wong");
     }
   }
 
-  public static synchronized void playSound(final String url) throws LineUnavailableException {
-    sound =
-        new Thread(
-            new Runnable() {
-              // The wrapper thread is unnecessary, unless it blocks on the
-              // Clip finishing; see comments.
-              Clip clip = AudioSystem.getClip();
+  public synchronized void play() throws LineUnavailableException {
+    Thread sound =
+            new Thread(
+                    new Runnable() {
+                      private final Clip clip = AudioSystem.getClip();
 
-              public void stop() {
-                clip.stop();
-              }
+                      public void stop() {
+                        clip.stop();
+                      }
 
-              public void run() {
-                try {
-                  AudioInputStream inputStream =
-                      AudioSystem.getAudioInputStream(
-                          Objects.requireNonNull(
-                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
-                  clip.open(inputStream);
-                  clip.start();
-                } catch (Exception e) {
-                  System.err.println(e.getMessage());
-                }
-                while (!Thread.interrupted()) ;
-                stop();
-              }
-            });
+                      public void run() {
+                        try {
+                          AudioInputStream inputStream =
+                                  AudioSystem.getAudioInputStream(
+                                          Objects.requireNonNull(
+                                                  easterEggController.class.getClassLoader().getResourceAsStream("edu/wpi/DapperDaemons/assets/easterEgg.wav")));
+                          clip.open(inputStream);
+                          clip.start();
+                        } catch (Exception e) {
+                          System.err.println(e.getMessage());
+                        }
+                        while (!Thread.interrupted()) ;
+                        stop();
+                      }
+                    });
     sound.start();
   }
 
+
   @FXML
   public void stopEasterEgg() {
-    sound.interrupt();
+    if(player != null) {
+      player.stop();
+    }
   }
 
   @FXML
