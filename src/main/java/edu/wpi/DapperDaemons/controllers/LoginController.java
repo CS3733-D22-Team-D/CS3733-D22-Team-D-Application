@@ -41,10 +41,10 @@ public class LoginController {
     if (username.getText().equals("") && password.getText().equals("")) {
       switchScene("default.fxml", 635, 510);
       return;
-    } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
+    } else if (username.getText().trim().equals("rfid") && password.getText().trim().equals("rfid")) {
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
-    } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
+    } else if (username.getText().trim().equals("Rick") && password.getText().trim().equals("Astley")) {
       playSound("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
     }
     Account acc = accountDAO.get(username.getText());
