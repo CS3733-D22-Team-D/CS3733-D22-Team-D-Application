@@ -245,7 +245,7 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void switchToMap() throws IOException {
-    switchScene("mapDashboard.fxml", 100, 100);
+    switchScene("mapDashboard.fxml", 1080, 100);
   }
 
   @FXML
