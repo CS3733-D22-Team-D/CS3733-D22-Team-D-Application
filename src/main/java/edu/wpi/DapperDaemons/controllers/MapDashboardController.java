@@ -23,11 +23,11 @@ import javafx.scene.control.ToggleButton;
 public class MapDashboardController extends UIController {
 
   @FXML private TableView<MedicalEquipment> equipTable;
-  private DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   @FXML private TableView<Location> locTable;
-  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   @FXML private TableView<Patient> patientTable;
-  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private TableView<Request> reqTable;
 
   @FXML private ToggleButton L1;
