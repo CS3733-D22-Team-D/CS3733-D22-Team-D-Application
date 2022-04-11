@@ -29,7 +29,7 @@ public class DefaultController extends UIController {
   /* Time, Weather, and Database */
   @FXML private Label time;
   @FXML private ImageView weatherIcon;
-  @FXML private Label Temp;
+  @FXML private Label tempLabel;
   @FXML private ImageView serverIcon;
   @FXML private HBox serverBox;
 
@@ -80,6 +80,13 @@ public class DefaultController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
 
+  public final Image LOAD =
+      new Image(
+          Objects.requireNonNull(
+              DefaultController.class
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -106,12 +113,7 @@ public class DefaultController extends UIController {
   }
 
   private void setLoad() {
-    serverIcon.setImage(
-        new Image(
-            Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
+    serverIcon.setImage(LOAD);
   }
 
   @FXML
@@ -120,8 +122,11 @@ public class DefaultController extends UIController {
     Thread serverChange =
         new Thread(
             () -> {
-              if (!tryChange()) {
-                Platform.runLater(() -> showError("Failed to switch connection"));
+              try {
+                if (!tryChange()) {
+                  Platform.runLater(() -> showError("Failed to switch connection"));
+                }
+              } catch (InterruptedException ignored) {
               }
             });
     serverChange.start();
@@ -141,20 +146,24 @@ public class DefaultController extends UIController {
     else serverIcon.setImage(SERVER);
   }
 
-  private boolean tryChange() {
+  private boolean tryChange() throws InterruptedException {
     if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED)) {
       if (connectionHandler.switchToClientServer()) {
+        Thread.sleep(1000);
         serverIcon.setImage(SERVER);
         return true;
       } else {
+        Thread.sleep(1000);
         serverIcon.setImage(EMBEDDED);
         return false;
       }
     } else {
       if (connectionHandler.switchToEmbedded()) {
+        Thread.sleep(1000);
         serverIcon.setImage(EMBEDDED);
         return true;
       } else {
+        Thread.sleep(1000);
         serverIcon.setImage(SERVER);
         return false;
       }
@@ -193,29 +202,37 @@ public class DefaultController extends UIController {
           public void run() {
             // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
             // non-GUI thread.
-            Platform.runLater(
-                new Runnable() {
-                  public void run() {
-                    int temp = -1;
-                    try {
-                      temp = weather.getTemp("boston");
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    }
-                    if (Temp != null && temp != -1) {
-                      Temp.setText(temp + "\u00B0F");
-                    }
-                    Image icon = null;
-                    try {
-                      icon = weather.getIcon("boston");
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    }
-                    if (weatherIcon != null && icon != null) {
-                      weatherIcon.setImage(icon);
-                    }
-                  }
-                });
+            weatherIcon.setScaleX(0.5);
+            weatherIcon.setScaleY(0.5);
+            weatherIcon.setImage(LOAD);
+            new Thread(
+                    () -> {
+                      // Gather data
+                      int temp = -999;
+                      try {
+                        temp = weather.getTemp("boston");
+                      } catch (Exception ignored) {
+                      }
+
+                      try {
+                        Thread.sleep(1000);
+                      } catch (InterruptedException ignored) {
+                      }
+
+                      // Set values
+                      int finalTemp = temp;
+                      Platform.runLater(
+                          () -> {
+                            if (finalTemp != -999) tempLabel.setText(finalTemp + "\u00B0F");
+                            try {
+                              weatherIcon.setImage(weather.getIcon("boston"));
+                            } catch (Exception ignored) {
+                            }
+                            weatherIcon.setScaleX(1);
+                            weatherIcon.setScaleY(1);
+                          });
+                    })
+                .start();
           }
         },
         0,
