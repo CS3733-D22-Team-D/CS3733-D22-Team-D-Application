@@ -1,0 +1,26 @@
+.backgroundDark{
+    -fx-background-color: #121212 !important;
+    -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png) !important;
+}
+
+.switchDark{
+    -fx-opacity: 1 !important;
+}
+
+.foregroundDark{
+    -fx-background-color: #1e1e1e !important;
+}
+
+.fieldDark{
+    -fx-background-color: #6c6c6c !important;
+    -fx-text-fill: white !important;
+}
+
+.specialFieldDark{
+    -fx-control-inner-background: #6c6c6c !important;
+    -fx-text-fill: white !important;
+}
+
+.textDark{
+    -fx-fill: white !important
+}

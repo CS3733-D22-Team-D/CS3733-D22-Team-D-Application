@@ -133,24 +133,6 @@ public class easterEggController extends UIController {
   }
 
   @FXML
-  public void switchToEquipmentDark() throws IOException {
-    stopEasterEgg();
-    switchScene("equipmentDark.fxml", 761, 626);
-  }
-
-  @FXML
-  public void switchToLabRequestDark() throws IOException {
-    stopEasterEgg();
-    switchScene("labRequestDark.fxml", 575, 575);
-  }
-
-  @FXML
-  public void switchToMealDark() throws IOException {
-    stopEasterEgg();
-    switchScene("mealDark.fxml", 500, 500);
-  }
-
-  @FXML
   public void switchToMedicineDark() throws IOException {
     stopEasterEgg();
     switchScene("medicineDark.fxml", 842, 530);
@@ -160,23 +142,5 @@ public class easterEggController extends UIController {
   public void switchToMapDark() throws IOException {
     stopEasterEgg();
     switchScene("locationMapDark.fxml", 100, 100);
-  }
-
-  @FXML
-  public void switchToPatientTransportDark() throws IOException {
-    stopEasterEgg();
-    switchScene("patientTransportDark.fxml", 831, 582);
-  }
-
-  @FXML
-  public void switchToSanitationDark() throws IOException {
-    stopEasterEgg();
-    switchScene("sanitationDark.fxml", 780, 548);
-  }
-
-  @FXML
-  public void switchToDBDark() throws IOException {
-    stopEasterEgg();
-    switchScene("backendInfoDispDark.fxml", 842, 530);
   }
 }

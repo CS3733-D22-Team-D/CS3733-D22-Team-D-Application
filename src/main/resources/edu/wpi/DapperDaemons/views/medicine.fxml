@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -24,13 +25,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MedicineController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%; -fx-background-color: #F1F0F0;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MedicineController">
     <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-              <HBox prefHeight="46.0" prefWidth="301.0">
+              <HBox id="background" prefHeight="46.0" prefWidth="301.0" stylesheets="@../assets/themes.css">
                   <children>
-                      <VBox maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="300.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                      <VBox id="foreground" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="300.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;" stylesheets="@../assets/themes.css" HBox.hgrow="ALWAYS">
                           <children>
                               <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="0.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
                                   <children>
@@ -45,12 +46,16 @@
                                   <children>
                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                           <children>
-                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medication Name:">
+                                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Medication Name:">
                                                   <VBox.margin>
                                                       <Insets bottom="10.0" />
                                                   </VBox.margin>
                                     </Text>
-                                              <JFXComboBox id="jButton" fx:id="medNameIn" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS" />
+                                              <JFXComboBox id="jButton" fx:id="medNameIn" prefHeight="30.0" prefWidth="250.0" promptText="    Select" VBox.vgrow="ALWAYS">
+                                       <stylesheets>
+                                          <URL value="@../assets/buttons.css" />
+                                          <URL value="@../assets/themes.css" />
+                                       </stylesheets></JFXComboBox>
                                           </children>
                                           <HBox.margin>
                                               <Insets />
@@ -61,12 +66,12 @@
                                       </VBox>
                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                           <children>
-                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
                                                   <VBox.margin>
                                                       <Insets bottom="10.0" />
                                                   </VBox.margin>
                                     </Text>
-                                              <TextField fx:id="quantityIn" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: f1f0f0; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS" />
+                                              <TextField id="field" fx:id="quantityIn" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: f1f0f0; -fx-background-radius: 7.5;" stylesheets="@../assets/themes.css" VBox.vgrow="ALWAYS" />
                                           </children>
                                           <padding>
                                               <Insets left="20.0" right="20.0" />
@@ -74,7 +79,7 @@
                                       </VBox>
                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                           <children>
-                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                                                   <VBox.margin>
                                                       <Insets bottom="10.0" />
                                                   </VBox.margin>
@@ -91,12 +96,12 @@
                            <children>
                               <VBox prefHeight="61.0" prefWidth="300.0">
                                  <children>
-                                    <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+                                    <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <TextField fx:id="patientName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                    <TextField id="field" fx:id="patientName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" stylesheets="@../assets/themes.css">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -108,12 +113,12 @@
                               </VBox>
                               <VBox prefHeight="61.0" prefWidth="307.0">
                                  <children>
-                                    <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
+                                    <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <TextField fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                    <TextField id="field" fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" stylesheets="@../assets/themes.css">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -125,12 +130,12 @@
                               </VBox>
                               <VBox prefHeight="61.0" prefWidth="307.0">
                                  <children>
-                                    <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
+                                    <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                                    <DatePicker id="specialField" fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" stylesheets="@../assets/themes.css" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -441,17 +446,17 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#goHomeDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>
