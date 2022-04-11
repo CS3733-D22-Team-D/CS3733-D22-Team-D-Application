@@ -116,6 +116,17 @@ public abstract class UIController implements Initializable {
   }
 
   @FXML
+  public void openUserSettings() {
+    // TODO : Create a userSettings.fxml page
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    // TODO : Logout the current user (set the user as something else or just remove it entirely)
+  }
+
+  @FXML
   public void goHome() throws IOException {
     switchScene("default.fxml", 635, 510);
   }
