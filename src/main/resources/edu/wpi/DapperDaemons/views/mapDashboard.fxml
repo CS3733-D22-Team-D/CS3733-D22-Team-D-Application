@@ -49,7 +49,15 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../../../../../../../../Downloads/b2b.jpeg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <effect>
                                     <DropShadow>
@@ -137,7 +145,7 @@
                               <Insets left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </HBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                        <VBox prefHeight="268.0" prefWidth="834.0" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
@@ -152,7 +160,7 @@
                                                 </Text>
                                              </children>
                                           </VBox>
-                                          <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                          <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5; -fx-tab-min-width: 191; -fx-tab-max-height: 19;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                              <tabs>
                                                 <Tab text="Equipment">
                                                    <content>
@@ -281,7 +289,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="4" toggleGroup="$floors">
+                                    <ToggleButton layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L4" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -293,7 +301,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="5" toggleGroup="$floors">
+                                    <ToggleButton layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L5" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
