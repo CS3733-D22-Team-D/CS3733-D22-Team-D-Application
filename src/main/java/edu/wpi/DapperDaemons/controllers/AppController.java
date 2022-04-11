@@ -16,7 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -91,5 +93,10 @@ public class AppController implements Initializable {
     if (window != null) window.close();
     Platform.exit();
     System.exit(0);
+  }
+
+  public static void bindImage(ImageView pageImage, Pane parent) {
+    pageImage.fitHeightProperty().bind(parent.heightProperty());
+    pageImage.fitWidthProperty().bind(parent.widthProperty());
   }
 }
