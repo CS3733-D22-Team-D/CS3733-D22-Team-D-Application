@@ -423,7 +423,7 @@
                                              <children>
                                                 <ImageView fx:id="backendPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
-                                                      <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
+                                                      <Image url="@../assets/HomeIcons/databaseIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>

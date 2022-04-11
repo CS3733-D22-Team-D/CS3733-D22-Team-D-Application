@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.derby.impl.jdbc.EmbedConnection;
@@ -34,6 +35,24 @@ public class DefaultController extends UIController {
   @FXML private Label Temp;
   @FXML private ImageView serverIcon;
   @FXML private HBox serverBox;
+
+  /* Menu Button images */
+  @FXML private Pane labPageContainer;
+  @FXML private ImageView labPageImage;
+  @FXML private Pane equipmentPageContainer;
+  @FXML private ImageView equipmentPageImage;
+  @FXML private Pane sanitationPageContainer;
+  @FXML private ImageView sanitationPageImage;
+  @FXML private Pane medicinePageContainer;
+  @FXML private ImageView medicinePageImage;
+  @FXML private Pane mealPageContainer;
+  @FXML private ImageView mealPageImage;
+  @FXML private Pane mapPageContainer;
+  @FXML private ImageView mapPageImage;
+  @FXML private Pane patientPageContainer;
+  @FXML private ImageView patientPageImage;
+  @FXML private Pane backendPageContainer;
+  @FXML private ImageView backendPageImage;
 
   private static Timer timer;
   private static final int timeUpdate = 1;
@@ -104,6 +123,16 @@ public class DefaultController extends UIController {
         0,
         timeUpdate * 1000); // Every 1 second
     updateWeather();
+
+    bindImage(labPageImage, labPageContainer);
+    bindImage(equipmentPageImage, equipmentPageContainer);
+    bindImage(sanitationPageImage, sanitationPageContainer);
+    bindImage(medicinePageImage, medicinePageContainer);
+    bindImage(mealPageImage, mealPageContainer);
+    bindImage(mapPageImage, mapPageContainer);
+    bindImage(patientPageImage, patientPageContainer);
+    bindImage(backendPageImage, backendPageContainer);
+
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.DOWN);
