@@ -4,6 +4,8 @@ import com.sun.scenario.Settings;
 import edu.wpi.DapperDaemons.controllers.easterEggController;
 
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class soundPlayer {
@@ -15,7 +17,6 @@ public class soundPlayer {
     }
 
     public synchronized void play() throws LineUnavailableException {
-        System.out.println();
         sound =
                 new Thread(
                         new Runnable() {
@@ -27,11 +28,11 @@ public class soundPlayer {
 
                             public void run() {
                                 try {
-                                    AudioInputStream inputStream =
-                                            AudioSystem.getAudioInputStream(
-                                                    Objects.requireNonNull(
-                                                            this.getClass().getClassLoader().getResourceAsStream(file)));
-                                    clip.open(inputStream);
+                                    InputStream audioSrc = getClass().getResourceAsStream(file);
+                                    InputStream bufferedIn = new BufferedInputStream(Objects.requireNonNull(
+                                            this.getClass().getClassLoader().getResourceAsStream(file)));
+                                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                                    clip.open(audioStream);
                                     clip.start();
                                 } catch (Exception e) {
                                     System.err.println(e.getMessage());
