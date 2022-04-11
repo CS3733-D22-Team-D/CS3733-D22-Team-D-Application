@@ -1,3 +1,13 @@
+CHALL001L1,3297,1689,L1,Tower,HALL,Hallway 1 Floor L1,Hallway C001L1
+CREST001L1,3297,2106,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
+CLABS002L1,3376,2417,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
+CHALL005L1,3376,3269,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
+WELEV00LL1,3529,1689,L1,Tower,ELEV,Elevator L Floor L1,Elevator LL1
+WELEV00ML1,3683,3269,L1,Tower,ELEV,Elevator M Floor L1,Elevator ML1
+CDEPT003L1,3793,1338,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
+CHALL014L1,3793,1689,L1,Tower,HALL,Hallway 14 Floor L1,Hallway C014L1
+CLABS001L1,4319,3269,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
+CDEPT002L1,4385,1338,L1,Tower,DEPT,Day Surgery Family Waiting Floor L1,Department C002L1
 CREST002L1,4758,3269,L1,Tower,REST,Restroom M Elevator Floor L1,Restroom C002L1
 CHALL007L1,5043,2220,L1,Tower,HALL,Hallway 7 Floor L1,Hallway C007L1
 CHALL006L1,5043,3269,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
@@ -138,13 +148,3 @@ HHALL01003,3529,1233,3,Tower,HALL,Hallway Connector 10 Floor 3,Hallway H01003
 HBATH00103,3529,1276,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
 WELEV00L03,3551,1693,3,Tower,ELEV,Elevator L Floor 3,Elevator L3
 WELEV00M03,3661,3295,3,Tower,ELEV,Elevator M Floor 3,Elevator M3
-CHALL001L1,3297,1689,L1,Tower,HALL,Hallway 1 Floor L1,Hallway C001L1
-CREST001L1,3297,2106,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
-CLABS002L1,3376,2417,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
-CHALL005L1,3376,3269,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
-WELEV00LL1,3529,1689,L1,Tower,ELEV,Elevator L Floor L1,Elevator LL1
-WELEV00ML1,3683,3269,L1,Tower,ELEV,Elevator M Floor L1,Elevator ML1
-CDEPT003L1,3793,1338,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
-CHALL014L1,3793,1689,L1,Tower,HALL,Hallway 14 Floor L1,Hallway C014L1
-CLABS001L1,4319,3269,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
-CDEPT002L1,4385,1338,L1,Tower,DEPT,Day Surgery Family Waiting Floor L1,Department C002L1
