@@ -47,6 +47,7 @@ public class AppController implements Initializable {
     errorContainer.setPadding(new Insets(20, 20, 20, 20));
   }
 
+  /** Creates an error box pop-up on the screen */
   @FXML
   protected void showError(String errorMessage) {
     error.setVisible(true);
@@ -60,6 +61,7 @@ public class AppController implements Initializable {
     }
   }
 
+  /** Creates an error box pop-up based on a specific location */
   @FXML
   protected void showError(String errorMessage, Pos pos) {
     ((HBox) error.getParent()).setAlignment(pos);

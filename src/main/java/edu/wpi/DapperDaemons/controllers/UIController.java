@@ -18,6 +18,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -67,7 +68,7 @@ public abstract class UIController extends AppController {
     try {
       initAccountGraphics();
     } catch (Exception e) {
-      showError("We could not find your profile picture.");
+      showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
   }
 
@@ -205,11 +206,6 @@ public abstract class UIController extends AppController {
   @FXML
   public void switchToAboutUs() throws IOException {
     switchScene("aboutUs.fxml", 780, 548);
-  }
-
-  @FXML
-  public void goToLogin() throws IOException {
-    switchScene("login.fxml", 780, 548);
   }
 
   @FXML
