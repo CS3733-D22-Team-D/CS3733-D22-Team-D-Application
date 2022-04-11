@@ -25,10 +25,10 @@ public class LoginController extends AppController {
   @FXML private VBox TwoFactor;
   @FXML private TextField code;
 
-  DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
-  DAO<Account> accountDAO = DAOPouch.getAccountDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+  private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  static Thread sound;
+  private static Thread sound;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -79,7 +79,7 @@ public class LoginController extends AppController {
             new Runnable() {
               // The wrapper thread is unnecessary, unless it blocks on the
               // Clip finishing; see comments.
-              Clip clip = AudioSystem.getClip();
+              private final Clip clip = AudioSystem.getClip();
 
               public void stop() {
                 clip.stop();
@@ -111,7 +111,7 @@ public class LoginController extends AppController {
   @FXML
   void authenticate() throws Exception {
     try {
-      int authCode = Integer.valueOf(code.getText());
+      int authCode = Integer.parseInt(code.getText());
       if (Authentication.authenticate(authCode)) {
         List<Employee> user =
             employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
