@@ -1,9 +1,10 @@
-package edu.wpi.DapperDaemons.controllers;
+package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -85,13 +86,6 @@ public class MedicineController extends UIController {
   public void onSubmitClicked() {
 
     // declare all request fields
-    Request.Priority priority;
-    int quantity = 0;
-    String medName;
-    String patientID;
-    String requesterID;
-    String assigneeID;
-    String roomID;
 
     // Check if all fields have a value if so, proceed
     if (!(medNameIn.getValue().trim().equals("")
@@ -99,7 +93,15 @@ public class MedicineController extends UIController {
         || priorityIn.getValue().equals("")
         || patientName.getText().equals("")
         || patientLastName.getText().equals("")
-        || patientDOB.getValue().toString().equals(""))) {
+        || patientDOB.getValue() == null)) {
+
+      Request.Priority priority;
+      int quantity = 0;
+      String medName;
+      String patientID;
+      String requesterID;
+      String assigneeID;
+      String roomID;
 
       // check if quantity is an int and not letters
       boolean isAnInt = true;
@@ -112,7 +114,7 @@ public class MedicineController extends UIController {
       if (isAnInt) {
 
         // check if the patient info points to a real patient
-        boolean isAPatient = true;
+        boolean isAPatient = false;
         patientID =
             patientName.getText()
                 + patientLastName.getText()
@@ -125,7 +127,11 @@ public class MedicineController extends UIController {
         } catch (SQLException e) {
           e.printStackTrace();
         }
-        isAPatient = patient.getFirstName().equals(patientName.getText());
+        try {
+          isAPatient = patient.getFirstName().equals(patientName.getText());
+        } catch (NullPointerException e) {
+          //dont need to print stacktrace here, if its null then nothing happens
+        }
         if (isAPatient) {
 
           // now we can create the request and send it
@@ -143,18 +149,21 @@ public class MedicineController extends UIController {
 
           if (!wentThrough) {
 
-            // TODO throw error saying no clearance allowed
-
+            // throw error saying no clearance allowed
+            showError("You do not have permission to do this.");
           }
 
         } else {
-          // TODO throw an error message saying that the patient doesnt exist
+          // throw an error message saying that the patient doesnt exist
+          showError("Could not find a patient that matches.");
         }
       } else {
-        // TODO throw error message about quantity not being a number
+        // throw error message about quantity not being a number
+        showError("Please enter a valid number.");
       }
     } else {
-      // TODO: throw error message about empty fields
+      //  throw error message about empty fields
+      showError("All fields must be filled.");
     }
 
     onClearClicked();

@@ -22,18 +22,18 @@ public class DAOPouch {
   private DAOPouch() {}
 
   public static void init() throws SQLException, IOException {
-    labRequestDAO = new DAO(new LabRequest());
-    mealDeliveryRequestDAO = new DAO(new MealDeliveryRequest());
-    medicalEquipmentRequestDAO = new DAO(new MedicalEquipmentRequest());
-    medicineRequestDAO = new DAO(new MedicineRequest());
-    patientTransportRequestDAO = new DAO(new PatientTransportRequest());
-    sanitationRequestDAO = new DAO(new SanitationRequest());
-    accountDAO = new DAO(new Account());
-    employeeDAO = new DAO(new Employee());
-    locationDAO = new DAO(new Location());
-    medicalEquipmentDAO = new DAO(new MedicalEquipment());
-    patientDAO = new DAO(new Patient());
-    nodeDAO = new DAO(new LocationNodeConnections());
+    labRequestDAO = new DAO<>(new LabRequest());
+    mealDeliveryRequestDAO = new DAO<>(new MealDeliveryRequest());
+    medicalEquipmentRequestDAO = new DAO<>(new MedicalEquipmentRequest());
+    medicineRequestDAO = new DAO<>(new MedicineRequest());
+    patientTransportRequestDAO = new DAO<>(new PatientTransportRequest());
+    sanitationRequestDAO = new DAO<>(new SanitationRequest());
+    accountDAO = new DAO<>(new Account());
+    employeeDAO = new DAO<>(new Employee());
+    locationDAO = new DAO<>(new Location());
+    medicalEquipmentDAO = new DAO<>(new MedicalEquipment());
+    patientDAO = new DAO<>(new Patient());
+    nodeDAO = new DAO<>(new LocationNodeConnections());
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
