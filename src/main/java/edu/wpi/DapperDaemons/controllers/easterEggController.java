@@ -21,7 +21,7 @@ public class easterEggController extends UIController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      playSound("easterEgg.wav");
+      playSound("edu/wpi/DapperDaemons/assets/easterEgg.wav");
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
@@ -44,11 +44,7 @@ public class easterEggController extends UIController {
                   AudioInputStream inputStream =
                       AudioSystem.getAudioInputStream(
                           Objects.requireNonNull(
-                              easterEggController
-                                  .class
-                                  .getClassLoader()
-                                  .getResourceAsStream(
-                                      "edu/wpi/DapperDaemons/assets/easterEgg.wav")));
+                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
                   clip.open(inputStream);
                   clip.start();
                 } catch (Exception e) {

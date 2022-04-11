@@ -66,9 +66,9 @@ public class Account extends TableObject {
   public void setAttribute(int columnNumber, String newAttribute) {
     switch (columnNumber) {
       case 1:
-        this.employeeID = newAttribute;
-      case 2:
         this.username = newAttribute;
+      case 2:
+        this.employeeID = newAttribute;
       case 3:
         this.password = newAttribute;
       case 4:
