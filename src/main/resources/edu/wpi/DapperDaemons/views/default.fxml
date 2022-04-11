@@ -31,7 +31,7 @@
                            <children>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox fx:id="medBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/medicineDeliveryIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -85,7 +85,7 @@
                               </VBox>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/sanitationIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -140,7 +140,7 @@
                            <children>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/labRequestIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -197,7 +197,7 @@
                               </VBox>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/equipmentIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -252,7 +252,7 @@
                            <children>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mealIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -306,7 +306,7 @@
                               </VBox>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mapIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -361,7 +361,7 @@
                            <children>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/patientTransportIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
@@ -418,7 +418,7 @@
                               </VBox>
                               <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                                    <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/databaseIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
                                              <children>
