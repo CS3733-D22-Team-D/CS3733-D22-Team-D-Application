@@ -34,7 +34,10 @@ public class App extends Application {
     primaryStage.show();
     primaryStage
         .getIcons()
-        .add(new Image(String.valueOf(App.class.getResource("assets/" + "wongDribble.png"))));
+        .add(
+            new Image(
+                String.valueOf(
+                    App.class.getResource("assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
   }
 
   @Override
