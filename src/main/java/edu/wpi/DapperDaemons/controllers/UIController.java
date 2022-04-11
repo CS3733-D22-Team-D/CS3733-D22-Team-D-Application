@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -39,6 +40,8 @@ public abstract class UIController implements Initializable {
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
+  @FXML private VBox userDropdown;
+  @FXML private ToggleButton userSettingsToggle;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
@@ -104,6 +107,12 @@ public abstract class UIController implements Initializable {
                 burgBack.setVisible(false);
               });
         });
+  }
+
+  @FXML
+  public void openUserDropdown() {
+    if (userSettingsToggle.isSelected()) userDropdown.setVisible(true);
+    else userDropdown.setVisible(false);
   }
 
   @FXML
@@ -222,6 +231,7 @@ public abstract class UIController implements Initializable {
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
   }
+
   /**
    * Gets all long names
    *

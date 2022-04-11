@@ -281,7 +281,7 @@
                   </HBox>
                </top>
             </BorderPane>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" StackPane.alignment="TOP_RIGHT">
+            <VBox fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="10.0" top="50.0" />
                </StackPane.margin>
