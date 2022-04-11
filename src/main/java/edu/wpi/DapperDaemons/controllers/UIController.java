@@ -63,16 +63,8 @@ public abstract class UIController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    profilePic.setFill(
-        new ImagePattern(
-            new Image(
-                Objects.requireNonNull(
-                    DefaultController.class
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/profilepictures/"
-                                + SecurityController.getUser().getNodeID()
-                                + ".png")))));
+
+
     DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
     try {
@@ -99,6 +91,28 @@ public abstract class UIController implements Initializable {
     windowContents.getChildren().add(error);
 
     menuSlider(slider, burg, burgBack);
+    try {
+
+
+      profilePic.setFill(
+              new ImagePattern(
+                      new Image(
+                              Objects.requireNonNull(
+                                      DefaultController.class
+                                              .getClassLoader()
+                                              .getResourceAsStream(
+                                                      "edu/wpi/DapperDaemons/profilepictures/"
+                                                              + SecurityController.getUser().getNodeID()
+                                                              + ".png")))));
+
+    }catch(Exception e){
+
+      showError("We could not find your profile picture");
+    }
+
+
+
+
   }
 
   @FXML
