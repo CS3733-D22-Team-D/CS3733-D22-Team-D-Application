@@ -29,6 +29,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -53,6 +54,7 @@ public abstract class UIController implements Initializable {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private Text accountName;
+  @FXML Circle profilePic;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;

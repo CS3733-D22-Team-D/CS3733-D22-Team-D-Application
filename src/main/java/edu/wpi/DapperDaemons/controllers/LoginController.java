@@ -38,10 +38,13 @@ public class LoginController {
 
   @FXML
   void login() throws Exception {
+    Employee admin = DAOPouch.getEmployeeDAO().get("admin");
     if (username.getText().equals("") && password.getText().equals("")) {
+      SecurityController.setUser(admin);
       switchScene("default.fxml", 635, 510);
       return;
     } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
+      SecurityController.setUser(admin);
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
     } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
