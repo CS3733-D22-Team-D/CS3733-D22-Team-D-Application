@@ -76,27 +76,35 @@ public class DefaultController extends UIController {
     if (SecurityController.getUser()
         .getEmployeeType()
         .equals(Employee.EmployeeType.ADMINISTRATOR)) {
-      serverBox.setVisible(true);
-      serverIcon.setVisible(true);
-      ColorAdjust ca = new ColorAdjust();
-      ca.setBrightness(1.0);
-      serverIcon.setEffect(ca);
-      if (connectionHandler.getConnection() instanceof EmbedConnection) {
-        serverIcon.setImage(
-            new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+      if (serverBox != null) {
+        serverBox.setVisible(true);
+        serverIcon.setVisible(true);
+        ColorAdjust ca = new ColorAdjust();
+        ca.setBrightness(1.0);
+        serverIcon.setEffect(ca);
+
+        if (connectionHandler.getConnection() instanceof EmbedConnection) {
+          serverIcon.setImage(
+              new Image(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream(
+                          "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+        }
       } else {
-        serverIcon.setImage(
-            new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+        if (serverBox != null) {
+          serverIcon.setImage(
+              new Image(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+        }
       }
     } else {
-      serverBox.setVisible(false);
-      serverIcon.setVisible(false);
+      if (serverBox != null) {
+        serverBox.setVisible(false);
+        serverIcon.setVisible(false);
+      }
     }
     //    weatherIcon.setImage(
     //        new Image(
@@ -128,15 +136,17 @@ public class DefaultController extends UIController {
         timeUpdate * 1000); // Every 1 second
     updateWeather();
 
-    bindImage(BGImage, BGContainer);
-    bindImage(labPageImage, labPageContainer);
-    bindImage(equipmentPageImage, equipmentPageContainer);
-    bindImage(sanitationPageImage, sanitationPageContainer);
-    bindImage(medicinePageImage, medicinePageContainer);
-    bindImage(mealPageImage, mealPageContainer);
-    bindImage(mapPageImage, mapPageContainer);
-    bindImage(patientPageImage, patientPageContainer);
-    bindImage(backendPageImage, backendPageContainer);
+    if (serverIcon != null) {
+      bindImage(BGImage, BGContainer);
+      bindImage(labPageImage, labPageContainer);
+      bindImage(equipmentPageImage, equipmentPageContainer);
+      bindImage(sanitationPageImage, sanitationPageContainer);
+      bindImage(medicinePageImage, medicinePageContainer);
+      bindImage(mealPageImage, mealPageContainer);
+      bindImage(mapPageImage, mapPageContainer);
+      bindImage(patientPageImage, patientPageContainer);
+      bindImage(backendPageImage, backendPageContainer);
+    }
 
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.UP);
