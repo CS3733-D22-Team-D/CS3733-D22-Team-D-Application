@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -33,15 +34,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox fx:id="medBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/medicineDeliveryIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="medicinePageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fx:id="medIMG" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="medicinePageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/medicineDeliveryIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="158.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
@@ -87,15 +88,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/sanitationIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="sanitationPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="sanitationPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/sanitationIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label text="Sanitation Service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
@@ -138,19 +139,19 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox fx:id="labPageContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/labRequestIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="labPageContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="labPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/labRequestIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
@@ -199,15 +200,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/equipmentIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="equipmentPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="equipmentPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/equipmentIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label text="Equipment Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
@@ -254,15 +255,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mealIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="mealPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="mealPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/mealIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
@@ -308,15 +309,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/mapIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="mapPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="mapPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/mapIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label text="Interactive Map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
@@ -363,18 +364,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/patientTransportIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="patientPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="patientPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
@@ -420,18 +418,15 @@
                                  <children>
                                     <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5 7.5 0 0; -fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/HomeIcons/databaseIcon.png); -fx-background-size: 100% 100%;" VBox.vgrow="ALWAYS">
+                                          <Pane fx:id="backendPageContainer" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" visible="false" HBox.hgrow="ALWAYS">
+                                                <ImageView fx:id="backendPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                                    <image>
                                                       <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
+                                          </Pane>
                                           <HBox alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
