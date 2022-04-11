@@ -60,61 +60,56 @@ public abstract class UIController implements Initializable {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private Text accountName;
-  @FXML Circle profilePic;
+  @FXML private Circle profilePic;
 
   /* DAO Object to access all room numbers */
-  List<Location> locations;
+  private List<Location> locations;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // Init a menu slider for all that extend this class
+    menuSlider(slider, burg, burgBack);
 
-    DAO<Location> dao = DAOPouch.getLocationDAO();
     /* Used the DAO object to get list */
+    DAO<Location> dao = DAOPouch.getLocationDAO();
     try {
       this.locations = dao.getAll();
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
-    String employeeName =
-        SecurityController.getUser().getFirstName()
-            + " "
-            + SecurityController.getUser().getLastName();
+
+    // Init graphics
+    try {
+      initAccount();
+      initGraphics();
+    } catch (IOException e) {
+      showError("System graphics encountered an error.");
+    } catch (NullPointerException e) {
+      showError("We could not find your profile picture.");
+    }
+  }
+
+  private void initGraphics() throws IOException {
+      error = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
+      error.setVisible(false);
+      error.setPickOnBounds(false);
+      HBox errorContainer = new HBox();
+      errorContainer.setPickOnBounds(false);
+      windowContents.getChildren().add(errorContainer);
+      errorContainer.getChildren().add(error);
+      errorContainer.setAlignment(Pos.CENTER);
+      errorContainer.setPadding(new Insets(20, 20, 20, 20));
+  }
+
+  private void initAccount() throws NullPointerException {
+    String employeeName = SecurityController.getUser().getFirstName() + " " + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
     accountName.setFont(Font.font("Comic Sans", 14));
-    try {
-      error =
-          FXMLLoader.load(
-              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
-    error.setVisible(false);
-    error.setPickOnBounds(false);
-    HBox errorContainer = new HBox();
-    errorContainer.setPickOnBounds(false);
-    windowContents.getChildren().add(errorContainer);
-    errorContainer.getChildren().add(error);
-    errorContainer.setAlignment(Pos.CENTER);
-    errorContainer.setPadding(new Insets(20, 20, 20, 20));
-    menuSlider(slider, burg, burgBack);
-    try {
-
-      profilePic.setFill(
-          new ImagePattern(
-              new Image(
-                  Objects.requireNonNull(
-                      DefaultController.class
-                          .getClassLoader()
-                          .getResourceAsStream(
-                              "edu/wpi/DapperDaemons/profilepictures/"
-                                  + SecurityController.getUser().getNodeID()
-                                  + ".png")))));
-
-    } catch (Exception e) {
-
-      showError("We could not find your profile picture");
-    }
+    profilePic.setFill(new ImagePattern(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(
+            "edu/wpi/DapperDaemons/profilepictures/"
+                    + SecurityController.getUser().getNodeID()
+                    + ".png")))));
   }
 
   @FXML
@@ -132,17 +127,8 @@ public abstract class UIController implements Initializable {
 
   @FXML
   protected void showError(String errorMessage, Pos pos) {
-
     ((HBox) error.getParent()).setAlignment(pos);
-    error.setVisible(true);
-    Node nodeOut = error.getChildren().get(1);
-    if (nodeOut instanceof VBox) {
-      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
-        if (nodeIn instanceof Label) {
-          ((Label) nodeIn).setText(errorMessage);
-        }
-      }
-    }
+    showError(errorMessage);
   }
 
   @FXML
@@ -197,8 +183,7 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void openUserDropdown() {
-    if (userSettingsToggle.isSelected()) userDropdown.setVisible(true);
-    else userDropdown.setVisible(false);
+    userDropdown.setVisible(userSettingsToggle.isSelected());
   }
 
   @FXML
@@ -335,7 +320,7 @@ public abstract class UIController implements Initializable {
    * @return a list of long names
    */
   protected List<String> getAllLongNames() {
-    List<String> names = new ArrayList<String>();
+    List<String> names = new ArrayList<>();
     for (Location loc : this.locations) {
       names.add(loc.getLongName());
     }
@@ -355,23 +340,6 @@ public abstract class UIController implements Initializable {
   }
 
   public void bindImage(ImageView pageImage, Pane parent) {
-
-    //    Rectangle clip = new Rectangle(pageImage.getFitWidth(), pageImage.getFitHeight());
-    //    clip.setArcWidth(15);
-    //    clip.setArcHeight(15);
-    //    pageImage.setClip(clip);
-    //
-    //    // snapshot the rounded image.
-    //    SnapshotParameters parameters = new SnapshotParameters();
-    //    parameters.setFill(Color.TRANSPARENT);
-    //    WritableImage image = pageImage.snapshot(parameters, null);
-    //
-    //    // remove the rounding clip so that our effect can show through.
-    //    pageImage.setClip(null);
-    //
-    //    // store the rounded image in the imageView.
-    //    pageImage.setImage(image);
-
     pageImage.fitHeightProperty().bind(parent.heightProperty());
     pageImage.fitWidthProperty().bind(parent.widthProperty());
   }

@@ -122,7 +122,8 @@ public class DefaultController extends UIController {
   }
 
   private void initConnectionImage() {
-    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)) return;
+    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
+      return;
     serverBox.setVisible(true);
     serverIcon.setVisible(true);
     ColorAdjust ca = new ColorAdjust();
