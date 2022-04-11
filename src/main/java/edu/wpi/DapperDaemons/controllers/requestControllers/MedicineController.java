@@ -130,7 +130,7 @@ public class MedicineController extends UIController {
         try {
           isAPatient = patient.getFirstName().equals(patientName.getText());
         } catch (NullPointerException e) {
-          //dont need to print stacktrace here, if its null then nothing happens
+          // dont need to print stacktrace here, if its null then nothing happens
         }
         if (isAPatient) {
 
