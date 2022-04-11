@@ -1,9 +1,10 @@
-package edu.wpi.DapperDaemons.controllers;
+package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -85,19 +86,18 @@ public class MealController extends UIController {
 
   /** Creates service request, executes when submit button is pressed */
   public void onSubmit() {
-    Request.Priority priority = Request.Priority.LOW;
-    String roomID;
-    String requesterID;
-    String assigneeID = "null";
-    String patientID;
-    String entree = entreeBox.getValue();
-    String side = sideBox.getValue();
-    String drink = drinkBox.getValue();
-    String dessert = dessertBox.getValue();
 
     // Check if all inputs are filled
     if (allFilled()) {
-
+      Request.Priority priority = Request.Priority.LOW;
+      String roomID;
+      String requesterID;
+      String assigneeID = "null";
+      String patientID;
+      String entree = entreeBox.getValue();
+      String side = sideBox.getValue();
+      String drink = drinkBox.getValue();
+      String dessert = dessertBox.getValue();
       // Check if the patient exists
       patientID =
           patientName.getText()
@@ -106,16 +106,19 @@ public class MealController extends UIController {
               + patientDOB.getValue().getDayOfMonth()
               + patientDOB.getValue().getYear();
       Patient patient = new Patient();
-      boolean isAPatient = true;
+      boolean isAPatient = false;
       try {
         patient = patientDAO.get(patientID);
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      isAPatient =
-          patient
-              .getFirstName()
-              .equals(patientName.getText()); // TODO : This creates a NULL pointer exception
+
+      try {
+        isAPatient = patient.getFirstName().equals(patientName.getText());
+      } catch (NullPointerException e) {
+        e.printStackTrace();
+      }
+
       if (isAPatient) {
 
         // request is formed correctly and the patient exists send it and check for clearance
@@ -135,15 +138,19 @@ public class MealController extends UIController {
                     dessert));
 
         if (!hadClearance) {
-          errorLabel.setText("Error: Access Denied");
+          // throw error that user aint got no clearance
+
+          showError("You do not have permission to do this.");
         }
 
       } else {
-        errorLabel.setText("Error: Patient Does Not Exist");
+        // throw error that patient aint real
+        showError("Could not find a patient that matches.");
       }
 
     } else {
-      errorLabel.setText("Error: One or More Fields were left empty");
+      // throw error that not all fields are filled in
+      showError("All fields must be filled.");
     }
     onClear();
   }
@@ -196,7 +203,7 @@ public class MealController extends UIController {
         || drinkBox.getValue().equals("")
         || dessertBox.getValue().equals("")
         || patientName.getText().equals("")
-        || patientDOB.getValue().toString().equals("")
+        || patientDOB.getValue() == null
         || patientLastName.getText().equals("")));
   }
 
