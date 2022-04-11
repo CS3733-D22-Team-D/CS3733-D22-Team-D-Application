@@ -70,69 +70,25 @@ public class DefaultController extends UIController {
   private long startTime;
   private int count = 0;
 
+  public final Image EMBEDDED =
+      new Image(
+          Objects.requireNonNull(
+              getClass()
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+  public final Image SERVER =
+      new Image(
+          Objects.requireNonNull(
+              getClass()
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    if (SecurityController.getUser()
-        .getEmployeeType()
-        .equals(Employee.EmployeeType.ADMINISTRATOR)) {
-      if (serverBox != null) {
-        serverBox.setVisible(true);
-        serverIcon.setVisible(true);
-        ColorAdjust ca = new ColorAdjust();
-        ca.setBrightness(1.0);
-        serverIcon.setEffect(ca);
 
-        if (connectionHandler.getConnection() instanceof EmbedConnection) {
-          serverIcon.setImage(
-              new Image(
-                  DefaultController.class
-                      .getClassLoader()
-                      .getResourceAsStream(
-                          "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
-        } else {
-          serverIcon.setImage(
-              new Image(
-                  DefaultController.class
-                      .getClassLoader()
-                      .getResourceAsStream(
-                          "edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
-        }
-      }
-    } else {
-      if (serverBox != null) {
-        serverBox.setVisible(false);
-        serverIcon.setVisible(false);
-      }
-    }
-    //    weatherIcon.setImage(
-    //        new Image(
-    //            Objects.requireNonNull(
-    //                DefaultController.class
-    //                    .getClassLoader()
-    //                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif"))));
-    if (timer != null) timer.cancel();
-    timer = new Timer();
-    timer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            Platform.runLater(
-                new Runnable() {
-                  public void run() {
-                    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
-                    Date now = new Date();
-                    if (time != null) {
-                      time.setText(formatter.format(now));
-                    }
-                  }
-                });
-          }
-        },
-        0,
-        timeUpdate * 1000); // Every 1 second
+    initConnectionImage();
+    updateDate();
     updateWeather();
 
     if (serverIcon != null) {
@@ -175,56 +131,65 @@ public class DefaultController extends UIController {
     Platform.runLater(this::tryChange);
   }
 
-  void tryChange() {
+  private void initConnectionImage() {
+    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
+      return;
+    if (serverBox != null) {
+      serverBox.setVisible(true);
+      serverIcon.setVisible(true);
+      ColorAdjust ca = new ColorAdjust();
+      ca.setBrightness(1.0);
+      serverIcon.setEffect(ca);
+
+      if (connectionHandler.getConnection() instanceof EmbedConnection) {
+        serverIcon.setImage(EMBEDDED);
+      } else {
+        serverIcon.setImage(SERVER);
+      }
+    }
+  }
+
+  private void tryChange() {
     if (connectionHandler.getConnection() instanceof EmbedConnection) {
       if (connectionHandler.switchToClientServer()) {
-        serverIcon.setImage(
-            new Image(
-                Objects.requireNonNull(
-                    DefaultController.class
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
+        serverIcon.setImage(SERVER);
       } else {
-        serverIcon.setImage(
-            new Image(
-                Objects.requireNonNull(
-                    DefaultController.class
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
+        serverIcon.setImage(EMBEDDED);
         showError("Connection could not be switched");
       }
     } else {
       if (connectionHandler.switchToEmbedded()) {
-        serverIcon.setImage(
-            new Image(
-                Objects.requireNonNull(
-                    DefaultController.class
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
+        serverIcon.setImage(EMBEDDED);
       } else {
-        serverIcon.setImage(
-            new Image(
-                Objects.requireNonNull(
-                    DefaultController.class
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
+        serverIcon.setImage(SERVER);
         showError("Connection could not be switched");
       }
     }
   }
 
+  private void updateDate() {
+    if (timer != null) timer.cancel();
+    timer = new Timer();
+    timer.schedule(
+        new TimerTask() { // timer task to update the seconds
+          @Override
+          public void run() {
+            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
+            // non-GUI thread.
+            Platform.runLater(
+                () -> {
+                  SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+                  Date now = new Date();
+                  if (time != null) time.setText(formatter.format(now));
+                });
+          }
+        },
+        0,
+        timeUpdate * 1000); // Every 1 second
+  }
+
   @FXML
-  void updateWeather() {
-    // loading image
-    //    weatherIcon.setImage(
-    //        new Image(
-    //            DefaultController.class
-    //                .getClassLoader()
-    //                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+  private void updateWeather() {
     // TODO: animate on refresh
     weatherTimer = new Timer();
     weatherTimer.schedule(
