@@ -173,16 +173,7 @@ public class DefaultController extends UIController {
   @FXML
   void changeServer() {
     setLoad();
-    Thread t =
-        new Thread(
-            new Runnable() {
-
-              @Override
-              public void run() {
-                tryChange();
-              }
-            });
-    t.start();
+    Platform.runLater(this::tryChange);
   }
 
   void tryChange() {
