@@ -1,17 +1,12 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.soundPlayer;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
-
-import edu.wpi.DapperDaemons.backend.soundPlayer;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 
 public class easterEggController extends UIController {
@@ -23,45 +18,16 @@ public class easterEggController extends UIController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-//      player = new soundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
-      play();
+      player = new soundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
+      player.play(0.75F);
     } catch (LineUnavailableException e) {
       System.out.println("Something went wong");
     }
   }
 
-  public synchronized void play() throws LineUnavailableException {
-    Thread sound =
-            new Thread(
-                    new Runnable() {
-                      private final Clip clip = AudioSystem.getClip();
-
-                      public void stop() {
-                        clip.stop();
-                      }
-
-                      public void run() {
-                        try {
-                          AudioInputStream inputStream =
-                                  AudioSystem.getAudioInputStream(
-                                          Objects.requireNonNull(
-                                                  easterEggController.class.getClassLoader().getResourceAsStream("edu/wpi/DapperDaemons/assets/easterEgg.wav")));
-                          clip.open(inputStream);
-                          clip.start();
-                        } catch (Exception e) {
-                          System.err.println(e.getMessage());
-                        }
-                        while (!Thread.interrupted()) ;
-                        stop();
-                      }
-                    });
-    sound.start();
-  }
-
-
   @FXML
   public void stopEasterEgg() {
-    if(player != null) {
+    if (player != null) {
       player.stop();
     }
   }

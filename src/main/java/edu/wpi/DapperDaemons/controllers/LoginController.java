@@ -5,7 +5,6 @@ import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -13,10 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 
 public class LoginController extends AppController {
 
@@ -57,7 +52,7 @@ public class LoginController extends AppController {
       return;
     } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
       player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
-      player.play(Float.valueOf(100));
+      player.play();
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {

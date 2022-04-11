@@ -1,3 +1,77 @@
+FEXIT00101,4547,1140,1,Tower,EXIT,Shattuck Street Lobby Exit,Shattuck St. Exit
+FHALL00301,4547,1628,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
+FSTAI00101,4587,1549,1,Tower,STAI,Lobby Shattuck Street Stairs,Stairway F00101
+FHALL00201,4587,1628,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
+FHALL03101,4587,1917,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
+FHALL02601,4587,3071,1,Tower,HALL,Lobby Hallway 4,Hallway F02601
+FHALL00101,4714,1628,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101
+FHALL02701,4762,3071,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
+FHALL03301,4762,3260,1,Tower,HALL,Emergency Hallway,Hallway F03301
+FREST00101,4872,1917,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
+FEXIT00301,4907,3589,1,Tower,EXIT,Emergency Department Entrance,Emergency Entrance
+FDEPT00501,5034,3339,1,Tower,DEPT,Emergency Department,Emergency
+HBATH00102,2739,2058,2,Tower,BATH,Bathroom 1 Tower Floor 2,Bathroom 0102
+HRETL00202,2783,2132,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
+HSTAI00202,3134,2747,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
+HHALL00702,3332,2747,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
+HHALL00802,3332,3032,2,Tower,HALL,Hallway Connector 8 Floor 2,Hallway H00802
+HHALL00902,3332,3251,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
+WHALL00702,3332,4217,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
+HHALL00602,3485,2374,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
+HSTAI00302,3551,3032,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
+WELEV00L02,3617,1693,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
+HHALL00502,3705,2132,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
+HRETL00302,3705,2374,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
+WELEV00M02,3705,3251,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
+HHALL00102,3924,1693,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
+HHALL00402,3924,2132,2,Tower,HALL,Hallway Connector 4 Floor 2,Hallway H00402
+HRETL00102,4187,1408,2,Tower,RETL,Garden Cafe,Garden Cafe
+HHALL00202,4275,1584,2,Tower,HALL,Hallway Connector 2 Floor 2,Hallway H00202
+HHALL00302,4626,1584,2,Tower,HALL,Hallway Connector 3 Floor 2,Hallway H00302
+HHALL01002,4714,3251,2,Tower,HALL,Hallway Connector 10 Floor 2,Hallway H01002
+HDEPT00102,4714,3471,2,Tower,DEPT,Endoscopy,Endoscopy
+HSTAI00102,4736,1496,2,Tower,STAI,Stairwell 1 Floor 2,Stairwell 0102
+HLABS00103,1116,1430,3,Tower,LABS,Reproductive Endocrine Labs,Reproductive Endocrine Labs
+HHALL00203,1116,1957,3,Tower,HALL,Hallway Connector 2 Floor 3,Hallway H00203
+HHALL00103,1511,509,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
+HHALL00303,1511,1957,3,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
+HHALL00403,1511,3295,3,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
+dPATI00703,1971,974,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01403,1980,2453,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00803,2002,1193,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01303,2002,2189,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00603,2020,803,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01503,2037,2584,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00903,2099,1338,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01203,2099,2058,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00503,2165,653,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01603,2182,2725,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI01003,2323,1448,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01103,2323,1939,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI01703,2323,2790,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00403,2336,592,3,Tower,PATI,Patient Rooms Pod B,PRB
+dSTOR00103,2401,1009,3,Tower,STOR,Clean Equipment Storage,CES
+dSTOR00203,2401,2395,3,Tower,STOR,Clean Equipment Storage,CES
+dDIRT00103,2410,1693,3,TOWER,DIRT,Dirty Equipment Storage,DES
+dPATI01803,2546,2777,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00303,2564,614,3,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01903,2696,2685,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00203,2717,719,3,Tower,PATI,Patient Rooms Pod B,PRB
+HHALL01203,2717,1233,3,Tower,HALL,Hallway Connector 12 Floor 3,Hallway H01203
+HHALL01303,2717,2154,3,Tower,HALL,Hallway Connector 13 Floor 3,Hallway H01303
+dPATI02003,2818,2448,3,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00103,2832,952,3,Tower,PATI,Patient Rooms Pod B,PRB
+dSTOR00403,3068,1197,3,Tower,STOR,Bed and Recliner Parking,BRP
+dSTOR00303,3068,2202,3,Tower,STOR,Bed and Recliner Parking,BRP
+HSTAI00103,3068,3229,3,Tower,STAI,Stairwell 1 Floor 3,Stairwell
+HHALL00503,3068,3295,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
+HHALL01103,3112,1233,3,Tower,HALL,Hallway Connector 11 Floor 3,Hallway H01103
+HDEPT00203,3112,1276,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
+HDEPT00103,3266,1584,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
+HHALL00903,3310,1233,3,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
+HHALL00803,3310,1430,3,Tower,HALL,Hallway Connector 8 Floor 3,Hallway H00803
+HHALL00703,3310,1584,3,Tower,HALL,Hallway Connector 7 Floor 3,Hallway H00703
+HHALL00603,3310,1693,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
 HHALL01503,3310,1957,3,Tower,HALL,Hallway Connector 15 Floor 3,Hallway H01503
 HHALL01403,3310,2154,3,Tower,HALL,Hallway Connector 14 Floor 3,Hallway H01403
 HSERV00103,3376,1430,3,Tower,SERV,Nursing Room,Nursing Room
@@ -74,77 +148,3 @@ FHALL02501,4319,3071,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
 FHALL02401,4319,3251,1,Tower,HALL,Lobby Hallway 2,Hallway F02401
 FRETL00101,4354,1338,1,Tower,RETL,Lobby Vending Machine,VM Lobby
 FHALL00401,4354,1628,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
-FEXIT00101,4547,1140,1,Tower,EXIT,Shattuck Street Lobby Exit,Shattuck St. Exit
-FHALL00301,4547,1628,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
-FSTAI00101,4587,1549,1,Tower,STAI,Lobby Shattuck Street Stairs,Stairway F00101
-FHALL00201,4587,1628,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
-FHALL03101,4587,1917,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
-FHALL02601,4587,3071,1,Tower,HALL,Lobby Hallway 4,Hallway F02601
-FHALL00101,4714,1628,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101
-FHALL02701,4762,3071,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
-FHALL03301,4762,3260,1,Tower,HALL,Emergency Hallway,Hallway F03301
-FREST00101,4872,1917,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
-FEXIT00301,4907,3589,1,Tower,EXIT,Emergency Department Entrance,Emergency Entrance
-FDEPT00501,5034,3339,1,Tower,DEPT,Emergency Department,Emergency
-HBATH00102,2739,2058,2,Tower,BATH,Bathroom 1 Tower Floor 2,Bathroom 0102
-HRETL00202,2783,2132,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
-HSTAI00202,3134,2747,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
-HHALL00702,3332,2747,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
-HHALL00802,3332,3032,2,Tower,HALL,Hallway Connector 8 Floor 2,Hallway H00802
-HHALL00902,3332,3251,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
-WHALL00702,3332,4217,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
-HHALL00602,3485,2374,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
-HSTAI00302,3551,3032,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
-WELEV00L02,3617,1693,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
-HHALL00502,3705,2132,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
-HRETL00302,3705,2374,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
-WELEV00M02,3705,3251,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
-HHALL00102,3924,1693,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
-HHALL00402,3924,2132,2,Tower,HALL,Hallway Connector 4 Floor 2,Hallway H00402
-HRETL00102,4187,1408,2,Tower,RETL,Garden Cafe,Garden Cafe
-HHALL00202,4275,1584,2,Tower,HALL,Hallway Connector 2 Floor 2,Hallway H00202
-HHALL00302,4626,1584,2,Tower,HALL,Hallway Connector 3 Floor 2,Hallway H00302
-HHALL01002,4714,3251,2,Tower,HALL,Hallway Connector 10 Floor 2,Hallway H01002
-HDEPT00102,4714,3471,2,Tower,DEPT,Endoscopy,Endoscopy
-HSTAI00102,4736,1496,2,Tower,STAI,Stairwell 1 Floor 2,Stairwell 0102
-HLABS00103,1116,1430,3,Tower,LABS,Reproductive Endocrine Labs,Reproductive Endocrine Labs
-HHALL00203,1116,1957,3,Tower,HALL,Hallway Connector 2 Floor 3,Hallway H00203
-HHALL00103,1511,509,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
-HHALL00303,1511,1957,3,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
-HHALL00403,1511,3295,3,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
-dPATI00703,1971,974,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01403,1980,2453,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00803,2002,1193,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01303,2002,2189,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00603,2020,803,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01503,2037,2584,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00903,2099,1338,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01203,2099,2058,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00503,2165,653,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01603,2182,2725,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI01003,2323,1448,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01103,2323,1939,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI01703,2323,2790,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00403,2336,592,3,Tower,PATI,Patient Rooms Pod B,PRB
-dSTOR00103,2401,1009,3,Tower,STOR,Clean Equipment Storage,CES
-dSTOR00203,2401,2395,3,Tower,STOR,Clean Equipment Storage,CES
-dDIRT00103,2410,1693,3,TOWER,DIRT,Dirty Equipment Storage,DES
-dPATI01803,2546,2777,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00303,2564,614,3,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01903,2696,2685,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00203,2717,719,3,Tower,PATI,Patient Rooms Pod B,PRB
-HHALL01203,2717,1233,3,Tower,HALL,Hallway Connector 12 Floor 3,Hallway H01203
-HHALL01303,2717,2154,3,Tower,HALL,Hallway Connector 13 Floor 3,Hallway H01303
-dPATI02003,2818,2448,3,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00103,2832,952,3,Tower,PATI,Patient Rooms Pod B,PRB
-dSTOR00403,3068,1197,3,Tower,STOR,Bed and Recliner Parking,BRP
-dSTOR00303,3068,2202,3,Tower,STOR,Bed and Recliner Parking,BRP
-HSTAI00103,3068,3229,3,Tower,STAI,Stairwell 1 Floor 3,Stairwell
-HHALL00503,3068,3295,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
-HHALL01103,3112,1233,3,Tower,HALL,Hallway Connector 11 Floor 3,Hallway H01103
-HDEPT00203,3112,1276,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
-HDEPT00103,3266,1584,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
-HHALL00903,3310,1233,3,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
-HHALL00803,3310,1430,3,Tower,HALL,Hallway Connector 8 Floor 3,Hallway H00803
-HHALL00703,3310,1584,3,Tower,HALL,Hallway Connector 7 Floor 3,Hallway H00703
-HHALL00603,3310,1693,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
