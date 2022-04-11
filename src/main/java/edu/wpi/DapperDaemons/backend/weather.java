@@ -58,6 +58,10 @@ public class weather {
     JSONObject obj = new JSONObject(jsonString);
     String icon = obj.getJSONArray("weather").getJSONObject(0).getString("icon");
 
-    return new Image(weather.class.getClassLoader().getResourceAsStream("edu/wpi/DapperDaemons/weatherIcons/" + icon + ".png"));
+    return new Image(
+        weather
+            .class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/DapperDaemons/weatherIcons/" + icon + ".png"));
   }
 }
