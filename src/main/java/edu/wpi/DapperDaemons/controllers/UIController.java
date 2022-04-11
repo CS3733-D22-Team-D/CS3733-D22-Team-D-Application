@@ -29,6 +29,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -50,6 +52,7 @@ public abstract class UIController implements Initializable {
   @FXML private VBox sceneBox;
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
+  @FXML private Text accountName;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
@@ -64,7 +67,12 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
-
+    String employeeName =
+        SecurityController.getUser().getFirstName()
+            + " "
+            + SecurityController.getUser().getLastName();
+    accountName.setText(employeeName);
+    accountName.setFont(Font.font(14));
     try {
       error =
           FXMLLoader.load(

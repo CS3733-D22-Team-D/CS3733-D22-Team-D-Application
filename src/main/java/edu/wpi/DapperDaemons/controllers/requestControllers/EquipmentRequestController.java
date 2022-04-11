@@ -90,10 +90,10 @@ public class EquipmentRequestController extends UIController {
 
   @FXML
   public void onSubmitClicked() {
-    // get all the variables ready to go
 
     // make sure all fields are filled
     if (allFieldsFilled()) {
+      // get all the variables ready to go
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
