@@ -57,22 +57,42 @@
                         <Insets left="150.0" right="150.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="61.0" prefWidth="941.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Button>
+                        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="942.0">
+                           <children>
+                              <Button id="defaultButton" fx:id="initButton" mnemonicParsing="false" onAction="#initScanner" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="CONNECT TO SENSOR" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="942.0">
+                           <children>
+                              <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
-                  </VBox>
+                  </HBox>
                   <VBox alignment="CENTER" prefHeight="53.0" prefWidth="941.0">
                      <children>
                         <Label fx:id="sLabel" text="LABEL">
