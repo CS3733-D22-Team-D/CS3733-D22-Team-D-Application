@@ -718,7 +718,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="49.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="Temp" text="Temp" textFill="WHITE">

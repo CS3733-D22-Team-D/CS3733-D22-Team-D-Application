@@ -19,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 /*
@@ -48,12 +47,6 @@ public class DefaultController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    super.profilePic.setFill(
-        new ImagePattern(
-            new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/easterEgg.gif"))));
     weatherIcon.setImage(
         new Image(
             DefaultController.class
@@ -127,6 +120,49 @@ public class DefaultController extends UIController {
     easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.B);
     easterEggSequence.add(KeyCode.ENTER);
+  }
+
+  @FXML
+  void updateWeather() {
+    weatherIcon.setImage(
+        new Image(
+            DefaultController.class
+                .getClassLoader()
+                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+    weatherTimer = new Timer();
+    weatherTimer.schedule(
+        new TimerTask() { // timer task to update the seconds
+          @Override
+          public void run() {
+            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
+            // non-GUI thread.
+            Platform.runLater(
+                new Runnable() {
+                  public void run() {
+                    Float temp = null;
+                    try {
+                      temp = weather.getTemp("boston");
+                    } catch (Exception e) {
+                      e.printStackTrace();
+                    }
+                    if (Temp != null && temp != null) {
+                      Temp.setText(String.valueOf(temp));
+                    }
+                    Image icon = null;
+                    try {
+                      icon = weather.getIcon("boston");
+                    } catch (Exception e) {
+                      e.printStackTrace();
+                    }
+                    if (weatherIcon != null && icon != null) {
+                      weatherIcon.setImage(icon);
+                    }
+                  }
+                });
+          }
+        },
+        0,
+        weatherUpdate * 1000); // Every 1 second
   }
 
   @FXML
