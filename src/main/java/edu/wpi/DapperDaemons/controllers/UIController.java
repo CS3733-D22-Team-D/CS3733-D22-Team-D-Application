@@ -131,8 +131,6 @@ public abstract class UIController implements Initializable {
 
   @FXML
   protected void showError(String errorMessage, Pos pos) {
-
-
     ((HBox)error.getParent()).setAlignment(pos);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
