@@ -90,14 +90,13 @@ public class DefaultController extends UIController {
                       .getClassLoader()
                       .getResourceAsStream(
                           "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
-        }
-      } else {
-        if (serverBox != null) {
+        } else {
           serverIcon.setImage(
               new Image(
                   DefaultController.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+                      .getResourceAsStream(
+                          "edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
         }
       }
     } else {
@@ -180,31 +179,39 @@ public class DefaultController extends UIController {
     if (connectionHandler.getConnection() instanceof EmbedConnection) {
       if (connectionHandler.switchToClientServer()) {
         serverIcon.setImage(
-            new Image(Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
+            new Image(
+                Objects.requireNonNull(
+                    DefaultController.class
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
       } else {
         serverIcon.setImage(
-            new Image(Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
+            new Image(
+                Objects.requireNonNull(
+                    DefaultController.class
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
         showError("Connection could not be switched");
       }
     } else {
       if (connectionHandler.switchToEmbedded()) {
         serverIcon.setImage(
-            new Image(Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
+            new Image(
+                Objects.requireNonNull(
+                    DefaultController.class
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png"))));
       } else {
         serverIcon.setImage(
-            new Image(Objects.requireNonNull(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
+            new Image(
+                Objects.requireNonNull(
+                    DefaultController.class
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/serverIcons/server.png"))));
         showError("Connection could not be switched");
       }
     }
