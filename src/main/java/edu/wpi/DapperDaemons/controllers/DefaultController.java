@@ -41,11 +41,11 @@ public class DefaultController extends UIController {
   private static Timer weatherTimer;
   private static final int weatherUpdate = 300;
 
-  List<KeyCode> easterEggSequence = new ArrayList<>();
-  int easterEggInd = 0;
+  private List<KeyCode> easterEggSequence = new ArrayList<>();
+  private int easterEggInd = 0;
 
-  long startTime;
-  int count = 0;
+  private long startTime;
+  private int count = 0;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
