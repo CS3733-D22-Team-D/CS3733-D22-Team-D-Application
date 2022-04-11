@@ -718,6 +718,16 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="weatherIcon" fitHeight="49.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="Temp" text="Temp" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="380.0">

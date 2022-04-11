@@ -1,9 +1,7 @@
 package edu.wpi.DapperDaemons.backend;
 
-import java.io.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javafx.scene.image.Image;
@@ -13,7 +11,7 @@ public class weather {
 
   private weather() {}
 
-  public static Float getWeather(String location) throws Exception {
+  public static Float getTemp(String location) throws Exception {
     URL url =
         new URL(
             "https://api.openweathermap.org/data/2.5/weather?q="
