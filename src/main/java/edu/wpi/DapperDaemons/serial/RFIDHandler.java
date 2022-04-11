@@ -26,7 +26,7 @@ public class RFIDHandler {
    *
    * @return true if the scan was valid, false otherwise
    */
-  public boolean scan()
+  public boolean scan(String COM)
       throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException,
           NoSuchAlgorithmException {
     SerialCOM reader = new SerialCOM();
@@ -34,7 +34,7 @@ public class RFIDHandler {
     if (!(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)))
       throw new UserNotAuthorizedException(user.getEmployeeType());
     else {
-      inputID = reader.readData();
+      inputID = reader.readData(COM);
       return UIDs.contains(SHA.toHexString(SHA.getSHA(inputID)));
     }
   }

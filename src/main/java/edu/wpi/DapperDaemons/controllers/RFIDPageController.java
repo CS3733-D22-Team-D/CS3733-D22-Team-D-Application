@@ -1,8 +1,10 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import arduino.Arduino;
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.RFIDMachine;
-import java.io.IOException;
+import edu.wpi.DapperDaemons.serial.SerialCOM;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,21 +21,39 @@ public class RFIDPageController extends UIController {
   @FXML private VBox sceneBox;
   @FXML private Button continueButton;
   @FXML private Button backButton;
+  @FXML private Button initButton;
+  @FXML private String COM;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     sLabel.setText("");
+    sButton.setVisible(false);
     continueButton.setVisible(false);
     backButton.setVisible(false);
   }
 
   @FXML
-  public void loginRFID() throws IOException {
+  public void initScanner() {
+    Arduino arduino;
+    SerialCOM serialCOM = new SerialCOM();
+    try {
+      arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+    } catch (UnableToConnectException e) {
+      sLabel.setText("Unable to Connect");
+      return;
+    }
+    this.COM = arduino.getPortDescription();
+    System.out.println(this.COM);
+    initButton.setVisible(false);
+    sButton.setVisible(true);
+  }
+
+  @FXML
+  public void loginRFID() {
     RFIDMachine rfid =
         new RFIDMachine(
-            new Employee("RFID", "Test", "Jan2 2002",
-                    Employee.EmployeeType.ADMINISTRATOR, 5));
-    RFIDMachine.LoginState state = rfid.login();
+            new Employee("RFID", "Test", "Jan2 2002", Employee.EmployeeType.ADMINISTRATOR, 5));
+    RFIDMachine.LoginState state = rfid.login(this.COM);
     if (state.equals(RFIDMachine.LoginState.SUCCESS)) {
       sLabel.setText(
           "Access Granted: Hello "
@@ -52,9 +72,7 @@ public class RFIDPageController extends UIController {
       backButton.setVisible(true);
       continueButton.setVisible(false);
     } else if (state.equals(RFIDMachine.LoginState.UNABLETOCONNECT)) {
-      sLabel.setText(
-          "Unable to Connect to RFID Sensor"); // TODO: Get list of COM Ports to attempt to
-      // reconnect
+      sLabel.setText("Unable to Connect to RFID Sensor");
       backButton.setVisible(true);
     }
   }
