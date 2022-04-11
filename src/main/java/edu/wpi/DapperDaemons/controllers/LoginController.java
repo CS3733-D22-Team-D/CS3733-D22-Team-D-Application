@@ -7,6 +7,7 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 
 public class LoginController {
 
@@ -29,6 +34,8 @@ public class LoginController {
   DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
+  static Thread sound;
+
   @FXML
   void login() throws Exception {
     if (username.getText().equals("") && password.getText().equals("")) {
@@ -37,12 +44,48 @@ public class LoginController {
     } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
+    } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
+      playSound("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
       TwoFactor.setVisible(true);
       Authentication.sendAuthCode(acc);
     }
+  }
+
+  public void stopSound() {
+    sound.interrupt();
+  }
+
+  public static synchronized void playSound(final String url) throws LineUnavailableException {
+    sound =
+        new Thread(
+            new Runnable() {
+              // The wrapper thread is unnecessary, unless it blocks on the
+              // Clip finishing; see comments.
+              Clip clip = AudioSystem.getClip();
+
+              public void stop() {
+                clip.stop();
+              }
+
+              public void run() {
+                try {
+                  AudioInputStream inputStream =
+                      AudioSystem.getAudioInputStream(
+                          Objects.requireNonNull(
+                              easterEggController.class.getClassLoader().getResourceAsStream(url)));
+                  clip.open(inputStream);
+                  clip.start();
+                } catch (Exception e) {
+                  System.err.println(e.getMessage());
+                }
+                while (!Thread.interrupted()) ;
+                stop();
+              }
+            });
+    sound.start();
   }
 
   @FXML
@@ -96,7 +139,6 @@ public class LoginController {
   @FXML
   public void quitProgram() {
     Stage window = (Stage) username.getScene().getWindow();
-
     //    try {
     //      DAO<Location> closer = DAOPouch.getLocationDAO();
     //      DAO<MedicalEquipmentRequest> closer2 = DAOPouch.getMedicalEquipmentRequestDAO();
@@ -108,5 +150,7 @@ public class LoginController {
     //    }
     csvSaver.saveAll();
     window.close();
+    Platform.exit();
+    System.exit(0);
   }
 }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.TableObject;
@@ -20,9 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,12 +38,18 @@ Contains methods needed for all UI pages
  */
 public abstract class UIController implements Initializable {
 
+  /* Variables for error messages */
+  @FXML private StackPane windowContents;
+  @FXML private VBox error;
+
   /* JFX Variable */
   @FXML private ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
+  @FXML private VBox userDropdown;
+  @FXML private ToggleButton userSettingsToggle;
 
   /* DAO Object to access all room numbers */
   List<Location> locations;
@@ -53,7 +64,33 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
+
+    try {
+      error =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "errorMessage.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    error.setVisible(false);
+    error.setPickOnBounds(false);
+    windowContents.getChildren().add(error);
+
     menuSlider(slider, burg, burgBack);
+  }
+
+  @FXML
+  protected void showError(String errorMessage) {
+    error.setVisible(true);
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
   }
 
   @FXML
@@ -104,6 +141,24 @@ public abstract class UIController implements Initializable {
                 burgBack.setVisible(false);
               });
         });
+  }
+
+  @FXML
+  public void openUserDropdown() {
+    if (userSettingsToggle.isSelected()) userDropdown.setVisible(true);
+    else userDropdown.setVisible(false);
+  }
+
+  @FXML
+  public void openUserSettings() {
+    // TODO : Create a userSettings.fxml page
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
+    // TODO : Logout the current user (set the user as something else or just remove it entirely)
   }
 
   @FXML
@@ -227,7 +282,7 @@ public abstract class UIController implements Initializable {
    *
    * @return a list of long names
    */
-  public List<String> getAllLongNames() {
+  protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<String>();
     for (Location loc : this.locations) {
       names.add(loc.getLongName());
