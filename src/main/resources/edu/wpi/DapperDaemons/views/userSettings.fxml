@@ -39,7 +39,7 @@
                <children>
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="220.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ToggleButton fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0;" text="Home" VBox.vgrow="ALWAYS">
+                        <ToggleButton fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0;" text="Home" VBox.vgrow="ALWAYS">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -47,7 +47,7 @@
                               <Font size="12.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Account Settings">
+                        <ToggleButton fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Account Settings">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -55,7 +55,7 @@
                               <Font size="12.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="securityAccessButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Security Access">
+                        <ToggleButton fx:id="securityAccessButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Security Access">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -63,7 +63,7 @@
                               <Font size="12.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="twoFAButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Two Factor Authentication">
+                        <ToggleButton fx:id="twoFAButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Two Factor Authentication">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -71,7 +71,7 @@
                               <Font size="12.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="portalPreferencesButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Portal Preferences">
+                        <ToggleButton fx:id="portalPreferencesButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="Portal Preferences">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -79,7 +79,7 @@
                               <Font size="12.0" />
                            </font>
                         </ToggleButton>
-                        <Button fx:id="aboutButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#switchToAboutUs" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 2 0 1 0;" text="About" VBox.vgrow="ALWAYS">
+                        <Button fx:id="aboutButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#switchToAboutUs" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 7.5 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 2 0 1 0;" text="About" VBox.vgrow="ALWAYS">
                            <graphic>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
@@ -528,7 +528,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#goHome" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/BrighamLogoWithBG.png" />
                                  </image>
