@@ -25,7 +25,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="631.0" prefWidth="1094.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="631.0" prefWidth="1094.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -42,7 +42,7 @@
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Notification thingy">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications">
                                              <font>
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
@@ -51,11 +51,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../../Downloads/b2b.jpeg" />
-                                             </image>
-                                          </ImageView>
+                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -164,41 +160,61 @@
                                              <tabs>
                                                 <Tab text="Equipment">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="equipTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="134.0" text="Equipment Name" />
+                                                            <TableColumn prefWidth="150.0" text="Equipment Type" />
+                                                            <TableColumn prefWidth="134.0" text="Clean Status" />
+                                                            <TableColumn prefWidth="134.0" text="Serial Number" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Patients">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="patientTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="First Name" />
+                                                            <TableColumn prefWidth="75.0" text="Last Name" />
+                                                            <TableColumn prefWidth="75.0" text="Room ID" />
+                                                            <TableColumn prefWidth="75.0" text="Blood Type" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Locations">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="locTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="Location ID" />
+                                                            <TableColumn prefWidth="75.0" text="Floor" />
+                                                            <TableColumn prefWidth="75.0" text="Building" />
+                                                            <TableColumn prefWidth="75.0" text="Type" />
+                                                            <TableColumn prefWidth="75.0" text="Name" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Requests">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="reqTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="Request Type" />
+                                                            <TableColumn prefWidth="75.0" text="Priority" />
+                                                            <TableColumn prefWidth="75.0" text="Requires Transport?" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
