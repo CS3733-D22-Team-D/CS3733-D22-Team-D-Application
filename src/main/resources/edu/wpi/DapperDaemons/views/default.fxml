@@ -732,16 +732,19 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox prefHeight="50.0" prefWidth="141.0">
-                                       <children>
-                                          <Label fx:id="time" prefHeight="17.0" prefWidth="147.0" textFill="WHITE" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="time" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" text="tretreter" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="7.0">
                            <children>
@@ -764,6 +767,9 @@
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
                                     </Text>
                                     <Circle fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
