@@ -52,7 +52,9 @@ public class DefaultController extends UIController {
                   public void run() {
                     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyy HH:mm:ss");
                     Date now = new Date();
-                    time.setText(formatter.format(now));
+                    if (time != null) {
+                      time.setText(formatter.format(now));
+                    }
                   }
                 });
           }
