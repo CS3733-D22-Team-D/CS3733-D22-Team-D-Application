@@ -50,7 +50,7 @@ public class easterEggController extends UIController {
                 } catch (Exception e) {
                   System.err.println(e.getMessage());
                 }
-                while (!Thread.interrupted()) ;
+                while (!Thread.interrupted());
                 stop();
               }
             });
