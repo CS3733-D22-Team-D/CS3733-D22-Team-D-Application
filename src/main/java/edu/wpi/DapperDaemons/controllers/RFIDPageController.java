@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import arduino.Arduino;
-import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
@@ -9,30 +8,21 @@ import edu.wpi.DapperDaemons.serial.RFIDMachine;
 import edu.wpi.DapperDaemons.serial.SerialCOM;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class RFIDPageController implements Initializable {
+public class RFIDPageController extends AppController {
 
   @FXML private Label sLabel;
   @FXML private Label initLabel;
   @FXML private Label resultLabel;
   @FXML private Label helpLabel;
   @FXML private Button sButton;
-  @FXML private ImageView homeIcon;
-  @FXML private VBox sceneBox;
   @FXML private Button continueButton;
   @FXML private Button backButton;
   @FXML private Button initButton;
@@ -124,23 +114,6 @@ public class RFIDPageController implements Initializable {
   @FXML
   public void goToLogin() throws IOException {
     switchScene("login.fxml", 780, 548);
-  }
-
-  protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) sLabel.getScene().getWindow();
-    window.setOnCloseRequest(e -> quitProgram());
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-
-    double width = sceneBox.getPrefWidth();
-    double height = sceneBox.getPrefHeight();
-    window.setScene(new Scene(root));
-    sceneBox.setPrefWidth(width);
-    sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
-    window.setHeight(window.getHeight());
   }
 
   @FXML
