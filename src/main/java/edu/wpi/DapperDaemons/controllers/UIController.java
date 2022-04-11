@@ -76,7 +76,7 @@ public abstract class UIController implements Initializable {
             + " "
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
-    accountName.setFont(Font.font(14));
+    accountName.setFont(Font.font("Comic Sans", 14));
     try {
       error =
           FXMLLoader.load(
