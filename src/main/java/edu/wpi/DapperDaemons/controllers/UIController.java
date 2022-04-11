@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -37,11 +36,13 @@ Contains methods needed for all UI pages
  */
 public abstract class UIController extends AppController {
 
-  /* JFX Variable */
+  /* Common to Default page */
   @FXML private ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
+
+  /* Home page stuff */
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private Text accountName;
@@ -90,17 +91,6 @@ public abstract class UIController extends AppController {
                             "edu/wpi/DapperDaemons/profilepictures/"
                                 + SecurityController.getUser().getNodeID()
                                 + ".png")))));
-  }
-
-  @FXML
-  public void quitProgram() {
-    Stage window = (Stage) homeIcon.getScene().getWindow();
-    csvSaver.saveAll();
-    if (window != null) {
-      window.close();
-    }
-    Platform.exit();
-    System.exit(0);
   }
 
   static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
@@ -252,11 +242,7 @@ public abstract class UIController extends AppController {
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
   }
-  /**
-   * Gets all long names
-   *
-   * @return a list of long names
-   */
+
   protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<>();
     for (Location loc : this.locations) {

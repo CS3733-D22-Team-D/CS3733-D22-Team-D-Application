@@ -74,7 +74,7 @@ public class AppController implements Initializable {
     Stage window = (Stage) sceneBox.getScene().getWindow();
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
-
+    window.setOnCloseRequest(e -> quitProgram());
     double width = sceneBox.getPrefWidth();
     double height = sceneBox.getPrefHeight();
     window.setScene(new Scene(root));
@@ -88,7 +88,7 @@ public class AppController implements Initializable {
   protected void quitProgram() {
     Stage window = (Stage) sceneBox.getScene().getWindow();
     csvSaver.saveAll();
-    window.close();
+    if (window != null) window.close();
     Platform.exit();
     System.exit(0);
   }
