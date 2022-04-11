@@ -1,9 +1,10 @@
-package edu.wpi.DapperDaemons.controllers;
+package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -90,15 +91,17 @@ public class EquipmentRequestController extends UIController {
   @FXML
   public void onSubmitClicked() {
     // get all the variables ready to go
-    Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
-    String roomID = "";
-    String requesterID = SecurityController.getUser().getNodeID();
-    String assigneeID = "null";
-    MedicalEquipment.EquipmentType equipmentType =
-        MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
-    MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
+
     // make sure all fields are filled
     if (allFieldsFilled()) {
+      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      String roomID = "";
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assigneeID = "null";
+      MedicalEquipment.EquipmentType equipmentType =
+          MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
+      MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
+
       ArrayList<MedicalEquipment> equipments = new ArrayList<>();
       MedicalEquipment equipment = new MedicalEquipment();
       // is there equipment with that Type?
@@ -168,18 +171,21 @@ public class EquipmentRequestController extends UIController {
                       cleanStatus));
           // check if user has permission
           if (!hadClearance) {
-            // TODO throw error saying that user does not have permission for that function
+            showError("You do not have permission to do this.");
           }
 
         } else {
-          // TODO throw error that room does not exist
+          // throw error that room does not exist
+          showError("A room with that name does not exist.");
         }
 
       } else {
-        // TODO Throw error that no equipment of that type exist
+        // Throw error that no equipment of that type exist
+
+        showError("No equipment of that type exists.");
       }
     } else {
-      // TODO  error message that not all fields are filled in
+      showError("All fields must be filled.");
     }
     onClearClicked();
   }

@@ -1,9 +1,10 @@
-package edu.wpi.DapperDaemons.controllers;
+package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -91,15 +92,16 @@ public class PatientTransportController extends UIController implements Initiali
 
   @FXML
   public void onSubmitClicked() {
-    Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
-    String roomID;
-    String requesterID = SecurityController.getUser().getNodeID();
-    String assigneeID = "null";
-    String patientID;
-    String nextRoomID = "";
-    Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
     if (fieldsNonEmpty()) {
+      Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+      String roomID;
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assigneeID = "null";
+      String patientID;
+      String nextRoomID = "";
+      Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
       // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
       boolean nextLocationExists = false;
@@ -117,7 +119,7 @@ public class PatientTransportController extends UIController implements Initiali
       if (nextLocationExists) {
 
         // Now Check of the patient exists
-        boolean patientExists = false;
+        boolean isAPatient = false;
         Patient patient = new Patient();
         patientID =
             patientFirstName.getText()
@@ -131,9 +133,13 @@ public class PatientTransportController extends UIController implements Initiali
         } catch (SQLException e) {
           e.printStackTrace();
         }
-        patientExists = patient.getFirstName().equals(patientFirstName.getText());
+        try {
+          isAPatient = patient.getFirstName().equals(patientFirstName.getText());
+        } catch (NullPointerException e) {
+          e.printStackTrace();
+        }
 
-        if (patientExists) {
+        if (isAPatient) {
 
           // now send request and get back whether it went through.
 
@@ -143,16 +149,21 @@ public class PatientTransportController extends UIController implements Initiali
                   new PatientTransportRequest(
                       priority, roomID, requesterID, assigneeID, patientID, nextRoomID, status));
           if (!hadPermission) {
-            // TODO display error that employee does not have permission
+            // display error that employee does not have permission
+
+            showError("You do not have permission to do this.");
           }
         } else {
-          // TODO display error that patient does not exist
+          // display error that patient does not exist
+          showError("Could not find a patient that matches.");
         }
       } else {
-        // TODO display error that location does not exist
+        // display error that location does not exist
+        showError("A room with that name does not exist.");
       }
     } else {
-      // TODO display error message not all fields filled
+      // display error message not all fields filled
+      showError("All fields must be filled.");
     }
     onClearClicked();
   }
