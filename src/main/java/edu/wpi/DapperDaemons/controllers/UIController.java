@@ -21,6 +21,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -92,6 +94,8 @@ public abstract class UIController implements Initializable {
     errorContainer.setPickOnBounds(false);
     windowContents.getChildren().add(errorContainer);
     errorContainer.getChildren().add(error);
+    errorContainer.setAlignment(Pos.CENTER);
+    errorContainer.setPadding(new Insets(20, 20, 20, 20));
     menuSlider(slider, burg, burgBack);
     try {
 
@@ -124,6 +128,23 @@ public abstract class UIController implements Initializable {
       }
     }
   }
+
+  @FXML
+  protected void showError(String errorMessage, Pos pos) {
+
+
+    ((HBox)error.getParent()).setAlignment(pos);
+    error.setVisible(true);
+    Node nodeOut = error.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(errorMessage);
+        }
+      }
+    }
+  }
+
 
   @FXML
   public void quitProgram() {

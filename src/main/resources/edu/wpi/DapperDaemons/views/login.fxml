@@ -25,42 +25,24 @@
                   <Insets top="50.0" />
                </opaqueInsets>
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" prefHeight="225.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#quitProgram" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                       <VBox.margin>
-                                          <Insets right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../assets/Brigham_and_Womens_Hospital_logo.png" />
-                                             </image>
-                                          </ImageView>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <Label text="Sign In" textFill="#003da6">
-                                                   <font>
-                                                      <Font size="37.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+                              <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Brigham_and_Womens_Hospital_logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Sign In" textFill="#003da6">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" top="20.0" />
+                           </padding>
                         </VBox>
                         <VBox prefHeight="225.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -125,6 +107,13 @@
                      <HBox.margin>
                         <Insets left="40.0" right="40.0" />
                      </HBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.30000001192092896" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </VBox>
                </children>
             </HBox>

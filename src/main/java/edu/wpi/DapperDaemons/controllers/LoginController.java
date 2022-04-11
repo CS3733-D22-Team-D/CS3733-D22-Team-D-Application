@@ -110,7 +110,7 @@ public class LoginController implements Initializable {
       Authentication.sendAuthCode(acc);
     } else {
 
-      //incorrect username or password
+      // incorrect username or password
       showError("Either your username or password is incorrect.");
     }
   }
