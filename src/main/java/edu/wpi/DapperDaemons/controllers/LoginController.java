@@ -13,6 +13,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -65,7 +68,12 @@ public class LoginController implements Initializable {
         });
     error.setVisible(false);
     error.setPickOnBounds(false);
-    windowContents.getChildren().add(error);
+    HBox errorContainer = new HBox();
+    errorContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(errorContainer);
+    errorContainer.getChildren().add(error);
+    errorContainer.setAlignment(Pos.TOP_CENTER);
+    errorContainer.setPadding(new Insets(20, 20, 20, 20));
   }
 
   // showing an error message
@@ -101,7 +109,9 @@ public class LoginController implements Initializable {
       TwoFactor.setVisible(true);
       Authentication.sendAuthCode(acc);
     } else {
-      showError("Either your username or Password is incorrect.");
+
+      //incorrect username or password
+      showError("Either your username or password is incorrect.");
     }
   }
 

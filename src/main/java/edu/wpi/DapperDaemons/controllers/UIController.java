@@ -28,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -87,8 +88,10 @@ public abstract class UIController implements Initializable {
 
     error.setVisible(false);
     error.setPickOnBounds(false);
-    windowContents.getChildren().add(error);
-
+    HBox errorContainer = new HBox();
+    errorContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(errorContainer);
+    errorContainer.getChildren().add(error);
     menuSlider(slider, burg, burgBack);
     try {
 
