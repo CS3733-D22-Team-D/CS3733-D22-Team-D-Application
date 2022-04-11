@@ -92,7 +92,7 @@ public class DefaultController extends UIController {
                       e.printStackTrace();
                     }
                     if (Temp != null && temp != null) {
-                      Temp.setText(String.valueOf(temp));
+                      Temp.setText(String.valueOf(temp) + "°F");
                     }
                     Image icon = null;
                     try {
@@ -124,11 +124,12 @@ public class DefaultController extends UIController {
 
   @FXML
   void updateWeather() {
-    weatherIcon.setImage(
-        new Image(
-            DefaultController.class
-                .getClassLoader()
-                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+//loading image
+    //    weatherIcon.setImage(
+//        new Image(
+//            DefaultController.class
+//                .getClassLoader()
+//                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
     weatherTimer = new Timer();
     weatherTimer.schedule(
         new TimerTask() { // timer task to update the seconds
@@ -146,7 +147,7 @@ public class DefaultController extends UIController {
                       e.printStackTrace();
                     }
                     if (Temp != null && temp != null) {
-                      Temp.setText(String.valueOf(temp));
+                      Temp.setText(String.valueOf(temp) + "°F");
                     }
                     Image icon = null;
                     try {
