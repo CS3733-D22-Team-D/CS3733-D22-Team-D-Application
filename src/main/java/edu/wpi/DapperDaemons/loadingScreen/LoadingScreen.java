@@ -9,10 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class loadingScreen {
+public class LoadingScreen {
   Stage primaryStage;
 
-  public loadingScreen(Stage primaryStage) {
+  public LoadingScreen(Stage primaryStage) {
     this.primaryStage = primaryStage;
   }
 
@@ -29,7 +29,7 @@ public class loadingScreen {
                           Parent root =
                               FXMLLoader.load(
                                   Objects.requireNonNull(
-                                      loadingScreen
+                                      LoadingScreen
                                           .class
                                           .getClassLoader()
                                           .getResource(
