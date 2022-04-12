@@ -2,6 +2,8 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.csvSaver;
+import edu.wpi.DapperDaemons.entities.TableObject;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -21,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppController implements Initializable {
@@ -29,6 +32,7 @@ public class AppController implements Initializable {
   @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
+  private boolean updatedSize;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -82,7 +86,8 @@ public class AppController implements Initializable {
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
+    if (updatedSize) window.setWidth(window.getWidth() + 0.001);
+    else window.setWidth(window.getWidth() - 0.001); // To update size because JavaFX is bad
     window.setHeight(window.getHeight());
   }
 
@@ -98,5 +103,17 @@ public class AppController implements Initializable {
   public static void bindImage(ImageView pageImage, Pane parent) {
     pageImage.fitHeightProperty().bind(parent.heightProperty());
     pageImage.fitWidthProperty().bind(parent.widthProperty());
+  }
+
+  protected void saveToCSV(TableObject type) {
+    FileChooser fileSys = new FileChooser();
+    Stage window = (Stage) sceneBox.getScene().getWindow();
+    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+    File csv = fileSys.showSaveDialog(window);
+    try {
+      csvSaver.save(type, csv.getAbsolutePath());
+    } catch (Exception e) {
+      System.err.println("Unable to Save CSV of type: " + type);
+    }
   }
 }

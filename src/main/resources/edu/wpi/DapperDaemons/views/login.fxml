@@ -25,7 +25,7 @@
                   <Insets top="50.0" />
                </opaqueInsets>
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" prefHeight="225.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -36,7 +36,7 @@
                               </ImageView>
                               <Label text="Sign In" textFill="#003da6">
                                  <font>
-                                    <Font size="37.0" />
+                                    <Font size="25.0" />
                                  </font>
                               </Label>
                            </children>
