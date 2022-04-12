@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.tables;
+package edu.wpi.DapperDaemons.map.tables;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

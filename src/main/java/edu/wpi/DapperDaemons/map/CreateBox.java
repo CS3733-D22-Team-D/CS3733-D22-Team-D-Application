@@ -3,7 +3,7 @@ package edu.wpi.DapperDaemons.map;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.map.tables.TableHelper;
 import java.util.List;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
