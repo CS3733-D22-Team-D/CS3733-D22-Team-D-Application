@@ -1,9 +1,8 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.tables.TableHandler;
+import edu.wpi.DapperDaemons.map.tables.TableHandler;
 import java.time.LocalDateTime;
-import javafx.scene.layout.Priority;
 
 public class SanitationRequest extends TableObject implements Request {
 

@@ -42,20 +42,23 @@ public class LoginController extends AppController {
   @FXML
   void login() throws Exception {
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
-    if (username.getText().equals("admin") && password.getText().equals("admin")) {
+    if (username.getText().trim().equals("admin") && password.getText().trim().equals("admin")) {
       SecurityController.setUser(admin);
       switchScene("default.fxml", 635, 510);
       return;
-    } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
+    } else if (username.getText().trim().equals("staff")
+        && password.getText().trim().equals("staff")) {
       Employee staff = DAOPouch.getEmployeeDAO().get("staff");
       SecurityController.setUser(staff);
       switchScene("default.fxml", 635, 510);
       return;
-    } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
+    } else if (username.getText().trim().equals("rfid")
+        && password.getText().trim().equals("rfid")) { // RFID TEST
       SecurityController.setUser(admin);
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
-    } else if (username.getText().equals("Rick") && password.getText().equals("Astley")) {
+    } else if (username.getText().trim().equals("Rick")
+        && password.getText().trim().equals("Astley")) {
       player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }

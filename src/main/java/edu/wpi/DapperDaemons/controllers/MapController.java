@@ -13,6 +13,7 @@ import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -131,10 +132,10 @@ public class MapController extends UIController implements Initializable {
             mapFloor3,
             mapFloor4,
             mapFloor5);
-    maps.setMap("1");
+    maps.setMap(MapDashboardController.floor);
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
-    glyphs.setFloorFilter("1");
+    glyphs.setFloorFilter(maps.getFloor());
 
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
@@ -182,6 +183,8 @@ public class MapController extends UIController implements Initializable {
     int y = (int) click.getY();
     String floor = maps.getFloor();
     System.out.println("Location " + x + " " + y + " clicked!");
+
+    System.out.println(x + " " + y);
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
@@ -553,11 +556,23 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   void showCarrot(MouseEvent event) {
-    filterButton.setVisible(true);
+    FadeTransition ft = new FadeTransition(Duration.millis(100), filterButton);
+    ft.setFromValue(0.0);
+    ft.setToValue(1.0);
+    ft.setCycleCount(1);
+    ft.setAutoReverse(false);
+
+    ft.play();
   }
 
   @FXML
   void hideCarrot(MouseEvent event) {
-    filterButton.setVisible(false);
+    FadeTransition ft = new FadeTransition(Duration.millis(100), filterButton);
+    ft.setFromValue(1.0);
+    ft.setToValue(0.0);
+    ft.setCycleCount(1);
+    ft.setAutoReverse(false);
+
+    ft.play();
   }
 }

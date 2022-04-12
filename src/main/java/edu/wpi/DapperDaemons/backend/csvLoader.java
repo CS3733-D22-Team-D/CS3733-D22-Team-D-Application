@@ -35,12 +35,12 @@ public class csvLoader {
     Statement stmt = connectionHandler.getConnection().createStatement();
     filenames.forEach(
         (k, v) -> {
-          System.out.println("Currently on " + v.getTableName());
+          //          System.out.println("Currently on " + v.getTableName());
           try {
             try {
               stmt.execute(v.getTableInit());
             } catch (SQLException e) {
-              System.out.printf("%s table already created\n", v.getTableName());
+              //              System.out.printf("%s table already created\n", v.getTableName());
             }
             load(v, k + ".csv");
           } catch (IOException e) {
