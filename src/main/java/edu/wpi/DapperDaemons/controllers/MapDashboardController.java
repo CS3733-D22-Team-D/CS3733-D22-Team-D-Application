@@ -10,6 +10,7 @@ import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.text.Text;
 
 public class MapDashboardController extends UIController {
 
@@ -49,6 +51,12 @@ public class MapDashboardController extends UIController {
   @FXML private ToggleButton LL2;
   @FXML private ToggleButton M1;
   @FXML private ToggleButton M2;
+
+  @FXML private Text cleanEquipNum;
+  @FXML private Text dirtyEquipNum;
+  @FXML private Text inUseEquipment;
+  @FXML private Text patientNum;
+  @FXML private Text requestNum;
 
   private String floor;
 
@@ -99,6 +107,40 @@ public class MapDashboardController extends UIController {
         showError("Failed to show data on tables.");
       }
     }
+    updateIcons();
+  }
+
+  private void updateIcons() {
+    requestNum.setText(reqTable.getItems().size() + "");
+    patientNum.setText(patientTable.getItems().size() + "");
+
+    List<MedicalEquipment> dirtyEquipment =
+        equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN");
+    List<MedicalEquipment> cleanEquipment = equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN");
+
+    dirtyEquipNum.setText(dirtyEquipment.size() + "");
+    cleanEquipNum.setText(cleanEquipment.size() + "");
+
+    List<MedicalEquipment> notInStorage = new ArrayList<>();
+    equipTable
+        .getItems()
+        .forEach(
+            e -> {
+              Location equipLoc;
+              try {
+                equipLoc = locationDAO.get(e.getLocationID());
+              } catch (Exception ex) {
+                equipLoc = new Location();
+              }
+              if (!equipLoc.getNodeType().equals("DIRT")
+                  && !equipLoc.getNodeType().equals("STOR")
+                  && !dirtyEquipment.contains(e)
+                  && !cleanEquipment.contains(e)) {
+                notInStorage.add(e);
+              }
+            });
+
+    inUseEquipment.setText(notInStorage.size() + "");
   }
 
   @FXML

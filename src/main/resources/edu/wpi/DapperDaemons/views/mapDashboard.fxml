@@ -55,7 +55,6 @@
                                              <children>
                                                 <StackPane prefHeight="150.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0" />
                                                       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                                          <children>
                                                             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
@@ -73,7 +72,7 @@
                                                             <StackPane prefHeight="150.0" prefWidth="200.0">
                                                                <children>
                                                                   <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                                                                  <Text fx:id="cleanEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
                                                                      <font>
                                                                         <Font name="System Bold" size="13.0" />
                                                                      </font>
@@ -100,7 +99,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="dirtyEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
@@ -128,7 +127,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="inUseEquipment" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
@@ -157,7 +156,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="patientNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
@@ -182,7 +181,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="requestNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
