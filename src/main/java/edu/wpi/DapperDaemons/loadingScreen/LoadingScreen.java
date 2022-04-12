@@ -17,38 +17,42 @@ public class LoadingScreen {
   }
 
   public void display(Runnable init, Runnable display) throws IOException {
+    //    Platform.runLater(
+    //        () -> {
+    try {
+      Parent root =
+          FXMLLoader.load(
+              Objects.requireNonNull(
+                  LoadingScreen.class
+                      .getClassLoader()
+                      .getResource("edu/wpi/DapperDaemons/views/loadingScreen.fxml")));
+      Scene scene = new Scene(root);
+      primaryStage.setMinWidth(635);
+      primaryStage.setMinHeight(510);
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    //        });
+
     new Thread(
+            //            () -> {
+            //              Platform.runLater(
+            //                  () -> {
+
+            //                  });
+            //              new Thread(
             () -> {
+              init.run();
               Platform.runLater(
                   () -> {
-                    try {
-                      Parent root =
-                          FXMLLoader.load(
-                              Objects.requireNonNull(
-                                  LoadingScreen.class
-                                      .getClassLoader()
-                                      .getResource(
-                                          "edu/wpi/DapperDaemons/views/loadingScreen.fxml")));
-                      Scene scene = new Scene(root);
-                      primaryStage.setMinWidth(635);
-                      primaryStage.setMinHeight(510);
-                      primaryStage.setScene(scene);
-                      primaryStage.show();
-                    } catch (IOException e) {
-                      e.printStackTrace();
-                    }
+                    display.run();
+                    stop();
                   });
-              new Thread(
-                      () -> {
-                        init.run();
-                        Platform.runLater(
-                            () -> {
-                              display.run();
-                              stop();
-                            });
-                      })
-                  .start();
             })
+        //                  .start();
+        //            })
         .start();
   }
 
