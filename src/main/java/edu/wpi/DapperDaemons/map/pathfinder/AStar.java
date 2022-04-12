@@ -16,9 +16,14 @@ public class AStar {
    *
    * @throws SQLException only throws exception when the getAll calls no work
    */
-  public AStar() throws SQLException {
-    locations = DAOPouch.getLocationDAO().getAll();
-    nodeConnections = DAOPouch.getLocationNodeDAO().getAll();
+  public AStar() {
+    try {
+      locations = DAOPouch.getLocationDAO().getAll();
+      nodeConnections = DAOPouch.getLocationNodeDAO().getAll();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("The connection failed to locations or nodeConnections");
+    }
   }
 
   /**
@@ -75,14 +80,18 @@ public class AStar {
         current = moveOrder.get(current).getLocationName();
       }
     }
+    path.add(startLocation);
 
-    List<String> forwardPath = new ArrayList<>();
-    for (int i = 0, j = path.size() - 1; i < j; i++) {
-      path.add(i, path.remove(j));
-    }
-    if (path.isEmpty()) {
-      path.add("Path Not Found");
-    }
+    //    for (int i = 0, j = path.size() - 1; i < j; i++) {
+    //      path.add(i, path.remove(j));
+    //    }
+    //    if (path.isEmpty()) {
+    //      path.add("Path Not Found");
+    //    }
+
+    System.out.println("Printing out the path from A*");
+    for (String node : path) System.out.println(node);
+
     return path;
   }
 
@@ -110,7 +119,17 @@ public class AStar {
     for (LocationNodeConnections location : connected) {
       String nodeID = location.getConnectionOne();
       if (flipFlop.get(connected.indexOf(location))) nodeID = location.getConnectionTwo();
-      walkableNode.add(nodeID); // Gets the connected node as a String
+
+      try { // Make sure this location is actually on the map / csv file
+        if (DAOPouch.getLocationDAO().get(nodeID).getYcoord() != -1) {
+          walkableNode.add(nodeID);
+        }
+      } catch (Exception e) {
+        // In order to not overpopulate the printline with a bunch of errors, I'm not printing
+        // anything out here
+        // This catch is just so the above get can run and get all of the correct neighbors
+      }
+
       //      System.out.println("Neighbor node " + nodeID); // For letting me see stuff
     }
     return walkableNode; // returns connected nodeID's
@@ -145,11 +164,27 @@ public class AStar {
                 ^ 2 + (current.getYcoord() - next.getYcoord())
                 ^ 2);
     if (!current.getFloor().equals(next.getFloor())) {
-      System.out.println(
-          "Its on a separate floor, adding 50"); // Comment out after it works - which it will first
-      // time
-      distance += 50.0;
+      //      System.out.println(
+      //          "Its on a separate floor, adding something"); // Comment out after it works -
+      // which it
+      // will first
+      //      System.out.println(currentLocation + "To" + nextLocation);
+      distance += Math.abs(floorDistance(current.getFloor()) - floorDistance(next.getFloor()));
     }
     return distance;
+  }
+
+  private double floorDistance(String currentFloor) {
+    switch (currentFloor) {
+      case "L2":
+        return 0;
+      case "L1":
+        return 100;
+    }
+    return Integer.parseInt(currentFloor) * 100 + 100;
+  }
+
+  private double heuristic(String current, String next) {
+    return Math.abs(floorDistance(current) - floorDistance(next)) * 2;
   }
 }
