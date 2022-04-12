@@ -12,7 +12,6 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -61,10 +60,10 @@ public class MapDashboardController extends UIController {
   @FXML private Text patientNum;
   @FXML private Text requestNum;
   private final String floorTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getPath();
+      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
   private final String locOfInterestTxtPath =
       Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
-          .getPath();
+          .getFile();
 
   private String floor;
 
@@ -177,11 +176,16 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    FileReader f = new FileReader(filePath);
-    BufferedReader reader = new BufferedReader(f);
-    List<String> lines = reader.lines().collect(Collectors.toList());
-    if (line < lines.size()) return lines.get(line);
-    else return "";
+    File file = new File(filePath);
+    Scanner s = new Scanner(file);
+    int l = 0;
+    String current;
+    while (s.hasNextLine()) {
+      current = s.nextLine();
+      if (l == line) return current;
+      l++;
+    }
+    return "";
   }
 
   private int getFloorNum() {
