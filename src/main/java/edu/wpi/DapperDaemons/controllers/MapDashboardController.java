@@ -164,6 +164,7 @@ public class MapDashboardController extends UIController {
       String floorText = getFileText(floorTxtPath, getFloorNum());
       floorSummary.setText(floorText);
     } catch (IOException e) {
+      showError("Error 404: File Not Found");
     }
   }
 
