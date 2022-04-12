@@ -248,8 +248,8 @@ public class DefaultController extends UIController {
     easterEggSequence.add(KeyCode.RIGHT);
     easterEggSequence.add(KeyCode.LEFT);
     easterEggSequence.add(KeyCode.RIGHT);
-    easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.B);
+    easterEggSequence.add(KeyCode.A);
     easterEggSequence.add(KeyCode.ENTER);
   }
 

@@ -55,7 +55,7 @@
                               </VBox>
                               <VBox prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shaffath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                    <Label prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shafath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
