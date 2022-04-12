@@ -18,6 +18,9 @@ public class loadingScreenController extends AppController {
   @FXML VBox sceneBox;
   @FXML Label loadingLabel;
 
+  private static Timer loading;
+  private static Timer backgroundImages;
+
   private static int ind = 0;
 
   public final Image LOAD =
@@ -31,7 +34,8 @@ public class loadingScreenController extends AppController {
   public void initialize(URL location, ResourceBundle resources) {
     System.out.println("init");
     loadingIcon.setImage(LOAD);
-    Timer loading = new Timer();
+    if (loading != null) loading.cancel();
+    loading = new Timer();
     loading.schedule(
         new TimerTask() {
           @Override
@@ -48,8 +52,8 @@ public class loadingScreenController extends AppController {
         },
         0,
         250);
-
-    Timer backgroundImages = new Timer();
+    if (backgroundImages != null) backgroundImages.cancel();
+    backgroundImages = new Timer();
     backgroundImages.schedule(
         new TimerTask() {
           @Override
@@ -82,5 +86,10 @@ public class loadingScreenController extends AppController {
         },
         0,
         5000);
+  }
+
+  public static void stop() {
+    loading.cancel();
+    backgroundImages.cancel();
   }
 }
