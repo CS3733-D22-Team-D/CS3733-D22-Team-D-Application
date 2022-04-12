@@ -231,7 +231,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat." wrapText="true">
+                                          <Label fx:id="floorSummary" text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat." wrapText="true">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -266,7 +266,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat. Surgery is a medical or dental specialty" wrapText="true">
+                                          <Label fx:id="locOfInterest" text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat. Surgery is a medical or dental specialty" wrapText="true">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>

@@ -8,15 +8,20 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
@@ -51,12 +56,19 @@ public class MapDashboardController extends UIController {
   @FXML private ToggleButton LL2;
   @FXML private ToggleButton M1;
   @FXML private ToggleButton M2;
+  @FXML private Label floorSummary;
+  @FXML private Label locOfInterest;
 
   @FXML private Text cleanEquipNum;
   @FXML private Text dirtyEquipNum;
   @FXML private Text inUseEquipment;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
+  private String floorTxtPath =
+      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
+  private String locOfInterestTxtPath =
+      Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
+          .getFile();
 
   private String floor;
 
@@ -81,6 +93,7 @@ public class MapDashboardController extends UIController {
     // Default floor
     this.floor = "1";
     updateTables();
+    updateIcons();
   }
 
   // Updates the data based on current floor
@@ -108,6 +121,8 @@ public class MapDashboardController extends UIController {
       }
     }
     updateIcons();
+    updateSummary();
+    updateLocOfInterest();
   }
 
   private void updateIcons() {
@@ -144,6 +159,78 @@ public class MapDashboardController extends UIController {
             });
 
     inUseEquipment.setText(notInStorage.size() + "");
+  }
+
+  private void updateSummary() {
+    try {
+      String floorText = getFileText(floorTxtPath, getFloorNum());
+      floorSummary.setText(floorText);
+    } catch (IOException e) {
+    }
+  }
+
+  private void updateLocOfInterest() {
+    try {
+      String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
+      locOfInterest.setText(floorText);
+    } catch (IOException e) {
+    }
+  }
+
+  private static String getFileText(String filePath, int line) throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    String curLine;
+    int n = 0;
+    while ((curLine = reader.readLine()) != null) {
+      if (n == line) return curLine;
+      n++;
+    }
+    return "";
+  }
+
+  private int getFloorNum() {
+    switch (floor) {
+      case "L2":
+        return 0;
+      case "L1":
+        return 1;
+      case "1":
+        return 2;
+      case "2":
+        return 3;
+      case "3":
+        return 4;
+      case "4":
+        return 5;
+      case "5":
+        return 6;
+      case "6":
+        return 7;
+      case "M1":
+        return 8;
+      case "M2":
+        return 9;
+      case "7":
+        return 10;
+      case "8":
+        return 11;
+      case "9":
+        return 12;
+      case "10":
+        return 13;
+      case "11":
+        return 14;
+      case "12":
+        return 15;
+      case "14":
+        return 16;
+      case "15":
+        return 17;
+      case "16":
+        return 18;
+      default:
+        return -1;
+    }
   }
 
   @FXML
