@@ -21,8 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox id="background" fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/17" styleClass="home" stylesheets="@../assets/themes.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox id="background" fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" styleClass="home" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -41,7 +40,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -72,7 +71,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a medication delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -95,7 +94,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -123,7 +122,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0">
+                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a sanitation service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -150,7 +149,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -181,7 +180,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a lab test" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -207,7 +206,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -235,7 +234,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0">
+                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request medical equipment" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -262,7 +261,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -293,7 +292,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a meal delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -316,7 +315,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -344,7 +343,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0">
+                                          <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -371,7 +370,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -402,7 +401,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a patient transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -425,7 +424,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox id="foreground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                                        <children>
@@ -456,7 +455,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-max-height: Infinity;">
+                                          <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                              <children>
                                                 <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>

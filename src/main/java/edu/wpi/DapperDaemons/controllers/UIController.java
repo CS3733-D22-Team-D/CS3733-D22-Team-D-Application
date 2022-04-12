@@ -16,15 +16,13 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -157,11 +155,11 @@ public abstract class UIController extends AppController {
 
     if (!isDark) {
       darkSwitch.setImage(
-              new Image(
-                      getClass()
-                              .getClassLoader()
-                              .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
-                              .toString()));
+          new Image(
+              getClass()
+                  .getClassLoader()
+                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
+                  .toString()));
 
       back.getStyleClass().add("backgroundDark");
 
@@ -191,11 +189,11 @@ public abstract class UIController extends AppController {
 
     } else {
       darkSwitch.setImage(
-              new Image(
-                      getClass()
-                              .getClassLoader()
-                              .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
-                              .toString()));
+          new Image(
+              getClass()
+                  .getClassLoader()
+                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
+                  .toString()));
 
       back.getStyleClass().remove("backgroundDark");
 
