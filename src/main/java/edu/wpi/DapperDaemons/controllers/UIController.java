@@ -261,6 +261,11 @@ public abstract class UIController extends AppController {
   }
 
   @FXML
+  public void switchToRealMap() throws IOException {
+    switchScene("locationMap.fxml", 1172, 200);
+  }
+
+  @FXML
   public void switchToPatientTransport() throws IOException {
     switchScene("patientTransport.fxml", 831, 582);
   }

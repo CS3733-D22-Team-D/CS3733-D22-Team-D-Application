@@ -7,7 +7,7 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.map.tables.TableHelper;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -64,8 +64,11 @@ public class MapDashboardController extends UIController {
   @FXML private Text inUseEquipment;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
-  private final String floorTxtPath = Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
-  private final String locOfInterestTxtPath = Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt")).getFile();
+  private final String floorTxtPath =
+      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
+  private final String locOfInterestTxtPath =
+      Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
+          .getFile();
 
   private String floor;
 
