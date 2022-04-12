@@ -177,7 +177,7 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    File file = new File(filePath);
+    File file = new File(filePath.replace("%20", " "));
     Scanner s = new Scanner(file);
     int l = 0;
     String current;
