@@ -45,7 +45,7 @@ public abstract class UIController extends AppController {
   @FXML private VBox sceneBox;
   @FXML private ImageView darkSwitch;
 
-  private boolean isDark = false;
+  protected static boolean isDark;
 
   /* Home page stuff */
   @FXML private VBox userDropdown;
@@ -76,6 +76,7 @@ public abstract class UIController extends AppController {
     } catch (Exception e) {
       showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
+    setTheme();
   }
 
   private void initAccountGraphics() throws NullPointerException {
@@ -139,12 +140,12 @@ public abstract class UIController extends AppController {
 
   @FXML
   public void toggleTheme() {
-    setTheme();
     isDark = !isDark;
+    setTheme();
   }
 
   public void setTheme() {
-    Node back = homeIcon.getScene().lookup("#background");
+    Node back = sceneBox.lookup("#background");
 
     Set<Node> fields = back.lookupAll("#field");
     Set<Node> fores = back.lookupAll("#foreground");
@@ -153,7 +154,7 @@ public abstract class UIController extends AppController {
     Set<Node> texts = back.lookupAll("#label");
     Set<Node> tableCols = back.lookupAll("#col");
 
-    if (!isDark) {
+    if (isDark) {
       darkSwitch.setImage(
           new Image(
               getClass()
