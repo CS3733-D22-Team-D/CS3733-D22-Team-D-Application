@@ -16,10 +16,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 public class MapDashboardController extends UIController {
@@ -53,6 +50,7 @@ public class MapDashboardController extends UIController {
   @FXML private ToggleButton M2;
   @FXML private Label floorSummary;
   @FXML private Label locOfInterest;
+  @FXML private TabPane tabs;
 
   @FXML private Text cleanEquipNum;
   @FXML private Text dirtyEquipNum;
@@ -187,6 +185,21 @@ public class MapDashboardController extends UIController {
       l++;
     }
     return "";
+  }
+
+  @FXML
+  public void onEquipIconClicked() {
+    tabs.getSelectionModel().select(0);
+  }
+
+  @FXML
+  public void onPatientIconClicked() {
+    tabs.getSelectionModel().select(1);
+  }
+
+  @FXML
+  public void onRequestIconClicked() {
+    tabs.getSelectionModel().select(3);
   }
 
   private int getFloorNum() {
