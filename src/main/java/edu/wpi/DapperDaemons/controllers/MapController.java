@@ -146,6 +146,7 @@ public class MapController extends UIController implements Initializable {
     int x = (int) click.getX();
     int y = (int) click.getY();
     String floor = maps.getFloor();
+    System.out.println("Location " + x + " " + y + " clicked!");
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
