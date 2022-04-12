@@ -268,6 +268,7 @@ public abstract class UIController implements Initializable {
     sceneBox.setPrefHeight(height);
     window.setWidth(window.getWidth() + 0.0); // To update size
     window.setHeight(window.getHeight());
+    setTheme();
   }
 
   /**
