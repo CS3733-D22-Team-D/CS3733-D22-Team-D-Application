@@ -46,6 +46,7 @@ public class RFIDPageController extends AppController {
       arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
     } catch (UnableToConnectException e) {
       resultLabel.setText("Unable to Connect");
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
       initLabel.setText("Initialization Error!");
       backButton.setVisible(true);
       return;
