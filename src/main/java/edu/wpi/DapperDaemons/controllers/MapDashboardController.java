@@ -70,7 +70,7 @@ public class MapDashboardController extends UIController {
       Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
           .getFile();
 
-  private String floor;
+  public static String floor;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -91,7 +91,7 @@ public class MapDashboardController extends UIController {
     rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));
 
     // Default floor
-    this.floor = "1";
+    floor = "1";
     updatePage();
   }
 
