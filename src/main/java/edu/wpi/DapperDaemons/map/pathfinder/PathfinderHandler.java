@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -65,7 +64,7 @@ public class PathfinderHandler implements Initializable {
   @FXML
   public void clearPath() {
     makeAllInVisible();
-    lineLayer.getChildren().removeAll();
+    lineLayer.getChildren().clear();
     locations.clear();
   }
 
@@ -80,17 +79,16 @@ public class PathfinderHandler implements Initializable {
    * @param endNode
    */
   private void makeLinePath(String startNode, String endNode) {
-    lineLayer.getChildren().clear();
-    locations.clear();
-    System.out.println("This should print nothing");
-    for (Node loc : lineLayer.getChildren()) {
-      System.out.println(loc);
-    }
-    System.out.println("Did it print nothing?");
+    clearPath(); // Clears the previous path
 
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
     List<String> nodePath = ppPlanner.getPath(startNode, endNode);
+    try {
+      locations.add(DAOPouch.getLocationDAO().get(endNode));
+    } catch (Exception e) {
+      System.out.println("Something went wrong adding the last location");
+    }
     for (String node : nodePath) {
       try {
         locations.add(DAOPouch.getLocationDAO().get(node));
@@ -98,11 +96,6 @@ public class PathfinderHandler implements Initializable {
         e.printStackTrace();
         System.out.println("Location not found");
       }
-    }
-    try {
-      locations.add(DAOPouch.getLocationDAO().get(endNode));
-    } catch (Exception e) {
-      System.out.println("Something went wrong adding the last location");
     }
 
     double overflow = 0.0;
@@ -175,7 +168,10 @@ public class PathfinderHandler implements Initializable {
     for (int i = 0;
         i < locations.size();
         i++) { // for every child, add make the locations on this floor visible
+
+      // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
+        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);
       }
     }
