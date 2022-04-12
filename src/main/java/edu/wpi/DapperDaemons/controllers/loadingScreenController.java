@@ -39,7 +39,7 @@ public class loadingScreenController extends AppController {
             Platform.runLater(
                 () -> {
                   loadingLabel.setText("Loading...".substring(0, ind));
-                  ind = (ind + 1) % "Loading...".length();
+                  ind = (ind + 1) % ("Loading...".length() + 1);
                 });
           }
         },
