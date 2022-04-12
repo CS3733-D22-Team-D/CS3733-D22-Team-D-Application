@@ -21,7 +21,6 @@ public class PathfinderHandler implements Initializable {
 
   private static AnchorPane lineLayer;
   private static MapController controller;
-  private List<String> nodePath;
   private static List<Location> locations;
 
   /* Pathfinder handler info */
@@ -47,6 +46,7 @@ public class PathfinderHandler implements Initializable {
         if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
             != -1) { // and to location is valid
           showPather(fromLocation.getValue(), toLocation.getValue());
+          makeAllInVisible();
         } else {
           System.out.println("Not a valid end location!");
         }
@@ -58,19 +58,18 @@ public class PathfinderHandler implements Initializable {
       //      e.printStackTrace();
       // TODO : Show the error message?
     }
+    makeAllInVisible(); // For some reason I need two of these to make it actually invisible
   }
 
   @FXML
   public void clearPath() {
     makeAllInVisible();
     lineLayer.getChildren().removeAll();
-    nodePath.clear();
     locations.clear();
   }
 
   public void showPather(String startNode, String endNode) {
     makeLinePath(startNode, endNode);
-    makeAllInVisible();
   }
 
   /**
@@ -81,10 +80,11 @@ public class PathfinderHandler implements Initializable {
    */
   private void makeLinePath(String startNode, String endNode) {
     lineLayer.getChildren().removeAll();
+    locations.clear();
 
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
-    nodePath = ppPlanner.getPath(startNode, endNode);
+    List<String> nodePath = ppPlanner.getPath(startNode, endNode);
     for (String node : nodePath) {
       try {
         locations.add(DAOPouch.getLocationDAO().get(node));
@@ -93,9 +93,14 @@ public class PathfinderHandler implements Initializable {
         System.out.println("Location not found");
       }
     }
+    try {
+      locations.add(DAOPouch.getLocationDAO().get(endNode));
+    } catch (Exception e) {
+      System.out.println("Something went wrong adding the last location");
+    }
 
     double overflow = 0.0;
-    for (int i = 0; i < locations.size() - 1; i++) {
+    for (int i = 0; i < locations.size(); i++) {
       // Add a new line to the list of lines
       System.out.println(
           "Position " + locations.get(i).getNodeID() + " to " + locations.get(i + 1).getNodeID());
@@ -161,7 +166,7 @@ public class PathfinderHandler implements Initializable {
   public void filterByFloor(String floor) {
     makeAllInVisible();
     for (int i = 0;
-        i < locations.size() - 1;
+        i < locations.size();
         i++) { // for every child, add make the locations on this floor visible
       if (locations.get(i).getFloor().equals(floor)) {
         lineLayer.getChildren().get(i).setVisible(true);
