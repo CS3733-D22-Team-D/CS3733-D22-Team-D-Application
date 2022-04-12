@@ -38,8 +38,8 @@ public abstract class UIController extends AppController {
 
   /* Common to Default page */
   @FXML private ImageView homeIcon;
-  //@FXML private JFXHamburger burg;
-  //@FXML private JFXHamburger burgBack;
+  @FXML private JFXHamburger burg;
+  @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
 
   /* Home page stuff */

@@ -41,7 +41,14 @@ public class GlyphHandler {
     image.setVisible(true);
     image.setX(pos.getX() - 16);
     image.setY(pos.getY() - 16);
-    image.setEffect(getPriorityColor(pos));
+
+    DropShadow dropShadow = new DropShadow();
+    dropShadow.setOffsetX(-2.00);
+    dropShadow.setOffsetY(4.00);
+
+    Blend multiEffect = new Blend(BlendMode.SRC_OVER, dropShadow, getPriorityColor(pos));
+    image.setEffect(multiEffect);
+
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
     imageLocs.add(pos);
@@ -217,10 +224,10 @@ public class GlyphHandler {
   public void filter() {
     makeAllVisible();
     for (int i = 0; i < imageLocs.size(); i++) {
-      if (!floorFilter.isEmpty() && !floorFilter.contains(imageLocs.get(i).getFloor())) {
+      if (!floorFilter.contains(imageLocs.get(i).getFloor())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
-      if (!nodeTypeFilter.isEmpty() && !nodeTypeFilter.contains(imageLocs.get(i).getType())) {
+      if (!nodeTypeFilter.contains(imageLocs.get(i).getType())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
       if (!longNameFilter.isEmpty() && !longNameFilter.contains(imageLocs.get(i).getLongName())) {

@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -9,14 +9,13 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +25,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -43,10 +41,12 @@ public class MapController extends UIController implements Initializable {
   @FXML private StackPane mapAssets;
 
   /* Map Filter */
-  @FXML private HBox mapFilter;
+  @FXML private StackPane mapFilter;
   @FXML private VBox filterMenu;
-  @FXML private JFXHamburger burg;
-  @FXML private JFXHamburger burgBack;
+  @FXML private VBox directionsFields;
+  @FXML private ToggleButton filterButton;
+  @FXML private ImageView carrotBack;
+  @FXML private ImageView carrotOut;
   @FXML private ToggleButton deptTG;
   @FXML private ToggleButton dirtTG;
   @FXML private ToggleButton elevTG;
@@ -99,6 +99,7 @@ public class MapController extends UIController implements Initializable {
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    mapFilter.setTranslateX(160);
     Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
     Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
     Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
@@ -129,7 +130,7 @@ public class MapController extends UIController implements Initializable {
     maps.setMap("1");
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
-    //    glyphs.setFloorFilter("1");
+    glyphs.setFloorFilter("1");
 
     this.positions = new PositionHandler(origPositions);
 
@@ -157,7 +158,7 @@ public class MapController extends UIController implements Initializable {
     closeCreate();
     closeRoom();
 
-    filterSlider(mapFilter, burg, burgBack);
+    //    filterSlider(mapFilter, burg, burgBack);
   }
 
   /**
@@ -364,43 +365,41 @@ public class MapController extends UIController implements Initializable {
     glyphs.setFloorFilter("L2");
   }
 
-  static void filterSlider(HBox mapFilter, JFXHamburger burg, JFXHamburger burgBack) {
-    mapFilter.setTranslateX(160);
-    burg.setOnMouseClicked(
-        event -> {
-          TranslateTransition slide = new TranslateTransition();
-          slide.setDuration(Duration.seconds(0.4));
-          slide.setNode(mapFilter);
+  @FXML
+  public void filterSlider() {
+    //    mapFilter.setTranslateX(160);
 
-          slide.setToX(0);
-          slide.play();
+    if (filterButton.isSelected()) {
+      TranslateTransition slide = new TranslateTransition();
+      slide.setDuration(Duration.seconds(0.4));
+      slide.setNode(mapFilter);
 
-          mapFilter.setTranslateX(160);
+      slide.setToX(0);
+      slide.play();
 
-          slide.setOnFinished(
-              (ActionEvent e) -> {
-                burg.setVisible(false);
-                burgBack.setVisible(true);
-              });
-        });
+      mapFilter.setTranslateX(160);
 
-    burgBack.setOnMouseClicked(
-        event -> {
-          TranslateTransition slide = new TranslateTransition();
-          slide.setDuration(Duration.seconds(0.4));
-          slide.setNode(mapFilter);
+      slide.setOnFinished(
+          (ActionEvent e) -> {
+            carrotOut.setVisible(false);
+            carrotBack.setVisible(true);
+          });
+    } else {
+      TranslateTransition slide = new TranslateTransition();
+      slide.setDuration(Duration.seconds(0.4));
+      slide.setNode(mapFilter);
 
-          slide.setToX(160);
-          slide.play();
+      slide.setToX(160);
+      slide.play();
 
-          mapFilter.setTranslateX(0);
+      mapFilter.setTranslateX(0);
 
-          slide.setOnFinished(
-              (ActionEvent e) -> {
-                burg.setVisible(true);
-                burgBack.setVisible(false);
-              });
-        });
+      slide.setOnFinished(
+          (ActionEvent e) -> {
+            carrotOut.setVisible(true);
+            carrotBack.setVisible(false);
+          });
+    }
   }
 
   @FXML
@@ -482,7 +481,7 @@ public class MapController extends UIController implements Initializable {
       glyphs.addNodeTypeFilter("BATH");
     } else {
       glyphs.removeNodeTypeFilter("REST");
-      glyphs.addNodeTypeFilter("BATH");
+      glyphs.removeNodeTypeFilter("BATH");
     }
   }
 
@@ -525,9 +524,26 @@ public class MapController extends UIController implements Initializable {
   @FXML
   void dirToggle(ActionEvent event) {
     if (directionTG.isSelected()) {
-      filterMenu.getChildren().add();
+      try {
+        directionsFields =
+            FXMLLoader.load(
+                Objects.requireNonNull(App.class.getResource("views/" + "directionsSearch.fxml")));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      filterMenu.getChildren().add(directionsFields);
     } else {
-      filterMenu.getChildren().remove(3);
+      filterMenu.getChildren().remove(2);
     }
+  }
+
+  @FXML
+  void showCarrot(MouseEvent event) {
+    filterButton.setVisible(true);
+  }
+
+  @FXML
+  void hideCarrot(MouseEvent event) {
+    filterButton.setVisible(false);
   }
 }
