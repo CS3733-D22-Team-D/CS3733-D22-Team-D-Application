@@ -25,13 +25,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.LabRequestController">
+
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.LabRequestController">
     <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
               <HBox prefHeight="46.0" prefWidth="301.0" style="-fx-background-image: url(../assets/BrighamOverlayAssetForLight.png); -fx-background-repeat: stretch; -fx-background-size: 900 506; -fx-background-position: center center;">
                   <children>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                             <children>
                                 <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                     <children>
@@ -44,7 +45,7 @@
                                 </VBox>
                                 <VBox minHeight="-Infinity" prefHeight="75.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Service:">
+                                        <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Service:">
                                             <VBox.margin>
                                                 <Insets bottom="5.0" left="30.0" right="30.0" />
                                             </VBox.margin>
@@ -69,12 +70,12 @@
                            <children>
                                       <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                                           <children>
-                                              <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+                                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                                                   <VBox.margin>
                                                       <Insets bottom="5.0" />
                                                   </VBox.margin>
                                               </Text>
-                                              <TextField fx:id="patientName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                              <TextField id="field" fx:id="patientName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                                                   <VBox.margin>
                                                       <Insets />
                                                   </VBox.margin>
@@ -86,12 +87,12 @@
                                       </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                                  <children>
-                                    <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
+                                    <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <TextField fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                    <TextField id="field" fx:id="patientLastName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -103,12 +104,12 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                                  <children>
-                                    <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
+                                    <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                                    <DatePicker id="specialField" fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -124,7 +125,7 @@
                         </HBox>
                                 <VBox prefHeight="61.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                                        <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                                             <VBox.margin>
                                                 <Insets bottom="5.0" left="30.0" right="30.0" />
                                             </VBox.margin>
@@ -182,19 +183,19 @@
                                       </VBox>
                                       <VBox prefHeight="364.0" prefWidth="247.0" VBox.vgrow="ALWAYS">
                                           <children>
-                                              <TableView fx:id="labReqTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                                              <TableView id="table" fx:id="labReqTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
                                                   <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                   </columnResizePolicy>
                                        <columns>
-                                          <TableColumn fx:id="ReqID" prefWidth="75.0" text="ReqID" />
-                                          <TableColumn fx:id="Priority" prefWidth="75.0" text="Priority" />
-                                          <TableColumn fx:id="RoomID" prefWidth="75.0" text="RoomID" />
-                                          <TableColumn fx:id="Requester" prefWidth="75.0" text="Requester" />
-                                          <TableColumn fx:id="Assignee" prefWidth="75.0" text="Assignee" />
-                                          <TableColumn fx:id="Patient" prefWidth="75.0" text="Patient" />
-                                          <TableColumn fx:id="Service" prefWidth="75.0" text="Service" />
-                                          <TableColumn fx:id="Status" prefWidth="75.0" text="Status" />
+                                          <TableColumn id="col" fx:id="ReqID" prefWidth="75.0" text="ReqID" />
+                                          <TableColumn id="col" fx:id="Priority" prefWidth="75.0" text="Priority" />
+                                          <TableColumn id="col" fx:id="RoomID" prefWidth="75.0" text="RoomID" />
+                                          <TableColumn id="col" fx:id="Requester" prefWidth="75.0" text="Requester" />
+                                          <TableColumn id="col" fx:id="Assignee" prefWidth="75.0" text="Assignee" />
+                                          <TableColumn id="col" fx:id="Patient" prefWidth="75.0" text="Patient" />
+                                          <TableColumn id="col" fx:id="Service" prefWidth="75.0" text="Service" />
+                                          <TableColumn id="col" fx:id="Status" prefWidth="75.0" text="Status" />
                                        </columns>
                                               </TableView>
                                           </children>
@@ -421,6 +422,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                  </children>
                               </StackPane>
@@ -446,9 +450,9 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#switchToLabRequestDark" preserveRatio="true">
+                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/Glyphs/moonWithBG.png" />
                                        </image>
@@ -457,6 +461,9 @@
                                        </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>
