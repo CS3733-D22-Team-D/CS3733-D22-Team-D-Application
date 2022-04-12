@@ -735,7 +735,7 @@
                                           </HBox>
                                           <VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="200.0" prefWidth="220.0">
                                              <children>
-                                                <ToggleButton fx:id="infoTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#infoToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Information Desk">
+                                                <ToggleButton id="nodesToggle" fx:id="infoTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#infoToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Information Desk">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -750,7 +750,7 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="retlTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#retlToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Retail">
+                                                <ToggleButton id="nodesToggle" fx:id="retlTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#retlToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Retail">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -762,7 +762,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="servTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#servToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Services">
+                                                <ToggleButton id="nodesToggle" fx:id="servTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#servToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Services">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -774,7 +774,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="staiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#staiToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Stairs">
+                                                <ToggleButton id="nodesToggle" fx:id="staiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#staiToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Stairs">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -786,7 +786,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="elevTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#elevToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Elevators">
+                                                <ToggleButton id="nodesToggle" fx:id="elevTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#elevToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Elevators">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -798,7 +798,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="restTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#restToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Restrooms">
+                                                <ToggleButton id="nodesToggle" fx:id="restTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#restToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Restrooms">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -810,7 +810,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="dirtTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirtToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Dirty Equipment Storage">
+                                                <ToggleButton id="nodesToggle" fx:id="dirtTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirtToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Dirty Equipment Storage">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -822,7 +822,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="storTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#storToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Storage">
+                                                <ToggleButton id="nodesToggle" fx:id="storTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#storToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Storage">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -834,7 +834,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="patiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#patiToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Patient Rooms">
+                                                <ToggleButton id="nodesToggle" fx:id="patiTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#patiToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Patient Rooms">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -846,7 +846,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="deptTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#deptToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Departments">
+                                                <ToggleButton id="nodesToggle" fx:id="deptTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#deptToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Departments">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -858,7 +858,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="hallTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#hallToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Hallways">
+                                                <ToggleButton id="nodesToggle" fx:id="hallTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#hallToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Hallways">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -870,7 +870,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="labsTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#labsToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Labs">
+                                                <ToggleButton id="nodesToggle" fx:id="labsTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#labsToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Labs">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -882,7 +882,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="exitTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Exits">
+                                                <ToggleButton id="nodesToggle" fx:id="exitTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitToggle" prefWidth="220.0" selected="true" stylesheets="@../../../../toggleButton.css" text="Exits">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
@@ -894,7 +894,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" style="-fx-background-color: #FFFEFE;" text="Get Directions">
+                                                <ToggleButton id="floors" fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" stylesheets="@../../../../toggleButton.css" text="Get Directions">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -916,7 +916,7 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="TOP_RIGHT">
                            <children>
-                              <ToggleButton fx:id="filterButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#filterSlider" pickOnBounds="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 16; -fx-border-color: #C4C4C4; -fx-border-radius: 16; -fx-border-width: 2;" text="ToggleButton" visible="false">
+                              <ToggleButton fx:id="filterButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#filterSlider" opacity="0.0" pickOnBounds="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 16; -fx-border-color: #C4C4C4; -fx-border-radius: 16; -fx-border-width: 2;" text="ToggleButton">
                                  <graphic>
                                     <StackPane pickOnBounds="false" prefHeight="32.0" prefWidth="32.0">
                                        <children>
