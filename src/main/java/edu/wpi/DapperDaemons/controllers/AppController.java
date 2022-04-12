@@ -29,6 +29,7 @@ public class AppController implements Initializable {
   @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
+  private boolean updatedSize;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -82,7 +83,8 @@ public class AppController implements Initializable {
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
+    if (updatedSize) window.setWidth(window.getWidth() + 0.001);
+    else window.setWidth(window.getWidth() - 0.001); // To update size because JavaFX is bad
     window.setHeight(window.getHeight());
   }
 
