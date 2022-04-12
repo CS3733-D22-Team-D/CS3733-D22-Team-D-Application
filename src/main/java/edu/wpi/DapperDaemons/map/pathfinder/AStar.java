@@ -89,6 +89,7 @@ public class AStar {
     //      path.add("Path Not Found");
     //    }
 
+    System.out.println("Printing out the path from A*");
     for (String node : path) System.out.println(node);
 
     return path;
@@ -163,10 +164,11 @@ public class AStar {
                 ^ 2 + (current.getYcoord() - next.getYcoord())
                 ^ 2);
     if (!current.getFloor().equals(next.getFloor())) {
-      System.out.println(
-          "Its on a separate floor, adding something"); // Comment out after it works - which it
+      //      System.out.println(
+      //          "Its on a separate floor, adding something"); // Comment out after it works -
+      // which it
       // will first
-      System.out.println(currentLocation + "To" + nextLocation);
+      //      System.out.println(currentLocation + "To" + nextLocation);
       distance += Math.abs(floorDistance(current.getFloor()) - floorDistance(next.getFloor()));
     }
     return distance;
