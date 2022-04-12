@@ -1,25 +1,18 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
-import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.entities.TableObject;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +21,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /*
@@ -99,7 +90,7 @@ public abstract class UIController extends AppController {
                                 + ".png")))));
   }
 
-  static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
+  private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
     slider.setTranslateX(-225);
     burg.setOnMouseClicked(
         event -> {
@@ -229,11 +220,6 @@ public abstract class UIController extends AppController {
   }
 
   @FXML
-  public void openUserSettings() {
-    // TODO : Create a userSettings.fxml page
-  }
-
-  @FXML
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
@@ -271,7 +257,12 @@ public abstract class UIController extends AppController {
 
   @FXML
   public void switchToMap() throws IOException {
-    switchScene("locationMap.fxml", 100, 100);
+    switchScene("mapDashboard.fxml", 1080, 100);
+  }
+
+  @FXML
+  public void switchToRealMap() throws IOException {
+    switchScene("locationMap.fxml", 1172, 200);
   }
 
   @FXML
@@ -294,20 +285,9 @@ public abstract class UIController extends AppController {
     switchScene("login.fxml", 780, 548);
   }
 
-  protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) homeIcon.getScene().getWindow();
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-
-    double width = sceneBox.getPrefWidth();
-    double height = sceneBox.getPrefHeight();
-    window.setScene(new Scene(root));
-    sceneBox.setPrefWidth(width);
-    sceneBox.setPrefHeight(height);
-    window.setWidth(window.getWidth() + 0.0); // To update size
-    window.setHeight(window.getHeight());
+  @FXML
+  public void openUserSettings() throws IOException {
+    switchScene("userSettings.fxml", 941, 592);
   }
 
   /**
@@ -321,17 +301,5 @@ public abstract class UIController extends AppController {
       names.add(loc.getLongName());
     }
     return names;
-  }
-
-  protected void saveToCSV(TableObject type) {
-    FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) homeIcon.getScene().getWindow();
-    fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    File csv = fileSys.showSaveDialog(window);
-    try {
-      csvSaver.save(type, csv.getAbsolutePath());
-    } catch (Exception e) {
-      System.err.println("Unable to Save CSV of type: " + type);
-    }
   }
 }

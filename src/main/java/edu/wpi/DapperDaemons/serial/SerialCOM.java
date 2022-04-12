@@ -65,8 +65,11 @@ public class SerialCOM {
     List<String> available = new ArrayList<>();
     SerialPort[] ports = SerialPort.getCommPorts();
     for (SerialPort s : ports) {
-      available.add(s.getSystemPortName().trim());
-      System.out.println(s.getSystemPortName().trim());
+      if (s.openPort()) {
+        available.add(s.getSystemPortName().trim());
+        //        System.out.println(s.getSystemPortName().trim());
+      }
+      s.closePort();
     }
     return available;
   }
@@ -79,15 +82,15 @@ public class SerialCOM {
    */
   public Arduino setupArduino() throws UnableToConnectException {
     List<String> ports = this.getAvailableCOMs();
-    System.out.println("Check system serial ports...");
+    //    System.out.println("Check system serial ports...");
     // For each available port
     for (String port : ports) {
       // Create arduino object on that port
       Arduino arduino = new Arduino(port, 9600);
-      System.out.println("Checking Serial Port: " + port);
+      //      System.out.println("Checking Serial Port: " + port);
       // Check if arduino has a connection and sends buffer message
       if (arduino.openConnection() && this.checkForBuffer(arduino)) {
-        System.out.println("Port " + port + " has correct connection");
+        //        System.out.println("Port " + port + " has correct connection");
         arduino.closeConnection();
         return arduino;
       } else arduino.closeConnection();
@@ -107,7 +110,7 @@ public class SerialCOM {
     String aIn = "";
     while (!containsLetters(aIn)) {
       aIn = arduino.serialRead();
-      System.out.println("Test signal: " + aIn);
+      //      System.out.println("Test signal: " + aIn);
       long currentTime = System.currentTimeMillis();
       if (currentTime >= startTime + 2000) {
         return false;

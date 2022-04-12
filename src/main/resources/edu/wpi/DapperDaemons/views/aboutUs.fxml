@@ -17,18 +17,16 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.AboutUsController">
-    <children>
+   <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-              <HBox prefHeight="46.0" prefWidth="301.0">
-                  <children>
-                      <VBox prefHeight="542.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+            <HBox prefHeight="46.0" prefWidth="301.0">
+               <children>
+                  <VBox prefHeight="542.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                            <children>
@@ -41,32 +39,38 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <VBox maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="190.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="131.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="174.0" stroke="BLACK" strokeType="INSIDE" width="211.0">
-                                             <VBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </Rectangle>
-                                       </children>
-                                    </VBox>
+                                    <Label id="label" text="WPI Computer Science Department" />
+                                    <Label id="label" text="Professor Wilson Wong" />
+                                    <Label id="label" text="Nestor Lopez" />
+                                    <Label id="label" prefHeight="104.0" prefWidth="301.0" text="We'd like to thank Brigham and Women’s Hospital and their representative, Andrew Shinn, for their time and input" textAlignment="CENTER" wrapText="true" />
+                                    <Label id="label" text="Developers:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
                                  </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </padding>
                               </VBox>
-                              <VBox prefWidth="100.0">
+                              <VBox prefHeight="365.0" prefWidth="321.0">
                                  <children>
-                                    <Label id="label" prefHeight="93.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak, Chandler Garcia, Cole Ouellette, Jacob Adams, Joanna Hu, Luke Gardone, Rosemary Shelton, Samuel Karkache, Shaffath Zaman, Tyler Evans. " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                    <Label id="label" prefHeight="164.0" prefWidth="321.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak (BackEnd), Chandler Garcia (BackEnd, Lead Software Engineer), Cole Ouellette (FrontEnd, Documentation Analyst), Jacob Adams (BackEnd, Lead BackEnd Engineer), Joanna Hu (FrontEnd), Luke Gardone(FrontEnd, Project Manager), Rosemary Shelton (FrontEnd, Scrum Master), Samuel Karkache (FrontEnd, Lead FrontEnd), Shafath Zaman (FrontEnd, Product Owner), Tyler Evans (BackEnd). " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                        <padding>
-                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                          <Insets left="20.0" right="20.0" />
                                        </padding>
                                     </Label>
-                                    <Label id="label" prefHeight="142.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                                    <Label id="label" prefHeight="154.0" prefWidth="321.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                                        <padding>
-                                          <Insets left="10.0" right="10.0" />
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </padding>
                                     </Label>
                                  </children>
@@ -84,10 +88,10 @@
                            </VBox.margin>
                         </VBox>
                      </children>
-                      </VBox>
+                  </VBox>
                   <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
                               <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                                  <children>
@@ -135,7 +139,7 @@
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text id="label" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
                                              <font>
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
@@ -172,7 +176,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  </children>
+               </children>
                <StackPane.margin>
                   <Insets top="50.0" />
                </StackPane.margin>
@@ -540,5 +544,5 @@
             </HBox>
          </children>
       </StackPane>
-    </children>
+   </children>
 </VBox>

@@ -1,23 +1,27 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.tables.TableHandler;
+import edu.wpi.DapperDaemons.map.tables.TableHandler;
 
 public class MedicalEquipment extends TableObject {
 
   @TableHandler(table = 0, col = 0)
   private String nodeID;
 
+  @TableHandler(table = 2, col = 0)
   @TableHandler(table = 1, col = 0)
   @TableHandler(table = 0, col = 1)
   private String equipmentName;
 
+  @TableHandler(table = 2, col = 1)
   @TableHandler(table = 1, col = 1)
   @TableHandler(table = 0, col = 2)
   private EquipmentType equipmentType;
 
+  @TableHandler(table = 2, col = 3)
   @TableHandler(table = 0, col = 3)
   private String serialNumber;
 
+  @TableHandler(table = 2, col = 2)
   @TableHandler(table = 1, col = 2)
   @TableHandler(table = 0, col = 4)
   private CleanStatus cleanStatus;

@@ -8,7 +8,7 @@ import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.map.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
