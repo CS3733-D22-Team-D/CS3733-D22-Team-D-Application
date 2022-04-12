@@ -1,10 +1,13 @@
 package edu.wpi.DapperDaemons;
 
+import edu.wpi.DapperDaemons.backend.AutoSave;
+import edu.wpi.DapperDaemons.backend.connectionHandler;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
 import java.util.Objects;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,21 +28,69 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    Platform.runLater(
+        new Runnable() {
+          @Override
+          public void run() {
+            try {
+              displayLoadingScreen(primaryStage);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
+    Thread t =
+        new Thread(
+            new Runnable() {
+              @Override
+              public void run() {
+                Platform.runLater(
+                    new Runnable() {
+                      @Override
+                      public void run() {
+                        System.out.println("init");
+                        connectionHandler.init();
+                        connectionHandler.switchToClientServer();
+                        AutoSave.start(10);
+                        Parent root = null;
+                        try {
+                          root =
+                              FXMLLoader.load(
+                                  Objects.requireNonNull(
+                                      getClass().getResource("views/login.fxml")));
+                        } catch (IOException e) {
+
+                          e.printStackTrace();
+                        }
+
+                        Scene scene = new Scene(root);
+                        primaryStage.setMinWidth(635);
+                        primaryStage.setMinHeight(510);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                        primaryStage
+                            .getIcons()
+                            .add(
+                                new Image(
+                                    String.valueOf(
+                                        App.class.getResource(
+                                            "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
+                        primaryStage.setTitle("BWH");
+                      }
+                    });
+              }
+            });
+    t.start();
+  }
+
+  public void displayLoadingScreen(Stage primaryStage) throws IOException {
     Parent root =
-        FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+        FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/loadingScreen.fxml")));
     Scene scene = new Scene(root);
     primaryStage.setMinWidth(635);
     primaryStage.setMinHeight(510);
     primaryStage.setScene(scene);
     primaryStage.show();
-    primaryStage
-        .getIcons()
-        .add(
-            new Image(
-                String.valueOf(
-                    App.class.getResource("assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
-    primaryStage.setTitle(
-        "The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound.");
   }
 
   @Override

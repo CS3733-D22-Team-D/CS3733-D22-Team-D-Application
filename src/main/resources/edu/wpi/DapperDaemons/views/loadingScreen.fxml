@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.loadingScreenController">
+   <children>
+      <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="background" fitHeight="592.0" fitWidth="941.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+   </children>
+</VBox>
