@@ -12,16 +12,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 /** Creates a path on the map */
 public class PathfinderHandler implements Initializable {
 
-  private AnchorPane lineLayer;
-  private MapController controller;
+  private static AnchorPane lineLayer;
+  private static MapController controller;
   private List<String> nodePath;
-  private List<Location> locations;
+  private static List<Location> locations;
 
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
@@ -30,7 +31,10 @@ public class PathfinderHandler implements Initializable {
   public PathfinderHandler(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
     this.controller = controller;
+    locations = new ArrayList<>();
   }
+
+  public PathfinderHandler() {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
@@ -43,8 +47,13 @@ public class PathfinderHandler implements Initializable {
         if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
             != -1) { // and to location is valid
           showPather(fromLocation.getValue(), toLocation.getValue());
+        } else {
+          System.out.println("Not a valid end location!");
         }
+      } else {
+        System.out.println("Not a valid start location!");
       }
+      filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
     } catch (Exception e) {
       //      e.printStackTrace();
       // TODO : Show the error message?
@@ -76,7 +85,6 @@ public class PathfinderHandler implements Initializable {
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
     nodePath = ppPlanner.getPath(startNode, endNode);
-    locations = new ArrayList<>();
     for (String node : nodePath) {
       try {
         locations.add(DAOPouch.getLocationDAO().get(node));
@@ -115,7 +123,17 @@ public class PathfinderHandler implements Initializable {
           Math.sqrt(
               Math.pow(locations.get(i).getXcoord() + locations.get(i + 1).getXcoord(), 2)
                   + Math.pow(locations.get(i).getYcoord() + locations.get(i + 1).getYcoord(), 2));
-
+      Circle ifNecessary;
+      if (!locations
+          .get(i)
+          .getFloor()
+          .equals(
+              locations.get(i + 1).getFloor())) { // If on different floor, create point particle
+        ifNecessary = new Circle(locations.get(i).getXcoord(), locations.get(i).getYcoord(), 6);
+        ifNecessary.setFill(Color.RED);
+        lineLayer.getChildren().add(ifNecessary);
+        System.out.println("Added new point since it went up a floor");
+      }
       // Start is 0d 24d
       double whiteSpace = 24;
       double lineSpace = 32;
@@ -132,6 +150,7 @@ public class PathfinderHandler implements Initializable {
         }
       }
       lineLayer.getChildren().add(pathLine);
+      //      System.out.println("added new line to lineLayer");
     }
   }
 

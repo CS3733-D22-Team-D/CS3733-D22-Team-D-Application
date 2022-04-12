@@ -334,42 +334,49 @@ public class MapController extends UIController implements Initializable {
   public void setFloor1(MouseEvent event) {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
+    pathfinder.filterByFloor("1");
   }
 
   @FXML
   public void setFloor2(MouseEvent event) {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
+    pathfinder.filterByFloor("2");
   }
 
   @FXML
   public void setFloor3(MouseEvent event) {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
+    pathfinder.filterByFloor("3");
   }
 
   @FXML
   public void setFloor4(MouseEvent event) {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
+    pathfinder.filterByFloor("4");
   }
 
   @FXML
   public void setFloor5(MouseEvent event) {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
+    pathfinder.filterByFloor("5");
   }
 
   @FXML
   public void setFloorL1(MouseEvent event) {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
+    pathfinder.filterByFloor("L1");
   }
 
   @FXML
   public void setFloorL2(MouseEvent event) {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
+    pathfinder.filterByFloor("L2");
   }
 
   @FXML

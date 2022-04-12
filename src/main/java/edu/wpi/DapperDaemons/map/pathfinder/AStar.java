@@ -80,14 +80,17 @@ public class AStar {
         current = moveOrder.get(current).getLocationName();
       }
     }
+    path.add(startLocation);
 
-    List<String> forwardPath = new ArrayList<>();
-    for (int i = 0, j = path.size() - 1; i < j; i++) {
-      path.add(i, path.remove(j));
-    }
-    if (path.isEmpty()) {
-      path.add("Path Not Found");
-    }
+    //    for (int i = 0, j = path.size() - 1; i < j; i++) {
+    //      path.add(i, path.remove(j));
+    //    }
+    //    if (path.isEmpty()) {
+    //      path.add("Path Not Found");
+    //    }
+
+    for (String node : path) System.out.println(node);
+
     return path;
   }
 
@@ -174,8 +177,12 @@ public class AStar {
       case "L2":
         return 0;
       case "L1":
-        return 50;
+        return 100;
     }
-    return Integer.parseInt(currentFloor) * 50 + 50;
+    return Integer.parseInt(currentFloor) * 100 + 100;
+  }
+
+  private double heuristic(String current, String next) {
+    return Math.abs(floorDistance(current) - floorDistance(next)) * 2;
   }
 }
