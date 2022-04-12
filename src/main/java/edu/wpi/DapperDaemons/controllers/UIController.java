@@ -31,6 +31,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -132,8 +133,7 @@ public abstract class UIController implements Initializable {
   @FXML
   protected void showError(String errorMessage, Pos pos) {
 
-
-    ((HBox)error.getParent()).setAlignment(pos);
+    ((HBox) error.getParent()).setAlignment(pos);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
     if (nodeOut instanceof VBox) {
@@ -144,7 +144,6 @@ public abstract class UIController implements Initializable {
       }
     }
   }
-
 
   @FXML
   public void quitProgram() {
@@ -246,7 +245,7 @@ public abstract class UIController implements Initializable {
 
   @FXML
   public void switchToMap() throws IOException {
-    switchScene("mapDashboard.fxml", 100, 100);
+    switchScene("mapDashboard.fxml", 1080, 100);
   }
 
   @FXML
@@ -353,5 +352,27 @@ public abstract class UIController implements Initializable {
     } catch (Exception e) {
       System.err.println("Unable to Save CSV of type: " + type);
     }
+  }
+
+  public void bindImage(ImageView pageImage, Pane parent) {
+
+    //    Rectangle clip = new Rectangle(pageImage.getFitWidth(), pageImage.getFitHeight());
+    //    clip.setArcWidth(15);
+    //    clip.setArcHeight(15);
+    //    pageImage.setClip(clip);
+    //
+    //    // snapshot the rounded image.
+    //    SnapshotParameters parameters = new SnapshotParameters();
+    //    parameters.setFill(Color.TRANSPARENT);
+    //    WritableImage image = pageImage.snapshot(parameters, null);
+    //
+    //    // remove the rounding clip so that our effect can show through.
+    //    pageImage.setClip(null);
+    //
+    //    // store the rounded image in the imageView.
+    //    pageImage.setImage(image);
+
+    pageImage.fitHeightProperty().bind(parent.heightProperty());
+    pageImage.fitWidthProperty().bind(parent.widthProperty());
   }
 }

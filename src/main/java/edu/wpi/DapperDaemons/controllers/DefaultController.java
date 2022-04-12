@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.derby.impl.jdbc.EmbedConnection;
@@ -34,6 +35,28 @@ public class DefaultController extends UIController {
   @FXML private Label Temp;
   @FXML private ImageView serverIcon;
   @FXML private HBox serverBox;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
+  /* Menu Button images */
+  @FXML private Pane labPageContainer;
+  @FXML private ImageView labPageImage;
+  @FXML private Pane equipmentPageContainer;
+  @FXML private ImageView equipmentPageImage;
+  @FXML private Pane sanitationPageContainer;
+  @FXML private ImageView sanitationPageImage;
+  @FXML private Pane medicinePageContainer;
+  @FXML private ImageView medicinePageImage;
+  @FXML private Pane mealPageContainer;
+  @FXML private ImageView mealPageImage;
+  @FXML private Pane mapPageContainer;
+  @FXML private ImageView mapPageImage;
+  @FXML private Pane patientPageContainer;
+  @FXML private ImageView patientPageImage;
+  @FXML private Pane backendPageContainer;
+  @FXML private ImageView backendPageImage;
 
   private static Timer timer;
   private static final int timeUpdate = 1;
@@ -53,27 +76,35 @@ public class DefaultController extends UIController {
     if (SecurityController.getUser()
         .getEmployeeType()
         .equals(Employee.EmployeeType.ADMINISTRATOR)) {
-      serverBox.setVisible(true);
-      serverIcon.setVisible(true);
-      ColorAdjust ca = new ColorAdjust();
-      ca.setBrightness(1.0);
-      serverIcon.setEffect(ca);
-      if (connectionHandler.getConnection() instanceof EmbedConnection) {
-        serverIcon.setImage(
-            new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+      if (serverBox != null) {
+        serverBox.setVisible(true);
+        serverIcon.setVisible(true);
+        ColorAdjust ca = new ColorAdjust();
+        ca.setBrightness(1.0);
+        serverIcon.setEffect(ca);
+
+        if (connectionHandler.getConnection() instanceof EmbedConnection) {
+          serverIcon.setImage(
+              new Image(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream(
+                          "edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
+        }
       } else {
-        serverIcon.setImage(
-            new Image(
-                DefaultController.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+        if (serverBox != null) {
+          serverIcon.setImage(
+              new Image(
+                  DefaultController.class
+                      .getClassLoader()
+                      .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+        }
       }
     } else {
-      serverBox.setVisible(false);
-      serverIcon.setVisible(false);
+      if (serverBox != null) {
+        serverBox.setVisible(false);
+        serverIcon.setVisible(false);
+      }
     }
     //    weatherIcon.setImage(
     //        new Image(
@@ -104,6 +135,19 @@ public class DefaultController extends UIController {
         0,
         timeUpdate * 1000); // Every 1 second
     updateWeather();
+
+    if (serverIcon != null) {
+      bindImage(BGImage, BGContainer);
+      bindImage(labPageImage, labPageContainer);
+      bindImage(equipmentPageImage, equipmentPageContainer);
+      bindImage(sanitationPageImage, sanitationPageContainer);
+      bindImage(medicinePageImage, medicinePageContainer);
+      bindImage(mealPageImage, mealPageContainer);
+      bindImage(mapPageImage, mapPageContainer);
+      bindImage(patientPageImage, patientPageContainer);
+      bindImage(backendPageImage, backendPageContainer);
+    }
+
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.UP);
     easterEggSequence.add(KeyCode.DOWN);
@@ -129,16 +173,7 @@ public class DefaultController extends UIController {
   @FXML
   void changeServer() {
     setLoad();
-    Thread t =
-        new Thread(
-            new Runnable() {
-
-              @Override
-              public void run() {
-                tryChange();
-              }
-            });
-    t.start();
+    Platform.runLater(this::tryChange);
   }
 
   void tryChange() {
@@ -183,6 +218,7 @@ public class DefaultController extends UIController {
     //            DefaultController.class
     //                .getClassLoader()
     //                .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+    // TODO: animate on refresh
     weatherTimer = new Timer();
     weatherTimer.schedule(
         new TimerTask() { // timer task to update the seconds

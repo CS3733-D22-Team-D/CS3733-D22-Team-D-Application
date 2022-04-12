@@ -70,7 +70,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="414.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Button id="defaultButton" fx:id="initButton" mnemonicParsing="false" onMousePressed="#initText" onMouseReleased="#initScanner" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="CONNECT TO SENSOR" textFill="WHITE">
                                              <font>
@@ -86,7 +86,7 @@
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="191.0">
                                        <children>
                                           <Label fx:id="initLabel" text="LABEL">
                                              <font>
@@ -106,7 +106,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
                                              <font>
@@ -122,7 +122,7 @@
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="194.0">
                                        <children>
                                           <Label fx:id="sLabel" text="LABEL">
                                              <font>

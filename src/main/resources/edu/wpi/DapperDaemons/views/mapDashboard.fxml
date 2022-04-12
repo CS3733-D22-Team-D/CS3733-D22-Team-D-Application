@@ -25,9 +25,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="631.0" prefWidth="1094.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="638.0" prefWidth="993.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <HBox prefHeight="46.0" prefWidth="301.0">
                <opaqueInsets>
@@ -42,7 +42,7 @@
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Notification thingy">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications">
                                              <font>
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
@@ -51,11 +51,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../../Downloads/b2b.jpeg" />
-                                             </image>
-                                          </ImageView>
+                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -164,41 +160,62 @@
                                              <tabs>
                                                 <Tab text="Equipment">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="equipTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="134.0" text="Equipment Name" />
+                                                            <TableColumn prefWidth="150.0" text="Equipment Type" />
+                                                            <TableColumn prefWidth="134.0" text="Clean Status" />
+                                                            <TableColumn prefWidth="134.0" text="Serial Number" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Patients">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="patientTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="First Name" />
+                                                            <TableColumn prefWidth="75.0" text="Last Name" />
+                                                            <TableColumn prefWidth="75.0" text="DOB" />
+                                                            <TableColumn prefWidth="75.0" text="Room ID" />
+                                                            <TableColumn prefWidth="75.0" text="Blood Type" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Locations">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="locTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="Location ID" />
+                                                            <TableColumn prefWidth="75.0" text="Floor" />
+                                                            <TableColumn prefWidth="75.0" text="Building" />
+                                                            <TableColumn prefWidth="75.0" text="Type" />
+                                                            <TableColumn prefWidth="75.0" text="Name" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
                                                 <Tab text="Requests">
                                                    <content>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
+                                                      <TableView fx:id="reqTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;">
                                                          <columns>
-                                                            <TableColumn prefWidth="75.0" text="C1" />
-                                                            <TableColumn prefWidth="75.0" text="C2" />
+                                                            <TableColumn prefWidth="75.0" text="Request Type" />
+                                                            <TableColumn prefWidth="75.0" text="Priority" />
+                                                            <TableColumn prefWidth="75.0" text="Requires Transport?" />
                                                          </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
                                                       </TableView>
                                                    </content>
                                                 </Tab>
@@ -220,13 +237,13 @@
                               <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
                            </VBox.margin></VBox>
                      </children></VBox>
-                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ScrollPane hbarPolicy="NEVER" hmax="0.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="583.0" prefWidth="200.0" style="-fx-border-color: transparent;" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                            <content>
                               <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="199.0" spacing="15.0">
                                  <children>
-                                    <ToggleButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL2">
+                                    <ToggleButton fx:id="LL2" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL2">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -241,7 +258,7 @@
                                           <ToggleGroup fx:id="floors" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL1" toggleGroup="$floors">
+                                    <ToggleButton fx:id="LL1" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -253,7 +270,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L1" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -265,7 +282,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L2" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L2" layoutX="10.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L2" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -277,7 +294,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L3" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L3" layoutX="10.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL3" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L3" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -289,7 +306,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L4" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L4" layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL4" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L4" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -301,7 +318,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L5" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L5" layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL5" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L5" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -313,7 +330,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="6" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L6" layoutX="10.0" layoutY="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL6" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L6" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -325,7 +342,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="218.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="MECHANICAL 1" toggleGroup="$floors">
+                                    <ToggleButton fx:id="M1" layoutX="10.0" layoutY="218.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -337,7 +354,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M2" toggleGroup="$floors">
+                                    <ToggleButton fx:id="M2" layoutX="10.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M2" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -349,7 +366,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="7" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L7" layoutX="10.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL7" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L7" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -361,7 +378,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="8" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L8" layoutX="10.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL8" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L8" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -373,7 +390,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="9" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L9" layoutX="10.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL9" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L9" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -385,7 +402,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="10" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L10" layoutX="10.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL10" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L10" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -397,7 +414,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="374.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="11" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L11" layoutX="10.0" layoutY="374.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL11" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L11" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -409,7 +426,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="12" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L12" layoutX="10.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL12" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L12" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -421,7 +438,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="14" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L14" layoutX="10.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL14" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L14" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -433,7 +450,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="15" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L15" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL15" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L15" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -445,7 +462,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="16" toggleGroup="$floors">
+                                    <ToggleButton fx:id="L16" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL16" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L16" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -710,12 +727,12 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="113.0">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
+                              <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </Text>
-                              <Circle fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                              <Circle fx:id="profilePic" fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
