@@ -177,7 +177,8 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    FileReader f = new FileReader(filePath);
+    BufferedReader reader = new BufferedReader(f);
     List<String> lines = reader.lines().collect(Collectors.toList());
     if (line < lines.size()) return lines.get(line);
     else return "";
