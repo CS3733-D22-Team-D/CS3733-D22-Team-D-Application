@@ -114,6 +114,7 @@ public class MapDashboardController extends UIController {
     requestNum.setText(reqTable.getItems().size() + "");
     patientNum.setText(patientTable.getItems().size() + "");
 
+    // Creates list of dirty and clean equipment by filtering the equipment on the floor
     List<MedicalEquipment> dirtyEquipment =
         equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN");
     List<MedicalEquipment> cleanEquipment = equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN");
@@ -121,6 +122,8 @@ public class MapDashboardController extends UIController {
     dirtyEquipNum.setText(dirtyEquipment.size() + "");
     cleanEquipNum.setText(cleanEquipment.size() + "");
 
+    // Checks if the equipment is not within a storage and if it has not been called before
+    // (to ensure total is total number of equipment)
     List<MedicalEquipment> notInStorage = new ArrayList<>();
     equipTable
         .getItems()
@@ -132,8 +135,8 @@ public class MapDashboardController extends UIController {
               } catch (Exception ex) {
                 equipLoc = new Location();
               }
-              if (!equipLoc.getNodeType().equals("DIRT")
-                  && !equipLoc.getNodeType().equals("STOR")
+              if (!"DIRT".equals(equipLoc.getNodeType())
+                  && !"STOR".equals(equipLoc.getNodeType())
                   && !dirtyEquipment.contains(e)
                   && !cleanEquipment.contains(e)) {
                 notInStorage.add(e);
