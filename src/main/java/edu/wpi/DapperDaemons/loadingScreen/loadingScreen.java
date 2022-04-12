@@ -9,13 +9,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class loadingScreen {
-  private loadingScreen() {}
+  Stage primaryStage;
 
-  public static void display(Stage primaryStage) throws IOException {
+  public loadingScreen(Stage primaryStage) {
+    this.primaryStage = primaryStage;
+  }
+
+  public void display() throws IOException {
     Parent root =
         FXMLLoader.load(
             Objects.requireNonNull(
-                loadingScreen.class.getClassLoader().getResource("views/loadingScreen.fxml")));
+                getClass().getClassLoader().getResource("views/loadingScreen.fxml")));
     Scene scene = new Scene(root);
     primaryStage.setMinWidth(635);
     primaryStage.setMinHeight(510);
@@ -23,7 +27,7 @@ public class loadingScreen {
     primaryStage.show();
   }
 
-  public static void stop() {
+  public void stop() {
     loadingScreenController.stop();
   }
 }

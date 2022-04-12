@@ -1,8 +1,10 @@
 package edu.wpi.DapperDaemons;
 
-import edu.wpi.DapperDaemons.loadingScreen.loadingScreen;
 import java.io.IOException;
+import java.util.Objects;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,8 +21,12 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    loadingScreen.display(primaryStage);
-
+    Parent root =
+        FXMLLoader.load(
+            Objects.requireNonNull(
+                getClass().getClassLoader().getResource("views/loadingScreen.fxml")));
+    //    loadingScreen ls = new loadingScreen(primaryStage);
+    //    ls.display();
     //    new Thread(
     //            new Runnable() {
     //              @Override
