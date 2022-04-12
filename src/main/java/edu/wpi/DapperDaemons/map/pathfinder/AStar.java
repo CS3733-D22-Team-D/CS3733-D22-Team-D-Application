@@ -54,17 +54,17 @@ public class AStar {
 
       for (String nextLocation : getNeighbors(current)) {
         Double new_cost =
-                costSoFar.get(current.getLocationName())
-                        + getDistance(
-                        current.getLocationName(),
-                        nextLocation); // add the distance from current to next
+            costSoFar.get(current.getLocationName())
+                + getDistance(
+                    current.getLocationName(),
+                    nextLocation); // add the distance from current to next
         if (!costSoFar.keySet().contains(nextLocation)
-                || new_cost < costSoFar.get(nextLocation)) { // If nextLocation isn't in the queue,
+            || new_cost < costSoFar.get(nextLocation)) { // If nextLocation isn't in the queue,
           //          System.out.println("Saving the location " + nextLocation + " in the path");
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
           Double priority =
-                  Math.sqrt(new_cost) + Math.pow(getDistance(nextLocation, endLocation), 3);
+              Math.sqrt(new_cost) + Math.pow(getDistance(nextLocation, endLocation), 3);
           // Priority is the distance from this node to the goal + costSoFar of this node
           queue.add(new WalkableNode(nextLocation, priority));
           moveOrder.put(nextLocation, current);
@@ -103,12 +103,12 @@ public class AStar {
     List<String> walkableNode = new ArrayList<>();
     // List of walkable connected nodes as strings using their nodeID
     connected =
-            DAOPouch.getLocationNodeDAO().filter(nodeConnections, 3, currentLocation.getLocationName());
+        DAOPouch.getLocationNodeDAO().filter(nodeConnections, 3, currentLocation.getLocationName());
     List<Boolean> flipFlop = new ArrayList<>(Arrays.asList(new Boolean[connected.size()]));
     Collections.fill(flipFlop, Boolean.FALSE); // Helps the program decide which column to look in
     for (LocationNodeConnections connection :
-            DAOPouch.getLocationNodeDAO()
-                    .filter(nodeConnections, 2, currentLocation.getLocationName())) {
+        DAOPouch.getLocationNodeDAO()
+            .filter(nodeConnections, 2, currentLocation.getLocationName())) {
       flipFlop.add(Boolean.TRUE); // Switches the column to the second one to look in
       connected.add(connection);
     }
@@ -116,13 +116,14 @@ public class AStar {
       String nodeID = location.getConnectionOne();
       if (flipFlop.get(connected.indexOf(location))) nodeID = location.getConnectionTwo();
 
-      try {// Make sure this location is actually on the map / csv file
+      try { // Make sure this location is actually on the map / csv file
         if (DAOPouch.getLocationDAO().get(nodeID).getYcoord() != -1) {
           walkableNode.add(nodeID);
         }
-      } catch (Exception e){
-        //In order to not overpopulate the printline with a bunch of errors, I'm not printing anything out here
-        //This catch is just so the above get can run and get all of the correct neighbors
+      } catch (Exception e) {
+        // In order to not overpopulate the printline with a bunch of errors, I'm not printing
+        // anything out here
+        // This catch is just so the above get can run and get all of the correct neighbors
       }
 
       //      System.out.println("Neighbor node " + nodeID); // For letting me see stuff
@@ -142,10 +143,10 @@ public class AStar {
     // If it can't find the position, then this is basically saying that the node parser won't let
     // it break everything
     Location current =
-            new Location(
-                    "Unknown", -1000, -1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
+        new Location(
+            "Unknown", -1000, -1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
     Location next =
-            new Location("Unknown", 1000, 1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
+        new Location("Unknown", 1000, 1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
     try {
       current = locationDAO.filter(locations, 1, currentLocation).get(0);
       next = locationDAO.filter(locations, 1, nextLocation).get(0);
@@ -154,13 +155,14 @@ public class AStar {
       //      System.out.println("Couldn't find location in table");
     }
     Double distance =
-            Math.sqrt(
-                    (current.getXcoord() - next.getXcoord())
-                            ^ 2 + (current.getYcoord() - next.getYcoord())
-                            ^ 2);
+        Math.sqrt(
+            (current.getXcoord() - next.getXcoord())
+                ^ 2 + (current.getYcoord() - next.getYcoord())
+                ^ 2);
     if (!current.getFloor().equals(next.getFloor())) {
       System.out.println(
-              "Its on a separate floor, adding something"); // Comment out after it works - which it will first
+          "Its on a separate floor, adding something"); // Comment out after it works - which it
+      // will first
       System.out.println(currentLocation + "To" + nextLocation);
       distance += Math.abs(floorDistance(current.getFloor()) - floorDistance(next.getFloor()));
     }
@@ -168,7 +170,7 @@ public class AStar {
   }
 
   private double floorDistance(String currentFloor) {
-    switch (currentFloor){
+    switch (currentFloor) {
       case "L2":
         return 0;
       case "L1":

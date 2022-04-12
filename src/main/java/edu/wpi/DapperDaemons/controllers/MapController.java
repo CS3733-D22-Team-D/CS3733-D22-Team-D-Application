@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -39,6 +40,7 @@ public class MapController extends UIController implements Initializable {
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
+  @FXML private AnchorPane pathPane;
 
   /* Map Filter */
   @FXML private StackPane mapFilter;
@@ -83,6 +85,12 @@ public class MapController extends UIController implements Initializable {
   private GlyphHandler glyphs;
   private PositionHandler positions;
   private PinHandler pin;
+
+  /* Pathfinder handler info */
+  @FXML private JFXComboBox<String> fromLocation;
+  @FXML private JFXComboBox<String> toLocation;
+
+  private PathfinderHandler pathfinder;
 
   /* Database stuff */
   private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -131,6 +139,8 @@ public class MapController extends UIController implements Initializable {
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
     glyphs.setFloorFilter("1");
+
+    this.pathfinder = new PathfinderHandler(pathPane, this);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -529,10 +539,10 @@ public class MapController extends UIController implements Initializable {
         directionsFields =
             FXMLLoader.load(
                 Objects.requireNonNull(App.class.getResource("views/" + "directionsSearch.fxml")));
+        filterMenu.getChildren().add(directionsFields);
       } catch (IOException e) {
         e.printStackTrace();
       }
-      filterMenu.getChildren().add(directionsFields);
     } else {
       filterMenu.getChildren().remove(2);
     }
@@ -546,5 +556,15 @@ public class MapController extends UIController implements Initializable {
   @FXML
   void hideCarrot(MouseEvent event) {
     filterButton.setVisible(false);
+  }
+
+  @FXML
+  public void showPath() {
+    pathfinder.showPath(fromLocation.getValue(), toLocation.getValue());
+  }
+
+  @FXML
+  public void clearPath() {
+    pathfinder.clearPath();
   }
 }
