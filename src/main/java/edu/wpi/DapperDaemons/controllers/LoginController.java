@@ -46,16 +46,19 @@ public class LoginController extends AppController {
       SecurityController.setUser(admin);
       switchScene("default.fxml", 635, 510);
       return;
-    } else if (username.getText().trim().equals("staff") && password.getText().trim().equals("staff")) {
+    } else if (username.getText().trim().equals("staff")
+        && password.getText().trim().equals("staff")) {
       Employee staff = DAOPouch.getEmployeeDAO().get("staff");
       SecurityController.setUser(staff);
       switchScene("default.fxml", 635, 510);
       return;
-    } else if (username.getText().trim().equals("rfid") && password.getText().trim().equals("rfid")) { // RFID TEST
+    } else if (username.getText().trim().equals("rfid")
+        && password.getText().trim().equals("rfid")) { // RFID TEST
       SecurityController.setUser(admin);
       switchScene("RFIDScanPage.fxml", 635, 510);
       return;
-    } else if (username.getText().trim().equals("Rick") && password.getText().trim().equals("Astley")) {
+    } else if (username.getText().trim().equals("Rick")
+        && password.getText().trim().equals("Astley")) {
       player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
