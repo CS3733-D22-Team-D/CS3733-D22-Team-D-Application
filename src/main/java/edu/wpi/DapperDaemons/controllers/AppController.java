@@ -85,9 +85,11 @@ public class AppController implements Initializable {
 
   @FXML
   protected void quitProgram() {
-    Stage window = (Stage) sceneBox.getScene().getWindow();
     csvSaver.saveAll();
-    if (window != null) window.close();
+    if (sceneBox != null && sceneBox.getScene() != null) {
+      Stage window = (Stage) sceneBox.getScene().getWindow();
+      if (window != null) window.close();
+    }
     Platform.exit();
     System.exit(0);
   }
