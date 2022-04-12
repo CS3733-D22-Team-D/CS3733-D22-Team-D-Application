@@ -31,7 +31,6 @@ public class AppController implements Initializable {
   @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
-  private boolean updatedSize;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
