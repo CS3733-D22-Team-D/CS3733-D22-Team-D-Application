@@ -86,10 +86,6 @@ public class MapController extends UIController implements Initializable {
   private PositionHandler positions;
   private PinHandler pin;
 
-  /* Pathfinder handler info */
-  @FXML private JFXComboBox<String> fromLocation;
-  @FXML private JFXComboBox<String> toLocation;
-
   private PathfinderHandler pathfinder;
 
   /* Database stuff */
@@ -556,15 +552,5 @@ public class MapController extends UIController implements Initializable {
   @FXML
   void hideCarrot(MouseEvent event) {
     filterButton.setVisible(false);
-  }
-
-  @FXML
-  public void showPath() {
-    pathfinder.showPath(fromLocation.getValue(), toLocation.getValue());
-  }
-
-  @FXML
-  public void clearPath() {
-    pathfinder.clearPath();
   }
 }

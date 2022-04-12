@@ -1,35 +1,48 @@
 package edu.wpi.DapperDaemons.map.pathfinder;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
 import edu.wpi.DapperDaemons.entities.Location;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 /** Creates a path on the map */
-public class PathfinderHandler {
+public class PathfinderHandler implements Initializable {
 
   private AnchorPane lineLayer;
   private MapController controller;
   private List<String> nodePath;
   private List<Location> locations;
 
+  /* Pathfinder handler info */
+  @FXML private JFXComboBox<String> fromLocation;
+  @FXML private JFXComboBox<String> toLocation;
+
   public PathfinderHandler(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
     this.controller = controller;
   }
 
-  public void showPath(String fromLocation, String toLocation) {
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {}
+
+  @FXML
+  public void showPath() {
     try {
-      if (DAOPouch.getLocationDAO().get(fromLocation).getXcoord()
+      if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
           != -1) { // if from location is valid
-        if (DAOPouch.getLocationDAO().get(fromLocation).getXcoord()
+        if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
             != -1) { // and to location is valid
-          showPather(fromLocation, toLocation);
+          showPather(fromLocation.getValue(), toLocation.getValue());
         }
       }
     } catch (Exception e) {
@@ -38,6 +51,7 @@ public class PathfinderHandler {
     }
   }
 
+  @FXML
   public void clearPath() {
     makeAllInVisible();
     lineLayer.getChildren().removeAll();
