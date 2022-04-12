@@ -3,8 +3,6 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class LoginController extends AppController {
 
@@ -58,21 +55,7 @@ public class LoginController extends AppController {
     } else if (username.getText().trim().equals("rfid")
         && password.getText().trim().equals("rfid")) { // RFID TEST
       SecurityController.setUser(admin);
-      LoadingScreen loadingScreen = new LoadingScreen((Stage) username.getScene().getWindow());
-
-      loadingScreen.display(
-          () -> {
-            // get the string value here!
-          },
-          () -> {
-            try {
-              switchScene("RFIDScanPage.fxml", 635, 510);
-            } catch (IOException e) {
-              e.printStackTrace();
-              System.err.println("Unable to switch pages");
-            }
-          });
-      // switchScene("RFIDScanPage.fxml", 635, 510);
+      switchScene("RFIDScanPage.fxml", 635, 510);
       return;
     } else if (username.getText().trim().equals("Rick")
         && password.getText().trim().equals("Astley")) {

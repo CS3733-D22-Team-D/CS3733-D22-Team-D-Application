@@ -52,14 +52,6 @@
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="helpLabel" text="In order to process the RFID scan, the RFID Sensor needs to be initialized.  Click below to initialze the sensor.">
-                                 <font>
-                                    <Font name="System Italic" size="11.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="15.0" />
-                                 </padding>
-                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -72,7 +64,7 @@
                                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
                                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="366.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Button id="defaultButton" fx:id="initButton" mnemonicParsing="false" onMousePressed="#initText" onMouseReleased="#initScanner" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="CONNECT TO SENSOR" textFill="WHITE">
+                                          <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
                                              <font>
                                                 <Font size="17.0" />
                                              </font>
@@ -83,53 +75,20 @@
                                                    </color>
                                                 </DropShadow>
                                              </effect>
+                                             <HBox.margin>
+                                                <Insets right="20.0" />
+                                             </HBox.margin>
                                           </Button>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="244.0">
-                                       <children>
-                                          <Label fx:id="initLabel" text="LABEL">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Button id="defaultButton" fx:id="sButton" mnemonicParsing="false" onMousePressed="#setScanning" onMouseReleased="#loginRFID" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="SCAN NOW" textFill="WHITE">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                             <effect>
-                                                <DropShadow>
-                                                   <color>
-                                                      <Color opacity="0.15000000596046448" />
-                                                   </color>
-                                                </DropShadow>
-                                             </effect>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="271.0">
                                        <children>
                                           <Label fx:id="sLabel" text="LABEL">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                              <HBox.margin>
-                                                <Insets left="20.0" />
+                                                <Insets left="15.0" />
                                              </HBox.margin>
                                           </Label>
                                        </children>
