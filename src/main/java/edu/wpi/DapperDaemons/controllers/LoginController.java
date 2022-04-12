@@ -42,8 +42,13 @@ public class LoginController extends AppController {
   @FXML
   void login() throws Exception {
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
-    if (username.getText().equals("") && password.getText().equals("")) {
+    if (username.getText().equals("admin") && password.getText().equals("admin")) {
       SecurityController.setUser(admin);
+      switchScene("default.fxml", 635, 510);
+      return;
+    } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
+      Employee staff = DAOPouch.getEmployeeDAO().get("staff");
+      SecurityController.setUser(staff);
       switchScene("default.fxml", 635, 510);
       return;
     } else if (username.getText().equals("rfid") && password.getText().equals("rfid")) {
