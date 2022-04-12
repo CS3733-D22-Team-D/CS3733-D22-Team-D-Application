@@ -83,6 +83,8 @@ public class AppController implements Initializable {
     window.setOnCloseRequest(e -> quitProgram());
     double width = sceneBox.getPrefWidth();
     double height = sceneBox.getPrefHeight();
+    root.prefHeight(height);
+    root.prefWidth(width);
     window.setScene(new Scene(root));
     sceneBox.setPrefWidth(width);
     sceneBox.setPrefHeight(height);
