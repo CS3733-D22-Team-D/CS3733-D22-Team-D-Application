@@ -1,5 +1,6 @@
-dSTOR001L1,3002,1381,L1,Tower,STOR,OR Bed Park,ORBP
+locationID,xCoord,yCoord,floor,building,nodeType,longName,shortName
 CHALL001L1,3283,1683,L1,Tower,HALL,Hallway 1 Floor L1,Hallway C001L1
+dSTOR001L1,3002,1381,L1,Tower,STOR,OR Bed Park,ORBP
 CREST001L1,3283,2100,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
 CLABS002L1,3362,2412,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
 CHALL005L1,3362,3263,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
