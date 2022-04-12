@@ -29,8 +29,7 @@ public class LoadingScreen {
                           Parent root =
                               FXMLLoader.load(
                                   Objects.requireNonNull(
-                                      LoadingScreen
-                                          .class
+                                      LoadingScreen.class
                                           .getClassLoader()
                                           .getResource(
                                               "edu/wpi/DapperDaemons/views/loadingScreen.fxml")));
