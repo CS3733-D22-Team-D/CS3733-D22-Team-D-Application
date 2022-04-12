@@ -64,11 +64,8 @@ public class MapDashboardController extends UIController {
   @FXML private Text inUseEquipment;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
-  private String floorTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
-  private String locOfInterestTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
-          .getFile();
+  private final String floorTxtPath = Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
+  private final String locOfInterestTxtPath = Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt")).getFile();
 
   private String floor;
 

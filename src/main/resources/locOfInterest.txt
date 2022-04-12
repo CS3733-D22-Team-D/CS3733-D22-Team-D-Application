@@ -16,4 +16,4 @@ M2 I actually really hate testing
 12 I actually really hate testing
 14 I actually really hate testing
 15 I actually really hate testing
-16 I actually really hate testing
+16 I actually really hate testing because testing is a serious challenge when programmers need to analyze for potential errors, but every second, every moment something can go wrong and...
