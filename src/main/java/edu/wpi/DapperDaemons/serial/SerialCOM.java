@@ -65,8 +65,11 @@ public class SerialCOM {
     List<String> available = new ArrayList<>();
     SerialPort[] ports = SerialPort.getCommPorts();
     for (SerialPort s : ports) {
-      available.add(s.getSystemPortName().trim());
-      System.out.println(s.getSystemPortName().trim());
+      if (s.openPort()) {
+        available.add(s.getSystemPortName().trim());
+        System.out.println(s.getSystemPortName().trim());
+      }
+      s.closePort();
     }
     return available;
   }
