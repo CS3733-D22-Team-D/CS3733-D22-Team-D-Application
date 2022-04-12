@@ -51,7 +51,160 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fitHeight="150.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true" />
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="29.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" />
+                                                      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../assets/Glyphs/MapIcons/dirty.png" />
+                                                               </image>
+                                                               <effect>
+                                                                  <ColorAdjust brightness="-0.3" />
+                                                               </effect>
+                                                            </ImageView>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                                                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="13.0" />
+                                                                     </font>
+                                                                     <StackPane.margin>
+                                                                        <Insets />
+                                                                     </StackPane.margin>
+                                                                  </Text>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="30.0" top="30.0" />
+                                                               </padding>
+                                                            </StackPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/wrench.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                               <StackPane.margin>
+                                                                  <Insets />
+                                                               </StackPane.margin>
+                                                            </Text>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="30.0" top="30.0" />
+                                                         </padding>
+                                                      </StackPane>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane layoutX="261.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/storage.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.3" />
+                                                         </effect>
+                                                      </ImageView>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                               <StackPane.margin>
+                                                                  <Insets />
+                                                               </StackPane.margin>
+                                                            </Text>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="30.0" top="30.0" />
+                                                         </padding>
+                                                      </StackPane>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/person.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                               <StackPane.margin>
+                                                                  <Insets />
+                                                               </StackPane.margin>
+                                                            </Text>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="30.0" top="30.0" />
+                                                         </padding>
+                                                      </StackPane>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane layoutX="166.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/clipboard.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                               <StackPane.margin>
+                                                                  <Insets />
+                                                               </StackPane.margin>
+                                                            </Text>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="30.0" top="30.0" />
+                                                         </padding>
+                                                      </StackPane>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" />
+                                             </VBox.margin>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                  </children>
@@ -77,9 +230,9 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat a pathological condition such as a disease or injury, to help improve bodily function, appearance, or to repair unwanted ruptured areas." wrapText="true">
+                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat." wrapText="true">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -112,9 +265,9 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat a pathological condition such as a disease or injury, to help improve bodily function, appearance, or to repair unwanted ruptured areas." wrapText="true">
+                                          <Label text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat. Surgery is a medical or dental specialty" wrapText="true">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -156,7 +309,7 @@
                                                 </Text>
                                              </children>
                                           </VBox>
-                                          <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5; -fx-tab-min-width: 191; -fx-tab-max-height: 19;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                          <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5; -fx-tab-min-width: 150; -fx-tab-max-height: 19;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                              <tabs>
                                                 <Tab text="Equipment">
                                                    <content>
@@ -230,6 +383,35 @@
                                           </DropShadow>
                                        </effect>
                                     </VBox>
+                                    <VBox prefHeight="330.0" prefWidth="257.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="330.0" prefWidth="256.0" VBox.vgrow="NEVER">
+                                             <children>
+                                                <Label text="Interactive Map" wrapText="true">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" right="15.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </VBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow>
+                                             <color>
+                                                <Color opacity="0.15000000596046448" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
                                  </children>
                               </HBox>
                            </children>
@@ -243,7 +425,7 @@
                            <content>
                               <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="199.0" spacing="15.0">
                                  <children>
-                                    <ToggleButton fx:id="LL2" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL2">
+                                    <ToggleButton id="floors" fx:id="LL2" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL2" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="LL2">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -258,7 +440,7 @@
                                           <ToggleGroup fx:id="floors" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="LL1" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="LL1" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="LL1" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToLL1" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="LL1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -270,7 +452,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L1" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -282,7 +464,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L2" layoutX="10.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L2" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L2" layoutX="10.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL2" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L2" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -294,7 +476,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L3" layoutX="10.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL3" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L3" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L3" layoutX="10.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL3" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L3" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -306,7 +488,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L4" layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL4" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L4" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L4" layoutX="10.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL4" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L4" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -318,7 +500,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L5" layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL5" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L5" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L5" layoutX="10.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL5" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L5" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -330,7 +512,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L6" layoutX="10.0" layoutY="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL6" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L6" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L6" layoutX="10.0" layoutY="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL6" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L6" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -342,7 +524,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="M1" layoutX="10.0" layoutY="218.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM1" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M1" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="M1" layoutX="10.0" layoutY="218.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM1" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="M1" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -354,7 +536,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="M2" layoutX="10.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM2" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="M2" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="M2" layoutX="10.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToM2" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="M2" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -366,7 +548,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L7" layoutX="10.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL7" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L7" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L7" layoutX="10.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL7" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L7" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -378,7 +560,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L8" layoutX="10.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL8" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L8" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L8" layoutX="10.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL8" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L8" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -390,7 +572,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L9" layoutX="10.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL9" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L9" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L9" layoutX="10.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL9" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L9" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -402,7 +584,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L10" layoutX="10.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL10" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L10" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L10" layoutX="10.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL10" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L10" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -414,7 +596,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L11" layoutX="10.0" layoutY="374.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL11" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L11" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L11" layoutX="10.0" layoutY="374.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL11" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L11" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -426,7 +608,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L12" layoutX="10.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL12" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L12" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L12" layoutX="10.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL12" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L12" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -438,7 +620,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L14" layoutX="10.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL14" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L14" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L14" layoutX="10.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL14" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L14" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -450,7 +632,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L15" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL15" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L15" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L15" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL15" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L15" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -462,7 +644,7 @@
                                           </DropShadow>
                                        </effect>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="L16" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL16" prefHeight="70.0" prefWidth="150.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" text="L16" toggleGroup="$floors">
+                                    <ToggleButton id="floors" fx:id="L16" layoutX="10.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL16" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../../../toggleButton.css" text="L16" toggleGroup="$floors">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -476,7 +658,7 @@
                                     </ToggleButton>
                                  </children>
                                  <padding>
-                                    <Insets bottom="70.0" left="15.0" right="15.0" top="15.0" />
+                                    <Insets bottom="50.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
                               </VBox>
                            </content>
