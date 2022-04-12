@@ -8,13 +8,13 @@ import javafx.scene.layout.Pane;
 
 public class UserSettingsController extends UIController {
 
-  @FXML private Pane userBackgroundContainer;
-  @FXML private ImageView userSettingsBackground;
+  @FXML private Pane BGContainer;
+  @FXML private ImageView BGImage;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
 
-    bindImage(userSettingsBackground, userBackgroundContainer);
+    bindImage(BGImage, BGContainer);
   }
 }
