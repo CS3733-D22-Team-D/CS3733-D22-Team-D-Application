@@ -172,7 +172,7 @@ public class PathfinderHandler implements Initializable {
       // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         System.out.println("Showing " + locations.get(i).getNodeID());
-        lineLayer.getChildren().get(i).setVisible(true);
+        lineLayer.getChildren().get(i + 1).setVisible(true);
       }
     }
   }
