@@ -127,10 +127,10 @@ public class MapController extends UIController implements Initializable {
             mapFloor3,
             mapFloor4,
             mapFloor5);
-    maps.setMap("1");
+    maps.setMap(MapDashboardController.floor);
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
-    glyphs.setFloorFilter("1");
+    glyphs.setFloorFilter(maps.getFloor());
 
     this.positions = new PositionHandler(origPositions);
 
