@@ -32,6 +32,7 @@ public class DAO<T extends TableObject> {
    */
   public DAO(T type, String filename) throws SQLException, IOException {
     orm = new ORM<T>(type, filename);
+    this.type = type;
   }
 
   /**
@@ -62,7 +63,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean update(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToUpdate(type);
+    boolean hasClearance = SecurityController.permissionToUpdate(type);
     if (hasClearance) {
       orm.update(type);
     }
@@ -77,7 +78,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean delete(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToDelete(type);
+    boolean hasClearance = SecurityController.permissionToDelete(type);
     if (hasClearance) {
       orm.delete(type.getAttribute(1));
     }
@@ -91,7 +92,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    */
   public boolean add(T type) throws SQLException {
-    boolean hasClearance = SecurityController.getInstance().permissionToAdd(type);
+    boolean hasClearance = SecurityController.permissionToAdd(type);
     if (hasClearance) {
       orm.add(type);
     }

@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 public class ORM<T extends TableObject> {
 
-  Connection conn = connectionHandler.getConnection();
   Supplier<T> supplier;
   int numAttributes;
   String tableName;
@@ -21,7 +20,7 @@ public class ORM<T extends TableObject> {
     initString = type.getTableInit();
     tableName = type.getTableName();
 
-    Statement stmt = conn.createStatement();
+    Statement stmt = connectionHandler.getConnection().createStatement();
     //    try {
     //      stmt.execute(initString);
     //    } catch (SQLException e) {
@@ -42,7 +41,7 @@ public class ORM<T extends TableObject> {
     initString = type.getTableInit();
     tableName = type.getTableName();
 
-    Statement stmt = conn.createStatement();
+    Statement stmt = connectionHandler.getConnection().createStatement();
     //    try {
     //      stmt.execute(initString);
     //    } catch (SQLException e) {
@@ -66,7 +65,7 @@ public class ORM<T extends TableObject> {
     String query = "SELECT * FROM " + tableName;
     query += " WHERE " + columnNames.get(0);
     query += " = ?";
-    PreparedStatement prepStmt = conn.prepareStatement(query);
+    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(query);
     prepStmt.setString(1, primaryKey);
     ResultSet rset = prepStmt.executeQuery();
     T newTemp = getInstance();
@@ -81,7 +80,7 @@ public class ORM<T extends TableObject> {
 
   public List<T> getAll() throws SQLException {
     ArrayList<T> all = new ArrayList<>();
-    Statement stmt = conn.createStatement();
+    Statement stmt = connectionHandler.getConnection().createStatement();
     String query = "SELECT * FROM " + tableName;
     ResultSet rset = stmt.executeQuery(query);
     while (rset.next()) {
@@ -101,7 +100,8 @@ public class ORM<T extends TableObject> {
       updateStatement += "?,";
     }
     updateStatement += "?)";
-    PreparedStatement prepStmt = conn.prepareStatement(updateStatement);
+    PreparedStatement prepStmt =
+        connectionHandler.getConnection().prepareStatement(updateStatement);
     if (!keyChecker.validID(newTableObject, newTableObject.getAttribute(1))) {
       for (int i = 1; i <= numAttributes; i++) {
         prepStmt.setString(i, newTableObject.getAttribute(i));
@@ -113,7 +113,7 @@ public class ORM<T extends TableObject> {
 
   public void delete(String primaryKey) throws SQLException {
     String query = "DELETE FROM " + tableName + " WHERE " + columnNames.get(0) + " = ?";
-    PreparedStatement prepStmt = conn.prepareStatement(query);
+    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(query);
     prepStmt.setString(1, primaryKey);
     prepStmt.executeUpdate();
     prepStmt.close();
@@ -132,7 +132,7 @@ public class ORM<T extends TableObject> {
     statement += "WHERE " + columnNames.get(0) + " = ?";
 
     // Iterate through the ? in the Statements and replace with values
-    PreparedStatement prepStmt = conn.prepareStatement(statement);
+    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(statement);
     T temp = get(primaryKey);
     for (int i = 1; i < numAttributes; i++) {
       prepStmt.setString(i, temp.getAttribute(i));
@@ -152,7 +152,7 @@ public class ORM<T extends TableObject> {
     statement += " WHERE " + columnNames.get(0) + " = ?";
 
     // Iterate through the ? in the Statements and replace with values
-    PreparedStatement prepStmt = conn.prepareStatement(statement);
+    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(statement);
     T temp = get(type.getAttribute(1));
     for (int i = 1; i < numAttributes; i++) {
       prepStmt.setString(i, type.getAttribute(i + 1));
