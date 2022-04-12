@@ -11,10 +11,8 @@ import edu.wpi.DapperDaemons.map.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -63,10 +61,10 @@ public class MapDashboardController extends UIController {
   @FXML private Text patientNum;
   @FXML private Text requestNum;
   private final String floorTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
+      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getPath();
   private final String locOfInterestTxtPath =
       Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
-          .getFile();
+          .getPath();
 
   private String floor;
 
@@ -180,15 +178,11 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    File f = new File(filePath);
-    BufferedReader reader = new BufferedReader(new FileReader(f));
-    String curLine;
-    int n = 0;
-    while ((curLine = reader.readLine()) != null) {
-      if (n == line) return curLine;
-      n++;
-    }
-    return "";
+    FileReader f = new FileReader(filePath);
+    BufferedReader reader = new BufferedReader(f);
+    List<String> lines = reader.lines().collect(Collectors.toList());
+    if (line < lines.size()) return lines.get(line);
+    else return "";
   }
 
   private int getFloorNum() {
