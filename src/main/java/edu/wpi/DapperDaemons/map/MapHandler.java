@@ -33,8 +33,8 @@ public class MapHandler {
   }
 
   public void resetScales() {
-    mapView.setScaleX(1);
-    mapView.setScaleY(1);
+    mapView.setScaleX(0.5);
+    mapView.setScaleY(0.5);
   }
 
   public String getFloor() {
