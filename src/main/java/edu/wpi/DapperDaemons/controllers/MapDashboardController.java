@@ -92,8 +92,14 @@ public class MapDashboardController extends UIController {
 
     // Default floor
     this.floor = "1";
+    updatePage();
+  }
+
+  private void updatePage() {
     updateTables();
     updateIcons();
+    updateSummary();
+    updateLocOfInterest();
   }
 
   // Updates the data based on current floor
@@ -120,9 +126,6 @@ public class MapDashboardController extends UIController {
         showError("Failed to show data on tables.");
       }
     }
-    updateIcons();
-    updateSummary();
-    updateLocOfInterest();
   }
 
   private void updateIcons() {
@@ -237,7 +240,7 @@ public class MapDashboardController extends UIController {
   void switchToL1(ActionEvent event) {
     if (L1.isSelected()) {
       this.floor = "1";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -245,7 +248,7 @@ public class MapDashboardController extends UIController {
   void switchToL10(ActionEvent event) {
     if (L10.isSelected()) {
       this.floor = "10";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -253,7 +256,7 @@ public class MapDashboardController extends UIController {
   void switchToL11(ActionEvent event) {
     if (L11.isSelected()) {
       this.floor = "11";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -261,7 +264,7 @@ public class MapDashboardController extends UIController {
   void switchToL12(ActionEvent event) {
     if (L12.isSelected()) {
       this.floor = "12";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -269,7 +272,7 @@ public class MapDashboardController extends UIController {
   void switchToL14(ActionEvent event) {
     if (L14.isSelected()) {
       this.floor = "14";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -277,7 +280,7 @@ public class MapDashboardController extends UIController {
   void switchToL15(ActionEvent event) {
     if (L15.isSelected()) {
       this.floor = "15";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -285,7 +288,7 @@ public class MapDashboardController extends UIController {
   void switchToL16(ActionEvent event) {
     if (L16.isSelected()) {
       this.floor = "16";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -293,7 +296,7 @@ public class MapDashboardController extends UIController {
   void switchToL2(ActionEvent event) {
     if (L2.isSelected()) {
       this.floor = "2";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -301,7 +304,7 @@ public class MapDashboardController extends UIController {
   void switchToL3(ActionEvent event) {
     if (L3.isSelected()) {
       this.floor = "3";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -309,7 +312,7 @@ public class MapDashboardController extends UIController {
   void switchToL4(ActionEvent event) {
     if (L4.isSelected()) {
       this.floor = "4";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -317,7 +320,7 @@ public class MapDashboardController extends UIController {
   void switchToL5(ActionEvent event) {
     if (L5.isSelected()) {
       this.floor = "5";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -325,7 +328,7 @@ public class MapDashboardController extends UIController {
   void switchToL6(ActionEvent event) {
     if (L6.isSelected()) {
       this.floor = "6";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -333,7 +336,7 @@ public class MapDashboardController extends UIController {
   void switchToL7(ActionEvent event) {
     if (L7.isSelected()) {
       this.floor = "7";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -341,7 +344,7 @@ public class MapDashboardController extends UIController {
   void switchToL8(ActionEvent event) {
     if (L8.isSelected()) {
       this.floor = "8";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -349,7 +352,7 @@ public class MapDashboardController extends UIController {
   void switchToL9(ActionEvent event) {
     if (L9.isSelected()) {
       this.floor = "9";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -357,7 +360,7 @@ public class MapDashboardController extends UIController {
   void switchToLL1(ActionEvent event) {
     if (LL1.isSelected()) {
       this.floor = "L1";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -365,7 +368,7 @@ public class MapDashboardController extends UIController {
   void switchToLL2(ActionEvent event) {
     if (LL2.isSelected()) {
       this.floor = "L2";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -373,7 +376,7 @@ public class MapDashboardController extends UIController {
   void switchToM1(ActionEvent event) {
     if (M1.isSelected()) {
       this.floor = "M1";
-      updateTables();
+      updatePage();
     }
   }
 
@@ -381,7 +384,7 @@ public class MapDashboardController extends UIController {
   void switchToM2(ActionEvent event) {
     if (M2.isSelected()) {
       this.floor = "M2";
-      updateTables();
+      updatePage();
     }
   }
 }
