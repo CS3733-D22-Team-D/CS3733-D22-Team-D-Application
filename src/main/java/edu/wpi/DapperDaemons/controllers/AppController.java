@@ -16,7 +16,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -81,12 +80,7 @@ public class AppController implements Initializable {
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
     window.setOnCloseRequest(e -> quitProgram());
-
-    double oldheight = window.getHeight();
-    double oldwidth = window.getWidth();
-    window.setScene(new Scene(root));
-    window.setHeight(oldheight);
-    window.setWidth(oldwidth);
+    window.getScene().setRoot(root);
   }
 
   @FXML
