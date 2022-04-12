@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -13,13 +16,25 @@
          <children>
             <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" />
+                  <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/loading.gif" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="0.3" hue="-0.13" saturation="1.0" />
+                     </effect></ImageView>
                   <Label fx:id="loadingLabel" prefHeight="118.0" prefWidth="744.0" text="Loading" textFill="#185783">
                      <font>
                         <Font size="80.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
                   </Label>
                </children>
+               <StackPane.margin>
+                  <Insets bottom="15.0" />
+               </StackPane.margin>
             </HBox>
          </children>
       </StackPane>

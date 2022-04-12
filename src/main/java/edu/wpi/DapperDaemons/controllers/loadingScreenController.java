@@ -30,10 +30,13 @@ public class loadingScreenController extends AppController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
 
+  public static double map(
+      double value, double start, double stop, double targetStart, double targetStop) {
+    return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("init");
-    loadingIcon.setImage(LOAD);
     if (loading != null) loading.cancel();
     loading = new Timer();
     loading.schedule(
