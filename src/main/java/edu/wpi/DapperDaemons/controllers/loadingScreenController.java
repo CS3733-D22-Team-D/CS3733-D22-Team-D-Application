@@ -23,17 +23,13 @@ public class loadingScreenController extends AppController {
 
   private static int ind = 0;
 
-  public final Image LOAD =
-      new Image(
-          Objects.requireNonNull(
-              DefaultController.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+  public static double map(
+      double value, double start, double stop, double targetStart, double targetStop) {
+    return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("init");
-    loadingIcon.setImage(LOAD);
     if (loading != null) loading.cancel();
     loading = new Timer();
     loading.schedule(
@@ -41,12 +37,9 @@ public class loadingScreenController extends AppController {
           @Override
           public void run() {
             Platform.runLater(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    loadingLabel.setText("Loading...".substring(0, ind));
-                    ind = (ind + 1) % "Loading...".length();
-                  }
+                () -> {
+                  loadingLabel.setText("Loading...".substring(0, ind));
+                  ind = (ind + 1) % "Loading...".length();
                 });
           }
         },
@@ -59,28 +52,24 @@ public class loadingScreenController extends AppController {
           @Override
           public void run() {
             Platform.runLater(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    int currImg = (int) (Math.random() * 11) + 1;
-                    System.out.println(currImg);
-                    sceneBox.setBackground(
-                        new Background(
-                            new BackgroundImage(
-                                new Image(
-                                    Objects.requireNonNull(
-                                        loadingScreenController
-                                            .class
-                                            .getClassLoader()
-                                            .getResourceAsStream(
-                                                "edu/wpi/DapperDaemons/loadingScreen/"
-                                                    + currImg
-                                                    + ".png"))),
-                                BackgroundRepeat.SPACE,
-                                BackgroundRepeat.SPACE,
-                                BackgroundPosition.CENTER,
-                                new BackgroundSize(100, 100, true, true, true, true))));
-                  }
+                () -> {
+                  int currImg = (int) (Math.random() * 11) + 1;
+                  sceneBox.setBackground(
+                      new Background(
+                          new BackgroundImage(
+                              new Image(
+                                  Objects.requireNonNull(
+                                      loadingScreenController
+                                          .class
+                                          .getClassLoader()
+                                          .getResourceAsStream(
+                                              "edu/wpi/DapperDaemons/loadingScreen/"
+                                                  + currImg
+                                                  + ".png"))),
+                              BackgroundRepeat.SPACE,
+                              BackgroundRepeat.SPACE,
+                              BackgroundPosition.CENTER,
+                              new BackgroundSize(100, 100, true, true, true, true))));
                 });
           }
         },

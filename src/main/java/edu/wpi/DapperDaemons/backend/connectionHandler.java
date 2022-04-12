@@ -34,13 +34,14 @@ public class connectionHandler {
     try {
       csvSaver.saveAll();
       Class.forName("org.apache.derby.jdbc.ClientDriver");
+      System.out.println("Connecting to client");
       connection =
           DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
       System.out.println("Connected to the client server");
       csvLoader.loadAll();
       type = connectionType.CLIENTSERVER;
     } catch (SQLException e) {
-      //      System.out.println("Database already created, continuing");
+      System.out.println("Could not connect to the client server, reverting back to embedded");
       type = connectionType.EMBEDDED;
       return false;
     } catch (ClassNotFoundException e) {
@@ -62,12 +63,14 @@ public class connectionHandler {
         csvSaver.saveAll();
       }
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      System.out.println("Connecting to embedded");
       connection = DriverManager.getConnection("jdbc:derby:BaW_database;create = true");
       csvLoader.loadAll();
       System.out.println("Connected to the embedded server");
       type = connectionType.EMBEDDED;
     } catch (SQLException e) {
-      //      System.out.println("Database already created, continuing");
+      System.out.println(
+          "Could not connect to the embedded server, reverting back to client server");
       type = connectionType.CLIENTSERVER;
       return false;
     } catch (ClassNotFoundException e) {
