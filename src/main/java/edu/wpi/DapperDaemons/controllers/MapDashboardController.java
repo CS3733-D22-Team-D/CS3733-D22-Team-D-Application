@@ -8,9 +8,7 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.map.tables.TableHelper;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -169,6 +167,7 @@ public class MapDashboardController extends UIController {
       String floorText = getFileText(floorTxtPath, getFloorNum());
       floorSummary.setText(floorText);
     } catch (IOException e) {
+      showError("Error 404: File Not Found");
     }
   }
 
@@ -181,7 +180,8 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    File f = new File(filePath);
+    BufferedReader reader = new BufferedReader(new FileReader(f));
     String curLine;
     int n = 0;
     while ((curLine = reader.readLine()) != null) {

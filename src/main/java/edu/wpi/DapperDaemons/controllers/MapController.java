@@ -12,6 +12,7 @@ import edu.wpi.DapperDaemons.map.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -542,11 +543,23 @@ public class MapController extends UIController implements Initializable {
 
   @FXML
   void showCarrot(MouseEvent event) {
-    filterButton.setVisible(true);
+    FadeTransition ft = new FadeTransition(Duration.millis(100), filterButton);
+    ft.setFromValue(0.0);
+    ft.setToValue(1.0);
+    ft.setCycleCount(1);
+    ft.setAutoReverse(false);
+
+    ft.play();
   }
 
   @FXML
   void hideCarrot(MouseEvent event) {
-    filterButton.setVisible(false);
+    FadeTransition ft = new FadeTransition(Duration.millis(100), filterButton);
+    ft.setFromValue(1.0);
+    ft.setToValue(0.0);
+    ft.setCycleCount(1);
+    ft.setAutoReverse(false);
+
+    ft.play();
   }
 }
