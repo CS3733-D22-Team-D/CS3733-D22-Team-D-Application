@@ -89,6 +89,23 @@ public class AppController implements Initializable {
     window.setWidth(oldwidth);
   }
 
+  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
+      throws IOException {
+    Parent root =
+        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
+    window.setMinWidth(minWidth);
+    window.setMinHeight(minHeight);
+    window.setOnCloseRequest(e -> quitProgram());
+    double width = sceneBox.getPrefWidth();
+    double height = sceneBox.getPrefHeight();
+    window.setScene(new Scene(root));
+    sceneBox.setPrefWidth(width);
+    sceneBox.setPrefHeight(height);
+    if (updatedSize) window.setWidth(window.getWidth() + 0.001);
+    else window.setWidth(window.getWidth() - 0.001); // To update size because JavaFX is bad
+    window.setHeight(window.getHeight());
+  }
+
   @FXML
   protected void quitProgram() {
     Stage window = (Stage) sceneBox.getScene().getWindow();
