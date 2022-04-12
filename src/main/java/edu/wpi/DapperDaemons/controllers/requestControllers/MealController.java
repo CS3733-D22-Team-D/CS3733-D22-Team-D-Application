@@ -8,9 +8,10 @@ import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.map.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -77,10 +78,8 @@ public class MealController extends UIController {
 
     try {
       mealRequestsTable.getItems().addAll(mealDeliveryRequestDAO.getAll());
-      System.out.println("Created Table");
     } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Error, Mead Delivery table was unable to be created");
+      mealRequestsTable.getItems().setAll(new ArrayList<>());
     }
   }
 
