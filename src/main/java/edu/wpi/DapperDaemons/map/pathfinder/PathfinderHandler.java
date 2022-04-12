@@ -8,6 +8,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.util.Duration;
 
 /** Creates a path on the map */
 public class PathfinderHandler implements Initializable {
@@ -128,6 +134,7 @@ public class PathfinderHandler implements Initializable {
           Math.sqrt(
               Math.pow(locations.get(i).getXcoord() + locations.get(i + 1).getXcoord(), 2)
                   + Math.pow(locations.get(i).getYcoord() + locations.get(i + 1).getYcoord(), 2));
+
       Circle ifNecessary;
       if (!locations
           .get(i)
@@ -154,6 +161,27 @@ public class PathfinderHandler implements Initializable {
           overflow = 0;
         }
       }
+
+      double maxOffset =
+              pathLine.getStrokeDashArray().stream()
+                      .reduce(0d, (a, b) -> a + b);
+      Timeline timeline = new Timeline(
+              new KeyFrame(
+                      Duration.ZERO,
+                      new KeyValue(
+                              pathLine.strokeDashOffsetProperty(),
+                              0,
+                              Interpolator.LINEAR)),
+              new KeyFrame(
+                      Duration.seconds(2),
+                      new KeyValue(
+                              pathLine.strokeDashOffsetProperty(),
+                              maxOffset,
+                              Interpolator.LINEAR))
+      );
+      timeline.setCycleCount(Timeline.INDEFINITE);
+      timeline.play(); // maybe this'll work
+
       lineLayer.getChildren().add(pathLine);
       //      System.out.println("added new line to lineLayer");
     }
