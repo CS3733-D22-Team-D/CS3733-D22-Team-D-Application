@@ -21,7 +21,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -138,11 +137,6 @@ public abstract class UIController extends AppController {
   }
 
   @FXML
-  public void openUserSettings() {
-    // TODO : Create a userSettings.fxml page
-  }
-
-  @FXML
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
@@ -241,6 +235,11 @@ public abstract class UIController extends AppController {
   @FXML
   public void switchToDBDark() throws IOException {
     switchScene("backendInfoDispDark.fxml", 842, 530);
+  }
+
+  @FXML
+  public void openUserSettings() throws IOException {
+    switchScene("userSettings.fxml", 941, 592);
   }
 
   protected List<String> getAllLongNames() {
