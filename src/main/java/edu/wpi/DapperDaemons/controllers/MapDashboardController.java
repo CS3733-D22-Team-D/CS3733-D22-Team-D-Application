@@ -8,15 +8,11 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.map.tables.TableHelper;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -65,10 +61,10 @@ public class MapDashboardController extends UIController {
   @FXML private Text patientNum;
   @FXML private Text requestNum;
   private final String floorTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
+      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getPath();
   private final String locOfInterestTxtPath =
       Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
-          .getFile();
+          .getPath();
 
   private String floor;
 
@@ -182,13 +178,9 @@ public class MapDashboardController extends UIController {
 
   private static String getFileText(String filePath, int line) throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    String curLine;
-    int n = 0;
-    while ((curLine = reader.readLine()) != null) {
-      if (n == line) return curLine;
-      n++;
-    }
-    return "";
+    List<String> lines = reader.lines().collect(Collectors.toList());
+    if (line < lines.size()) return lines.get(line);
+    else return "";
   }
 
   private int getFloorNum() {
