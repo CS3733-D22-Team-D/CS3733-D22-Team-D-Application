@@ -122,7 +122,7 @@
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="194.0">
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="269.0">
                                        <children>
                                           <Label fx:id="sLabel" text="LABEL">
                                              <font>
