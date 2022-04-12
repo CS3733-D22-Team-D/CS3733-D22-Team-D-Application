@@ -28,59 +28,60 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Platform.runLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              displayLoadingScreen(primaryStage);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          }
-        });
-    Thread t =
-        new Thread(
-            new Runnable() {
+    //    displayLoadingScreen(primaryStage);
+
+    new Thread(
+            new Runnable() { // timer task to update the seconds
               @Override
               public void run() {
                 Platform.runLater(
                     new Runnable() {
                       @Override
                       public void run() {
-                        System.out.println("init");
-                        connectionHandler.init();
-                        connectionHandler.switchToClientServer();
-                        AutoSave.start(10);
-                        Parent root = null;
                         try {
-                          root =
-                              FXMLLoader.load(
-                                  Objects.requireNonNull(
-                                      getClass().getResource("views/login.fxml")));
+                          displayLoadingScreen(primaryStage);
                         } catch (IOException e) {
-
                           e.printStackTrace();
                         }
-
-                        Scene scene = new Scene(root);
-                        primaryStage.setMinWidth(635);
-                        primaryStage.setMinHeight(510);
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
-                        primaryStage
-                            .getIcons()
-                            .add(
-                                new Image(
-                                    String.valueOf(
-                                        App.class.getResource(
-                                            "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
-                        primaryStage.setTitle("BWH");
                       }
                     });
+                new Thread(
+                        () -> {
+                          // initialize things
+                          connectionHandler.init();
+                          connectionHandler.switchToClientServer();
+                          AutoSave.start(10);
+                          Platform.runLater(
+                              () -> {
+                                Parent root = null;
+                                try {
+                                  root =
+                                      FXMLLoader.load(
+                                          Objects.requireNonNull(
+                                              getClass().getResource("views/login.fxml")));
+                                } catch (IOException e) {
+                                  e.printStackTrace();
+                                }
+                                Scene scene = new Scene(root);
+                                primaryStage.setMinWidth(635);
+                                primaryStage.setMinHeight(510);
+                                primaryStage.setScene(scene);
+                                primaryStage.show();
+                                primaryStage
+                                    .getIcons()
+                                    .add(
+                                        new Image(
+                                            String.valueOf(
+                                                App.class.getResource(
+                                                    "assets/"
+                                                        + "Brigham_and_Womens_Hospital_logo.png"))));
+                                primaryStage.setTitle("BWH");
+                              });
+                        })
+                    .start();
               }
-            });
-    t.start();
+            })
+        .start();
   }
 
   public void displayLoadingScreen(Stage primaryStage) throws IOException {

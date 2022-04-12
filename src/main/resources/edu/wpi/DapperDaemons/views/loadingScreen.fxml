@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.loadingScreenController">
    <children>
@@ -11,7 +15,25 @@
          <children>
             <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="background" fitHeight="592.0" fitWidth="941.0" pickOnBounds="true" preserveRatio="true" />
+                  <StackPane alignment="BOTTOM_LEFT" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="background" fitHeight="603.0" fitWidth="970.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../loadingScreen/1.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label text="Loading" textFill="#185783">
+                                 <font>
+                                    <Font size="80.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
                </children>
             </Pane>
          </children>
