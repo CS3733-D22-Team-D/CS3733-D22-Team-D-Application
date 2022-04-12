@@ -725,7 +725,7 @@
                         <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="Temp" text="Temp" textFill="WHITE">
+                              <Label fx:id="tempLabel" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
