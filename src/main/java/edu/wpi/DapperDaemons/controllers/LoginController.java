@@ -152,6 +152,7 @@ public class LoginController extends AppController {
       }
     } catch (NumberFormatException e) {
       System.out.println("int was not entered");
+      showError("Invalid code");
     }
   }
 
