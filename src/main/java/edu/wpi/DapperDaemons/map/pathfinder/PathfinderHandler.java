@@ -45,6 +45,8 @@ public class PathfinderHandler implements Initializable {
 
   @FXML
   public void showPath() {
+    fromLocation.setValue(fromLocation.getValue().trim());
+    toLocation.setValue(toLocation.getValue().trim());
     try {
       if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
           != -1) { // if from location is valid
