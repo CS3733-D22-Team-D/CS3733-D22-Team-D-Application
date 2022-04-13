@@ -53,7 +53,7 @@ public class loadingScreenController extends AppController {
           public void run() {
             Platform.runLater(
                 () -> {
-                  int currImg = (int) (Math.random() * 11) + 1;
+                  int currImg = (int) (Math.random() * 9) + 1;
                   sceneBox.setBackground(
                       new Background(
                           new BackgroundImage(

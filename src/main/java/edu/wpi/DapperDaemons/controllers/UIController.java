@@ -136,14 +136,13 @@ public abstract class UIController extends AppController {
   }
 
   public void setTheme() {
-    Node back = sceneBox.lookup("#background");
-
-    Set<Node> fields = back.lookupAll("#field");
-    Set<Node> fores = back.lookupAll("#foreground");
-    Set<Node> jButtons = back.lookupAll("#jButton");
-    Set<Node> specialFields = back.lookupAll("#specialField");
-    Set<Node> texts = back.lookupAll("#label");
-    Set<Node> tableCols = back.lookupAll("#col");
+    Set<Node> backs = sceneBox.lookupAll("#background");
+    Set<Node> fields = sceneBox.lookupAll("#field");
+    Set<Node> fores = sceneBox.lookupAll("#foreground");
+    Set<Node> jButtons = sceneBox.lookupAll("#jButton");
+    Set<Node> specialFields = sceneBox.lookupAll("#specialField");
+    Set<Node> texts = sceneBox.lookupAll("#label");
+    Set<Node> tableCols = sceneBox.lookupAll("#col");
 
     if (isDark) {
       darkSwitch.setImage(
@@ -153,7 +152,9 @@ public abstract class UIController extends AppController {
                   .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
                   .toString()));
 
-      back.getStyleClass().add("backgroundDark");
+      for (Node back : backs) {
+        back.getStyleClass().add("backgroundDark");
+      }
 
       for (Node field : fields) {
         field.getStyleClass().add("fieldDark");
@@ -187,7 +188,9 @@ public abstract class UIController extends AppController {
                   .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
                   .toString()));
 
-      back.getStyleClass().remove("backgroundDark");
+      for (Node back : backs) {
+        back.getStyleClass().remove("backgroundDark");
+      }
 
       for (Node field : fields) {
         field.getStyleClass().remove("fieldDark");
