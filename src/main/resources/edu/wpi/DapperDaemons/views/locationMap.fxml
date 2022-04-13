@@ -31,17 +31,18 @@
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane hbarPolicy="NEVER" hvalue="0.62" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.34">
+            <ScrollPane hbarPolicy="NEVER" hvalue="0.55" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.44">
                <content>
-                  <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0">
+                  <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0" scaleX="0.4" scaleY="0.4">
                      <children>
                         <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/Maps/00_thelowerlevel2.png" />
+                              <Image url="@../assets/Maps/00_thelowerlevel1.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane fx:id="pathPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </content>
@@ -916,7 +917,7 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="TOP_RIGHT">
                            <children>
-                              <ToggleButton fx:id="filterButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#filterSlider" pickOnBounds="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 16; -fx-border-color: #C4C4C4; -fx-border-radius: 16; -fx-border-width: 2;" text="ToggleButton" visible="false">
+                              <ToggleButton fx:id="filterButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#filterSlider" opacity="0.0" pickOnBounds="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 16; -fx-border-color: #C4C4C4; -fx-border-radius: 16; -fx-border-width: 2;" text="ToggleButton">
                                  <graphic>
                                     <StackPane pickOnBounds="false" prefHeight="32.0" prefWidth="32.0">
                                        <children>

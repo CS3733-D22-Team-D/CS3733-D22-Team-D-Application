@@ -51,7 +51,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="29.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="29.0" onMouseClicked="#onEquipIconClicked" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <StackPane prefHeight="150.0" prefWidth="200.0">
                                                    <children>
@@ -146,7 +146,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                <StackPane fx:id="patientIcon" onMouseClicked="#onPatientIconClicked" prefHeight="150.0" prefWidth="200.0">
                                                    <children>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -171,7 +171,7 @@
                                                       </StackPane>
                                                    </children>
                                                 </StackPane>
-                                                <StackPane layoutX="166.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0">
+                                                <StackPane fx:id="requestIcon" layoutX="166.0" layoutY="10.0" onMouseClicked="#onRequestIconClicked" prefHeight="150.0" prefWidth="200.0">
                                                    <children>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -308,7 +308,7 @@
                                                 </Text>
                                              </children>
                                           </VBox>
-                                          <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5; -fx-tab-min-width: 150; -fx-tab-max-height: 19;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                          <TabPane fx:id="tabs" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5; -fx-tab-min-width: 150; -fx-tab-max-height: 19;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                              <tabs>
                                                 <Tab text="Equipment">
                                                    <content>

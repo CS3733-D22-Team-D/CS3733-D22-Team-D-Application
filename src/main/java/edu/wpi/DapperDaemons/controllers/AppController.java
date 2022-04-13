@@ -16,7 +16,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -32,7 +31,6 @@ public class AppController implements Initializable {
   @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
-  private boolean updatedSize;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -81,21 +79,26 @@ public class AppController implements Initializable {
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
     window.setOnCloseRequest(e -> quitProgram());
-    double width = sceneBox.getPrefWidth();
-    double height = sceneBox.getPrefHeight();
-    window.setScene(new Scene(root));
-    sceneBox.setPrefWidth(width);
-    sceneBox.setPrefHeight(height);
-    if (updatedSize) window.setWidth(window.getWidth() + 0.001);
-    else window.setWidth(window.getWidth() - 0.001); // To update size because JavaFX is bad
-    window.setHeight(window.getHeight());
+    window.getScene().setRoot(root);
+  }
+
+  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
+      throws IOException {
+    Parent root =
+        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
+    window.setMinWidth(minWidth);
+    window.setMinHeight(minHeight);
+    window.setOnCloseRequest(e -> quitProgram());
+    window.getScene().setRoot(root);
   }
 
   @FXML
   protected void quitProgram() {
-    Stage window = (Stage) sceneBox.getScene().getWindow();
     csvSaver.saveAll();
-    if (window != null) window.close();
+    if (sceneBox != null && sceneBox.getScene() != null) {
+      Stage window = (Stage) sceneBox.getScene().getWindow();
+      if (window != null) window.close();
+    }
     Platform.exit();
     System.exit(0);
   }

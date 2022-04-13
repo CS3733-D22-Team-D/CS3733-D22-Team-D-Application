@@ -34,6 +34,11 @@ public class GlyphHandler {
     imageLocs.forEach(this::addPosition);
     this.imageLocs = imageLocs;
     clearFilters();
+    String[] allFilters = {
+      "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "BATH", "RETL", "SERV", "STAI", "ELEV",
+      "STOR", "PATI", "DIRT"
+    };
+    nodeTypeFilter.addAll(List.of(allFilters));
   }
 
   public void addPosition(PositionInfo pos) {
