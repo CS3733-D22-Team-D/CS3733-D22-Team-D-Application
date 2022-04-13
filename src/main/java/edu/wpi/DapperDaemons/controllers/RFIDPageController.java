@@ -18,10 +18,17 @@ public class RFIDPageController extends AppController {
   @FXML private Button continueButton;
   @FXML private Button backButton;
   public static String COM;
+  public static String errorOS;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    if (COM == null) {
+    if (errorOS != null) {
+      resultLabel.setText("Invalid Operating system: " + errorOS);
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
+      sLabel.setText("Initialization Error");
+      backButton.setVisible(true);
+      continueButton.setVisible(false);
+    } else if (COM == null) {
       resultLabel.setText("Unable to Connect");
       resultLabel.setTextFill(Paint.valueOf("#eb4034"));
       sLabel.setText("Initialization Error");

@@ -64,13 +64,18 @@ public class LoginController extends AppController {
       LoadingScreen ls = new LoadingScreen(window);
       ls.display(
           () -> {
-            Arduino arduino;
-            SerialCOM serialCOM = new SerialCOM();
-            try {
-              arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
-              RFIDPageController.COM = arduino.getPortDescription();
-            } catch (UnableToConnectException e) {
-              RFIDPageController.COM = null;
+            if (!System.getProperty("os.name").trim().toLowerCase().contains("windows")) {
+              RFIDPageController.errorOS = System.getProperty("os.name").trim();
+            } else {
+              RFIDPageController.errorOS = null;
+              Arduino arduino;
+              SerialCOM serialCOM = new SerialCOM();
+              try {
+                arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+                RFIDPageController.COM = arduino.getPortDescription();
+              } catch (UnableToConnectException e) {
+                RFIDPageController.COM = null;
+              }
             }
           },
           () -> {
