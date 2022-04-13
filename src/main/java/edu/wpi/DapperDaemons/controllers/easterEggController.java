@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.soundPlayer;
 import java.io.IOException;
 import java.net.URL;
@@ -84,5 +85,30 @@ public class easterEggController extends UIController {
   public void switchToSanitation() throws IOException {
     stopEasterEgg();
     switchScene("sanitation.fxml", 780, 548);
+  }
+
+  @FXML
+  public void switchToAboutUs() throws IOException {
+    stopEasterEgg();
+    switchScene("aboutUs.fxml", 780, 548);
+  }
+
+  @FXML
+  public void goToLogin() throws IOException {
+    stopEasterEgg();
+    switchScene("login.fxml", 780, 548);
+  }
+
+  @FXML
+  public void openUserSettings() throws IOException {
+    stopEasterEgg();
+    switchScene("userSettings.fxml", 941, 592);
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    stopEasterEgg();
+    switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
   }
 }
