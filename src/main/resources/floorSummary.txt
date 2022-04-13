@@ -1,19 +1,19 @@
-L2 Information Location
-L1 Family Waiting
-1 Wholistic Patient Care
-2 Lobby
-3 Kidney Help
-4 Tower Reflection
-5 Babies and Brains
-6 Dana Farber Cancer Institute
-M1 Mechanical Level
-M2 Mechanical Level
-7 Patient Rooms
-8 Patient Rooms
-9 CRC
-10 Patient Rooms
-11 Patient Rooms
-12 Observation
-14 Patient Rooms
-15 Patient rooms
-16 Shapiro Pavilion
+Information Location
+Family Waiting
+Wholistic Patient Care
+Lobby
+Kidney Help
+Tower Reflection
+Babies and Brains
+Dana Farber Cancer Institute
+Mechanical Level
+Mechanical Level
+Patient Rooms
+Patient Rooms
+CRC
+Patient Rooms
+Patient Rooms
+Observation
+Patient Rooms
+Patient rooms
+Shapiro Pavilion

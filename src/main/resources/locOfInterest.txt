@@ -1,19 +1,19 @@
-L2 Conference rooms and library
-L1 Medical records and family waiting room
-1 International Patient Center, Multifaith Chapel, and Bridge Clinic
-2 Cafe and gift shop
-3 MICU and Dialysis
-4 Tower reflection room
-5 IVF and Neuro testing
-6 Dana Farber Cancer Institute
-M1 Mechanical Level
-M2 Mechanical Level
-7 Patient Rooms
-8 Patient Rooms
-9 CRC
-10 Patient Rooms
-11 Patient Rooms
-12 Observation
-14 Patient Rooms
-15 Patient rooms
-16 Shapiro Pavilion
+Conference rooms and library
+Medical records and family waiting room
+International Patient Center, Multifaith Chapel, and Bridge Clinic
+Cafe and gift shop
+MICU and Dialysis
+Tower reflection room
+IVF and Neuro testing
+Dana Farber Cancer Institute
+Mechanical Level
+Mechanical Level 2
+Patient Rooms
+Patient Rooms
+CRC
+Patient Rooms
+Patient Rooms
+Observation
+Patient Rooms
+Patient rooms
+Shapiro Pavilion
