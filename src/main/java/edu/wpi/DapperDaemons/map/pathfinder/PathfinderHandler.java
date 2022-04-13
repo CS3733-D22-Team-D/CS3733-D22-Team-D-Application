@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -162,23 +161,16 @@ public class PathfinderHandler implements Initializable {
         }
       }
 
-      double maxOffset =
-              pathLine.getStrokeDashArray().stream()
-                      .reduce(0d, (a, b) -> a + b);
-      Timeline timeline = new Timeline(
+      double maxOffset = pathLine.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+      Timeline timeline =
+          new Timeline(
               new KeyFrame(
-                      Duration.ZERO,
-                      new KeyValue(
-                              pathLine.strokeDashOffsetProperty(),
-                              0,
-                              Interpolator.LINEAR)),
+                  Duration.ZERO,
+                  new KeyValue(pathLine.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
               new KeyFrame(
-                      Duration.seconds(2),
-                      new KeyValue(
-                              pathLine.strokeDashOffsetProperty(),
-                              maxOffset,
-                              Interpolator.LINEAR))
-      );
+                  Duration.seconds(100),
+                  new KeyValue(
+                      pathLine.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
       timeline.setCycleCount(Timeline.INDEFINITE);
       timeline.play(); // maybe this'll work
 
@@ -196,11 +188,10 @@ public class PathfinderHandler implements Initializable {
     for (int i = 0;
         i < locations.size();
         i++) { // for every child, add make the locations on this floor visible
-
       // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         System.out.println("Showing " + locations.get(i).getNodeID());
-        lineLayer.getChildren().get(i + 1).setVisible(true);
+        lineLayer.getChildren().get(i).setVisible(true);
       }
     }
   }
