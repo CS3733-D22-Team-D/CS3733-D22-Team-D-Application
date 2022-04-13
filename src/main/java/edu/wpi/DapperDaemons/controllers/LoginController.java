@@ -45,6 +45,10 @@ public class LoginController extends AppController {
         });
   }
 
+  /**
+   * The login method invoked when the user attempts to log into the program
+   * @throws Exception if there is an issue :p (This should not happen)
+   */
   @FXML
   void login() throws Exception {
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
@@ -60,6 +64,7 @@ public class LoginController extends AppController {
       return;
     } else if (username.getText().trim().equals("rfid")
         && password.getText().trim().equals("rfid")) { // RFID TEST
+      // LOGIN -> RFID PAGE PORT DETECTION ALGORITHM
       Stage window = (Stage) username.getScene().getWindow();
       LoadingScreen ls = new LoadingScreen(window);
       ls.display(

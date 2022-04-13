@@ -50,6 +50,10 @@ public class RFIDMachine {
     else return LoginState.INVALIDUSER;
   }
 
+  /**
+   * gets the employee being used
+   * @return
+   */
   public Employee getEmployee() {
     return this.employee;
   }
