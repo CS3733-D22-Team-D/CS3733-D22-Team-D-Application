@@ -8,12 +8,12 @@
     -fx-background-radius: 7.5;
 }
 
-#nodesToggle.toggle-button {
+.nodesToggle.toggle-button {
     -fx-background-color: #FFFEFE;
     -fx-background-radius: 7.5;
 }
 
-#nodesToggle.toggle-button:selected {
+.nodesToggle.toggle-button:selected {
     -fx-background-color: #ebebeb;
     -fx-background-radius: 7.5;
 }
