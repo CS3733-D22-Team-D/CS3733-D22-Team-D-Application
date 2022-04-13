@@ -99,6 +99,17 @@ public class LoginController extends AppController {
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
+      if(acc.getAttribute(4).equals("")){
+        List<Employee> user =
+                employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
+        if (user.size() == 1) {
+          SecurityController.setUser(user.get(0));
+          switchScene("default.fxml", 635, 510);
+        } else {
+          throw new Exception(
+                  "More than one user with the same username?"); // theoretically this is unreachable
+        }
+      }
       TwoFactor.setVisible(true);
       Authentication.sendAuthCode(acc);
     } else {
