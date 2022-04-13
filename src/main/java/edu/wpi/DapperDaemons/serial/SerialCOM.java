@@ -16,7 +16,6 @@ public class SerialCOM {
   }
 
   /**
-   *
    * @param COM port that contains an arduino
    * @return the string received by the Java program from the arduino
    * @throws ArduinoTimeOutException 10 seconds have gone by and no RFID card was scanned
@@ -60,8 +59,9 @@ public class SerialCOM {
 
   /**
    * Obtains a list of open coms
-   * @return a list of available coms that have SOMETHING (not necessarily an Arduino)
-   * connected to them
+   *
+   * @return a list of available coms that have SOMETHING (not necessarily an Arduino) connected to
+   *     them
    */
   public List<String> getAvailableCOMs() {
     List<String> available = new ArrayList<>();
@@ -77,9 +77,10 @@ public class SerialCOM {
   }
 
   /**
-   * check all available ports to attempt to establish a connection with the arduino
-   * The Arduino is continuously sending an a "BUFFER" string so this method
-   * attempts to check if a "BUFFER" string is being sent on a list of open com ports
+   * check all available ports to attempt to establish a connection with the arduino The Arduino is
+   * continuously sending an a "BUFFER" string so this method attempts to check if a "BUFFER" string
+   * is being sent on a list of open com ports
+   *
    * @return the arduino object containing the valid port that has the arduino on it
    * @throws UnableToConnectException if no ports can establish a connection
    */

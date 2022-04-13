@@ -52,6 +52,7 @@ public class RFIDMachine {
 
   /**
    * gets the employee being used
+   *
    * @return
    */
   public Employee getEmployee() {
