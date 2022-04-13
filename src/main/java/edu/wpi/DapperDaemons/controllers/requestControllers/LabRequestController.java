@@ -15,12 +15,18 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class LabRequestController extends UIController {
 
   /* Table Object and Helper */
   @FXML private TableView<LabRequest> labReqTable;
   private TableHelper<LabRequest> tableHelper;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
 
   /* UI Fields */
   @FXML private TextField patientName;
@@ -41,6 +47,7 @@ public class LabRequestController extends UIController {
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
     LabRequestInitializer init = new LabRequestInitializer();
 
     init.initializeTable();

@@ -27,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -97,6 +98,10 @@ public class MapController extends UIController implements Initializable {
   /* Info Assets */
   @FXML private VBox tableContainer;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   /* Request filter stuff */
   @FXML private TextField searchLongName;
   @FXML private JFXComboBox<String> searchReqLongName;
@@ -113,6 +118,7 @@ public class MapController extends UIController implements Initializable {
     Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
     Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javax.sound.sampled.LineUnavailableException;
 
@@ -15,9 +16,15 @@ public class easterEggController extends UIController {
   @FXML private VBox sceneBox;
   private soundPlayer player;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
+
     try {
       player = new soundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
       player.play(0.75F);

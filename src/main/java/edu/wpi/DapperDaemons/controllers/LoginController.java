@@ -14,8 +14,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -26,6 +28,10 @@ public class LoginController extends AppController {
   @FXML private VBox TwoFactor;
   @FXML private TextField code;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
@@ -34,6 +40,7 @@ public class LoginController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
 
     code.setOnKeyPressed(
         e -> {

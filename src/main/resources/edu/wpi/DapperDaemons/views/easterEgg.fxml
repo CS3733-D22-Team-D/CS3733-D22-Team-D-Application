@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -18,11 +19,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.easterEggController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.easterEggController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox prefHeight="46.0" prefWidth="301.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/easterEgg.gif); -fx-background-size: 100% 100%;">
+            <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../assets/easterEgg.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <HBox prefHeight="46.0" prefWidth="301.0">
                <opaqueInsets>
                   <Insets top="50.0" />
                </opaqueInsets>

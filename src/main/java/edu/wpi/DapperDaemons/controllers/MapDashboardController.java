@@ -17,6 +17,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class MapDashboardController extends UIController {
@@ -65,9 +67,18 @@ public class MapDashboardController extends UIController {
 
   public static String floor;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
+  @FXML private ImageView mapImage;
+  @FXML private Pane mapImageContainer;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(mapImage, mapImageContainer);
+    bindImage(BGImage, BGContainer);
 
     // Init tables
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);

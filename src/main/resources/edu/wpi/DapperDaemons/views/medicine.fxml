@@ -18,6 +18,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -26,10 +27,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForLight.png); -fx-background-size: 100% 100%;" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
+<VBox id="background" fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
     <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
+            <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../assets/BrighamOverlayAssetForLight.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
               <HBox id="background" prefHeight="46.0" prefWidth="301.0">
                   <children>
                       <VBox id="foreground" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="300.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;" HBox.hgrow="ALWAYS">
@@ -365,11 +375,6 @@
                                  </effect>
                               </ImageView>
                            </graphic>
-                        </JFXButton>
-                        <JFXButton id="slider" onAction="#switchToAboutUs" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
                         </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>

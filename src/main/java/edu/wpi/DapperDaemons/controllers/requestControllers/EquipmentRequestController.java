@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends UIController {
@@ -27,6 +29,10 @@ public class EquipmentRequestController extends UIController {
 
   /* Table Helper */
   private TableHelper<MedicalEquipmentRequest> tableHelper;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityBox;
@@ -52,6 +58,7 @@ public class EquipmentRequestController extends UIController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     initBoxes();
+    bindImage(BGImage, BGContainer);
 
     tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
     tableHelper.linkColumns(MedicalEquipmentRequest.class);

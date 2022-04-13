@@ -11,15 +11,25 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-image: url(file:src/main/resources/edu/wpi/DapperDaemons/assets/BrighamOverlayAssetForDark.png); -fx-background-size: 100% 100%; -fx-background-color: #012d5a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.LoginController">
+<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" style="-fx-background-color: #012d5a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.LoginController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
+            <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../assets/BrighamOverlayAssetForDark.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="301.0">
                <opaqueInsets>
                   <Insets top="50.0" />

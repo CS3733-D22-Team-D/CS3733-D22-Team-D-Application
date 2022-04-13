@@ -18,6 +18,10 @@ public class loadingScreenController extends AppController {
   @FXML VBox sceneBox;
   @FXML Label loadingLabel;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   private static Timer loading;
   private static Timer backgroundImages;
 
@@ -30,6 +34,7 @@ public class loadingScreenController extends AppController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    bindImage(BGImage, BGContainer);
     if (loading != null) loading.cancel();
     loading = new Timer();
     loading.schedule(
