@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.csvLoader;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -59,11 +60,8 @@ public class MapDashboardController extends UIController {
   @FXML private Text inUseEquipment;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
-  private final String floorTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("floorSummary.txt")).getFile();
-  private final String locOfInterestTxtPath =
-      Objects.requireNonNull(getClass().getClassLoader().getResource("locOfInterest.txt"))
-          .getFile();
+  private final String floorTxtPath = "floorSummary.txt";
+  private final String locOfInterestTxtPath = "locOfInterest.txt";
 
   public static String floor;
 
@@ -186,8 +184,12 @@ public class MapDashboardController extends UIController {
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
-    File file = new File(filePath.replace("%20", " "));
-    Scanner s = new Scanner(file);
+    InputStreamReader f =
+        new InputStreamReader(
+            Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filePath)));
+    BufferedReader reader = new BufferedReader(f);
+    // filePath.replace("%20", " ")
+    Scanner s = new Scanner(reader);
     int l = 0;
     String current;
     while (s.hasNextLine()) {
