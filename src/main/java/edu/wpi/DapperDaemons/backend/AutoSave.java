@@ -16,6 +16,7 @@ public class AutoSave {
         new TimerTask() {
           @Override
           public void run() {
+            System.out.println("AutoSaving...");
             csvSaver.saveAll();
           }
         },
