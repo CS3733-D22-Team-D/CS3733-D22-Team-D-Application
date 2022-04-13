@@ -1,17 +1,14 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.RFIDMachine;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
 
 public class RFIDPageController extends AppController {
 
@@ -85,17 +82,6 @@ public class RFIDPageController extends AppController {
   @FXML
   public void goToLogin() throws IOException {
     switchScene("login.fxml", 780, 548);
-  }
-
-  @FXML
-  public void quitProgram() {
-    Stage window = (Stage) sLabel.getScene().getWindow();
-    csvSaver.saveAll();
-    if (window != null) {
-      window.close();
-    }
-    Platform.exit();
-    System.exit(0);
   }
 
   @FXML
