@@ -1,12 +1,8 @@
 package edu.wpi.DapperDaemons;
 
-import arduino.Arduino;
 import edu.wpi.DapperDaemons.backend.AutoSave;
 import edu.wpi.DapperDaemons.backend.connectionHandler;
-import edu.wpi.DapperDaemons.controllers.RFIDPageController;
 import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
-import edu.wpi.DapperDaemons.serial.SerialCOM;
 import java.io.IOException;
 import java.util.Objects;
 import javafx.application.Application;
@@ -38,15 +34,6 @@ public class App extends Application {
           connectionHandler.init();
           connectionHandler.switchToClientServer();
           AutoSave.start(10);
-
-          Arduino arduino;
-          SerialCOM serialCOM = new SerialCOM();
-          try {
-            arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
-            RFIDPageController.COM = arduino.getPortDescription();
-          } catch (UnableToConnectException e) {
-            RFIDPageController.COM = null;
-          }
         },
         () -> {
           Parent root = null;

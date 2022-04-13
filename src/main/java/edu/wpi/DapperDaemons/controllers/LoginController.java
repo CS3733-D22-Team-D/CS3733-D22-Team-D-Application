@@ -1,8 +1,13 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import arduino.Arduino;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
+import edu.wpi.DapperDaemons.serial.SerialCOM;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class LoginController extends AppController {
 
@@ -54,8 +60,27 @@ public class LoginController extends AppController {
       return;
     } else if (username.getText().trim().equals("rfid")
         && password.getText().trim().equals("rfid")) { // RFID TEST
-      SecurityController.setUser(admin);
-      switchScene("RFIDScanPage.fxml", 635, 510);
+      Stage window = (Stage) username.getScene().getWindow();
+      LoadingScreen ls = new LoadingScreen(window);
+      ls.display(
+          () -> {
+            Arduino arduino;
+            SerialCOM serialCOM = new SerialCOM();
+            try {
+              arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+              RFIDPageController.COM = arduino.getPortDescription();
+            } catch (UnableToConnectException e) {
+              RFIDPageController.COM = null;
+            }
+          },
+          () -> {
+            SecurityController.setUser(admin);
+            try {
+              switchScene("RFIDScanPage.fxml", 635, 510, window);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          });
       return;
     } else if (username.getText().trim().equals("Rick")
         && password.getText().trim().equals("Astley")) {
