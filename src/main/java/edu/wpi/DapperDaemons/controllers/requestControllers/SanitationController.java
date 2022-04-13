@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class SanitationController extends UIController {
 
@@ -25,6 +27,10 @@ public class SanitationController extends UIController {
 
   /* Table Helper */
   private TableHelper<SanitationRequest> helper;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
 
   /* Table Columns */
   @FXML private TableColumn<PatientTransportRequest, String> ReqID;
@@ -47,6 +53,8 @@ public class SanitationController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
+
     onClearClicked();
     SanitationServiceInitializer init = new SanitationServiceInitializer();
     init.initializeInputs();

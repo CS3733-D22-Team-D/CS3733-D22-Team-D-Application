@@ -29,7 +29,7 @@
                <children>
                   <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../assets/BrighamOverlayAssetForLight.png" />
+                        <Image url="@../assets/Brigham-Blurred.jpg" />
                      </image>
                   </ImageView>
                </children>

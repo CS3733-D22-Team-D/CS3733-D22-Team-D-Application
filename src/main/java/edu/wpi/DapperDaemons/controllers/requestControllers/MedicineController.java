@@ -18,11 +18,17 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class MedicineController extends UIController {
   @FXML private TableView<MedicineRequest> medicineRequests;
   private TableHelper<MedicineRequest> helper;
   @FXML private TableColumn<MedicineRequest, String> priorityCol;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
@@ -37,6 +43,7 @@ public class MedicineController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
     helper = new TableHelper<>(medicineRequests, 0);
     helper.linkColumns(MedicineRequest.class);
 

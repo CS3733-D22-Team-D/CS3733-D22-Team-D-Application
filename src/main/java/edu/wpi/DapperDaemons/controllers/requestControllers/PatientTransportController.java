@@ -22,12 +22,18 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
 
   /* Table Object */
   @FXML private TableView<PatientTransportRequest> transportRequests;
+
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
 
   /*Table Helper */
   private TableHelper<PatientTransportRequest> tableHelper;
@@ -63,6 +69,7 @@ public class PatientTransportController extends UIController implements Initiali
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
     PatientTransportInitializer init = new PatientTransportInitializer();
     init.initializeTable();
     init.initializeInputs();

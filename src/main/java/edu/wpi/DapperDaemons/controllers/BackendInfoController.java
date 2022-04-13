@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 /** Controller for Backend Info Page, allows for the database tables to be displayed */
 public class BackendInfoController extends UIController {
@@ -37,9 +39,14 @@ public class BackendInfoController extends UIController {
   private DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    bindImage(BGImage, BGContainer);
 
     // TODO : The patient DAO is broken :(
     patientTableHelper = new TableHelper<>(patientsTable, 0);

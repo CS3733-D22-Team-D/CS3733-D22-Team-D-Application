@@ -10,6 +10,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
@@ -22,8 +24,13 @@ public class RFIDPageController extends AppController {
   @FXML private Button backButton;
   public static String COM;
 
+  /* Background */
+  @FXML private ImageView BGImage;
+  @FXML private Pane BGContainer;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    bindImage(BGImage, BGContainer);
     if (COM == null) {
       resultLabel.setText("Unable to Connect");
       resultLabel.setTextFill(Paint.valueOf("#eb4034"));
