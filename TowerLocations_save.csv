@@ -1,3 +1,34 @@
+FHALL00501,4161,1585,1,Tower,HALL,Shattuck Street Lobby 3,Hallway F00501
+FHALL02501,4226,3029,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
+FHALL02401,4226,3209,1,Tower,HALL,Lobby Hallway 2,Hallway F02401
+FRETL00101,4261,1296,1,Tower,RETL,Lobby Vending Machine,VM Lobby
+FHALL00401,4261,1585,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
+FEXIT00101,4455,1098,1,Tower,EXIT,Shattuck Street Lobby Exit,Shattuck St. Exit
+FHALL00301,4455,1585,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
+FSTAI00101,4494,1506,1,Tower,STAI,Lobby Shattuck Street Stairs,Stairway F00101
+FHALL00201,4494,1585,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
+FHALL03101,4494,1875,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
+FHALL02601,4494,3029,1,Tower,HALL,Lobby Hallway 4,Hallway F02601
+FHALL00101,4621,1585,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101
+FHALL02701,4670,3029,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
+FHALL03301,4670,3218,1,Tower,HALL,Emergency Hallway,Hallway F03301
+FREST00101,4779,1875,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
+FEXIT00301,4814,3547,1,Tower,EXIT,Emergency Department Entrance,Emergency Entrance
+FDEPT00501,4942,3297,1,Tower,DEPT,Emergency Department,Emergency
+HBATH00102,2658,2040,2,Tower,BATH,Bathroom 1 Tower Floor 2,Bathroom 0102
+HRETL00202,2702,2114,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
+HSTAI00202,3053,2729,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
+HHALL00702,3251,2729,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
+HHALL00802,3251,3014,2,Tower,HALL,Hallway Connector 8 Floor 2,Hallway H00802
+HHALL00902,3251,3233,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
+WHALL00702,3251,4199,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
+HHALL00602,3404,2356,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
+HSTAI00302,3470,3014,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
+WELEV00L02,3536,1676,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
+HHALL00502,3624,2114,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
+HRETL00302,3624,2356,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
+WELEV00M02,3624,3233,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
+HHALL00102,3843,1676,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
 HHALL00402,3843,2114,2,Tower,HALL,Hallway Connector 4 Floor 2,Hallway H00402
 HRETL00102,4107,1390,2,Tower,RETL,Garden Cafe,Garden Cafe
 HHALL00202,4194,1566,2,Tower,HALL,Hallway Connector 2 Floor 2,Hallway H00202
@@ -31,37 +62,6 @@ dPATI01803,2528,2737,3,Tower,PATI,Patient Rooms Pod C,PRC
 dPATI00303,2546,574,3,Tower,PATI,Patient Rooms Pod B,PRB
 dPATI01903,2677,2645,3,Tower,PATI,Patient Rooms Pod C,PRC
 dPATI00203,2699,679,3,Tower,PATI,Patient Rooms Pod B,PRB
-FHALL00501,4161,1585,1,Tower,HALL,Shattuck Street Lobby 3,Hallway F00501
-FHALL02501,4226,3029,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
-FHALL02401,4226,3209,1,Tower,HALL,Lobby Hallway 2,Hallway F02401
-FRETL00101,4261,1296,1,Tower,RETL,Lobby Vending Machine,VM Lobby
-FHALL00401,4261,1585,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
-FEXIT00101,4455,1098,1,Tower,EXIT,Shattuck Street Lobby Exit,Shattuck St. Exit
-FHALL00301,4455,1585,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
-FSTAI00101,4494,1506,1,Tower,STAI,Lobby Shattuck Street Stairs,Stairway F00101
-FHALL00201,4494,1585,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
-FHALL03101,4494,1875,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
-FHALL02601,4494,3029,1,Tower,HALL,Lobby Hallway 4,Hallway F02601
-FHALL00101,4621,1585,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101
-FHALL02701,4670,3029,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
-FHALL03301,4670,3218,1,Tower,HALL,Emergency Hallway,Hallway F03301
-FREST00101,4779,1875,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
-FEXIT00301,4814,3547,1,Tower,EXIT,Emergency Department Entrance,Emergency Entrance
-FDEPT00501,4942,3297,1,Tower,DEPT,Emergency Department,Emergency
-HBATH00102,2658,2040,2,Tower,BATH,Bathroom 1 Tower Floor 2,Bathroom 0102
-HRETL00202,2702,2114,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
-HSTAI00202,3053,2729,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
-HHALL00702,3251,2729,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
-HHALL00802,3251,3014,2,Tower,HALL,Hallway Connector 8 Floor 2,Hallway H00802
-HHALL00902,3251,3233,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
-WHALL00702,3251,4199,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
-HHALL00602,3404,2356,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
-HSTAI00302,3470,3014,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
-WELEV00L02,3536,1676,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
-HHALL00502,3624,2114,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
-HRETL00302,3624,2356,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
-WELEV00M02,3624,3233,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
-HHALL00102,3843,1676,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
 dPATI01304,1984,2149,4,Tower,PATI,Patient Rooms Pod C,PRC
 dPATI00604,2002,763,4,Tower,PATI,Patient Rooms Pod B,PRB
 dPATI01504,2019,2544,4,Tower,PATI,Patient Rooms Pod C,PRC
