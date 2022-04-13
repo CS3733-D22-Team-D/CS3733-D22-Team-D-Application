@@ -173,13 +173,26 @@ public class MapController extends UIController implements Initializable {
     this.createLocation =
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
     try {
-      List<String> allNamesOnFloor = new ArrayList<>();
-      locationDAO.filter(4, maps.getFloor()).forEach(e -> allNamesOnFloor.add(e.getLongName()));
-      searchBar.getItems().addAll(allNamesOnFloor);
+      List<String> allReqNames = new ArrayList<>();
+      RequestHandler.getAllRequests()
+          .forEach(
+              r -> {
+                if (!allReqNames.contains(r.getRequestType())) allReqNames.add(r.getRequestType());
+              });
+      searchBar.getItems().addAll(allReqNames);
     } catch (Exception e) {
       searchBar.getItems().setAll(new ArrayList<>());
     }
-    searchBar.getEditor().setOnKeyPressed(e -> onSearchLocation());
+    searchBar
+        .getEditor()
+        .setOnKeyPressed(
+            e -> {
+              // If filtering by request fails, search by location
+              if (!onFilterRequestType()) {
+                onSearchLocation();
+              }
+            });
+    searchBar.setOnAction(e -> onFilterRequestType());
     closeCreate();
     closeRoom();
 
@@ -224,11 +237,10 @@ public class MapController extends UIController implements Initializable {
     List<MedicalEquipment> equipment = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
-    RequestHandler reqHelper = new RequestHandler();
     try {
       equipment = equipmentDAO.filter(6, pos.getId());
       patients = patientDAO.filter(6, pos.getId());
-      requests = reqHelper.getFilteredRequests(pos.getId());
+      requests = RequestHandler.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
@@ -286,12 +298,12 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  public void zoomIn(MouseEvent click) {
+  public void zoomIn() {
     maps.zoom(3);
   }
 
   @FXML
-  public void zoomOut(MouseEvent click) {
+  public void zoomOut() {
     maps.zoom(-3);
   }
 
@@ -304,7 +316,7 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  public void onDeleteLocation(MouseEvent event) {
+  public void onDeleteLocation() {
     try {
       locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());
@@ -315,29 +327,29 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  void showEquipList(MouseEvent event) {
+  void showEquipList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.EQUIPMENT);
   }
 
   @FXML
-  void showPersonList(MouseEvent event) {
+  void showPersonList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.PATIENT);
   }
 
   @FXML
-  void showReqList(MouseEvent event) {
+  void showReqList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
   }
 
-  @FXML
-  void onFilterRequestType() {
+  private boolean onFilterRequestType() {
     try {
-      RequestHandler reqHelper = new RequestHandler();
-      List<Request> searchReq = reqHelper.getSearchedRequestsByLongName(searchBar.getValue());
+      List<Request> searchReq = RequestHandler.getSearchedRequestsByLongName(searchBar.getValue());
+      if (searchReq.size() == 0) return false;
       glyphs.filterByReqType(maps.getFloor(), searchReq);
     } catch (Exception e) {
       System.out.println("Error in search by request type");
     }
+    return true;
   }
 
   @FXML
@@ -350,49 +362,49 @@ public class MapController extends UIController implements Initializable {
   }
 
   @FXML
-  public void setFloor1(MouseEvent event) {
+  public void setFloor1() {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
   }
 
   @FXML
-  public void setFloor2(MouseEvent event) {
+  public void setFloor2() {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
     pathfinder.filterByFloor("2");
   }
 
   @FXML
-  public void setFloor3(MouseEvent event) {
+  public void setFloor3() {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
     pathfinder.filterByFloor("3");
   }
 
   @FXML
-  public void setFloor4(MouseEvent event) {
+  public void setFloor4() {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
     pathfinder.filterByFloor("4");
   }
 
   @FXML
-  public void setFloor5(MouseEvent event) {
+  public void setFloor5() {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
     pathfinder.filterByFloor("5");
   }
 
   @FXML
-  public void setFloorL1(MouseEvent event) {
+  public void setFloorL1() {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
     pathfinder.filterByFloor("L1");
   }
 
   @FXML
-  public void setFloorL2(MouseEvent event) {
+  public void setFloorL2() {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");

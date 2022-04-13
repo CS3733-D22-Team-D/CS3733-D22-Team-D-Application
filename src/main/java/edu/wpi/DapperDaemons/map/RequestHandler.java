@@ -34,7 +34,7 @@ public class RequestHandler {
     return allReq;
   }
 
-  public List<Request> getSearchedRequestsByLongName(String reqType) throws SQLException {
+  public static List<Request> getSearchedRequestsByLongName(String reqType) throws SQLException {
     List<Request> allReq = getAllRequests();
     LinkedList<Request> searchReq = new LinkedList<>();
     for (int i = 0; i < allReq.size(); i++) {
