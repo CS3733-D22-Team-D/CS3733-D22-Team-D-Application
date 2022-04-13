@@ -77,8 +77,8 @@ public class SerialCOM {
   }
 
   /**
-   * check all available ports to attempt to establish a connection with the arduino The Arduino is
-   * continuously sending an a "BUFFER" string so this method attempts to check if a "BUFFER" string
+   * check all available ports to attempt to establish a connection with the arduino. The Arduino is
+   * continuously sending an "BUFFER" string so this method attempts to check if a "BUFFER" string
    * is being sent on a list of open com ports
    *
    * @return the arduino object containing the valid port that has the arduino on it
