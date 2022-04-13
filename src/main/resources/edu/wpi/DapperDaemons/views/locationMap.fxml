@@ -743,7 +743,7 @@
                                                       <ColorAdjust brightness="0.43" />
                                                    </effect>
                                                 </ImageView>
-                                                <JFXComboBox editable="true" labelFloat="true" promptText="Location/Request" />
+                                                <JFXComboBox fx:id="searchBar" editable="true" labelFloat="true" promptText="Location/Request" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" left="17.0" right="17.0" top="10.0" />

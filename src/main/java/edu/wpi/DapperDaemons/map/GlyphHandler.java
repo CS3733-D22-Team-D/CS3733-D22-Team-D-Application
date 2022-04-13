@@ -217,11 +217,11 @@ public class GlyphHandler {
   }
 
   public void searchByLongName(String floor, String search) {
-    makeAllInVisible();
+    makeAllVisible();
     for (int i = 0; i < imageLocs.size(); i++) {
-      if (imageLocs.get(i).getFloor().equals(floor)
-          && imageLocs.get(i).getLongName().toLowerCase().contains(search.toLowerCase())) {
-        glyphLayer.getChildren().get(i).setVisible(true);
+      if (!imageLocs.get(i).getFloor().equals(floor)
+          || !imageLocs.get(i).getLongName().toLowerCase().contains(search.toLowerCase())) {
+        glyphLayer.getChildren().get(i).setVisible(false);
       }
     }
   }
@@ -235,10 +235,17 @@ public class GlyphHandler {
       if (!nodeTypeFilter.contains(imageLocs.get(i).getType())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
-      if (!longNameFilter.isEmpty() && !longNameFilter.contains(imageLocs.get(i).getLongName())) {
+      if (!longNameFilter.isEmpty() && !longNameIsSearched(imageLocs.get(i).getLongName())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
     }
+  }
+
+  private boolean longNameIsSearched(String name) {
+    for (String s : longNameFilter) {
+      if (name.contains(s)) return true;
+    }
+    return false;
   }
 
   public void setFloorFilter(String floorFilter) {

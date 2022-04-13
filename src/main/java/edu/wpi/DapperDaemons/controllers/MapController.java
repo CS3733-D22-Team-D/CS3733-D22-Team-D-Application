@@ -103,8 +103,7 @@ public class MapController extends UIController implements Initializable {
   @FXML private Pane BGContainer;
 
   /* Request filter stuff */
-  @FXML private TextField searchLongName;
-  @FXML private JFXComboBox<String> searchReqLongName;
+  @FXML private JFXComboBox<String> searchBar;
 
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
@@ -173,20 +172,14 @@ public class MapController extends UIController implements Initializable {
             roomInfoBox, tableContainer, nameLabel, floorLabel, nodeTypeLabel, buildingLabel);
     this.createLocation =
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
-
-    // Initialize search request box
-    //    searchReqLongName.setItems(
-    //        FXCollections.observableArrayList(
-    //            "Search Request...",
-    //            "Lab Request",
-    //            "Meal Delivery Request",
-    //            "Medical Equipment Request",
-    //            "Medicine Request",
-    //            "Patient Transport Request",
-    //            "Sanitation Request"));
-
-    // searchLongName.setOnKeyPressed(e -> onSearchLocation());
-    // searchReqLongName.setOnAction(e -> onFilterRequestType());
+    try {
+      List<String> allNamesOnFloor = new ArrayList<>();
+      locationDAO.filter(4, maps.getFloor()).forEach(e -> allNamesOnFloor.add(e.getLongName()));
+      searchBar.getItems().addAll(allNamesOnFloor);
+    } catch (Exception e) {
+      searchBar.getItems().setAll(new ArrayList<>());
+    }
+    searchBar.getEditor().setOnKeyPressed(e -> onSearchLocation());
     closeCreate();
     closeRoom();
 
@@ -340,8 +333,7 @@ public class MapController extends UIController implements Initializable {
   void onFilterRequestType() {
     try {
       RequestHandler reqHelper = new RequestHandler();
-      List<Request> searchReq =
-          reqHelper.getSearchedRequestsByLongName(searchReqLongName.getValue());
+      List<Request> searchReq = reqHelper.getSearchedRequestsByLongName(searchBar.getValue());
       glyphs.filterByReqType(maps.getFloor(), searchReq);
     } catch (Exception e) {
       System.out.println("Error in search by request type");
@@ -351,8 +343,7 @@ public class MapController extends UIController implements Initializable {
   @FXML
   void onSearchLocation() {
     try {
-      RequestHandler reqHelper = new RequestHandler();
-      glyphs.searchByLongName(maps.getFloor(), searchLongName.getText());
+      glyphs.setLongNameFilter(searchBar.getEditor().getText());
     } catch (Exception e) {
       System.out.println("Error in search location");
     }
