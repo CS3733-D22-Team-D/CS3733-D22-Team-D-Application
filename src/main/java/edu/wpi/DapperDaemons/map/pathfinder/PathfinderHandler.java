@@ -64,6 +64,11 @@ public class PathfinderHandler implements Initializable {
       // TODO : Show the error message?
     }
     makeAllInVisible(); // For some reason I need two of these to make it actually invisible
+    try {
+      filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
+    } catch (Exception e) {
+      // Do thing
+    }
   }
 
   @FXML
