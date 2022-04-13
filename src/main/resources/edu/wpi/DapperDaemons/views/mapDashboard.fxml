@@ -84,7 +84,7 @@
                                                             <StackPane prefHeight="150.0" prefWidth="200.0">
                                                                <children>
                                                                   <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                                  <Text fx:id="cleanEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                                                                  <Text fx:id="dirtyEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
                                                                      <font>
                                                                         <Font name="System Bold" size="13.0" />
                                                                      </font>
@@ -111,7 +111,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fx:id="dirtyEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="inUseEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
@@ -139,7 +139,7 @@
                                                       <StackPane prefHeight="150.0" prefWidth="200.0">
                                                          <children>
                                                             <Circle fill="#e43131" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                                            <Text fx:id="inUseEquipment" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                                                            <Text fx:id="cleanEquipNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                                                                <font>
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>

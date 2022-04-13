@@ -57,7 +57,7 @@ public class MapDashboardController extends UIController {
 
   @FXML private Text cleanEquipNum;
   @FXML private Text dirtyEquipNum;
-  @FXML private Text inUseEquipment;
+  @FXML private Text inUseEquipNum;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
   private final String floorTxtPath = "floorSummary.txt";
@@ -163,7 +163,7 @@ public class MapDashboardController extends UIController {
               }
             });
 
-    inUseEquipment.setText(notInStorage.size() + "");
+    inUseEquipNum.setText(notInStorage.size() + "");
   }
 
   private void updateSummary() {
