@@ -113,6 +113,7 @@ public class LoginController extends AppController {
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));
           switchScene("default.fxml", 635, 510);
+          return;
         } else {
           throw new Exception(
               "More than one user with the same username?"); // theoretically this is unreachable
@@ -151,6 +152,7 @@ public class LoginController extends AppController {
       }
     } catch (NumberFormatException e) {
       System.out.println("int was not entered");
+      showError("Invalid code");
     }
   }
 
