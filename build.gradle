@@ -39,7 +39,9 @@ dependencies {
             'org.slf4j:slf4j-simple:1.7.30',
 
             // https://mvnrepository.com/artifact/com.opencsv/opencsv
-            [group: 'com.opencsv', name: 'opencsv', version: '3.7']
+            [group: 'com.opencsv', name: 'opencsv', version: '3.7'],
+
+            'me.xdrop:fuzzywuzzy:1.4.0'
     )
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
