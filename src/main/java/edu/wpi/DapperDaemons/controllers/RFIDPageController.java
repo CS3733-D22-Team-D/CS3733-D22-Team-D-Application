@@ -1,19 +1,14 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.RFIDMachine;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
 
 public class RFIDPageController extends AppController {
 
@@ -23,21 +18,33 @@ public class RFIDPageController extends AppController {
   @FXML private Button continueButton;
   @FXML private Button backButton;
   public static String COM;
+  public static String errorOS;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
-
+  /**
+   * On page init, determines status of Arduino port
+   * @param location
+   * The location used to resolve relative paths for the root object, or
+   * {@code null} if the location is not known.
+   *
+   * @param resources
+   * The resources used to localize the root object, or {@code null} if
+   * the root object was not localized.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    bindImage(BGImage, BGContainer);
-    if (COM == null) {
+    if (errorOS != null) { // The Arduino Lib only works on Windows, other operating systems will get caught here
+      resultLabel.setText("Unsupported Operating system: " + errorOS);
+      resultLabel.setTextFill(Paint.valueOf("#eb4034"));
+      sLabel.setText("OS Error");
+      backButton.setVisible(true);
+      continueButton.setVisible(false);
+    } else if (COM == null) { // The Arduino was not detected, possibly not plugged in
       resultLabel.setText("Unable to Connect");
       resultLabel.setTextFill(Paint.valueOf("#eb4034"));
       sLabel.setText("Initialization Error");
       backButton.setVisible(true);
       continueButton.setVisible(false);
-    } else {
+    } else { //the Arduino was detected on the given port
       System.out.println("Port was determined to be: " + COM);
       sButton.setVisible(true);
       backButton.setVisible(false);
@@ -47,6 +54,9 @@ public class RFIDPageController extends AppController {
     }
   }
 
+  /**
+   * Conducts the overall RFID scan, invoked by the SCAN NOW button on the FXML page
+   */
   @FXML
   public void loginRFID() {
     RFIDMachine rfid =
@@ -84,27 +94,28 @@ public class RFIDPageController extends AppController {
     }
   }
 
+  /**
+   * sets the label outside the RFID login method
+   * (It breaks if put into the RFID login method idk)
+   */
   @FXML
   public void setScanning() {
     sLabel.setText("Waiting for scan...");
   }
 
+  /**
+   * changes to login page
+   * @throws IOException if unable to change
+   */
   @FXML
   public void goToLogin() throws IOException {
     switchScene("login.fxml", 780, 548);
   }
 
-  @FXML
-  public void quitProgram() {
-    Stage window = (Stage) sLabel.getScene().getWindow();
-    csvSaver.saveAll();
-    if (window != null) {
-      window.close();
-    }
-    Platform.exit();
-    System.exit(0);
-  }
-
+  /**
+   * changes to go home
+   * @throws IOException
+   */
   @FXML
   public void goHome() throws IOException {
     switchScene("default.fxml", 635, 510);

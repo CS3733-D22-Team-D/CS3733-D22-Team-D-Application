@@ -161,7 +161,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#switchToAboutUs" onMouseClicked="#quitProgram" text=" ?   About Us" textFill="WHITE">
+                        <JFXButton onAction="#switchToAboutUs" onMouseClicked="#switchToAboutUs" text=" ?   About Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

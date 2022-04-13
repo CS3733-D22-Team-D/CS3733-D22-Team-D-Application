@@ -8,6 +8,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.util.Duration;
 
 /** Creates a path on the map */
 public class PathfinderHandler implements Initializable {
@@ -59,6 +64,11 @@ public class PathfinderHandler implements Initializable {
       // TODO : Show the error message?
     }
     makeAllInVisible(); // For some reason I need two of these to make it actually invisible
+    try {
+      filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
+    } catch (Exception e) {
+      // Do thing
+    }
   }
 
   @FXML
@@ -128,6 +138,7 @@ public class PathfinderHandler implements Initializable {
           Math.sqrt(
               Math.pow(locations.get(i).getXcoord() + locations.get(i + 1).getXcoord(), 2)
                   + Math.pow(locations.get(i).getYcoord() + locations.get(i + 1).getYcoord(), 2));
+
       Circle ifNecessary;
       if (!locations
           .get(i)
@@ -154,6 +165,20 @@ public class PathfinderHandler implements Initializable {
           overflow = 0;
         }
       }
+
+      double maxOffset = pathLine.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+      Timeline timeline =
+          new Timeline(
+              new KeyFrame(
+                  Duration.ZERO,
+                  new KeyValue(pathLine.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+              new KeyFrame(
+                  Duration.seconds(100),
+                  new KeyValue(
+                      pathLine.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
+      timeline.setCycleCount(Timeline.INDEFINITE);
+      timeline.play(); // maybe this'll work
+
       lineLayer.getChildren().add(pathLine);
       //      System.out.println("added new line to lineLayer");
     }
@@ -168,11 +193,10 @@ public class PathfinderHandler implements Initializable {
     for (int i = 0;
         i < locations.size();
         i++) { // for every child, add make the locations on this floor visible
-
       // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         System.out.println("Showing " + locations.get(i).getNodeID());
-        lineLayer.getChildren().get(i + 1).setVisible(true);
+        lineLayer.getChildren().get(i).setVisible(true);
       }
     }
   }

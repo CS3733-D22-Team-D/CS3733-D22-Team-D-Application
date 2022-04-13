@@ -13,17 +13,17 @@ import java.util.List;
 public class RFIDHandler {
 
   private Employee user;
-  private List<String> UIDs; // TODO: Try to integrate with Backend
+  private List<String> UIDs;
 
   public RFIDHandler(Employee user) {
     this.user = user;
     this.UIDs = new ArrayList<String>();
-    this.UIDs.add("9a1b036b82baba3177d83c27c1f7d0beacaac6de1c5fdcc9680c49f638c5fb9");
+    this.UIDs.add("9a1b036b82baba3177d83c27c1f7d0beacaac6de1c5fdcc9680c49f638c5fb9"); // 256-bit hash of the UID
   }
 
   /**
    * Opens serial communication to get incoming UID and checks if it is valid
-   *
+   * Uses the SHA256 hash for security
    * @return true if the scan was valid, false otherwise
    */
   public boolean scan(String COM)

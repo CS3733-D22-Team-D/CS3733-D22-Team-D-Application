@@ -290,6 +290,15 @@ public abstract class UIController extends AppController {
     switchScene("userSettings.fxml", 941, 592);
   }
 
+  @FXML
+  public void goToServicePage() {
+    try {
+      switchScene("serviceRequestPage.fxml", 635, 510);
+    } catch (Exception e) {
+      // TODO: maybe fix this one day?
+    }
+  }
+
   /**
    * Gets all long names
    *
