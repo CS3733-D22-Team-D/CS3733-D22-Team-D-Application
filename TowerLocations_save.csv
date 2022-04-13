@@ -82,6 +82,40 @@ FRETL00201,2664,3060,1,Tower,RETL,Au Bon Pain,ABP
 FDEPT00201,2669,2507,1,Tower,DEPT,Bretholtz Center for Patients and Families,Bretholtz WR
 FDEPT00101,2699,1212,1,Tower,DEPT,Center for International Medicine,CIM
 FHALL01001,2743,1112,1,Tower,HALL,Tower Hallway 3,Hallway F01001
+HHALL00404,1493,3255,4,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
+dPATI00704,1953,934,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01404,1962,2413,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00804,1984,1153,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01304,1984,2149,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00604,2002,763,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01504,2019,2544,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00904,2081,1298,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01204,2081,2018,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00504,2147,614,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01604,2164,2685,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI01004,2304,1408,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01104,2304,1899,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI01704,2304,2751,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00404,2318,552,4,Tower,PATI,Patient Rooms Pod B,PRB
+dSTOR00104,2383,969,4,Tower,STOR,Clean Equipment Storage,CES
+dSTOR00204,2383,2356,4,Tower,STOR,Clean Equipment Storage,CES
+dDIRT00104,2392,1654,4,TOWER,DIRT,Dirty Equipment Storage,DES
+dPATI01804,2528,2737,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00304,2546,574,4,Tower,PATI,Patient Rooms Pod B,PRB
+dPATI01904,2677,2645,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00204,2699,679,4,Tower,PATI,Patient Rooms Pod B,PRB
+HHALL01204,2699,1193,4,Tower,HALL,Hallway Connector 12 Floor 3,Hallway H01203
+HHALL01304,2699,2114,4,Tower,HALL,Hallway Connector 13 Floor 3,Hallway H01303
+dPATI02004,2800,2408,4,Tower,PATI,Patient Rooms Pod C,PRC
+dPATI00104,2814,912,4,Tower,PATI,Patient Rooms Pod B,PRB
+dSTOR00404,3050,1158,4,Tower,STOR,Bed and Recliner Parking,BRP
+dSTOR00304,3050,2163,4,Tower,STOR,Bed and Recliner Parking,BRP
+HSTAI00104,3050,3189,4,Tower,STAI,Stairwell 1 Floor 3,Stairwell
+HHALL00504,3050,3255,4,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
+HHALL01104,3094,1193,4,Tower,HALL,Hallway Connector 11 Floor 3,Hallway H01103
+HDEPT00204,3094,1237,4,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
+HDEPT00104,3248,1544,4,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
+HHALL00904,3292,1193,4,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
 FHALL01301,2743,1212,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FHALL00501,4161,1585,1,Tower,HALL,Shattuck Street Lobby 3,Hallway F00501
 FHALL02501,4226,3029,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
@@ -174,40 +208,6 @@ HLABS00104,1098,1390,4,Tower,LABS,Reproductive Endocrine Labs,Reproductive Endoc
 HHALL00204,1098,1917,4,Tower,HALL,Hallway Connector 2 Floor 3,Hallway H00203
 HHALL00104,1493,469,4,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
 HHALL00304,1493,1917,4,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
-HHALL00404,1493,3255,4,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
-dPATI00704,1953,934,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01404,1962,2413,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00804,1984,1153,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01304,1984,2149,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00604,2002,763,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01504,2019,2544,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00904,2081,1298,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01204,2081,2018,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00504,2147,614,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01604,2164,2685,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI01004,2304,1408,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01104,2304,1899,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI01704,2304,2751,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00404,2318,552,4,Tower,PATI,Patient Rooms Pod B,PRB
-dSTOR00104,2383,969,4,Tower,STOR,Clean Equipment Storage,CES
-dSTOR00204,2383,2356,4,Tower,STOR,Clean Equipment Storage,CES
-dDIRT00104,2392,1654,4,TOWER,DIRT,Dirty Equipment Storage,DES
-dPATI01804,2528,2737,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00304,2546,574,4,Tower,PATI,Patient Rooms Pod B,PRB
-dPATI01904,2677,2645,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00204,2699,679,4,Tower,PATI,Patient Rooms Pod B,PRB
-HHALL01204,2699,1193,4,Tower,HALL,Hallway Connector 12 Floor 3,Hallway H01203
-HHALL01304,2699,2114,4,Tower,HALL,Hallway Connector 13 Floor 3,Hallway H01303
-dPATI02004,2800,2408,4,Tower,PATI,Patient Rooms Pod C,PRC
-dPATI00104,2814,912,4,Tower,PATI,Patient Rooms Pod B,PRB
-dSTOR00404,3050,1158,4,Tower,STOR,Bed and Recliner Parking,BRP
-dSTOR00304,3050,2163,4,Tower,STOR,Bed and Recliner Parking,BRP
-HSTAI00104,3050,3189,4,Tower,STAI,Stairwell 1 Floor 3,Stairwell
-HHALL00504,3050,3255,4,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
-HHALL01104,3094,1193,4,Tower,HALL,Hallway Connector 11 Floor 3,Hallway H01103
-HDEPT00204,3094,1237,4,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
-HDEPT00104,3248,1544,4,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
-HHALL00904,3292,1193,4,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
 HHALL00804,3292,1390,4,Tower,HALL,Hallway Connector 8 Floor 3,Hallway H00803
 HHALL00704,3292,1544,4,Tower,HALL,Hallway Connector 7 Floor 3,Hallway H00703
 HHALL00604,3292,1654,4,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603

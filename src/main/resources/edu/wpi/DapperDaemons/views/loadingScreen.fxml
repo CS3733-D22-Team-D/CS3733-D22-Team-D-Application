@@ -14,26 +14,31 @@
    <children>
       <StackPane fx:id="windowContents" alignment="BOTTOM_LEFT" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="BOTTOM_LEFT">
                <children>
-                  <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/loading.gif" />
-                     </image>
-                     <effect>
-                        <ColorAdjust brightness="0.3" hue="-0.13" saturation="1.0" />
-                     </effect></ImageView>
-                  <Label fx:id="loadingLabel" prefHeight="118.0" prefWidth="744.0" text="Loading" textFill="#185783">
-                     <font>
-                        <Font size="80.0" />
-                     </font>
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/loading.gif" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="0.3" hue="-0.13" saturation="1.0" />
+                           </effect>
+                        </ImageView>
+                        <Label fx:id="loadingLabel" prefHeight="118.0" prefWidth="744.0" text="Loading" textFill="#185783">
+                           <font>
+                              <Font size="80.0" />
+                           </font>
+                        </Label>
+                     </children>
                      <HBox.margin>
-                        <Insets left="15.0" />
+                        <Insets bottom="20.0" left="20.0" />
                      </HBox.margin>
-                  </Label>
+                  </HBox>
                </children>
                <StackPane.margin>
-                  <Insets bottom="15.0" />
+                  <Insets />
                </StackPane.margin>
             </HBox>
          </children>
