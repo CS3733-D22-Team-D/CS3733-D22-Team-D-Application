@@ -69,12 +69,7 @@ public class DefaultController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    super.initialize(location, resources);
     initGraphics();
-    //
-    //    updateDate();
-    //    updateWeather();
-
     initSequence();
   }
 

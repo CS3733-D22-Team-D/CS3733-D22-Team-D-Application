@@ -65,18 +65,13 @@ public class MapDashboardController extends UIController {
 
   public static String floor;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
-
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
+    //    super.initialize(location, resources);
     bindImage(mapImage, mapImageContainer);
-    bindImage(BGImage, BGContainer);
 
     // Init tables
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
