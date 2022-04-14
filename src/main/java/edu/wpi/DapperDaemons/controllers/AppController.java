@@ -34,7 +34,7 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    App.LOG.info("Initializing AppController");
+    App.LOG.info("Initializing App Page");
     try {
       error =
           FXMLLoader.load(
@@ -75,6 +75,7 @@ public class AppController implements Initializable {
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) sceneBox.getScene().getWindow();

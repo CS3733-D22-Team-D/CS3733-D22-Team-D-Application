@@ -1,8 +1,9 @@
 package edu.wpi.DapperDaemons;
 
 import edu.wpi.DapperDaemons.backend.AutoSave;
+import edu.wpi.DapperDaemons.backend.LogSaver;
 import edu.wpi.DapperDaemons.backend.connectionHandler;
-import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -28,12 +29,12 @@ public class App extends Application {
   @Override
   public void init() {
     createLogger();
-    LOG.info("Starting Up");
     log.info("Starting Up");
   }
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    LogSaver.saveAll();
     LoadingScreen ls = new LoadingScreen(primaryStage);
     ls.display(
         () -> {
