@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="defaultPage" prefHeight="526.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<HBox fx:id="defaultPage" prefHeight="526.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="164.4" HBox.hgrow="ALWAYS">
          <children>
