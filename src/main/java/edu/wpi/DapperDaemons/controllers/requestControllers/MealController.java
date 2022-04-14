@@ -79,7 +79,7 @@ public class MealController extends UIController {
 
     /* Init Request table */
     helper = new TableHelper<>(mealRequestsTable, 0);
-    helper.linkColumns(MealDeliveryRequest.class);
+    helper.betterLinkColumns(MealDeliveryRequest.class);
     initBoxes();
     onClear();
 

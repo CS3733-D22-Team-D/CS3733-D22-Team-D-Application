@@ -13,8 +13,6 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -79,18 +77,18 @@ public class MapDashboardController extends UIController {
     bindImage(BGImage, BGContainer);
 
     // Init tables
-    new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
-    new TableHelper<>(locTable, 2).linkColumns(Location.class);
-    new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
-
-    TableColumn<Request, String> nameCol =
+    new TableHelper<>(equipTable, 2).betterLinkColumns(MedicalEquipment.class);
+    new TableHelper<>(locTable, 2).betterLinkColumns(Location.class);
+    new TableHelper<>(patientTable, 2).betterLinkColumns(Patient.class);
+    new TableHelper<>(reqTable, 1).betterLinkColumns(Request.class);
+    /*TableColumn<Request, String> nameCol =
         (TableColumn<Request, String>) reqTable.getColumns().get(0);
     nameCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getRequestType()));
     TableColumn<Request, String> pCol = (TableColumn<Request, String>) reqTable.getColumns().get(1);
     pCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getPriority().name()));
     TableColumn<Request, Boolean> rTCol =
         (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
-    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));
+    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));*/
 
     // Default floor
     floor = "1";

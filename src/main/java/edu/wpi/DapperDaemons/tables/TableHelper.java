@@ -1,15 +1,16 @@
 package edu.wpi.DapperDaemons.tables;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
@@ -35,7 +36,7 @@ public class TableHelper<R> {
    *
    * @param type - (YOUR_REQUEST).class
    */
-  public void linkColumns(Class<R> type) {
+  /*public void linkColumns(Class<R> type) {
     for (Field f : type.getDeclaredFields()) {
       f.setAccessible(true);
       TableHandler[] annotations = f.getAnnotationsByType(TableHandler.class);
@@ -53,6 +54,35 @@ public class TableHelper<R> {
         columns
             .get(annotations[i].col())
             .setCellValueFactory(new PropertyValueFactory<>(f.getName()));
+      }
+    }
+  }*/
+
+  public void betterLinkColumns(Class<R> type) {
+    for (Method m : type.getDeclaredMethods()) {
+      m.setAccessible(true);
+      TableHandler[] annotations = m.getAnnotationsByType(TableHandler.class);
+
+      boolean match = false;
+      int i;
+      for (i = 0; i < annotations.length; i++) {
+        if (annotations[i].table() == tableNum) {
+          match = true;
+          break;
+        }
+      }
+
+      if (match && annotations[i].col() < columns.size()) {
+        TableColumn<R, Object> dispCol = (TableColumn<R, Object>) columns.get(annotations[i].col());
+
+        dispCol.setCellValueFactory(
+            cell -> {
+              try {
+                return new SimpleObjectProperty<>(m.invoke(cell.getValue()));
+              } catch (IllegalAccessException | InvocationTargetException ignored) {
+                return null;
+              }
+            });
       }
     }
   }
