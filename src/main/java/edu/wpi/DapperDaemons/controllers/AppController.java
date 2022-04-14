@@ -35,7 +35,6 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    App.LOG.info("Initializing App Page");
     try {
       error =
           FXMLLoader.load(
