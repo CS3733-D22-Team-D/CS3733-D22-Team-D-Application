@@ -34,6 +34,7 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    App.LOG.info("Initializing AppController");
     try {
       error =
           FXMLLoader.load(
@@ -54,6 +55,7 @@ public class AppController implements Initializable {
   /** Creates an error box pop-up on the screen */
   @FXML
   protected void showError(String errorMessage) {
+    App.LOG.warn("Caught error: " + errorMessage);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
     if (nodeOut instanceof VBox) {
