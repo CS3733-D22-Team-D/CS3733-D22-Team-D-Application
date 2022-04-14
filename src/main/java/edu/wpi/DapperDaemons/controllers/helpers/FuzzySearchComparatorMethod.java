@@ -2,9 +2,6 @@ package edu.wpi.DapperDaemons.controllers.helpers;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FuzzySearchComparatorMethod implements AutoCompleteFuzzy.AutoCompleteComparator {
 
     @Override
