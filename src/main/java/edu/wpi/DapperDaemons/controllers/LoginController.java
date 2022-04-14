@@ -35,7 +35,7 @@ public class LoginController extends AppController {
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  private soundPlayer player;
+  private SoundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -102,7 +102,7 @@ public class LoginController extends AppController {
       return;
     } else if (username.getText().trim().equals("Rick")
         && password.getText().trim().equals("Astley")) {
-      player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
     Account acc = accountDAO.get(username.getText());

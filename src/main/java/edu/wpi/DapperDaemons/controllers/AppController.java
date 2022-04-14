@@ -1,8 +1,8 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.CSVSaver;
 import edu.wpi.DapperDaemons.backend.LogSaver;
-import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class AppController implements Initializable {
   protected void quitProgram() {
     App.LOG.info("Closing program");
     LogSaver.saveAll();
-    csvSaver.saveAll();
+    CSVSaver.saveAll();
     App.LOG.info("Successfully saved all files!");
     if (sceneBox != null && sceneBox.getScene() != null) {
       Stage window = (Stage) sceneBox.getScene().getWindow();
@@ -120,7 +120,7 @@ public class AppController implements Initializable {
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {
-      csvSaver.save(type, csv.getAbsolutePath());
+      CSVSaver.save(type, csv.getAbsolutePath());
     } catch (Exception e) {
       App.LOG.error("Unable to Save CSV of type: " + type);
     }

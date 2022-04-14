@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class csvLoader {
+public class CSVLoader {
 
   static HashMap<String, TableObject> filenames = new HashMap<>();
 
@@ -29,10 +29,10 @@ public class csvLoader {
     filenames.put("AllEdges", new LocationNodeConnections());
   }
 
-  private csvLoader() {}
+  private CSVLoader() {}
 
   public static void loadAll() throws SQLException {
-    Statement stmt = connectionHandler.getConnection().createStatement();
+    Statement stmt = ConnectionHandler.getConnection().createStatement();
     filenames.forEach(
         (k, v) -> {
           //          System.out.println("Currently on " + v.getTableName());
@@ -55,7 +55,7 @@ public class csvLoader {
   public static void load(TableObject type, String filename) throws IOException, SQLException {
     InputStreamReader f =
         new InputStreamReader(
-            Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filename)));
+            Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
@@ -63,7 +63,7 @@ public class csvLoader {
     String tableName = type.getTableName();
     String query = "SELECT * FROM " + tableName;
 
-    Statement stmt = connectionHandler.getConnection().createStatement();
+    Statement stmt = ConnectionHandler.getConnection().createStatement();
     ResultSet resultSet = stmt.executeQuery(query);
     ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
     int numAttributes = resultSetMetaData.getColumnCount();
@@ -77,10 +77,10 @@ public class csvLoader {
     }
     updateStatement += "?)";
     PreparedStatement prepStmt =
-        connectionHandler.getConnection().prepareStatement(updateStatement);
-    PreparedStatement dropStmt = connectionHandler.getConnection().prepareStatement(drop);
+        ConnectionHandler.getConnection().prepareStatement(updateStatement);
+    PreparedStatement dropStmt = ConnectionHandler.getConnection().prepareStatement(drop);
     for (String[] line : entries) {
-      if (keyChecker.validID(type, line[0])) {
+      if (KeyChecker.validID(type, line[0])) {
         dropStmt.setString(1, line[0]);
         dropStmt.executeUpdate();
       }
