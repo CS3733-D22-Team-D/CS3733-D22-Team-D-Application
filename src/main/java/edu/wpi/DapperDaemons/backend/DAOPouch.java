@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.backend;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class DAOPouch {
   private static DAO<LabRequest> labRequestDAO;
@@ -21,7 +20,7 @@ public class DAOPouch {
 
   private DAOPouch() {}
 
-  public static void init() throws SQLException, IOException {
+  public static void init() throws IOException {
     labRequestDAO = new DAO<>(new LabRequest());
     mealDeliveryRequestDAO = new DAO<>(new MealDeliveryRequest());
     medicalEquipmentRequestDAO = new DAO<>(new MedicalEquipmentRequest());

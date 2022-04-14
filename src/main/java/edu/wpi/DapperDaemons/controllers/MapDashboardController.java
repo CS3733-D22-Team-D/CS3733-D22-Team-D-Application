@@ -102,7 +102,7 @@ public class MapDashboardController extends UIController {
     locTable.getItems().clear();
     List<Location> locsByFloor;
     try {
-      locsByFloor = locationDAO.filter(4, floor);
+      locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
     } catch (SQLException e) {
       e.printStackTrace();
       showError("Failed to get locations.");
@@ -110,8 +110,8 @@ public class MapDashboardController extends UIController {
     }
     for (Location l : locsByFloor) {
       try {
-        equipTable.getItems().addAll(equipmentDAO.filter(6, l.getNodeID()));
-        patientTable.getItems().addAll(patientDAO.filter(6, l.getNodeID()));
+        equipTable.getItems().addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
+        patientTable.getItems().addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
         reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
         locTable.getItems().add(l);
       } catch (SQLException e) {
@@ -126,8 +126,9 @@ public class MapDashboardController extends UIController {
 
     // Creates list of dirty and clean equipment by filtering the equipment on the floor
     List<MedicalEquipment> dirtyEquipment =
-        equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN");
-    List<MedicalEquipment> cleanEquipment = equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN");
+        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN").values());
+    List<MedicalEquipment> cleanEquipment =
+        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN").values());
 
     dirtyEquipNum.setText(dirtyEquipment.size() + "");
     cleanEquipNum.setText(cleanEquipment.size() + "");

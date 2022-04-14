@@ -1,15 +1,10 @@
 package edu.wpi.DapperDaemons;
 
-import edu.wpi.DapperDaemons.backend.AutoSave;
-import edu.wpi.DapperDaemons.backend.connectionHandler;
+import com.google.firebase.database.*;
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
 import java.io.IOException;
-import java.util.Objects;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,36 +22,138 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) throws IOException {
-    LoadingScreen ls = new LoadingScreen(primaryStage);
-    ls.display(
-        () -> {
-          connectionHandler.init();
-          connectionHandler.switchToClientServer();
-          AutoSave.start(10);
-        },
-        () -> {
-          Parent root = null;
-          try {
-            root =
-                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-          Scene scene = new Scene(root);
-          primaryStage.setMinWidth(635);
-          primaryStage.setMinHeight(510);
-          primaryStage.setScene(scene);
-          primaryStage.show();
-          primaryStage
-              .getIcons()
-              .add(
-                  new Image(
-                      String.valueOf(
-                          App.class.getResource(
-                              "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
-          primaryStage.setTitle("BWH");
-        });
+  public void start(Stage primaryStage) throws IOException, InterruptedException {
+    //    firebase.init();
+    //    DAOPouch.init();
+    //
+    //    csvLoader.load(new Account(), "Accounts.csv");
+    //    csvLoader.loadAll();
+    //    try {
+    //      Thread.sleep(10000);
+    //    } catch (InterruptedException e) {
+    //      throw new RuntimeException(e);
+    //    }
+    //    System.out.println();
+
+    //        FileInputStream serviceAccount =
+    //                new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
+    //
+    //        // Initialize the app with a service account, granting admin privileges
+    //        FirebaseOptions options =
+    //                FirebaseOptions.builder()
+    //                        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+    //                        // The database URL depends on the location of the database
+    //
+    // .setDatabaseUrl("https://bwh-application-default-rtdb.firebaseio.com/")
+    //                        .build();
+    //
+    //        FirebaseApp.initializeApp(options);
+    //
+    //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    //        ref.addListenerForSingleValueEvent(
+    //                new ValueEventListener() {
+    //                  @Override
+    //                  public void onDataChange(DataSnapshot dataSnapshot) {
+    //                    Object document = dataSnapshot.getValue();
+    //                    System.out.println(document);
+    //                  }
+    //
+    //                  @Override
+    //                  public void onCancelled(DatabaseError error) {}
+    //                });
+    //
+    //        DatabaseReference usersRef = ref.child("users");
+    //
+    //
+    //        usersRef.setValueAsync("lol");
+    //
+    //        Map<String, Account> accounts = new HashMap<>();
+    //
+    //        ref.child("test").setValueAsync("whynowork");
+    //
+    //        ref.addListenerForSingleValueEvent(
+    //                new ValueEventListener() {
+    //                  @Override
+    //                  public void onDataChange(DataSnapshot dataSnapshot) {
+    //                    System.out.println("Changed");
+    //                  }
+    //
+    //                  @Override
+    //                  public void onCancelled(DatabaseError databaseError) {
+    //                    // ...
+    //                  }
+    //                });
+    //
+    //        try {
+    //          Thread.sleep(10000);
+    //        } catch (InterruptedException e) {
+    //          throw new RuntimeException(e);
+    //        }
+
+    //    firebase.init();
+    //    DAOPouch.init();
+    //    csvLoader.loadAll();
+    //    System.out.println();
+    //        Parent root = null;
+    //        try {
+    //          root =
+    //     FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+    //        } catch (IOException e) {
+    //          e.printStackTrace();
+    //        }
+    //        Scene scene = new Scene(root);
+    //        primaryStage.setMinWidth(635);
+    //        primaryStage.setMinHeight(510);
+    //        primaryStage.setScene(scene);
+    //        primaryStage.show();
+    //        primaryStage
+    //            .getIcons()
+    //            .add(
+    //                new Image(
+    //                    String.valueOf(
+    //                        App.class.getResource("assets/" +
+    //     "Brigham_and_Womens_Hospital_logo.png"))));
+    //        primaryStage.setTitle("BWH");
+
+    firebase.init();
+    DAOPouch.init();
+    Thread.sleep(10000);
+    System.out.println();
+
+    //      LoadingScreen ls = new LoadingScreen(primaryStage);
+    //    ls.display(
+    //        () -> {
+    //          firebase.init();
+    //          try {
+    //            DAOPouch.init();
+    //          } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //          }
+    //          AutoSave.start(10);
+    //        },
+    //        () -> {
+    //          Parent root = null;
+    //          try {
+    //            root =
+    //
+    // FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+    //          } catch (IOException e) {
+    //            e.printStackTrace();
+    //          }
+    //          Scene scene = new Scene(root);
+    //          primaryStage.setMinWidth(635);
+    //          primaryStage.setMinHeight(510);
+    //          primaryStage.setScene(scene);
+    //          primaryStage.show();
+    //          primaryStage
+    //              .getIcons()
+    //              .add(
+    //                  new Image(
+    //                      String.valueOf(
+    //                          App.class.getResource(
+    //                              "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
+    //          primaryStage.setTitle("BWH");
+    //        });
   }
 
   @Override

@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MedicalEquipmentRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
@@ -82,13 +83,17 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MedicalEquipmentRequest();
+  public String getRequestType() {
+    return "Medical Equipment Request";
   }
 
   @Override
-  public String getRequestType() {
-    return "Medical Equipment Request";
+  public TableObject newInstance(List<String> l) {
+    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   @Override

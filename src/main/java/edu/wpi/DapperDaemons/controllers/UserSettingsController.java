@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -33,12 +32,8 @@ public class UserSettingsController extends UIController {
             + " "
             + SecurityController.getUser().getLastName();
     accountName1.setText(employeeName);
-    try {
-      accountUserName.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    accountUserName.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
 
     profilePic1.setFill(
         new ImagePattern(

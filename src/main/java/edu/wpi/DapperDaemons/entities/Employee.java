@@ -1,8 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.util.List;
 
 public class Employee extends TableObject {
 
@@ -80,8 +79,12 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Employee();
+  public TableObject newInstance(List<String> l) {
+    Employee temp = new Employee();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   // ATTRIBUTES

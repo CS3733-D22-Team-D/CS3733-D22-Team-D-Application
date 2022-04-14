@@ -8,6 +8,7 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -62,14 +63,14 @@ public class BackendInfoController extends UIController {
     equipmentTableHelper.linkColumns(MedicalEquipment.class);
 
     try {
-      locationsTable.getItems().addAll(locationDAO.getAll());
+      locationsTable.getItems().addAll(new ArrayList<>(locationDAO.getAll().values()));
 
-      employeesTable.getItems().addAll(employeeDAO.getAll());
+      employeesTable.getItems().addAll(new ArrayList<>(employeeDAO.getAll().values()));
 
-      equipmentTable.getItems().addAll(medicalEquipmentDAO.getAll());
+      equipmentTable.getItems().addAll(new ArrayList<>(medicalEquipmentDAO.getAll().values()));
 
       //      System.out.println(patientDAO.getAll());
-      patientsTable.getItems().addAll(patientDAO.getAll());
+      patientsTable.getItems().addAll(new ArrayList<>(patientDAO.getAll().values()));
 
     } catch (Exception e) {
       e.printStackTrace();

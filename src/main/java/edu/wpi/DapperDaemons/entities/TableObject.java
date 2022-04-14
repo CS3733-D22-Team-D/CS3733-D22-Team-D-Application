@@ -1,8 +1,8 @@
 package edu.wpi.DapperDaemons.entities;
 
-import java.util.function.Supplier;
+import java.util.List;
 
-public abstract class TableObject implements Supplier {
+public abstract class TableObject {
 
   public TableObject() {}
 
@@ -14,5 +14,5 @@ public abstract class TableObject implements Supplier {
 
   public abstract void setAttribute(int columnNumber, String newAttribute);
 
-  public abstract Object get();
+  public abstract TableObject newInstance(List<String> l);
 }

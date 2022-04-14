@@ -10,7 +10,7 @@ import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -54,7 +54,7 @@ public class LabRequestController extends UIController {
     init.initializeInputs();
 
     try {
-      labReqTable.getItems().addAll(labRequestDAO.getAll());
+      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
@@ -90,11 +90,7 @@ public class LabRequestController extends UIController {
       // Check if the patient info points to a real patient
       boolean isAPatient = false;
       Patient patient = new Patient();
-      try {
-        patient = patientDAO.get(patientID);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      patient = patientDAO.get(patientID);
       try {
         isAPatient = patient.getFirstName().equals(patientName.getText());
       } catch (NullPointerException e) {
@@ -135,11 +131,7 @@ public class LabRequestController extends UIController {
 
   private boolean addItem(LabRequest request) {
     boolean hadClearance = false;
-    try {
-      hadClearance = labRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = labRequestDAO.add(request);
     if (hadClearance) {
       labReqTable.getItems().add(request);
     }

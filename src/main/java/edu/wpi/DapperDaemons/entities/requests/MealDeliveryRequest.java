@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MealDeliveryRequest extends TableObject implements Request {
 
@@ -100,11 +101,6 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MealDeliveryRequest();
-  }
-
-  @Override
   public String getRequestType() {
     return "Meal Delivery Request";
   }
@@ -113,6 +109,15 @@ public class MealDeliveryRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    MealDeliveryRequest temp = new MealDeliveryRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   @Override

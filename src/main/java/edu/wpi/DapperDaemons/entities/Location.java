@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class Location extends TableObject {
 
@@ -193,8 +194,12 @@ public class Location extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Location();
+  public TableObject newInstance(List<String> l) {
+    Location temp = new Location();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   public String toString() {

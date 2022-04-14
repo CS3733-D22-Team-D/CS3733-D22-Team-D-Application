@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SanitationRequest extends TableObject implements Request {
 
@@ -77,8 +78,12 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new SanitationRequest();
+  public TableObject newInstance(List<String> l) {
+    SanitationRequest temp = new SanitationRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   @Override

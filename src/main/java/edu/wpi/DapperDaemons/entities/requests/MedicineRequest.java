@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MedicineRequest extends TableObject implements Request {
 
@@ -88,8 +89,12 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MedicineRequest();
+  public TableObject newInstance(List<String> l) {
+    MedicineRequest temp = new MedicineRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   @Override

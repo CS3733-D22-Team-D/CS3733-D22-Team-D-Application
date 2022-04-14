@@ -109,7 +109,7 @@ public class DefaultController extends UIController {
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
     bindImage(backendPageImage, backendPageContainer);
-    initConnectionImage();
+    //    initConnectionImage();
   }
 
   private void setLoad() {

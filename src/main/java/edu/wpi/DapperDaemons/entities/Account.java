@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.backend.SHA;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class Account extends TableObject {
   private String username;
@@ -81,8 +82,12 @@ public class Account extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Account();
+  public TableObject newInstance(List<String> l) {
+    Account temp = new Account();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   public boolean checkPassword(String password) throws NoSuchAlgorithmException {

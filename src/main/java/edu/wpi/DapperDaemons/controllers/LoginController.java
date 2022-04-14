@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.SerialCOM;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -109,7 +110,8 @@ public class LoginController extends AppController {
     if (acc != null && acc.checkPassword(password.getText())) {
       if (acc.getAttribute(4).equals("")) {
         List<Employee> user =
-            employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
+            new ArrayList(
+                employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));
           switchScene("default.fxml", 635, 510);
@@ -139,7 +141,8 @@ public class LoginController extends AppController {
       int authCode = Integer.parseInt(code.getText());
       if (Authentication.authenticate(authCode)) {
         List<Employee> user =
-            employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
+            new ArrayList(
+                employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));
           switchScene("default.fxml", 635, 510);

@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LabRequest extends TableObject implements Request {
 
@@ -34,6 +35,15 @@ public class LabRequest extends TableObject implements Request {
         + "patientID varchar(28),"
         + "labType varchar(20),"
         + "status varchar(20))";
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    LabRequest temp = new LabRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   @Override
@@ -106,11 +116,6 @@ public class LabRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 7)
   public RequestStatus getStatus() {
     return status;
-  }
-
-  @Override
-  public Object get() {
-    return new LabRequest();
   }
 
   @Override

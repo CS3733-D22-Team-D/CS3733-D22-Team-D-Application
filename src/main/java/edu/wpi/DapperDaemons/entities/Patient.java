@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.util.List;
 
 public class Patient extends TableObject {
 
@@ -102,9 +103,14 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Patient();
+  public TableObject newInstance(List<String> l) {
+    Patient temp = new Patient();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
+
   // getters and setters
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {

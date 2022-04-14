@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class LocationNodeConnections extends TableObject {
   private String startNodeID = "";
@@ -87,13 +88,17 @@ public class LocationNodeConnections extends TableObject {
     this.connectionTwo = connectionTwo;
   }
 
-  @Override
-  public Object get() {
-    return new LocationNodeConnections();
-  }
-
   public String toString() {
     return startNodeID + "," + connectionOne + "," + connectionTwo + "\n";
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    LocationNodeConnections temp = new LocationNodeConnections();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
 
   public boolean equals(Location l) {

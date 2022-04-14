@@ -56,7 +56,7 @@ public abstract class UIController extends AppController {
     /* Used the DAO object to get list */
     DAO<Location> dao = DAOPouch.getLocationDAO();
     try {
-      this.locations = dao.getAll();
+      this.locations = new ArrayList(dao.getAll().values());
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
