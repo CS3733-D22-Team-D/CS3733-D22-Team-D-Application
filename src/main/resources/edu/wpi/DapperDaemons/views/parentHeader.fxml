@@ -21,92 +21,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="592.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../assets/BrighamOverlayAssetForLight.png" />
+                        <Image url="@../assets/Brigham-Blurred.jpg" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <children>
-                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeWidth="0.0" text="User Settings">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </graphic>
-                        </JFXButton>
-                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/userLogoutIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </graphic>
-                        </JFXButton>
-                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#quitProgram" prefHeight="40.0" prefWidth="140.0" text="Button" textFill="TRANSPARENT">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/userExitIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeWidth="0.0" text="Exit">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                     <HBox.margin>
-                        <Insets right="10.0" top="50.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
+            <HBox fx:id="childContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+               <padding>
+                  <Insets top="50.0" />
+               </padding>
             </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
@@ -232,7 +166,8 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onAction="#switchToAboutUs" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
+
+                        <JFXButton id="slider" onAction="#switchToAboutUs" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -258,9 +193,9 @@
                <top>
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
+                        <HBox alignment="CENTER" onMouseClicked="#goHome" prefHeight="51.0" prefWidth="42.0">
                            <children>
-                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#easterEgg" preserveRatio="true" HBox.hgrow="ALWAYS">
+                              <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/BrighamLogoWithBG.png" />
                                  </image>
@@ -292,6 +227,9 @@
                                        <effect>
                                           <ColorAdjust brightness="1.0" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </JFXHamburger>
                                  </children>
                               </StackPane>
@@ -317,7 +255,7 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
@@ -328,6 +266,9 @@
                                        </cursor>
                                     </ImageView>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackPane>
                            </children>
                            <HBox.margin>
@@ -342,10 +283,10 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="100.0" prefWidth="85.0">
+                        <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="Temp" text="Temp" textFill="WHITE">
+                              <Label fx:id="tempLabel" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -354,12 +295,12 @@
                         </HBox>
                         <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0" visible="false">
                            <children>
-                              <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
+                              <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#changeServer" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Template" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Text fx:id="headerNameField" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Name" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="28.0" />
                                  </font>
@@ -422,6 +363,80 @@
                   </HBox>
                </top>
             </BorderPane>
+            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeWidth="0.0" text="User Settings">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
+                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/userLogoutIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
+                        <JFXButton fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#quitProgram" prefHeight="40.0" prefWidth="140.0" text="Button" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/userExitIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeWidth="0.0" text="Exit">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </StackPane>
    </children>
