@@ -1,6 +1,6 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 
 public class MedicalEquipment extends TableObject {
 

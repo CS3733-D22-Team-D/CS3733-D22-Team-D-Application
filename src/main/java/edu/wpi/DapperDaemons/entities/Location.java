@@ -1,6 +1,6 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.lang.reflect.Array;
 
 public class Location extends TableObject {

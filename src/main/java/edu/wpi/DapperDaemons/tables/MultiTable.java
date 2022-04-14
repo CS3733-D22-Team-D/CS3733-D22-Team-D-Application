@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.map.tables;
+package edu.wpi.DapperDaemons.tables;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
