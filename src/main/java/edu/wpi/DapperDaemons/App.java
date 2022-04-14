@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons;
 
 import edu.wpi.DapperDaemons.backend.AutoSave;
-import edu.wpi.DapperDaemons.backend.LogSaver;
 import edu.wpi.DapperDaemons.backend.connectionHandler;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import java.io.IOException;
@@ -34,7 +33,16 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    LogSaver.saveAll();
+    // Setup app icons
+    primaryStage
+        .getIcons()
+        .add(
+            new Image(
+                String.valueOf(
+                    App.class.getResource("assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
+    primaryStage.setTitle("BWH");
+
+    // Load app
     LoadingScreen ls = new LoadingScreen(primaryStage);
     ls.display(
         () -> {
@@ -55,14 +63,6 @@ public class App extends Application {
           primaryStage.setMinHeight(510);
           primaryStage.setScene(scene);
           primaryStage.show();
-          primaryStage
-              .getIcons()
-              .add(
-                  new Image(
-                      String.valueOf(
-                          App.class.getResource(
-                              "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
-          primaryStage.setTitle("BWH");
         });
   }
 
