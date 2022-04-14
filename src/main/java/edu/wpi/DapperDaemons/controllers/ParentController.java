@@ -30,6 +30,14 @@ public class ParentController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    if (childContainer != null) {
+      mainBox = childContainer;
+    }
+
+    if (headerNameField != null) {
+      headerName = headerNameField;
+    }
+
     initGraphics();
 
     updateDate();
@@ -50,10 +58,12 @@ public class ParentController extends UIController {
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private HBox childContainer;
+  private static HBox mainBox;
   @FXML private HBox childPage;
   @FXML private ImageView darkSwitch;
   @FXML private JFXButton exitButton;
   @FXML private Text headerNameField;
+  private static Text headerName;
   @FXML private ImageView homeIcon;
   @FXML private ImageView homeIcon1;
   @FXML private JFXButton logoutButton;
@@ -98,14 +108,14 @@ public class ParentController extends UIController {
   void changeServer(MouseEvent event) {}
 
   public void swapPage(String page, String pageName) {
-    childContainer.getChildren().clear();
+    mainBox.getChildren().clear();
 
     try {
       childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
-      childContainer.getChildren().add(childPage);
+      mainBox.getChildren().add(childPage);
       bindChild(childPage);
-      headerNameField.setText(pageName);
+      headerName.setText(pageName);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -113,7 +123,6 @@ public class ParentController extends UIController {
 
   @FXML
   void goHome(MouseEvent event) {
-    //    swapPage("labRequest");
     swapPage("default", "Home");
   }
 
