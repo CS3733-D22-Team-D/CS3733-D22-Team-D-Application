@@ -221,7 +221,7 @@ public class PatientTransportController extends UIController implements Initiali
 
     private void initializeTable() {
       tableHelper = new TableHelper<>(transportRequests, 0);
-      tableHelper.linkColumns(PatientTransportRequest.class);
+      tableHelper.betterLinkColumns(PatientTransportRequest.class);
     }
 
     private void initializeInputs() {

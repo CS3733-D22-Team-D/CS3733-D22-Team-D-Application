@@ -155,7 +155,7 @@ public class SanitationController extends UIController {
   private class SanitationServiceInitializer {
     private void initializeTable() {
       helper = new TableHelper<>(pendingRequests, 0);
-      helper.linkColumns(SanitationRequest.class);
+      helper.betterLinkColumns(SanitationRequest.class);
     }
 
     private void initializeInputs() {

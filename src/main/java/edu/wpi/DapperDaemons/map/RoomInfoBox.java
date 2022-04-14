@@ -51,8 +51,8 @@ public class RoomInfoBox {
     this.requestTable =
         (TableView<Request>) ((StackPane) infoTables.getChildren().get(0)).getChildren().get(2);
 
-    new TableHelper<>(equipTable, 1).linkColumns(MedicalEquipment.class);
-    new TableHelper<>(patientTable, 1).linkColumns(Patient.class);
+    new TableHelper<>(equipTable, 1).betterLinkColumns(MedicalEquipment.class);
+    new TableHelper<>(patientTable, 1).betterLinkColumns(Patient.class);
     new TableHelper<>(requestTable, 1).betterLinkColumns(Request.class);
     /*TableColumn<Request, String> col1 =
         (TableColumn<Request, String>) requestTable.getColumns().get(0);

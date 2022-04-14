@@ -50,16 +50,16 @@ public class BackendInfoController extends UIController {
 
     // TODO : The patient DAO is broken :(
     patientTableHelper = new TableHelper<>(patientsTable, 0);
-    patientTableHelper.linkColumns(Patient.class);
+    patientTableHelper.betterLinkColumns(Patient.class);
 
     locationTableHelper = new TableHelper<>(locationsTable, 0);
-    locationTableHelper.linkColumns(Location.class);
+    locationTableHelper.betterLinkColumns(Location.class);
 
     employeeTableHelper = new TableHelper<>(employeesTable, 0);
-    employeeTableHelper.linkColumns(Employee.class);
+    employeeTableHelper.betterLinkColumns(Employee.class);
 
     equipmentTableHelper = new TableHelper<>(equipmentTable, 0);
-    equipmentTableHelper.linkColumns(MedicalEquipment.class);
+    equipmentTableHelper.betterLinkColumns(MedicalEquipment.class);
 
     try {
       locationsTable.getItems().addAll(locationDAO.getAll());

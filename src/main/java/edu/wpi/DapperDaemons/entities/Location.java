@@ -5,33 +5,13 @@ import java.lang.reflect.Array;
 
 public class Location extends TableObject {
 
-  @TableHandler(table = 2, col = 0)
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private int xcoord = -1;
-
-  @TableHandler(table = 0, col = 2)
   private int ycoord = -1;
-
-  @TableHandler(table = 2, col = 1)
-  @TableHandler(table = 0, col = 3)
   private String floor = "unknown";
-
-  @TableHandler(table = 2, col = 2)
-  @TableHandler(table = 0, col = 4)
   private String building = "unknown";
-
-  @TableHandler(table = 2, col = 3)
-  @TableHandler(table = 0, col = 5)
   private String nodeType = "unassigned";
-
-  @TableHandler(table = 2, col = 4)
-  @TableHandler(table = 0, col = 6)
   private String longName = "room";
-
-  @TableHandler(table = 0, col = 7)
   private String shortName = "r";
 
   public Location() {}
@@ -135,34 +115,47 @@ public class Location extends TableObject {
     this.nodeID = nodeID;
   }
 
+  @TableHandler(table = 2, col = 0)
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
 
+  @TableHandler(table = 0, col = 1)
   public int getXcoord() {
     return xcoord;
   }
 
+  @TableHandler(table = 0, col = 2)
   public int getYcoord() {
     return ycoord;
   }
 
+  @TableHandler(table = 2, col = 1)
+  @TableHandler(table = 0, col = 3)
   public String getFloor() {
     return floor;
   }
 
+  @TableHandler(table = 2, col = 2)
+  @TableHandler(table = 0, col = 4)
   public String getBuilding() {
     return building;
   }
 
+  @TableHandler(table = 2, col = 3)
+  @TableHandler(table = 0, col = 5)
   public String getNodeType() {
     return nodeType;
   }
 
+  @TableHandler(table = 2, col = 4)
+  @TableHandler(table = 0, col = 6)
   public String getLongName() {
     return longName;
   }
 
+  @TableHandler(table = 0, col = 7)
   public String getShortName() {
     return shortName;
   }
