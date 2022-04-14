@@ -18,6 +18,7 @@ public class AutoSave {
           public void run() {
             System.out.println("AutoSaving...");
             csvSaver.saveAll();
+            LogSaver.saveAll();
           }
         },
         interval * 60000L,

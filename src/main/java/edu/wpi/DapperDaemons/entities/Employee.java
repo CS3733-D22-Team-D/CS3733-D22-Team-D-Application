@@ -1,6 +1,6 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 
 public class Employee extends TableObject {
 
@@ -83,22 +83,11 @@ public class Employee extends TableObject {
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private String firstName;
-
-  @TableHandler(table = 0, col = 2)
   private String lastName;
-
-  @TableHandler(table = 0, col = 3)
   private String dateOfBirth;
-
-  @TableHandler(table = 0, col = 4)
   private EmployeeType employeeType;
-
-  @TableHandler(table = 0, col = 5)
   private int securityClearance;
 
   // CONSTRUCTORS
@@ -121,6 +110,7 @@ public class Employee extends TableObject {
 
   // SETTERS AND GETTERS
 
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -129,6 +119,7 @@ public class Employee extends TableObject {
     this.nodeID = nodeID;
   }
 
+  @TableHandler(table = 0, col = 1)
   public String getFirstName() {
     return firstName;
   }
@@ -137,6 +128,7 @@ public class Employee extends TableObject {
     this.firstName = firstName;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getLastName() {
     return lastName;
   }
@@ -145,6 +137,7 @@ public class Employee extends TableObject {
     this.lastName = lastName;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getDateOfBirth() {
     return dateOfBirth;
   }
@@ -153,6 +146,7 @@ public class Employee extends TableObject {
     this.dateOfBirth = dateOfBirth;
   }
 
+  @TableHandler(table = 0, col = 4)
   public EmployeeType getEmployeeType() {
     return employeeType;
   }
@@ -161,6 +155,7 @@ public class Employee extends TableObject {
     this.employeeType = employeeType;
   }
 
+  @TableHandler(table = 0, col = 5)
   public int getSecurityClearance() {
     return securityClearance;
   }

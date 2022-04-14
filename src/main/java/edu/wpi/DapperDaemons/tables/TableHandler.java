@@ -1,9 +1,9 @@
-package edu.wpi.DapperDaemons.map.tables;
+package edu.wpi.DapperDaemons.tables;
 
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Repeatable(MultiTable.class)
 public @interface TableHandler {
   int table();
