@@ -17,7 +17,7 @@ public class AutoSave {
           @Override
           public void run() {
             System.out.println("AutoSaving...");
-            csvSaver.saveAll();
+            CSVSaver.saveAll();
             LogSaver.saveAll();
           }
         },
