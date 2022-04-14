@@ -1,6 +1,8 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Employee extends TableObject {
 
