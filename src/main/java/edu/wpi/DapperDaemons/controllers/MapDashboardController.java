@@ -81,14 +81,6 @@ public class MapDashboardController extends UIController {
     new TableHelper<>(locTable, 2).linkColumns(Location.class);
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    /*TableColumn<Request, String> nameCol =
-        (TableColumn<Request, String>) reqTable.getColumns().get(0);
-    nameCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getRequestType()));
-    TableColumn<Request, String> pCol = (TableColumn<Request, String>) reqTable.getColumns().get(1);
-    pCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getPriority().name()));
-    TableColumn<Request, Boolean> rTCol =
-        (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
-    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));*/
 
     // Default floor
     floor = "1";

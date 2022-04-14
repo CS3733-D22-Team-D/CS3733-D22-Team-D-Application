@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.tables;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
@@ -30,35 +28,6 @@ public class TableHelper<R> {
     table.setEditable(true);
 
     this.tableNum = tableNum;
-  }
-
-  /**
-   * Maps a class with associated TableHandler tags to columns Above fields,
-   * include @TableHandler(table=#,col=#)
-   *
-   * @param type - (YOUR_REQUEST).class
-   */
-  @Deprecated
-  public void linkColumnsByField(Class<R> type) {
-    for (Field f : type.getDeclaredFields()) {
-      f.setAccessible(true);
-      TableHandler[] annotations = f.getAnnotationsByType(TableHandler.class);
-
-      boolean match = false;
-      int i;
-      for (i = 0; i < annotations.length; i++) {
-        if (annotations[i].table() == tableNum) {
-          match = true;
-          break;
-        }
-      }
-
-      if (match && annotations[i].col() < columns.size()) {
-        columns
-            .get(annotations[i].col())
-            .setCellValueFactory(new PropertyValueFactory<>(f.getName()));
-      }
-    }
   }
 
   /**
