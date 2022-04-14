@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.LogSaver;
 import edu.wpi.DapperDaemons.backend.csvSaver;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
@@ -97,7 +98,10 @@ public class AppController implements Initializable {
 
   @FXML
   protected void quitProgram() {
+    App.LOG.info("Closing program");
+    LogSaver.saveAll();
     csvSaver.saveAll();
+    App.LOG.info("Successfully saved all files!");
     if (sceneBox != null && sceneBox.getScene() != null) {
       Stage window = (Stage) sceneBox.getScene().getWindow();
       if (window != null) window.close();
@@ -119,7 +123,7 @@ public class AppController implements Initializable {
     try {
       csvSaver.save(type, csv.getAbsolutePath());
     } catch (Exception e) {
-      System.err.println("Unable to Save CSV of type: " + type);
+      App.LOG.error("Unable to Save CSV of type: " + type);
     }
   }
 }
