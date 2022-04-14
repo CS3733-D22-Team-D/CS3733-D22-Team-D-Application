@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.tables;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
@@ -36,7 +38,8 @@ public class TableHelper<R> {
    *
    * @param type - (YOUR_REQUEST).class
    */
-  /*public void linkColumns(Class<R> type) {
+  @Deprecated
+  public void linkColumnsByField(Class<R> type) {
     for (Field f : type.getDeclaredFields()) {
       f.setAccessible(true);
       TableHandler[] annotations = f.getAnnotationsByType(TableHandler.class);
@@ -56,9 +59,15 @@ public class TableHelper<R> {
             .setCellValueFactory(new PropertyValueFactory<>(f.getName()));
       }
     }
-  }*/
+  }
 
-  public void betterLinkColumns(Class<R> type) {
+  /**
+   * Maps a class with associated TableHandler tags above method declarations to table columns,
+   * include @TableHandler(table=#,col=#)
+   *
+   * @param type - (YOUR_REQUEST).class
+   */
+  public void linkColumns(Class<R> type) {
     for (Method m : type.getDeclaredMethods()) {
       m.setAccessible(true);
       TableHandler[] annotations = m.getAnnotationsByType(TableHandler.class);

@@ -156,7 +156,7 @@ public class LabRequestController extends UIController {
     private void initializeTable() {
       // Bind values to column values
       tableHelper = new TableHelper<>(labReqTable, 0);
-      tableHelper.betterLinkColumns(LabRequest.class);
+      tableHelper.linkColumns(LabRequest.class);
     }
 
     private void initializeInputs() {

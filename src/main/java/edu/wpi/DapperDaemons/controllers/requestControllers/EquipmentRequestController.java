@@ -61,7 +61,7 @@ public class EquipmentRequestController extends UIController {
     bindImage(BGImage, BGContainer);
 
     tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
-    tableHelper.betterLinkColumns(MedicalEquipmentRequest.class);
+    tableHelper.linkColumns(MedicalEquipmentRequest.class);
 
     try { // Removed second field (filename) since everything is
       // loaded on startup

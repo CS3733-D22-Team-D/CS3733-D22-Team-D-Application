@@ -45,7 +45,7 @@ public class MedicineController extends UIController {
     super.initialize(location, resources);
     bindImage(BGImage, BGContainer);
     helper = new TableHelper<>(medicineRequests, 0);
-    helper.betterLinkColumns(MedicineRequest.class);
+    helper.linkColumns(MedicineRequest.class);
 
     helper.addEnumEditProperty(priorityCol, Request.Priority.class);
 
