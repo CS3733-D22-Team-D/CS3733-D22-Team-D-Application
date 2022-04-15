@@ -31,9 +31,19 @@ public class ORM<T extends TableObject> {
                           ((HashMap<String, List<String>>) snapshot.getValue())
                               .forEach(
                                   (k, v) -> {
-                                    map.put(decodeFirebaseKey(k), (T) type.newInstance(v.stream().map(e -> {
-                                        return decodeFirebaseKey(e);
-                                    }).collect(Collectors.toList())));
+                                    map.put(
+                                        decodeFirebaseKey(k),
+                                        (T)
+                                            type.newInstance(
+                                                v.stream()
+                                                    .map(
+                                                        e -> {
+                                                          if (e != null) {
+                                                            return decodeFirebaseKey(e);
+                                                          }
+                                                          return e;
+                                                        })
+                                                    .collect(Collectors.toList())));
                                   });
                         } catch (ClassCastException e) {
                           HashMap<String, Object> res =
@@ -75,50 +85,49 @@ public class ORM<T extends TableObject> {
     return map;
   }
 
+  // TODO fix
 
-    //TODO fix
-
-    public void add(T newTableObject) {
+  public void add(T newTableObject) {
     map.put(newTableObject.getAttribute(1), newTableObject);
-    HashMap<String, T> data = new HashMap<>();
-    data.put(newTableObject.getAttribute(1), newTableObject);
-    //    ref.child(newTableObject.getAttribute(1)).setValueAsync(data);
-    ref.setValueAsync(data);
+    Map<String, Map<String, String>> put = new HashMap<>();
+    Map<String, String> data = new HashMap<>();
+    try {
+      for (int i = 1; i < 100; i++) { // not at all how we should do this, but, were lazy
+        data.put(Integer.toString(i - 1), encodeForFirebaseKey(newTableObject.getAttribute(i)));
+      }
+    } catch (IndexOutOfBoundsException ignored) {
+    }
+    put.put(encodeForFirebaseKey(newTableObject.getAttribute(1)), data);
+    ref.child(encodeForFirebaseKey(newTableObject.getAttribute(1))).setValueAsync(data);
   }
 
-
-    //TODO encode PK
-    public void delete(String primaryKey) {
-    ref.child(primaryKey).setValueAsync(null);
+  // TODO encode PK
+  public void delete(String primaryKey) {
+    ref.child(encodeForFirebaseKey(primaryKey)).setValueAsync(null);
   }
 
-
-  //TODO fix
+  // TODO fix
   public void update(T type) {
-    ref.child(type.getAttribute(1)).setValueAsync(type);
+    add(type);
   }
 
-    private static String encodeForFirebaseKey(String s) {
-        return s
-                .replace("_", "____")
-                .replace(".", "___P")
-                .replace("$", "___D")
-                .replace("#", "___H")
-                .replace("[", "___O")
-                .replace("]", "___C")
-                .replace("/", "___S")
-                ;
-    }
+  private static String encodeForFirebaseKey(String s) {
+    return s.replace("_", "____")
+        .replace(".", "___P")
+        .replace("$", "___D")
+        .replace("#", "___H")
+        .replace("[", "___O")
+        .replace("]", "___C")
+        .replace("/", "___S");
+  }
 
-    private static String decodeFirebaseKey(String s) {
-        return s
-                .replace("____","_")
-                .replace("___P",".")
-                .replace("___D","$")
-                .replace("___H","#")
-                .replace("___O","[")
-                .replace("___C","]")
-                .replace("___S","/")
-                ;
-    }
+  private static String decodeFirebaseKey(String s) {
+    return s.replace("____", "_")
+        .replace("___P", ".")
+        .replace("___D", "$")
+        .replace("___H", "#")
+        .replace("___O", "[")
+        .replace("___C", "]")
+        .replace("___S", "/");
+  }
 }

@@ -77,8 +77,9 @@ public class Location extends TableObject {
         return longName;
       case 8:
         return shortName;
+      default:
+        throw new ArrayIndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override
