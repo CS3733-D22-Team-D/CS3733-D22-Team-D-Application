@@ -106,7 +106,7 @@ public class DAO<T extends TableObject> {
    */
   public void save(String filename) {
     try {
-      csvSaver.save(type, filename);
+      CSVSaver.save(type, filename);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -119,7 +119,7 @@ public class DAO<T extends TableObject> {
    */
   public void load(String filename) {
     try {
-      csvLoader.load(type, filename);
+      CSVLoader.load(type, filename);
     } catch (Exception e) {
       e.printStackTrace();
     }

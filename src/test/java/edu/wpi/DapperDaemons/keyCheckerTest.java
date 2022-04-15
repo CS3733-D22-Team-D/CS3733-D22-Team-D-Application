@@ -2,7 +2,7 @@ package edu.wpi.DapperDaemons;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.DapperDaemons.backend.keyChecker;
+import edu.wpi.DapperDaemons.backend.KeyChecker;
 import edu.wpi.DapperDaemons.entities.Location;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +12,7 @@ class keyCheckerTest {
 
   @Test
   void validID() throws SQLException {
-    Assertions.assertTrue(keyChecker.validID(new Location(), "FDEPT00101"));
-    assertFalse(keyChecker.validID(new Location(), "FDEPT00102"));
+    Assertions.assertTrue(KeyChecker.validID(new Location(), "FDEPT00101"));
+    assertFalse(KeyChecker.validID(new Location(), "FDEPT00102"));
   }
 }

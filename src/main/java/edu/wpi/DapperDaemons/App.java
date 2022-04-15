@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons;
 
 import edu.wpi.DapperDaemons.backend.AutoSave;
-import edu.wpi.DapperDaemons.backend.connectionHandler;
+import edu.wpi.DapperDaemons.backend.ConnectionHandler;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,8 +46,8 @@ public class App extends Application {
     LoadingScreen ls = new LoadingScreen(primaryStage);
     ls.display(
         () -> {
-          connectionHandler.init();
-          connectionHandler.switchToClientServer();
+          ConnectionHandler.init();
+          ConnectionHandler.switchToClientServer();
           AutoSave.start(10);
         },
         () -> {

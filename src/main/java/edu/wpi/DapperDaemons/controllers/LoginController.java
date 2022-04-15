@@ -7,7 +7,6 @@ import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.SerialCOM;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,7 +34,7 @@ public class LoginController extends AppController {
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  private soundPlayer player;
+  private SoundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -62,13 +61,13 @@ public class LoginController extends AppController {
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
     if (username.getText().trim().equals("admin") && password.getText().trim().equals("admin")) {
       SecurityController.setUser(admin);
-      switchScene("default.fxml", 635, 510);
+      switchScene("parentHeader.fxml", 635, 510);
       return;
     } else if (username.getText().trim().equals("staff")
         && password.getText().trim().equals("staff")) {
       Employee staff = DAOPouch.getEmployeeDAO().get("staff");
       SecurityController.setUser(staff);
-      switchScene("default.fxml", 635, 510);
+      switchScene("parentHeader.fxml", 635, 510);
       return;
     } else if (username.getText().trim().equals("rfid")
         && password.getText().trim().equals("rfid")) { // RFID TEST
@@ -93,16 +92,16 @@ public class LoginController extends AppController {
           },
           () -> {
             SecurityController.setUser(admin);
-            try {
-              switchScene("RFIDScanPage.fxml", 635, 510, window);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            //            try {
+            //              switchScene("RFIDScanPage.fxml", 635, 510, window);  TODO
+            //            } catch (IOException e) {
+            //              e.printStackTrace();
+            //            }
           });
       return;
     } else if (username.getText().trim().equals("Rick")
         && password.getText().trim().equals("Astley")) {
-      player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
     Account acc = accountDAO.get(username.getText());
@@ -112,7 +111,7 @@ public class LoginController extends AppController {
             employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));
-          switchScene("default.fxml", 635, 510);
+          switchScene("parentHeader.fxml", 635, 510);
           return;
         } else {
           throw new Exception(
@@ -142,7 +141,7 @@ public class LoginController extends AppController {
             employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));
-          switchScene("default.fxml", 635, 510);
+          switchScene("parentHeader.fxml", 635, 510);
         } else {
           throw new Exception(
               "More than one user with the same username?"); // theoretically this is unreachable

@@ -1,41 +1,21 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.connectionHandler;
-import edu.wpi.DapperDaemons.backend.weather;
-import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /*
 Manages Default Page Navigation
  */
-public class DefaultController extends UIController {
-
-  /* Time, Weather, and Database */
-  @FXML private Label time;
-  @FXML private ImageView weatherIcon;
-  @FXML private Label tempLabel;
-  @FXML private ImageView serverIcon;
-  @FXML private HBox serverBox;
-
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
+public class DefaultController extends ParentController {
 
   /* Menu Button images */
   @FXML private Pane labPageContainer;
@@ -89,18 +69,11 @@ public class DefaultController extends UIController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-
     initGraphics();
-
-    updateDate();
-    updateWeather();
-
     initSequence();
   }
 
   private void initGraphics() {
-    bindImage(BGImage, BGContainer);
     bindImage(labPageImage, labPageContainer);
     bindImage(equipmentPageImage, equipmentPageContainer);
     bindImage(sanitationPageImage, sanitationPageContainer);
@@ -109,134 +82,6 @@ public class DefaultController extends UIController {
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
     bindImage(backendPageImage, backendPageContainer);
-    initConnectionImage();
-  }
-
-  private void setLoad() {
-    serverIcon.setImage(LOAD);
-  }
-
-  @FXML
-  private void changeServer() {
-    setLoad();
-    Thread serverChange =
-        new Thread(
-            () -> {
-              try {
-                if (!tryChange()) {
-                  Platform.runLater(() -> showError("Failed to switch connection"));
-                }
-              } catch (InterruptedException ignored) {
-              }
-            });
-    serverChange.start();
-  }
-
-  private void initConnectionImage() {
-    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
-      return;
-    serverBox.setVisible(true);
-    serverIcon.setVisible(true);
-    ColorAdjust ca = new ColorAdjust();
-    ca.setBrightness(1.0);
-    serverIcon.setEffect(ca);
-
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED))
-      serverIcon.setImage(EMBEDDED);
-    else serverIcon.setImage(SERVER);
-  }
-
-  private boolean tryChange() throws InterruptedException {
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED)) {
-      if (connectionHandler.switchToClientServer()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return false;
-      }
-    } else {
-      if (connectionHandler.switchToEmbedded()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return false;
-      }
-    }
-  }
-
-  private void updateDate() {
-    if (timer != null) timer.cancel();
-    timer = new Timer();
-    timer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            Platform.runLater(
-                () -> {
-                  SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
-                  Date now = new Date();
-                  if (time != null) time.setText(formatter.format(now));
-                });
-          }
-        },
-        0,
-        timeUpdate * 1000); // Every 1 second
-  }
-
-  @FXML
-  private void updateWeather() {
-    // TODO: animate on refresh
-    if (weatherTimer != null) weatherTimer.cancel();
-    weatherTimer = new Timer();
-    weatherTimer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            weatherIcon.setScaleX(0.5);
-            weatherIcon.setScaleY(0.5);
-            weatherIcon.setImage(LOAD);
-            new Thread(
-                    () -> {
-                      // Gather data
-                      int temp = -999;
-                      try {
-                        temp = weather.getTemp("boston");
-                      } catch (Exception ignored) {
-                      }
-
-                      try {
-                        Thread.sleep(1000);
-                      } catch (InterruptedException ignored) {
-                      }
-
-                      // Set values
-                      int finalTemp = temp;
-                      Platform.runLater(
-                          () -> {
-                            if (finalTemp != -999) tempLabel.setText(finalTemp + "\u00B0F");
-                            try {
-                              weatherIcon.setImage(weather.getIcon("boston"));
-                            } catch (Exception ignored) {
-                            }
-                            weatherIcon.setScaleX(1);
-                            weatherIcon.setScaleY(1);
-                          });
-                    })
-                .start();
-          }
-        },
-        0,
-        weatherUpdate * 1000); // Every 1 second
   }
 
   private void initSequence() {
