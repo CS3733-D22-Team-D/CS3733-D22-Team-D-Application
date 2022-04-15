@@ -163,4 +163,25 @@ public class Employee extends TableObject {
   public void setSecurityClearance(int securityClearance) {
     this.securityClearance = securityClearance;
   }
+
+  /**
+   * Returns the security level's description for this user, all descriptions are subject to change
+   *
+   * @return
+   */
+  public String getSecurityDescription() {
+    switch (securityClearance) {
+      case 1:
+        return "Base Security access, ability to accept and request XYZ";
+      case 2:
+        return "Low Level Security access, ability to accept and request XYZ";
+      case 3:
+        return "Medium Level Security access, ability to accept and request XYZ";
+      case 4:
+        return "High Level Security access, ability to accept and request XYZ";
+      case 5:
+        return "Admin Level Security access, ability to accept and request XYZ";
+    }
+    return "Security Level has no description, you are god";
+  }
 }
