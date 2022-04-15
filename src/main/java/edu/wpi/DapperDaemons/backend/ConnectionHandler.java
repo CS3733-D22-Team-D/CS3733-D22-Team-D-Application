@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.backend;
 import com.google.firebase.database.DatabaseReference;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,13 +36,15 @@ public class ConnectionHandler {
   }
 
   public static boolean switchToCloudServer() {
-    //Getting everything currently in the embedded or client database
+    // Getting everything currently in the embedded or client database
     try {
       DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
       DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
-      DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO = DAOPouch.getMedicalEquipmentRequestDAO();
+      DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
+          DAOPouch.getMedicalEquipmentRequestDAO();
       DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
-      DAO<PatientTransportRequest> patientTransportRequestDAO = DAOPouch.getPatientTransportRequestDAO();
+      DAO<PatientTransportRequest> patientTransportRequestDAO =
+          DAOPouch.getPatientTransportRequestDAO();
       DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
       DAO<Account> accountDAO = DAOPouch.getAccountDAO();
       DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
@@ -54,16 +55,19 @@ public class ConnectionHandler {
 
       Map<String, LabRequest> labRequestMap = labRequestDAO.getAll();
       Map<String, MealDeliveryRequest> mealDeliveryRequestMap = mealDeliveryRequestDAO.getAll();
-      Map<String, MedicalEquipmentRequest> medicalEquipmentRequestMap = medicalEquipmentRequestDAO.getAll();
+      Map<String, MedicalEquipmentRequest> medicalEquipmentRequestMap =
+          medicalEquipmentRequestDAO.getAll();
       Map<String, MedicineRequest> medicineRequestMap = medicineRequestDAO.getAll();
-      Map<String, PatientTransportRequest> patientTransportRequestMap = patientTransportRequestDAO.getAll();
+      Map<String, PatientTransportRequest> patientTransportRequestMap =
+          patientTransportRequestDAO.getAll();
       Map<String, SanitationRequest> sanitationRequestMap = sanitationRequestDAO.getAll();
       Map<String, Account> accountMap = accountDAO.getAll();
       Map<String, Employee> employeeMap = employeeDAO.getAll();
       Map<String, Location> locationMap = locationDAO.getAll();
       Map<String, MedicalEquipment> medicalEquipmentMap = medicalEquipmentDAO.getAll();
       Map<String, Patient> patientMap = patientDAO.getAll();
-      Map<String, LocationNodeConnections> locationNodeConnectionsMap = locationNodeConnectionsDAO.getAll();
+      Map<String, LocationNodeConnections> locationNodeConnectionsMap =
+          locationNodeConnectionsDAO.getAll();
 
       type = connectionType.CLOUD;
       connection = null;
@@ -115,7 +119,7 @@ public class ConnectionHandler {
       new FireBaseLoader(medicalEquipmentDAO, new MedicalEquipment());
       new FireBaseLoader(patientDAO, new Patient());
       new FireBaseLoader(locationNodeConnectionsDAO, new LocationNodeConnections());
-    }catch(Exception e){
+    } catch (Exception e) {
       return false;
     }
     return true; // not sure if this could ever fail unless google is down
@@ -127,7 +131,7 @@ public class ConnectionHandler {
       Class.forName("org.apache.derby.jdbc.ClientDriver");
       System.out.println("Connecting to client");
       connection =
-              DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
+          DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
       System.out.println("Connected to the client server");
       CSVLoader.loadAll();
       type = connectionType.CLIENTSERVER;
@@ -161,7 +165,7 @@ public class ConnectionHandler {
       type = connectionType.EMBEDDED;
     } catch (SQLException e) {
       System.out.println(
-              "Could not connect to the embedded server, reverting back to client server");
+          "Could not connect to the embedded server, reverting back to client server");
       type = connectionType.CLIENTSERVER;
       return false;
     } catch (ClassNotFoundException e) {

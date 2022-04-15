@@ -4,8 +4,6 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DAOPouch {
   private static DAO<LabRequest> labRequestDAO;

@@ -32,21 +32,23 @@ public class ORM<T extends TableObject> {
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(tableName + " data updating");
               for (DataSnapshot ignored : snapshot.getChildren()) {
-                new Thread(//this is very important, so that no other event listeners overwrite this one
+                new Thread( // this is very important, so that no other event listeners overwrite
+                        // this one
                         () -> {
                           try {
                             ((HashMap<String, List<String>>) snapshot.getValue())
                                 .forEach(
                                     (k, v) -> {
                                       map.put(
-                                              FireBaseCoder.decodeFirebaseKey(k),
+                                          FireBaseCoder.decodeFirebaseKey(k),
                                           (T)
                                               type.newInstance(
                                                   v.stream()
                                                       .map(
                                                           e -> {
                                                             if (e != null) {
-                                                              return FireBaseCoder.decodeFirebaseKey(e);
+                                                              return FireBaseCoder
+                                                                  .decodeFirebaseKey(e);
                                                             }
                                                             return e;
                                                           })
@@ -116,12 +118,15 @@ public class ORM<T extends TableObject> {
       Map<String, String> data = new HashMap<>();
       try {
         for (int i = 1; i < 100; i++) { // not at all how we should do this, but, were lazy
-          data.put(Integer.toString(i - 1), FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(i)));
+          data.put(
+              Integer.toString(i - 1),
+              FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(i)));
         }
       } catch (IndexOutOfBoundsException ignored) {
       }
       put.put(FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(1)), data);
-      ref.child(FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(1))).setValueAsync(data);
+      ref.child(FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(1)))
+          .setValueAsync(data);
     } else {
       try {
         String updateStatement = "INSERT INTO " + tableName + " VALUES(";
