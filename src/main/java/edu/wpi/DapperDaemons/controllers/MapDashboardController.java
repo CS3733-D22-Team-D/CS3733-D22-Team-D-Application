@@ -13,6 +13,8 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -68,7 +70,6 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    super.initialize(location, resources);
     bindImage(mapImage, mapImageContainer);
 
     // Init tables
@@ -77,18 +78,14 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
 
-    //    TableColumn<Request, String> nameCol =
-    //        (TableColumn<Request, String>) reqTable.getColumns().get(0);
-    //    nameCol.setCellValueFactory(req -> new
-    // SimpleStringProperty(req.getValue().getRequestType()));
-    //    TableColumn<Request, String> pCol = (TableColumn<Request, String>)
-    // reqTable.getColumns().get(1);
-    //    pCol.setCellValueFactory(req -> new
-    // SimpleStringProperty(req.getValue().getPriority().name()));
-    //    TableColumn<Request, Boolean> rTCol =
-    //        (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
-    //    rTCol.setCellValueFactory(req -> new
-    // SimpleBooleanProperty(req.getValue().requiresTransport()));
+    TableColumn<Request, String> nameCol =
+        (TableColumn<Request, String>) reqTable.getColumns().get(0);
+    nameCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getRequestType()));
+    TableColumn<Request, String> pCol = (TableColumn<Request, String>) reqTable.getColumns().get(1);
+    pCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getPriority().name()));
+    TableColumn<Request, Boolean> rTCol =
+        (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
+    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));
 
     // Default floor
     floor = "1";

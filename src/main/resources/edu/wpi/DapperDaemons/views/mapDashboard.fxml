@@ -377,7 +377,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToRealMap" prefHeight="256.0" prefWidth="256.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToMap" prefHeight="256.0" prefWidth="256.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>

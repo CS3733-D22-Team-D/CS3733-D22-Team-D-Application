@@ -27,23 +27,6 @@ import javafx.scene.text.Text;
 
 public class ParentController extends UIController {
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    if (childContainer != null) {
-      mainBox = childContainer;
-    }
-
-    if (headerNameField != null) {
-      headerName = headerNameField;
-    }
-
-    initGraphics();
-
-    updateDate();
-    updateWeather();
-  }
-
   /* Time, Weather, and Database */
   @FXML private Label time;
   @FXML private ImageView weatherIcon;
@@ -104,6 +87,24 @@ public class ParentController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+    if (childContainer != null) {
+      mainBox = childContainer;
+    }
+
+    if (headerNameField != null) {
+      headerName = headerNameField;
+    }
+
+    initGraphics();
+    updateDate();
+    updateWeather();
+
+    swapPage("default", "Home");
+  }
+
   @FXML
   void changeServer(MouseEvent event) {}
 
@@ -156,7 +157,9 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMap(MouseEvent event) {}
+  void switchToMap(MouseEvent event) {
+    swapPage("locationMap", "Interactive Map");
+  }
 
   @FXML
   void switchToMapDashboard(MouseEvent event) {
