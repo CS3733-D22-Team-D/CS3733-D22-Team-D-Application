@@ -62,9 +62,8 @@ public class PatientTransportController extends UIController implements Initiali
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    PatientTransportInitializer init = new PatientTransportInitializer();
-    init.initializeTable();
-    init.initializeInputs();
+    initializeTable();
+    //    initializeInputs(); TODO: Get all long names problem
 
     try {
       transportRequests.getItems().addAll(patientTransportRequestDAO.getAll());
@@ -176,6 +175,21 @@ public class PatientTransportController extends UIController implements Initiali
         || patientDOB.getValue() == null);
   }
 
+  private void initializeTable() {
+    tableHelper = new TableHelper<>(transportRequests, 0);
+    tableHelper.linkColumns(PatientTransportRequest.class);
+  }
+
+  private void initializeInputs() {
+
+    pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+
+    // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
+    // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
+  }
+
   private boolean addItem(PatientTransportRequest request) {
     boolean hasClearance = false;
 
@@ -207,24 +221,6 @@ public class PatientTransportController extends UIController implements Initiali
     }
     System.out.println(locationNames);
     roomBox.setValue(String.valueOf(locationNames));
-  }
-
-  private class PatientTransportInitializer {
-
-    private void initializeTable() {
-      tableHelper = new TableHelper<>(transportRequests, 0);
-      tableHelper.linkColumns(PatientTransportRequest.class);
-    }
-
-    private void initializeInputs() {
-
-      pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-      roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
-
-      // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
-      // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
-      // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
-    }
   }
 
   public void saveToCSV() {

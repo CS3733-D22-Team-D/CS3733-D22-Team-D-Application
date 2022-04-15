@@ -461,7 +461,7 @@
                               </DropShadow>
                            </effect>
                         </ToggleButton>
-                        <ToggleButton id="foreground" fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" styleClass="floors" stylesheets="@../../../../toggleButton.css" text="L1" toggleGroup="$floors">
+                        <ToggleButton id="foreground" fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" selected="true" styleClass="floors" stylesheets="@../../../../toggleButton.css" text="L1" toggleGroup="$floors">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
