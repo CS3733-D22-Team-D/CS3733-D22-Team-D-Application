@@ -32,16 +32,18 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    startNoLoadingScreen(primaryStage);
+    //    CSVLoader.resetFirebase();
+    //    startNoLoadingScreen(primaryStage);
+    startWithLoadingScreen(primaryStage);
   }
 
   private void startWithLoadingScreen(Stage primaryStage) {
-    FireBase.init();
-    try {
-      DAOPouch.init();
-    } catch (IOException e) {
-      System.out.println("Could not initialize DAOPouch");
-    }
+    //    FireBase.init();
+    //    try {
+    //      DAOPouch.init();
+    //    } catch (IOException e) {
+    //      System.out.println("Could not initialize DAOPouch");
+    //    }
     //        Thread.sleep(10000);
     //        System.out.println();
 
@@ -56,6 +58,11 @@ public class App extends Application {
               throw new RuntimeException(e);
             }
             AutoSave.start(10);
+            try {
+              Thread.sleep(2000);
+            } catch (InterruptedException e) {
+              throw new RuntimeException(e);
+            }
           },
           () -> {
             Parent root = null;
@@ -92,6 +99,7 @@ public class App extends Application {
     } catch (IOException e) {
       System.out.println("Could not initialize DAOPouch");
     }
+    AutoSave.start(10);
     //    CSVLoader.resetFirebase();
     Parent root = null;
     try {
