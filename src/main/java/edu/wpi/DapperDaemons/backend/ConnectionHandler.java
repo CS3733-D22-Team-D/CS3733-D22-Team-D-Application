@@ -36,8 +36,6 @@ public class ConnectionHandler {
     return FireBase.getReference();
   }
 
-
-  //TODO put into firebase, pull from firebase
   public static boolean switchToCloudServer() {
     //Getting everything currently in the embedded or client database
     try {
