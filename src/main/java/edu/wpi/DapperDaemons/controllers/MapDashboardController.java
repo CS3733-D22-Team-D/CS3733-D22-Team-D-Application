@@ -22,7 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class MapDashboardController extends UIController {
+public class MapDashboardController extends ParentController {
 
   @FXML private TableView<MedicalEquipment> equipTable;
   private final DAO<MedicalEquipment> equipmentDAO = DAOPouch.getMedicalEquipmentDAO();

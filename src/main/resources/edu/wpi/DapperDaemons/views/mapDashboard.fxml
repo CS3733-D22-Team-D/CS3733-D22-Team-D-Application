@@ -28,18 +28,26 @@
    <opaqueInsets>
       <Insets top="50.0" />
    </opaqueInsets>
+   <children>
       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+         <children>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
                   <VBox id="foreground" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                     <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                           <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Breakdown">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
+                           </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                           <children>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="29.0" onMouseClicked="#onEquipIconClicked" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
                                     <StackPane prefHeight="150.0" prefWidth="200.0">
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -369,7 +377,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToMap" prefHeight="256.0" prefWidth="256.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToRealMap" prefHeight="256.0" prefWidth="256.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>
