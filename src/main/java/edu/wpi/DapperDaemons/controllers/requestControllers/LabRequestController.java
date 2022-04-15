@@ -40,8 +40,6 @@ public class LabRequestController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
-    //    super.initialize(location, resources);
-    //    bindImage(BGImage, BGContainer);
     LabRequestInitializer init = new LabRequestInitializer();
 
     init.initializeTable();

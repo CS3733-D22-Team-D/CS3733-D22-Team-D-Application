@@ -136,13 +136,19 @@ public class ParentController extends UIController {
   void openUserSettings(ActionEvent event) {}
 
   @FXML
-  void quitProgram(ActionEvent event) {}
+  void quitProgram(ActionEvent event) {
+    System.out.println("TRYING TO QUIT THE PROGRAM");
+  }
 
   @FXML
-  void switchToAboutUs(ActionEvent event) {}
+  void switchToAboutUs(ActionEvent event) {
+    swapPage("aboutUs", "Meet the Team");
+  }
 
   @FXML
-  void switchToEquipment(MouseEvent event) {}
+  void switchToEquipment(MouseEvent event) {
+    swapPage("equipment", "Equipment Delivery");
+  }
 
   @FXML
   void switchToLabRequest(MouseEvent event) {
@@ -151,6 +157,11 @@ public class ParentController extends UIController {
 
   @FXML
   void switchToMap(MouseEvent event) {}
+
+  @FXML
+  void switchToMapDashboard(MouseEvent event) {
+    swapPage("mapDashboard", "Map Dashboard");
+  }
 
   @FXML
   void switchToMeal(MouseEvent event) {}
@@ -163,6 +174,11 @@ public class ParentController extends UIController {
 
   @FXML
   void switchToSanitation(MouseEvent event) {}
+
+  @FXML
+  void switchToDB(MouseEvent event) {
+    swapPage("backendInfoDisp", "Backend Information Display");
+  }
 
   @FXML
   void toggleTheme(MouseEvent event) {}

@@ -7,7 +7,6 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.SerialCOM;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -93,11 +92,11 @@ public class LoginController extends AppController {
           },
           () -> {
             SecurityController.setUser(admin);
-            try {
-              switchScene("RFIDScanPage.fxml", 635, 510, window);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            //            try {
+            //              switchScene("RFIDScanPage.fxml", 635, 510, window);  TODO
+            //            } catch (IOException e) {
+            //              e.printStackTrace();
+            //            }
           });
       return;
     } else if (username.getText().trim().equals("Rick")

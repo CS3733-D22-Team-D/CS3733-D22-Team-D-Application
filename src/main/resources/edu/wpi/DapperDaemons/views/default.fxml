@@ -292,7 +292,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMap" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
+                  <VBox id="foreground" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMapDashboard" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" stylesheets="@../assets/buttons.css" VBox.vgrow="ALWAYS">
                      <children>
                         <Pane fx:id="mapPageContainer" prefHeight="200.0" prefWidth="200.0">
                            <children>
