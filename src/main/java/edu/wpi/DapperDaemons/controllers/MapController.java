@@ -109,31 +109,14 @@ public class MapController extends UIController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     mapFilter.setTranslateX(160);
-    Image mapFloorL2;
-    Image mapFloorL1;
-    Image mapFloor1;
-    Image mapFloor2;
-    Image mapFloor3;
-    Image mapFloor4;
-    Image mapFloor5;
 
-    if (isDark) {
-      mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1_dark.png");
-      mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2_dark.png");
-      mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor_dark.png");
-      mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor_dark.png");
-      mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor_dark.png");
-      mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor_dark.png");
-      mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor_dark.png");
-    } else {
-      mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
-      mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
-      mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
-      mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
-      mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
-      mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
-      mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
-    }
+    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
+    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
+    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
+    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
+    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
+    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
+    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
 
     super.initialize(location, resources);
     bindImage(BGImage, BGContainer);

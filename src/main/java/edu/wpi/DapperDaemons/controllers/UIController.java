@@ -36,7 +36,15 @@ public abstract class UIController extends AppController {
   @FXML private VBox sceneBox;
   @FXML private ImageView darkSwitch;
 
-  protected static boolean isDark;
+  // names are formatted this way so enums can easily reference css files
+  public enum Theme {
+    Light,
+    Dark,
+    Blue,
+    Red
+  }
+
+  protected static Theme theme = Theme.Red;
 
   /* Home page stuff */
   @FXML private VBox userDropdown;
@@ -131,11 +139,18 @@ public abstract class UIController extends AppController {
 
   @FXML
   public void toggleTheme() {
-    isDark = !isDark;
     setTheme();
   }
 
   public void setTheme() {
+    sceneBox
+        .getStylesheets()
+        .add(
+            getClass()
+                .getClassLoader()
+                .getResource("edu/wpi/DapperDaemons/assets/theme" + theme.toString() + ".css")
+                .toString());
+
     Set<Node> backs = sceneBox.lookupAll("#background");
     Set<Node> fields = sceneBox.lookupAll("#field");
     Set<Node> fores = sceneBox.lookupAll("#foreground");
@@ -144,76 +159,76 @@ public abstract class UIController extends AppController {
     Set<Node> texts = sceneBox.lookupAll("#label");
     Set<Node> tableCols = sceneBox.lookupAll("#col");
 
-    if (isDark) {
-      darkSwitch.setImage(
-          new Image(
-              getClass()
-                  .getClassLoader()
-                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
-                  .toString()));
+    if (theme != Theme.Light) {
+      //      darkSwitch.setImage(
+      //          new Image(
+      //              getClass()
+      //                  .getClassLoader()
+      //                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
+      //                  .toString()));
 
       for (Node back : backs) {
-        back.getStyleClass().add("backgroundDark");
+        back.getStyleClass().add("background" + theme.toString());
       }
 
       for (Node field : fields) {
-        field.getStyleClass().add("fieldDark");
+        field.getStyleClass().add("field" + theme.toString());
       }
 
       for (Node fore : fores) {
-        fore.getStyleClass().add("foregroundDark");
+        fore.getStyleClass().add("foreground" + theme.toString());
       }
 
       for (Node jButton : jButtons) {
-        jButton.getStyleClass().add("fieldDark");
+        jButton.getStyleClass().add("field" + theme.toString());
       }
 
       for (Node specialField : specialFields) {
-        specialField.getStyleClass().add("specialFieldDark");
+        specialField.getStyleClass().add("specialField" + theme.toString());
       }
 
       for (Node text : texts) {
-        text.getStyleClass().add("textDark");
+        text.getStyleClass().add("text" + theme.toString());
       }
 
       for (Node col : tableCols) {
-        col.getStyleClass().add("tableDark");
+        col.getStyleClass().add("table" + theme.toString());
       }
 
     } else {
-      darkSwitch.setImage(
-          new Image(
-              getClass()
-                  .getClassLoader()
-                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
-                  .toString()));
+      //      darkSwitch.setImage(
+      //          new Image(
+      //              getClass()
+      //                  .getClassLoader()
+      //                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
+      //                  .toString()));
 
       for (Node back : backs) {
-        back.getStyleClass().remove("backgroundDark");
+        back.getStyleClass().clear();
       }
 
       for (Node field : fields) {
-        field.getStyleClass().remove("fieldDark");
+        field.getStyleClass().clear();
       }
 
       for (Node fore : fores) {
-        fore.getStyleClass().remove("foregroundDark");
+        fore.getStyleClass().clear();
       }
 
       for (Node jButton : jButtons) {
-        jButton.getStyleClass().remove("fieldDark");
+        jButton.getStyleClass().clear();
       }
 
       for (Node specialField : specialFields) {
-        specialField.getStyleClass().remove("specialFieldDark");
+        specialField.getStyleClass().clear();
       }
 
       for (Node text : texts) {
-        text.getStyleClass().remove("textDark");
+        text.getStyleClass().clear();
       }
 
       for (Node col : tableCols) {
-        col.getStyleClass().remove("tableDark");
+        col.getStyleClass().clear();
       }
     }
   }
