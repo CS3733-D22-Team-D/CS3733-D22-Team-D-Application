@@ -1,9 +1,13 @@
 package edu.wpi.DapperDaemons.backend;
 
 import com.google.firebase.database.DatabaseReference;
+import edu.wpi.DapperDaemons.entities.*;
+import edu.wpi.DapperDaemons.entities.requests.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class ConnectionHandler {
   static Connection connection;
@@ -29,12 +33,93 @@ public class ConnectionHandler {
   }
 
   public static DatabaseReference getCloudConnection() {
-    return firebase.getReference();
+    return FireBase.getReference();
   }
 
+
+  //TODO put into firebase, pull from firebase
   public static boolean switchToCloudServer() {
-    type = connectionType.CLOUD;
-    connection = null;
+    //Getting everything currently in the embedded or client database
+    try {
+      DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
+      DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
+      DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO = DAOPouch.getMedicalEquipmentRequestDAO();
+      DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
+      DAO<PatientTransportRequest> patientTransportRequestDAO = DAOPouch.getPatientTransportRequestDAO();
+      DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
+      DAO<Account> accountDAO = DAOPouch.getAccountDAO();
+      DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+      DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+      DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+      DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+      DAO<LocationNodeConnections> locationNodeConnectionsDAO = DAOPouch.getLocationNodeDAO();
+
+      Map<String, LabRequest> labRequestMap = labRequestDAO.getAll();
+      Map<String, MealDeliveryRequest> mealDeliveryRequestMap = mealDeliveryRequestDAO.getAll();
+      Map<String, MedicalEquipmentRequest> medicalEquipmentRequestMap = medicalEquipmentRequestDAO.getAll();
+      Map<String, MedicineRequest> medicineRequestMap = medicineRequestDAO.getAll();
+      Map<String, PatientTransportRequest> patientTransportRequestMap = patientTransportRequestDAO.getAll();
+      Map<String, SanitationRequest> sanitationRequestMap = sanitationRequestDAO.getAll();
+      Map<String, Account> accountMap = accountDAO.getAll();
+      Map<String, Employee> employeeMap = employeeDAO.getAll();
+      Map<String, Location> locationMap = locationDAO.getAll();
+      Map<String, MedicalEquipment> medicalEquipmentMap = medicalEquipmentDAO.getAll();
+      Map<String, Patient> patientMap = patientDAO.getAll();
+      Map<String, LocationNodeConnections> locationNodeConnectionsMap = locationNodeConnectionsDAO.getAll();
+
+      type = connectionType.CLOUD;
+      connection = null;
+      for (LabRequest lr : labRequestMap.values()) {
+        labRequestDAO.add(lr);
+      }
+      for (MealDeliveryRequest lr : mealDeliveryRequestMap.values()) {
+        mealDeliveryRequestDAO.add(lr);
+      }
+      for (MedicalEquipmentRequest lr : medicalEquipmentRequestMap.values()) {
+        medicalEquipmentRequestDAO.add(lr);
+      }
+      for (MedicineRequest lr : medicineRequestMap.values()) {
+        medicineRequestDAO.add(lr);
+      }
+      for (PatientTransportRequest lr : patientTransportRequestMap.values()) {
+        patientTransportRequestDAO.add(lr);
+      }
+      for (SanitationRequest lr : sanitationRequestMap.values()) {
+        sanitationRequestDAO.add(lr);
+      }
+      for (Account lr : accountMap.values()) {
+        accountDAO.add(lr);
+      }
+      for (Employee lr : employeeMap.values()) {
+        employeeDAO.add(lr);
+      }
+      for (Location lr : locationMap.values()) {
+        locationDAO.add(lr);
+      }
+      for (MedicalEquipment lr : medicalEquipmentMap.values()) {
+        medicalEquipmentDAO.add(lr);
+      }
+      for (Patient lr : patientMap.values()) {
+        patientDAO.add(lr);
+      }
+      for (LocationNodeConnections lr : locationNodeConnectionsMap.values()) {
+        locationNodeConnectionsDAO.add(lr);
+      }
+      new FireBaseLoader(labRequestDAO, new LabRequest());
+      new FireBaseLoader(mealDeliveryRequestDAO, new MealDeliveryRequest());
+      new FireBaseLoader(medicalEquipmentRequestDAO, new MedicalEquipmentRequest());
+      new FireBaseLoader(medicineRequestDAO, new MedicineRequest());
+      new FireBaseLoader(patientTransportRequestDAO, new PatientTransportRequest());
+      new FireBaseLoader(sanitationRequestDAO, new SanitationRequest());
+      new FireBaseLoader(accountDAO, new Account());
+      new FireBaseLoader(employeeDAO, new Employee());
+      new FireBaseLoader(locationDAO, new Location());
+      new FireBaseLoader(medicalEquipmentDAO, new MedicalEquipment());
+      new FireBaseLoader(patientDAO, new Patient());
+      new FireBaseLoader(locationNodeConnectionsDAO, new LocationNodeConnections());
+    }catch(Exception e){
+      return false;
+    }
     return true; // not sure if this could ever fail unless google is down
   }
 
@@ -44,9 +129,9 @@ public class ConnectionHandler {
       Class.forName("org.apache.derby.jdbc.ClientDriver");
       System.out.println("Connecting to client");
       connection =
-          DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
+              DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
       System.out.println("Connected to the client server");
-      CSVLoader.resetFirebase();
+      CSVLoader.loadAll();
       type = connectionType.CLIENTSERVER;
     } catch (SQLException e) {
       System.out.println("Could not connect to the client server, reverting back to embedded");
@@ -73,12 +158,12 @@ public class ConnectionHandler {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       System.out.println("Connecting to embedded");
       connection = DriverManager.getConnection("jdbc:derby:BaW_database;create = true");
-      CSVLoader.resetFirebase();
+      CSVLoader.loadAll();
       System.out.println("Connected to the embedded server");
       type = connectionType.EMBEDDED;
     } catch (SQLException e) {
       System.out.println(
-          "Could not connect to the embedded server, reverting back to client server");
+              "Could not connect to the embedded server, reverting back to client server");
       type = connectionType.CLIENTSERVER;
       return false;
     } catch (ClassNotFoundException e) {

@@ -113,27 +113,19 @@ public class CSVLoader {
     entries.remove(0);
     String tableName = type.tableName();
 
-    DatabaseReference ref = firebase.getReference();
+    DatabaseReference ref = FireBase.getReference();
     ref = ref.child(type.tableName());
     Map<String, Map<String, String>> map = new HashMap<>();
     Map<String, String> data;
     for (String[] line : entries) {
       data = new HashMap<>();
       for (Integer i = 0; i < line.length; i++) {
-        data.put(i.toString(), encodeForFirebaseKey(line[i]));
+        data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
       }
       map.put(line[0], data);
     }
     ref.setValueAsync(map);
   }
 
-  private static String encodeForFirebaseKey(String s) {
-    return s.replace("_", "____")
-        .replace(".", "___P")
-        .replace("$", "___D")
-        .replace("#", "___H")
-        .replace("[", "___O")
-        .replace("]", "___C")
-        .replace("/", "___S");
-  }
+
 }

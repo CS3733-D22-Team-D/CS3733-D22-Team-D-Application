@@ -36,7 +36,7 @@ public class App extends Application {
   }
 
   private void startWithLoadingScreen(Stage primaryStage) {
-    firebase.init();
+    FireBase.init();
     try {
       DAOPouch.init();
     } catch (IOException e) {
@@ -49,7 +49,7 @@ public class App extends Application {
     try {
       ls.display(
           () -> {
-            firebase.init();
+            FireBase.init();
             try {
               DAOPouch.init();
             } catch (IOException e) {
@@ -86,7 +86,7 @@ public class App extends Application {
   }
 
   private void startNoLoadingScreen(Stage primaryStage) {
-    firebase.init();
+    FireBase.init();
     try {
       DAOPouch.init();
     } catch (IOException e) {

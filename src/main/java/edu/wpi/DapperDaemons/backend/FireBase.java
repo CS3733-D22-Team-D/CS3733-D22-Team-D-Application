@@ -8,11 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class firebase {
+public class FireBase {
 
   private static DatabaseReference ref;
 
-  private firebase() {}
+  private FireBase() {}
 
   public static DatabaseReference getReference() {
     return ref;

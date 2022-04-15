@@ -15,7 +15,7 @@ public class DefaultTest {
 
   @Test
   public void checkLoadCSV() throws SQLException {
-    CSVLoader.resetFirebase();
+    CSVLoader.loadAll();
   }
 
   @Test

@@ -25,28 +25,28 @@ public class ORM<T extends TableObject> {
     this.type = type;
     tableName = type.tableName();
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
-      ref = firebase.getReference().child(type.tableName());
+      ref = FireBase.getReference().child(type.tableName());
       ref.addValueEventListener(
           new ValueEventListener() {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(tableName + " data updating");
               for (DataSnapshot ignored : snapshot.getChildren()) {
-                new Thread(
+                new Thread(//this is very important, so that no other event listeners overwrite this one
                         () -> {
                           try {
                             ((HashMap<String, List<String>>) snapshot.getValue())
                                 .forEach(
                                     (k, v) -> {
                                       map.put(
-                                          decodeFirebaseKey(k),
+                                              FireBaseCoder.decodeFirebaseKey(k),
                                           (T)
                                               type.newInstance(
                                                   v.stream()
                                                       .map(
                                                           e -> {
                                                             if (e != null) {
-                                                              return decodeFirebaseKey(e);
+                                                              return FireBaseCoder.decodeFirebaseKey(e);
                                                             }
                                                             return e;
                                                           })
@@ -116,12 +116,12 @@ public class ORM<T extends TableObject> {
       Map<String, String> data = new HashMap<>();
       try {
         for (int i = 1; i < 100; i++) { // not at all how we should do this, but, were lazy
-          data.put(Integer.toString(i - 1), encodeForFirebaseKey(newTableObject.getAttribute(i)));
+          data.put(Integer.toString(i - 1), FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(i)));
         }
       } catch (IndexOutOfBoundsException ignored) {
       }
-      put.put(encodeForFirebaseKey(newTableObject.getAttribute(1)), data);
-      ref.child(encodeForFirebaseKey(newTableObject.getAttribute(1))).setValueAsync(data);
+      put.put(FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(1)), data);
+      ref.child(FireBaseCoder.encodeForFirebaseKey(newTableObject.getAttribute(1))).setValueAsync(data);
     } else {
       try {
         String updateStatement = "INSERT INTO " + tableName + " VALUES(";
@@ -146,7 +146,7 @@ public class ORM<T extends TableObject> {
   // TODO test sql
   public void delete(String primaryKey) {
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD))
-      ref.child(encodeForFirebaseKey(primaryKey)).setValueAsync(null);
+      ref.child(FireBaseCoder.encodeForFirebaseKey(primaryKey)).setValueAsync(null);
     else {
       try {
         String query = "DELETE FROM " + tableName + " WHERE " + columnNames.get(0) + " = ?";
@@ -184,25 +184,5 @@ public class ORM<T extends TableObject> {
         System.out.println("SQLException");
       }
     }
-  }
-
-  private static String encodeForFirebaseKey(String s) {
-    return s.replace("_", "____")
-        .replace(".", "___P")
-        .replace("$", "___D")
-        .replace("#", "___H")
-        .replace("[", "___O")
-        .replace("]", "___C")
-        .replace("/", "___S");
-  }
-
-  private static String decodeFirebaseKey(String s) {
-    return s.replace("____", "_")
-        .replace("___P", ".")
-        .replace("___D", "$")
-        .replace("___H", "#")
-        .replace("___O", "[")
-        .replace("___C", "]")
-        .replace("___S", "/");
   }
 }
