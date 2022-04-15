@@ -14,7 +14,8 @@ public interface Request {
   enum Priority {
     LOW,
     MEDIUM,
-    HIGH
+    HIGH,
+    OVERDUE
   }
 
   /** @return name of the Request class */

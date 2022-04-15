@@ -67,6 +67,8 @@ public class GlyphHandler {
         return new ColorAdjust(0.3333, 1, -0.2, 0.5);
       case HIGH:
         return new ColorAdjust(0, 1, -0.5, 0.5);
+      case OVERDUE:
+        return new ColorAdjust(0, 0, -1, -1);
     }
     return new ColorAdjust();
   }
