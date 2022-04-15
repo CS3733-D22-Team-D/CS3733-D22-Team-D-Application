@@ -3,9 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
-import edu.wpi.DapperDaemons.backend.ConnectionHandler;
-import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.Weather;
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ParentController extends UIController {
 
@@ -126,12 +125,21 @@ public class ParentController extends UIController {
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
   }
+  //
+  //  @FXML
+  //  void logout(ActionEvent event) {
+  //    swapPage("login", "Login");
+  //    SecurityController.setUser(null);
+  //  }
 
   @FXML
-  void logout(ActionEvent event) {}
-
-  @FXML
-  void openUserDropdown(ActionEvent event) {}
+  void openUserDropdown(ActionEvent event) {
+    if (userSettingsToggle.isSelected()) {
+      userDropdown.setVisible(true);
+    } else {
+      userDropdown.setVisible(false);
+    }
+  }
 
   @FXML
   void openUserSettings(ActionEvent event) {
@@ -139,7 +147,24 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void quitProgram(ActionEvent event) {}
+  void quitProgram(MouseEvent event) {
+    App.LOG.info("Closing program");
+    LogSaver.saveAll();
+    CSVSaver.saveAll();
+    App.LOG.info("Successfully saved all files!");
+    if (sceneBox != null && sceneBox.getScene() != null) {
+      Stage window = (Stage) sceneBox.getScene().getWindow();
+      if (window != null) window.close();
+    }
+    Platform.exit();
+    System.exit(0);
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
+  }
 
   @FXML
   void switchToAboutUs(MouseEvent event) {
