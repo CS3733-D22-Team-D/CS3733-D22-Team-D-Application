@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.firebase.database.DatabaseReference;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,15 +8,12 @@ import java.sql.SQLException;
 public class ConnectionHandler {
   static Connection connection;
 
-  static connectionType type;
+  static connectionType type = connectionType.CLOUD;
 
   public enum connectionType {
     EMBEDDED,
-    CLIENTSERVER
-  }
-
-  static {
-    switchToEmbedded();
+    CLIENTSERVER,
+    CLOUD
   }
 
   private ConnectionHandler() {}
@@ -30,6 +28,16 @@ public class ConnectionHandler {
     return connection;
   }
 
+  public static DatabaseReference getCloudConnection() {
+    return firebase.getReference();
+  }
+
+  public static boolean switchToCloudServer() {
+    type = connectionType.CLOUD;
+    connection = null;
+    return true; // not sure if this could ever fail unless google is down
+  }
+
   public static boolean switchToClientServer() {
     try {
       CSVSaver.saveAll();
@@ -38,7 +46,7 @@ public class ConnectionHandler {
       connection =
           DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
       System.out.println("Connected to the client server");
-      CSVLoader.loadAll();
+      CSVLoader.resetFirebase();
       type = connectionType.CLIENTSERVER;
     } catch (SQLException e) {
       System.out.println("Could not connect to the client server, reverting back to embedded");
@@ -65,7 +73,7 @@ public class ConnectionHandler {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       System.out.println("Connecting to embedded");
       connection = DriverManager.getConnection("jdbc:derby:BaW_database;create = true");
-      CSVLoader.loadAll();
+      CSVLoader.resetFirebase();
       System.out.println("Connected to the embedded server");
       type = connectionType.EMBEDDED;
     } catch (SQLException e) {

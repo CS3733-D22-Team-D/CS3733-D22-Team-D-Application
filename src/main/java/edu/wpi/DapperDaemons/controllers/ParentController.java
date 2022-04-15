@@ -80,6 +80,14 @@ public class ParentController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
 
+  // TODO get new image for the cloud server
+  public final Image CLOUD =
+      new Image(
+          Objects.requireNonNull(
+              getClass()
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+
   public final Image LOAD =
       new Image(
           Objects.requireNonNull(
@@ -106,7 +114,20 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void changeServer(MouseEvent event) {}
+  void changeServer(MouseEvent event) {
+    setLoad();
+    Thread serverChange =
+        new Thread(
+            () -> {
+              try {
+                if (!tryChange()) {
+                  Platform.runLater(() -> showError("Failed to switch connection"));
+                }
+              } catch (InterruptedException ignored) {
+              }
+            });
+    serverChange.start();
+  }
 
   public void swapPage(String page, String pageName) {
     mainBox.getChildren().clear();
@@ -239,7 +260,9 @@ public class ParentController extends UIController {
 
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
       serverIcon.setImage(EMBEDDED);
-    else serverIcon.setImage(SERVER);
+    else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
+      serverIcon.setImage(SERVER);
+    else serverIcon.setImage(CLOUD);
   }
 
   private boolean tryChange() throws InterruptedException {
@@ -253,6 +276,16 @@ public class ParentController extends UIController {
         serverIcon.setImage(EMBEDDED);
         return false;
       }
+    } else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER)) {
+      if (ConnectionHandler.switchToCloudServer()) {
+        Thread.sleep(1000);
+        serverIcon.setImage(CLOUD);
+        return true;
+      } else {
+        Thread.sleep(1000);
+        serverIcon.setImage(SERVER);
+        return false;
+      }
     } else {
       if (ConnectionHandler.switchToEmbedded()) {
         Thread.sleep(1000);
@@ -260,7 +293,7 @@ public class ParentController extends UIController {
         return true;
       } else {
         Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
+        serverIcon.setImage(CLOUD);
         return false;
       }
     }

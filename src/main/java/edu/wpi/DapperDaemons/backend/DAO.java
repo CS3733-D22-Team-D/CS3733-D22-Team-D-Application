@@ -106,7 +106,7 @@ public class DAO<T extends TableObject> {
    */
   public void load(String filename) {
     try {
-      CSVLoader.load(type, filename);
+      CSVLoader.loadToFirebase(type, filename);
     } catch (Exception e) {
       e.printStackTrace();
     }
