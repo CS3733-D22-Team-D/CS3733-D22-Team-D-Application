@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 
 public class LabRequest extends TableObject implements Request {
@@ -103,6 +103,7 @@ public class LabRequest extends TableObject implements Request {
     }
   }
 
+  @TableHandler(table = 0, col = 7)
   public RequestStatus getStatus() {
     return status;
   }
@@ -118,6 +119,7 @@ public class LabRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -128,29 +130,13 @@ public class LabRequest extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String patientID;
-
-  @TableHandler(table = 0, col = 6)
   private LabType labType;
-
-  @TableHandler(table = 0, col = 7)
   private RequestStatus status;
 
   // CONSTRUCTORS
@@ -178,6 +164,7 @@ public class LabRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
 
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -190,6 +177,7 @@ public class LabRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -198,6 +186,7 @@ public class LabRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -206,6 +195,7 @@ public class LabRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -214,6 +204,7 @@ public class LabRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getPatientID() {
     return patientID;
   }
@@ -222,6 +213,7 @@ public class LabRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
+  @TableHandler(table = 0, col = 6)
   public LabType getLabType() {
     return labType;
   }

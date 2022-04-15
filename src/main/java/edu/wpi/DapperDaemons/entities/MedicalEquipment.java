@@ -1,29 +1,13 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 
 public class MedicalEquipment extends TableObject {
 
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 2, col = 0)
-  @TableHandler(table = 1, col = 0)
-  @TableHandler(table = 0, col = 1)
   private String equipmentName;
-
-  @TableHandler(table = 2, col = 1)
-  @TableHandler(table = 1, col = 1)
-  @TableHandler(table = 0, col = 2)
   private EquipmentType equipmentType;
-
-  @TableHandler(table = 2, col = 3)
-  @TableHandler(table = 0, col = 3)
   private String serialNumber;
-
-  @TableHandler(table = 2, col = 2)
-  @TableHandler(table = 1, col = 2)
-  @TableHandler(table = 0, col = 4)
   private CleanStatus cleanStatus;
 
   private String locationID;
@@ -119,6 +103,7 @@ public class MedicalEquipment extends TableObject {
   }
 
   // getters and setters
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -127,6 +112,9 @@ public class MedicalEquipment extends TableObject {
     this.nodeID = nodeID;
   }
 
+  @TableHandler(table = 2, col = 0)
+  @TableHandler(table = 1, col = 0)
+  @TableHandler(table = 0, col = 1)
   public String getEquipmentName() {
     return equipmentName;
   }
@@ -135,6 +123,9 @@ public class MedicalEquipment extends TableObject {
     this.equipmentName = equipmentName;
   }
 
+  @TableHandler(table = 2, col = 1)
+  @TableHandler(table = 1, col = 1)
+  @TableHandler(table = 0, col = 2)
   public EquipmentType getEquipmentType() {
     return equipmentType;
   }
@@ -143,6 +134,8 @@ public class MedicalEquipment extends TableObject {
     this.equipmentType = equipmentType;
   }
 
+  @TableHandler(table = 2, col = 3)
+  @TableHandler(table = 0, col = 3)
   public String getSerialNumber() {
     return serialNumber;
   }
@@ -159,6 +152,9 @@ public class MedicalEquipment extends TableObject {
     return locationID;
   }
 
+  @TableHandler(table = 2, col = 2)
+  @TableHandler(table = 1, col = 3)
+  @TableHandler(table = 0, col = 4)
   public CleanStatus getCleanStatus() {
     return cleanStatus;
   }

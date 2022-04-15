@@ -1,7 +1,8 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.App;
-import edu.wpi.DapperDaemons.backend.csvSaver;
+import edu.wpi.DapperDaemons.backend.CSVSaver;
+import edu.wpi.DapperDaemons.backend.LogSaver;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
 import java.io.IOException;
@@ -54,6 +55,7 @@ public class AppController implements Initializable {
   /** Creates an error box pop-up on the screen */
   @FXML
   protected void showError(String errorMessage) {
+    App.LOG.warn("Caught error: " + errorMessage);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
     if (nodeOut instanceof VBox) {
@@ -73,6 +75,7 @@ public class AppController implements Initializable {
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) sceneBox.getScene().getWindow();
@@ -94,7 +97,10 @@ public class AppController implements Initializable {
 
   @FXML
   protected void quitProgram() {
-    csvSaver.saveAll();
+    App.LOG.info("Closing program");
+    LogSaver.saveAll();
+    CSVSaver.saveAll();
+    App.LOG.info("Successfully saved all files!");
     if (sceneBox != null && sceneBox.getScene() != null) {
       Stage window = (Stage) sceneBox.getScene().getWindow();
       if (window != null) window.close();
@@ -114,9 +120,9 @@ public class AppController implements Initializable {
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {
-      csvSaver.save(type, csv.getAbsolutePath());
+      CSVSaver.save(type, csv.getAbsolutePath());
     } catch (Exception e) {
-      System.err.println("Unable to Save CSV of type: " + type);
+      App.LOG.error("Unable to Save CSV of type: " + type);
     }
   }
 }

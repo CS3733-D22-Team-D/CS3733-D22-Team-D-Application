@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.soundPlayer;
+import edu.wpi.DapperDaemons.backend.SoundPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,10 +11,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javax.sound.sampled.LineUnavailableException;
 
-public class easterEggController extends UIController {
+public class EasterEggController extends UIController {
   @FXML ImageView homeIcon;
   @FXML private VBox sceneBox;
-  private soundPlayer player;
+  private SoundPlayer player;
 
   /* Background */
   @FXML private ImageView BGImage;
@@ -26,7 +26,7 @@ public class easterEggController extends UIController {
     bindImage(BGImage, BGContainer);
 
     try {
-      player = new soundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
+      player = new SoundPlayer("edu/wpi/DapperDaemons/assets/easterEgg.wav");
       player.play(0.75F);
     } catch (LineUnavailableException e) {
       System.out.println("Something went wong");

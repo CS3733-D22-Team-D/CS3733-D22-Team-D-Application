@@ -1,14 +1,14 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.backend.csvLoader;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
-import edu.wpi.DapperDaemons.map.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -75,6 +75,7 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
     new TableHelper<>(locTable, 2).linkColumns(Location.class);
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
+    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
 
     //    TableColumn<Request, String> nameCol =
     //        (TableColumn<Request, String>) reqTable.getColumns().get(0);
@@ -183,7 +184,7 @@ public class MapDashboardController extends ParentController {
   private static String getFileText(String filePath, int line) throws IOException {
     InputStreamReader f =
         new InputStreamReader(
-            Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filePath)));
+            Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filePath)));
     BufferedReader reader = new BufferedReader(f);
     // filePath.replace("%20", " ")
     Scanner s = new Scanner(reader);

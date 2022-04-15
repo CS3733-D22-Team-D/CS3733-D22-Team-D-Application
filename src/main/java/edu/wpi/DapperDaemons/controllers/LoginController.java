@@ -2,9 +2,9 @@ package edu.wpi.DapperDaemons.controllers;
 
 import arduino.Arduino;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.serial.SerialCOM;
 import java.net.URL;
@@ -34,7 +34,7 @@ public class LoginController extends AppController {
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private final DAO<Account> accountDAO = DAOPouch.getAccountDAO();
 
-  private soundPlayer player;
+  private SoundPlayer player;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -101,7 +101,7 @@ public class LoginController extends AppController {
       return;
     } else if (username.getText().trim().equals("Rick")
         && password.getText().trim().equals("Astley")) {
-      player = new soundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
+      player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
     Account acc = accountDAO.get(username.getText());
