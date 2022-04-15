@@ -3,9 +3,9 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.ConnectionHandler;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.connectionHandler;
-import edu.wpi.DapperDaemons.backend.weather;
+import edu.wpi.DapperDaemons.backend.Weather;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.net.URL;
@@ -234,14 +234,14 @@ public class ParentController extends UIController {
     ca.setBrightness(1.0);
     serverIcon.setEffect(ca);
 
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED))
+    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
       serverIcon.setImage(EMBEDDED);
     else serverIcon.setImage(SERVER);
   }
 
   private boolean tryChange() throws InterruptedException {
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED)) {
-      if (connectionHandler.switchToClientServer()) {
+    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED)) {
+      if (ConnectionHandler.switchToClientServer()) {
         Thread.sleep(1000);
         serverIcon.setImage(SERVER);
         return true;
@@ -251,7 +251,7 @@ public class ParentController extends UIController {
         return false;
       }
     } else {
-      if (connectionHandler.switchToEmbedded()) {
+      if (ConnectionHandler.switchToEmbedded()) {
         Thread.sleep(1000);
         serverIcon.setImage(EMBEDDED);
         return true;
@@ -303,7 +303,7 @@ public class ParentController extends UIController {
                       // Gather data
                       int temp = -999;
                       try {
-                        temp = weather.getTemp("boston");
+                        temp = Weather.getTemp("boston");
                       } catch (Exception ignored) {
                       }
 
@@ -318,7 +318,7 @@ public class ParentController extends UIController {
                           () -> {
                             if (finalTemp != -999) tempLabel.setText(finalTemp + "\u00B0F");
                             try {
-                              weatherIcon.setImage(weather.getIcon("boston"));
+                              weatherIcon.setImage(Weather.getIcon("boston"));
                             } catch (Exception ignored) {
                             }
                             weatherIcon.setScaleX(1);
