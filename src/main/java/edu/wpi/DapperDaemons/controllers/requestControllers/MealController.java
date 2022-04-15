@@ -16,18 +16,12 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 /** Controller for Meal UI Page UPDATED 4/5/22 at 12:08 AM */
 public class MealController extends UIController {
 
   /* Table Helper */
   private TableHelper<MealDeliveryRequest> helper;
-
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
 
   /* Table Object */
   @FXML private TableView<MealDeliveryRequest> mealRequestsTable;
@@ -74,8 +68,6 @@ public class MealController extends UIController {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
 
     /* Init Request table */
     helper = new TableHelper<>(mealRequestsTable, 0);

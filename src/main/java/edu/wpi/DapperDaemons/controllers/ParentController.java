@@ -164,7 +164,9 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMeal(MouseEvent event) {}
+  void switchToMeal(MouseEvent event) {
+    swapPage("meal", "Patient Meal Delivery Portal");
+  }
 
   @FXML
   void switchToMedicine(MouseEvent event) {
