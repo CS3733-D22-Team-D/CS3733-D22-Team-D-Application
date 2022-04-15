@@ -18,7 +18,7 @@ public class SecurityController {
   }
 
   public static boolean permissionToAdd(TableObject type) {
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
     int clearance = user.getSecurityClearance();
     if (tableName.equals("")) {
       return false;
@@ -49,7 +49,7 @@ public class SecurityController {
   }
 
   public static boolean permissionToUpdate(TableObject type) {
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
     int clearance = user.getSecurityClearance();
     if (tableName.equals("")) {
       return false;
@@ -80,7 +80,7 @@ public class SecurityController {
   }
 
   public static boolean permissionToDelete(TableObject type) {
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
     int clearance = user.getSecurityClearance();
     if (tableName.equals("")) {
       return false;

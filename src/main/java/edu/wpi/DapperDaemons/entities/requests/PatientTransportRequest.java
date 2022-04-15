@@ -1,8 +1,9 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PatientTransportRequest extends TableObject implements Request {
 
@@ -15,7 +16,7 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60) ,"
@@ -27,7 +28,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTTRANSPORTREQUESTS";
   }
 
@@ -91,16 +92,53 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new PatientTransportRequest();
+  public TableObject newInstance(List<String> l) {
+    PatientTransportRequest temp = new PatientTransportRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
-  public String getRequestType() {
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "nextRoomID":
+        nextRoomID = newAttribute;
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  public String requestType() {
     return "Patient Transport Request";
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -111,28 +149,13 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String patientID;
-
-  @TableHandler(table = 0, col = 6)
   private String nextRoomID;
-
-  @TableHandler(table = 0, col = 7)
   private RequestStatus status;
 
   // CONSTRUCTORS
@@ -159,7 +182,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   public PatientTransportRequest() {}
 
   // SETTERS AND GETTERS
-
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -172,6 +195,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -180,6 +204,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -188,6 +213,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -196,6 +222,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getPatientID() {
     return patientID;
   }
@@ -204,6 +231,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
+  @TableHandler(table = 0, col = 6)
   public String getNextRoomID() {
     return nextRoomID;
   }
@@ -212,6 +240,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.nextRoomID = nextRoomID;
   }
 
+  @TableHandler(table = 0, col = 7)
   public RequestStatus getStatus() {
     return status;
   }

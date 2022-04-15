@@ -1,8 +1,10 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
-import java.time.LocalDateTime;
+import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class MedicineRequest extends TableObject implements Request {
 
@@ -15,7 +17,7 @@ public class MedicineRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEDICINEREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20) DEFAULT 'LOW',"
         + "roomID varchar(20) DEFAULT 'Unknown',"
@@ -27,7 +29,7 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEDICINEREQUESTS";
   }
 
@@ -88,16 +90,53 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MedicineRequest();
+  public TableObject newInstance(List<String> l) {
+    MedicineRequest temp = new MedicineRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
-  public String getRequestType() {
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "medicationName":
+        medicationName = newAttribute;
+        break;
+      case "quantity":
+        quantity = Integer.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  public String requestType() {
     return "Medicine Request";
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -108,28 +147,13 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String patientID;
-
-  @TableHandler(table = 0, col = 6)
   private String medicationName;
-
-  @TableHandler(table = 0, col = 7)
   private int quantity;
 
   // CONTSTRUCTORS
@@ -142,7 +166,8 @@ public class MedicineRequest extends TableObject implements Request {
       String patientID,
       String medicationName,
       int quantity) {
-    this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
+    SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy-HH:MM:SS");
+    this.nodeID = priority.toString() + requesterID + format.format(new Date());
 
     this.priority = priority;
     this.roomID = roomID;
@@ -155,7 +180,7 @@ public class MedicineRequest extends TableObject implements Request {
 
   public MedicineRequest() {}
   // SETTERS AND GETTERS
-
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -168,6 +193,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -176,6 +202,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -184,6 +211,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -192,6 +220,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getPatientID() {
     return patientID;
   }
@@ -200,6 +229,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
+  @TableHandler(table = 0, col = 6)
   public String getMedicationName() {
     return medicationName;
   }
@@ -208,6 +238,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.medicationName = medicationName;
   }
 
+  @TableHandler(table = 0, col = 7)
   public int getQuantity() {
     return quantity;
   }

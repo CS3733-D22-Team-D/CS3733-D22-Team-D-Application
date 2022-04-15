@@ -9,9 +9,8 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
-import edu.wpi.DapperDaemons.map.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -51,7 +50,7 @@ public class SanitationController extends UIController {
     initializeTable();
 
     try {
-      pendingRequests.getItems().addAll(sanitationRequestDAO.getAll());
+      pendingRequests.getItems().addAll(new ArrayList(sanitationRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
@@ -82,11 +81,7 @@ public class SanitationController extends UIController {
       boolean isALocation = false;
       Location location = new Location();
       ArrayList<Location> locations = new ArrayList<>();
-      try {
-        locations = (ArrayList<Location>) locationDAO.getAll();
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      locations = (ArrayList<Location>) locationDAO.getAll();
 
       location = locationDAO.filter(locations, 7, roomID).get(0);
 
@@ -139,11 +134,7 @@ public class SanitationController extends UIController {
   /** Adds new sanitationRequest to table of pending requests * */
   private boolean addItem(SanitationRequest request) {
     boolean hasClearance = false;
-    try {
-      hasClearance = sanitationRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hasClearance = sanitationRequestDAO.add(request);
 
     if (hasClearance) {
       pendingRequests.getItems().add(request);

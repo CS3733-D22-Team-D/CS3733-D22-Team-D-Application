@@ -1,14 +1,15 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SanitationRequest extends TableObject implements Request {
 
   // TABLEOBJECT METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE SANITATIONREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -19,7 +20,7 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "SANITATIONREQUESTS";
   }
 
@@ -77,16 +78,50 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new SanitationRequest();
+  public TableObject newInstance(List<String> l) {
+    SanitationRequest temp = new SanitationRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
-  public String getRequestType() {
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "sanitationType":
+        sanitationType = newAttribute;
+        break;
+      case "cleanStatus":
+        cleanStatus = RequestStatus.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  public String requestType() {
     return "Sanitation Request";
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -97,25 +132,12 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String sanitationType;
-
-  @TableHandler(table = 0, col = 6)
   private RequestStatus cleanStatus;
 
   // CONSTRUCTOR
@@ -141,7 +163,7 @@ public class SanitationRequest extends TableObject implements Request {
   public SanitationRequest() {}
 
   // SETTERS AND GETTERS
-
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -154,6 +176,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -162,6 +185,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -170,6 +194,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -178,6 +203,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getSanitationType() {
     return sanitationType;
   }
@@ -186,6 +212,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.sanitationType = sanitationType;
   }
 
+  @TableHandler(table = 0, col = 6)
   public RequestStatus getCleanStatus() {
     return cleanStatus;
   }

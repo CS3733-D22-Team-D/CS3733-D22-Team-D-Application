@@ -1,14 +1,12 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.firebase.database.DatabaseReference;
 import com.opencsv.CSVReader;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class csvLoader {
 
@@ -31,28 +29,18 @@ public class csvLoader {
 
   private csvLoader() {}
 
-  public static void loadAll() throws SQLException {
-    Statement stmt = connectionHandler.getConnection().createStatement();
+  public static void loadAll() {
     filenames.forEach(
         (k, v) -> {
-          //          System.out.println("Currently on " + v.getTableName());
           try {
-            try {
-              stmt.execute(v.getTableInit());
-            } catch (SQLException e) {
-              //              System.out.printf("%s table already created\n", v.getTableName());
-            }
             load(v, k + ".csv");
           } catch (IOException e) {
             e.printStackTrace();
-          } catch (SQLException e) {
-            e.printStackTrace();
           }
         });
-    stmt.close();
   }
 
-  public static void load(TableObject type, String filename) throws IOException, SQLException {
+  public static void load(TableObject type, String filename) throws IOException {
     InputStreamReader f =
         new InputStreamReader(
             Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filename)));
@@ -60,36 +48,33 @@ public class csvLoader {
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
     entries.remove(0);
-    String tableName = type.getTableName();
-    String query = "SELECT * FROM " + tableName;
+    String tableName = type.tableName();
 
-    Statement stmt = connectionHandler.getConnection().createStatement();
-    ResultSet resultSet = stmt.executeQuery(query);
-    ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-    int numAttributes = resultSetMetaData.getColumnCount();
-
-    String updateStatement = "INSERT INTO " + tableName + " VALUES(";
-    String drop = "DELETE FROM " + tableName + " WHERE ";
-    drop += resultSetMetaData.getColumnLabel(1);
-    drop += " = ?";
-    for (int i = 1; i < numAttributes; i++) {
-      updateStatement += "?,";
-    }
-    updateStatement += "?)";
-    PreparedStatement prepStmt =
-        connectionHandler.getConnection().prepareStatement(updateStatement);
-    PreparedStatement dropStmt = connectionHandler.getConnection().prepareStatement(drop);
+    DatabaseReference ref = firebase.getReference();
+    ref = ref.child(type.tableName());
+    Map<String, Map<String, String>> map = new HashMap<>();
+    Map<String, String> data;
     for (String[] line : entries) {
-      if (keyChecker.validID(type, line[0])) {
-        dropStmt.setString(1, line[0]);
-        dropStmt.executeUpdate();
+      data = new HashMap<>();
+      for (Integer i = 0; i < line.length; i++) {
+        data.put(i.toString(), encodeForFirebaseKey(line[i]));
       }
-      for (int i = 1; i <= numAttributes; i++) {
-        prepStmt.setString(i, line[i - 1]);
-      }
-      prepStmt.executeUpdate();
+      map.put(line[0], data);
     }
+    ref.setValueAsync(map);
+  }
 
-    prepStmt.close();
+  private static String encodeForFirebaseKey(String s) {
+    return s
+            .replace("_", "____")
+            .replace(".", "___P")
+            .replace("$", "___D")
+            .replace("#", "___H")
+            .replace("[", "___O")
+            .replace("]", "___C")
+            .replace("/", "___S")
+            ;
   }
 }
+
+

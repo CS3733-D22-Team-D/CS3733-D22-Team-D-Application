@@ -1,163 +1,124 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.entities.TableObject;
-import java.io.*;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ORM<T extends TableObject> {
-
-  Supplier<T> supplier;
-  int numAttributes;
   String tableName;
-  ArrayList<String> columnNames = new ArrayList<>();
-  String initString;
 
-  public ORM(T type) throws SQLException, IOException {
-    this.supplier = type;
-    initString = type.getTableInit();
-    tableName = type.getTableName();
+  T type;
+  HashMap<String, T> map = new HashMap<>();
+  DatabaseReference ref;
 
-    Statement stmt = connectionHandler.getConnection().createStatement();
-    //    try {
-    //      stmt.execute(initString);
-    //    } catch (SQLException e) {
-    //      System.out.println("Table already created");
-    //    }
-    String query = "SELECT * FROM " + tableName;
-    ResultSet resultSet = stmt.executeQuery(query);
-    ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-    this.numAttributes = resultSetMetaData.getColumnCount();
-    for (int i = 1; i <= numAttributes; i++) {
-      columnNames.add(resultSetMetaData.getColumnName(i));
-    }
-    stmt.close();
-  }
+  public ORM(T type) {
+    this.type = type;
+    tableName = type.tableName();
+    ref = firebase.getReference().child(type.tableName());
+    ref.addValueEventListener(
+        new ValueEventListener() {
+          @Override
+          public synchronized void onDataChange(DataSnapshot snapshot) {
+            System.out.println(tableName + " data updating");
+            for (DataSnapshot ignored : snapshot.getChildren()) {
+              new Thread(
+                      () -> {
+                        try {
+                          ((HashMap<String, List<String>>) snapshot.getValue())
+                              .forEach(
+                                  (k, v) -> {
+                                    map.put(decodeFirebaseKey(k), (T) type.newInstance(v.stream().map(e -> {
+                                        return decodeFirebaseKey(e);
+                                    }).collect(Collectors.toList())));
+                                  });
+                        } catch (ClassCastException e) {
+                          HashMap<String, Object> res =
+                              (HashMap<String, Object>) snapshot.getValue();
+                          ArrayList<String> attributes = new ArrayList<>();
+                          T temp = (T) type.newInstance(new ArrayList<>());
+                          res.forEach(
+                              (k, v) -> {
+                                if (k.equals("nodeID")) {
+                                  attributes.add(0, v.toString());
+                                } else {
+                                  attributes.add(v.toString());
+                                }
+                                temp.setAttribute(k, String.valueOf(v));
+                              });
+                          map.put(attributes.get(0), temp);
+                        }
+                      })
+                  .start();
+            }
+          }
 
-  public ORM(T type, String filename) throws SQLException, IOException {
-    this.supplier = type;
-    initString = type.getTableInit();
-    tableName = type.getTableName();
-
-    Statement stmt = connectionHandler.getConnection().createStatement();
-    //    try {
-    //      stmt.execute(initString);
-    //    } catch (SQLException e) {
-    //      System.out.printf("%s table already created\n", tableName);
-    //    }
-    String query = "SELECT * FROM " + tableName;
-    ResultSet resultSet = stmt.executeQuery(query);
-    ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-    this.numAttributes = resultSetMetaData.getColumnCount();
-    for (int i = 1; i <= numAttributes; i++) {
-      columnNames.add(resultSetMetaData.getColumnName(i));
-    }
-    stmt.close();
+          @Override
+          public void onCancelled(DatabaseError error) {
+            System.out.println("There was an error in the event listener");
+          }
+        });
   }
 
   private T getInstance() {
-    return supplier.get();
+    return (T) new Object();
   }
 
-  public T get(String primaryKey) throws SQLException {
-    String query = "SELECT * FROM " + tableName;
-    query += " WHERE " + columnNames.get(0);
-    query += " = ?";
-    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(query);
-    prepStmt.setString(1, primaryKey);
-    ResultSet rset = prepStmt.executeQuery();
-    T newTemp = getInstance();
-    if (rset.next()) {
-      for (int i = 1; i <= numAttributes; i++) {
-        newTemp.setAttribute(i, rset.getString(columnNames.get(i - 1)));
-      }
-    }
-    prepStmt.close();
-    return newTemp;
+  public T get(String primaryKey) {
+    return map.get(primaryKey);
   }
 
-  public List<T> getAll() throws SQLException {
-    ArrayList<T> all = new ArrayList<>();
-    Statement stmt = connectionHandler.getConnection().createStatement();
-    String query = "SELECT * FROM " + tableName;
-    ResultSet rset = stmt.executeQuery(query);
-    while (rset.next()) {
-      T newTemp = getInstance();
-      for (int i = 1; i <= numAttributes; i++) {
-        newTemp.setAttribute(i, rset.getString(columnNames.get(i - 1)));
-      }
-      all.add(newTemp);
-    }
-    stmt.close();
-    return all;
+  public Map<String, T> getAll() {
+    return map;
   }
 
-  public void add(T newTableObject) throws SQLException {
-    String updateStatement = "INSERT INTO " + tableName + " VALUES(";
-    for (int i = 1; i < numAttributes; i++) {
-      updateStatement += "?,";
-    }
-    updateStatement += "?)";
-    PreparedStatement prepStmt =
-        connectionHandler.getConnection().prepareStatement(updateStatement);
-    if (!keyChecker.validID(newTableObject, newTableObject.getAttribute(1))) {
-      for (int i = 1; i <= numAttributes; i++) {
-        prepStmt.setString(i, newTableObject.getAttribute(i));
-      }
-      prepStmt.executeUpdate();
-    }
-    prepStmt.close();
+
+    //TODO fix
+
+    public void add(T newTableObject) {
+    map.put(newTableObject.getAttribute(1), newTableObject);
+    HashMap<String, T> data = new HashMap<>();
+    data.put(newTableObject.getAttribute(1), newTableObject);
+    //    ref.child(newTableObject.getAttribute(1)).setValueAsync(data);
+    ref.setValueAsync(data);
   }
 
-  public void delete(String primaryKey) throws SQLException {
-    String query = "DELETE FROM " + tableName + " WHERE " + columnNames.get(0) + " = ?";
-    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(query);
-    prepStmt.setString(1, primaryKey);
-    prepStmt.executeUpdate();
-    prepStmt.close();
+
+    //TODO encode PK
+    public void delete(String primaryKey) {
+    ref.child(primaryKey).setValueAsync(null);
   }
 
-  public void updateAttribute(String primaryKey, int columnNum, String newValue)
-      throws SQLException {
-    // alter T within tableList with nodeID/PrimaryKey and change value in columnNum to NewValue
-    // Set the statement String to deal with the table handling T Objects
-    T instance = getInstance();
-    String statement = "UPDATE " + tableName + " SET " + columnNames.get(0) + " = ?,";
-    for (int i = 2; i < numAttributes - 1; i++) {
-      statement += columnNames.get(i - 1) + " = ?,";
-    }
-    statement += columnNames.get(numAttributes - 1) + " = ?";
-    statement += "WHERE " + columnNames.get(0) + " = ?";
 
-    // Iterate through the ? in the Statements and replace with values
-    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(statement);
-    T temp = get(primaryKey);
-    for (int i = 1; i < numAttributes; i++) {
-      prepStmt.setString(i, temp.getAttribute(i));
-    }
-    prepStmt.setString(numAttributes, primaryKey);
-    prepStmt.executeUpdate();
+  //TODO fix
+  public void update(T type) {
+    ref.child(type.getAttribute(1)).setValueAsync(type);
   }
 
-  public void update(T type) throws SQLException {
-
-    T instance = getInstance();
-    String statement = "UPDATE " + tableName + " SET " + columnNames.get(1) + " = ?,";
-    for (int i = 2; i < numAttributes - 1; i++) {
-      statement += columnNames.get(i) + " = ?,";
+    private static String encodeForFirebaseKey(String s) {
+        return s
+                .replace("_", "____")
+                .replace(".", "___P")
+                .replace("$", "___D")
+                .replace("#", "___H")
+                .replace("[", "___O")
+                .replace("]", "___C")
+                .replace("/", "___S")
+                ;
     }
-    statement += columnNames.get(numAttributes - 1) + " = ?";
-    statement += " WHERE " + columnNames.get(0) + " = ?";
 
-    // Iterate through the ? in the Statements and replace with values
-    PreparedStatement prepStmt = connectionHandler.getConnection().prepareStatement(statement);
-    T temp = get(type.getAttribute(1));
-    for (int i = 1; i < numAttributes; i++) {
-      prepStmt.setString(i, type.getAttribute(i + 1));
+    private static String decodeFirebaseKey(String s) {
+        return s
+                .replace("____","_")
+                .replace("___P",".")
+                .replace("___D","$")
+                .replace("___H","#")
+                .replace("___O","[")
+                .replace("___C","]")
+                .replace("___S","/")
+                ;
     }
-    prepStmt.setString(numAttributes, type.getAttribute(1));
-    prepStmt.executeUpdate();
-  }
 }

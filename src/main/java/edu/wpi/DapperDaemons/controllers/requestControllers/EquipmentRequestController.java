@@ -10,9 +10,8 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.map.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -60,7 +59,9 @@ public class EquipmentRequestController extends ParentController {
 
     try { // Removed second field (filename) since everything is
       // loaded on startup
-      equipmentRequestsTable.getItems().addAll(medicalEquipmentRequestDAO.getAll());
+      equipmentRequestsTable
+          .getItems()
+          .addAll(new ArrayList(medicalEquipmentRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, table was unable to be created\n");
@@ -72,11 +73,7 @@ public class EquipmentRequestController extends ParentController {
   public boolean addItem(MedicalEquipmentRequest request) {
     boolean hadClearance = false;
 
-    try {
-      hadClearance = medicalEquipmentRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = medicalEquipmentRequestDAO.add(request);
     if (hadClearance) {
       equipmentRequestsTable.getItems().add(request);
     }
@@ -110,14 +107,10 @@ public class EquipmentRequestController extends ParentController {
       boolean equipmentExists = true;
 
       // get all equipment of that type.
-      try {
-        equipments =
-            (ArrayList<MedicalEquipment>)
-                medicalEquipmentDAO.filter(
-                    medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue());
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      equipments =
+          (ArrayList<MedicalEquipment>)
+              medicalEquipmentDAO.filter(
+                  medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue());
 
       if (medicalEquipmentDAO
               .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
@@ -154,11 +147,7 @@ public class EquipmentRequestController extends ParentController {
         cleanStatus = equipment.getCleanStatus();
         roomID = roomBox.getValue();
         int numCorrectLocations = 0;
-        try {
-          numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
+        numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
         if (numCorrectLocations >= 1) {
 
           boolean hadClearance =

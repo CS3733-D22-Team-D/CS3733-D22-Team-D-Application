@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "keen-vial-347203",
+  "private_key_id": "c1fa8f1e5bc950b71f4f85a63379295e48d1aacd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDM9vRQiu0nBAIa\nbNNEH+HSHLava5DjJjK5gcZvopxdIaiz+wW0KeEmV7LYxU3pkoNNHlEu+D72F9h1\np8FFAJ45fBl2Uj8BrqpfqASy2fU7eFTM8r++VKs9IJFtH8hx6JTlFRVu4J588ken\nL7L/nl4cf9Q67ufHZ+UukmBvyfkjWDZ7Mnz1pAe/R68BVNAzUuP7sxey8v81VTun\nc+tJIUJOsCdehnBsWL+Y7/ErHqEkbpADlsceqOhT651jY+7T8J4CZtSTfGj3EHnr\n6qr//AS+M3XeXYh+V60+zlbaTgvzXFcHCsXrAQ6D9EeusDEr2BkIp6CYkXqpECT8\nE9Qi0rT3AgMBAAECggEAY8YhdyWxvQjb9z4bd7GnbW8R1QHhRVneXmRYkxZO1J0i\ncP6Ur7elRNNzGceuHjH2na9Q6LLqf0RrWBbB49Ohsi0BfhIaXrjGcgspwmCMWpdA\nfIX8peu0ceytLjhHDIAiHwPs640HSZ5tF+sF0R4oBOqLBucuR+kA7PNPY4unrjaP\nRisBB2mQSnY2lqJCnppXJNU+HSW0LSHhpJ8P6yrbCsc9J8g1StSO8zC2nuY7pLmQ\nVC6cJCCz9JGOgAW6EZSewS4flvXUhQTAdkF2dz8DzuQrg9gtE6Tz3BfwVBSLYOR2\nYxURXIujGXTKaIIQ63vmN2rLmiWE7Vws3M3WTbYflQKBgQDmSnWvHBdRpNTRQ5E7\n+gRBpWoFKxxSmIjk5FDPeoM3uZpIxbMWAo7FfelEkQL7pL5evExGPstaeWj+TWU6\nf5jbibvueOl0Sf0QGET40HZWvCKwZaTVkrSvUsASImL7RbiWL8ygXJGe3eM41HrQ\nV6NjZOoAZpaQFQjNWq+bgmVCdQKBgQDj2LDm+qI7NWs49NdMC4crHMZuRmiez88l\nL+tABxI3tv2QYetdoXfCnldC4xFFQP3XNMFKb0ieom9vNh992FHFTjszSlH2Pv6H\nqFcDuGthD/fR8gmfQgsxfq8hlU5Hn0f7woxOJ7nzM2Xr8phTBLkho10NJc1ULlNz\n0gvPmzZUOwKBgCGe/U9zanQg/HEQzENVXQm4fKIEiT4Fxvaj3qhr2nxoPH4jXuH3\nvaBXoZbBFQ5oHuL12qzmvgmXcBywb/b6afajRSyrummf47JV2Lv6s0w2a1oVfNsx\nb++oxSHgo1LL+wbyM4219gybmHDTlJqWMORx9zfXwmOGrqJMexbZEq+BAoGAO2QR\ngLPWM+7Ruy//KuBaZH+ErdwGi1cJ3NynyrHNKt61K7yKeIaNTBqwDkxYBSBSypUC\nyV9Go6sdtvR5svj/H5orzkvSH4j+GehkfiDFRLC/3Wbk4TF673ThO7TKidrYDaUB\no6GxU9aS+7TpxcIWa9FEgRfYdNf6gtc+ougHel8CgYEA4AhYCF167SS2TP+x+0jf\n/idyGhhvnTnsyl9LNUzwQGYMqsv2+SQJFK7IjaI06WoLDHY82yXm3DWHHADiRyiK\neAiWr2o6j0MYUf8FgMkmfI9QFpdKIaA1sb+PkZr5AOLIbg9YIPTFaZ767vrOVkWj\ndzeDdkAdoX71av2CRFYEJjg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bwh-application@keen-vial-347203.iam.gserviceaccount.com",
+  "client_id": "105795414846222010965",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bwh-application%40keen-vial-347203.iam.gserviceaccount.com"
+}

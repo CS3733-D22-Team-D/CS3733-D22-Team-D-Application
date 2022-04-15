@@ -1,32 +1,15 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.util.List;
 
 public class Patient extends TableObject {
 
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 2, col = 0)
-  @TableHandler(table = 1, col = 0)
-  @TableHandler(table = 0, col = 1)
   private String firstName;
-
-  @TableHandler(table = 2, col = 1)
-  @TableHandler(table = 1, col = 1)
-  @TableHandler(table = 0, col = 2)
   private String lastName;
-
-  @TableHandler(table = 2, col = 2)
-  @TableHandler(table = 0, col = 3)
   private int dateOfBirth;
-
-  @TableHandler(table = 2, col = 4)
-  @TableHandler(table = 0, col = 4)
   private BloodType bloodType;
-
-  @TableHandler(table = 2, col = 3)
-  @TableHandler(table = 0, col = 5)
   private String locationID;
 
   public enum BloodType {
@@ -59,7 +42,7 @@ public class Patient extends TableObject {
 
   // TableObject Methods
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTS(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(20) DEFAULT 'John',"
         + "lastname varchar(20) DEFAULT 'Doe',"
@@ -69,7 +52,7 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTS";
   }
 
@@ -120,10 +103,44 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Patient();
+  public TableObject newInstance(List<String> l) {
+    Patient temp = new Patient();
+    //    System.out.println("Patient size " + l.size());
+    for (int i = 0; i < l.size(); i++) {
+      System.out.println(i);
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = Integer.parseInt(newAttribute);
+        break;
+      case "bloodType":
+        bloodType = BloodType.valueOf(newAttribute);
+        break;
+      case "locationID":
+        locationID = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
   // getters and setters
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -132,6 +149,9 @@ public class Patient extends TableObject {
     this.nodeID = nodeID;
   }
 
+  @TableHandler(table = 1, col = 0)
+  @TableHandler(table = 2, col = 0)
+  @TableHandler(table = 0, col = 1)
   public String getFirstName() {
     return firstName;
   }
@@ -140,6 +160,9 @@ public class Patient extends TableObject {
     this.firstName = firstName;
   }
 
+  @TableHandler(table = 1, col = 1)
+  @TableHandler(table = 2, col = 1)
+  @TableHandler(table = 0, col = 2)
   public String getLastName() {
     return lastName;
   }
@@ -148,6 +171,8 @@ public class Patient extends TableObject {
     this.lastName = lastName;
   }
 
+  @TableHandler(table = 2, col = 2)
+  @TableHandler(table = 0, col = 3)
   public int getDateOfBirth() {
     return dateOfBirth;
   }
@@ -156,6 +181,8 @@ public class Patient extends TableObject {
     this.dateOfBirth = dateOfBirth;
   }
 
+  @TableHandler(table = 2, col = 4)
+  @TableHandler(table = 0, col = 4)
   public BloodType getBloodType() {
     return bloodType;
   }
@@ -164,6 +191,8 @@ public class Patient extends TableObject {
     this.bloodType = bloodType;
   }
 
+  @TableHandler(table = 2, col = 3)
+  @TableHandler(table = 0, col = 5)
   public String getLocationID() {
     return locationID;
   }

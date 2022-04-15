@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.backend;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class DAOPouch {
   private static DAO<LabRequest> labRequestDAO;
@@ -21,7 +20,7 @@ public class DAOPouch {
 
   private DAOPouch() {}
 
-  public static void init() throws SQLException, IOException {
+  public static void init() throws IOException {
     labRequestDAO = new DAO<>(new LabRequest());
     mealDeliveryRequestDAO = new DAO<>(new MealDeliveryRequest());
     medicalEquipmentRequestDAO = new DAO<>(new MedicalEquipmentRequest());
@@ -83,4 +82,34 @@ public class DAOPouch {
   public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
   }
+
+  //  public static DAO getDAO(TableObject type) {
+  //    String tableName = type.getTableName();
+  //    if (tableName.equals("")) {
+  //      return null;
+  //    } else if (tableName.equals("LABREQUESTS")) {
+  //      return labRequestDAO;
+  //    } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
+  //      return mealDeliveryRequestDAO;
+  //    } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("MEDICINEREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("SANITATIONREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("ACCOUNTS")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("EMPLOYEES")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("LOCATIONS")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("MEDICALEQUIPMENT")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("PATIENTS")) {
+  //      return patientDAO;
+  //    }
+  //    return null;
+  //  }
 }

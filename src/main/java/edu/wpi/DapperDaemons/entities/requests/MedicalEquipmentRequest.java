@@ -2,13 +2,14 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MedicalEquipmentRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEDICALEQUIPMENTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -20,7 +21,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEDICALEQUIPMENTREQUESTS";
   }
 
@@ -82,16 +83,54 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MedicalEquipmentRequest();
-  }
-
-  @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Medical Equipment Request";
   }
 
   @Override
+  public TableObject newInstance(List<String> l) {
+    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        equipmentID = newAttribute;
+        break;
+      case "labType":
+        equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
+        break;
+      case "status":
+        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        break;
+
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -102,28 +141,13 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String equipmentID;
-
-  @TableHandler(table = 0, col = 6)
   private MedicalEquipment.EquipmentType equipmentType;
-
-  @TableHandler(table = 0, col = 7)
   private MedicalEquipment.CleanStatus cleanStatus;
 
   // CONSTRUCTORS
@@ -150,7 +174,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   public MedicalEquipmentRequest() {}
 
   // SETTERS AND GETTERS
-
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -163,6 +187,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -171,6 +196,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -179,6 +205,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -187,6 +214,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getEquipmentID() {
     return equipmentID;
   }
@@ -195,6 +223,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentID = equipmentID;
   }
 
+  @TableHandler(table = 0, col = 6)
   public MedicalEquipment.EquipmentType getEquipmentType() {
     return equipmentType;
   }
@@ -203,6 +232,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentType = equipmentType;
   }
 
+  @TableHandler(table = 0, col = 7)
   public MedicalEquipment.CleanStatus getCleanStatus() {
     return cleanStatus;
   }

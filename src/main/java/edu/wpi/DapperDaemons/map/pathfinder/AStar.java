@@ -18,8 +18,8 @@ public class AStar {
    */
   public AStar() {
     try {
-      locations = DAOPouch.getLocationDAO().getAll();
-      nodeConnections = DAOPouch.getLocationNodeDAO().getAll();
+      locations = new ArrayList(DAOPouch.getLocationDAO().getAll().values());
+      nodeConnections = new ArrayList(DAOPouch.getLocationNodeDAO().getAll().values());
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("The connection failed to locations or nodeConnections");
@@ -107,12 +107,16 @@ public class AStar {
     List<String> walkableNode = new ArrayList<>();
     // List of walkable connected nodes as strings using their nodeID
     connected =
-        DAOPouch.getLocationNodeDAO().filter(nodeConnections, 3, currentLocation.getLocationName());
+        new ArrayList(
+            DAOPouch.getLocationNodeDAO()
+                .filter(nodeConnections, 3, currentLocation.getLocationName())
+                .values());
     List<Boolean> flipFlop = new ArrayList<>(Arrays.asList(new Boolean[connected.size()]));
     Collections.fill(flipFlop, Boolean.FALSE); // Helps the program decide which column to look in
     for (LocationNodeConnections connection :
         DAOPouch.getLocationNodeDAO()
-            .filter(nodeConnections, 2, currentLocation.getLocationName())) {
+            .filter(nodeConnections, 2, currentLocation.getLocationName())
+            .values()) {
       flipFlop.add(Boolean.TRUE); // Switches the column to the second one to look in
       connected.add(connection);
     }

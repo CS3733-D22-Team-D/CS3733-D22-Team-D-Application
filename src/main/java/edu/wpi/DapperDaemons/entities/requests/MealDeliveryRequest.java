@@ -1,8 +1,9 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MealDeliveryRequest extends TableObject implements Request {
 
@@ -15,7 +16,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -29,7 +30,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEALDELIVERYREQUESTS";
   }
 
@@ -100,18 +101,59 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MealDeliveryRequest();
-  }
-
-  @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Meal Delivery Request";
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    MealDeliveryRequest temp = new MealDeliveryRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "entree":
+        entree = newAttribute;
+        break;
+      case "side":
+        side = newAttribute;
+        break;
+      case "drink":
+        drink = newAttribute;
+      case "dessert":
+        dessert = newAttribute;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   @Override
@@ -121,34 +163,15 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // ATTRIBUTES
 
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private Priority priority;
-
-  @TableHandler(table = 0, col = 2)
   private String roomID;
-
-  @TableHandler(table = 0, col = 3)
   private String requesterID;
-
-  @TableHandler(table = 0, col = 4)
   private String assigneeID;
-
-  @TableHandler(table = 0, col = 5)
   private String patientID;
-
-  @TableHandler(table = 0, col = 6)
   private String entree;
-
-  @TableHandler(table = 0, col = 7)
   private String side;
-
-  @TableHandler(table = 0, col = 8)
   private String drink;
-
-  @TableHandler(table = 0, col = 9)
   private String dessert;
 
   // CONSTRUCTORS
@@ -180,6 +203,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
 
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -192,6 +216,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -200,6 +225,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -208,6 +234,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -216,6 +243,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public String getPatientID() {
     return patientID;
   }
@@ -224,6 +252,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
+  @TableHandler(table = 0, col = 6)
   public String getEntree() {
     return entree;
   }
@@ -232,6 +261,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.entree = entree;
   }
 
+  @TableHandler(table = 0, col = 7)
   public String getSide() {
     return side;
   }
@@ -240,6 +270,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
   }
 
+  @TableHandler(table = 0, col = 8)
   public String getDrink() {
     return drink;
   }
@@ -248,6 +279,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.drink = drink;
   }
 
+  @TableHandler(table = 0, col = 9)
   public String getDessert() {
     return dessert;
   }

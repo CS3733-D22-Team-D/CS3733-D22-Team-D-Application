@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
-import edu.wpi.DapperDaemons.map.tables.TableHandler;
+import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.util.List;
 
 public class Employee extends TableObject {
 
@@ -15,7 +16,7 @@ public class Employee extends TableObject {
 
   // TABLEOBJECT METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE EMPLOYEES(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(60),"
@@ -26,7 +27,7 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "EMPLOYEES";
   }
 
@@ -78,27 +79,46 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Employee();
+  public TableObject newInstance(List<String> l) {
+    Employee temp = new Employee();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = newAttribute;
+        break;
+      case "employeeType":
+        employeeType = EmployeeType.valueOf(newAttribute);
+        break;
+      case "securityClearance":
+        securityClearance = Integer.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   // ATTRIBUTES
-  @TableHandler(table = 0, col = 0)
   private String nodeID;
-
-  @TableHandler(table = 0, col = 1)
   private String firstName;
-
-  @TableHandler(table = 0, col = 2)
   private String lastName;
-
-  @TableHandler(table = 0, col = 3)
   private String dateOfBirth;
-
-  @TableHandler(table = 0, col = 4)
   private EmployeeType employeeType;
-
-  @TableHandler(table = 0, col = 5)
   private int securityClearance;
 
   // CONSTRUCTORS
@@ -121,6 +141,7 @@ public class Employee extends TableObject {
 
   // SETTERS AND GETTERS
 
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -129,6 +150,7 @@ public class Employee extends TableObject {
     this.nodeID = nodeID;
   }
 
+  @TableHandler(table = 0, col = 1)
   public String getFirstName() {
     return firstName;
   }
@@ -137,6 +159,7 @@ public class Employee extends TableObject {
     this.firstName = firstName;
   }
 
+  @TableHandler(table = 0, col = 2)
   public String getLastName() {
     return lastName;
   }
@@ -145,6 +168,7 @@ public class Employee extends TableObject {
     this.lastName = lastName;
   }
 
+  @TableHandler(table = 0, col = 3)
   public String getDateOfBirth() {
     return dateOfBirth;
   }
@@ -153,6 +177,7 @@ public class Employee extends TableObject {
     this.dateOfBirth = dateOfBirth;
   }
 
+  @TableHandler(table = 0, col = 4)
   public EmployeeType getEmployeeType() {
     return employeeType;
   }
@@ -161,6 +186,7 @@ public class Employee extends TableObject {
     this.employeeType = employeeType;
   }
 
+  @TableHandler(table = 0, col = 5)
   public int getSecurityClearance() {
     return securityClearance;
   }
