@@ -15,4 +15,6 @@ public abstract class TableObject {
   public abstract void setAttribute(int columnNumber, String newAttribute);
 
   public abstract TableObject newInstance(List<String> l);
+
+  public abstract void setAttribute(String attribute, String newAttribute);
 }

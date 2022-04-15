@@ -82,9 +82,35 @@ public class Employee extends TableObject {
   public TableObject newInstance(List<String> l) {
     Employee temp = new Employee();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = newAttribute;
+        break;
+      case "employeeType":
+        employeeType = EmployeeType.valueOf(newAttribute);
+        break;
+      case "securityClearance":
+        securityClearance = Integer.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   // ATTRIBUTES

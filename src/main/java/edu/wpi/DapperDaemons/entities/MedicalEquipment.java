@@ -112,9 +112,35 @@ public class MedicalEquipment extends TableObject {
   public TableObject newInstance(List<String> l) {
     MedicalEquipment temp = new MedicalEquipment();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "equipmentName":
+        equipmentName = newAttribute;
+        break;
+      case "equipmentType":
+        equipmentType = EquipmentType.valueOf(newAttribute);
+        break;
+      case "serialNumber":
+        serialNumber = newAttribute;
+        break;
+      case "cleanStatus":
+        cleanStatus = CleanStatus.valueOf(newAttribute);
+        break;
+      case "locationID":
+        locationID = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   @TableHandler(table = 2, col = 0)

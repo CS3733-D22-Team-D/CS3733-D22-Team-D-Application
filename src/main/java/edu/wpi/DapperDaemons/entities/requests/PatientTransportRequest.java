@@ -95,9 +95,41 @@ public class PatientTransportRequest extends TableObject implements Request {
   public TableObject newInstance(List<String> l) {
     PatientTransportRequest temp = new PatientTransportRequest();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "nextRoomID":
+        nextRoomID = newAttribute;
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   @Override

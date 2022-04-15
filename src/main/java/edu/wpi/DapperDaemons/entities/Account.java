@@ -68,14 +68,19 @@ public class Account extends TableObject {
     switch (columnNumber) {
       case 1:
         this.username = newAttribute;
+        break;
       case 2:
         this.employeeID = newAttribute;
+        break;
       case 3:
         this.password = newAttribute;
+        break;
       case 4:
         this.phoneNumber = newAttribute;
+        break;
       case 5:
         this.settingsFile = newAttribute;
+        break;
       default:
         break;
     }
@@ -85,9 +90,32 @@ public class Account extends TableObject {
   public TableObject newInstance(List<String> l) {
     Account temp = new Account();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "username":
+        username = newAttribute;
+        break;
+      case "employeeID":
+        employeeID = newAttribute;
+        break;
+      case "password":
+        password = newAttribute;
+        break;
+      case "phoneNumber":
+        phoneNumber = newAttribute;
+        break;
+      case "settingsFile":
+        settingsFile = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public boolean checkPassword(String password) throws NoSuchAlgorithmException {

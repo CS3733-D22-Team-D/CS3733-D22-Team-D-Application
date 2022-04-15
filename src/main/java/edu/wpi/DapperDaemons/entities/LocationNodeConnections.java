@@ -96,9 +96,26 @@ public class LocationNodeConnections extends TableObject {
   public TableObject newInstance(List<String> l) {
     LocationNodeConnections temp = new LocationNodeConnections();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "startNodeID":
+        startNodeID = newAttribute;
+        break;
+      case "connectionOne":
+        connectionOne = newAttribute;
+        break;
+      case "connectionTwo":
+        connectionTwo = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public boolean equals(Location l) {

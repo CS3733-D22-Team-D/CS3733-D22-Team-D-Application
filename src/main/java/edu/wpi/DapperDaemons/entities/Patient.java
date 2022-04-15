@@ -105,10 +105,38 @@ public class Patient extends TableObject {
   @Override
   public TableObject newInstance(List<String> l) {
     Patient temp = new Patient();
+    //    System.out.println("Patient size " + l.size());
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      System.out.println(i);
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = Integer.parseInt(newAttribute);
+        break;
+      case "bloodType":
+        bloodType = BloodType.valueOf(newAttribute);
+        break;
+      case "locationID":
+        locationID = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   // getters and setters

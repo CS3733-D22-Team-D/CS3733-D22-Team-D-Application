@@ -18,38 +18,42 @@ public class ORM<T extends TableObject> {
     this.type = type;
     tableName = type.getTableName();
     ref = firebase.getReference().child(type.getTableName());
-    new Thread(
-            () -> {
-              ref.addValueEventListener(
-                  new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                      System.out.println(tableName + " data updating");
-                      //            for (DataSnapshot ignored : snapshot.getChildren()) {
-                      //                      List<String> values = new ArrayList((Collection)
-                      // snapshot.getValue());
-                      //                      for (String attribute : values) {
-                      //                        System.out.println(attribute);
-                      //                      }
-                      //                      Account post = snapshot.getValue(Account.class);
-                      //                      map.put(post.getAttribute(1), (T) post);
-
-                      ((HashMap<String, List<String>>) snapshot.getValue())
-                          .forEach(
+    ref.addValueEventListener(
+        new ValueEventListener() {
+          @Override
+          public synchronized void onDataChange(DataSnapshot snapshot) {
+            System.out.println(tableName + " data updating");
+            for (DataSnapshot ignored : snapshot.getChildren()) {
+              new Thread(
+                      () -> {
+                        try {
+                          ((HashMap<String, List<String>>) snapshot.getValue())
+                              .forEach(
+                                  (k, v) -> {
+                                    map.put(k, (T) type.newInstance(v));
+                                  });
+                        } catch (ClassCastException e) {
+                          HashMap<String, Object> res =
+                              (HashMap<String, Object>) snapshot.getValue();
+                          ArrayList<String> attributes = new ArrayList<>();
+                          T temp = (T) type.newInstance(new ArrayList<>());
+                          res.forEach(
                               (k, v) -> {
-                                map.put(k, (T) type.newInstance(v));
+                                //                                attributes.add(v.toString());
+                                temp.setAttribute(k, String.valueOf(v));
                               });
-                      System.out.println(snapshot.toString());
-                      //            }
-                    }
+                          map.put(attributes.get(0), temp);
+                        }
+                      })
+                  .start();
+            }
+          }
 
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                      System.out.println("There was an error in the event listener");
-                    }
-                  });
-            })
-        .start();
+          @Override
+          public void onCancelled(DatabaseError error) {
+            System.out.println("There was an error in the event listener");
+          }
+        });
   }
 
   private T getInstance() {

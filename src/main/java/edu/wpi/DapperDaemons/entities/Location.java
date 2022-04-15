@@ -196,10 +196,45 @@ public class Location extends TableObject {
   @Override
   public TableObject newInstance(List<String> l) {
     Location temp = new Location();
+    //    System.out.println("Size in location new instance" + l.size());
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      //      System.out.println(temp);
+      //      System.out.println(l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "xcoord":
+        xcoord = Integer.parseInt(newAttribute);
+        break;
+      case "ycoord":
+        ycoord = Integer.parseInt(newAttribute);
+        break;
+      case "floor":
+        floor = newAttribute;
+        break;
+      case "building":
+        building = newAttribute;
+        break;
+      case "nodeType":
+        nodeType = newAttribute;
+        break;
+      case "longName":
+        longName = newAttribute;
+        break;
+      case "shortName":
+        shortName = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public String toString() {
