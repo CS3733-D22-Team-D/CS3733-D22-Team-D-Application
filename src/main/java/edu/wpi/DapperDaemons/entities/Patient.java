@@ -42,7 +42,7 @@ public class Patient extends TableObject {
 
   // TableObject Methods
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTS(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(20) DEFAULT 'John',"
         + "lastname varchar(20) DEFAULT 'Doe',"
@@ -52,7 +52,7 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTS";
   }
 

@@ -38,7 +38,7 @@ public class MedicalEquipment extends TableObject {
   }
   // TableObject Methods
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEDICALEQUIPMENT(nodeid varchar(40) PRIMARY KEY,"
         + " equipmentname varchar(20),"
         + "equipmenttype varchar(20),"
@@ -48,7 +48,7 @@ public class MedicalEquipment extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEDICALEQUIPMENT";
   }
 

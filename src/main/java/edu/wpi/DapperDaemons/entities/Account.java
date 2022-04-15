@@ -31,7 +31,7 @@ public class Account extends TableObject {
   public Account() {}
 
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,"
         + "employeeID varchar(20) UNIQUE,"
         + "password varchar(255),"
@@ -40,7 +40,7 @@ public class Account extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "ACCOUNTS";
   }
 

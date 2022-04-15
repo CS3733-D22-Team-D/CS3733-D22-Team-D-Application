@@ -16,7 +16,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -30,7 +30,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEALDELIVERYREQUESTS";
   }
 
@@ -101,7 +101,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Meal Delivery Request";
   }
 

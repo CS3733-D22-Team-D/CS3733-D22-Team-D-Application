@@ -9,7 +9,7 @@ import java.util.List;
 public class MedicalEquipmentRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEDICALEQUIPMENTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -21,7 +21,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEDICALEQUIPMENTREQUESTS";
   }
 
@@ -83,7 +83,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Medical Equipment Request";
   }
 

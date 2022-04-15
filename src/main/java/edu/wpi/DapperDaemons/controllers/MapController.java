@@ -177,7 +177,7 @@ public class MapController extends UIController implements Initializable {
       RequestHandler.getAllRequests()
           .forEach(
               r -> {
-                if (!allReqNames.contains(r.getRequestType())) allReqNames.add(r.getRequestType());
+                if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
               });
       searchBar.getItems().addAll(allReqNames);
     } catch (Exception e) {

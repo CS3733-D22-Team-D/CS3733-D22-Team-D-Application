@@ -6,7 +6,6 @@ import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.*;
 import java.util.*;
 
 public class csvLoader {
@@ -49,14 +48,33 @@ public class csvLoader {
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
     entries.remove(0);
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
 
     DatabaseReference ref = firebase.getReference();
-    ref = ref.child(type.getTableName());
-    Map<String, List<String>> map = new HashMap<>();
+    ref = ref.child(type.tableName());
+    Map<String, Map<String, String>> map = new HashMap<>();
+    Map<String, String> data;
     for (String[] line : entries) {
-      map.put(line[0], List.of(line));
+      data = new HashMap<>();
+      for (Integer i = 0; i < line.length; i++) {
+        data.put(i.toString(), encodeForFirebaseKey(line[i]));
+      }
+      map.put(line[0], data);
     }
     ref.setValueAsync(map);
   }
+
+  private static String encodeForFirebaseKey(String s) {
+    return s
+            .replace("_", "____")
+            .replace(".", "___P")
+            .replace("$", "___D")
+            .replace("#", "___H")
+            .replace("[", "___O")
+            .replace("]", "___C")
+            .replace("/", "___S")
+            ;
+  }
 }
+
+

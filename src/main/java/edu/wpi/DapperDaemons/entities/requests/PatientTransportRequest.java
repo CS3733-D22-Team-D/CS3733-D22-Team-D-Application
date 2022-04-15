@@ -16,7 +16,7 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60) ,"
@@ -28,7 +28,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTTRANSPORTREQUESTS";
   }
 
@@ -133,7 +133,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Patient Transport Request";
   }
 

@@ -24,14 +24,14 @@ public class LocationNodeConnections extends TableObject {
     return 8;
   }
 
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE LOCATIONNODECONNECTIONS(nodeID varchar(60) PRIMARY KEY,"
         + "connectionOne varchar(60) DEFAULT '',"
         + "connectionTwo varchar(60) DEFAULT '')";
   }
 
-  public String getTableName() {
+  public String tableName() {
     return "LOCATIONNODECONNECTIONS";
   }
 

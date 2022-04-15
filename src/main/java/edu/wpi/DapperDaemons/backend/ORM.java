@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ORM<T extends TableObject> {
   String tableName;
@@ -16,8 +17,8 @@ public class ORM<T extends TableObject> {
 
   public ORM(T type) {
     this.type = type;
-    tableName = type.getTableName();
-    ref = firebase.getReference().child(type.getTableName());
+    tableName = type.tableName();
+    ref = firebase.getReference().child(type.tableName());
     ref.addValueEventListener(
         new ValueEventListener() {
           @Override
@@ -30,7 +31,9 @@ public class ORM<T extends TableObject> {
                           ((HashMap<String, List<String>>) snapshot.getValue())
                               .forEach(
                                   (k, v) -> {
-                                    map.put(k, (T) type.newInstance(v));
+                                    map.put(decodeFirebaseKey(k), (T) type.newInstance(v.stream().map(e -> {
+                                        return decodeFirebaseKey(e);
+                                    }).collect(Collectors.toList())));
                                   });
                         } catch (ClassCastException e) {
                           HashMap<String, Object> res =
@@ -39,7 +42,11 @@ public class ORM<T extends TableObject> {
                           T temp = (T) type.newInstance(new ArrayList<>());
                           res.forEach(
                               (k, v) -> {
-                                //                                attributes.add(v.toString());
+                                if (k.equals("nodeID")) {
+                                  attributes.add(0, v.toString());
+                                } else {
+                                  attributes.add(v.toString());
+                                }
                                 temp.setAttribute(k, String.valueOf(v));
                               });
                           map.put(attributes.get(0), temp);
@@ -68,16 +75,50 @@ public class ORM<T extends TableObject> {
     return map;
   }
 
-  public void add(T newTableObject) {
+
+    //TODO fix
+
+    public void add(T newTableObject) {
     map.put(newTableObject.getAttribute(1), newTableObject);
-    ref.setValueAsync(newTableObject);
+    HashMap<String, T> data = new HashMap<>();
+    data.put(newTableObject.getAttribute(1), newTableObject);
+    //    ref.child(newTableObject.getAttribute(1)).setValueAsync(data);
+    ref.setValueAsync(data);
   }
 
-  public void delete(String primaryKey) {
+
+    //TODO encode PK
+    public void delete(String primaryKey) {
     ref.child(primaryKey).setValueAsync(null);
   }
 
+
+  //TODO fix
   public void update(T type) {
-    ref.setValueAsync(type);
+    ref.child(type.getAttribute(1)).setValueAsync(type);
   }
+
+    private static String encodeForFirebaseKey(String s) {
+        return s
+                .replace("_", "____")
+                .replace(".", "___P")
+                .replace("$", "___D")
+                .replace("#", "___H")
+                .replace("[", "___O")
+                .replace("]", "___C")
+                .replace("/", "___S")
+                ;
+    }
+
+    private static String decodeFirebaseKey(String s) {
+        return s
+                .replace("____","_")
+                .replace("___P",".")
+                .replace("___D","$")
+                .replace("___H","#")
+                .replace("___O","[")
+                .replace("___C","]")
+                .replace("___S","/")
+                ;
+    }
 }

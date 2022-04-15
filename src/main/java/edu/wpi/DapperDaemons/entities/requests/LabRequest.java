@@ -26,7 +26,7 @@ public class LabRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
 
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE LABREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(20) ,"
@@ -47,7 +47,7 @@ public class LabRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "LABREQUESTS";
   }
 
@@ -152,7 +152,7 @@ public class LabRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Lab Request";
   }
 

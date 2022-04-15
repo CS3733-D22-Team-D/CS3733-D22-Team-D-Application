@@ -42,7 +42,7 @@ public class Location extends TableObject {
     return 8;
   }
 
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE LOCATIONS(nodeid varchar(20) PRIMARY KEY,"
         + "xcoord varchar(20) DEFAULT '-1',"
@@ -54,7 +54,7 @@ public class Location extends TableObject {
         + "shortname varchar(255) DEFAULT 'r')";
   }
 
-  public String getTableName() {
+  public String tableName() {
     return "LOCATIONS";
   }
 

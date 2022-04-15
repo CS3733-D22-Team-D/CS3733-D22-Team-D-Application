@@ -42,7 +42,7 @@ public class RequestHandler {
     List<Request> allReq = getAllRequests();
     LinkedList<Request> searchReq = new LinkedList<>();
     for (int i = 0; i < allReq.size(); i++) {
-      if (allReq.get(i).getRequestType().equals(reqType)) {
+      if (allReq.get(i).requestType().equals(reqType)) {
         searchReq.add(allReq.get(i));
       }
     }

@@ -6,9 +6,9 @@ public abstract class TableObject {
 
   public TableObject() {}
 
-  public abstract String getTableInit();
+  public abstract String tableInit();
 
-  public abstract String getTableName();
+  public abstract String tableName();
 
   public abstract String getAttribute(int columnNumber);
 

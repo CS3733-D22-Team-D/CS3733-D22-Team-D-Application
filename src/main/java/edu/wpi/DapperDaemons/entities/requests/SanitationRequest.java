@@ -9,7 +9,7 @@ public class SanitationRequest extends TableObject implements Request {
 
   // TABLEOBJECT METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE SANITATIONREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -20,7 +20,7 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "SANITATIONREQUESTS";
   }
 
@@ -116,7 +116,7 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Sanitation Request";
   }
 

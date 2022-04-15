@@ -16,7 +16,7 @@ public class Employee extends TableObject {
 
   // TABLEOBJECT METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE EMPLOYEES(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(60),"
@@ -27,7 +27,7 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "EMPLOYEES";
   }
 
