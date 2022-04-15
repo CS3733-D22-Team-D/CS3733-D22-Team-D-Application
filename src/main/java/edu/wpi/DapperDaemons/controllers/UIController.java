@@ -223,12 +223,6 @@ public abstract class UIController extends AppController {
   }
 
   @FXML
-  public void logout() throws IOException {
-    switchScene("login.fxml", 575, 575);
-    SecurityController.setUser(null);
-  }
-
-  @FXML
   public void openUserSettings() throws IOException {
     switchScene("userSettings.fxml", 941, 592);
   }
