@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 public class SanitationController extends UIController {
 
@@ -26,10 +24,6 @@ public class SanitationController extends UIController {
 
   /* Table Helper */
   private TableHelper<SanitationRequest> helper;
-
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
 
   /* Table Columns */
   @FXML private TableColumn<PatientTransportRequest, String> ReqID;
@@ -51,13 +45,9 @@ public class SanitationController extends UIController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
-
     onClearClicked();
-    SanitationServiceInitializer init = new SanitationServiceInitializer();
-    init.initializeInputs();
-    init.initializeTable();
+    //    initializeInputs(); TODO: Get all long names problem
+    initializeTable();
 
     try {
       pendingRequests.getItems().addAll(new ArrayList(sanitationRequestDAO.getAll().values()));
@@ -119,6 +109,22 @@ public class SanitationController extends UIController {
     onClearClicked();
   }
 
+  private void initializeTable() {
+    helper = new TableHelper<>(pendingRequests, 0);
+    helper.linkColumns(SanitationRequest.class);
+  }
+
+  private void initializeInputs() {
+    priorityBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    sanitationBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
+
+    locationBox.setItems((FXCollections.observableArrayList(getAllLongNames())));
+
+    // locationBox.getItems().removeAll();
+  }
+
   private boolean allFieldsFilled() {
     return !((sanitationBox.getValue().equals(""))
         || priorityBox.getValue().equals("")
@@ -141,24 +147,6 @@ public class SanitationController extends UIController {
     Sterilize,
     Trash,
     BioHazard;
-  }
-
-  private class SanitationServiceInitializer {
-    private void initializeTable() {
-      helper = new TableHelper<>(pendingRequests, 0);
-      helper.linkColumns(SanitationRequest.class);
-    }
-
-    private void initializeInputs() {
-      priorityBox.setItems(
-          FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-      sanitationBox.setItems(
-          FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
-
-      locationBox.setItems((FXCollections.observableArrayList(getAllLongNames())));
-
-      // locationBox.getItems().removeAll();
-    }
   }
 
   /** Saves a given service request to a CSV by opening the CSV window */

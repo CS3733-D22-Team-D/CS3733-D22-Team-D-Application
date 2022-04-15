@@ -10,7 +10,7 @@ package edu.wpi.DapperDaemons.wongSweeper;
  * @version 1.01
  * @since 2017-08-24
  */
-import edu.wpi.DapperDaemons.backend.soundPlayer;
+import edu.wpi.DapperDaemons.backend.SoundPlayer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -367,7 +367,7 @@ public class MinesweeperZN extends Application {
    * @throws Exception Exceptions should not be thrown.
    */
   public void begin(Stage stage) throws Exception {
-    soundPlayer player = new soundPlayer("edu/wpi/DapperDaemons/assets/Smash.wav");
+    SoundPlayer player = new SoundPlayer("edu/wpi/DapperDaemons/assets/Smash.wav");
     player.play(0.75F);
 
     stage.setMinWidth(Screen.getPrimary().getVisualBounds().getWidth() * 0.50);

@@ -1,30 +1,31 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.ConnectionHandler;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.Weather;
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
-/*
-Manages Default Page Navigation
- */
-public class ServicePageController extends UIController {
+public class ParentController extends UIController {
 
   /* Time, Weather, and Database */
   @FXML private Label time;
@@ -36,29 +37,32 @@ public class ServicePageController extends UIController {
   /* Background */
   @FXML private ImageView BGImage;
   @FXML private Pane BGContainer;
-
-  /* Menu Button images */
-  @FXML private Pane labPageContainer;
-  @FXML private ImageView labPageImage;
-  @FXML private Pane equipmentPageContainer;
-  @FXML private ImageView equipmentPageImage;
-  @FXML private Pane sanitationPageContainer;
-  @FXML private ImageView sanitationPageImage;
-  @FXML private Pane medicinePageContainer;
-  @FXML private ImageView medicinePageImage;
-  @FXML private Pane mealPageContainer;
-  @FXML private ImageView mealPageImage;
-  @FXML private Pane patientPageContainer;
-  @FXML private ImageView patientPageImage;
+  @FXML private Text accountName;
+  @FXML private JFXHamburger burg;
+  @FXML private JFXHamburger burgBack;
+  @FXML private HBox childContainer;
+  private static HBox mainBox;
+  @FXML private HBox childPage;
+  @FXML private ImageView darkSwitch;
+  @FXML private JFXButton exitButton;
+  @FXML private Text headerNameField;
+  private static Text headerName;
+  @FXML private ImageView homeIcon;
+  @FXML private ImageView homeIcon1;
+  @FXML private JFXButton logoutButton;
+  @FXML private Circle profilePic;
+  @FXML private VBox sceneBox;
+  @FXML private VBox slider;
+  @FXML private VBox userDropdown;
+  @FXML private JFXButton userSettingsButton;
+  @FXML private ToggleButton userSettingsToggle;
+  @FXML private StackPane windowContents;
 
   private static Timer timer;
   private static final int timeUpdate = 1;
 
   private static Timer weatherTimer;
   private static final int weatherUpdate = 300;
-
-  private final List<KeyCode> easterEggSequence = new ArrayList<>();
-  private int easterEggInd = 0;
 
   private long startTime;
   private int count = 0;
@@ -86,24 +90,122 @@ public class ServicePageController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    if (childContainer != null) {
+      mainBox = childContainer;
+    }
+
+    if (headerNameField != null) {
+      headerName = headerNameField;
+    }
 
     initGraphics();
-
     updateDate();
     updateWeather();
 
-    initSequence();
+    swapPage("default", "Home");
   }
+
+  @FXML
+  void changeServer(MouseEvent event) {}
+
+  public void swapPage(String page, String pageName) {
+    mainBox.getChildren().clear();
+
+    try {
+      childPage =
+          FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
+      mainBox.getChildren().add(childPage);
+      bindChild(childPage);
+      headerName.setText(pageName);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void goHome(MouseEvent event) {
+    swapPage("default", "Home");
+  }
+
+  @FXML
+  void logout(ActionEvent event) {}
+
+  @FXML
+  void openUserDropdown(ActionEvent event) {}
+
+  @FXML
+  void openUserSettings(ActionEvent event) {
+    swapPage("userSettings", "User Settings");
+  }
+
+  @FXML
+  void quitProgram(ActionEvent event) {}
+
+  @FXML
+  void switchToAboutUs(MouseEvent event) {
+    swapPage("aboutUs", "About Us");
+  }
+
+  @FXML
+  void switchToEquipment(MouseEvent event) {
+    swapPage("equipment", "Equipment Delivery");
+  }
+
+  @FXML
+  void switchToLabRequest(MouseEvent event) {
+    swapPage("labRequest", "Lab Request");
+  }
+
+  @FXML
+  void switchToMap(MouseEvent event) {
+    swapPage("locationMap", "Interactive Map");
+  }
+
+  @FXML
+  void switchToMapDashboard(MouseEvent event) {
+    swapPage("mapDashboard", "Map Dashboard");
+  }
+
+  @FXML
+  void switchToMeal(MouseEvent event) {
+    swapPage("meal", "Patient Meal Delivery Portal");
+  }
+
+  @FXML
+  void switchToMedicine(MouseEvent event) {
+    swapPage("medicine", "Medication Request");
+  }
+
+  @FXML
+  void switchToPatientTransport(MouseEvent event) {
+    swapPage("patientTransport", "Internal Patient Transportation");
+  }
+
+  @FXML
+  void switchToSanitation(MouseEvent event) {
+    swapPage("sanitation", "Sanitation Services");
+  }
+
+  @FXML
+  void switchToDB(MouseEvent event) {
+    swapPage("backendInfoDisp", "Backend Information Display");
+  }
+
+  @FXML
+  void toggleTheme(MouseEvent event) {}
 
   private void initGraphics() {
     bindImage(BGImage, BGContainer);
-    bindImage(labPageImage, labPageContainer);
-    bindImage(equipmentPageImage, equipmentPageContainer);
-    bindImage(sanitationPageImage, sanitationPageContainer);
-    bindImage(medicinePageImage, medicinePageContainer);
-    bindImage(mealPageImage, mealPageContainer);
-    bindImage(patientPageImage, patientPageContainer);
     initConnectionImage();
+  }
+
+  public static void bindImage(ImageView pageImage, Pane parent) {
+    pageImage.fitHeightProperty().bind(parent.heightProperty());
+    pageImage.fitWidthProperty().bind(parent.widthProperty());
+  }
+
+  public static void bindChild(HBox child) {
+    HBox.setHgrow(child, Priority.ALWAYS);
   }
 
   private void setLoad() {
@@ -231,53 +333,5 @@ public class ServicePageController extends UIController {
         },
         0,
         weatherUpdate * 1000); // Every 1 second
-  }
-
-  private void initSequence() {
-    easterEggSequence.add(KeyCode.UP);
-    easterEggSequence.add(KeyCode.UP);
-    easterEggSequence.add(KeyCode.DOWN);
-    easterEggSequence.add(KeyCode.DOWN);
-    easterEggSequence.add(KeyCode.LEFT);
-    easterEggSequence.add(KeyCode.RIGHT);
-    easterEggSequence.add(KeyCode.LEFT);
-    easterEggSequence.add(KeyCode.RIGHT);
-    easterEggSequence.add(KeyCode.B);
-    easterEggSequence.add(KeyCode.A);
-    easterEggSequence.add(KeyCode.ENTER);
-  }
-
-  @FXML
-  public void konami(KeyEvent e) {
-    if (e.getCode().equals(easterEggSequence.get(easterEggInd))) {
-      easterEggInd++;
-      if (easterEggInd == easterEggSequence.size()) {
-        easterEggInd = 0;
-        try {
-          //          switchScene("konami.fxml", 700, 500);
-          MinesweeperZN ms = new MinesweeperZN();
-          ms.begin(new Stage());
-        } catch (Exception ex) {
-          ex.printStackTrace();
-        }
-      }
-    } else {
-      easterEggInd = 0;
-    }
-  }
-
-  @FXML
-  public void easterEgg() throws IOException {
-    if (count == 0) {
-      startTime = System.currentTimeMillis();
-    }
-    count++;
-    if ((System.currentTimeMillis() - startTime) > 10000) {
-      count = 0;
-    }
-    if (count == 10 & (System.currentTimeMillis() - startTime) < 10000) {
-      count = 0;
-      switchScene("easterEgg.fxml", 761, 626);
-    }
   }
 }

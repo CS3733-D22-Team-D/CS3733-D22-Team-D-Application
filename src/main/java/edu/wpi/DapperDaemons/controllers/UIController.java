@@ -49,7 +49,7 @@ public abstract class UIController extends AppController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
+    //    super.initialize(location, resources);
     // Init a menu slider for all that extend this class
     menuSlider(slider, burg, burgBack);
 
@@ -226,66 +226,6 @@ public abstract class UIController extends AppController {
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
-  }
-
-  @FXML
-  public void goHome() throws IOException {
-    switchScene("default.fxml", 635, 510);
-  }
-
-  @FXML
-  public void switchToEquipment() throws IOException {
-    switchScene("equipment.fxml", 761, 626);
-  }
-
-  @FXML
-  public void switchToLabRequest() throws IOException {
-    switchScene("labRequest.fxml", 575, 575);
-  }
-
-  @FXML
-  public void switchToMeal() throws IOException {
-    switchScene("meal.fxml", 500, 500);
-  }
-
-  @FXML
-  public void switchToMedicine() throws IOException {
-    switchScene("medicine.fxml", 842, 530);
-  }
-
-  @FXML
-  public void switchToDB() throws IOException {
-    switchScene("backendInfoDisp.fxml", 842, 530);
-  }
-
-  @FXML
-  public void switchToMap() throws IOException {
-    switchScene("mapDashboard.fxml", 1080, 100);
-  }
-
-  @FXML
-  public void switchToRealMap() throws IOException {
-    switchScene("locationMap.fxml", 1172, 200);
-  }
-
-  @FXML
-  public void switchToPatientTransport() throws IOException {
-    switchScene("patientTransport.fxml", 831, 582);
-  }
-
-  @FXML
-  public void switchToSanitation() throws IOException {
-    switchScene("sanitation.fxml", 780, 548);
-  }
-
-  @FXML
-  public void switchToAboutUs() throws IOException {
-    switchScene("aboutUs.fxml", 780, 548);
-  }
-
-  @FXML
-  public void goToLogin() throws IOException {
-    switchScene("login.fxml", 780, 548);
   }
 
   @FXML

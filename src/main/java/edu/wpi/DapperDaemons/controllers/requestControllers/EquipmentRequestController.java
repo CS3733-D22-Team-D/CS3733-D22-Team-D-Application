@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -17,11 +17,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
-public class EquipmentRequestController extends UIController {
+public class EquipmentRequestController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<MedicalEquipmentRequest> equipmentRequestsTable;
@@ -29,14 +27,11 @@ public class EquipmentRequestController extends UIController {
   /* Table Helper */
   private TableHelper<MedicalEquipmentRequest> tableHelper;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
-
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+
   /* Table Columns */
   @FXML private TableColumn<MealDeliveryRequest, String> reqID;
   @FXML private TableColumn<MealDeliveryRequest, String> priority;
@@ -55,9 +50,9 @@ public class EquipmentRequestController extends UIController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
+    //        super.initialize(location, resources);
     initBoxes();
-    bindImage(BGImage, BGContainer);
+    //    bindImage(BGImage, BGContainer);
 
     tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
     tableHelper.linkColumns(MedicalEquipmentRequest.class);
@@ -205,7 +200,7 @@ public class EquipmentRequestController extends UIController {
     equipmentTypeBox.setItems(
         FXCollections.observableArrayList(
             TableHelper.convertEnum(MedicalEquipment.EquipmentType.class)));
-    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    //    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

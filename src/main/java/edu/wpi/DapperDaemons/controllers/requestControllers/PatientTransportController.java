@@ -21,18 +21,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends UIController implements Initializable {
 
   /* Table Object */
   @FXML private TableView<PatientTransportRequest> transportRequests;
-
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
 
   /*Table Helper */
   private TableHelper<PatientTransportRequest> tableHelper;
@@ -67,11 +61,8 @@ public class PatientTransportController extends UIController implements Initiali
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
-    PatientTransportInitializer init = new PatientTransportInitializer();
-    init.initializeTable();
-    init.initializeInputs();
+    initializeTable();
+    //    initializeInputs(); TODO: Get all long names problem
 
     try {
       transportRequests
@@ -177,6 +168,21 @@ public class PatientTransportController extends UIController implements Initiali
         || patientDOB.getValue() == null);
   }
 
+  private void initializeTable() {
+    tableHelper = new TableHelper<>(transportRequests, 0);
+    tableHelper.linkColumns(PatientTransportRequest.class);
+  }
+
+  private void initializeInputs() {
+
+    pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
+    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+
+    // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
+    // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
+  }
+
   private boolean addItem(PatientTransportRequest request) {
     boolean hasClearance = false;
 
@@ -200,24 +206,6 @@ public class PatientTransportController extends UIController implements Initiali
     }
     System.out.println(locationNames);
     roomBox.setValue(String.valueOf(locationNames));
-  }
-
-  private class PatientTransportInitializer {
-
-    private void initializeTable() {
-      tableHelper = new TableHelper<>(transportRequests, 0);
-      tableHelper.linkColumns(PatientTransportRequest.class);
-    }
-
-    private void initializeInputs() {
-
-      pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-      roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
-
-      // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
-      // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
-      // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
-    }
   }
 
   public void saveToCSV() {

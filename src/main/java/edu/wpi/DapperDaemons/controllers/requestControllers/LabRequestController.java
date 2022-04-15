@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -15,18 +15,12 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
-public class LabRequestController extends UIController {
+public class LabRequestController extends ParentController {
 
   /* Table Object and Helper */
   @FXML private TableView<LabRequest> labReqTable;
   private TableHelper<LabRequest> tableHelper;
-
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
 
   /* UI Fields */
   @FXML private TextField patientName;
@@ -46,8 +40,6 @@ public class LabRequestController extends UIController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
-    super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
     LabRequestInitializer init = new LabRequestInitializer();
 
     init.initializeTable();

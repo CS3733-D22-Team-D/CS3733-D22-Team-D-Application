@@ -3,11 +3,11 @@ package edu.wpi.DapperDaemons.backend;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.IOException;
 
-public class csvSaver {
-  private csvSaver() {}
+public class CSVSaver {
+  private CSVSaver() {}
 
   public static void saveAll() {
-    csvLoader.filenames.forEach(
+    CSVLoader.filenames.forEach(
         (k, v) -> {
           try {
             save(v, k + "_save.csv");

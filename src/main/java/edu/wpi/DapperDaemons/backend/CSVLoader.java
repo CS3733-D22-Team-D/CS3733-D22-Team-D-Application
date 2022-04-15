@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class csvLoader {
+public class CSVLoader {
 
   static HashMap<String, TableObject> filenames = new HashMap<>();
 
@@ -27,7 +27,7 @@ public class csvLoader {
     filenames.put("AllEdges", new LocationNodeConnections());
   }
 
-  private csvLoader() {}
+  private CSVLoader() {}
 
   public static void loadAll() {
     filenames.forEach(
@@ -43,7 +43,7 @@ public class csvLoader {
   public static void load(TableObject type, String filename) throws IOException {
     InputStreamReader f =
         new InputStreamReader(
-            Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filename)));
+            Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
