@@ -365,8 +365,4 @@ public class MealDeliveryRequest extends TableObject implements Request {
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
   }
-
-
-
-
 }

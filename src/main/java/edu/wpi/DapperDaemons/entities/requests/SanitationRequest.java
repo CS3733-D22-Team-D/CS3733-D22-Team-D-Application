@@ -2,7 +2,10 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class SanitationRequest extends TableObject implements Request {
@@ -15,8 +18,10 @@ public class SanitationRequest extends TableObject implements Request {
         + "roomID varchar(60),"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
-        + "sanitationType varchar(20),"
-        + "cleanStatus varchar(20))";
+            + "status varchar(20),"
+            + "notes varchar(255),"
+            + "dateTime varchar(20),"
+        + "sanitationType varchar(20),";
   }
 
   @Override
@@ -39,9 +44,13 @@ public class SanitationRequest extends TableObject implements Request {
       case 5:
         return assigneeID;
       case 6:
-        return sanitationType;
+        return status.toString();
       case 7:
-        return cleanStatus.toString();
+        return notes;
+      case 8:
+        return dateTime;
+      case 9:
+        return sanitationType;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -67,10 +76,16 @@ public class SanitationRequest extends TableObject implements Request {
         assigneeID = newAttribute;
         break;
       case 6:
-        sanitationType = newAttribute;
+        status = RequestStatus.valueOf(newAttribute);
         break;
       case 7:
-        cleanStatus = RequestStatus.valueOf(newAttribute);
+        notes = newAttribute;
+        break;
+      case 8:
+        dateTime = newAttribute;
+        break;
+      case 9:
+        sanitationType = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -104,11 +119,17 @@ public class SanitationRequest extends TableObject implements Request {
       case "assigneeID":
         assigneeID = newAttribute;
         break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
       case "sanitationType":
         sanitationType = newAttribute;
-        break;
-      case "cleanStatus":
-        cleanStatus = RequestStatus.valueOf(newAttribute);
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -137,8 +158,10 @@ public class SanitationRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private RequestStatus status;
+  private String notes;
+  private String dateTime;
   private String sanitationType;
-  private RequestStatus cleanStatus;
 
   // CONSTRUCTOR
 
@@ -147,8 +170,8 @@ public class SanitationRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
-      String sanitationType,
-      RequestStatus cleanStatus) {
+      String notes,
+      String sanitationType) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
@@ -156,8 +179,12 @@ public class SanitationRequest extends TableObject implements Request {
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
     this.sanitationType = sanitationType;
-    this.cleanStatus = cleanStatus;
   }
 
   public SanitationRequest() {}
@@ -213,11 +240,30 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @TableHandler(table = 0, col = 6)
-  public RequestStatus getCleanStatus() {
-    return cleanStatus;
+  public RequestStatus getStatus() {
+    return status;
   }
 
-  public void setCleanStatus(RequestStatus cleanStatus) {
-    this.cleanStatus = cleanStatus;
+  public void setStatus(RequestStatus status) {
+    this.status = status;
+  }
+
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 }
+
+
