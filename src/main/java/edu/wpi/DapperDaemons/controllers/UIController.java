@@ -11,7 +11,6 @@ import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -65,7 +64,8 @@ public abstract class UIController extends AppController {
     try {
       initAccountGraphics();
     } catch (Exception e) {
-      showError("We could not find your profile picture.", Pos.TOP_LEFT);
+      System.out.println("Oop");
+      //      showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
     setTheme();
   }

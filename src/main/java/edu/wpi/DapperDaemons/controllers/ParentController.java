@@ -85,7 +85,7 @@ public class ParentController extends UIController {
           Objects.requireNonNull(
               getClass()
                   .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/cloud.png")));
 
   public final Image LOAD =
       new Image(
