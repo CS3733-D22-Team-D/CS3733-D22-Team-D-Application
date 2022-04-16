@@ -41,7 +41,7 @@ public class MealController extends UIController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
-
+  @FXML private TextField notes;
   /* Buttons */
   @FXML private Button clearButton;
   @FXML private Button submitButton;
@@ -124,6 +124,7 @@ public class MealController extends UIController {
                     roomID,
                     requesterID,
                     assigneeID,
+                    notes.getText(),
                     patientID,
                     entree,
                     side,
@@ -158,6 +159,7 @@ public class MealController extends UIController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    notes.setText("");
   }
 
   /**

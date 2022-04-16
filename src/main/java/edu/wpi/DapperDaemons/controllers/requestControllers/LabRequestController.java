@@ -28,6 +28,7 @@ public class LabRequestController extends ParentController {
   @FXML private DatePicker patientDOB;
   @FXML private JFXComboBox<String> priorityChoiceBox;
   @FXML private JFXComboBox<String> procedureComboBox;
+  @FXML private TextField notes;
 
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
@@ -60,6 +61,7 @@ public class LabRequestController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
+    notes.setText("");
   }
 
   @FXML
@@ -94,7 +96,7 @@ public class LabRequestController extends ParentController {
         boolean hadClearance =
             addItem(
                 new LabRequest(
-                    priority, roomID, requesterID, assigneeID, patientID, labType, status));
+                    priority, roomID, requesterID, assigneeID, notes.getText(), patientID, labType));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada

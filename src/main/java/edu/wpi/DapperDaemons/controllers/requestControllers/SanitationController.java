@@ -39,7 +39,7 @@ public class SanitationController extends UIController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> locationBox;
   /* Text Field */
-
+  @FXML private TextField notes;
   DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
   DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
@@ -63,6 +63,7 @@ public class SanitationController extends UIController {
     sanitationBox.setValue("");
     priorityBox.setValue("");
     locationBox.setValue("");
+    notes.setText("");
   }
 
   /** What happens when the submit button is clicked * */
@@ -91,7 +92,7 @@ public class SanitationController extends UIController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority, roomID, requesterID, assigneeID, sanitationType, status));
+                    priority, roomID, requesterID, assigneeID,notes.getText(), sanitationType));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.

@@ -31,6 +31,7 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private TextField notes;
 
   /* Table Columns */
   @FXML private TableColumn<MealDeliveryRequest, String> reqID;
@@ -85,6 +86,7 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
+    notes.setText("");
   }
 
   @FXML
@@ -164,6 +166,7 @@ public class EquipmentRequestController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       equipment.getNodeID(),
                       equipmentType,
                       cleanStatus));

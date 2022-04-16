@@ -30,6 +30,7 @@ public class MedicineController extends UIController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
@@ -64,6 +65,7 @@ public class MedicineController extends UIController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    notes.setText("");
   }
 
   @FXML
@@ -140,7 +142,7 @@ public class MedicineController extends UIController {
           boolean wentThrough =
               addItem(
                   new MedicineRequest(
-                      priority, roomID, requesterID, assigneeID, patientID, medName, quantity));
+                      priority, roomID, requesterID, assigneeID, notes.getText(), patientID, medName, quantity));
 
           if (!wentThrough) {
 

@@ -49,7 +49,7 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
-
+  @FXML private TextField notes;
   List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
@@ -87,6 +87,7 @@ public class PatientTransportController extends UIController implements Initiali
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+    notes.setText("");
   }
 
   @FXML
@@ -138,7 +139,7 @@ public class PatientTransportController extends UIController implements Initiali
           boolean hadPermission =
               addItem(
                   new PatientTransportRequest(
-                      priority, roomID, requesterID, assigneeID, patientID, nextRoomID, status));
+                      priority, roomID, requesterID, assigneeID, notes.getText(),patientID, nextRoomID));
           if (!hadPermission) {
             // display error that employee does not have permission
 
