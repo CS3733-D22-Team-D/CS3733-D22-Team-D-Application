@@ -1,20 +1,18 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.backend.csvLoader;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.RequestHandler;
-import edu.wpi.DapperDaemons.map.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -77,15 +75,7 @@ public class MapDashboardController extends UIController {
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
     new TableHelper<>(locTable, 2).linkColumns(Location.class);
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
-
-    TableColumn<Request, String> nameCol =
-        (TableColumn<Request, String>) reqTable.getColumns().get(0);
-    nameCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getRequestType()));
-    TableColumn<Request, String> pCol = (TableColumn<Request, String>) reqTable.getColumns().get(1);
-    pCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getPriority().name()));
-    TableColumn<Request, Boolean> rTCol =
-        (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
-    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));
+    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
 
     // Default floor
     floor = "1";
@@ -181,7 +171,7 @@ public class MapDashboardController extends UIController {
   private static String getFileText(String filePath, int line) throws IOException {
     InputStreamReader f =
         new InputStreamReader(
-            Objects.requireNonNull(csvLoader.class.getClassLoader().getResourceAsStream(filePath)));
+            Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filePath)));
     BufferedReader reader = new BufferedReader(f);
     // filePath.replace("%20", " ")
     Scanner s = new Scanner(reader);

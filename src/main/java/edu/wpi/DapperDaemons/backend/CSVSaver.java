@@ -10,11 +10,11 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class csvSaver {
-  private csvSaver() {}
+public class CSVSaver {
+  private CSVSaver() {}
 
   public static void saveAll() {
-    csvLoader.filenames.forEach(
+    CSVLoader.filenames.forEach(
         (k, v) -> {
           try {
             save(v, k + "_save.csv");
@@ -35,7 +35,7 @@ public class csvSaver {
     String tableName = type.getTableName();
     String query = "SELECT * FROM " + tableName;
 
-    Statement stmt = connectionHandler.getConnection().createStatement();
+    Statement stmt = ConnectionHandler.getConnection().createStatement();
     ResultSet resultSet = stmt.executeQuery(query);
     ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
     int numAttributes = resultSetMetaData.getColumnCount();

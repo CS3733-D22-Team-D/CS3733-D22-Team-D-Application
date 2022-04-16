@@ -6,7 +6,7 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.map.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

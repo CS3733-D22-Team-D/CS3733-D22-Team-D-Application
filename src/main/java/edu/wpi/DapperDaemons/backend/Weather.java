@@ -7,9 +7,9 @@ import java.net.URL;
 import javafx.scene.image.Image;
 import org.json.*;
 
-public class weather {
+public class Weather {
 
-  private weather() {}
+  private Weather() {}
 
   public static int getTemp(String location) throws Exception {
     URL url =
@@ -57,8 +57,7 @@ public class weather {
     String icon = obj.getJSONArray("weather").getJSONObject(0).getString("icon");
 
     return new Image(
-        weather
-            .class
+        Weather.class
             .getClassLoader()
             .getResourceAsStream("edu/wpi/DapperDaemons/weatherIcons/" + icon + ".png"));
   }
