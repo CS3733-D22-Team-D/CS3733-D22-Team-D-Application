@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -13,8 +14,6 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -31,6 +30,8 @@ public class MapDashboardController extends ParentController {
   @FXML private TableView<Patient> patientTable;
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private TableView<Request> reqTable;
+  private final DAO<Alert> alertDAO = DAOPouch.getAlertDAO();
+  @FXML private TableView<Alert> alertTable;
 
   @FXML private ToggleButton L1;
   @FXML private ToggleButton L10;
@@ -70,6 +71,12 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    try {
+      alertDAO.add(new Alert("22", Request.Priority.HIGH, "234"));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     bindImage(mapImage, mapImageContainer);
 
     // Init tables
@@ -77,15 +84,7 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(locTable, 2).linkColumns(Location.class);
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-
-    TableColumn<Request, String> nameCol =
-        (TableColumn<Request, String>) reqTable.getColumns().get(0);
-    nameCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getRequestType()));
-    TableColumn<Request, String> pCol = (TableColumn<Request, String>) reqTable.getColumns().get(1);
-    pCol.setCellValueFactory(req -> new SimpleStringProperty(req.getValue().getPriority().name()));
-    TableColumn<Request, Boolean> rTCol =
-        (TableColumn<Request, Boolean>) reqTable.getColumns().get(2);
-    rTCol.setCellValueFactory(req -> new SimpleBooleanProperty(req.getValue().requiresTransport()));
+    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
@@ -96,7 +95,6 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
-    updateLocOfInterest();
   }
 
   // Updates the data based on current floor
@@ -105,9 +103,12 @@ public class MapDashboardController extends ParentController {
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
+    alertTable.getItems().clear();
+
     List<Location> locsByFloor;
     try {
       locsByFloor = locationDAO.filter(4, floor);
+      alertTable.getItems().addAll(alertDAO.getAll());
     } catch (SQLException e) {
       e.printStackTrace();
       showError("Failed to get locations.");
@@ -167,14 +168,6 @@ public class MapDashboardController extends ParentController {
       floorSummary.setText(floorText);
     } catch (IOException e) {
       showError("Error 404: File Not Found");
-    }
-  }
-
-  private void updateLocOfInterest() {
-    try {
-      String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
-      locOfInterest.setText(floorText);
-    } catch (IOException e) {
     }
   }
 

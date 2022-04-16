@@ -19,6 +19,7 @@ public class DAOPouch {
   private static DAO<MedicalEquipment> medicalEquipmentDAO;
   private static DAO<Patient> patientDAO;
   private static DAO<LocationNodeConnections> nodeDAO;
+  private static DAO<Alert> alertDAO;
 
   private DAOPouch() {}
 
@@ -70,6 +71,10 @@ public class DAOPouch {
     App.LOG.info("Initializing Node Connections");
     nodeDAO = new DAO<>(new LocationNodeConnections());
     App.LOG.info("Node connections have been produced");
+
+    App.LOG.info("Initializing Node Connections");
+    alertDAO = new DAO<>(new Alert());
+    App.LOG.info("Node connections have been produced");
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -118,5 +123,9 @@ public class DAOPouch {
 
   public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
+  }
+
+  public static DAO<Alert> getAlertDAO() {
+    return alertDAO;
   }
 }
