@@ -19,6 +19,7 @@ public class DAOPouch {
   private static DAO<Patient> patientDAO;
   private static DAO<LocationNodeConnections> nodeDAO;
   private static DAO<LanguageRequest> languageRequestDAO;
+  private static DAO<Notification> notificationDAO;
 
   private DAOPouch() {}
 
@@ -72,7 +73,11 @@ public class DAOPouch {
 
     App.LOG.info("Initializing Languages");
     languageRequestDAO = new DAO<>(new LanguageRequest());
-    App.LOG.info("Languages connections has been produced");
+    App.LOG.info("Languages has been produced");
+
+    App.LOG.info("Initializing Notifications");
+    languageRequestDAO = new DAO<>(new LanguageRequest());
+    App.LOG.info("Notifications has been produced");
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -125,6 +130,10 @@ public class DAOPouch {
 
   public static DAO<LanguageRequest> getLanguageRequestDAO() {
     return languageRequestDAO;
+  }
+
+  public static DAO<Notification> getNotificationDAO(){
+    return notificationDAO;
   }
 
   //  public static DAO getDAO(TableObject type) {
