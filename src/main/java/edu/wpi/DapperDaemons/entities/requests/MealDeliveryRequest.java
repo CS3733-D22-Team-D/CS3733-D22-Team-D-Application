@@ -189,6 +189,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case "dateTime":
         dateTime = newAttribute;
+        break;
         //the three above this comment
       default:
         throw new IndexOutOfBoundsException();
@@ -227,6 +228,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String assigneeID,
       //add notes after Assignee JOE
       String notes,
+      //thats it, should be pretty easy
       String patientID,
       String entree,
       String side,
