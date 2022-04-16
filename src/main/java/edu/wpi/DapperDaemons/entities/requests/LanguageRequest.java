@@ -55,9 +55,9 @@ public class LanguageRequest extends TableObject {
 
   private String nodeID;
   private Language language;
-  private String roomID = "default";
-  private String requester = "default";
-  private String assignee = "default";
+  private String roomID;
+  private String requester;
+  private String assignee;
 
   public enum Language {
     CHINESE,
@@ -89,8 +89,9 @@ public class LanguageRequest extends TableObject {
   public LanguageRequest(Language language, String roomID) {
     this.language = language;
     this.roomID = roomID;
-    this.assignee = SecurityController.getUser().getAttribute(1);
+    this.assignee = "none";
     this.nodeID = String.valueOf(language) + roomID + LocalDateTime.now();
+    this.requester = SecurityController.getUser().getAttribute(1);
   }
 
   @Override
@@ -150,7 +151,11 @@ public class LanguageRequest extends TableObject {
 
   @Override
   public TableObject newInstance(List<String> l) {
-    return new LanguageRequest();
+    LanguageRequest temp = new LanguageRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override

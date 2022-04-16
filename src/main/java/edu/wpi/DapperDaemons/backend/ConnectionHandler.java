@@ -55,7 +55,7 @@ public class ConnectionHandler {
     }
 
     if (connected) {
-      try {
+      try { // TODO fix
         DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
         DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
         DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
