@@ -46,4 +46,24 @@ public class UserSettingsController extends ParentController {
                                 + SecurityController.getUser().getNodeID()
                                 + ".png")))));
   }
+
+  @FXML
+  private void lightSwitch() {
+    toggleTheme(Theme.Light);
+  }
+
+  @FXML
+  private void darkSwitch() {
+    toggleTheme(Theme.Dark);
+  }
+
+  @FXML
+  private void blueSwitch() {
+    toggleTheme(Theme.Blue);
+  }
+
+  @FXML
+  private void redSwitch() {
+    toggleTheme(Theme.Red);
+  }
 }
