@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -255,7 +256,7 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
@@ -440,4 +441,10 @@
          </children>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@../assets/themes.css" />
+      <URL value="@../assets/themeBlue.css" />
+      <URL value="@../assets/themeDark.css" />
+      <URL value="@../assets/themeRed.css" />
+   </stylesheets>
 </VBox>
