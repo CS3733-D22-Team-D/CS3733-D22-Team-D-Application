@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -201,7 +202,28 @@ public class ParentController extends UIController {
     }
   }
 
-  void setNotifications() {}
+  void setNotifications() {
+    List<Notification> notifications =
+        new ArrayList<Notification>(
+            DAOPouch.getNotificationDAO()
+                .filter(2, SecurityController.getUser().getAttribute(1))
+                .values());
+    if (notifications.size() == 0) {
+      Text t = new Text();
+      t.setText("Looks empty in here");
+      this.notifications.getChildren().add(t);
+    }
+    for (Notification n : notifications) {}
+  }
+
+  HBox createNotification() {
+    HBox outer = new HBox();
+    ImageView icon = new ImageView();
+    Text txt = new Text();
+    outer.getChildren().add(icon);
+    outer.getChildren().add(txt);
+    return outer;
+  }
 
   @FXML
   void openNotifications() {

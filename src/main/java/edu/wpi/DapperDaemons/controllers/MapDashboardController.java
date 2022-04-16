@@ -96,13 +96,8 @@ public class MapDashboardController extends ParentController {
     reqTable.getItems().clear();
     locTable.getItems().clear();
     List<Location> locsByFloor;
-    try {
-      locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
-    } catch (SQLException e) {
-      e.printStackTrace();
-      showError("Failed to get locations.");
-      return;
-    }
+    locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
+
     for (Location l : locsByFloor) {
       try {
         equipTable.getItems().addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));

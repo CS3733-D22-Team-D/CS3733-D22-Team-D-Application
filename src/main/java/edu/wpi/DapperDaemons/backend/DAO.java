@@ -18,7 +18,7 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    * @throws IOException
    */
-  public DAO(T type) throws IOException {
+  public DAO(T type) {
     orm = new ORM<T>(type);
     this.type = type;
   }
@@ -144,7 +144,7 @@ public class DAO<T extends TableObject> {
    * @return : a List of all TableObjects in which the attribute occurs
    * @throws SQLException
    */
-  public Map<String, T> filter(int column, String attribute) throws SQLException {
+  public Map<String, T> filter(int column, String attribute) {
     return filter(orm.getAll(), column, attribute);
   }
 
@@ -179,7 +179,7 @@ public class DAO<T extends TableObject> {
    * @return : a List of all TableObjects in which the attribute occurs
    * @throws SQLException
    */
-  public Map<String, T> search(int column, String attribute) throws SQLException {
+  public Map<String, T> search(int column, String attribute) {
     return search(orm.getAll(), column, attribute);
   }
 }
