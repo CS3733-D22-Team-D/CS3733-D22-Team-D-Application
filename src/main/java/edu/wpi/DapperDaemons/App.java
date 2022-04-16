@@ -3,11 +3,13 @@ package edu.wpi.DapperDaemons;
 import edu.wpi.DapperDaemons.backend.AutoSave;
 import edu.wpi.DapperDaemons.backend.ConnectionHandler;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -63,11 +65,19 @@ public class App extends Application {
           primaryStage.setMinHeight(510);
           primaryStage.setScene(scene);
           primaryStage.show();
+          primaryStage.setOnCloseRequest(
+              q -> {
+                Platform.exit();
+                System.exit(0);
+              });
         });
   }
 
   private void createLogger() {
     try {
+      File logDir = new File(getClass().getClassLoader().getResource("logs").getPath());
+      if (!logDir.exists()) logDir.mkdirs();
+
       Properties properties = new Properties();
       InputStream propFile =
           getClass().getClassLoader().getResourceAsStream("simplelogger.properties");
