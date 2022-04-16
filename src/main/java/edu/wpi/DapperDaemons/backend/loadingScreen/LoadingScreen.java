@@ -31,10 +31,11 @@ public class LoadingScreen {
       primaryStage.setMinHeight(510);
       primaryStage.setScene(scene);
       primaryStage.show();
-      primaryStage.setOnCloseRequest(q -> {
-          Platform.exit();
-          System.exit(0);
-      });
+      primaryStage.setOnCloseRequest(
+          q -> {
+            Platform.exit();
+            System.exit(0);
+          });
     } catch (IOException e) {
       e.printStackTrace();
     }
