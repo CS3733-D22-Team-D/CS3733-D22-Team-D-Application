@@ -28,18 +28,26 @@
    <opaqueInsets>
       <Insets top="50.0" />
    </opaqueInsets>
+   <children>
       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+         <children>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
                   <VBox id="foreground" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                     <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                           <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Breakdown">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
+                           </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                           <children>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="29.0" onMouseClicked="#onEquipIconClicked" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
                                     <StackPane prefHeight="150.0" prefWidth="200.0">
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -453,7 +461,7 @@
                               </DropShadow>
                            </effect>
                         </ToggleButton>
-                        <ToggleButton id="foreground" fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" styleClass="floors" stylesheets="@../../../../toggleButton.css" text="L1" toggleGroup="$floors">
+                        <ToggleButton id="foreground" fx:id="L1" layoutX="10.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToL1" prefHeight="70.0" prefWidth="150.0" selected="true" styleClass="floors" stylesheets="@../../../../toggleButton.css" text="L1" toggleGroup="$floors">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>

@@ -204,7 +204,7 @@ public class EquipmentRequestController extends ParentController {
     equipmentTypeBox.setItems(
         FXCollections.observableArrayList(
             TableHelper.convertEnum(MedicalEquipment.EquipmentType.class)));
-    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    //    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

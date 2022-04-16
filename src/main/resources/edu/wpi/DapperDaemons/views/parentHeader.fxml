@@ -166,20 +166,11 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text="About Us" textFill="WHITE">
+
+                        <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/Glyphs/blood_bag.png" />
-                                 </image>
-                                 <effect>
-                                    <ColorAdjust brightness="1.0" />
-                                 </effect>
-                              </ImageView>
-                           </graphic>
                         </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
@@ -339,7 +330,7 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <JFXButton onAction="#switchToAboutUs" text="?" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToAboutUs" text="?" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -383,7 +374,7 @@
                         </DropShadow>
                      </effect>
                      <children>
-                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" pickOnBounds="false" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -402,7 +393,7 @@
                            </graphic>
                         </JFXButton>
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" pickOnBounds="false" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -421,7 +412,7 @@
                            </graphic>
                         </JFXButton>
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#quitProgram" pickOnBounds="false" prefHeight="40.0" prefWidth="140.0" text="Button" textFill="TRANSPARENT">
+                        <JFXButton fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#quitProgram" prefHeight="40.0" prefWidth="140.0" text="Button" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
