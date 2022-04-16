@@ -1,5 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.*;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
@@ -13,6 +15,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.ColorAdjust;
@@ -31,6 +34,15 @@ public class ParentController extends UIController {
   @FXML private ImageView weatherIcon;
   @FXML private Label tempLabel;
   @FXML private ImageView serverIcon;
+  @FXML private ToggleButton serverToggle;
+  @FXML private ImageView serverSlotOne;
+  @FXML private ImageView serverSlotTwo;
+  @FXML private Text serverSlotOneText;
+  @FXML private Text serverSlotTwoText;
+  @FXML private VBox serverDropdown;
+  @FXML private Button serverButtonOne;
+  @FXML private Button serverButtonTwo;
+
   @FXML private HBox serverBox;
 
   /* Background */
@@ -109,6 +121,8 @@ public class ParentController extends UIController {
     updateDate();
     updateWeather();
 
+    setServerToggleMenu();
+
     swapPage("default", "Home");
   }
 
@@ -159,6 +173,146 @@ public class ParentController extends UIController {
       userDropdown.setVisible(true);
     } else {
       userDropdown.setVisible(false);
+    }
+  }
+
+  @FXML
+  void openServerDropdown() {
+    if (serverToggle.isSelected()) {
+      serverDropdown.setVisible(true);
+    } else {
+      serverDropdown.setVisible(false);
+    }
+  }
+
+  private void setServerToggleMenu() {
+    switch (ConnectionHandler.getType()) {
+      case EMBEDDED:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(SERVER);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Client Server");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        System.out.println("Switching to cloud");
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLIENTSERVER:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLOUD:
+        serverSlotOne.setImage(SERVER);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Client Server");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        break;
     }
   }
 
@@ -292,7 +446,7 @@ public class ParentController extends UIController {
 
   private boolean tryChange() throws InterruptedException {
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED)) {
-      if (ConnectionHandler.switchToClientServer()) {
+      if (switchToClientServer()) {
         Thread.sleep(1000);
         serverIcon.setImage(SERVER);
         return true;
@@ -302,7 +456,7 @@ public class ParentController extends UIController {
         return false;
       }
     } else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER)) {
-      if (ConnectionHandler.switchToCloudServer()) {
+      if (switchToCloudServer()) {
         Thread.sleep(1000);
         serverIcon.setImage(CLOUD);
         return true;
@@ -312,7 +466,7 @@ public class ParentController extends UIController {
         return false;
       }
     } else {
-      if (ConnectionHandler.switchToEmbedded()) {
+      if (switchToEmbedded()) {
         Thread.sleep(1000);
         serverIcon.setImage(EMBEDDED);
         return true;
