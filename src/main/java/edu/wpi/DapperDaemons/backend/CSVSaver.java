@@ -14,14 +14,16 @@ public class CSVSaver {
   private CSVSaver() {}
 
   public static void saveAll() {
-    CSVLoader.filenames.forEach(
-        (k, v) -> {
-          try {
-            save(v, k + "_save.csv");
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        });
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      CSVLoader.filenames.forEach(
+          (k, v) -> {
+            try {
+              save(v, k + "_save.csv");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          });
+    }
   }
 
   public static void save(TableObject type, String filename) throws IOException {
