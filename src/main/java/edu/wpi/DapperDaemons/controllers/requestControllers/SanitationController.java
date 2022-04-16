@@ -81,9 +81,9 @@ public class SanitationController extends UIController {
       boolean isALocation = false;
       Location location = new Location();
       ArrayList<Location> locations = new ArrayList<>();
-      locations = (ArrayList<Location>) locationDAO.getAll();
+      locations = new ArrayList(locationDAO.getAll().values());
 
-      location = locationDAO.filter(locations, 7, roomID).get(0);
+      location = new ArrayList<Location>(locationDAO.filter(locations, 7, roomID).values()).get(0);
 
       isALocation = location.getAttribute(7).equals(roomID);
       if (isALocation) {

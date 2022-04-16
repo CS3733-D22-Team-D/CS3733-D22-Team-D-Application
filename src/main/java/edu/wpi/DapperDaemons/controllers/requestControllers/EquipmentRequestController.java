@@ -108,25 +108,30 @@ public class EquipmentRequestController extends ParentController {
 
       // get all equipment of that type.
       equipments =
-          (ArrayList<MedicalEquipment>)
-              medicalEquipmentDAO.filter(
-                  medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue());
+          new ArrayList(
+              medicalEquipmentDAO
+                  .filter(medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue())
+                  .values());
 
       if (medicalEquipmentDAO
               .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
+            new ArrayList<MedicalEquipment>(
+                    (medicalEquipmentDAO.filter(
+                            equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString()))
+                        .values())
                 .get(0);
       } else if (medicalEquipmentDAO
               .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
+            new ArrayList<MedicalEquipment>(
+                    medicalEquipmentDAO
+                        .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
+                        .values())
                 .get(0);
 
       } else if (medicalEquipmentDAO
@@ -134,8 +139,10 @@ public class EquipmentRequestController extends ParentController {
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.UNCLEAN.toString())
+            new ArrayList<MedicalEquipment>(
+                    medicalEquipmentDAO
+                        .filter(equipments, 5, MedicalEquipment.CleanStatus.UNCLEAN.toString())
+                        .values())
                 .get(0);
       } else {
 

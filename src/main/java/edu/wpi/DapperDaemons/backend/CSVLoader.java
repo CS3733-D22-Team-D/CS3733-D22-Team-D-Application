@@ -65,16 +65,12 @@ public class csvLoader {
   }
 
   private static String encodeForFirebaseKey(String s) {
-    return s
-            .replace("_", "____")
-            .replace(".", "___P")
-            .replace("$", "___D")
-            .replace("#", "___H")
-            .replace("[", "___O")
-            .replace("]", "___C")
-            .replace("/", "___S")
-            ;
+    return s.replace("_", "____")
+        .replace(".", "___P")
+        .replace("$", "___D")
+        .replace("#", "___H")
+        .replace("[", "___O")
+        .replace("]", "___C")
+        .replace("/", "___S");
   }
 }
-
-

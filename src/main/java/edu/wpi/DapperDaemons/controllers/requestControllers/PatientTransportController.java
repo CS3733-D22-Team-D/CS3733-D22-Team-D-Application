@@ -104,7 +104,7 @@ public class PatientTransportController extends UIController implements Initiali
       // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
       boolean nextLocationExists = false;
-      locations = (ArrayList<Location>) locationDAO.getAll();
+      locations = new ArrayList(locationDAO.getAll().values());
       for (Location l : locations) {
         if (l.getAttribute(7).equals(roomBox.getValue())) {
           nextRoomID = l.getNodeID();
