@@ -18,7 +18,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -27,13 +26,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /** Controller Class for interactive Map Page */
-public class MapController extends UIController implements Initializable {
+public class MapController extends ParentController {
 
   /* UI Assets */
   @FXML private ImageView mapView;
@@ -98,10 +96,6 @@ public class MapController extends UIController implements Initializable {
   /* Info Assets */
   @FXML private VBox tableContainer;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
-
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
 
@@ -118,8 +112,8 @@ public class MapController extends UIController implements Initializable {
     Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
     Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
 
-    super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
+    //    super.initialize(location, resources);
+    //    bindImage(BGImage, BGContainer);
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
