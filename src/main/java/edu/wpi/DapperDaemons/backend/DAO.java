@@ -99,17 +99,9 @@ public class DAO<T extends TableObject> {
     }
   }
 
-  /**
-   * Loads the information from the inputted file csv into the database
-   *
-   * @param filename : filename you wish to import
-   */
-  public void load(String filename) {
-    try {
-      CSVLoader.loadToFirebase(type, filename);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  /** Loads the information from the inputted file csv into the database */
+  public void load() {
+    this.orm.fillFromDatabase();
   }
 
   /**

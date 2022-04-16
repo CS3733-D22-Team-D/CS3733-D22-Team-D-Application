@@ -348,22 +348,19 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <HBox prefHeight="52.0" prefWidth="87.0">
-                           <children>
-                              <JFXButton fx:id="alertButton" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" stylesheets="@../assets/buttons.css">
-                                 <graphic>
+                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="45.0" prefWidth="87.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="87.0">
+                                 <children>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT">
                                        <image>
                                           <Image url="@../assets/Glyphs/notification.png" />
                                        </image>
                                     </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                           </children>
-                        </HBox>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </ToggleButton>
                         <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
                            <graphic>
                               <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0">
@@ -518,6 +515,43 @@
                      </children>
                      <HBox.margin>
                         <Insets left="284.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="notifications" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fx:id="serverSlotOne1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="serverSlotOneText1" strokeWidth="0.0" text="User Settings">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="67.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>

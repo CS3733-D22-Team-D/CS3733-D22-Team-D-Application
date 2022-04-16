@@ -69,6 +69,8 @@ public class ParentController extends UIController {
   @FXML private JFXButton userSettingsButton;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private StackPane windowContents;
+  @FXML private ToggleButton alertButton;
+  @FXML private VBox notifications;
 
   private static Timer timer;
   private static final int timeUpdate = 1;
@@ -134,6 +136,8 @@ public class ParentController extends UIController {
 
     setServerToggleMenu();
 
+    setNotifications();
+
     swapPage("default", "Home");
   }
 
@@ -194,6 +198,17 @@ public class ParentController extends UIController {
       serverDropdown.setVisible(true);
     } else {
       serverDropdown.setVisible(false);
+    }
+  }
+
+  void setNotifications() {}
+
+  @FXML
+  void openNotifications() {
+    if (alertButton.isSelected()) {
+      notifications.setVisible(true);
+    } else {
+      notifications.setVisible(false);
     }
   }
 

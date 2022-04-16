@@ -1,10 +1,14 @@
 package edu.wpi.DapperDaemons;
 
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.switchToEmbedded;
+
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 import javafx.application.Application;
@@ -13,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.net.ssl.HttpsURLConnection;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,11 +57,27 @@ public class App extends Application {
     try {
       ls.display(
           () -> {
-            FireBase.init();
+            HttpsURLConnection testCon = null;
+            boolean connected = false;
             try {
-              DAOPouch.init();
+              URL url = new URL("https://google.com");
+              testCon = (HttpsURLConnection) url.openConnection();
+              testCon.connect();
+              connected = true;
+            } catch (MalformedURLException e) {
+              System.out.println("Not connected to the internet");
             } catch (IOException e) {
-              throw new RuntimeException(e);
+              System.out.println("Not connected to the internet");
+            }
+            if (connected) {
+              FireBase.init();
+              try {
+                DAOPouch.init();
+              } catch (IOException e) {
+                System.out.println("DAOPouch could not initialize");
+              }
+            } else {
+              switchToEmbedded();
             }
             AutoSave.start(10);
             try {

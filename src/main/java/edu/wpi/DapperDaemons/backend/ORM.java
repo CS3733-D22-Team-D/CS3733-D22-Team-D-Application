@@ -98,7 +98,7 @@ public class ORM<T extends TableObject> {
   }
 
   private T getInstance() {
-    return (T) new Object();
+    return (T) type.newInstance(new ArrayList<>());
   }
 
   public T get(String primaryKey) {
@@ -185,6 +185,26 @@ public class ORM<T extends TableObject> {
         }
         prepStmt.setString(numAttributes, type.getAttribute(1));
         prepStmt.executeUpdate();
+      } catch (SQLException e) {
+        System.out.println("SQLException");
+      }
+    }
+  }
+
+  public void fillFromDatabase() {
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      try {
+        Statement stmt = ConnectionHandler.getConnection().createStatement();
+        String query = "SELECT * FROM " + tableName;
+        ResultSet resultSet = stmt.executeQuery(query);
+        while (resultSet.next()) {
+          T temp = getInstance();
+          for (int i = 1; i <= numAttributes; i++) {
+            temp.setAttribute(i, resultSet.getString(columnNames.get(i - 1)));
+          }
+          map.put(temp.getAttribute(1), temp);
+        }
+        stmt.close();
       } catch (SQLException e) {
         System.out.println("SQLException");
       }

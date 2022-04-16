@@ -6,21 +6,26 @@ import java.util.List;
 public class Notification extends TableObject {
 
   private String nodeID;
-  private String user;
+  private String userID;
   private String subject;
   private String body;
   private boolean read = false;
 
-  public Notification(String subject, String body, String user) {
+  public Notification() {}
+
+  public Notification(String subject, String body, String userID) {
     this.subject = subject;
     this.body = body;
-    this.user = user;
-    this.nodeID = user + subject + LocalDateTime.now();
+    this.userID = userID;
+    this.nodeID = userID + subject + LocalDateTime.now();
   }
 
   @Override
   public String tableInit() {
-    return "null";
+    return "CREATE TABLE NOTIFICATIONS(nodeID varchar(255) PRIMARY KEY,"
+        + "userID varchar(100),"
+        + "subject varchar(100),"
+        + "body varchar(255))";
   }
 
   @Override
@@ -34,7 +39,7 @@ public class Notification extends TableObject {
       case 1:
         return nodeID;
       case 2:
-        return user;
+        return userID;
       case 3:
         return subject;
       case 4:
@@ -53,7 +58,7 @@ public class Notification extends TableObject {
         this.nodeID = newAttribute;
         break;
       case 2:
-        this.user = newAttribute;
+        this.userID = newAttribute;
         break;
       case 3:
         this.subject = newAttribute;
@@ -81,7 +86,7 @@ public class Notification extends TableObject {
         this.nodeID = newAttribute;
         break;
       case "user":
-        this.user = newAttribute;
+        this.userID = newAttribute;
         break;
       case "subject":
         this.subject = newAttribute;

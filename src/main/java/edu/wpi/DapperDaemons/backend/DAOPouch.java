@@ -76,8 +76,25 @@ public class DAOPouch {
     App.LOG.info("Languages has been produced");
 
     App.LOG.info("Initializing Notifications");
-    languageRequestDAO = new DAO<>(new LanguageRequest());
+    notificationDAO = new DAO<>(new Notification());
     App.LOG.info("Notifications has been produced");
+
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      labRequestDAO.load();
+      mealDeliveryRequestDAO.load();
+      medicalEquipmentRequestDAO.load();
+      medicineRequestDAO.load();
+      patientTransportRequestDAO.load();
+      sanitationRequestDAO.load();
+      accountDAO.load();
+      employeeDAO.load();
+      locationDAO.load();
+      medicalEquipmentDAO.load();
+      patientDAO.load();
+      nodeDAO.load();
+      languageRequestDAO.load();
+      notificationDAO.load();
+    }
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {

@@ -61,7 +61,8 @@ public abstract class UIController extends AppController {
     try {
       initAccountGraphics();
     } catch (Exception e) {
-      System.out.println("Oop");
+      System.out.println(
+          "Couldn't initialize account graphics, account is probably null for some reason");
       //      showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
   }
