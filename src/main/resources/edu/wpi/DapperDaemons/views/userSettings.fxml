@@ -18,7 +18,7 @@
    <children>
       <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="220.0" HBox.hgrow="NEVER">
          <children>
-            <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
+            <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -29,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ToggleButton>
-            <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
+            <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -40,7 +40,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ToggleButton>
-            <ToggleButton id="foreground" fx:id="securityAccessButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security Access">
+            <ToggleButton id="foreground" fx:id="securityAccessButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security Access">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -51,7 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ToggleButton>
-            <ToggleButton id="foreground" fx:id="twoFAButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Two Factor Authentication">
+            <ToggleButton id="foreground" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchTab2FA" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Two Factor Authentication">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -62,7 +62,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ToggleButton>
-            <ToggleButton id="foreground" fx:id="portalPreferencesButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Portal Preferences">
+            <ToggleButton id="foreground" fx:id="portalPreferencesButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openPortalPreferences" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Portal Preferences">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -176,7 +176,7 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <Button alignment="TOP_CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button">
+                              <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#switchTab2FA" style="-fx-background-color: transparent;" text="Button">
                                  <graphic>
                                     <HBox alignment="CENTER" prefHeight="16.0" spacing="10.0">
                                        <children>

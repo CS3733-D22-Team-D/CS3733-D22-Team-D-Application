@@ -19,34 +19,32 @@ import javafx.scene.text.Text;
 
 public class UserSettingsController extends ParentController {
 
-  @FXML private ToggleButton aboutButton;
-
   @FXML private Text accountName1;
-
-  @FXML private ToggleButton accountSettingsButton;
 
   @FXML private Text accountUserName;
 
   @FXML private Label currentProtection;
 
-  @FXML private ToggleButton homeButton;
-
-  @FXML private ToggleButton portalPreferencesButton;
-
   @FXML private Circle profilePic1;
-
-  @FXML private ToggleButton securityAccessButton;
 
   @FXML private Text securityLevel;
 
   @FXML private Label securityLevelDescription;
 
-  @FXML private ToggleButton twoFAButton;
-
-  @FXML private Button twoFASwitcher;
-
   @FXML
   void switchTab2FA(MouseEvent event) {}
+
+  @FXML
+  void goUserHome(MouseEvent event) {}
+
+  @FXML
+  void openAccountSettings(MouseEvent event) {}
+
+  @FXML
+  void openUserSecurity(MouseEvent event) {}
+
+  @FXML
+  void openPortalPreferences(MouseEvent event) {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
