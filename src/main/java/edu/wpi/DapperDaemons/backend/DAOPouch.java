@@ -132,7 +132,7 @@ public class DAOPouch {
     return languageRequestDAO;
   }
 
-  public static DAO<Notification> getNotificationDAO(){
+  public static DAO<Notification> getNotificationDAO() {
     return notificationDAO;
   }
 
