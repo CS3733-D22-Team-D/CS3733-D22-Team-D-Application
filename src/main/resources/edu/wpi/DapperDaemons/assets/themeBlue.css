@@ -14,12 +14,12 @@
 }
 
 .fieldBlue{
-    -fx-background-color: #68bea9 !important;
+    -fx-background-color: #a3d5d5 !important;
     -fx-text-fill: white !important;
 }
 
 .specialFieldBlue{
-    -fx-control-inner-background: #68bea9 !important;
+    -fx-control-inner-background: #a3d5d5 !important;
     -fx-text-fill: white !important;
 }
 
@@ -30,12 +30,12 @@
 
 .tableBlue {
     -fx-background-color: #969cc5;
-    -fx-border-color: #68bea9;
+    -fx-border-color: #a3d5d5;
     -fx-text-fill: white;
 }
 
 .tableBlue.table-view{
-    -fx-background-color: #68bea9;
+    -fx-background-color: #a3d5d5;
 }
 
 .tableBlue.column-header{

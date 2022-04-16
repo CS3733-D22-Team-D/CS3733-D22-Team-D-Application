@@ -1,13 +1,11 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -20,7 +18,6 @@ public class UserSettingsController extends ParentController {
 
   @FXML private Text accountName1;
   @FXML private Text accountUserName;
-  @FXML private JFXComboBox themeBox;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -48,14 +45,25 @@ public class UserSettingsController extends ParentController {
                             "edu/wpi/DapperDaemons/profilepictures/"
                                 + SecurityController.getUser().getNodeID()
                                 + ".png")))));
-
-    for (Theme theme : Theme.values()) {
-      themeBox.getItems().add(theme);
-    }
   }
 
   @FXML
-  private void themeAction(ActionEvent event) {
-    toggleTheme(Theme.valueOf(themeBox.getValue().toString()));
+  private void lightSwitch() {
+    toggleTheme(Theme.Light);
+  }
+
+  @FXML
+  private void darkSwitch() {
+    toggleTheme(Theme.Dark);
+  }
+
+  @FXML
+  private void blueSwitch() {
+    toggleTheme(Theme.Blue);
+  }
+
+  @FXML
+  private void redSwitch() {
+    toggleTheme(Theme.Red);
   }
 }
