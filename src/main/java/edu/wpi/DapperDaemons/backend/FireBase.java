@@ -21,7 +21,10 @@ public class FireBase {
   public static void init() {
     FileInputStream serviceAccount = null;
     try {
-      serviceAccount = new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
+      //      serviceAccount = new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
+      serviceAccount =
+          new FileInputStream(
+              FireBase.class.getClassLoader().getResource("service-account.json").getPath());
     } catch (FileNotFoundException e) {
       System.out.println("Service account json not found");
     }
