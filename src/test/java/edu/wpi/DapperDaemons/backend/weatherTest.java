@@ -6,7 +6,7 @@ class weatherTest {
 
   @Test
   void getWeather() throws Exception {
-    Float res = Float.valueOf(weather.getTemp("boston"));
+    Float res = Float.valueOf(Weather.getTemp("boston"));
     System.out.println(res);
   }
 }

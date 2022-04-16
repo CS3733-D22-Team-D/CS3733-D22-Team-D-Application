@@ -3,9 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
-import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.backend.connectionHandler;
-import edu.wpi.DapperDaemons.backend.weather;
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.net.URL;
@@ -24,25 +22,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ParentController extends UIController {
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    if (childContainer != null) {
-      mainBox = childContainer;
-    }
-
-    if (headerNameField != null) {
-      headerName = headerNameField;
-    }
-
-    initGraphics();
-
-    updateDate();
-    updateWeather();
-  }
 
   /* Time, Weather, and Database */
   @FXML private Label time;
@@ -104,6 +86,24 @@ public class ParentController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+    if (childContainer != null) {
+      mainBox = childContainer;
+    }
+
+    if (headerNameField != null) {
+      headerName = headerNameField;
+    }
+
+    initGraphics();
+    updateDate();
+    updateWeather();
+
+    swapPage("default", "Home");
+  }
+
   @FXML
   void changeServer(MouseEvent event) {}
 
@@ -125,12 +125,21 @@ public class ParentController extends UIController {
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
   }
+  //
+  //  @FXML
+  //  void logout(ActionEvent event) {
+  //    swapPage("login", "Login");
+  //    SecurityController.setUser(null);
+  //  }
 
   @FXML
-  void logout(ActionEvent event) {}
-
-  @FXML
-  void openUserDropdown(ActionEvent event) {}
+  void openUserDropdown(ActionEvent event) {
+    if (userSettingsToggle.isSelected()) {
+      userDropdown.setVisible(true);
+    } else {
+      userDropdown.setVisible(false);
+    }
+  }
 
   @FXML
   void openUserSettings(ActionEvent event) {
@@ -138,7 +147,24 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void quitProgram(ActionEvent event) {}
+  void quitProgram(MouseEvent event) {
+    App.LOG.info("Closing program");
+    LogSaver.saveAll();
+    CSVSaver.saveAll();
+    App.LOG.info("Successfully saved all files!");
+    if (sceneBox != null && sceneBox.getScene() != null) {
+      Stage window = (Stage) sceneBox.getScene().getWindow();
+      if (window != null) window.close();
+    }
+    Platform.exit();
+    System.exit(0);
+  }
+
+  @FXML
+  public void logout() throws IOException {
+    switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
+  }
 
   @FXML
   void switchToAboutUs(MouseEvent event) {
@@ -156,7 +182,9 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMap(MouseEvent event) {}
+  void switchToMap(MouseEvent event) {
+    swapPage("locationMap", "Interactive Map");
+  }
 
   @FXML
   void switchToMapDashboard(MouseEvent event) {
@@ -234,14 +262,14 @@ public class ParentController extends UIController {
     ca.setBrightness(1.0);
     serverIcon.setEffect(ca);
 
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED))
+    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
       serverIcon.setImage(EMBEDDED);
     else serverIcon.setImage(SERVER);
   }
 
   private boolean tryChange() throws InterruptedException {
-    if (connectionHandler.getType().equals(connectionHandler.connectionType.EMBEDDED)) {
-      if (connectionHandler.switchToClientServer()) {
+    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED)) {
+      if (ConnectionHandler.switchToClientServer()) {
         Thread.sleep(1000);
         serverIcon.setImage(SERVER);
         return true;
@@ -251,7 +279,7 @@ public class ParentController extends UIController {
         return false;
       }
     } else {
-      if (connectionHandler.switchToEmbedded()) {
+      if (ConnectionHandler.switchToEmbedded()) {
         Thread.sleep(1000);
         serverIcon.setImage(EMBEDDED);
         return true;
@@ -303,7 +331,7 @@ public class ParentController extends UIController {
                       // Gather data
                       int temp = -999;
                       try {
-                        temp = weather.getTemp("boston");
+                        temp = Weather.getTemp("boston");
                       } catch (Exception ignored) {
                       }
 
@@ -318,7 +346,7 @@ public class ParentController extends UIController {
                           () -> {
                             if (finalTemp != -999) tempLabel.setText(finalTemp + "\u00B0F");
                             try {
-                              weatherIcon.setImage(weather.getIcon("boston"));
+                              weatherIcon.setImage(Weather.getIcon("boston"));
                             } catch (Exception ignored) {
                             }
                             weatherIcon.setScaleX(1);

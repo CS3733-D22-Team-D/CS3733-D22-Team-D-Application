@@ -3,11 +3,11 @@ package edu.wpi.DapperDaemons.backend;
 import java.util.Objects;
 import javax.sound.sampled.*;
 
-public class soundPlayer {
+public class SoundPlayer {
   private Thread sound;
   private String file;
 
-  public soundPlayer(String file) {
+  public SoundPlayer(String file) {
     this.file = file;
   }
 

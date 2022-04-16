@@ -15,12 +15,12 @@ public class DefaultTest {
 
   @Test
   public void checkLoadCSV() throws SQLException {
-    csvLoader.loadAll();
+    CSVLoader.loadAll();
   }
 
   @Test
   public void checkSaveCSV() {
-    csvSaver.saveAll();
+    CSVSaver.saveAll();
   }
 
   @Test

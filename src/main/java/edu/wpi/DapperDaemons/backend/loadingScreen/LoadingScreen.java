@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.loadingScreen;
+package edu.wpi.DapperDaemons.backend.loadingScreen;
 
 import edu.wpi.DapperDaemons.controllers.loadingScreenController;
 import java.io.IOException;
