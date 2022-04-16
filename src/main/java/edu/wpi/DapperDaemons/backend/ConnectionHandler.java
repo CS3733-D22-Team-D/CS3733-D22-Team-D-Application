@@ -52,6 +52,7 @@ public class ConnectionHandler {
       DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
       DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
       DAO<LocationNodeConnections> locationNodeConnectionsDAO = DAOPouch.getLocationNodeDAO();
+      DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
 
       Map<String, LabRequest> labRequestMap = labRequestDAO.getAll();
       Map<String, MealDeliveryRequest> mealDeliveryRequestMap = mealDeliveryRequestDAO.getAll();
@@ -68,6 +69,7 @@ public class ConnectionHandler {
       Map<String, Patient> patientMap = patientDAO.getAll();
       Map<String, LocationNodeConnections> locationNodeConnectionsMap =
           locationNodeConnectionsDAO.getAll();
+      Map<String, LanguageRequest> languageRequestMap = languageRequestDAO.getAll();
 
       type = connectionType.CLOUD;
       connection = null;
@@ -107,6 +109,9 @@ public class ConnectionHandler {
       for (LocationNodeConnections lr : locationNodeConnectionsMap.values()) {
         locationNodeConnectionsDAO.add(lr);
       }
+      for (LanguageRequest lr : languageRequestMap.values()) {
+        languageRequestDAO.add(lr);
+      }
       new FireBaseLoader(labRequestDAO, new LabRequest());
       new FireBaseLoader(mealDeliveryRequestDAO, new MealDeliveryRequest());
       new FireBaseLoader(medicalEquipmentRequestDAO, new MedicalEquipmentRequest());
@@ -119,6 +124,7 @@ public class ConnectionHandler {
       new FireBaseLoader(medicalEquipmentDAO, new MedicalEquipment());
       new FireBaseLoader(patientDAO, new Patient());
       new FireBaseLoader(locationNodeConnectionsDAO, new LocationNodeConnections());
+      new FireBaseLoader(labRequestDAO, new LanguageRequest());
     } catch (Exception e) {
       return false;
     }

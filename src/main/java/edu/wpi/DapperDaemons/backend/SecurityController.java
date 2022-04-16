@@ -44,6 +44,8 @@ public class SecurityController {
       return clearance >= 3;
     } else if (tableName.equals("PATIENTS")) {
       return clearance >= 3;
+    } else if (tableName.equals("LANGUAGEREQUESTS")) {
+      return clearance >= 2;
     }
     return false;
   }

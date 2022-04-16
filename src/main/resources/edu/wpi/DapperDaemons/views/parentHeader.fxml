@@ -172,6 +172,11 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToLanguage" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />

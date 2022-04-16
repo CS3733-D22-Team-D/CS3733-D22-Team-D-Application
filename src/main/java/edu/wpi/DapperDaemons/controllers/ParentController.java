@@ -387,6 +387,11 @@ public class ParentController extends UIController {
   }
 
   @FXML
+  void switchToLanguage(MouseEvent event) {
+    swapPage("language", "Interpreter Request");
+  }
+
+  @FXML
   void switchToDB(MouseEvent event) {
     swapPage("backendInfoDisp", "Backend Information Display");
   }

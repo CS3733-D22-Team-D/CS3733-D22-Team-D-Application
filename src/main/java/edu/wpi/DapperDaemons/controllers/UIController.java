@@ -243,7 +243,7 @@ public abstract class UIController extends AppController {
    */
   protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<>();
-    for (Location loc : this.locations) {
+    for (Location loc : new ArrayList<Location>(DAOPouch.getLocationDAO().getAll().values())) {
       names.add(loc.getLongName());
     }
     return names;
