@@ -82,6 +82,7 @@ public class DefaultController extends ParentController {
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
     bindImage(backendPageImage, backendPageContainer);
+    //    initConnectionImage();
   }
 
   private void initSequence() {

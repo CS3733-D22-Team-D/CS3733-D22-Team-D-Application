@@ -1,9 +1,9 @@
-package edu.wpi.DapperDaemons.serial;
+package edu.wpi.DapperDaemons.map.serial;
 
 import arduino.*;
 import com.fazecast.jSerialComm.SerialPort;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
+import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.ArduinoTimeOutException;
+import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
 import java.util.ArrayList;
 import java.util.List;
 

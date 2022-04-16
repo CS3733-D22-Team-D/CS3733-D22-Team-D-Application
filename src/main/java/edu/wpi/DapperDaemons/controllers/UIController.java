@@ -11,8 +11,6 @@ import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,8 +33,6 @@ public abstract class UIController extends AppController {
   @FXML private VBox slider;
   @FXML private VBox sceneBox;
   @FXML private ImageView darkSwitch;
-
-  protected static boolean isDark;
 
   /* Home page stuff */
   @FXML private VBox userDropdown;
@@ -65,9 +61,10 @@ public abstract class UIController extends AppController {
     try {
       initAccountGraphics();
     } catch (Exception e) {
-      showError("We could not find your profile picture.", Pos.TOP_LEFT);
+      System.out.println(
+          "Couldn't initialize account graphics, account is probably null for some reason");
+      //      showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
-    setTheme();
   }
 
   private void initAccountGraphics() throws NullPointerException {
@@ -129,95 +126,6 @@ public abstract class UIController extends AppController {
         });
   }
 
-  @FXML
-  public void toggleTheme() {
-    isDark = !isDark;
-    setTheme();
-  }
-
-  public void setTheme() {
-    Set<Node> backs = sceneBox.lookupAll("#background");
-    Set<Node> fields = sceneBox.lookupAll("#field");
-    Set<Node> fores = sceneBox.lookupAll("#foreground");
-    Set<Node> jButtons = sceneBox.lookupAll("#jButton");
-    Set<Node> specialFields = sceneBox.lookupAll("#specialField");
-    Set<Node> texts = sceneBox.lookupAll("#label");
-    Set<Node> tableCols = sceneBox.lookupAll("#col");
-
-    if (isDark) {
-      darkSwitch.setImage(
-          new Image(
-              getClass()
-                  .getClassLoader()
-                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/sun.png")
-                  .toString()));
-
-      for (Node back : backs) {
-        back.getStyleClass().add("backgroundDark");
-      }
-
-      for (Node field : fields) {
-        field.getStyleClass().add("fieldDark");
-      }
-
-      for (Node fore : fores) {
-        fore.getStyleClass().add("foregroundDark");
-      }
-
-      for (Node jButton : jButtons) {
-        jButton.getStyleClass().add("fieldDark");
-      }
-
-      for (Node specialField : specialFields) {
-        specialField.getStyleClass().add("specialFieldDark");
-      }
-
-      for (Node text : texts) {
-        text.getStyleClass().add("textDark");
-      }
-
-      for (Node col : tableCols) {
-        col.getStyleClass().add("tableDark");
-      }
-
-    } else {
-      darkSwitch.setImage(
-          new Image(
-              getClass()
-                  .getClassLoader()
-                  .getResource("edu/wpi/DapperDaemons/assets/Glyphs/moon.png")
-                  .toString()));
-
-      for (Node back : backs) {
-        back.getStyleClass().remove("backgroundDark");
-      }
-
-      for (Node field : fields) {
-        field.getStyleClass().remove("fieldDark");
-      }
-
-      for (Node fore : fores) {
-        fore.getStyleClass().remove("foregroundDark");
-      }
-
-      for (Node jButton : jButtons) {
-        jButton.getStyleClass().remove("fieldDark");
-      }
-
-      for (Node specialField : specialFields) {
-        specialField.getStyleClass().remove("specialFieldDark");
-      }
-
-      for (Node text : texts) {
-        text.getStyleClass().remove("textDark");
-      }
-
-      for (Node col : tableCols) {
-        col.getStyleClass().remove("tableDark");
-      }
-    }
-  }
-
   public void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
   }
@@ -243,7 +151,7 @@ public abstract class UIController extends AppController {
    */
   protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<>();
-    for (Location loc : this.locations) {
+    for (Location loc : new ArrayList<Location>(DAOPouch.getLocationDAO().getAll().values())) {
       names.add(loc.getLongName());
     }
     return names;

@@ -683,6 +683,24 @@
                      </children>
                   </StackPane>
                </right>
+               <left>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button id="defaultButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToMapDashboard" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Back to Dashboard" textFill="WHITE">
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="15.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </left>
             </BorderPane>
          </children>
       </StackPane>

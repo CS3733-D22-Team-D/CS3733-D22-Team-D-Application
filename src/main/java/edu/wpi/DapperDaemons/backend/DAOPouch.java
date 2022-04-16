@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
@@ -17,22 +18,83 @@ public class DAOPouch {
   private static DAO<MedicalEquipment> medicalEquipmentDAO;
   private static DAO<Patient> patientDAO;
   private static DAO<LocationNodeConnections> nodeDAO;
+  private static DAO<LanguageRequest> languageRequestDAO;
+  private static DAO<Notification> notificationDAO;
 
   private DAOPouch() {}
 
   public static void init() throws IOException {
     labRequestDAO = new DAO<>(new LabRequest());
+    App.LOG.info("Successfully constructed Lab Request DAO");
+
+    App.LOG.info("Initializing Meal Delivery Request DAO");
     mealDeliveryRequestDAO = new DAO<>(new MealDeliveryRequest());
+    App.LOG.info("Successfully constructed Meal Delivery Request DAO");
+
+    App.LOG.info("Initializing Medical Equipment Request DAO");
     medicalEquipmentRequestDAO = new DAO<>(new MedicalEquipmentRequest());
+    App.LOG.info("Successfully constructed Medical Equipment Request DAO");
+
+    App.LOG.info("Initializing Medicine Request DAO");
     medicineRequestDAO = new DAO<>(new MedicineRequest());
+    App.LOG.info("Successfully constructed Medicine Request DAO");
+
+    App.LOG.info("Initializing Patient Transport Request DAO");
     patientTransportRequestDAO = new DAO<>(new PatientTransportRequest());
+    App.LOG.info("Successfully constructed Patient Transport Request DAO");
+
+    App.LOG.info("Initializing Sanitation Request DAO");
     sanitationRequestDAO = new DAO<>(new SanitationRequest());
+    App.LOG.info("Successfully constructed Sanitation Request DAO");
+
+    App.LOG.info("Initializing Account DAO");
     accountDAO = new DAO<>(new Account());
+    App.LOG.info("Successfully constructed Account DAO");
+
+    App.LOG.info("Initializing Employee DAO");
     employeeDAO = new DAO<>(new Employee());
+    App.LOG.info("Successfully constructed Employee DAO");
+
+    App.LOG.info("Initializing Location DAO");
     locationDAO = new DAO<>(new Location());
+    App.LOG.info("Successfully constructed Location DAO");
+
+    App.LOG.info("Initializing Medical Equipment DAO");
     medicalEquipmentDAO = new DAO<>(new MedicalEquipment());
+    App.LOG.info("Successfully constructed Medical Equipment DAO");
+
+    App.LOG.info("Initializing Patient DAO");
     patientDAO = new DAO<>(new Patient());
+    App.LOG.info("Successfully constructed Patient DAO");
+
+    App.LOG.info("Initializing Node Connections");
     nodeDAO = new DAO<>(new LocationNodeConnections());
+    App.LOG.info("Node connections have been produced");
+
+    App.LOG.info("Initializing Languages");
+    languageRequestDAO = new DAO<>(new LanguageRequest());
+    App.LOG.info("Languages has been produced");
+
+    App.LOG.info("Initializing Notifications");
+    notificationDAO = new DAO<>(new Notification());
+    App.LOG.info("Notifications has been produced");
+
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      labRequestDAO.load();
+      mealDeliveryRequestDAO.load();
+      medicalEquipmentRequestDAO.load();
+      medicineRequestDAO.load();
+      patientTransportRequestDAO.load();
+      sanitationRequestDAO.load();
+      accountDAO.load();
+      employeeDAO.load();
+      locationDAO.load();
+      medicalEquipmentDAO.load();
+      patientDAO.load();
+      nodeDAO.load();
+      languageRequestDAO.load();
+      notificationDAO.load();
+    }
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -81,6 +143,14 @@ public class DAOPouch {
 
   public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
+  }
+
+  public static DAO<LanguageRequest> getLanguageRequestDAO() {
+    return languageRequestDAO;
+  }
+
+  public static DAO<Notification> getNotificationDAO() {
+    return notificationDAO;
   }
 
   //  public static DAO getDAO(TableObject type) {

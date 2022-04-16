@@ -10,7 +10,7 @@ public abstract class TableObject {
 
   public abstract String tableName();
 
-  public abstract String getAttribute(int columnNumber);
+  public abstract String getAttribute(int columnNumber) throws ArrayIndexOutOfBoundsException;
 
   public abstract void setAttribute(int columnNumber, String newAttribute);
 

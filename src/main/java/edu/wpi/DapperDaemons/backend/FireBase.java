@@ -8,11 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class firebase {
+public class FireBase {
 
   private static DatabaseReference ref;
 
-  private firebase() {}
+  private FireBase() {}
 
   public static DatabaseReference getReference() {
     return ref;
@@ -22,6 +22,10 @@ public class firebase {
     FileInputStream serviceAccount = null;
     try {
       serviceAccount = new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
+      //      serviceAccount =
+      //          new FileInputStream(
+      //
+      // FireBase.class.getClassLoader().getResource("service-account.json").getPath());
     } catch (FileNotFoundException e) {
       System.out.println("Service account json not found");
     }

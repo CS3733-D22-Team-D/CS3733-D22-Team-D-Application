@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" stylesheets="@../assets/themes.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -172,6 +173,11 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToLanguage" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -211,7 +217,7 @@
                               <Insets />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" minWidth="30.0" prefHeight="51.0" prefWidth="34.0">
+                        <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="51.0" prefWidth="34.0">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -255,7 +261,7 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="32.0">
                            <children>
-                              <StackPane onMouseClicked="#toggleTheme" prefHeight="150.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
                                        <image>
@@ -295,7 +301,11 @@
                         </HBox>
                         <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0" visible="false">
                            <children>
-                              <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#changeServer" preserveRatio="true" />
+                              <ToggleButton fx:id="serverToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openServerDropdown" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #012D5A;" text="ToggleButton">
+                                 <graphic>
+                                    <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
+                                 </graphic>
+                              </ToggleButton>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
@@ -338,13 +348,26 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="45.0" prefWidth="87.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
                            <graphic>
-                              <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="113.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="87.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT">
+                                       <image>
+                                          <Image url="@../assets/Glyphs/notification.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                           <graphic>
+                              <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0">
                                  <children>
                                     <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
-                                          <Insets />
+                                          <Insets bottom="2.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font size="14.0" />
@@ -352,10 +375,13 @@
                                     </Text>
                                     <Circle fx:id="profilePic" fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                          <Insets bottom="12.0" left="10.0" right="3.0" top="10.0" />
                                        </HBox.margin>
                                     </Circle>
                                  </children>
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
                               </HBox>
                            </graphic>
                         </ToggleButton>
@@ -437,7 +463,85 @@
                   </VBox>
                </children>
             </HBox>
+            <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="serverDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <JFXButton fx:id="serverButtonOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fx:id="serverSlotOne" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="serverSlotOneText" strokeWidth="0.0" text="User Settings">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
+                        <JFXButton fx:id="serverButtonTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fx:id="serverSlotTwo" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/HomeIcons/userLogoutIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="serverSlotTwoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </JFXButton>
+                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="284.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="notifications" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <HBox.margin>
+                        <Insets right="125.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@../assets/themes.css" />
+      <URL value="@../assets/themeBlue.css" />
+      <URL value="@../assets/themeDark.css" />
+      <URL value="@../assets/themeRed.css" />
+   </stylesheets>
 </VBox>
