@@ -221,16 +221,45 @@ public class ParentController extends UIController {
                       () -> {
                         Platform.runLater(
                             () -> {
-                              System.out.println("Receiving notification");
-                              ((HashMap<String, List<String>>) snapshot.getValue())
-                                  .forEach(
-                                      (k, v) -> {
-                                        Notification n = new Notification();
-                                        for (int i = 1; i <= v.size(); i++) {
-                                          n.setAttribute(i, v.get(i - 1));
-                                        }
-                                        setNotifications(n);
-                                      });
+                              //                              HashMap<String, List<String>> snap =
+                              //                                  ((HashMap<String, List<String>>)
+                              // snapshot.getValue());
+                              //                              ArrayList<String> val = new
+                              // ArrayList(snap.values());
+                              //                              for (List<String> s : snap.values()) {
+                              //                                if
+                              // (s.get(1).equals(SecurityController.getUser().getAttribute(1))) {
+                              //                                  addNotification(new
+                              // Notification(s.get(2), s.get(3), s.get(1)));
+                              //                                }
+                              //                              }
+
+                              //                              List<Notification> notifications =
+                              //                                  new ArrayList<Notification>(
+                              //                                      DAOPouch.getNotificationDAO()
+                              //                                          .filter(2,
+                              // SecurityController.getUser().getAttribute(1))
+                              //                                          .values());
+                              //                              if (notifications.size() > 0) {
+                              //                                setNotifications();
+                              //                              }
+
+                              //                              System.out.println("Receiving
+                              // notification");
+                              //                              ((HashMap<String, List<String>>)
+                              //                                      snapshot.getValue()) // TODO
+                              // might be able to comment this out
+                              //                                  .forEach(
+                              //                                      (k, v) -> {
+                              //                                        Notification n = new
+                              // Notification();
+                              //                                        for (int i = 1; i <=
+                              // v.size(); i++) {
+                              //                                          n.setAttribute(i, v.get(i
+                              // - 1));
+                              //                                        }
+                              setNotifications();
+                              //                                      });
                             });
                       })
                   .start();
@@ -244,27 +273,41 @@ public class ParentController extends UIController {
     }
   }
 
-  void setNotifications(Notification c) {
-    this.notifications.getChildren().clear();
-    List<Notification> notifications =
-        new ArrayList<Notification>(
-            DAOPouch.getNotificationDAO()
-                .filter(2, SecurityController.getUser().getAttribute(1))
-                .values());
-    if (notifications.size() == 0 || c == null) {
-      Text t = new Text();
-      t.setText("Looks empty in here");
-      this.notifications.getChildren().add(t);
-      return;
-    }
+  void addNotification(Notification n) {
     SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
     try {
       sp.play();
     } catch (LineUnavailableException e) {
       throw new RuntimeException(e);
     }
-    for (Notification n : notifications) {
-      this.notifications.getChildren().add(createNotification(n));
+    this.notifications.getChildren().add(createNotification(n));
+  }
+
+  void setNotifications() {
+    this.notifications.getChildren().clear();
+    List<Notification> notifications =
+        new ArrayList<Notification>(
+            DAOPouch.getNotificationDAO()
+                .filter(2, SecurityController.getUser().getAttribute(1))
+                .values());
+    List<Notification> unRead =
+        new ArrayList(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
+    if (notifications.size() == 0) {
+      Text t = new Text();
+      t.setText("Looks empty in here");
+      this.notifications.getChildren().add(t);
+      return;
+    }
+    if (unRead.size() > 0) {
+      SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+      try {
+        sp.play();
+      } catch (LineUnavailableException e) {
+        throw new RuntimeException(e);
+      }
+      for (Notification n : unRead) {
+        this.notifications.getChildren().add(createNotification(n));
+      }
     }
   }
 
