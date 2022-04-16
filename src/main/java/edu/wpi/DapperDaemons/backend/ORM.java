@@ -31,50 +31,50 @@ public class ORM<T extends TableObject> {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(tableName + " data updating");
-              for (DataSnapshot ignored : snapshot.getChildren()) {
-                new Thread( // this is very important, so that no other event listeners overwrite
-                        // this one
-                        () -> {
-                          try {
-                            ((HashMap<String, List<String>>) snapshot.getValue())
-                                .forEach(
-                                    (k, v) -> {
-                                      map.put(
-                                          FireBaseCoder.decodeFirebaseKey(k),
-                                          (T)
-                                              type.newInstance(
-                                                  v.stream()
-                                                      .map(
-                                                          e -> {
-                                                            if (e != null) {
-                                                              return FireBaseCoder
-                                                                  .decodeFirebaseKey(e);
-                                                            }
-                                                            return e;
-                                                          })
-                                                      .collect(Collectors.toList())));
-                                    });
-                          } catch (ClassCastException e) {
-                            // TODO test if this is ever reachd
-                            System.out.println("Caught in event listener");
-                            HashMap<String, Object> res =
-                                (HashMap<String, Object>) snapshot.getValue();
-                            ArrayList<String> attributes = new ArrayList<>();
-                            T temp = (T) type.newInstance(new ArrayList<>());
-                            res.forEach(
-                                (k, v) -> {
-                                  if (k.equals("nodeID")) {
-                                    attributes.add(0, v.toString());
-                                  } else {
-                                    attributes.add(v.toString());
-                                  }
-                                  temp.setAttribute(k, String.valueOf(v));
-                                });
-                            map.put(attributes.get(0), temp);
-                          }
-                        })
-                    .start();
-              }
+              //              for (DataSnapshot ignored : snapshot.getChildren()) {
+              new Thread( // this is very important, so that no other event listeners overwrite
+                      // this one
+                      () -> {
+                        try {
+                          ((HashMap<String, List<String>>) snapshot.getValue())
+                              .forEach(
+                                  (k, v) -> {
+                                    map.put(
+                                        FireBaseCoder.decodeFirebaseKey(k),
+                                        (T)
+                                            type.newInstance(
+                                                v.stream()
+                                                    .map(
+                                                        e -> {
+                                                          if (e != null) {
+                                                            return FireBaseCoder.decodeFirebaseKey(
+                                                                e);
+                                                          }
+                                                          return e;
+                                                        })
+                                                    .collect(Collectors.toList())));
+                                  });
+                        } catch (ClassCastException e) {
+                          // TODO test if this is ever reachd
+                          System.out.println("Caught in event listener");
+                          HashMap<String, Object> res =
+                              (HashMap<String, Object>) snapshot.getValue();
+                          ArrayList<String> attributes = new ArrayList<>();
+                          T temp = (T) type.newInstance(new ArrayList<>());
+                          res.forEach(
+                              (k, v) -> {
+                                if (k.equals("nodeID")) {
+                                  attributes.add(0, v.toString());
+                                } else {
+                                  attributes.add(v.toString());
+                                }
+                                temp.setAttribute(k, String.valueOf(v));
+                              });
+                          map.put(attributes.get(0), temp);
+                        }
+                      })
+                  .start();
+              //              }
             }
 
             @Override

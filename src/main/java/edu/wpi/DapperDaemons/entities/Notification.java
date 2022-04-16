@@ -76,7 +76,11 @@ public class Notification extends TableObject {
 
   @Override
   public TableObject newInstance(List<String> l) {
-    return new Notification("Subject", "Body", "Default");
+    Notification temp = new Notification();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override

@@ -2,6 +2,10 @@ package edu.wpi.DapperDaemons.controllers;
 
 import static edu.wpi.DapperDaemons.backend.ConnectionHandler.*;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
@@ -28,6 +32,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
 
 public class ParentController extends UIController {
 
@@ -127,6 +132,8 @@ public class ParentController extends UIController {
       mainBox = childContainer;
     }
 
+    setNotificationListener();
+
     if (headerNameField != null) {
       headerName = headerNameField;
     }
@@ -137,7 +144,7 @@ public class ParentController extends UIController {
 
     setServerToggleMenu();
 
-    setNotifications();
+    //    setNotifications();
 
     swapPage("default", "Home");
   }
@@ -202,24 +209,69 @@ public class ParentController extends UIController {
     }
   }
 
-  void setNotifications() {
+  void setNotificationListener() {
+    if (ConnectionHandler.getType().equals(connectionType.CLOUD)) {
+      DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
+      ref.addValueEventListener(
+          new ValueEventListener() {
+            @Override
+            public synchronized void onDataChange(DataSnapshot snapshot) {
+              System.out.println("Notification listener");
+              new Thread(
+                      () -> {
+                        Platform.runLater(
+                            () -> {
+                              System.out.println("Receiving notification");
+                              ((HashMap<String, List<String>>) snapshot.getValue())
+                                  .forEach(
+                                      (k, v) -> {
+                                        Notification n = new Notification();
+                                        for (int i = 1; i <= v.size(); i++) {
+                                          n.setAttribute(i, v.get(i - 1));
+                                        }
+                                        setNotifications(n);
+                                      });
+                            });
+                      })
+                  .start();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+              System.out.println("Cancelled in notification listener");
+            }
+          });
+    }
+  }
+
+  void setNotifications(Notification c) {
+    this.notifications.getChildren().clear();
     List<Notification> notifications =
         new ArrayList<Notification>(
             DAOPouch.getNotificationDAO()
                 .filter(2, SecurityController.getUser().getAttribute(1))
                 .values());
-    if (notifications.size() == 0) {
+    if (notifications.size() == 0 || c == null) {
       Text t = new Text();
       t.setText("Looks empty in here");
       this.notifications.getChildren().add(t);
+      return;
     }
-    for (Notification n : notifications) {}
+    SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+    try {
+      sp.play();
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
+    for (Notification n : notifications) {
+      this.notifications.getChildren().add(createNotification(n));
+    }
   }
 
-  HBox createNotification() {
+  HBox createNotification(Notification n) {
     HBox outer = new HBox();
     ImageView icon = new ImageView();
-    Text txt = new Text();
+    Text txt = new Text(n.getSubject());
     outer.getChildren().add(icon);
     outer.getChildren().add(txt);
     return outer;
