@@ -55,6 +55,8 @@ public class ORM<T extends TableObject> {
                                                       .collect(Collectors.toList())));
                                     });
                           } catch (ClassCastException e) {
+                            // TODO test if this is ever reachd
+                            System.out.println("Caught in event listener");
                             HashMap<String, Object> res =
                                 (HashMap<String, Object>) snapshot.getValue();
                             ArrayList<String> attributes = new ArrayList<>();
@@ -95,10 +97,6 @@ public class ORM<T extends TableObject> {
         System.out.println("SQLException");
       }
     }
-  }
-
-  private T getInstance() {
-    return (T) type.newInstance(new ArrayList<>());
   }
 
   public T get(String primaryKey) {
@@ -170,7 +168,7 @@ public class ORM<T extends TableObject> {
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) add(type);
     else {
       try {
-        T instance = getInstance();
+        T instance = (T) type.newInstance(new ArrayList<>());
         String statement = "UPDATE " + tableName + " SET " + columnNames.get(1) + " = ?,";
         for (int i = 2; i < numAttributes - 1; i++) {
           statement += columnNames.get(i) + " = ?,";
@@ -198,11 +196,11 @@ public class ORM<T extends TableObject> {
         String query = "SELECT * FROM " + tableName;
         ResultSet resultSet = stmt.executeQuery(query);
         while (resultSet.next()) {
-          T temp = getInstance();
+          List<String> attributes = new ArrayList<>();
           for (int i = 1; i <= numAttributes; i++) {
-            temp.setAttribute(i, resultSet.getString(columnNames.get(i - 1)));
+            attributes.add(resultSet.getString(columnNames.get(i - 1)));
           }
-          map.put(temp.getAttribute(1), temp);
+          map.put(attributes.get(0), (T) type.newInstance(attributes));
         }
         stmt.close();
       } catch (SQLException e) {
