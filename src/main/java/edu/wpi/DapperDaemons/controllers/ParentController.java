@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.ColorAdjust;
@@ -77,6 +78,16 @@ public class ParentController extends UIController {
 
   private long startTime;
   private int count = 0;
+
+  // names are formatted this way so enums can easily reference css files
+  public enum Theme {
+    Light,
+    Dark,
+    Blue,
+    Red
+  }
+
+  protected static Theme theme;
 
   public final Image EMBEDDED =
       new Image(
@@ -154,6 +165,7 @@ public class ParentController extends UIController {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    setTheme();
   }
 
   @FXML
@@ -396,9 +408,6 @@ public class ParentController extends UIController {
     swapPage("backendInfoDisp", "Backend Information Display");
   }
 
-  @FXML
-  void toggleTheme(MouseEvent event) {}
-
   private void initGraphics() {
     bindImage(BGImage, BGContainer);
     initConnectionImage();
@@ -550,5 +559,81 @@ public class ParentController extends UIController {
         },
         0,
         weatherUpdate * 1000); // Every 1 second
+  }
+
+  @FXML
+  public void toggleTheme(Theme newTheme) {
+    theme = newTheme;
+    setTheme();
+  }
+
+  public void setTheme() {
+
+    Set<Node> backs = mainBox.lookupAll("#background");
+    Set<Node> fields = mainBox.lookupAll("#field");
+    Set<Node> fores = mainBox.lookupAll("#foreground");
+    Set<Node> jButtons = mainBox.lookupAll("#jButton");
+    Set<Node> specialFields = mainBox.lookupAll("#specialField");
+    Set<Node> texts = mainBox.lookupAll("#label");
+    Set<Node> tableCols = mainBox.lookupAll("#col");
+
+    //      for (Node back : backs) {
+    //        back.getStyleClass().clear();
+    //      }
+
+    for (Node field : fields) {
+      field.getStyleClass().clear();
+    }
+
+    for (Node fore : fores) {
+      fore.getStyleClass().clear();
+    }
+
+    for (Node jButton : jButtons) {
+      jButton.getStyleClass().clear();
+    }
+
+    for (Node specialField : specialFields) {
+      specialField.getStyleClass().clear();
+    }
+
+    for (Node text : texts) {
+      text.getStyleClass().clear();
+    }
+
+    for (Node col : tableCols) {
+      col.getStyleClass().clear();
+    }
+
+    if (theme != Theme.Light && theme != null) {
+
+      //      for (Node back : backs) {
+      //        back.getStyleClass().add("background" + theme.toString());
+      //      }
+
+      for (Node field : fields) {
+        field.getStyleClass().add("field" + theme.toString());
+      }
+
+      for (Node fore : fores) {
+        fore.getStyleClass().add("foreground" + theme.toString());
+      }
+
+      for (Node jButton : jButtons) {
+        jButton.getStyleClass().add("field" + theme.toString());
+      }
+
+      for (Node specialField : specialFields) {
+        specialField.getStyleClass().add("specialField" + theme.toString());
+      }
+
+      for (Node text : texts) {
+        text.getStyleClass().add("text" + theme.toString());
+      }
+
+      for (Node col : tableCols) {
+        col.getStyleClass().add("table" + theme.toString());
+      }
+    }
   }
 }

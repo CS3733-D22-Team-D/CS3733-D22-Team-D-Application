@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserSettingsController">
+<HBox prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserSettingsController">
    <children>
       <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="220.0" HBox.hgrow="NEVER">
          <children>
@@ -116,9 +117,9 @@
                   <Insets top="16.0" />
                </VBox.margin>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
                <children>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
+                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
@@ -158,7 +159,7 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
+                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
@@ -197,87 +198,164 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox id="foreground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="420.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="160.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                  <VBox id="foreground" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Looking For Something Else?" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="23.0" />
-                           </font>
-                        </Text>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Features" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                           <children>
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Color">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Button" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Security Access Request">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </VBox>
                      </children>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </VBox>
-                  <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="78.0" prefWidth="100.0">
+                  <VBox id="foreground" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Theme" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Color">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fitHeight="40.0" fitWidth="70.0" onMouseClicked="#lightSwitch" pickOnBounds="true" preserveRatio="true">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../assets/lightTheme.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="40.0" fitWidth="70.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#blueSwitch" pickOnBounds="true" preserveRatio="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../assets/blueTheme.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Request To Change Security Access">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fitHeight="40.0" fitWidth="70.0" onMouseClicked="#darkSwitch" pickOnBounds="true" preserveRatio="true">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../assets/darkTheme.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="40.0" fitWidth="70.0" onMouseClicked="#redSwitch" pickOnBounds="true" preserveRatio="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../assets/redTheme.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.15000000596046448" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color opacity="0.15000000596046448" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </VBox>
+            </HBox>
          </children>
          <HBox.margin>
             <Insets right="220.0" />
