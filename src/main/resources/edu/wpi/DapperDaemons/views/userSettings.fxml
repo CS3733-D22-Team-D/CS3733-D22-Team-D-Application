@@ -4,10 +4,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
@@ -86,116 +88,201 @@
             </ToggleButton>
          </children>
       </VBox>
-      <VBox id="background" alignment="TOP_CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" spacing="16.0" HBox.hgrow="ALWAYS">
+      <StackPane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
+            <VBox id="background" fx:id="homeSettingsPage" alignment="TOP_CENTER" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" spacing="16.0" visible="false">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
                      <children>
-                        <Circle fx:id="profilePic1" fill="#d2d2d2" radius="90.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
+                           <children>
+                              <Circle fx:id="profilePic1" fill="#d2d2d2" radius="90.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                           </children>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <Text id="label" fx:id="accountName1" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Text>
+                        <Text id="label" fx:id="accountUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Text>
                      </children>
-                     <padding>
-                        <Insets bottom="6.0" />
-                     </padding>
                      <VBox.margin>
-                        <Insets left="40.0" right="40.0" />
+                        <Insets top="16.0" />
                      </VBox.margin>
                   </VBox>
-                  <Text id="label" fx:id="accountName1" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Text>
-                  <Text id="label" fx:id="accountUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets top="16.0" />
-               </VBox.margin>
-            </VBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
-               <children>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
+                     <children>
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
+                           <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                                 <children>
+                                    <Label text="Security Access Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text id="label" fx:id="securityLevel" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level">
+                                       <font>
+                                          <Font name="System Bold" size="23.0" />
+                                       </font>
+                                    </Text>
+                                    <Label id="label" fx:id="securityLevelDescription" text="Short Description of Access Level" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                                 <children>
+                                    <Label text="Protect Your Account" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                 <children>
+                                    <Label id="label" fx:id="currentProtection" text="Account's Level of Protection" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#switchTab2FA" style="-fx-background-color: transparent;" text="Button">
+                                       <graphic>
+                                          <HBox alignment="CENTER" prefHeight="16.0" spacing="10.0">
+                                             <children>
+                                                <Label id="label" text="Enable Further Protection" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </HBox>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox id="foreground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="420.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
-                              <Label text="Security Access Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Text id="label" fx:id="securityLevel" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Looking For Something Else?" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
-                              <Label id="label" fx:id="securityLevelDescription" text="Short Description of Access Level" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </VBox>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="78.0" prefWidth="100.0">
                            <children>
-                              <Label text="Protect Your Account" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                           <children>
-                              <Label id="label" fx:id="currentProtection" text="Account's Level of Protection" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                              <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#switchTab2FA" style="-fx-background-color: transparent;" text="Button">
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
                                  <graphic>
-                                    <HBox alignment="CENTER" prefHeight="16.0" spacing="10.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label id="label" text="Enable Further Protection" textAlignment="CENTER" wrapText="true">
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Color">
                                              <font>
-                                                <Font name="System Bold" size="12.0" />
+                                                <Font size="12.0" />
                                              </font>
-                                          </Label>
+                                          </Text>
                                           <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </HBox>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Button" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Request To Change Security Access">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children>
                         </VBox>
                      </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                      <effect>
                         <DropShadow>
                            <color>
@@ -205,92 +292,63 @@
                      </effect>
                   </VBox>
                </children>
-            </HBox>
-            <VBox id="foreground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="420.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" VBox.vgrow="NEVER">
+            </VBox>
+            <VBox fx:id="accountSettingsPage" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Looking For Something Else?" textAlignment="CENTER">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
+                           <children>
+                              <Circle fx:id="profilePic11" fill="#d2d2d2" radius="90.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                           </children>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <Text id="label" fx:id="accountName11" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name">
                            <font>
-                              <Font name="System Bold" size="23.0" />
+                              <Font size="23.0" />
+                           </font>
+                        </Text>
+                        <Text id="label" fx:id="accountUserName1" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+                           <font>
+                              <Font size="12.0" />
                            </font>
                         </Text>
                      </children>
+                     <VBox.margin>
+                        <Insets top="16.0" />
+                     </VBox.margin>
                   </VBox>
-                  <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="78.0" prefWidth="100.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Color">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Request To Change Security Access">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </HBox>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <TextField />
                      </children>
-                  </VBox>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                     </children>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color opacity="0.15000000596046448" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </VBox>
          </children>
-         <HBox.margin>
-            <Insets right="220.0" />
-         </HBox.margin>
-      </VBox>
+      </StackPane>
    </children>
 </HBox>
