@@ -1,14 +1,13 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.firebase.database.DatabaseReference;
 import com.opencsv.CSVReader;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class CSVLoader {
 
@@ -27,6 +26,8 @@ public class CSVLoader {
     filenames.put("MedicineRequest", new MedicineRequest());
     filenames.put("Accounts", new Account());
     filenames.put("AllEdges", new LocationNodeConnections());
+    filenames.put("LanguageRequests", new LanguageRequest());
+    filenames.put("Notifications", new Notification());
   }
 
   private CSVLoader() {}
@@ -38,7 +39,7 @@ public class CSVLoader {
           //          System.out.println("Currently on " + v.getTableName());
           try {
             try {
-              stmt.execute(v.getTableInit());
+              stmt.execute(v.tableInit());
             } catch (SQLException e) {
               //              System.out.printf("%s table already created\n", v.getTableName());
             }
@@ -60,7 +61,7 @@ public class CSVLoader {
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
     entries.remove(0);
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
     String query = "SELECT * FROM " + tableName;
 
     Statement stmt = ConnectionHandler.getConnection().createStatement();
@@ -91,5 +92,40 @@ public class CSVLoader {
     }
 
     prepStmt.close();
+  }
+
+  public static void resetFirebase() {
+    filenames.forEach(
+        (k, v) -> {
+          try {
+            loadToFirebase(v, k + ".csv");
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        });
+  }
+
+  public static void loadToFirebase(TableObject type, String filename) throws IOException {
+    InputStreamReader f =
+        new InputStreamReader(
+            Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filename)));
+    CSVReader read = new CSVReader(f);
+    List<String[]> entries = read.readAll();
+    if (entries.size() < 1) return;
+    entries.remove(0);
+    String tableName = type.tableName();
+
+    DatabaseReference ref = FireBase.getReference();
+    ref = ref.child(type.tableName());
+    Map<String, Map<String, String>> map = new HashMap<>();
+    Map<String, String> data;
+    for (String[] line : entries) {
+      data = new HashMap<>();
+      for (Integer i = 0; i < line.length; i++) {
+        data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
+      }
+      map.put(line[0], data);
+    }
+    ref.setValueAsync(map);
   }
 }

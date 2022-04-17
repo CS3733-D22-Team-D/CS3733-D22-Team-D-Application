@@ -5,12 +5,13 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -45,14 +46,26 @@ public class MedicineController extends UIController {
     priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
 
     try {
-      medicineRequests.getItems().addAll(medicineRequestDAO.getAll());
+      medicineRequests.getItems().addAll(new ArrayList(medicineRequestDAO.getAll().values()));
       //      System.out.println("Created table");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Medicine Request table was unable to be created\n");
     }
-
+    setListeners();
     onClearClicked();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMedicinRequestListener(
+        tl.eventListener(
+            () -> {
+              medicineRequests.getItems().clear();
+              medicineRequests
+                  .getItems()
+                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
+            }));
   }
 
   /** Clears the fields when clicked */
@@ -121,11 +134,7 @@ public class MedicineController extends UIController {
                 + patientDOB.getValue().getDayOfMonth()
                 + patientDOB.getValue().getYear();
         Patient patient = new Patient();
-        try {
-          patient = patientDAO.get(patientID);
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
+        patient = patientDAO.get(patientID);
         try {
           isAPatient = patient.getFirstName().equals(patientName.getText());
         } catch (NullPointerException e) {
@@ -175,11 +184,7 @@ public class MedicineController extends UIController {
   @FXML
   private boolean addItem(MedicineRequest request) {
     boolean hasClearance = false;
-    try {
-      hasClearance = medicineRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hasClearance = medicineRequestDAO.add(request);
     if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;

@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LabRequest extends TableObject implements Request {
 
@@ -25,7 +26,7 @@ public class LabRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
 
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE LABREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(20) ,"
@@ -37,7 +38,16 @@ public class LabRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public TableObject newInstance(List<String> l) {
+    LabRequest temp = new LabRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public String tableName() {
     return "LABREQUESTS";
   }
 
@@ -103,18 +113,46 @@ public class LabRequest extends TableObject implements Request {
     }
   }
 
+  public void setAttribute(String attribute, String newAttribute) {
+
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "labType":
+        labType = LabType.valueOf(newAttribute);
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
   @TableHandler(table = 0, col = 7)
   public RequestStatus getStatus() {
     return status;
   }
 
   @Override
-  public Object get() {
-    return new LabRequest();
-  }
-
-  @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Lab Request";
   }
 

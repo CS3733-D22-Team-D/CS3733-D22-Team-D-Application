@@ -117,7 +117,7 @@ public class MapController extends ParentController {
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      locationDAO.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
+      locationDAO.getAll().values().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
     }
@@ -154,7 +154,7 @@ public class MapController extends ParentController {
       RequestHandler.getAllRequests()
           .forEach(
               r -> {
-                if (!allReqNames.contains(r.getRequestType())) allReqNames.add(r.getRequestType());
+                if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
               });
       searchBar.getItems().addAll(allReqNames);
     } catch (Exception e) {
@@ -215,8 +215,8 @@ public class MapController extends ParentController {
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
     try {
-      equipment = equipmentDAO.filter(6, pos.getId());
-      patients = patientDAO.filter(6, pos.getId());
+      equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
+      patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
       requests = RequestHandler.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");

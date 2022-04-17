@@ -1,10 +1,18 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.*;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -14,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.ColorAdjust;
@@ -24,6 +33,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
 
 public class ParentController extends UIController {
 
@@ -32,6 +42,15 @@ public class ParentController extends UIController {
   @FXML private ImageView weatherIcon;
   @FXML private Label tempLabel;
   @FXML private ImageView serverIcon;
+  @FXML private ToggleButton serverToggle;
+  @FXML private ImageView serverSlotOne;
+  @FXML private ImageView serverSlotTwo;
+  @FXML private Text serverSlotOneText;
+  @FXML private Text serverSlotTwoText;
+  @FXML private VBox serverDropdown;
+  @FXML private Button serverButtonOne;
+  @FXML private Button serverButtonTwo;
+
   @FXML private HBox serverBox;
 
   /* Background */
@@ -57,7 +76,10 @@ public class ParentController extends UIController {
   @FXML private JFXButton userSettingsButton;
   @FXML private ToggleButton userSettingsToggle;
   @FXML private StackPane windowContents;
+  @FXML private ToggleButton alertButton;
+  @FXML private VBox notifications;
 
+  private static ValueEventListener notifListener;
   private static Timer timer;
   private static final int timeUpdate = 1;
 
@@ -90,6 +112,14 @@ public class ParentController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
 
+  // TODO get new image for the cloud server
+  public final Image CLOUD =
+      new Image(
+          Objects.requireNonNull(
+              getClass()
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/cloud.png")));
+
   public final Image LOAD =
       new Image(
           Objects.requireNonNull(
@@ -104,6 +134,8 @@ public class ParentController extends UIController {
       mainBox = childContainer;
     }
 
+    setNotificationListener();
+
     if (headerNameField != null) {
       headerName = headerNameField;
     }
@@ -112,13 +144,15 @@ public class ParentController extends UIController {
     updateDate();
     updateWeather();
 
+    setServerToggleMenu();
+
+    //    setNotifications();
+
     swapPage("default", "Home");
   }
 
-  @FXML
-  void changeServer(MouseEvent event) {}
-
   public void swapPage(String page, String pageName) {
+    TableListeners.removeAllListeners();
     mainBox.getChildren().clear();
 
     try {
@@ -136,13 +170,10 @@ public class ParentController extends UIController {
   @FXML
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
-  //
-  //  @FXML
-  //  void logout(ActionEvent event) {
-  //    swapPage("login", "Login");
-  //    SecurityController.setUser(null);
-  //  }
 
   @FXML
   void openUserDropdown(ActionEvent event) {
@@ -150,6 +181,248 @@ public class ParentController extends UIController {
       userDropdown.setVisible(true);
     } else {
       userDropdown.setVisible(false);
+    }
+  }
+
+  @FXML
+  void openServerDropdown() {
+    if (serverToggle.isSelected()) {
+      serverDropdown.setVisible(true);
+    } else {
+      serverDropdown.setVisible(false);
+    }
+  }
+
+  void setNotificationListener() {
+    if (ConnectionHandler.getType().equals(connectionType.CLOUD)) {
+      DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
+      notifListener =
+          new ValueEventListener() {
+            @Override
+            public synchronized void onDataChange(DataSnapshot snapshot) {
+              System.out.println(
+                  "Notification listener for " + SecurityController.getUser().getAttribute(1));
+              new Thread(
+                      () -> {
+                        Platform.runLater(
+                            () -> {
+                              setNotifications();
+                            });
+                      })
+                  .start();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+              System.out.println("Cancelled in notification listener");
+            }
+          };
+      ref.addValueEventListener(notifListener);
+    }
+  }
+
+  void addNotification(Notification n) {
+    SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+    try {
+      sp.play();
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
+    this.notifications.getChildren().add(createNotification(n));
+  }
+
+  void setNotifications() {
+    this.notifications.getChildren().clear();
+    List<Notification> notifications =
+        new ArrayList<Notification>(
+            DAOPouch.getNotificationDAO()
+                .filter(2, SecurityController.getUser().getAttribute(1))
+                .values());
+    List<Notification> unRead =
+        new ArrayList(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
+    List<Notification> unReadUnChimed =
+        new ArrayList(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
+    if (notifications.size() == 0) {
+      Text t = new Text();
+      t.setText("Looks empty in here");
+      this.notifications.getChildren().add(t);
+      return;
+    }
+    if (unRead.size() > 0) {
+      if (unReadUnChimed.size() > 0) {
+        SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+        try {
+          sp.play();
+        } catch (LineUnavailableException e) {
+          throw new RuntimeException(e);
+        }
+        for (Notification n : unReadUnChimed) {
+          n.setAttribute(6, "true");
+          DAOPouch.getNotificationDAO().add(n);
+        }
+        for (Notification n : unRead) {
+          this.notifications.getChildren().add(createNotification(n));
+        }
+      }
+    }
+  }
+
+  VBox createNotification(Notification n) {
+    VBox notif = new VBox();
+
+    try {
+      notif =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
+      notifications.getChildren().add(notif);
+      Label notifSubject = (Label) notif.getChildren().get(0);
+      Label notifBody = (Label) notif.getChildren().get(1);
+
+      notifSubject.setText(n.getSubject());
+      notifBody.setText(n.getBody());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return notif;
+  }
+
+  @FXML
+  void openNotifications() {
+    if (alertButton.isSelected()) {
+      notifications.setVisible(true);
+    } else {
+      notifications.setVisible(false);
+    }
+  }
+
+  private void setServerToggleMenu() {
+    switch (ConnectionHandler.getType()) {
+      case EMBEDDED:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(SERVER);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Client Server");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        System.out.println("Switching to cloud");
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLIENTSERVER:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLOUD:
+        serverSlotOne.setImage(SERVER);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Client Server");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        break;
     }
   }
 
@@ -174,58 +447,100 @@ public class ParentController extends UIController {
 
   @FXML
   public void logout() throws IOException {
+    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifListener);
     switchScene("login.fxml", 575, 575);
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
     SecurityController.setUser(null);
   }
 
   @FXML
   void switchToAboutUs(MouseEvent event) {
     swapPage("aboutUs", "About Us");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToEquipment(MouseEvent event) {
     swapPage("equipment", "Equipment Delivery");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToLabRequest(MouseEvent event) {
     swapPage("labRequest", "Lab Request");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMap(MouseEvent event) {
     swapPage("locationMap", "Interactive Map");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMapDashboard(MouseEvent event) {
     swapPage("mapDashboard", "Map Dashboard");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMeal(MouseEvent event) {
     swapPage("meal", "Patient Meal Delivery Portal");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMedicine(MouseEvent event) {
     swapPage("medicine", "Medication Request");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToPatientTransport(MouseEvent event) {
     swapPage("patientTransport", "Internal Patient Transportation");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToSanitation(MouseEvent event) {
     swapPage("sanitation", "Sanitation Services");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
+  }
+
+  @FXML
+  void switchToLanguage(MouseEvent event) {
+    swapPage("language", "Interpreter Request");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToDB(MouseEvent event) {
     swapPage("backendInfoDisp", "Backend Information Display");
+    if (burgBack != null && burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   private void initGraphics() {
@@ -246,22 +561,6 @@ public class ParentController extends UIController {
     serverIcon.setImage(LOAD);
   }
 
-  @FXML
-  private void changeServer() {
-    setLoad();
-    Thread serverChange =
-        new Thread(
-            () -> {
-              try {
-                if (!tryChange()) {
-                  Platform.runLater(() -> showError("Failed to switch connection"));
-                }
-              } catch (InterruptedException ignored) {
-              }
-            });
-    serverChange.start();
-  }
-
   private void initConnectionImage() {
     if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
       return;
@@ -273,31 +572,9 @@ public class ParentController extends UIController {
 
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
       serverIcon.setImage(EMBEDDED);
-    else serverIcon.setImage(SERVER);
-  }
-
-  private boolean tryChange() throws InterruptedException {
-    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED)) {
-      if (ConnectionHandler.switchToClientServer()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return false;
-      }
-    } else {
-      if (ConnectionHandler.switchToEmbedded()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return false;
-      }
-    }
+    else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
+      serverIcon.setImage(SERVER);
+    else serverIcon.setImage(CLOUD);
   }
 
   private void updateDate() {

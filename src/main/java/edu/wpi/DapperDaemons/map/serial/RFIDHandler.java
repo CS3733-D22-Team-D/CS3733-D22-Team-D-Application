@@ -1,10 +1,10 @@
-package edu.wpi.DapperDaemons.serial;
+package edu.wpi.DapperDaemons.map.serial;
 
 import edu.wpi.DapperDaemons.backend.SHA;
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.ArduinoTimeOutException;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UnableToConnectException;
-import edu.wpi.DapperDaemons.serial.ArduinoExceptions.UserNotAuthorizedException;
+import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.ArduinoTimeOutException;
+import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
+import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UserNotAuthorizedException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;

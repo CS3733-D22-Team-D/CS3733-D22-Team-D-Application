@@ -11,7 +11,6 @@ import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -53,7 +52,7 @@ public abstract class UIController extends AppController {
     /* Used the DAO object to get list */
     DAO<Location> dao = DAOPouch.getLocationDAO();
     try {
-      this.locations = dao.getAll();
+      this.locations = new ArrayList(dao.getAll().values());
     } catch (Exception e) {
       this.locations = new ArrayList<>();
     }
@@ -62,7 +61,9 @@ public abstract class UIController extends AppController {
     try {
       initAccountGraphics();
     } catch (Exception e) {
-      showError("We could not find your profile picture.", Pos.TOP_LEFT);
+      System.out.println(
+          "Couldn't initialize account graphics, account is probably null for some reason");
+      //      showError("We could not find your profile picture.", Pos.TOP_LEFT);
     }
   }
 
@@ -74,16 +75,28 @@ public abstract class UIController extends AppController {
     accountName.setText(employeeName);
     accountName.setFont(Font.font("Comic Sans", 14));
 
-    profilePic.setFill(
-        new ImagePattern(
-            new Image(
-                Objects.requireNonNull(
-                    getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/profilepictures/"
-                                + SecurityController.getUser().getNodeID()
-                                + ".png")))));
+    try {
+      profilePic.setFill(
+          new ImagePattern(
+              new Image(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResourceAsStream(
+                              "edu/wpi/DapperDaemons/profilepictures/"
+                                  + SecurityController.getUser().getNodeID()
+                                  + ".png")))));
+    } catch (Exception e) {
+      System.out.println("Setting pfp to default");
+      profilePic.setFill(
+          new ImagePattern(
+              new Image(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResourceAsStream(
+                              "edu/wpi/DapperDaemons/profilepictures/" + "wwrong2" + ".png")))));
+    }
   }
 
   private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
@@ -134,10 +147,30 @@ public abstract class UIController extends AppController {
     switchScene("userSettings.fxml", 941, 592);
   }
 
+  public void closeSlider() {
+    TranslateTransition slide = new TranslateTransition();
+    slide.setDuration(Duration.seconds(0.4));
+    slide.setNode(slider);
+
+    slide.setToX(-225);
+    slide.play();
+
+    slider.setTranslateX(0);
+
+    slide.setOnFinished(
+        (ActionEvent e) -> {
+          burg.setVisible(true);
+          burgBack.setVisible(false);
+        });
+  }
+
   @FXML
   public void goToServicePage() {
     try {
       switchScene("serviceRequestPage.fxml", 635, 510);
+      if (burgBack != null && burgBack.isVisible()) {
+        closeSlider();
+      }
     } catch (Exception e) {
       // TODO: maybe fix this one day?
     }
@@ -150,7 +183,7 @@ public abstract class UIController extends AppController {
    */
   protected List<String> getAllLongNames() {
     List<String> names = new ArrayList<>();
-    for (Location loc : this.locations) {
+    for (Location loc : new ArrayList<Location>(DAOPouch.getLocationDAO().getAll().values())) {
       names.add(loc.getLongName());
     }
     return names;
