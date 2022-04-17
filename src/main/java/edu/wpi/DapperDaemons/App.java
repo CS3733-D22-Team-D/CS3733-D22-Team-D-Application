@@ -4,6 +4,7 @@ import static edu.wpi.DapperDaemons.backend.ConnectionHandler.switchToEmbedded;
 
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.backend.preload.Images;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +48,7 @@ public class App extends Application {
     try {
       ls.display(
           () -> {
+            Images.init();
             HttpsURLConnection testCon = null;
             boolean connected = false;
             try {
@@ -70,11 +72,6 @@ public class App extends Application {
               switchToEmbedded();
             }
             AutoSave.start(10);
-            try {
-              Thread.sleep(2000);
-            } catch (InterruptedException e) {
-              throw new RuntimeException(e);
-            }
           },
           () -> {
             Parent root = null;
