@@ -167,9 +167,9 @@ public class ParentController extends UIController {
   @FXML
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
-      if (burgBack.isVisible()) {
-          closeSlider();
-      }
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
