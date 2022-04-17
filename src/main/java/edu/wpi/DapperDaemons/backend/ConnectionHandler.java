@@ -89,8 +89,6 @@ public class ConnectionHandler {
             locationNodeConnectionsDAO.getAll();
         Map<String, LanguageRequest> languageRequestMap = languageRequestDAO.getAll();
 
-        type = connectionType.CLOUD;
-        connection = null;
         for (LabRequest lr : labRequestMap.values()) {
           labRequestDAO.add(lr);
         }
@@ -146,6 +144,8 @@ public class ConnectionHandler {
       } catch (Exception e) {
         return false;
       }
+      connection = null;
+      type = connectionType.CLOUD;
       try {
         DAOPouch.init();
       } catch (IOException e) {

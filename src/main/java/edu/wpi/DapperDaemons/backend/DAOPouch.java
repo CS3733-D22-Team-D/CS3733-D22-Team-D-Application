@@ -153,33 +153,33 @@ public class DAOPouch {
     return notificationDAO;
   }
 
-  //  public static DAO getDAO(TableObject type) {
-  //    String tableName = type.getTableName();
-  //    if (tableName.equals("")) {
-  //      return null;
-  //    } else if (tableName.equals("LABREQUESTS")) {
-  //      return labRequestDAO;
-  //    } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
-  //      return mealDeliveryRequestDAO;
-  //    } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
-  //      return clearance >= 3;
-  //    } else if (tableName.equals("MEDICINEREQUESTS")) {
-  //      return clearance >= 3;
-  //    } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {
-  //      return clearance >= 3;
-  //    } else if (tableName.equals("SANITATIONREQUESTS")) {
-  //      return clearance >= 3;
-  //    } else if (tableName.equals("ACCOUNTS")) {
-  //      return clearance >= 5;
-  //    } else if (tableName.equals("EMPLOYEES")) {
-  //      return clearance >= 5;
-  //    } else if (tableName.equals("LOCATIONS")) {
-  //      return clearance >= 5;
-  //    } else if (tableName.equals("MEDICALEQUIPMENT")) {
-  //      return clearance >= 3;
-  //    } else if (tableName.equals("PATIENTS")) {
-  //      return patientDAO;
-  //    }
-  //    return null;
-  //  }
+  public static DAO getDAO(TableObject type) {
+    String tableName = type.tableName();
+    if (tableName.equals("")) {
+      return null;
+    } else if (tableName.equals("LABREQUESTS")) {
+      return labRequestDAO;
+    } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
+      return mealDeliveryRequestDAO;
+    } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
+      return medicineRequestDAO;
+    } else if (tableName.equals("MEDICINEREQUESTS")) {
+      return medicineRequestDAO;
+    } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {
+      return patientTransportRequestDAO;
+    } else if (tableName.equals("SANITATIONREQUESTS")) {
+      return sanitationRequestDAO;
+    } else if (tableName.equals("ACCOUNTS")) {
+      return accountDAO;
+    } else if (tableName.equals("EMPLOYEES")) {
+      return employeeDAO;
+    } else if (tableName.equals("LOCATIONS")) {
+      return locationDAO;
+    } else if (tableName.equals("MEDICALEQUIPMENT")) {
+      return medicalEquipmentDAO;
+    } else if (tableName.equals("PATIENTS")) {
+      return patientDAO;
+    }
+    return null;
+  }
 }

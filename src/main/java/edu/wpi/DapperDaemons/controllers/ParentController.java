@@ -149,21 +149,6 @@ public class ParentController extends UIController {
     swapPage("default", "Home");
   }
 
-  @FXML
-  void changeServer(MouseEvent event) {
-    setLoad();
-    Thread serverChange =
-        new Thread(
-            () -> {
-              try {
-                if (!tryChange()) {
-                  Platform.runLater(() -> showError("Failed to switch connection"));
-                }
-              } catch (InterruptedException ignored) {
-              }
-            });
-    serverChange.start();
-  }
 
   public void swapPage(String page, String pageName) {
     mainBox.getChildren().clear();
@@ -184,12 +169,6 @@ public class ParentController extends UIController {
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
   }
-  //
-  //  @FXML
-  //  void logout(ActionEvent event) {
-  //    swapPage("login", "Login");
-  //    SecurityController.setUser(null);
-  //  }
 
   @FXML
   void openUserDropdown(ActionEvent event) {
@@ -530,21 +509,6 @@ public class ParentController extends UIController {
     serverIcon.setImage(LOAD);
   }
 
-  @FXML
-  private void changeServer() {
-    setLoad();
-    Thread serverChange =
-        new Thread(
-            () -> {
-              try {
-                if (!tryChange()) {
-                  Platform.runLater(() -> showError("Failed to switch connection"));
-                }
-              } catch (InterruptedException ignored) {
-              }
-            });
-    serverChange.start();
-  }
 
   private void initConnectionImage() {
     if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
@@ -560,40 +524,6 @@ public class ParentController extends UIController {
     else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
       serverIcon.setImage(SERVER);
     else serverIcon.setImage(CLOUD);
-  }
-
-  private boolean tryChange() throws InterruptedException {
-    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED)) {
-      if (switchToClientServer()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return false;
-      }
-    } else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER)) {
-      if (switchToCloudServer()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(CLOUD);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(SERVER);
-        return false;
-      }
-    } else {
-      if (switchToEmbedded()) {
-        Thread.sleep(1000);
-        serverIcon.setImage(EMBEDDED);
-        return true;
-      } else {
-        Thread.sleep(1000);
-        serverIcon.setImage(CLOUD);
-        return false;
-      }
-    }
   }
 
   private void updateDate() {
