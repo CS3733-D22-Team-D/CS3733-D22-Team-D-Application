@@ -6,8 +6,9 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class LanguageRequest extends TableObject {
+public class LanguageRequest extends TableObject implements Request{
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -16,6 +17,21 @@ public class LanguageRequest extends TableObject {
   @TableHandler(table = 0, col = 1)
   public Language getLanguage() {
     return language;
+  }
+
+  @Override
+  public String requestType() {
+    return "Language Request";
+  }
+
+  @Override
+  public Priority getPriority() {
+    return priority;
+  }
+
+  @Override
+  public boolean requiresTransport() {
+    return false;
   }
 
   @TableHandler(table = 0, col = 2)
@@ -53,11 +69,26 @@ public class LanguageRequest extends TableObject {
     this.assignee = assignee;
   }
 
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
+  }
+
+  public void setPriority(Priority priority) {
+    this.priority = priority;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
   private String nodeID;
   private Language language;
   private String roomID;
   private String requester;
   private String assignee;
+  private String dateNeeded;
+  private Priority priority;
 
   public enum Language {
     CHINESE,

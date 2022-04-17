@@ -157,6 +157,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   private String patientID;
   private String nextRoomID;
   private RequestStatus status;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -182,6 +183,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   public PatientTransportRequest() {}
 
   // SETTERS AND GETTERS
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -247,5 +249,14 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   public void setStatus(RequestStatus status) {
     this.status = status;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

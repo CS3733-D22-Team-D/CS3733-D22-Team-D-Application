@@ -173,6 +173,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   private String side;
   private String drink;
   private String dessert;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -203,6 +204,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -286,5 +288,14 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   public void setDessert(String dessert) {
     this.dessert = dessert;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

@@ -139,6 +139,7 @@ public class SanitationRequest extends TableObject implements Request {
   private String assigneeID;
   private String sanitationType;
   private RequestStatus cleanStatus;
+  private String dateNeeded;
 
   // CONSTRUCTOR
 
@@ -219,5 +220,14 @@ public class SanitationRequest extends TableObject implements Request {
 
   public void setCleanStatus(RequestStatus cleanStatus) {
     this.cleanStatus = cleanStatus;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

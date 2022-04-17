@@ -55,15 +55,18 @@ public class OverdueHandler {
 
     private void checkLabReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request labReq : labRequestDAO.getAll()){
+        for(Request labReq : (List<Request>)labRequestDAO.getAll()){
             requestList.add(labReq);
         }
         requestList = checkOverdue(requestList);
+        for(Request req : requestList) {
+            LabRequest overdueReq = labRequestDAO.get(req.getNodeID());
+        }
     }
 
     private void checkMealReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request mealReq : mealDeliveryRequestDAO.getAll()){
+        for(Request mealReq : (List<Request>)mealDeliveryRequestDAO.getAll()){
             requestList.add(mealReq);
         }
         requestList = checkOverdue(requestList);
@@ -71,7 +74,7 @@ public class OverdueHandler {
 
     private void checkMedicalEqReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request medEqReq : medicalEquipmentRequestDAO.getAll()){
+        for(Request medEqReq : (List<Request>)medicalEquipmentRequestDAO.getAll()){
             requestList.add(medEqReq);
         }
         requestList = checkOverdue(requestList);
@@ -79,7 +82,7 @@ public class OverdueHandler {
 
     private void checkMedicineReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request medicineReq : medicineRequestDAO.getAll()){
+        for(Request medicineReq : (List<Request>)medicineRequestDAO.getAll()){
             requestList.add(medicineReq);
         }
         requestList = checkOverdue(requestList);
@@ -87,7 +90,7 @@ public class OverdueHandler {
 
     private void checkPatientTransportReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request patTranReq : patientTransportRequestDAO.getAll()){
+        for(Request patTranReq : (List<Request>)patientTransportRequestDAO.getAll()){
             requestList.add(patTranReq);
         }
         requestList = checkOverdue(requestList);
@@ -95,7 +98,7 @@ public class OverdueHandler {
 
     private void checkSanitaitonReq() throws SQLException {
         List<Request> requestList = new ArrayList<>();
-        for(Request sanitationReq : sanitationRequestDAO.getAll()){
+        for(Request sanitationReq : (List<Request>)sanitationRequestDAO.getAll()){
             requestList.add(sanitationReq);
         }
         requestList = checkOverdue(requestList);

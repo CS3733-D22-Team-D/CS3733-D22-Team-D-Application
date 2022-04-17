@@ -176,6 +176,7 @@ public class LabRequest extends TableObject implements Request {
   private String patientID;
   private LabType labType;
   private RequestStatus status;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -202,9 +203,15 @@ public class LabRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
   }
 
   public void setNodeID(String nodeID) {

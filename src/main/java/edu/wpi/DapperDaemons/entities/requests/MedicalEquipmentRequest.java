@@ -149,6 +149,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -239,5 +240,14 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
 
   public void setCleanStatus(MedicalEquipment.CleanStatus cleanStatus) {
     this.cleanStatus = cleanStatus;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }
