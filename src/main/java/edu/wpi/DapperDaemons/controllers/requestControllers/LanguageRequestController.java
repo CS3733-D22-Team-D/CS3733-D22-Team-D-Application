@@ -67,7 +67,7 @@ public class LanguageRequestController extends ParentController {
     tl.setLanguageRequestListener(
         tl.eventListener(
             () -> {
-              System.out.println("LanguageRequestsTable");
+              //              System.out.println("LanguageRequestsTable");
               languageRequestsTable.getItems().clear();
               languageRequestsTable
                   .getItems()
