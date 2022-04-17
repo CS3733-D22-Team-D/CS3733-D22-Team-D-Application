@@ -81,8 +81,8 @@ public class ParentController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    menuSlider(slider, burg, burgBack);
     bindImage(BGImage, BGContainer);
+    menuSlider(slider, burg, burgBack);
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -118,9 +118,6 @@ public class ParentController extends AppController {
   @FXML
   void goHome() {
     swapPage("default", "Home");
-    if (burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
@@ -339,15 +336,6 @@ public class ParentController extends AppController {
   @FXML
   void goToServicePage() {
     swapPage("serviceRequestPage", "Service Page");
-  }
-
-  public static void bindImage(ImageView pageImage, Pane parent) {
-    pageImage.fitHeightProperty().bind(parent.heightProperty());
-    pageImage.fitWidthProperty().bind(parent.widthProperty());
-  }
-
-  public static void bindChild(HBox child) {
-    HBox.setHgrow(child, Priority.ALWAYS);
   }
 
   @FXML
