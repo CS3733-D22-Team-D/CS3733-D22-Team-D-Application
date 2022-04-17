@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.CSVSaver;
 import edu.wpi.DapperDaemons.backend.LogSaver;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
 import java.io.IOException;
@@ -75,6 +76,7 @@ public class AppController implements Initializable {
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));

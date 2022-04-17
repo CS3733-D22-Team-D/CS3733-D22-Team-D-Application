@@ -11,6 +11,24 @@ public class Notification extends TableObject {
   private String body;
   private boolean read = false;
 
+  public String getNodeID() {
+    return nodeID;
+  }
+
+  public String getUserID() {
+    return userID;
+  }
+
+  public boolean isRead() {
+    return read;
+  }
+
+  public boolean isChimed() {
+    return chimed;
+  }
+
+  private boolean chimed = false;
+
   public Notification() {}
 
   public Notification(String subject, String body, String userID) {
@@ -25,7 +43,9 @@ public class Notification extends TableObject {
     return "CREATE TABLE NOTIFICATIONS(nodeID varchar(255) PRIMARY KEY,"
         + "userID varchar(100),"
         + "subject varchar(100),"
-        + "body varchar(255))";
+        + "body varchar(255),"
+        + "read varchar(5),"
+        + "chimed varchar(5))";
   }
 
   @Override
@@ -46,6 +66,8 @@ public class Notification extends TableObject {
         return body;
       case 5:
         return String.valueOf(read);
+      case 6:
+        return String.valueOf(chimed);
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -68,6 +90,9 @@ public class Notification extends TableObject {
         break;
       case 5:
         this.read = Boolean.parseBoolean(newAttribute);
+        break;
+      case 6:
+        this.chimed = Boolean.parseBoolean(newAttribute);
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -100,6 +125,9 @@ public class Notification extends TableObject {
         break;
       case "read":
         this.read = Boolean.parseBoolean(newAttribute);
+        break;
+      case "chimed":
+        this.chimed = Boolean.parseBoolean(newAttribute);
         break;
       default:
         throw new IndexOutOfBoundsException();

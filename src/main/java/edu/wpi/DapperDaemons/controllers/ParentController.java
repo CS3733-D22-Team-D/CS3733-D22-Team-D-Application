@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
@@ -150,6 +151,7 @@ public class ParentController extends UIController {
   }
 
   public void swapPage(String page, String pageName) {
+    TableListeners.removeAllListeners();
     mainBox.getChildren().clear();
 
     try {
@@ -235,6 +237,8 @@ public class ParentController extends UIController {
                 .values());
     List<Notification> unRead =
         new ArrayList(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
+    List<Notification> unReadUnChimed =
+        new ArrayList(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
     if (notifications.size() == 0) {
       Text t = new Text();
       t.setText("Looks empty in here");
@@ -242,14 +246,20 @@ public class ParentController extends UIController {
       return;
     }
     if (unRead.size() > 0) {
-      SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
-      try {
-        sp.play();
-      } catch (LineUnavailableException e) {
-        throw new RuntimeException(e);
-      }
-      for (Notification n : unRead) {
-        this.notifications.getChildren().add(createNotification(n));
+      if (unReadUnChimed.size() > 0) {
+        SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+        try {
+          sp.play();
+        } catch (LineUnavailableException e) {
+          throw new RuntimeException(e);
+        }
+        for (Notification n : unReadUnChimed) {
+          n.setAttribute(6, "true");
+          DAOPouch.getNotificationDAO().add(n);
+        }
+        for (Notification n : unRead) {
+          this.notifications.getChildren().add(createNotification(n));
+        }
       }
     }
   }
@@ -435,7 +445,7 @@ public class ParentController extends UIController {
   @FXML
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
     SecurityController.setUser(null);
@@ -444,7 +454,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToAboutUs(MouseEvent event) {
     swapPage("aboutUs", "About Us");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -452,7 +462,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToEquipment(MouseEvent event) {
     swapPage("equipment", "Equipment Delivery");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -460,7 +470,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToLabRequest(MouseEvent event) {
     swapPage("labRequest", "Lab Request");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -468,7 +478,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToMap(MouseEvent event) {
     swapPage("locationMap", "Interactive Map");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -476,7 +486,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToMapDashboard(MouseEvent event) {
     swapPage("mapDashboard", "Map Dashboard");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -484,7 +494,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToMeal(MouseEvent event) {
     swapPage("meal", "Patient Meal Delivery Portal");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -492,7 +502,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToMedicine(MouseEvent event) {
     swapPage("medicine", "Medication Request");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -500,7 +510,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToPatientTransport(MouseEvent event) {
     swapPage("patientTransport", "Internal Patient Transportation");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -516,7 +526,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToLanguage(MouseEvent event) {
     swapPage("language", "Interpreter Request");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
@@ -524,7 +534,7 @@ public class ParentController extends UIController {
   @FXML
   void switchToDB(MouseEvent event) {
     swapPage("backendInfoDisp", "Backend Information Display");
-    if (burgBack.isVisible()) {
+    if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }

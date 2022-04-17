@@ -8,64 +8,94 @@ import edu.wpi.DapperDaemons.backend.FireBase;
 
 public class TableListeners {
 
-  private DatabaseReference ref = FireBase.getReference();
+  private static DatabaseReference ref = FireBase.getReference();
+  private static ValueEventListener lbrL;
+  private static ValueEventListener lrL;
+  private static ValueEventListener mdrL;
+  private static ValueEventListener merL;
+  private static ValueEventListener mrL;
+  private static ValueEventListener ptrL;
+  private static ValueEventListener srL;
+  private static ValueEventListener aL;
+  private static ValueEventListener eL;
+  private static ValueEventListener lL;
+  private static ValueEventListener lncL;
+  private static ValueEventListener meL;
+  private static ValueEventListener nL;
+  private static ValueEventListener pL;
 
-  public void setLabRequestListener(ValueEventListener labRequestListener) {
-    ref.child("LABREQUESTS").addValueEventListener(labRequestListener);
+  public static void setLabRequestListener(ValueEventListener labRequestListener) {
+    lbrL = labRequestListener;
+    ref.child("LABREQUESTS").addValueEventListener(lbrL);
   }
 
-  public void setLanguageRequestListener(ValueEventListener languageRequestListener) {
-    ref.child("LANGUAGEREQUESTS").addValueEventListener(languageRequestListener);
+  public static void setLanguageRequestListener(ValueEventListener languageRequestListener) {
+    lrL = languageRequestListener;
+    ref.child("LANGUAGEREQUESTS").addValueEventListener(lrL);
   }
 
-  public void setMealDeliveryRequestListener(ValueEventListener mealDeliveryRequestListener) {
-    ref.child("MEALDELIVERYREQUESTS").addValueEventListener(mealDeliveryRequestListener);
+  public static void setMealDeliveryRequestListener(
+      ValueEventListener mealDeliveryRequestListener) {
+    mdrL = mealDeliveryRequestListener;
+    ref.child("MEALDELIVERYREQUESTS").addValueEventListener(mdrL);
   }
 
-  public void setMedicalEquipmentRequestListener(
+  public static void setMedicalEquipmentRequestListener(
       ValueEventListener medicalEquipmentRequestListener) {
-    ref.child("MEDICALEQUIPMENTREQUESTS").addValueEventListener(medicalEquipmentRequestListener);
+    merL = medicalEquipmentRequestListener;
+    ref.child("MEDICALEQUIPMENTREQUESTS").addValueEventListener(merL);
   }
 
-  public void setMedicinRequestListener(ValueEventListener medicinRequestListener) {
-    ref.child("MEDICINEREQUESTS").addValueEventListener(medicinRequestListener);
+  public static void setMedicinRequestListener(ValueEventListener medicinRequestListener) {
+    mrL = medicinRequestListener;
+    ref.child("MEDICINEREQUESTS").addValueEventListener(mrL);
   }
 
-  public void setPatientTrasportRequestListener(ValueEventListener patientTrasportRequestListener) {
-    ref.child("PATIENTTRANSPORTREQUESTS").addValueEventListener(patientTrasportRequestListener);
+  public static void setPatientTrasportRequestListener(
+      ValueEventListener patientTrasportRequestListener) {
+    ptrL = patientTrasportRequestListener;
+    ref.child("PATIENTTRANSPORTREQUESTS").addValueEventListener(ptrL);
   }
 
-  public void setSanitationRequestListener(ValueEventListener sanitationRequestListener) {
-    ref.child("SANITATIONREQUESTS").addValueEventListener(sanitationRequestListener);
+  public static void setSanitationRequestListener(ValueEventListener sanitationRequestListener) {
+    srL = sanitationRequestListener;
+    ref.child("SANITATIONREQUESTS").addValueEventListener(srL);
   }
 
-  public void setAccountListener(ValueEventListener accountListener) {
-    ref.child("ACCOUNTS").addValueEventListener(accountListener);
+  public static void setAccountListener(ValueEventListener accountListener) {
+    aL = accountListener;
+    ref.child("ACCOUNTS").addValueEventListener(aL);
   }
 
-  public void setEmployeeListener(ValueEventListener employeeListener) {
+  public static void setEmployeeListener(ValueEventListener employeeListener) {
+    eL = employeeListener;
     ref.child("EMPLOYEES").addValueEventListener(employeeListener);
   }
 
-  public void setLocationListener(ValueEventListener locationListener) {
-    ref.child("LOCATIONS").addValueEventListener(locationListener);
+  public static void setLocationListener(ValueEventListener locationListener) {
+    lL = locationListener;
+    ref.child("LOCATIONS").addValueEventListener(lL);
   }
 
-  public void setLocationNodeConnectionsListener(
+  public static void setLocationNodeConnectionsListener(
       ValueEventListener locationNodeConnectionsListener) {
-    ref.child("LOCATIONNODECONNECTIONS").addValueEventListener(locationNodeConnectionsListener);
+    lncL = locationNodeConnectionsListener;
+    ref.child("LOCATIONNODECONNECTIONS").addValueEventListener(lncL);
   }
 
-  public void setMedicalEquipmentListener(ValueEventListener medicalEquipmentListener) {
-    ref.child("MEDICALEQUIPMENT").addValueEventListener(medicalEquipmentListener);
+  public static void setMedicalEquipmentListener(ValueEventListener medicalEquipmentListener) {
+    meL = medicalEquipmentListener;
+    ref.child("MEDICALEQUIPMENT").addValueEventListener(meL);
   }
 
-  public void setNotificationListener(ValueEventListener notificationListener) {
-    ref.child("NOTIFICATIONS").addValueEventListener(notificationListener);
+  public static void setNotificationListener(ValueEventListener notificationListener) {
+    nL = notificationListener;
+    ref.child("NOTIFICATIONS").addValueEventListener(nL);
   }
 
-  public void setPatientListener(ValueEventListener patientListener) {
-    ref.child("PATIENTS").addValueEventListener(patientListener);
+  public static void setPatientListener(ValueEventListener patientListener) {
+    pL = patientListener;
+    ref.child("PATIENTS").addValueEventListener(pL);
   }
 
   public ValueEventListener eventListener(Runnable r) {
@@ -83,6 +113,65 @@ public class TableListeners {
       @Override
       public void onCancelled(DatabaseError error) {}
     };
+  }
+
+  public static void removeAllListeners() {
+    try {
+      ref.child("LABREQUESTS").removeEventListener(lbrL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("LANGUAGEREQUESTS").removeEventListener(lrL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("MEALDELIVERYREQUESTS").removeEventListener(mdrL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("MEDICALEQUIPMENTREQUESTS").removeEventListener(merL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("MEDICINEREQUESTS").removeEventListener(mrL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("PATIENTTRANSPORTREQUESTS").removeEventListener(ptrL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("SANITATIONREQUESTS").removeEventListener(srL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("ACCOUNTS").removeEventListener(aL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("EMPLOYEES").removeEventListener(eL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("LOCATIONS").removeEventListener(lL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("LOCATIONNODECONNECTIONS").removeEventListener(lncL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("MEDICALEQUIPMENT").removeEventListener(meL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("NOTIFICATIONS").removeEventListener(nL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("PATIENTS").removeEventListener(pL);
+    } catch (NullPointerException ignored) {
+    }
   }
 
   public TableListeners() {}

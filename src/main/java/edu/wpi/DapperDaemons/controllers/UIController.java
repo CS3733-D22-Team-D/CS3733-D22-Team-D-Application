@@ -156,7 +156,7 @@ public abstract class UIController extends AppController {
   public void goToServicePage() {
     try {
       switchScene("serviceRequestPage.fxml", 635, 510);
-      if (burgBack.isVisible()) {
+      if (burgBack != null && burgBack.isVisible()) {
         closeSlider();
       }
     } catch (Exception e) {
