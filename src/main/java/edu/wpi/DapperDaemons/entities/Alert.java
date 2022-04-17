@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Alert extends TableObject {
   private String description;
@@ -19,16 +20,14 @@ public class Alert extends TableObject {
     this.type = type;
   }
 
-  @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE ALERTS(nodeID varchar(100) PRIMARY KEY,"
         + "type varchar(255),"
         + "description varchar(255),"
         + "priority varchar(255))";
   }
 
-  @Override
-  public String getTableName() {
+  public String tableName() {
     return "ALERTS";
   }
 
@@ -66,9 +65,16 @@ public class Alert extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Alert();
+  public TableObject newInstance(List<String> l) {
+    Alert temp = new Alert();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i, l.get(i));
+    }
+    return temp;
   }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {}
 
   @TableHandler(table = 1, col = 0)
   public String getDescription() {

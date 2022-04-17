@@ -3,8 +3,8 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -74,11 +74,7 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    try {
-      DAOPouch.getAlertDAO().add(new Alert("22", Request.Priority.HIGH, "234"));
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    DAOPouch.getAlertDAO().add(new Alert("22", Request.Priority.HIGH, "234"));
 
     bindImage(mapImage, mapImageContainer);
 

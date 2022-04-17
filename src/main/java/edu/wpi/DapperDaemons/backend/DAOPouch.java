@@ -4,7 +4,6 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class DAOPouch {
   private static DAO<LabRequest> labRequestDAO;
@@ -102,8 +101,6 @@ public class DAOPouch {
       notificationDAO.load();
       alertDAO.load();
     }
-
-
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
