@@ -223,6 +223,7 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 7)
   public String getDateNeeded() {
     return dateNeeded;
   }

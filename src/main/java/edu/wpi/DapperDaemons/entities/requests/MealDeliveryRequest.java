@@ -291,6 +291,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 10)
   public String getDateNeeded() {
     return dateNeeded;
   }

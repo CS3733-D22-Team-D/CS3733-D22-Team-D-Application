@@ -252,6 +252,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 8)
   public String getDateNeeded() {
     return dateNeeded;
   }

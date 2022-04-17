@@ -36,5 +36,4 @@ public interface Request {
   public String getNodeID();
 
   public String getDateNeeded();
-
 }

@@ -6,7 +6,7 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class LanguageRequest extends TableObject implements Request{
+public class LanguageRequest extends TableObject implements Request {
 
   @Override
   @TableHandler(table = 0, col = 0)
@@ -78,6 +78,7 @@ public class LanguageRequest extends TableObject implements Request{
   }
 
   @Override
+  @TableHandler(table = 0, col = 5)
   public String getDateNeeded() {
     return dateNeeded;
   }
