@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 /*
 Manages Default Page Navigation
  */
-public class ServicePageController extends UIController {
+public class ServicePageController extends AppController {
 
   /* Time, Weather, and Database */
   @FXML private Label time;
