@@ -1,13 +1,16 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -37,9 +40,14 @@ public class BackendInfoController extends ParentController {
   private DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
+  private static ValueEventListener tableListener;
+
+  private TableListeners tl;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    tl = new TableListeners();
+    setListeners();
     // TODO : The patient DAO is broken :(
     patientTableHelper = new TableHelper<>(patientsTable, 0);
     patientTableHelper.linkColumns(Patient.class);
@@ -54,18 +62,47 @@ public class BackendInfoController extends ParentController {
     equipmentTableHelper.linkColumns(MedicalEquipment.class);
 
     try {
-      locationsTable.getItems().addAll(locationDAO.getAll());
+      locationsTable.getItems().addAll(new ArrayList<>(locationDAO.getAll().values()));
 
-      employeesTable.getItems().addAll(employeeDAO.getAll());
+      employeesTable.getItems().addAll(new ArrayList<>(employeeDAO.getAll().values()));
 
-      equipmentTable.getItems().addAll(medicalEquipmentDAO.getAll());
+      equipmentTable.getItems().addAll(new ArrayList<>(medicalEquipmentDAO.getAll().values()));
 
       //      System.out.println(patientDAO.getAll());
-      patientsTable.getItems().addAll(patientDAO.getAll());
+      patientsTable.getItems().addAll(new ArrayList<>(patientDAO.getAll().values()));
 
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, table was unable to be created\n");
     }
+  }
+
+  private void setListeners() {
+    tl.setLocationListener(
+        tl.eventListener(
+            () -> {
+              locationsTable.getItems().clear();
+              locationsTable.getItems().addAll(new ArrayList<>(locationDAO.getAll().values()));
+            }));
+    tl.setEmployeeListener(
+        tl.eventListener(
+            () -> {
+              employeesTable.getItems().clear();
+              employeesTable.getItems().addAll(new ArrayList<>(employeeDAO.getAll().values()));
+            }));
+    tl.setMedicalEquipmentListener(
+        tl.eventListener(
+            () -> {
+              equipmentTable.getItems().clear();
+              equipmentTable
+                  .getItems()
+                  .addAll(new ArrayList<>(medicalEquipmentDAO.getAll().values()));
+            }));
+    tl.setPatientListener(
+        tl.eventListener(
+            () -> {
+              patientsTable.getItems().clear();
+              patientsTable.getItems().addAll(new ArrayList<>(patientDAO.getAll().values()));
+            }));
   }
 }

@@ -4,11 +4,12 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MedicalEquipmentRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE MEDICALEQUIPMENTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
@@ -20,7 +21,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "MEDICALEQUIPMENTREQUESTS";
   }
 
@@ -82,13 +83,50 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new MedicalEquipmentRequest();
+  public String requestType() {
+    return "Medical Equipment Request";
   }
 
   @Override
-  public String getRequestType() {
-    return "Medical Equipment Request";
+  public TableObject newInstance(List<String> l) {
+    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        equipmentID = newAttribute;
+        break;
+      case "labType":
+        equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
+        break;
+      case "status":
+        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        break;
+
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   @Override

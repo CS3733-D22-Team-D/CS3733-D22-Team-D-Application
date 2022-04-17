@@ -5,12 +5,12 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -76,10 +76,23 @@ public class MealController extends UIController {
     onClear();
 
     try {
-      mealRequestsTable.getItems().addAll(mealDeliveryRequestDAO.getAll());
+      mealRequestsTable.getItems().addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
     } catch (Exception e) {
       mealRequestsTable.getItems().setAll(new ArrayList<>());
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMealDeliveryRequestListener(
+        tl.eventListener(
+            () -> {
+              mealRequestsTable.getItems().clear();
+              mealRequestsTable
+                  .getItems()
+                  .addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
+            }));
   }
 
   /** Creates service request, executes when submit button is pressed */
@@ -105,11 +118,7 @@ public class MealController extends UIController {
               + patientDOB.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = false;
-      try {
-        patient = patientDAO.get(patientID);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      patient = patientDAO.get(patientID);
 
       try {
         isAPatient = patient.getFirstName().equals(patientName.getText());
@@ -172,11 +181,8 @@ public class MealController extends UIController {
    */
   public boolean addMealRequest(MealDeliveryRequest request) {
     boolean hadClearance = false;
-    try {
-      hadClearance = mealDeliveryRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = mealDeliveryRequestDAO.add(request);
+
     if (hadClearance) mealRequestsTable.getItems().add(request);
 
     return hadClearance;
