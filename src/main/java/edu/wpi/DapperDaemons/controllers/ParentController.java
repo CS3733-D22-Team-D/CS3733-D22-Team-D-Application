@@ -15,7 +15,6 @@ import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
-import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +28,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
@@ -52,8 +50,6 @@ public class ParentController extends AppController {
   @FXML private VBox serverDropdown;
   @FXML private Button serverButtonOne;
   @FXML private Button serverButtonTwo;
-
-  @FXML private HBox serverBox;
 
   /* Account */
   @FXML private Text accountName;
@@ -152,11 +148,7 @@ public class ParentController extends AppController {
 
   @FXML
   void openServerDropdown() {
-    if (serverToggle.isSelected()) {
-      serverDropdown.setVisible(true);
-    } else {
-      serverDropdown.setVisible(false);
-    }
+    serverDropdown.setVisible(serverToggle.isSelected());
   }
 
   void setNotificationListener() {
@@ -168,14 +160,7 @@ public class ParentController extends AppController {
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(
                   "Notification listener for " + SecurityController.getUser().getAttribute(1));
-              new Thread(
-                      () -> {
-                        Platform.runLater(
-                            () -> {
-                              setNotifications();
-                            });
-                      })
-                  .start();
+              new Thread(() -> Platform.runLater(() -> setNotifications())).start();
             }
 
             @Override
@@ -200,14 +185,14 @@ public class ParentController extends AppController {
   void setNotifications() {
     this.notifications.getChildren().clear();
     List<Notification> notifications =
-        new ArrayList<Notification>(
+        new ArrayList<>(
             DAOPouch.getNotificationDAO()
                 .filter(2, SecurityController.getUser().getAttribute(1))
                 .values());
     List<Notification> unRead =
-        new ArrayList(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
+        new ArrayList<>(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
     List<Notification> unReadUnChimed =
-        new ArrayList(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
+        new ArrayList<>(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
     if (notifications.size() == 0) {
       Text t = new Text();
       t.setText("Looks empty in here");
@@ -254,11 +239,7 @@ public class ParentController extends AppController {
 
   @FXML
   void openNotifications() {
-    if (alertButton.isSelected()) {
-      notifications.setVisible(true);
-    } else {
-      notifications.setVisible(false);
-    }
+    notifications.setVisible(alertButton.isSelected());
   }
 
   private void setServerToggleMenu() {
@@ -464,11 +445,6 @@ public class ParentController extends AppController {
     swapPage("serviceRequestPage", "Service Page");
   }
 
-  private void initGraphics() {
-    bindImage(BGImage, BGContainer);
-    initConnectionImage();
-  }
-
   public static void bindImage(ImageView pageImage, Pane parent) {
     pageImage.fitHeightProperty().bind(parent.heightProperty());
     pageImage.fitWidthProperty().bind(parent.widthProperty());
@@ -476,26 +452,6 @@ public class ParentController extends AppController {
 
   public static void bindChild(HBox child) {
     HBox.setHgrow(child, Priority.ALWAYS);
-  }
-
-  private void setLoad() {
-    serverIcon.setImage(Images.LOAD);
-  }
-
-  private void initConnectionImage() {
-    if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
-      return;
-    serverBox.setVisible(true);
-    serverIcon.setVisible(true);
-    ColorAdjust ca = new ColorAdjust();
-    ca.setBrightness(1.0);
-    serverIcon.setEffect(ca);
-
-    if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
-      serverIcon.setImage(Images.EMBEDDED);
-    else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
-      serverIcon.setImage(Images.SERVER);
-    else serverIcon.setImage(Images.CLOUD);
   }
 
   @FXML
@@ -578,7 +534,7 @@ public class ParentController extends AppController {
     }
   }
 
-  private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
+  private void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
     slider.setTranslateX(-225);
     burg.setOnMouseClicked(
         event -> {
@@ -598,23 +554,7 @@ public class ParentController extends AppController {
               });
         });
 
-    burgBack.setOnMouseClicked(
-        event -> {
-          TranslateTransition slide = new TranslateTransition();
-          slide.setDuration(Duration.seconds(0.4));
-          slide.setNode(slider);
-
-          slide.setToX(-225);
-          slide.play();
-
-          slider.setTranslateX(0);
-
-          slide.setOnFinished(
-              (ActionEvent e) -> {
-                burg.setVisible(true);
-                burgBack.setVisible(false);
-              });
-        });
+    burgBack.setOnMouseClicked(e -> closeSlider());
   }
 
   public void closeSlider() {
