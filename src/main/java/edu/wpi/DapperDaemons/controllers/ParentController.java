@@ -201,7 +201,7 @@ public class ParentController extends UIController {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(
-                  "Notification listener for + " + SecurityController.getUser().getAttribute(1));
+                  "Notification listener for " + SecurityController.getUser().getAttribute(1));
               new Thread(
                       () -> {
                         Platform.runLater(
