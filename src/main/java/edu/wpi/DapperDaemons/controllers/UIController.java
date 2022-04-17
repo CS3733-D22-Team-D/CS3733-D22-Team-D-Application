@@ -135,10 +135,30 @@ public abstract class UIController extends AppController {
     switchScene("userSettings.fxml", 941, 592);
   }
 
+  public void closeSlider() {
+    TranslateTransition slide = new TranslateTransition();
+    slide.setDuration(Duration.seconds(0.4));
+    slide.setNode(slider);
+
+    slide.setToX(-225);
+    slide.play();
+
+    slider.setTranslateX(0);
+
+    slide.setOnFinished(
+        (ActionEvent e) -> {
+          burg.setVisible(true);
+          burgBack.setVisible(false);
+        });
+  }
+
   @FXML
   public void goToServicePage() {
     try {
       switchScene("serviceRequestPage.fxml", 635, 510);
+      if (burgBack.isVisible()) {
+        closeSlider();
+      }
     } catch (Exception e) {
       // TODO: maybe fix this one day?
     }

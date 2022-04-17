@@ -149,7 +149,6 @@ public class ParentController extends UIController {
     swapPage("default", "Home");
   }
 
-
   public void swapPage(String page, String pageName) {
     mainBox.getChildren().clear();
 
@@ -168,6 +167,9 @@ public class ParentController extends UIController {
   @FXML
   void goHome(MouseEvent event) {
     swapPage("default", "Home");
+      if (burgBack.isVisible()) {
+          closeSlider();
+      }
   }
 
   @FXML
@@ -433,62 +435,98 @@ public class ParentController extends UIController {
   @FXML
   public void logout() throws IOException {
     switchScene("login.fxml", 575, 575);
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
     SecurityController.setUser(null);
   }
 
   @FXML
   void switchToAboutUs(MouseEvent event) {
     swapPage("aboutUs", "About Us");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToEquipment(MouseEvent event) {
     swapPage("equipment", "Equipment Delivery");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToLabRequest(MouseEvent event) {
     swapPage("labRequest", "Lab Request");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMap(MouseEvent event) {
     swapPage("locationMap", "Interactive Map");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMapDashboard(MouseEvent event) {
     swapPage("mapDashboard", "Map Dashboard");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMeal(MouseEvent event) {
     swapPage("meal", "Patient Meal Delivery Portal");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToMedicine(MouseEvent event) {
     swapPage("medicine", "Medication Request");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToPatientTransport(MouseEvent event) {
     swapPage("patientTransport", "Internal Patient Transportation");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToSanitation(MouseEvent event) {
     swapPage("sanitation", "Sanitation Services");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToLanguage(MouseEvent event) {
     swapPage("language", "Interpreter Request");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   @FXML
   void switchToDB(MouseEvent event) {
     swapPage("backendInfoDisp", "Backend Information Display");
+    if (burgBack.isVisible()) {
+      closeSlider();
+    }
   }
 
   private void initGraphics() {
@@ -508,7 +546,6 @@ public class ParentController extends UIController {
   private void setLoad() {
     serverIcon.setImage(LOAD);
   }
-
 
   private void initConnectionImage() {
     if (!SecurityController.getUser().getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR))
