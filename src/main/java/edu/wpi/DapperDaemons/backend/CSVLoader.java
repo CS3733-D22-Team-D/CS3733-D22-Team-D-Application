@@ -27,6 +27,7 @@ public class CSVLoader {
     filenames.put("MedicineRequest", new MedicineRequest());
     filenames.put("Accounts", new Account());
     filenames.put("AllEdges", new LocationNodeConnections());
+    filenames.put("Alerts", new Alert());
   }
 
   private CSVLoader() {}

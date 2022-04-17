@@ -30,7 +30,7 @@ public class MapDashboardController extends ParentController {
   @FXML private TableView<Patient> patientTable;
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private TableView<Request> reqTable;
-  private final DAO<Alert> alertDAO = DAOPouch.getAlertDAO();
+
   @FXML private TableView<Alert> alertTable;
 
   @FXML private ToggleButton L1;
@@ -72,7 +72,7 @@ public class MapDashboardController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
-      alertDAO.add(new Alert("22", Request.Priority.HIGH, "234"));
+      DAOPouch.getAlertDAO().add(new Alert("22", Request.Priority.HIGH, "234"));
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -108,7 +108,7 @@ public class MapDashboardController extends ParentController {
     List<Location> locsByFloor;
     try {
       locsByFloor = locationDAO.filter(4, floor);
-      alertTable.getItems().addAll(alertDAO.getAll());
+      alertTable.getItems().addAll(DAOPouch.getAlertDAO().getAll());
     } catch (SQLException e) {
       e.printStackTrace();
       showError("Failed to get locations.");
