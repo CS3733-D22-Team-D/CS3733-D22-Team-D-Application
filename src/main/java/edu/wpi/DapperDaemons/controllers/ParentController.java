@@ -18,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -53,7 +52,6 @@ public class ParentController extends AppController {
   private static HBox mainBox;
   private static Text headerName;
   private static WeatherHandler weather;
-  //  private static DateHandler date;
   private static DBSwitchHandler dbSwitch;
 
   // names are formatted this way so enums can easily reference css files
@@ -98,17 +96,17 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void goHome(MouseEvent event) {
+  void goHome() {
     swapPage("default", "Home");
   }
 
   @FXML
-  void openUserDropdown(ActionEvent event) {
+  void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
   }
 
   @FXML
-  void openUserSettings(ActionEvent event) {
+  void openUserSettings() {
     swapPage("userSettings", "User Settings");
   }
 
@@ -119,52 +117,52 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void switchToAboutUs(MouseEvent event) {
+  void switchToAboutUs() {
     swapPage("aboutUs", "About Us");
   }
 
   @FXML
-  void switchToEquipment(MouseEvent event) {
+  void switchToEquipment() {
     swapPage("equipment", "Equipment Delivery");
   }
 
   @FXML
-  void switchToLabRequest(MouseEvent event) {
+  void switchToLabRequest() {
     swapPage("labRequest", "Lab Request");
   }
 
   @FXML
-  void switchToMap(MouseEvent event) {
+  void switchToMap() {
     swapPage("locationMap", "Interactive Map");
   }
 
   @FXML
-  void switchToMapDashboard(MouseEvent event) {
+  void switchToMapDashboard() {
     swapPage("mapDashboard", "Map Dashboard");
   }
 
   @FXML
-  void switchToMeal(MouseEvent event) {
+  void switchToMeal() {
     swapPage("meal", "Patient Meal Delivery Portal");
   }
 
   @FXML
-  void switchToMedicine(MouseEvent event) {
+  void switchToMedicine() {
     swapPage("medicine", "Medication Request");
   }
 
   @FXML
-  void switchToPatientTransport(MouseEvent event) {
+  void switchToPatientTransport() {
     swapPage("patientTransport", "Internal Patient Transportation");
   }
 
   @FXML
-  void switchToSanitation(MouseEvent event) {
+  void switchToSanitation() {
     swapPage("sanitation", "Sanitation Services");
   }
 
   @FXML
-  void switchToDB(MouseEvent event) {
+  void switchToDB() {
     swapPage("backendInfoDisp", "Backend Information Display");
   }
 
