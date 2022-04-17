@@ -36,28 +36,31 @@ public class ORM<T extends TableObject> {
                       () -> {
                         try {
                           HashMap<String, T> temp = new HashMap<>();
-                          ((HashMap<String, List<String>>) snapshot.getValue())
-                              .forEach(
-                                  (k, v) -> {
-                                    temp.put(
-                                        FireBaseCoder.decodeFirebaseKey(k),
-                                        (T)
-                                            type.newInstance(
-                                                v.stream()
-                                                    .map(
-                                                        e -> {
-                                                          if (e != null) {
-                                                            return FireBaseCoder.decodeFirebaseKey(
-                                                                e);
-                                                          }
-                                                          return e;
-                                                        })
-                                                    .collect(Collectors.toList())));
-                                  });
+                          HashMap<String, List<String>> snap =
+                              ((HashMap<String, List<String>>) snapshot.getValue());
+                          snap.forEach(
+                              (k, v) -> {
+                                temp.put(
+                                    FireBaseCoder.decodeFirebaseKey(k),
+                                    (T)
+                                        type.newInstance(
+                                            v.stream()
+                                                .map(
+                                                    e -> {
+                                                      if (e != null) {
+                                                        return FireBaseCoder.decodeFirebaseKey(e);
+                                                      }
+                                                      return e;
+                                                    })
+                                                .collect(
+                                                    Collectors.toCollection(
+                                                        ArrayList<String>::new))));
+                              });
                           map = temp;
                         } catch (ClassCastException e) {
-                          // TODO test if this is ever reached, I dont think it ever does
-                          System.out.println("Caught in event listener");
+                          // TODO test if this is ever reached, I dont think it ever does oop
+                          System.out.println(
+                              "Caught in event listener, make sure the data is correct in firebase!\nAll of it!");
                           //                          HashMap<String, Object> res =
                           //                              (HashMap<String, Object>)
                           // snapshot.getValue();
