@@ -59,49 +59,7 @@ public class LoginController extends AppController {
    */
   @FXML
   void login() throws Exception {
-    Employee admin = DAOPouch.getEmployeeDAO().get("admin");
-    /*if (username.getText().trim().equals("admin") && password.getText().trim().equals("admin")) {
-      SecurityController.setUser(admin);
-      switchScene("parentHeader.fxml", 635, 510);
-      return;
-    } else*/ if (username.getText().trim().equals("staff")
-        && password.getText().trim().equals("staff")) {
-      Employee staff = DAOPouch.getEmployeeDAO().get("staff");
-      SecurityController.setUser(staff);
-      switchScene("parentHeader.fxml", 635, 510);
-      return;
-    } else if (username.getText().trim().equals("rfid")
-        && password.getText().trim().equals("rfid")) { // RFID TEST
-      // LOGIN -> RFID PAGE PORT DETECTION ALGORITHM
-      Stage window = (Stage) username.getScene().getWindow();
-      LoadingScreen ls = new LoadingScreen(window);
-      ls.display(
-          () -> {
-            if (!System.getProperty("os.name").trim().toLowerCase().contains("windows")) {
-              RFIDPageController.errorOS = System.getProperty("os.name").trim();
-            } else {
-              RFIDPageController.errorOS = null;
-              Arduino arduino;
-              SerialCOM serialCOM = new SerialCOM();
-              try {
-                arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
-                RFIDPageController.COM = arduino.getPortDescription();
-              } catch (UnableToConnectException e) {
-                RFIDPageController.COM = null;
-              }
-            }
-          },
-          () -> {
-            SecurityController.setUser(admin);
-            //            try {
-            //              switchScene("RFIDScanPage.fxml", 635, 510, window);  TODO
-            //            } catch (IOException e) {
-            //              e.printStackTrace();
-            //            }
-          });
-      return;
-    } else if (username.getText().trim().equals("Rick")
-        && password.getText().trim().equals("Astley")) {
+    if (username.getText().trim().equals("Rick") && password.getText().trim().equals("Astley")) {
       player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
@@ -112,6 +70,30 @@ public class LoginController extends AppController {
             new ArrayList<>(
                 employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
         if (user.size() == 1) {
+          if (acc.getAttribute(6).equals("rfid")) {
+            Stage window = (Stage) username.getScene().getWindow();
+            LoadingScreen ls = new LoadingScreen(window);
+            ls.display(
+                () -> {
+                  if (!System.getProperty("os.name").trim().toLowerCase().contains("windows")) {
+                    RFIDPageController.errorOS = System.getProperty("os.name").trim();
+                  } else {
+                    RFIDPageController.errorOS = null;
+                    Arduino arduino;
+                    SerialCOM serialCOM = new SerialCOM();
+                    try {
+                      arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+                      RFIDPageController.COM = arduino.getPortDescription();
+                    } catch (UnableToConnectException e) {
+                      RFIDPageController.COM = null;
+                    }
+                  }
+                },
+                () -> {
+                  SecurityController.setUser(user.get(0));
+                });
+            return;
+          }
           SecurityController.setUser(user.get(0)); // Correctly finds the user
           switchScene("parentHeader.fxml", 635, 510);
           return;

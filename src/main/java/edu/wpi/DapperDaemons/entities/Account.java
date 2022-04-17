@@ -10,7 +10,7 @@ public class Account extends TableObject {
   private String password;
   private String phoneNumber;
   private String settingsFile = "none";
-  private boolean twoFactor = false;
+  private String twoFactor = "false";
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
@@ -60,7 +60,7 @@ public class Account extends TableObject {
       case 5:
         return this.settingsFile;
       case 6:
-        return String.valueOf(twoFactor);
+        return twoFactor;
       default:
         break;
     }
@@ -86,7 +86,7 @@ public class Account extends TableObject {
         this.settingsFile = newAttribute;
         break;
       case 6:
-        this.twoFactor = Boolean.parseBoolean(newAttribute);
+        this.twoFactor = newAttribute;
         break;
       default:
         break;
@@ -121,7 +121,7 @@ public class Account extends TableObject {
         settingsFile = newAttribute;
         break;
       case "twoFactor":
-        twoFactor = Boolean.parseBoolean(newAttribute);
+        twoFactor = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
