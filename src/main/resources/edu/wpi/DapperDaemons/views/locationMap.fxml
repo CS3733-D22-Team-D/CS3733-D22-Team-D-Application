@@ -294,7 +294,7 @@
                                           <Insets bottom="5.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <JFXComboBox id="jButton" fx:id="typeIn" editable="true" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." stylesheets="@../assets/buttons.css" visibleRowCount="3">
+                                    <JFXComboBox id="jButton" fx:id="typeIn" editable="true" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="Filter..." stylesheets="@../assets/buttons.css" visibleRowCount="3">
                                        <VBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </VBox.margin>
@@ -453,7 +453,7 @@
                                                       <ColorAdjust brightness="0.43" />
                                                    </effect>
                                                 </ImageView>
-                                                <JFXComboBox fx:id="searchBar" editable="true" labelFloat="true" promptText="Location/Request" />
+                                                <JFXComboBox fx:id="searchBar" editable="true" labelFloat="true" onKeyTyped="#startFuzzySearch" promptText="Location/Request" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" left="17.0" right="17.0" top="10.0" />

@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -51,6 +53,14 @@ public class LabRequestController extends ParentController {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
     }
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(
+        priorityChoiceBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(
+        procedureComboBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML

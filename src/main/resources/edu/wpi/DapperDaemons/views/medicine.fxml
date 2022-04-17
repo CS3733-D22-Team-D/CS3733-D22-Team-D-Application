@@ -37,7 +37,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="medNameIn" prefHeight="30.0" prefWidth="250.0" promptText="    Select" VBox.vgrow="ALWAYS">
+                        <JFXComboBox id="jButton" fx:id="medNameIn" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" VBox.vgrow="ALWAYS">
                            <stylesheets>
                               <URL value="@../assets/buttons.css" />
                            </stylesheets>
@@ -70,7 +70,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="priorityIn" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                        <JFXComboBox id="jButton" fx:id="priorityIn" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                      </children>
                      <padding>
                         <Insets right="20.0" />

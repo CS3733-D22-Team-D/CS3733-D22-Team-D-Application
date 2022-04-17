@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -48,6 +50,13 @@ public class EquipmentRequestController extends ParentController {
       DAOPouch.getMedicalEquipmentRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentTypeBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

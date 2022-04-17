@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -86,6 +88,12 @@ public class PatientTransportController extends UIController implements Initiali
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
