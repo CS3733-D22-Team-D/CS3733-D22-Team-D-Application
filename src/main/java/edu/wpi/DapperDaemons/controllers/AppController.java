@@ -83,16 +83,6 @@ public class AppController implements Initializable {
     window.getScene().setRoot(root);
   }
 
-  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
-      throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-    window.setOnCloseRequest(e -> quitProgram());
-    window.getScene().setRoot(root);
-  }
-
   @FXML
   protected void quitProgram() {
     App.LOG.info("Closing program");

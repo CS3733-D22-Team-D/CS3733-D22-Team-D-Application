@@ -100,6 +100,7 @@ public class ParentController extends AppController {
 
   public void swapPage(String page, String pageName) {
     TableListeners.removeAllListeners();
+    App.LOG.info("Switching to page: <" + page + ">");
     mainBox.getChildren().clear();
     if (burgBack != null && burgBack.isVisible()) closeSlider();
 
