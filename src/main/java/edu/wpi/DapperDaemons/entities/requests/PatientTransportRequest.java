@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PatientTransportRequest extends TableObject implements Request {
 
@@ -15,7 +16,7 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60) ,"
@@ -27,7 +28,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTTRANSPORTREQUESTS";
   }
 
@@ -91,12 +92,48 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new PatientTransportRequest();
+  public TableObject newInstance(List<String> l) {
+    PatientTransportRequest temp = new PatientTransportRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
-  public String getRequestType() {
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "nextRoomID":
+        nextRoomID = newAttribute;
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  public String requestType() {
     return "Patient Transport Request";
   }
 

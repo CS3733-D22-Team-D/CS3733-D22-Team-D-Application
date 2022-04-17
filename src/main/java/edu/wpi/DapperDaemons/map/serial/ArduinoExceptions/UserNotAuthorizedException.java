@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.serial.ArduinoExceptions;
+package edu.wpi.DapperDaemons.map.serial.ArduinoExceptions;
 
 import edu.wpi.DapperDaemons.entities.Employee;
 

@@ -20,7 +20,7 @@ public interface Request {
 
   /** @return name of the Request class */
   @TableHandler(table = 1, col = 0)
-  public String getRequestType();
+  public String requestType();
 
   /** @return the priority of a given request */
   @TableHandler(table = 1, col = 1)

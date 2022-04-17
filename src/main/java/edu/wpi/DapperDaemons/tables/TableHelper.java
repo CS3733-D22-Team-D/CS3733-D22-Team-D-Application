@@ -22,9 +22,12 @@ public class TableHelper<R> {
   private int tableNum;
 
   /**
-   * Constructs a TableHelper to give a facade of useful features involving a JavaFX TableView (and associated data)
+   * Constructs a TableHelper to give a facade of useful features involving a JavaFX TableView (and
+   * associated data)
+   *
    * @param jfxTable - The table being used
-   * @param tableNum - A number associated with the table, can be anything. Use this number as table reference in TableHandler.class
+   * @param tableNum - A number associated with the table, can be anything. Use this number as table
+   *     reference in TableHandler.class
    */
   public TableHelper(TableView<R> jfxTable, int tableNum) {
     this.table = jfxTable;
@@ -117,11 +120,14 @@ public class TableHelper<R> {
   }
 
   /**
-   * Filters a table based on a data value that can be contained in a specific column
-   * Need to have a reference to the JavaFX column in order to filter by its data (including its type)
+   * Filters a table based on a data value that can be contained in a specific column Need to have a
+   * reference to the JavaFX column in order to filter by its data (including its type)
+   *
    * @param column - The TableColumn to be filtered
-   * @param toFilter - The thing to filter for. Ex: If a TableColumn<X,String> is given, only String cans can be filtered
-   * @param <T> - The data type stored in the column (can all be cast to Object, but not recommended)
+   * @param toFilter - The thing to filter for. Ex: If a TableColumn<X,String> is given, only String
+   *     cans can be filtered
+   * @param <T> - The data type stored in the column (can all be cast to Object, but not
+   *     recommended)
    */
   public <T> void filterTable(TableColumn<R, T> column, T toFilter) {
     ObservableList<R> filteredItems = FXCollections.observableArrayList();
