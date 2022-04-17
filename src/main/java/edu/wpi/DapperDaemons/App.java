@@ -1,20 +1,23 @@
 package edu.wpi.DapperDaemons;
 
-import edu.wpi.DapperDaemons.backend.AutoSave;
-import edu.wpi.DapperDaemons.backend.ConnectionHandler;
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.switchToEmbedded;
+
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.net.ssl.HttpsURLConnection;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +37,103 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) throws IOException {
-    // Setup app icons
+  public void start(Stage primaryStage) {
+    //    CSVLoader.resetFirebase();
+    //    startNoLoadingScreen(primaryStage);
+    startWithLoadingScreen(primaryStage);
+  }
+
+  private void startWithLoadingScreen(Stage primaryStage) {
+    //    FireBase.init();
+    //    try {
+    //      DAOPouch.init();
+    //    } catch (IOException e) {
+    //      System.out.println("Could not initialize DAOPouch");
+    //    }
+    //        Thread.sleep(10000);
+    //        System.out.println();
+
+    LoadingScreen ls = new LoadingScreen(primaryStage);
+    try {
+      ls.display(
+          () -> {
+            HttpsURLConnection testCon = null;
+            boolean connected = false;
+            try {
+              URL url = new URL("https://google.com");
+              testCon = (HttpsURLConnection) url.openConnection();
+              testCon.connect();
+              connected = true;
+            } catch (MalformedURLException e) {
+              System.out.println("Not connected to the internet");
+            } catch (IOException e) {
+              System.out.println("Not connected to the internet");
+            }
+            if (connected) {
+              FireBase.init();
+              try {
+                DAOPouch.init();
+              } catch (IOException e) {
+                System.out.println("DAOPouch could not initialize");
+              }
+            } else {
+              switchToEmbedded();
+            }
+            AutoSave.start(10);
+            try {
+              Thread.sleep(2000);
+            } catch (InterruptedException e) {
+              throw new RuntimeException(e);
+            }
+          },
+          () -> {
+            Parent root = null;
+            try {
+              root =
+                  FXMLLoader.load(
+                      Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+            Scene scene = new Scene(root);
+            primaryStage.setMinWidth(635);
+            primaryStage.setMinHeight(510);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            primaryStage
+                .getIcons()
+                .add(
+                    new Image(
+                        String.valueOf(
+                            App.class.getResource(
+                                "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
+            primaryStage.setTitle("BWH");
+          });
+    } catch (IOException e) {
+      System.out.println("Loading Screen broke :(");
+    }
+  }
+
+  private void startNoLoadingScreen(Stage primaryStage) {
+    FireBase.init();
+    try {
+      DAOPouch.init();
+    } catch (IOException e) {
+      System.out.println("Could not initialize DAOPouch");
+    }
+    AutoSave.start(10);
+    //    CSVLoader.resetFirebase();
+    Parent root = null;
+    try {
+      root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Scene scene = new Scene(root);
+    primaryStage.setMinWidth(635);
+    primaryStage.setMinHeight(510);
+    primaryStage.setScene(scene);
+    primaryStage.show();
     primaryStage
         .getIcons()
         .add(
@@ -43,34 +141,6 @@ public class App extends Application {
                 String.valueOf(
                     App.class.getResource("assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
     primaryStage.setTitle("BWH");
-
-    // Load app
-    LoadingScreen ls = new LoadingScreen(primaryStage);
-    ls.display(
-        () -> {
-          ConnectionHandler.init();
-          ConnectionHandler.switchToClientServer();
-          AutoSave.start(10);
-        },
-        () -> {
-          Parent root = null;
-          try {
-            root =
-                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-          Scene scene = new Scene(root);
-          primaryStage.setMinWidth(635);
-          primaryStage.setMinHeight(510);
-          primaryStage.setScene(scene);
-          primaryStage.show();
-          primaryStage.setOnCloseRequest(
-              q -> {
-                Platform.exit();
-                System.exit(0);
-              });
-        });
   }
 
   private void createLogger() {

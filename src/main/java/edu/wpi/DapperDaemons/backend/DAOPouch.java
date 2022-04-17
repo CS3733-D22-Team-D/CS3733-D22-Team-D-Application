@@ -4,7 +4,6 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class DAOPouch {
   private static DAO<LabRequest> labRequestDAO;
@@ -19,11 +18,12 @@ public class DAOPouch {
   private static DAO<MedicalEquipment> medicalEquipmentDAO;
   private static DAO<Patient> patientDAO;
   private static DAO<LocationNodeConnections> nodeDAO;
+  private static DAO<LanguageRequest> languageRequestDAO;
+  private static DAO<Notification> notificationDAO;
 
   private DAOPouch() {}
 
-  public static void init() throws SQLException, IOException {
-    App.LOG.info("Initializing Lab Request DAO");
+  public static void init() throws IOException {
     labRequestDAO = new DAO<>(new LabRequest());
     App.LOG.info("Successfully constructed Lab Request DAO");
 
@@ -70,6 +70,31 @@ public class DAOPouch {
     App.LOG.info("Initializing Node Connections");
     nodeDAO = new DAO<>(new LocationNodeConnections());
     App.LOG.info("Node connections have been produced");
+
+    App.LOG.info("Initializing Languages");
+    languageRequestDAO = new DAO<>(new LanguageRequest());
+    App.LOG.info("Languages has been produced");
+
+    App.LOG.info("Initializing Notifications");
+    notificationDAO = new DAO<>(new Notification());
+    App.LOG.info("Notifications has been produced");
+
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      labRequestDAO.load();
+      mealDeliveryRequestDAO.load();
+      medicalEquipmentRequestDAO.load();
+      medicineRequestDAO.load();
+      patientTransportRequestDAO.load();
+      sanitationRequestDAO.load();
+      accountDAO.load();
+      employeeDAO.load();
+      locationDAO.load();
+      medicalEquipmentDAO.load();
+      patientDAO.load();
+      nodeDAO.load();
+      languageRequestDAO.load();
+      notificationDAO.load();
+    }
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -119,4 +144,42 @@ public class DAOPouch {
   public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
   }
+
+  public static DAO<LanguageRequest> getLanguageRequestDAO() {
+    return languageRequestDAO;
+  }
+
+  public static DAO<Notification> getNotificationDAO() {
+    return notificationDAO;
+  }
+
+  //  public static DAO getDAO(TableObject type) {
+  //    String tableName = type.getTableName();
+  //    if (tableName.equals("")) {
+  //      return null;
+  //    } else if (tableName.equals("LABREQUESTS")) {
+  //      return labRequestDAO;
+  //    } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
+  //      return mealDeliveryRequestDAO;
+  //    } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("MEDICINEREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("SANITATIONREQUESTS")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("ACCOUNTS")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("EMPLOYEES")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("LOCATIONS")) {
+  //      return clearance >= 5;
+  //    } else if (tableName.equals("MEDICALEQUIPMENT")) {
+  //      return clearance >= 3;
+  //    } else if (tableName.equals("PATIENTS")) {
+  //      return patientDAO;
+  //    }
+  //    return null;
+  //  }
 }

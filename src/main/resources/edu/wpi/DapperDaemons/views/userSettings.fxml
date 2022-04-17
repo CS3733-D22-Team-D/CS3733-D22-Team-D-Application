@@ -119,25 +119,25 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="NEVER">
                <children>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
+                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
-                              <Label text="Security Access Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label text="Security Access" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="210.0">
                            <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level">
+                              <Text id="label" fx:id="accessLevel" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
-                              <Label id="label" text="Short Description of Access Level" textAlignment="CENTER" wrapText="true">
+                              <Label id="label" prefHeight="83.0" prefWidth="210.0" text="Your access level represents a number which gives you access to things that require a clearance level less than or equal to your number." textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -159,7 +159,7 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
+                  <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
@@ -172,12 +172,12 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                            <children>
-                              <Label id="label" text="Account's Level of Protection" textAlignment="CENTER" wrapText="true">
+                              <Label id="label" fx:id="protectionMessage" prefHeight="60.0" prefWidth="154.0" text="Account's Level of Protection" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <Label id="label" text="Further Protection They Can Do" textAlignment="CENTER" wrapText="true">
+                              <Label id="label" prefHeight="48.0" prefWidth="167.0" text="Further Protection They Can Do" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="12.0" />
                                  </font>

@@ -7,7 +7,7 @@ public class KeyChecker {
   private KeyChecker() {}
 
   public static boolean validID(TableObject type, String pk) throws SQLException {
-    String tableName = type.getTableName();
+    String tableName = type.tableName();
 
     String query = "SELECT * FROM " + tableName;
     Statement stmt = ConnectionHandler.getConnection().createStatement();

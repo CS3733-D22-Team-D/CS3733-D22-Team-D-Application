@@ -10,7 +10,6 @@ import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -76,7 +75,7 @@ public class MealController extends ParentController {
     onClear();
 
     try {
-      mealRequestsTable.getItems().addAll(mealDeliveryRequestDAO.getAll());
+      mealRequestsTable.getItems().addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
     } catch (Exception e) {
       mealRequestsTable.getItems().setAll(new ArrayList<>());
     }
@@ -105,11 +104,7 @@ public class MealController extends ParentController {
               + patientDOB.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = false;
-      try {
-        patient = patientDAO.get(patientID);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      patient = patientDAO.get(patientID);
 
       try {
         isAPatient = patient.getFirstName().equals(patientName.getText());
@@ -172,11 +167,8 @@ public class MealController extends ParentController {
    */
   public boolean addMealRequest(MealDeliveryRequest request) {
     boolean hadClearance = false;
-    try {
-      hadClearance = mealDeliveryRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = mealDeliveryRequestDAO.add(request);
+
     if (hadClearance) mealRequestsTable.getItems().add(request);
 
     return hadClearance;

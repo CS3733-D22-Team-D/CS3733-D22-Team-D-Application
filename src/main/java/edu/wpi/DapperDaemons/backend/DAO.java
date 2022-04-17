@@ -3,8 +3,9 @@ package edu.wpi.DapperDaemons.backend;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DAO<T extends TableObject> {
   ORM<T> orm;
@@ -17,21 +18,8 @@ public class DAO<T extends TableObject> {
    * @throws SQLException
    * @throws IOException
    */
-  public DAO(T type) throws SQLException, IOException {
+  public DAO(T type) {
     orm = new ORM<T>(type);
-    this.type = type;
-  }
-
-  /**
-   * Creates a basic DAO and populates / updates it using the filename given
-   *
-   * @param type : Table / TableObject you wish to use and update
-   * @param filename : Filename you wish to grab your data from
-   * @throws SQLException
-   * @throws IOException
-   */
-  public DAO(T type, String filename) throws SQLException, IOException {
-    orm = new ORM<T>(type, filename);
     this.type = type;
   }
 
@@ -41,7 +29,7 @@ public class DAO<T extends TableObject> {
    * @return : a List of TableObjects for the type you set up the DAO with
    * @throws SQLException
    */
-  public List<T> getAll() throws SQLException {
+  public Map<String, T> getAll() {
     return orm.getAll();
   }
 
@@ -52,7 +40,7 @@ public class DAO<T extends TableObject> {
    * @return
    * @throws SQLException
    */
-  public T get(String primaryKey) throws SQLException {
+  public T get(String primaryKey) {
     return orm.get(primaryKey);
   }
 
@@ -62,12 +50,11 @@ public class DAO<T extends TableObject> {
    * @param type : the object you wish to update
    * @throws SQLException
    */
-  public boolean update(T type) throws SQLException {
+  public boolean update(T type) {
     boolean hasClearance = SecurityController.permissionToUpdate(type);
     if (hasClearance) {
       orm.update(type);
     }
-
     return hasClearance;
   }
 
@@ -77,7 +64,7 @@ public class DAO<T extends TableObject> {
    * @param type : the TableObject you wish to delete
    * @throws SQLException
    */
-  public boolean delete(T type) throws SQLException {
+  public boolean delete(T type) {
     boolean hasClearance = SecurityController.permissionToDelete(type);
     if (hasClearance) {
       orm.delete(type.getAttribute(1));
@@ -91,7 +78,7 @@ public class DAO<T extends TableObject> {
    * @param type
    * @throws SQLException
    */
-  public boolean add(T type) throws SQLException {
+  public boolean add(T type) {
     boolean hasClearance = SecurityController.permissionToAdd(type);
     if (hasClearance) {
       orm.add(type);
@@ -112,17 +99,9 @@ public class DAO<T extends TableObject> {
     }
   }
 
-  /**
-   * Loads the information from the inputted file csv into the database
-   *
-   * @param filename : filename you wish to import
-   */
-  public void load(String filename) {
-    try {
-      CSVLoader.load(type, filename);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  /** Loads the information from the inputted file csv into the database */
+  public void load() {
+    this.orm.fillFromDatabase();
   }
 
   /**
@@ -134,13 +113,25 @@ public class DAO<T extends TableObject> {
    * @param attribute : the attribute / key / ID you wish to select
    * @return : A List of all TableObjects with the occurring attribute for the column given
    */
-  public List<T> filter(List<T> list, int column, String attribute) {
-    List<T> ret = new ArrayList<>();
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getAttribute(column).equals(attribute)) {
-        ret.add(list.get(i));
-      }
-    }
+  public Map<String, T> filter(Map<String, T> list, int column, String attribute) {
+    Map<String, T> ret = new HashMap<>();
+    list.forEach(
+        (k, v) -> {
+          if (list.get(k).getAttribute(column).equals(attribute)) {
+            ret.put(k, v);
+          }
+        });
+    return ret;
+  }
+
+  public Map<String, T> filter(List<T> list, int column, String attribute) {
+    Map<String, T> ret = new HashMap<>();
+    list.forEach(
+        (l) -> {
+          if (l.getAttribute(column).equals(attribute)) {
+            ret.put(l.getAttribute(1), l);
+          }
+        });
     return ret;
   }
 
@@ -153,17 +144,29 @@ public class DAO<T extends TableObject> {
    * @return : a List of all TableObjects in which the attribute occurs
    * @throws SQLException
    */
-  public List<T> filter(int column, String attribute) throws SQLException {
+  public Map<String, T> filter(int column, String attribute) {
     return filter(orm.getAll(), column, attribute);
   }
 
-  public List<T> search(List<T> list, int column, String attribute) {
-    List<T> ret = new ArrayList<>();
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getAttribute(column).contains(attribute)) {
-        ret.add(list.get(i));
-      }
-    }
+  public Map<String, T> search(List<T> list, int column, String attribute) {
+    Map<String, T> ret = new HashMap<>();
+    list.forEach(
+        (l) -> {
+          if (l.getAttribute(column).contains(attribute)) {
+            ret.put(l.getAttribute(1), l);
+          }
+        });
+    return ret;
+  }
+
+  public Map<String, T> search(Map<String, T> list, int column, String attribute) {
+    Map<String, T> ret = new HashMap<>();
+    list.forEach(
+        (k, v) -> {
+          if (list.get(k).getAttribute(column).contains(attribute)) {
+            ret.put(k, v);
+          }
+        });
     return ret;
   }
 
@@ -176,7 +179,7 @@ public class DAO<T extends TableObject> {
    * @return : a List of all TableObjects in which the attribute occurs
    * @throws SQLException
    */
-  public List<T> search(int column, String attribute) throws SQLException {
+  public Map<String, T> search(int column, String attribute) {
     return search(orm.getAll(), column, attribute);
   }
 }

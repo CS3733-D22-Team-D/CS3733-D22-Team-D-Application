@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.serial.RFIDMachine;
+import edu.wpi.DapperDaemons.map.serial.RFIDMachine;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

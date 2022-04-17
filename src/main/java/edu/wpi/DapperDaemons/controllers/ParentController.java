@@ -1,5 +1,12 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.*;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
@@ -7,6 +14,8 @@ import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
+import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -15,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
@@ -22,6 +32,8 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
 
 public class ParentController extends AppController {
 
@@ -30,6 +42,16 @@ public class ParentController extends AppController {
   @FXML private ImageView weatherIcon;
   @FXML private Label tempLabel;
   @FXML private ImageView serverIcon;
+  @FXML private ToggleButton serverToggle;
+  @FXML private ImageView serverSlotOne;
+  @FXML private ImageView serverSlotTwo;
+  @FXML private Text serverSlotOneText;
+  @FXML private Text serverSlotTwoText;
+  @FXML private VBox serverDropdown;
+  @FXML private Button serverButtonOne;
+  @FXML private Button serverButtonTwo;
+
+  @FXML private HBox serverBox;
 
   /* Account */
   @FXML private Text accountName;
@@ -53,6 +75,17 @@ public class ParentController extends AppController {
   private static Text headerName;
   private static WeatherHandler weather;
   private static DBSwitchHandler dbSwitch;
+  @FXML private ToggleButton alertButton;
+  @FXML private VBox notifications;
+
+  private static Timer timer;
+  private static final int timeUpdate = 1;
+
+  private static Timer weatherTimer;
+  private static final int weatherUpdate = 300;
+
+  private long startTime;
+  private int count = 0;
 
   // names are formatted this way so enums can easily reference css files
   protected static Theme theme;
@@ -76,6 +109,20 @@ public class ParentController extends AppController {
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
+
+    setNotificationListener();
+
+    if (headerNameField != null) {
+      headerName = headerNameField;
+    }
+
+    initGraphics();
+    updateDate();
+    updateWeather();
+
+    setServerToggleMenu();
+
+    //    setNotifications();
 
     swapPage("default", "Home");
   }
@@ -103,6 +150,276 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
+  }
+
+  @FXML
+  void openServerDropdown() {
+    if (serverToggle.isSelected()) {
+      serverDropdown.setVisible(true);
+    } else {
+      serverDropdown.setVisible(false);
+    }
+  }
+
+  void setNotificationListener() {
+    if (ConnectionHandler.getType().equals(connectionType.CLOUD)) {
+      DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
+      ref.addValueEventListener(
+          new ValueEventListener() {
+            @Override
+            public synchronized void onDataChange(DataSnapshot snapshot) {
+              System.out.println("Notification listener");
+              new Thread(
+                      () -> {
+                        Platform.runLater(
+                            () -> {
+                              //                              HashMap<String, List<String>> snap =
+                              //                                  ((HashMap<String, List<String>>)
+                              // snapshot.getValue());
+                              //                              ArrayList<String> val = new
+                              // ArrayList(snap.values());
+                              //                              for (List<String> s : snap.values()) {
+                              //                                if
+                              // (s.get(1).equals(SecurityController.getUser().getAttribute(1))) {
+                              //                                  addNotification(new
+                              // Notification(s.get(2), s.get(3), s.get(1)));
+                              //                                }
+                              //                              }
+
+                              //                              List<Notification> notifications =
+                              //                                  new ArrayList<Notification>(
+                              //                                      DAOPouch.getNotificationDAO()
+                              //                                          .filter(2,
+                              // SecurityController.getUser().getAttribute(1))
+                              //                                          .values());
+                              //                              if (notifications.size() > 0) {
+                              //                                setNotifications();
+                              //                              }
+
+                              //                              System.out.println("Receiving
+                              // notification");
+                              //                              ((HashMap<String, List<String>>)
+                              //                                      snapshot.getValue()) // TODO
+                              // might be able to comment this out
+                              //                                  .forEach(
+                              //                                      (k, v) -> {
+                              //                                        Notification n = new
+                              // Notification();
+                              //                                        for (int i = 1; i <=
+                              // v.size(); i++) {
+                              //                                          n.setAttribute(i, v.get(i
+                              // - 1));
+                              //                                        }
+                              setNotifications();
+                              //                                      });
+                            });
+                      })
+                  .start();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+              System.out.println("Cancelled in notification listener");
+            }
+          });
+    }
+  }
+
+  void addNotification(Notification n) {
+    SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+    try {
+      sp.play();
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
+    this.notifications.getChildren().add(createNotification(n));
+  }
+
+  void setNotifications() {
+    this.notifications.getChildren().clear();
+    List<Notification> notifications =
+        new ArrayList<Notification>(
+            DAOPouch.getNotificationDAO()
+                .filter(2, SecurityController.getUser().getAttribute(1))
+                .values());
+    List<Notification> unRead =
+        new ArrayList(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
+    if (notifications.size() == 0) {
+      Text t = new Text();
+      t.setText("Looks empty in here");
+      this.notifications.getChildren().add(t);
+      return;
+    }
+    if (unRead.size() > 0) {
+      SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+      try {
+        sp.play();
+      } catch (LineUnavailableException e) {
+        throw new RuntimeException(e);
+      }
+      for (Notification n : unRead) {
+        this.notifications.getChildren().add(createNotification(n));
+      }
+    }
+  }
+
+  VBox createNotification(Notification n) {
+    VBox notif = new VBox();
+
+    try {
+      notif =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
+      notifications.getChildren().add(notif);
+      Label notifSubject = (Label) notif.getChildren().get(0);
+      Label notifBody = (Label) notif.getChildren().get(1);
+
+      notifSubject.setText(n.getSubject());
+      notifBody.setText(n.getBody());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return notif;
+  }
+
+  @FXML
+  void openNotifications() {
+    if (alertButton.isSelected()) {
+      notifications.setVisible(true);
+    } else {
+      notifications.setVisible(false);
+    }
+  }
+
+  private void setServerToggleMenu() {
+    switch (ConnectionHandler.getType()) {
+      case EMBEDDED:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(SERVER);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Client Server");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        System.out.println("Switching to cloud");
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(EMBEDDED);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLIENTSERVER:
+        serverSlotOne.setImage(CLOUD);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Firebase");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToCloudServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(CLOUD);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(SERVER);
+                        }
+                      })
+                  .start();
+            });
+        break;
+      case CLOUD:
+        serverSlotOne.setImage(SERVER);
+        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOneText.setText("Client Server");
+        serverSlotTwoText.setText("Embedded");
+        serverButtonOne.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToClientServer()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(SERVER);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        serverButtonTwo.setOnMouseClicked(
+            event -> {
+              setLoad();
+              new Thread(
+                      () -> {
+                        openServerDropdown();
+                        if (switchToEmbedded()) {
+                          Platform.runLater(
+                              () -> {
+                                setServerToggleMenu();
+                                serverIcon.setImage(EMBEDDED);
+                              });
+                        } else {
+                          serverIcon.setImage(CLOUD);
+                        }
+                      })
+                  .start();
+            });
+        break;
+    }
   }
 
   @FXML
@@ -159,6 +476,11 @@ public class ParentController extends AppController {
   @FXML
   void switchToSanitation() {
     swapPage("sanitation", "Sanitation Services");
+  }
+
+  @FXML
+  void switchToLanguage(MouseEvent event) {
+    swapPage("language", "Interpreter Request");
   }
 
   @FXML
