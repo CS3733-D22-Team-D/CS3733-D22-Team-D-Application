@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -18,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class SanitationController extends UIController {
+public class SanitationController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<SanitationRequest> pendingRequests;

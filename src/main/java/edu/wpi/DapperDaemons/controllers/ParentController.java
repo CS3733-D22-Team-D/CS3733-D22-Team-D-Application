@@ -6,17 +6,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
+import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
+import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
+import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,17 +29,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.sound.sampled.LineUnavailableException;
 
-public class ParentController extends UIController {
+public class ParentController extends AppController {
 
   /* Time, Weather, and Database */
   @FXML private Label time;
@@ -53,29 +54,28 @@ public class ParentController extends UIController {
 
   @FXML private HBox serverBox;
 
+  /* Account */
+  @FXML private Text accountName;
+  @FXML private Circle profilePic;
+  @FXML private VBox userDropdown;
+  @FXML private ToggleButton userSettingsToggle;
+
   /* Background */
   @FXML private ImageView BGImage;
   @FXML private Pane BGContainer;
-  @FXML private Text accountName;
+
+  /* Common UI */
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
-  @FXML private HBox childContainer;
-  private static HBox mainBox;
-  @FXML private HBox childPage;
-  @FXML private ImageView darkSwitch;
-  @FXML private JFXButton exitButton;
-  @FXML private Text headerNameField;
-  private static Text headerName;
-  @FXML private ImageView homeIcon;
-  @FXML private ImageView homeIcon1;
-  @FXML private JFXButton logoutButton;
-  @FXML private Circle profilePic;
-  @FXML private VBox sceneBox;
   @FXML private VBox slider;
-  @FXML private VBox userDropdown;
-  @FXML private JFXButton userSettingsButton;
-  @FXML private ToggleButton userSettingsToggle;
-  @FXML private StackPane windowContents;
+  @FXML private HBox childContainer;
+  @FXML private Text headerNameField;
+
+  /* Static across all home pages */
+  private static HBox mainBox;
+  private static Text headerName;
+  private static WeatherHandler weather;
+  private static DBSwitchHandler dbSwitch;
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
 
@@ -90,6 +90,8 @@ public class ParentController extends UIController {
   private int count = 0;
 
   // names are formatted this way so enums can easily reference css files
+  protected static Theme theme;
+
   public enum Theme {
     Light,
     Dark,
@@ -97,42 +99,20 @@ public class ParentController extends UIController {
     Red
   }
 
-  protected static Theme theme;
-
-  public final Image EMBEDDED =
-      new Image(
-          Objects.requireNonNull(
-              getClass()
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
-  public final Image SERVER =
-      new Image(
-          Objects.requireNonNull(
-              getClass()
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
-
-  // TODO get new image for the cloud server
-  public final Image CLOUD =
-      new Image(
-          Objects.requireNonNull(
-              getClass()
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/cloud.png")));
-
-  public final Image LOAD =
-      new Image(
-          Objects.requireNonNull(
-              DefaultController.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    if (childContainer != null) {
-      mainBox = childContainer;
-    }
+    menuSlider(slider, burg, burgBack);
+    bindImage(BGImage, BGContainer);
+    if (childContainer != null) mainBox = childContainer;
+    if (headerNameField != null) headerName = headerNameField;
+
+    setServerToggleMenu();
+
+    dbSwitch = new DBSwitchHandler(serverIcon);
+    new DateHandler(time);
+    new AccountHandler(accountName, profilePic);
+    weather = new WeatherHandler(weatherIcon, tempLabel);
 
     setNotificationListener();
 
@@ -140,11 +120,7 @@ public class ParentController extends UIController {
       headerName = headerNameField;
     }
 
-    initGraphics();
-    updateDate();
     updateWeather();
-
-    setServerToggleMenu();
 
     //    setNotifications();
 
@@ -156,7 +132,7 @@ public class ParentController extends UIController {
     mainBox.getChildren().clear();
 
     try {
-      childPage =
+      HBox childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
       mainBox.getChildren().add(childPage);
       bindChild(childPage);
@@ -168,7 +144,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void goHome(MouseEvent event) {
+  void goHome() {
     swapPage("default", "Home");
     if (burgBack.isVisible()) {
       closeSlider();
@@ -176,12 +152,8 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void openUserDropdown(ActionEvent event) {
-    if (userSettingsToggle.isSelected()) {
-      userDropdown.setVisible(true);
-    } else {
-      userDropdown.setVisible(false);
-    }
+  void openUserDropdown() {
+    userDropdown.setVisible(userSettingsToggle.isSelected());
   }
 
   @FXML
@@ -298,13 +270,13 @@ public class ParentController extends UIController {
   private void setServerToggleMenu() {
     switch (ConnectionHandler.getType()) {
       case EMBEDDED:
-        serverSlotOne.setImage(CLOUD);
-        serverSlotTwo.setImage(SERVER);
+        serverSlotOne.setImage(Images.CLOUD);
+        serverSlotTwo.setImage(Images.SERVER);
         serverSlotOneText.setText("Firebase");
         serverSlotTwoText.setText("Client Server");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         System.out.println("Switching to cloud");
@@ -312,17 +284,17 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(CLOUD);
+                                serverIcon.setImage(Images.CLOUD);
                               });
                         } else {
-                          serverIcon.setImage(EMBEDDED);
+                          serverIcon.setImage(Images.EMBEDDED);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -330,23 +302,23 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(SERVER);
+                                serverIcon.setImage(Images.SERVER);
                               });
                         } else {
-                          serverIcon.setImage(EMBEDDED);
+                          serverIcon.setImage(Images.EMBEDDED);
                         }
                       })
                   .start();
             });
         break;
       case CLIENTSERVER:
-        serverSlotOne.setImage(CLOUD);
-        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOne.setImage(Images.CLOUD);
+        serverSlotTwo.setImage(Images.EMBEDDED);
         serverSlotOneText.setText("Firebase");
         serverSlotTwoText.setText("Embedded");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -354,17 +326,17 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(CLOUD);
+                                serverIcon.setImage(Images.CLOUD);
                               });
                         } else {
-                          serverIcon.setImage(SERVER);
+                          serverIcon.setImage(Images.SERVER);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -372,23 +344,23 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(EMBEDDED);
+                                serverIcon.setImage(Images.EMBEDDED);
                               });
                         } else {
-                          serverIcon.setImage(SERVER);
+                          serverIcon.setImage(Images.SERVER);
                         }
                       })
                   .start();
             });
         break;
       case CLOUD:
-        serverSlotOne.setImage(SERVER);
-        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOne.setImage(Images.SERVER);
+        serverSlotTwo.setImage(Images.EMBEDDED);
         serverSlotOneText.setText("Client Server");
         serverSlotTwoText.setText("Embedded");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -396,17 +368,17 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(SERVER);
+                                serverIcon.setImage(Images.SERVER);
                               });
                         } else {
-                          serverIcon.setImage(CLOUD);
+                          serverIcon.setImage(Images.CLOUD);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -414,10 +386,10 @@ public class ParentController extends UIController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(EMBEDDED);
+                                serverIcon.setImage(Images.EMBEDDED);
                               });
                         } else {
-                          serverIcon.setImage(CLOUD);
+                          serverIcon.setImage(Images.CLOUD);
                         }
                       })
                   .start();
@@ -427,22 +399,8 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void openUserSettings(ActionEvent event) {
+  void openUserSettings() {
     swapPage("userSettings", "User Settings");
-  }
-
-  @FXML
-  void quitProgram(MouseEvent event) {
-    App.LOG.info("Closing program");
-    LogSaver.saveAll();
-    CSVSaver.saveAll();
-    App.LOG.info("Successfully saved all files!");
-    if (sceneBox != null && sceneBox.getScene() != null) {
-      Stage window = (Stage) sceneBox.getScene().getWindow();
-      if (window != null) window.close();
-    }
-    Platform.exit();
-    System.exit(0);
   }
 
   @FXML
@@ -456,7 +414,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToAboutUs(MouseEvent event) {
+  void switchToAboutUs() {
     swapPage("aboutUs", "About Us");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -464,7 +422,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToEquipment(MouseEvent event) {
+  void switchToEquipment() {
     swapPage("equipment", "Equipment Delivery");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -472,7 +430,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToLabRequest(MouseEvent event) {
+  void switchToLabRequest() {
     swapPage("labRequest", "Lab Request");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -480,7 +438,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMap(MouseEvent event) {
+  void switchToMap() {
     swapPage("locationMap", "Interactive Map");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -488,7 +446,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMapDashboard(MouseEvent event) {
+  void switchToMapDashboard() {
     swapPage("mapDashboard", "Map Dashboard");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -504,7 +462,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToMedicine(MouseEvent event) {
+  void switchToMedicine() {
     swapPage("medicine", "Medication Request");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -512,7 +470,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToPatientTransport(MouseEvent event) {
+  void switchToPatientTransport() {
     swapPage("patientTransport", "Internal Patient Transportation");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -520,7 +478,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToSanitation(MouseEvent event) {
+  void switchToSanitation() {
     swapPage("sanitation", "Sanitation Services");
     if (burgBack.isVisible()) {
       closeSlider();
@@ -528,7 +486,7 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToLanguage(MouseEvent event) {
+  void switchToLanguage() {
     swapPage("language", "Interpreter Request");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -536,13 +494,16 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void switchToDB(MouseEvent event) {
+  void switchToDB() {
     swapPage("backendInfoDisp", "Backend Information Display");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
     }
   }
 
+  @FXML
+  void goToServicePage() {
+    swapPage("serviceRequestPage", "Service Page");
   private void initGraphics() {
     bindImage(BGImage, BGContainer);
     initConnectionImage();
@@ -600,50 +561,7 @@ public class ParentController extends UIController {
 
   @FXML
   private void updateWeather() {
-    // TODO: animate on refresh
-    if (weatherTimer != null) weatherTimer.cancel();
-    weatherTimer = new Timer();
-    weatherTimer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            weatherIcon.setScaleX(0.5);
-            weatherIcon.setScaleY(0.5);
-            weatherIcon.setImage(LOAD);
-            new Thread(
-                    () -> {
-                      // Gather data
-                      int temp = -999;
-                      try {
-                        temp = Weather.getTemp("boston");
-                      } catch (Exception ignored) {
-                      }
-
-                      try {
-                        Thread.sleep(1000);
-                      } catch (InterruptedException ignored) {
-                      }
-
-                      // Set values
-                      int finalTemp = temp;
-                      Platform.runLater(
-                          () -> {
-                            if (finalTemp != -999) tempLabel.setText(finalTemp + "\u00B0F");
-                            try {
-                              weatherIcon.setImage(Weather.getIcon("boston"));
-                            } catch (Exception ignored) {
-                            }
-                            weatherIcon.setScaleX(1);
-                            weatherIcon.setScaleY(1);
-                          });
-                    })
-                .start();
-          }
-        },
-        0,
-        weatherUpdate * 1000); // Every 1 second
+    weather.update();
   }
 
   @FXML
@@ -653,7 +571,6 @@ public class ParentController extends UIController {
   }
 
   public void setTheme() {
-
     Set<Node> backs = mainBox.lookupAll("#background");
     Set<Node> fields = mainBox.lookupAll("#field");
     Set<Node> fores = mainBox.lookupAll("#foreground");
@@ -662,9 +579,9 @@ public class ParentController extends UIController {
     Set<Node> texts = mainBox.lookupAll("#label");
     Set<Node> tableCols = mainBox.lookupAll("#col");
 
-    //      for (Node back : backs) {
-    //        back.getStyleClass().clear();
-    //      }
+    for (Node back : backs) {
+      back.getStyleClass().clear();
+    }
 
     for (Node field : fields) {
       field.getStyleClass().clear();
@@ -692,9 +609,9 @@ public class ParentController extends UIController {
 
     if (theme != Theme.Light && theme != null) {
 
-      //      for (Node back : backs) {
-      //        back.getStyleClass().add("background" + theme.toString());
-      //      }
+      for (Node back : backs) {
+        back.getStyleClass().add("background" + theme.toString());
+      }
 
       for (Node field : fields) {
         field.getStyleClass().add("field" + theme.toString());
@@ -720,5 +637,54 @@ public class ParentController extends UIController {
         col.getStyleClass().add("table" + theme.toString());
       }
     }
+  }
+
+  private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
+    slider.setTranslateX(-225);
+    burg.setOnMouseClicked(
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
+
+          slide.setToX(0);
+          slide.play();
+
+          slider.setTranslateX(-225);
+
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(false);
+                burgBack.setVisible(true);
+              });
+        });
+
+    burgBack.setOnMouseClicked(
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
+
+          slide.setToX(-225);
+          slide.play();
+
+          slider.setTranslateX(0);
+
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(true);
+                burgBack.setVisible(false);
+              });
+        });
+  }
+
+  @FXML
+  public void changeServer() {
+    dbSwitch.swap();
+  }
+
+  // TODO: Remove this or move it
+  protected List<String> getAllLongNames() {
+    return new ArrayList<>();
   }
 }

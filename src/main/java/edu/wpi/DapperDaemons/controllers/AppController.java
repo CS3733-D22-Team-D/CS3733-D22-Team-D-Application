@@ -20,19 +20,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppController implements Initializable {
 
-  @FXML protected Node mainNode;
-  @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
+
+  private static VBox error;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +40,7 @@ public class AppController implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
     error.setVisible(false);
     error.setPickOnBounds(false);
     HBox errorContainer = new HBox();
@@ -54,8 +52,7 @@ public class AppController implements Initializable {
   }
 
   /** Creates an error box pop-up on the screen */
-  @FXML
-  protected void showError(String errorMessage) {
+  public static void showError(String errorMessage) {
     App.LOG.warn("Caught error: " + errorMessage);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
@@ -69,8 +66,7 @@ public class AppController implements Initializable {
   }
 
   /** Creates an error box pop-up based on a specific location */
-  @FXML
-  protected void showError(String errorMessage, Pos pos) {
+  public static void showError(String errorMessage, Pos pos) {
     ((HBox) error.getParent()).setAlignment(pos);
     showError(errorMessage);
   }
@@ -114,6 +110,10 @@ public class AppController implements Initializable {
   public static void bindImage(ImageView pageImage, Pane parent) {
     pageImage.fitHeightProperty().bind(parent.heightProperty());
     pageImage.fitWidthProperty().bind(parent.widthProperty());
+  }
+
+  public static void bindChild(HBox child) {
+    HBox.setHgrow(child, Priority.ALWAYS);
   }
 
   protected void saveToCSV(TableObject type) {

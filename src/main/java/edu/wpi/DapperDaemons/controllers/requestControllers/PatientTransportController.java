@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -17,14 +18,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
-public class PatientTransportController extends UIController implements Initializable {
+public class PatientTransportController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<PatientTransportRequest> transportRequests;
