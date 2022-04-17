@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.CSVSaver;
 import edu.wpi.DapperDaemons.backend.LogSaver;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
 import java.io.IOException;
@@ -19,19 +20,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppController implements Initializable {
 
-  @FXML protected Node mainNode;
-  @FXML private VBox error;
   @FXML private StackPane windowContents;
   @FXML private VBox sceneBox;
+
+  private static VBox error;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -42,6 +40,7 @@ public class AppController implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
     error.setVisible(false);
     error.setPickOnBounds(false);
     HBox errorContainer = new HBox();
@@ -53,8 +52,7 @@ public class AppController implements Initializable {
   }
 
   /** Creates an error box pop-up on the screen */
-  @FXML
-  protected void showError(String errorMessage) {
+  public static void showError(String errorMessage) {
     App.LOG.warn("Caught error: " + errorMessage);
     error.setVisible(true);
     Node nodeOut = error.getChildren().get(1);
@@ -68,27 +66,17 @@ public class AppController implements Initializable {
   }
 
   /** Creates an error box pop-up based on a specific location */
-  @FXML
-  protected void showError(String errorMessage, Pos pos) {
+  public static void showError(String errorMessage, Pos pos) {
     ((HBox) error.getParent()).setAlignment(pos);
     showError(errorMessage);
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     Stage window = (Stage) sceneBox.getScene().getWindow();
-    window.setMinWidth(minWidth);
-    window.setMinHeight(minHeight);
-    window.setOnCloseRequest(e -> quitProgram());
-    window.getScene().setRoot(root);
-  }
-
-  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
-      throws IOException {
-    Parent root =
-        FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
     window.setOnCloseRequest(e -> quitProgram());
@@ -112,6 +100,10 @@ public class AppController implements Initializable {
   public static void bindImage(ImageView pageImage, Pane parent) {
     pageImage.fitHeightProperty().bind(parent.heightProperty());
     pageImage.fitWidthProperty().bind(parent.widthProperty());
+  }
+
+  public static void bindChild(HBox child) {
+    HBox.setHgrow(child, Priority.ALWAYS);
   }
 
   protected void saveToCSV(TableObject type) {

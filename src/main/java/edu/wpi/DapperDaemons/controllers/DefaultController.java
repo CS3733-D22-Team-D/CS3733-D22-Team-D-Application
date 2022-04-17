@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -35,37 +34,11 @@ public class DefaultController extends ParentController {
   @FXML private Pane backendPageContainer;
   @FXML private ImageView backendPageImage;
 
-  private static Timer timer;
-  private static final int timeUpdate = 1;
-
-  private static Timer weatherTimer;
-  private static final int weatherUpdate = 300;
-
   private final List<KeyCode> easterEggSequence = new ArrayList<>();
   private int easterEggInd = 0;
 
   private long startTime;
   private int count = 0;
-
-  public final Image EMBEDDED =
-      new Image(
-          Objects.requireNonNull(
-              getClass()
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
-  public final Image SERVER =
-      new Image(
-          Objects.requireNonNull(
-              getClass()
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
-
-  public final Image LOAD =
-      new Image(
-          Objects.requireNonNull(
-              DefaultController.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -82,7 +55,6 @@ public class DefaultController extends ParentController {
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
     bindImage(backendPageImage, backendPageContainer);
-    //    initConnectionImage();
   }
 
   private void initSequence() {

@@ -4,7 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -19,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class MedicineController extends UIController {
+public class MedicineController extends ParentController {
   @FXML private TableView<MedicineRequest> medicineRequests;
   private TableHelper<MedicineRequest> helper;
   @FXML private TableColumn<MedicineRequest, String> priorityCol;
@@ -52,8 +53,20 @@ public class MedicineController extends UIController {
       e.printStackTrace();
       System.err.print("Error, Medicine Request table was unable to be created\n");
     }
-
+    setListeners();
     onClearClicked();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMedicinRequestListener(
+        tl.eventListener(
+            () -> {
+              medicineRequests.getItems().clear();
+              medicineRequests
+                  .getItems()
+                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
+            }));
   }
 
   /** Clears the fields when clicked */

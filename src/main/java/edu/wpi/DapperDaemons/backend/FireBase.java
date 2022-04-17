@@ -4,9 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class FireBase {
 
@@ -19,16 +17,9 @@ public class FireBase {
   }
 
   public static void init() {
-    FileInputStream serviceAccount = null;
-    try {
-      serviceAccount = new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
-      //      serviceAccount =
-      //          new FileInputStream(
-      //
-      // FireBase.class.getClassLoader().getResource("service-account.json").getPath());
-    } catch (FileNotFoundException e) {
-      System.out.println("Service account json not found");
-    }
+    InputStream serviceAccount = null;
+    InputStream targetStream;
+    serviceAccount = FireBase.class.getClassLoader().getResourceAsStream("service-account.json");
 
     FirebaseOptions options = null;
     // Initialize the app with a service account, granting admin privileges

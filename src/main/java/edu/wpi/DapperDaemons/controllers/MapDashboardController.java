@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -13,7 +14,6 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -58,17 +58,20 @@ public class MapDashboardController extends ParentController {
   @FXML private Text inUseEquipNum;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
-  private final String floorTxtPath = "floorSummary.txt";
-  private final String locOfInterestTxtPath = "locOfInterest.txt";
 
   public static String floor;
 
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
+  private TableListeners tl;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     bindImage(mapImage, mapImageContainer);
+
+    tl = new TableListeners();
+    setListeners();
 
     // Init tables
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
@@ -82,6 +85,121 @@ public class MapDashboardController extends ParentController {
     updatePage();
   }
 
+  private void setListeners() {
+    TableListeners.setMedicalEquipmentListener(
+        tl.eventListener(
+            () -> {
+              equipTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                equipTable
+                    .getItems()
+                    .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
+              }
+            }));
+    TableListeners.setPatientListener(
+        tl.eventListener(
+            () -> {
+              patientTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                patientTable
+                    .getItems()
+                    .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
+              }
+            }));
+    TableListeners.setLabRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setLanguageRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setMealDeliveryRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setMedicalEquipmentRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setMedicinRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setPatientTrasportRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setSanitationRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    TableListeners.setLocationListener(
+        tl.eventListener(
+            () -> {
+              locTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                locTable.getItems().add(l);
+              }
+            }));
+  }
+
   private void updatePage() {
     updateTables();
     updateIcons();
@@ -89,19 +207,20 @@ public class MapDashboardController extends ParentController {
     updateLocOfInterest();
   }
 
+  private List<Location> locsByFloor;
+
   // Updates the data based on current floor
   private void updateTables() {
     equipTable.getItems().clear();
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
-    List<Location> locsByFloor;
-    locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
+    locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
       try {
-        equipTable.getItems().addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
-        patientTable.getItems().addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
+        equipTable.getItems().addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
+        patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
         reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
         locTable.getItems().add(l);
       } catch (SQLException e) {
@@ -116,9 +235,9 @@ public class MapDashboardController extends ParentController {
 
     // Creates list of dirty and clean equipment by filtering the equipment on the floor
     List<MedicalEquipment> dirtyEquipment =
-        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN").values());
+        new ArrayList<>(equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN").values());
     List<MedicalEquipment> cleanEquipment =
-        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN").values());
+        new ArrayList<>(equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN").values());
 
     dirtyEquipNum.setText(dirtyEquipment.size() + "");
     cleanEquipNum.setText(cleanEquipment.size() + "");
@@ -149,6 +268,7 @@ public class MapDashboardController extends ParentController {
 
   private void updateSummary() {
     try {
+      String floorTxtPath = "floorSummary.txt";
       String floorText = getFileText(floorTxtPath, getFloorNum());
       floorSummary.setText(floorText);
     } catch (IOException e) {
@@ -158,10 +278,10 @@ public class MapDashboardController extends ParentController {
 
   private void updateLocOfInterest() {
     try {
+      String locOfInterestTxtPath = "locOfInterest.txt";
       String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
       locOfInterest.setText(floorText);
-    } catch (IOException e) {
-    }
+    } catch (IOException ignored) {}
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
@@ -242,153 +362,153 @@ public class MapDashboardController extends ParentController {
   }
 
   @FXML
-  void switchToL1(ActionEvent event) {
+  void switchToL1() {
     if (L1.isSelected()) {
-      this.floor = "1";
+      floor = "1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL10(ActionEvent event) {
+  void switchToL10() {
     if (L10.isSelected()) {
-      this.floor = "10";
+      floor = "10";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL11(ActionEvent event) {
+  void switchToL11() {
     if (L11.isSelected()) {
-      this.floor = "11";
+      floor = "11";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL12(ActionEvent event) {
+  void switchToL12() {
     if (L12.isSelected()) {
-      this.floor = "12";
+      floor = "12";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL14(ActionEvent event) {
+  void switchToL14() {
     if (L14.isSelected()) {
-      this.floor = "14";
+      floor = "14";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL15(ActionEvent event) {
+  void switchToL15() {
     if (L15.isSelected()) {
-      this.floor = "15";
+      floor = "15";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL16(ActionEvent event) {
+  void switchToL16() {
     if (L16.isSelected()) {
-      this.floor = "16";
+      floor = "16";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL2(ActionEvent event) {
+  void switchToL2() {
     if (L2.isSelected()) {
-      this.floor = "2";
+      floor = "2";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL3(ActionEvent event) {
+  void switchToL3() {
     if (L3.isSelected()) {
-      this.floor = "3";
+      floor = "3";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL4(ActionEvent event) {
+  void switchToL4() {
     if (L4.isSelected()) {
-      this.floor = "4";
+      floor = "4";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL5(ActionEvent event) {
+  void switchToL5() {
     if (L5.isSelected()) {
-      this.floor = "5";
+      floor = "5";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL6(ActionEvent event) {
+  void switchToL6() {
     if (L6.isSelected()) {
-      this.floor = "6";
+      floor = "6";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL7(ActionEvent event) {
+  void switchToL7() {
     if (L7.isSelected()) {
-      this.floor = "7";
+      floor = "7";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL8(ActionEvent event) {
+  void switchToL8() {
     if (L8.isSelected()) {
-      this.floor = "8";
+      floor = "8";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL9(ActionEvent event) {
+  void switchToL9() {
     if (L9.isSelected()) {
-      this.floor = "9";
+      floor = "9";
       updatePage();
     }
   }
 
   @FXML
-  void switchToLL1(ActionEvent event) {
+  void switchToLL1() {
     if (LL1.isSelected()) {
-      this.floor = "L1";
+      floor = "L1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToLL2(ActionEvent event) {
+  void switchToLL2() {
     if (LL2.isSelected()) {
-      this.floor = "L2";
+      floor = "L2";
       updatePage();
     }
   }
 
   @FXML
-  void switchToM1(ActionEvent event) {
+  void switchToM1() {
     if (M1.isSelected()) {
-      this.floor = "M1";
+      floor = "M1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToM2(ActionEvent event) {
+  void switchToM2() {
     if (M2.isSelected()) {
-      this.floor = "M2";
+      floor = "M2";
       updatePage();
     }
   }

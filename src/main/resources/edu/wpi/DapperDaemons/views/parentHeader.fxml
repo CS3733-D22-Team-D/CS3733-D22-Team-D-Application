@@ -299,7 +299,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0" visible="false">
+                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0">
                            <children>
                               <ToggleButton fx:id="serverToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openServerDropdown" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #012D5A;" text="ToggleButton">
                                  <graphic>
@@ -348,13 +348,13 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="45.0" prefWidth="87.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
                            <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="87.0">
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT">
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT">
                                        <image>
-                                          <Image url="@../assets/Glyphs/notification.png" />
+                                          <Image url="@../assets/Glyphs/bell.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -521,7 +521,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox fx:id="notifications" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
+                  <VBox fx:id="notifications" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
                      <effect>
                         <DropShadow>
                            <color>
@@ -530,7 +530,7 @@
                         </DropShadow>
                      </effect>
                      <HBox.margin>
-                        <Insets right="125.0" top="50.0" />
+                        <Insets right="65.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
@@ -539,7 +539,6 @@
       </StackPane>
    </children>
    <stylesheets>
-      <URL value="@../assets/themes.css" />
       <URL value="@../assets/themeBlue.css" />
       <URL value="@../assets/themeDark.css" />
       <URL value="@../assets/themeRed.css" />
