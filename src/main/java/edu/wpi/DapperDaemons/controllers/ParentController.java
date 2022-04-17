@@ -123,6 +123,7 @@ public class ParentController extends AppController {
   public void swapPage(String page, String pageName) {
     TableListeners.removeAllListeners();
     mainBox.getChildren().clear();
+    if (burgBack != null && burgBack.isVisible()) closeSlider();
 
     try {
       HBox childPage =
@@ -400,98 +401,62 @@ public class ParentController extends AppController {
   public void logout() throws IOException {
     FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifListener);
     switchScene("login.fxml", 575, 575);
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
     SecurityController.setUser(null);
   }
 
   @FXML
   void switchToAboutUs() {
     swapPage("aboutUs", "About Us");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToEquipment() {
     swapPage("equipment", "Equipment Delivery");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToLabRequest() {
     swapPage("labRequest", "Lab Request");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToMap() {
     swapPage("locationMap", "Interactive Map");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToMapDashboard() {
     swapPage("mapDashboard", "Map Dashboard");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToMeal() {
     swapPage("meal", "Patient Meal Delivery Portal");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToMedicine() {
     swapPage("medicine", "Medication Request");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToPatientTransport() {
     swapPage("patientTransport", "Internal Patient Transportation");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToSanitation() {
     swapPage("sanitation", "Sanitation Services");
-    if (burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToLanguage() {
     swapPage("language", "Interpreter Request");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
   void switchToDB() {
     swapPage("backendInfoDisp", "Backend Information Display");
-    if (burgBack != null && burgBack.isVisible()) {
-      closeSlider();
-    }
   }
 
   @FXML
@@ -666,11 +631,6 @@ public class ParentController extends AppController {
           burg.setVisible(true);
           burgBack.setVisible(false);
         });
-  }
-
-  @FXML
-  public void changeServer() {
-    dbSwitch.swap();
   }
 
   // TODO: Remove this or move it
