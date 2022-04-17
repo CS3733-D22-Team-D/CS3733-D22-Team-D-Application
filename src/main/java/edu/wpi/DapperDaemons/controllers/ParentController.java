@@ -10,11 +10,11 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
@@ -29,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
@@ -80,14 +81,6 @@ public class ParentController extends AppController {
   @FXML private VBox notifications;
 
   private static ValueEventListener notifListener;
-  private static Timer timer;
-  private static final int timeUpdate = 1;
-
-  private static Timer weatherTimer;
-  private static final int weatherUpdate = 300;
-
-  private long startTime;
-  private int count = 0;
 
   // names are formatted this way so enums can easily reference css files
   protected static Theme theme;
@@ -454,7 +447,7 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void switchToMeal(MouseEvent event) {
+  void switchToMeal() {
     swapPage("meal", "Patient Meal Delivery Portal");
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
@@ -504,6 +497,8 @@ public class ParentController extends AppController {
   @FXML
   void goToServicePage() {
     swapPage("serviceRequestPage", "Service Page");
+  }
+
   private void initGraphics() {
     bindImage(BGImage, BGContainer);
     initConnectionImage();
@@ -519,7 +514,7 @@ public class ParentController extends AppController {
   }
 
   private void setLoad() {
-    serverIcon.setImage(LOAD);
+    serverIcon.setImage(Images.LOAD);
   }
 
   private void initConnectionImage() {
@@ -532,31 +527,10 @@ public class ParentController extends AppController {
     serverIcon.setEffect(ca);
 
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
-      serverIcon.setImage(EMBEDDED);
+      serverIcon.setImage(Images.EMBEDDED);
     else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
-      serverIcon.setImage(SERVER);
-    else serverIcon.setImage(CLOUD);
-  }
-
-  private void updateDate() {
-    if (timer != null) timer.cancel();
-    timer = new Timer();
-    timer.schedule(
-        new TimerTask() { // timer task to update the seconds
-          @Override
-          public void run() {
-            // use Platform.runLater(Runnable runnable) If you need to update a GUI component from a
-            // non-GUI thread.
-            Platform.runLater(
-                () -> {
-                  SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
-                  Date now = new Date();
-                  if (time != null) time.setText(formatter.format(now));
-                });
-          }
-        },
-        0,
-        timeUpdate * 1000); // Every 1 second
+      serverIcon.setImage(Images.SERVER);
+    else serverIcon.setImage(Images.CLOUD);
   }
 
   @FXML
@@ -675,6 +649,22 @@ public class ParentController extends AppController {
                 burg.setVisible(true);
                 burgBack.setVisible(false);
               });
+        });
+  }
+
+  public void closeSlider() {
+    TranslateTransition slide = new TranslateTransition();
+    slide.setDuration(Duration.seconds(0.4));
+    slide.setNode(slider);
+    slide.setToX(-225);
+    slide.play();
+
+    slider.setTranslateX(0);
+
+    slide.setOnFinished(
+        (ActionEvent e) -> {
+          burg.setVisible(true);
+          burgBack.setVisible(false);
         });
   }
 
