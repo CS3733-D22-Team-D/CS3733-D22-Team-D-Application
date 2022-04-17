@@ -75,16 +75,28 @@ public abstract class UIController extends AppController {
     accountName.setText(employeeName);
     accountName.setFont(Font.font("Comic Sans", 14));
 
-    profilePic.setFill(
-        new ImagePattern(
-            new Image(
-                Objects.requireNonNull(
-                    getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/profilepictures/"
-                                + SecurityController.getUser().getNodeID()
-                                + ".png")))));
+    try {
+      profilePic.setFill(
+          new ImagePattern(
+              new Image(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResourceAsStream(
+                              "edu/wpi/DapperDaemons/profilepictures/"
+                                  + SecurityController.getUser().getNodeID()
+                                  + ".png")))));
+    } catch (Exception e) {
+      System.out.println("Setting pfp to default");
+      profilePic.setFill(
+          new ImagePattern(
+              new Image(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResourceAsStream(
+                              "edu/wpi/DapperDaemons/profilepictures/" + "wwrong2" + ".png")))));
+    }
   }
 
   private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
