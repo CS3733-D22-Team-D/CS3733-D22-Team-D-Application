@@ -46,7 +46,7 @@ public class DBSwitchHandler {
     serverChange.start();
   }
 
-  private void setLoad() {
+  public void setLoad() {
     serverIcon.setImage(Images.LOAD);
   }
 

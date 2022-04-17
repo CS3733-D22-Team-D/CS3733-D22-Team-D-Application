@@ -6,20 +6,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
-import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +32,6 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 
 public class ParentController extends AppController {
@@ -78,11 +77,6 @@ public class ParentController extends AppController {
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
 
-  private static Timer timer;
-  private static final int timeUpdate = 1;
-
-  private static Timer weatherTimer;
-  private static final int weatherUpdate = 300;
 
   private long startTime;
   private int count = 0;
@@ -105,6 +99,8 @@ public class ParentController extends AppController {
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
+    setServerToggleMenu();
+
     dbSwitch = new DBSwitchHandler(serverIcon);
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
@@ -116,11 +112,7 @@ public class ParentController extends AppController {
       headerName = headerNameField;
     }
 
-    initGraphics();
-    updateDate();
     updateWeather();
-
-    setServerToggleMenu();
 
     //    setNotifications();
 
@@ -173,45 +165,7 @@ public class ParentController extends AppController {
                       () -> {
                         Platform.runLater(
                             () -> {
-                              //                              HashMap<String, List<String>> snap =
-                              //                                  ((HashMap<String, List<String>>)
-                              // snapshot.getValue());
-                              //                              ArrayList<String> val = new
-                              // ArrayList(snap.values());
-                              //                              for (List<String> s : snap.values()) {
-                              //                                if
-                              // (s.get(1).equals(SecurityController.getUser().getAttribute(1))) {
-                              //                                  addNotification(new
-                              // Notification(s.get(2), s.get(3), s.get(1)));
-                              //                                }
-                              //                              }
-
-                              //                              List<Notification> notifications =
-                              //                                  new ArrayList<Notification>(
-                              //                                      DAOPouch.getNotificationDAO()
-                              //                                          .filter(2,
-                              // SecurityController.getUser().getAttribute(1))
-                              //                                          .values());
-                              //                              if (notifications.size() > 0) {
-                              //                                setNotifications();
-                              //                              }
-
-                              //                              System.out.println("Receiving
-                              // notification");
-                              //                              ((HashMap<String, List<String>>)
-                              //                                      snapshot.getValue()) // TODO
-                              // might be able to comment this out
-                              //                                  .forEach(
-                              //                                      (k, v) -> {
-                              //                                        Notification n = new
-                              // Notification();
-                              //                                        for (int i = 1; i <=
-                              // v.size(); i++) {
-                              //                                          n.setAttribute(i, v.get(i
-                              // - 1));
-                              //                                        }
                               setNotifications();
-                              //                                      });
                             });
                       })
                   .start();
@@ -294,13 +248,13 @@ public class ParentController extends AppController {
   private void setServerToggleMenu() {
     switch (ConnectionHandler.getType()) {
       case EMBEDDED:
-        serverSlotOne.setImage(CLOUD);
-        serverSlotTwo.setImage(SERVER);
+        serverSlotOne.setImage(Images.CLOUD);
+        serverSlotTwo.setImage(Images.SERVER);
         serverSlotOneText.setText("Firebase");
         serverSlotTwoText.setText("Client Server");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         System.out.println("Switching to cloud");
@@ -308,17 +262,17 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(CLOUD);
+                                serverIcon.setImage(Images.CLOUD);
                               });
                         } else {
-                          serverIcon.setImage(EMBEDDED);
+                          serverIcon.setImage(Images.EMBEDDED);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -326,23 +280,23 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(SERVER);
+                                serverIcon.setImage(Images.SERVER);
                               });
                         } else {
-                          serverIcon.setImage(EMBEDDED);
+                          serverIcon.setImage(Images.EMBEDDED);
                         }
                       })
                   .start();
             });
         break;
       case CLIENTSERVER:
-        serverSlotOne.setImage(CLOUD);
-        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOne.setImage(Images.CLOUD);
+        serverSlotTwo.setImage(Images.EMBEDDED);
         serverSlotOneText.setText("Firebase");
         serverSlotTwoText.setText("Embedded");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -350,17 +304,17 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(CLOUD);
+                                serverIcon.setImage(Images.CLOUD);
                               });
                         } else {
-                          serverIcon.setImage(SERVER);
+                          serverIcon.setImage(Images.SERVER);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -368,23 +322,23 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(EMBEDDED);
+                                serverIcon.setImage(Images.EMBEDDED);
                               });
                         } else {
-                          serverIcon.setImage(SERVER);
+                          serverIcon.setImage(Images.SERVER);
                         }
                       })
                   .start();
             });
         break;
       case CLOUD:
-        serverSlotOne.setImage(SERVER);
-        serverSlotTwo.setImage(EMBEDDED);
+        serverSlotOne.setImage(Images.SERVER);
+        serverSlotTwo.setImage(Images.EMBEDDED);
         serverSlotOneText.setText("Client Server");
         serverSlotTwoText.setText("Embedded");
         serverButtonOne.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -392,17 +346,17 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(SERVER);
+                                serverIcon.setImage(Images.SERVER);
                               });
                         } else {
-                          serverIcon.setImage(CLOUD);
+                          serverIcon.setImage(Images.CLOUD);
                         }
                       })
                   .start();
             });
         serverButtonTwo.setOnMouseClicked(
             event -> {
-              setLoad();
+              dbSwitch.setLoad();
               new Thread(
                       () -> {
                         openServerDropdown();
@@ -410,10 +364,10 @@ public class ParentController extends AppController {
                           Platform.runLater(
                               () -> {
                                 setServerToggleMenu();
-                                serverIcon.setImage(EMBEDDED);
+                                serverIcon.setImage(Images.EMBEDDED);
                               });
                         } else {
-                          serverIcon.setImage(CLOUD);
+                          serverIcon.setImage(Images.CLOUD);
                         }
                       })
                   .start();
@@ -479,7 +433,7 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void switchToLanguage(MouseEvent event) {
+  void switchToLanguage() {
     swapPage("language", "Interpreter Request");
   }
 

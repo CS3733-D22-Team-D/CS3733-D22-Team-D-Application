@@ -22,6 +22,13 @@ public class Images {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
 
+  public static final Image CLOUD =
+      new Image(
+          Objects.requireNonNull(
+              Images.class
+                  .getClassLoader()
+                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/cloud.png")));
+
   public static final Image LOAD =
       new Image(
           Objects.requireNonNull(
