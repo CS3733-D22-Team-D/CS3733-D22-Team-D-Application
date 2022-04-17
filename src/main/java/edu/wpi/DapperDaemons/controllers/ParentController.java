@@ -2,20 +2,12 @@ package edu.wpi.DapperDaemons.controllers;
 
 import static edu.wpi.DapperDaemons.backend.ConnectionHandler.*;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
-import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
-import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
-import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
-import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
-import edu.wpi.DapperDaemons.entities.Notification;
+import edu.wpi.DapperDaemons.controllers.homePage.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -33,7 +25,6 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javax.sound.sampled.LineUnavailableException;
 
 public class ParentController extends AppController {
 
@@ -73,10 +64,9 @@ public class ParentController extends AppController {
   private static Text headerName;
   private static WeatherHandler weather;
   private static DBSwitchHandler dbSwitch;
+  private static NotificationHandler notifs;
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
-
-  private static ValueEventListener notifListener;
 
   // names are formatted this way so enums can easily reference css files
   protected static Theme theme;
@@ -102,17 +92,9 @@ public class ParentController extends AppController {
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
-
-    setNotificationListener();
-
-    if (headerNameField != null) {
-      headerName = headerNameField;
-    }
+    notifs = new NotificationHandler(notifications);
 
     updateWeather();
-
-    //    setNotifications();
-
     swapPage("default", "Home");
   }
 
@@ -149,92 +131,6 @@ public class ParentController extends AppController {
   @FXML
   void openServerDropdown() {
     serverDropdown.setVisible(serverToggle.isSelected());
-  }
-
-  void setNotificationListener() {
-    if (ConnectionHandler.getType().equals(connectionType.CLOUD)) {
-      DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
-      notifListener =
-          new ValueEventListener() {
-            @Override
-            public synchronized void onDataChange(DataSnapshot snapshot) {
-              System.out.println(
-                  "Notification listener for " + SecurityController.getUser().getAttribute(1));
-              new Thread(() -> Platform.runLater(() -> setNotifications())).start();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-              System.out.println("Cancelled in notification listener");
-            }
-          };
-      ref.addValueEventListener(notifListener);
-    }
-  }
-
-  void addNotification(Notification n) {
-    SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
-    try {
-      sp.play();
-    } catch (LineUnavailableException e) {
-      throw new RuntimeException(e);
-    }
-    this.notifications.getChildren().add(createNotification(n));
-  }
-
-  void setNotifications() {
-    this.notifications.getChildren().clear();
-    List<Notification> notifications =
-        new ArrayList<>(
-            DAOPouch.getNotificationDAO()
-                .filter(2, SecurityController.getUser().getAttribute(1))
-                .values());
-    List<Notification> unRead =
-        new ArrayList<>(DAOPouch.getNotificationDAO().filter(notifications, 5, "false").values());
-    List<Notification> unReadUnChimed =
-        new ArrayList<>(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
-    if (notifications.size() == 0) {
-      Text t = new Text();
-      t.setText("Looks empty in here");
-      this.notifications.getChildren().add(t);
-      return;
-    }
-    if (unRead.size() > 0) {
-      if (unReadUnChimed.size() > 0) {
-        SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
-        try {
-          sp.play();
-        } catch (LineUnavailableException e) {
-          throw new RuntimeException(e);
-        }
-        for (Notification n : unReadUnChimed) {
-          n.setAttribute(6, "true");
-          DAOPouch.getNotificationDAO().add(n);
-        }
-        for (Notification n : unRead) {
-          this.notifications.getChildren().add(createNotification(n));
-        }
-      }
-    }
-  }
-
-  VBox createNotification(Notification n) {
-    VBox notif = new VBox();
-
-    try {
-      notif =
-          FXMLLoader.load(
-              Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
-      notifications.getChildren().add(notif);
-      Label notifSubject = (Label) notif.getChildren().get(0);
-      Label notifBody = (Label) notif.getChildren().get(1);
-
-      notifSubject.setText(n.getSubject());
-      notifBody.setText(n.getBody());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return notif;
   }
 
   @FXML
@@ -380,7 +276,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifListener);
+    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }

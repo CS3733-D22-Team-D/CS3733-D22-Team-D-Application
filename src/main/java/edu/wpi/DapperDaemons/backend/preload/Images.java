@@ -7,34 +7,58 @@ import javafx.scene.paint.ImagePattern;
 
 public class Images {
 
+  private static final String ASSETS = "edu/wpi/DapperDaemons/assets/";
+  private static final String MAP_PATH =
+      Images.class.getClassLoader().getResource(ASSETS + "Maps") + "/";
+
   private Images() {}
 
-  public static final Image EMBEDDED =
-      new Image(
-          Objects.requireNonNull(
-              Images.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/embedded.png")));
-  public static final Image SERVER =
-      new Image(
-          Objects.requireNonNull(
-              Images.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
+  public static void init() {
+    EMBEDDED =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream(ASSETS + "serverIcons/embedded.png")));
+    SERVER =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream(ASSETS + "serverIcons/server.png")));
+    CLOUD =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream(ASSETS + "serverIcons/cloud.png")));
+    LOAD =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+    mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
+    mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
+    mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
+    mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
+    mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
+    mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
+    mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
+  }
 
-  public static final Image CLOUD =
-      new Image(
-          Objects.requireNonNull(
-              Images.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/cloud.png")));
+  public static Image EMBEDDED;
+  public static Image SERVER;
+  public static Image CLOUD;
+  public static Image LOAD;
 
-  public static final Image LOAD =
-      new Image(
-          Objects.requireNonNull(
-              Images.class
-                  .getClassLoader()
-                  .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+  public static Image mapFloorL2;
+  public static Image mapFloorL1;
+  public static Image mapFloor1;
+  public static Image mapFloor2;
+  public static Image mapFloor3;
+  public static Image mapFloor4;
+  public static Image mapFloor5;
 
   public static ImagePattern getAccountImage() {
     return new ImagePattern(
