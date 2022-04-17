@@ -110,7 +110,7 @@ public class LoginController extends AppController {
         List<Employee> user =
             employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2));
         if (user.size() == 1) {
-          SecurityController.setUser(user.get(0));
+          SecurityController.setUser(user.get(0)); // Correctly finds the user
           switchScene("parentHeader.fxml", 635, 510);
           return;
         } else {
