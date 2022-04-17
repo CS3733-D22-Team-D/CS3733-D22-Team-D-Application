@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -72,6 +73,19 @@ public class PatientTransportController extends UIController implements Initiali
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setPatientTrasportRequestListener(
+        tl.eventListener(
+            () -> {
+              transportRequests.getItems().clear();
+              transportRequests
+                  .getItems()
+                  .addAll(new ArrayList(patientTransportRequestDAO.getAll().values()));
+            }));
   }
 
   @FXML

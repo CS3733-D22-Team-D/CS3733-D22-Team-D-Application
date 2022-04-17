@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -79,6 +80,19 @@ public class MealController extends UIController {
     } catch (Exception e) {
       mealRequestsTable.getItems().setAll(new ArrayList<>());
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMealDeliveryRequestListener(
+        tl.eventListener(
+            () -> {
+              mealRequestsTable.getItems().clear();
+              mealRequestsTable
+                  .getItems()
+                  .addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
+            }));
   }
 
   /** Creates service request, executes when submit button is pressed */

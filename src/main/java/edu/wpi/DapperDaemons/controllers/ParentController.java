@@ -221,45 +221,7 @@ public class ParentController extends UIController {
                       () -> {
                         Platform.runLater(
                             () -> {
-                              //                              HashMap<String, List<String>> snap =
-                              //                                  ((HashMap<String, List<String>>)
-                              // snapshot.getValue());
-                              //                              ArrayList<String> val = new
-                              // ArrayList(snap.values());
-                              //                              for (List<String> s : snap.values()) {
-                              //                                if
-                              // (s.get(1).equals(SecurityController.getUser().getAttribute(1))) {
-                              //                                  addNotification(new
-                              // Notification(s.get(2), s.get(3), s.get(1)));
-                              //                                }
-                              //                              }
-
-                              //                              List<Notification> notifications =
-                              //                                  new ArrayList<Notification>(
-                              //                                      DAOPouch.getNotificationDAO()
-                              //                                          .filter(2,
-                              // SecurityController.getUser().getAttribute(1))
-                              //                                          .values());
-                              //                              if (notifications.size() > 0) {
-                              //                                setNotifications();
-                              //                              }
-
-                              //                              System.out.println("Receiving
-                              // notification");
-                              //                              ((HashMap<String, List<String>>)
-                              //                                      snapshot.getValue()) // TODO
-                              // might be able to comment this out
-                              //                                  .forEach(
-                              //                                      (k, v) -> {
-                              //                                        Notification n = new
-                              // Notification();
-                              //                                        for (int i = 1; i <=
-                              // v.size(); i++) {
-                              //                                          n.setAttribute(i, v.get(i
-                              // - 1));
-                              //                                        }
                               setNotifications();
-                              //                                      });
                             });
                       })
                   .start();

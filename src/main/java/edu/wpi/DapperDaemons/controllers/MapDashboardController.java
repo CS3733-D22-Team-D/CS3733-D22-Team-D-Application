@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.CSVLoader;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -66,9 +67,14 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
+  private TableListeners tl;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     bindImage(mapImage, mapImageContainer);
+
+    tl = new TableListeners();
+    setListeners();
 
     // Init tables
     new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
@@ -82,6 +88,121 @@ public class MapDashboardController extends ParentController {
     updatePage();
   }
 
+  private void setListeners() {
+    tl.setMedicalEquipmentListener(
+        tl.eventListener(
+            () -> {
+              equipTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                equipTable
+                    .getItems()
+                    .addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
+              }
+            }));
+    tl.setPatientListener(
+        tl.eventListener(
+            () -> {
+              patientTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                patientTable
+                    .getItems()
+                    .addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
+              }
+            }));
+    tl.setLabRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setLanguageRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setMealDeliveryRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setMedicalEquipmentRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setMedicinRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setPatientTrasportRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setSanitationRequestListener(
+        tl.eventListener(
+            () -> {
+              reqTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                try {
+                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
+                } catch (SQLException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            }));
+    tl.setLocationListener(
+        tl.eventListener(
+            () -> {
+              locTable.getItems().clear();
+              for (Location l : locsByFloor) {
+                locTable.getItems().add(l);
+              }
+            }));
+  }
+
   private void updatePage() {
     updateTables();
     updateIcons();
@@ -89,13 +210,14 @@ public class MapDashboardController extends ParentController {
     updateLocOfInterest();
   }
 
+  private List<Location> locsByFloor;
+
   // Updates the data based on current floor
   private void updateTables() {
     equipTable.getItems().clear();
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
-    List<Location> locsByFloor;
     locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {

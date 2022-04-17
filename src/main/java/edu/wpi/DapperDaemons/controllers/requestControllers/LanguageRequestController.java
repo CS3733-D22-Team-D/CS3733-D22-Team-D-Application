@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
@@ -58,6 +59,20 @@ public class LanguageRequestController extends ParentController {
     }
 
     onClearClicked();
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setLanguageRequestListener(
+        tl.eventListener(
+            () -> {
+              System.out.println("LanguageRequestsTable");
+              languageRequestsTable.getItems().clear();
+              languageRequestsTable
+                  .getItems()
+                  .addAll(new ArrayList(languageRequestDAO.getAll().values()));
+            }));
   }
 
   public boolean addItem(LanguageRequest request) {

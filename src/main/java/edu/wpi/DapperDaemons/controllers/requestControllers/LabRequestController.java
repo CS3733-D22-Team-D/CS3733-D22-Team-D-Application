@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -51,6 +52,17 @@ public class LabRequestController extends ParentController {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setLabRequestListener(
+        tl.eventListener(
+            () -> {
+              labReqTable.getItems().clear();
+              labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
+            }));
   }
 
   @FXML

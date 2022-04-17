@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -51,8 +52,20 @@ public class MedicineController extends UIController {
       e.printStackTrace();
       System.err.print("Error, Medicine Request table was unable to be created\n");
     }
-
+    setListeners();
     onClearClicked();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMedicinRequestListener(
+        tl.eventListener(
+            () -> {
+              medicineRequests.getItems().clear();
+              medicineRequests
+                  .getItems()
+                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
+            }));
   }
 
   /** Clears the fields when clicked */

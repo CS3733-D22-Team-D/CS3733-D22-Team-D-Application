@@ -31,15 +31,15 @@ public class ORM<T extends TableObject> {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
               System.out.println(tableName + " data updating");
-              //              for (DataSnapshot ignored : snapshot.getChildren()) {
               new Thread( // this is very important, so that no other event listeners overwrite
                       // this one
                       () -> {
                         try {
+                          HashMap<String, T> temp = new HashMap<>();
                           ((HashMap<String, List<String>>) snapshot.getValue())
                               .forEach(
                                   (k, v) -> {
-                                    map.put(
+                                    temp.put(
                                         FireBaseCoder.decodeFirebaseKey(k),
                                         (T)
                                             type.newInstance(
@@ -54,8 +54,9 @@ public class ORM<T extends TableObject> {
                                                         })
                                                     .collect(Collectors.toList())));
                                   });
+                          map = temp;
                         } catch (ClassCastException e) {
-                          // TODO test if this is ever reachd
+                          // TODO test if this is ever reached, I dont think it ever does
                           System.out.println("Caught in event listener");
                           HashMap<String, Object> res =
                               (HashMap<String, Object>) snapshot.getValue();
@@ -74,7 +75,6 @@ public class ORM<T extends TableObject> {
                         }
                       })
                   .start();
-              //              }
             }
 
             @Override
