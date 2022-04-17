@@ -28,7 +28,9 @@ public class DBSwitchHandler {
 
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.EMBEDDED))
       serverIcon.setImage(Images.EMBEDDED);
-    else serverIcon.setImage(Images.SERVER);
+    else if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLIENTSERVER))
+      serverIcon.setImage(Images.SERVER);
+    else serverIcon.setImage(Images.CLOUD);
   }
 
   public void swap() {

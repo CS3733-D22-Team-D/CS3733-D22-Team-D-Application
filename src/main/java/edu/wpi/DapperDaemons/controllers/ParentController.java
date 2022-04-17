@@ -77,7 +77,6 @@ public class ParentController extends AppController {
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
 
-
   private long startTime;
   private int count = 0;
 
