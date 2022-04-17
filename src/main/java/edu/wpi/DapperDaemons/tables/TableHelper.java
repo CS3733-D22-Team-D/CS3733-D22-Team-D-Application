@@ -21,6 +21,11 @@ public class TableHelper<R> {
   private ObservableList<TableColumn<R, ?>> columns;
   private int tableNum;
 
+  /**
+   * Constructs a TableHelper to give a facade of useful features involving a JavaFX TableView (and associated data)
+   * @param jfxTable - The table being used
+   * @param tableNum - A number associated with the table, can be anything. Use this number as table reference in TableHandler.class
+   */
   public TableHelper(TableView<R> jfxTable, int tableNum) {
     this.table = jfxTable;
     this.columns = jfxTable.getColumns();
@@ -37,10 +42,12 @@ public class TableHelper<R> {
    * @param type - (YOUR_REQUEST).class
    */
   public void linkColumns(Class<R> type) {
+    // Search for any TableHandler methods
     for (Method m : type.getDeclaredMethods()) {
       m.setAccessible(true);
       TableHandler[] annotations = m.getAnnotationsByType(TableHandler.class);
 
+      // Find methods with the same table number association (or none)
       boolean match = false;
       int i;
       for (i = 0; i < annotations.length; i++) {
@@ -50,9 +57,11 @@ public class TableHelper<R> {
         }
       }
 
+      // Get the column referenced in the tag (ignore if table cannot store)
       if (match && annotations[i].col() < columns.size()) {
         TableColumn<R, Object> dispCol = (TableColumn<R, Object>) columns.get(annotations[i].col());
 
+        // Invoke the method when the cell value is called
         dispCol.setCellValueFactory(
             cell -> {
               try {
@@ -90,6 +99,7 @@ public class TableHelper<R> {
         column, Arrays.stream(enumClass.getEnumConstants()).map(Enum::name).toArray(String[]::new));
   }
 
+  /** Helper function to convert an enum into a list of its values as strings */
   public static <E extends Enum<E>> List<String> convertEnum(Class<E> e) {
     ArrayList<String> values = new ArrayList<>();
     Arrays.stream(e.getEnumConstants()).map(Enum::name).forEach(values::add);
@@ -106,7 +116,13 @@ public class TableHelper<R> {
         });
   }
 
-  /** Filters a column for a specific value within it */
+  /**
+   * Filters a table based on a data value that can be contained in a specific column
+   * Need to have a reference to the JavaFX column in order to filter by its data (including its type)
+   * @param column - The TableColumn to be filtered
+   * @param toFilter - The thing to filter for. Ex: If a TableColumn<X,String> is given, only String cans can be filtered
+   * @param <T> - The data type stored in the column (can all be cast to Object, but not recommended)
+   */
   public <T> void filterTable(TableColumn<R, T> column, T toFilter) {
     ObservableList<R> filteredItems = FXCollections.observableArrayList();
     for (R row : column.getTableView().getItems()) {

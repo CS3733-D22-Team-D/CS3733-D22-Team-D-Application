@@ -539,7 +539,6 @@
       </StackPane>
    </children>
    <stylesheets>
-      <URL value="@../assets/themes.css" />
       <URL value="@../assets/themeBlue.css" />
       <URL value="@../assets/themeDark.css" />
       <URL value="@../assets/themeRed.css" />
