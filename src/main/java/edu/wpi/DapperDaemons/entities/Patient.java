@@ -107,7 +107,7 @@ public class Patient extends TableObject {
     Patient temp = new Patient();
     //    System.out.println("Patient size " + l.size());
     for (int i = 0; i < l.size(); i++) {
-      System.out.println(i);
+//      System.out.println(i);
       temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
