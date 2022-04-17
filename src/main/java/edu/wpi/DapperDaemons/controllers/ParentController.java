@@ -112,7 +112,6 @@ public class ParentController extends UIController {
                   .getClassLoader()
                   .getResourceAsStream("edu/wpi/DapperDaemons/assets/serverIcons/server.png")));
 
-  // TODO get new image for the cloud server
   public final Image CLOUD =
       new Image(
           Objects.requireNonNull(
@@ -154,7 +153,6 @@ public class ParentController extends UIController {
   public void swapPage(String page, String pageName) {
     TableListeners.removeAllListeners();
     mainBox.getChildren().clear();
-
     try {
       childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
