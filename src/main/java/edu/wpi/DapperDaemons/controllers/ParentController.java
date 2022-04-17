@@ -1,36 +1,27 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
-import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DBSwitchHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.DateHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.WeatherHandler;
-import edu.wpi.DapperDaemons.entities.Employee;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
-import edu.wpi.DapperDaemons.entities.Location;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ParentController extends AppController {
@@ -62,12 +53,12 @@ public class ParentController extends AppController {
   private static HBox mainBox;
   private static Text headerName;
   private static WeatherHandler weather;
-//  private static DateHandler date;
+  //  private static DateHandler date;
   private static DBSwitchHandler dbSwitch;
-  private static AccountHandler accountHandler;
 
   // names are formatted this way so enums can easily reference css files
   protected static Theme theme;
+
   public enum Theme {
     Light,
     Dark,
@@ -78,15 +69,15 @@ public class ParentController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    menuSlider(slider,burg,burgBack);
+    menuSlider(slider, burg, burgBack);
     bindImage(BGImage, BGContainer);
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
-    accountHandler = new AccountHandler(accountName,profilePic);
     dbSwitch = new DBSwitchHandler(serverIcon);
     new DateHandler(time);
-    weather = new WeatherHandler(weatherIcon,tempLabel);
+    new AccountHandler(accountName, profilePic);
+    weather = new WeatherHandler(weatherIcon, tempLabel);
 
     swapPage("default", "Home");
   }
@@ -95,7 +86,8 @@ public class ParentController extends AppController {
     mainBox.getChildren().clear();
 
     try {
-      HBox childPage = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
+      HBox childPage =
+          FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
       mainBox.getChildren().add(childPage);
       bindChild(childPage);
       headerName.setText(pageName);
@@ -176,13 +168,9 @@ public class ParentController extends AppController {
     swapPage("backendInfoDisp", "Backend Information Display");
   }
 
-  public static void bindImage(ImageView pageImage, Pane parent) {
-    pageImage.fitHeightProperty().bind(parent.heightProperty());
-    pageImage.fitWidthProperty().bind(parent.widthProperty());
-  }
-
-  public static void bindChild(HBox child) {
-    HBox.setHgrow(child, Priority.ALWAYS);
+  @FXML
+  void goToServicePage() {
+    swapPage("serviceRequestPage", "Service Page");
   }
 
   @FXML
@@ -268,39 +256,49 @@ public class ParentController extends AppController {
   private static void menuSlider(VBox slider, JFXHamburger burg, JFXHamburger burgBack) {
     slider.setTranslateX(-225);
     burg.setOnMouseClicked(
-            event -> {
-              TranslateTransition slide = new TranslateTransition();
-              slide.setDuration(Duration.seconds(0.4));
-              slide.setNode(slider);
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
 
-              slide.setToX(0);
-              slide.play();
+          slide.setToX(0);
+          slide.play();
 
-              slider.setTranslateX(-225);
+          slider.setTranslateX(-225);
 
-              slide.setOnFinished(
-                      (ActionEvent e) -> {
-                        burg.setVisible(false);
-                        burgBack.setVisible(true);
-                      });
-            });
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(false);
+                burgBack.setVisible(true);
+              });
+        });
 
     burgBack.setOnMouseClicked(
-            event -> {
-              TranslateTransition slide = new TranslateTransition();
-              slide.setDuration(Duration.seconds(0.4));
-              slide.setNode(slider);
+        event -> {
+          TranslateTransition slide = new TranslateTransition();
+          slide.setDuration(Duration.seconds(0.4));
+          slide.setNode(slider);
 
-              slide.setToX(-225);
-              slide.play();
+          slide.setToX(-225);
+          slide.play();
 
-              slider.setTranslateX(0);
+          slider.setTranslateX(0);
 
-              slide.setOnFinished(
-                      (ActionEvent e) -> {
-                        burg.setVisible(true);
-                        burgBack.setVisible(false);
-                      });
-            });
+          slide.setOnFinished(
+              (ActionEvent e) -> {
+                burg.setVisible(true);
+                burgBack.setVisible(false);
+              });
+        });
+  }
+
+  @FXML
+  public void changeServer() {
+    dbSwitch.swap();
+  }
+
+  // TODO: Remove this or move it
+  protected List<String> getAllLongNames() {
+    return new ArrayList<>();
   }
 }
