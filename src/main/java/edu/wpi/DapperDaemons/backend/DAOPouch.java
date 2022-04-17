@@ -19,12 +19,13 @@ public class DAOPouch {
   private static DAO<MedicalEquipment> medicalEquipmentDAO;
   private static DAO<Patient> patientDAO;
   private static DAO<LocationNodeConnections> nodeDAO;
+  private static DAO<LanguageRequest> languageRequestDAO;
+  private static DAO<Notification> notificationDAO;
   private static DAO<Alert> alertDAO;
 
   private DAOPouch() {}
 
-  public static void init() throws SQLException, IOException {
-    App.LOG.info("Initializing Lab Request DAO");
+  public static void init() throws IOException {
     labRequestDAO = new DAO<>(new LabRequest());
     App.LOG.info("Successfully constructed Lab Request DAO");
 
@@ -72,9 +73,37 @@ public class DAOPouch {
     nodeDAO = new DAO<>(new LocationNodeConnections());
     App.LOG.info("Node connections have been produced");
 
+    App.LOG.info("Initializing Languages");
+    languageRequestDAO = new DAO<>(new LanguageRequest());
+    App.LOG.info("Languages has been produced");
+
+    App.LOG.info("Initializing Notifications");
+    notificationDAO = new DAO<>(new Notification());
+    App.LOG.info("Notifications has been produced");
+
     App.LOG.info("Initializing Node Connections");
     alertDAO = new DAO<>(new Alert());
     App.LOG.info("Node connections have been produced");
+
+    if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
+      labRequestDAO.load();
+      mealDeliveryRequestDAO.load();
+      medicalEquipmentRequestDAO.load();
+      medicineRequestDAO.load();
+      patientTransportRequestDAO.load();
+      sanitationRequestDAO.load();
+      accountDAO.load();
+      employeeDAO.load();
+      locationDAO.load();
+      medicalEquipmentDAO.load();
+      patientDAO.load();
+      nodeDAO.load();
+      languageRequestDAO.load();
+      notificationDAO.load();
+      alertDAO.load();
+    }
+
+
   }
 
   public static DAO<LabRequest> getLabRequestDAO() {
@@ -123,6 +152,44 @@ public class DAOPouch {
 
   public static DAO<LocationNodeConnections> getLocationNodeDAO() {
     return nodeDAO;
+  }
+
+  public static DAO<LanguageRequest> getLanguageRequestDAO() {
+    return languageRequestDAO;
+  }
+
+  public static DAO<Notification> getNotificationDAO() {
+    return notificationDAO;
+  }
+
+  public static DAO getDAO(TableObject type) {
+    String tableName = type.tableName();
+    if (tableName.equals("")) {
+      return null;
+    } else if (tableName.equals("LABREQUESTS")) {
+      return labRequestDAO;
+    } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
+      return mealDeliveryRequestDAO;
+    } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
+      return medicineRequestDAO;
+    } else if (tableName.equals("MEDICINEREQUESTS")) {
+      return medicineRequestDAO;
+    } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {
+      return patientTransportRequestDAO;
+    } else if (tableName.equals("SANITATIONREQUESTS")) {
+      return sanitationRequestDAO;
+    } else if (tableName.equals("ACCOUNTS")) {
+      return accountDAO;
+    } else if (tableName.equals("EMPLOYEES")) {
+      return employeeDAO;
+    } else if (tableName.equals("LOCATIONS")) {
+      return locationDAO;
+    } else if (tableName.equals("MEDICALEQUIPMENT")) {
+      return medicalEquipmentDAO;
+    } else if (tableName.equals("PATIENTS")) {
+      return patientDAO;
+    }
+    return null;
   }
 
   public static DAO<Alert> getAlertDAO() {

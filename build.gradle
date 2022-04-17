@@ -38,6 +38,8 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
 
+            'com.google.firebase:firebase-admin:8.1.0',
+
             // https://mvnrepository.com/artifact/com.opencsv/opencsv
             [group: 'com.opencsv', name: 'opencsv', version: '3.7'],
 

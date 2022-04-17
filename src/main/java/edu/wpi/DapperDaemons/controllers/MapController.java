@@ -103,38 +103,21 @@ public class MapController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     mapFilter.setTranslateX(160);
-    Image mapFloorL2;
-    Image mapFloorL1;
-    Image mapFloor1;
-    Image mapFloor2;
-    Image mapFloor3;
-    Image mapFloor4;
-    Image mapFloor5;
 
-    if (isDark) {
-      mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1_dark.png");
-      mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2_dark.png");
-      mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor_dark.png");
-      mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor_dark.png");
-      mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor_dark.png");
-      mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor_dark.png");
-      mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor_dark.png");
-    } else {
-      mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
-      mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
-      mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
-      mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
-      mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
-      mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
-      mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
-    }
+    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
+    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
+    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
+    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
+    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
+    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
+    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
 
     //    super.initialize(location, resources);
     //    bindImage(BGImage, BGContainer);
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      locationDAO.getAll().forEach(l -> origPositions.add(new PositionInfo(l)));
+      locationDAO.getAll().values().forEach(l -> origPositions.add(new PositionInfo(l)));
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
     }
@@ -171,7 +154,7 @@ public class MapController extends ParentController {
       RequestHandler.getAllRequests()
           .forEach(
               r -> {
-                if (!allReqNames.contains(r.getRequestType())) allReqNames.add(r.getRequestType());
+                if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
               });
       searchBar.getItems().addAll(allReqNames);
     } catch (Exception e) {
@@ -232,8 +215,8 @@ public class MapController extends ParentController {
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
     try {
-      equipment = equipmentDAO.filter(6, pos.getId());
-      patients = patientDAO.filter(6, pos.getId());
+      equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
+      patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
       requests = RequestHandler.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
