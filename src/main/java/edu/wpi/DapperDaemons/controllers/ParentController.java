@@ -311,13 +311,23 @@ public class ParentController extends UIController {
     }
   }
 
-  HBox createNotification(Notification n) {
-    HBox outer = new HBox();
-    ImageView icon = new ImageView();
-    Text txt = new Text(n.getSubject());
-    outer.getChildren().add(icon);
-    outer.getChildren().add(txt);
-    return outer;
+  VBox createNotification(Notification n) {
+    VBox notif = new VBox();
+
+    try {
+      notif =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
+      notifications.getChildren().add(notif);
+      Label notifSubject = (Label) notif.getChildren().get(0);
+      Label notifBody = (Label) notif.getChildren().get(1);
+
+      notifSubject.setText(n.getSubject());
+      notifBody.setText(n.getBody());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return notif;
   }
 
   @FXML

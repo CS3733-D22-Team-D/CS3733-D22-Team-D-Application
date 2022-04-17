@@ -21,7 +21,9 @@ public class FireBase {
   public static void init() {
     FileInputStream serviceAccount = null;
     try {
-      serviceAccount = new FileInputStream("C:/Users/jrmad/Downloads/service-account.json");
+      serviceAccount =
+          new FileInputStream(
+              "D:/coleo/Documents/WPI/Sophomore Year/D Term/SoftEng/TeamD/CS3733-D22-Team-D-Application/src/main/resources/service-account.json");
       //      serviceAccount =
       //          new FileInputStream(
       //
