@@ -54,7 +54,6 @@ public class MapDashboardController extends ParentController {
   @FXML private ToggleButton M1;
   @FXML private ToggleButton M2;
   @FXML private Label floorSummary;
-  @FXML private Label locOfInterest;
   @FXML private TabPane tabs;
 
   @FXML private Text cleanEquipNum;
@@ -95,27 +94,27 @@ public class MapDashboardController extends ParentController {
   }
 
   private void setListeners() {
-    tl.setMedicalEquipmentListener(
+    TableListeners.setMedicalEquipmentListener(
         tl.eventListener(
             () -> {
               equipTable.getItems().clear();
               for (Location l : locsByFloor) {
                 equipTable
                     .getItems()
-                    .addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
+                    .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    tl.setPatientListener(
+    TableListeners.setPatientListener(
         tl.eventListener(
             () -> {
               patientTable.getItems().clear();
               for (Location l : locsByFloor) {
                 patientTable
                     .getItems()
-                    .addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
+                    .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    tl.setLabRequestListener(
+    TableListeners.setLabRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -139,7 +138,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setMealDeliveryRequestListener(
+    TableListeners.setMealDeliveryRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -151,7 +150,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setMedicalEquipmentRequestListener(
+    TableListeners.setMedicalEquipmentRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -163,7 +162,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setMedicinRequestListener(
+    TableListeners.setMedicinRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -175,7 +174,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setPatientTrasportRequestListener(
+    TableListeners.setPatientTrasportRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -187,7 +186,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setSanitationRequestListener(
+    TableListeners.setSanitationRequestListener(
         tl.eventListener(
             () -> {
               reqTable.getItems().clear();
@@ -199,7 +198,7 @@ public class MapDashboardController extends ParentController {
                 }
               }
             }));
-    tl.setLocationListener(
+    TableListeners.setLocationListener(
         tl.eventListener(
             () -> {
               locTable.getItems().clear();
@@ -213,7 +212,6 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
-    updateLocOfInterest();
   }
 
   private List<Location> locsByFloor;
@@ -224,7 +222,7 @@ public class MapDashboardController extends ParentController {
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
-    locsByFloor = new ArrayList(locationDAO.filter(4, floor).values());
+    locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
       try {
@@ -244,9 +242,9 @@ public class MapDashboardController extends ParentController {
 
     // Creates list of dirty and clean equipment by filtering the equipment on the floor
     List<MedicalEquipment> dirtyEquipment =
-        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN").values());
+        new ArrayList<>(equipmentDAO.filter(equipTable.getItems(), 5, "UNCLEAN").values());
     List<MedicalEquipment> cleanEquipment =
-        new ArrayList(equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN").values());
+        new ArrayList<>(equipmentDAO.filter(equipTable.getItems(), 5, "CLEAN").values());
 
     dirtyEquipNum.setText(dirtyEquipment.size() + "");
     cleanEquipNum.setText(cleanEquipment.size() + "");
@@ -281,14 +279,6 @@ public class MapDashboardController extends ParentController {
       floorSummary.setText(floorText);
     } catch (IOException e) {
       showError("Error 404: File Not Found");
-    }
-  }
-
-  private void updateLocOfInterest() {
-    try {
-      String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
-      locOfInterest.setText(floorText);
-    } catch (IOException e) {
     }
   }
 
