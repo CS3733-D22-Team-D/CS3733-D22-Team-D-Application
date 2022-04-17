@@ -17,7 +17,7 @@ public class OverdueHandler {
   private static DAO<PatientTransportRequest> patientTransportRequestDAO;
   private static DAO<SanitationRequest> sanitationRequestDAO;
   private static OverdueHandler handler;
-  private static String date;
+  private static int dateRepresentation;
 
   public OverdueHandler() {}
 
@@ -34,8 +34,8 @@ public class OverdueHandler {
   public static void updateOverdue() {
     try {
       Date dateDat = new Date();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
-      date = dateFormat.format(dateDat);
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+      dateRepresentation = Integer.parseInt(dateFormat.format(dateDat));
       handler.checkLabReq();
       handler.checkEquipmentCleanReq();
       handler.checkMealReq();
@@ -49,11 +49,13 @@ public class OverdueHandler {
   }
 
   private List<Request> checkOverdue(List<Request> requestList) {
-    String currentDate = ""; // Figure out this
     List<Request> overdueList = new ArrayList<>();
     for (Request req : requestList) {
-      if (false) // TODO : Add this checked to compare current date to date on request
-      overdueList.add(req);
+      // Convert date into the same format to get a linear reqresentation
+      String reqDate = req.getDateNeeded();
+      int dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0,4));
+      if (dateOf < dateRepresentation) // If the due date has passed,
+        overdueList.add(req);// Add the req to the list
     }
     return overdueList;
   }
@@ -66,6 +68,8 @@ public class OverdueHandler {
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       LabRequest overdueReq = labRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      labRequestDAO.update(overdueReq);
     }
   }
 

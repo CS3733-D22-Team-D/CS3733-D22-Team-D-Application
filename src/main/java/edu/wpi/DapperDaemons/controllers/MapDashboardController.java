@@ -219,8 +219,12 @@ public class MapDashboardController extends ParentController {
 
     for (Location l : locsByFloor) {
       try {
-        equipTable.getItems().addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
-        patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
+        equipTable
+            .getItems()
+            .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
+        patientTable
+            .getItems()
+            .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
         reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
         locTable.getItems().add(l);
       } catch (SQLException e) {
@@ -281,7 +285,8 @@ public class MapDashboardController extends ParentController {
       String locOfInterestTxtPath = "locOfInterest.txt";
       String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
       locOfInterest.setText(floorText);
-    } catch (IOException ignored) {}
+    } catch (IOException ignored) {
+    }
   }
 
   private static String getFileText(String filePath, int line) throws IOException {
