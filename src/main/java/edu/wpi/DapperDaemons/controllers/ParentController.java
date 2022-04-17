@@ -79,6 +79,7 @@ public class ParentController extends UIController {
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
 
+  private static ValueEventListener notifListener;
   private static Timer timer;
   private static final int timeUpdate = 1;
 
@@ -195,7 +196,7 @@ public class ParentController extends UIController {
   void setNotificationListener() {
     if (ConnectionHandler.getType().equals(connectionType.CLOUD)) {
       DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
-      ref.addValueEventListener(
+      notifListener =
           new ValueEventListener() {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
@@ -214,7 +215,8 @@ public class ParentController extends UIController {
             public void onCancelled(DatabaseError error) {
               System.out.println("Cancelled in notification listener");
             }
-          });
+          };
+      ref.addValueEventListener(notifListener);
     }
   }
 
@@ -444,6 +446,7 @@ public class ParentController extends UIController {
 
   @FXML
   public void logout() throws IOException {
+    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifListener);
     switchScene("login.fxml", 575, 575);
     if (burgBack != null && burgBack.isVisible()) {
       closeSlider();
