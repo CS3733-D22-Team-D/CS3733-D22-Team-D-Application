@@ -152,7 +152,13 @@ public class PatientTransportController extends ParentController {
           boolean hadPermission =
               addItem(
                   new PatientTransportRequest(
-                      priority, roomID, requesterID, assigneeID, notes.getText(),patientID, nextRoomID));
+                      priority,
+                      roomID,
+                      requesterID,
+                      assigneeID,
+                      notes.getText(),
+                      patientID,
+                      nextRoomID));
           if (!hadPermission) {
             // display error that employee does not have permission
 

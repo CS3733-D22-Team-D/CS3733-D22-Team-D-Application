@@ -2,7 +2,6 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -25,9 +24,9 @@ public class PatientTransportRequest extends TableObject implements Request {
         + "roomID varchar(60) ,"
         + "requesterID varchar(60) ,"
         + "assigneeID varchar(60) ,"
-            + "status varchar(20),"
-            + "notes varchar(255),"
-            + "dateTime varchar(20),"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "patientID varchar(60) ,"
         + "nextRoomID varchar(60),";
   }
@@ -275,7 +274,6 @@ public class PatientTransportRequest extends TableObject implements Request {
   public void setStatus(RequestStatus status) {
     this.status = status;
   }
-
 
   public String getNotes() {
     return notes;

@@ -2,7 +2,6 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,9 +17,9 @@ public class SanitationRequest extends TableObject implements Request {
         + "roomID varchar(60),"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
-            + "status varchar(20),"
-            + "notes varchar(255),"
-            + "dateTime varchar(20),"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "sanitationType varchar(20),";
   }
 
@@ -248,7 +247,6 @@ public class SanitationRequest extends TableObject implements Request {
     this.status = status;
   }
 
-
   public String getNotes() {
     return notes;
   }
@@ -265,5 +263,3 @@ public class SanitationRequest extends TableObject implements Request {
     this.dateTime = dateTime;
   }
 }
-
-

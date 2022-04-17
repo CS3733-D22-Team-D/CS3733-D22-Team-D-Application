@@ -155,7 +155,14 @@ public class MedicineController extends ParentController {
           boolean wentThrough =
               addItem(
                   new MedicineRequest(
-                      priority, roomID, requesterID, assigneeID, notes.getText(), patientID, medName, quantity));
+                      priority,
+                      roomID,
+                      requesterID,
+                      assigneeID,
+                      notes.getText(),
+                      patientID,
+                      medName,
+                      quantity));
 
           if (!wentThrough) {
 

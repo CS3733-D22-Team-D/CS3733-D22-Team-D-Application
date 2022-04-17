@@ -108,7 +108,13 @@ public class LabRequestController extends ParentController {
         boolean hadClearance =
             addItem(
                 new LabRequest(
-                    priority, roomID, requesterID, assigneeID, notes.getText(), patientID, labType));
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    notes.getText(),
+                    patientID,
+                    labType));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada

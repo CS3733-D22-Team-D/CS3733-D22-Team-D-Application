@@ -23,9 +23,9 @@ public class MedicineRequest extends TableObject implements Request {
         + "roomID varchar(20) DEFAULT 'Unknown',"
         + "requesterID varchar(60) ,"
         + "assigneeID varchar(60) DEFAULT 'Unselected',"
-            + "status varchar(20),"
-            + "notes varchar(255),"
-            + "dateTime varchar(20),"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "patientID varchar(60) DEFAULT 'Someone',"
         + "medicationName varchar(60) ,"
         + "quantity varchar(20))";
@@ -281,7 +281,6 @@ public class MedicineRequest extends TableObject implements Request {
   public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
-
 
   public RequestStatus getStatus() {
     return status;

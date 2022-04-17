@@ -2,7 +2,6 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -35,9 +34,9 @@ public class LabRequest extends TableObject implements Request {
         + "roomID varchar(20) ,"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
-            + "status varchar(20),"
-            + "notes varchar(255),"
-            + "dateTime varchar(20),"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "patientID varchar(28),"
         + "labType varchar(20))";
   }
@@ -221,7 +220,6 @@ public class LabRequest extends TableObject implements Request {
     Date now = new Date();
     this.dateTime = formatter.format(now);
     this.status = RequestStatus.REQUESTED;
-
   }
 
   public LabRequest() {}
@@ -305,7 +303,4 @@ public class LabRequest extends TableObject implements Request {
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
   }
-
-
-
 }
