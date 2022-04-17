@@ -307,7 +307,8 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
-                        System.out.println("Switching to cloud");
+                        serverToggle.setSelected(false);
+                        openServerDropdown();
                         if (switchToCloudServer()) {
                           Platform.runLater(
                               () -> {
@@ -325,6 +326,7 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
+                        serverToggle.setSelected(false);
                         openServerDropdown();
                         if (switchToClientServer()) {
                           Platform.runLater(
@@ -349,6 +351,7 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
+                        serverToggle.setSelected(false);
                         openServerDropdown();
                         if (switchToCloudServer()) {
                           Platform.runLater(
@@ -367,6 +370,7 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
+                        serverToggle.setSelected(false);
                         openServerDropdown();
                         if (switchToEmbedded()) {
                           Platform.runLater(
@@ -391,6 +395,7 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
+                        serverToggle.setSelected(false);
                         openServerDropdown();
                         if (switchToClientServer()) {
                           Platform.runLater(
@@ -409,6 +414,7 @@ public class ParentController extends UIController {
               setLoad();
               new Thread(
                       () -> {
+                        serverToggle.setSelected(false);
                         openServerDropdown();
                         if (switchToEmbedded()) {
                           Platform.runLater(
