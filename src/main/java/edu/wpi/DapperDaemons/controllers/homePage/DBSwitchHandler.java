@@ -3,7 +3,9 @@ package edu.wpi.DapperDaemons.controllers.homePage;
 import edu.wpi.DapperDaemons.backend.ConnectionHandler;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.AppController;
 import edu.wpi.DapperDaemons.entities.Employee;
+import javafx.application.Platform;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 
@@ -36,9 +38,7 @@ public class DBSwitchHandler {
             () -> {
               try {
                 if (!tryChange()) {
-                  // Platform.runLater(() -> showError("Failed to switch connection"));
-                  // TODO: fix
-                  System.out.println("fix");
+                  Platform.runLater(() -> AppController.showError("Failed to switch connection"));
                 }
               } catch (InterruptedException ignored) {
               }

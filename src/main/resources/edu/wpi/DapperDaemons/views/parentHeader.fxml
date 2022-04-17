@@ -294,7 +294,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0" visible="false">
+                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0">
                            <children>
                               <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#changeServer" preserveRatio="true" />
                            </children>

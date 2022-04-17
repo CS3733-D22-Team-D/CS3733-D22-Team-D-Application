@@ -143,7 +143,7 @@ public class ParentController extends AppController {
 
   @FXML
   void switchToMeal() {
-    swapPage("meal", "Patient Meal Delivery Portal");
+    swapPage("meal", "Meal Delivery Portal");
   }
 
   @FXML
@@ -191,9 +191,9 @@ public class ParentController extends AppController {
     Set<Node> texts = mainBox.lookupAll("#label");
     Set<Node> tableCols = mainBox.lookupAll("#col");
 
-    //      for (Node back : backs) {
-    //        back.getStyleClass().clear();
-    //      }
+    for (Node back : backs) {
+      back.getStyleClass().clear();
+    }
 
     for (Node field : fields) {
       field.getStyleClass().clear();
@@ -221,9 +221,9 @@ public class ParentController extends AppController {
 
     if (theme != Theme.Light && theme != null) {
 
-      //      for (Node back : backs) {
-      //        back.getStyleClass().add("background" + theme.toString());
-      //      }
+      for (Node back : backs) {
+        back.getStyleClass().add("background" + theme.toString());
+      }
 
       for (Node field : fields) {
         field.getStyleClass().add("field" + theme.toString());
