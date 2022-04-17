@@ -60,11 +60,11 @@ public class LoginController extends AppController {
   @FXML
   void login() throws Exception {
     Employee admin = DAOPouch.getEmployeeDAO().get("admin");
-    if (username.getText().trim().equals("admin") && password.getText().trim().equals("admin")) {
+    /*if (username.getText().trim().equals("admin") && password.getText().trim().equals("admin")) {
       SecurityController.setUser(admin);
       switchScene("parentHeader.fxml", 635, 510);
       return;
-    } else if (username.getText().trim().equals("staff")
+    } else*/ if (username.getText().trim().equals("staff")
         && password.getText().trim().equals("staff")) {
       Employee staff = DAOPouch.getEmployeeDAO().get("staff");
       SecurityController.setUser(staff);
@@ -107,9 +107,9 @@ public class LoginController extends AppController {
     }
     Account acc = accountDAO.get(username.getText());
     if (acc != null && acc.checkPassword(password.getText())) {
-      if (acc.getAttribute(4).equals("")) {
+      if (acc.getAttribute(4).equals("") || acc.getAttribute(6).equals("false")) {
         List<Employee> user =
-            new ArrayList(
+            new ArrayList<>(
                 employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0)); // Correctly finds the user
@@ -140,7 +140,7 @@ public class LoginController extends AppController {
       int authCode = Integer.parseInt(code.getText());
       if (Authentication.authenticate(authCode)) {
         List<Employee> user =
-            new ArrayList(
+            new ArrayList<>(
                 employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
         if (user.size() == 1) {
           SecurityController.setUser(user.get(0));

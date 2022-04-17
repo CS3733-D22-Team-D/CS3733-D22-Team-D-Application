@@ -61,14 +61,23 @@ public class Images {
   public static Image mapFloor5;
 
   public static ImagePattern getAccountImage() {
-    return new ImagePattern(
-        new Image(
-            Objects.requireNonNull(
-                Images.class
-                    .getClassLoader()
-                    .getResourceAsStream(
-                        "edu/wpi/DapperDaemons/profilepictures/"
-                            + SecurityController.getUser().getNodeID()
-                            + ".png"))));
+    try {
+      return new ImagePattern(
+          new Image(
+              Objects.requireNonNull(
+                  Images.class
+                      .getClassLoader()
+                      .getResourceAsStream(
+                          "edu/wpi/DapperDaemons/profilepictures/"
+                              + SecurityController.getUser().getNodeID()
+                              + ".png"))));
+    } catch (NullPointerException e) {
+      return new ImagePattern(
+          new Image(
+              Objects.requireNonNull(
+                  Images.class
+                      .getClassLoader()
+                      .getResourceAsStream("edu/wpi/DapperDaemons/profilepictures/wwrong2.png"))));
+    }
   }
 }
