@@ -39,7 +39,7 @@ public class SecurityRequestController extends ParentController {
     @FXML private TableColumn<SecurityRequest, String> assignee;
 
     /* DAO Object */
-    private DAO<SecurityRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
+    private DAO<SecurityRequest> securityRequestDAO = DAOPouch.getSecurityRequestDAO();
     private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
     @Override
@@ -53,7 +53,7 @@ public class SecurityRequestController extends ParentController {
 
         try { // Removed second field (filename) since everything is
             // loaded on startup
-            languageRequestsTable.getItems().addAll(new ArrayList(languageRequestDAO.getAll().values()));
+            SecurityRequestTable.getItems().addAll(new ArrayList(securityRequestDAO.getAll().values()));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.print("Error, table was unable to be created\n");
@@ -69,26 +69,26 @@ public class SecurityRequestController extends ParentController {
                 tl.eventListener(
                         () -> {
                             //              System.out.println("LanguageRequestsTable");
-                            languageRequestsTable.getItems().clear();
-                            languageRequestsTable
+                            SecurityRequestTable.getItems().clear();
+                            SecurityRequestTable
                                     .getItems()
-                                    .addAll(new ArrayList(languageRequestDAO.getAll().values()));
+                                    .addAll(new ArrayList(securityRequestDAO.getAll().values()));
                         }));
     }
 
-    public boolean addItem(LanguageRequest request) {
+    public boolean addItem(SecurityRequest request) {
         boolean hadClearance = true;
 
-        hadClearance = languageRequestDAO.add(request);
+        hadClearance = securityRequestDAO.add(request);
         if (hadClearance) {
-            languageRequestsTable.getItems().add(request);
+            SecurityRequestTable.getItems().add(request);
         }
         return hadClearance;
     }
 
     @FXML
     public void onClearClicked() {
-        languageBox.setValue("");
+        priorityBox.setValue("");
         roomBox.setValue("");
     }
 
@@ -98,8 +98,8 @@ public class SecurityRequestController extends ParentController {
         // make sure all fields are filled
         if (allFieldsFilled()) {
             addItem(
-                    new LanguageRequest(
-                            LanguageRequest.Language.valueOf(languageBox.getValue()), roomBox.getValue()));
+                    new SecurityRequest(
+                            SecurityRequest.priority.valueOf(languageBox.getValue()), roomBox.getValue()));
         } else {
             // TODO uncomment when fixed
             //      showError("All fields must be filled.");
@@ -108,12 +108,12 @@ public class SecurityRequestController extends ParentController {
     }
 
     private boolean allFieldsFilled() {
-        return !(languageBox.getValue().equals("") || roomBox.getValue().equals(""));
+        return !(priorityBox.getValue().equals("") || roomBox.getValue().equals(""));
     }
 
     public void initBoxes() {
-        languageBox.setItems(
-                FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
+        priorityBox.setItems(
+                FXCollections.observableArrayList(TableHelper.convertEnum(SecurityRequest.Language.class)));
         roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
     }
     /** Saves a given service request to a CSV by opening the CSV window */

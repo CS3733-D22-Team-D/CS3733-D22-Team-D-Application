@@ -159,7 +159,7 @@ public class DAOPouch {
     return notificationDAO;
   }
 
-  public static DAO<SecurityRequest> getSecurityRequesrDAO() {
+  public static DAO<SecurityRequest> getSecurityRequestDAO() {
     return securityRequestDAO;
   }
 
