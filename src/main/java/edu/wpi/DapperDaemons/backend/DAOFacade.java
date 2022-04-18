@@ -97,4 +97,13 @@ public class DAOFacade {
     tempMap = medicalEquipmentDAO.filter(tempMap, 3, type);
     return tempMap;
   }
+
+  /**
+   * Gets the location of an equipment
+   *
+   * @param equipment - The Medical Equipment table object
+   */
+  public static Location getLocationOfEquip(MedicalEquipment equipment) {
+    return DAOPouch.getLocationDAO().get(equipment.getLocationID());
+  }
 }

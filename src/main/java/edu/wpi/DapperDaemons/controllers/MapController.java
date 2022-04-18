@@ -39,6 +39,7 @@ public class MapController extends ParentController {
   /* UI Assets */
   @FXML private ImageView mapView;
   @FXML private AnchorPane glyphsLayer;
+  @FXML private AnchorPane equipLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
   @FXML private AnchorPane pathPane;
@@ -137,7 +138,7 @@ public class MapController extends ParentController {
             Images.mapFloor5);
     maps.setMap(MapDashboardController.floor);
 
-    this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
+    this.glyphs = new GlyphHandler(glyphsLayer, equipLayer, origPositions, this);
     glyphs.setFloorFilter(maps.getFloor());
 
     this.pathfinder = new PathfinderHandler(pathPane, this);

@@ -1,6 +1,8 @@
 package edu.wpi.DapperDaemons.map;
 
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,9 @@ import javafx.scene.paint.Color;
 public class GlyphHandler {
 
   private List<PositionInfo> imageLocs;
+  private List<MedicalEquipment> equipLocs;
   private AnchorPane glyphLayer;
+  private AnchorPane equipLayer;
   private MapController controller;
   private PositionInfo selected;
   public final String GLYPH_PATH =
@@ -27,9 +31,11 @@ public class GlyphHandler {
   private List<String> longNameFilter;
 
   public GlyphHandler(
-      AnchorPane glyphLayer, List<PositionInfo> imageLocs, MapController controller) {
+      AnchorPane glyphLayer,AnchorPane equipLayer, List<PositionInfo> imageLocs, MapController controller) {
     this.glyphLayer = glyphLayer;
+    this.equipLayer = equipLayer;
     this.controller = controller;
+    this.equipLocs = new ArrayList<>();
     this.imageLocs = new ArrayList<>();
     imageLocs.forEach(this::addPosition);
     this.imageLocs = imageLocs;
@@ -56,6 +62,19 @@ public class GlyphHandler {
 
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
+
+    List<MedicalEquipment> all = DAOPouch.getMedicalEquipmentDAO().filter(6,pos.getId()).values());
+    equipLocs.addAll(all);
+    all.forEach(e -> {
+      ImageView equip = getEquipImage(e.getEquipmentType().name());
+      equip.setX(pos.getX()-16);
+      equip.setY(pos.getY()-16);
+      equip.setVisible(true);
+
+      image.setOnMouseClicked(i -> controller.onMapClicked(i));
+      equipLayer.getChildren().add(equip);
+    });
+
     imageLocs.add(pos);
   }
 
@@ -106,6 +125,22 @@ public class GlyphHandler {
       node.setScaleY(1);
     }
     this.selected = null;
+  }
+
+  private ImageView getEquipImage(String type) {
+    String png = "";
+    switch (type) {
+      case "INFUSIONPUMP":
+        png = "pump.png";
+        break;
+      case "BED":
+        png = "bed.png";
+        break;
+      default:
+        png = "error.png";
+    }
+
+    return new ImageView(GLYPH_PATH + png);
   }
 
   private ImageView getIconImage(String type) {
