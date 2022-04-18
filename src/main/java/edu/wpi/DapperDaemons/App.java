@@ -220,18 +220,19 @@ public class App extends Application {
                             DAOFacade.filterEquipByTypeAndStatus(
                                 loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
 
-                        // If there are less than 5 clean infusion pumps in a clean location
+                        // If there are less than 5 clean infusion pumps in a clean location...
                         if (cleanInfusionMap.size() <= 5) {
+                          // Iterate through dirty locations
                           for (Location dirtyLoc : locationDAO.filter(6, "DIRT").values()) {
 
-                            Map<String, MedicalEquipment> dirtyTempMap =
-                                medicalEquipmentDAO.filter(
-                                    medicalEquipmentDAO.filter(6, dirtyLoc.getAttribute(1)),
-                                    5,
-                                    "UNCLEAN");
-                            dirtyTempMap =
-                                medicalEquipmentDAO.filter(dirtyTempMap, 3, "INFUSIONPUMP");
-                            for (MedicalEquipment equipment : dirtyTempMap.values()) {
+                            // Find all dirty infusion pumps in that location
+                            Map<String, MedicalEquipment> dirtyInfusionMap =
+                                    DAOFacade.filterEquipByTypeAndStatus(
+                                            dirtyLoc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
+
+                            // For all the dirty infusion pumps at the dirty location
+                            for (MedicalEquipment equipment : dirtyInfusionMap.values()) {
+                              // create a request
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
                                       Request.Priority.OVERDUE,
@@ -241,7 +242,7 @@ public class App extends Application {
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus());
-                              if (equipmentRequestDAO.get(request.getNodeID()) == null) {
+                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
                                 equipmentRequestDAO.add(request);
                               }
                             }
