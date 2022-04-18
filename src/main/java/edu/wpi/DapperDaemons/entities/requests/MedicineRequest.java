@@ -166,7 +166,8 @@ public class MedicineRequest extends TableObject implements Request {
       String assigneeID,
       String patientID,
       String medicationName,
-      int quantity) {
+      int quantity,
+      String dateNeeded) {
     SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy-HH:MM:SS");
     this.nodeID = priority.toString() + requesterID + format.format(new Date());
 
@@ -177,6 +178,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.patientID = patientID;
     this.medicationName = medicationName;
     this.quantity = quantity;
+    this.dateNeeded = dateNeeded;
   }
 
   public MedicineRequest() {}

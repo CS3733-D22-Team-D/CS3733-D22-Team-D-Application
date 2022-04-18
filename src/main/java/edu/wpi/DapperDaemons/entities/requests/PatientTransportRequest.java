@@ -168,7 +168,8 @@ public class PatientTransportRequest extends TableObject implements Request {
       String assigneeID,
       String patientID,
       String nextRoomID,
-      RequestStatus status) {
+      RequestStatus status,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -178,6 +179,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.patientID = patientID;
     this.nextRoomID = nextRoomID;
     this.status = status;
+    this.dateNeeded = dateNeeded;
   }
 
   public PatientTransportRequest() {}
