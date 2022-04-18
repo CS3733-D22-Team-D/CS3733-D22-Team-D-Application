@@ -360,6 +360,7 @@ public class ParentController extends AppController {
     Set<Node> backs = mainBox.lookupAll("#background");
     Set<Node> fields = mainBox.lookupAll("#field");
     Set<Node> fores = mainBox.lookupAll("#foreground");
+    Set<Node> defs = mainBox.lookupAll("#default");
     Set<Node> jButtons = mainBox.lookupAll("#jButton");
     Set<Node> specialFields = mainBox.lookupAll("#specialField");
     Set<Node> texts = mainBox.lookupAll("#label");
@@ -375,6 +376,10 @@ public class ParentController extends AppController {
 
     for (Node fore : fores) {
       fore.getStyleClass().clear();
+    }
+
+    for (Node def : defs) {
+      def.getStyleClass().clear();
     }
 
     for (Node jButton : jButtons) {
@@ -405,6 +410,10 @@ public class ParentController extends AppController {
 
       for (Node fore : fores) {
         fore.getStyleClass().add("foreground" + theme.toString());
+      }
+
+      for (Node def : defs) {
+        def.getStyleClass().add("foreground" + theme.toString());
       }
 
       for (Node jButton : jButtons) {
