@@ -86,17 +86,6 @@ public class ParentController extends AppController {
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
     notifs = new NotificationHandler(notifications, notifBell);
-    //    try {
-    //      this.notifications
-    //          .getChildren()
-    //          .add(
-    //              FXMLLoader.load(
-    //                  Objects.requireNonNull(
-    //                      App.class.getResource("views/" + "notification" + ".fxml"))));
-    //    } catch (IOException e) {
-    //      throw new RuntimeException(e);
-    //    }
-    notifs = new NotificationHandler(notifications, notifBell);
     new ThemeHandler(mainBox);
 
     updateWeather();
@@ -301,7 +290,8 @@ public class ParentController extends AppController {
           .setRoot(
               FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/login.fxml"))));
       AppController.showError("Session Timed Out");
-    } catch (Exception e) {}
+    } catch (Exception e) {
+    }
     SecurityController.setUser(null);
   }
 
