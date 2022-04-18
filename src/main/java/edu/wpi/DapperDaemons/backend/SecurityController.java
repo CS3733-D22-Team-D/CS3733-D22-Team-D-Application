@@ -19,6 +19,9 @@ public class SecurityController {
 
   public static boolean permissionToAdd(TableObject type) {
     String tableName = type.tableName();
+    if (user == null) {
+      return true;
+    }
     int clearance = user.getSecurityClearance();
     if (tableName.equals("")) {
       return false;
