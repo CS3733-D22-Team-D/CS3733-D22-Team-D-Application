@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -21,7 +22,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -35,8 +35,6 @@ public class MapController extends ParentController {
 
   /* UI Assets */
   @FXML private ImageView mapView;
-  public final String MAP_PATH =
-      getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/assets/Maps") + "/";
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
@@ -108,15 +106,6 @@ public class MapController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     mapFilter.setTranslateX(160);
-
-    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
-    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
-    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
-    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
-    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
-    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
-    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
-
     //    super.initialize(location, resources);
     //    bindImage(BGImage, BGContainer);
     List<PositionInfo> origPositions = new ArrayList<>();
@@ -131,13 +120,13 @@ public class MapController extends ParentController {
         new MapHandler(
             mapAssets,
             mapView,
-            mapFloorL2,
-            mapFloorL1,
-            mapFloor1,
-            mapFloor2,
-            mapFloor3,
-            mapFloor4,
-            mapFloor5);
+            Images.mapFloorL2,
+            Images.mapFloorL1,
+            Images.mapFloor1,
+            Images.mapFloor2,
+            Images.mapFloor3,
+            Images.mapFloor4,
+            Images.mapFloor5);
     maps.setMap(MapDashboardController.floor);
 
     this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);

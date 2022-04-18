@@ -54,19 +54,6 @@ public class RoomInfoBox {
     new TableHelper<>(equipTable, 1).linkColumns(MedicalEquipment.class);
     new TableHelper<>(patientTable, 1).linkColumns(Patient.class);
     new TableHelper<>(requestTable, 1).linkColumns(Request.class);
-    /*TableColumn<Request, String> col1 =
-        (TableColumn<Request, String>) requestTable.getColumns().get(0);
-    TableColumn<Request, String> col2 =
-        (TableColumn<Request, String>) requestTable.getColumns().get(1);
-    TableColumn<Request, Boolean> col3 =
-        (TableColumn<Request, Boolean>) requestTable.getColumns().get(2);
-
-    col1.setCellValueFactory(
-        request -> new SimpleStringProperty(request.getValue().getPriority().toString()));
-    col2.setCellValueFactory(
-        request -> new SimpleStringProperty(request.getValue().getRequestType().toString()));
-    col3.setCellValueFactory(
-        request -> new SimpleBooleanProperty(request.getValue().requiresTransport()));*/
   }
 
   public void open() {

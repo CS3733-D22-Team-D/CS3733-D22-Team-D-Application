@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -18,7 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 /** Controller for Meal UI Page UPDATED 4/5/22 at 12:08 AM */
-public class MealController extends UIController {
+public class MealController extends ParentController {
 
   /* Table Helper */
   private TableHelper<MealDeliveryRequest> helper;
