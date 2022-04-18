@@ -183,7 +183,7 @@ public class LanguageRequest extends TableObject implements Request {
         assignee = newAttribute;
         break;
       case 6:
-        language = language.valueOf(newAttribute);
+        language = Language.valueOf(newAttribute);
         break;
       case 7:
         dateNeeded = newAttribute;
