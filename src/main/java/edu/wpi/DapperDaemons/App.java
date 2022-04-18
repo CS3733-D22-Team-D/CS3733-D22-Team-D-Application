@@ -186,6 +186,7 @@ public class App extends Application {
                                     "dSTOR001L1",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
+                                    "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus());
@@ -203,6 +204,7 @@ public class App extends Application {
                                     "dEXIT00401",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
+                                    "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus());
@@ -239,6 +241,7 @@ public class App extends Application {
                                       "dEXIT00401",
                                       "AUTOMATIC REQUEST",
                                       "NONE",
+                                      "",
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus());
