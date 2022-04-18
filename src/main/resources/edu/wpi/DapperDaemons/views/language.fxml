@@ -118,6 +118,7 @@
                               <TableColumn id="col" fx:id="roomID" prefWidth="75.0" text="RoomID" />
                               <TableColumn id="col" fx:id="requester" prefWidth="75.0" text="Requester" />
                               <TableColumn id="col" fx:id="assignee" prefWidth="75.0" text="Assignee" />
+                              <TableColumn id="col" fx:id="assignee1" prefWidth="75.0" text="Date Requested" />
                            </columns>
                         </TableView>
                      </children>
