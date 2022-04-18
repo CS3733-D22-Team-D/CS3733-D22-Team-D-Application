@@ -96,6 +96,7 @@ public class ParentController extends AppController {
     //    } catch (IOException e) {
     //      throw new RuntimeException(e);
     //    }
+    notifs = new NotificationHandler(notifications, notifBell);
     new ThemeHandler(mainBox);
 
     updateWeather();
@@ -103,9 +104,11 @@ public class ParentController extends AppController {
   }
 
   public void swapPage(String page, String pageName) {
+    SessionTimeout.reset();
     TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + page + ">");
     mainBox.getChildren().clear();
+    mainBox.setOnMouseMoved(e -> SessionTimeout.reset());
     if (burgBack != null && burgBack.isVisible()) closeSlider();
 
     try {
@@ -286,6 +289,19 @@ public class ParentController extends AppController {
   public void logout() throws IOException {
     FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
     switchScene("login.fxml", 575, 575);
+    SecurityController.setUser(null);
+  }
+
+  public static void logoutUser() {
+    App.LOG.info("Session timeout, user logged out.");
+    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    try {
+      mainBox
+          .getScene()
+          .setRoot(
+              FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/login.fxml"))));
+      AppController.showError("Session Timed Out");
+    } catch (Exception e) {}
     SecurityController.setUser(null);
   }
 
