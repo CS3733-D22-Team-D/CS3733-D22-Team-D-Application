@@ -53,9 +53,9 @@ public class OverdueHandler {
     for (Request req : requestList) {
       // Convert date into the same format to get a linear reqresentation
       String reqDate = req.getDateNeeded();
-      int dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0,4));
+      int dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
       if (dateOf < dateRepresentation) // If the due date has passed,
-        overdueList.add(req);// Add the req to the list
+      overdueList.add(req); // Add the req to the list
     }
     return overdueList;
   }
@@ -87,6 +87,11 @@ public class OverdueHandler {
       requestList.add(medEqReq);
     }
     requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      MedicalEquipmentRequest overdueReq = medicalEquipmentRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      medicalEquipmentRequestDAO.update(overdueReq);
+    }
   }
 
   private void checkMedicineReq() throws SQLException {
@@ -95,6 +100,11 @@ public class OverdueHandler {
       requestList.add(medicineReq);
     }
     requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      MedicineRequest overdueReq = medicineRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      medicineRequestDAO.update(overdueReq);
+    }
   }
 
   private void checkPatientTransportReq() throws SQLException {
@@ -103,6 +113,11 @@ public class OverdueHandler {
       requestList.add(patTranReq);
     }
     requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      PatientTransportRequest overdueReq = patientTransportRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      patientTransportRequestDAO.update(overdueReq);
+    }
   }
 
   private void checkSanitaitonReq() throws SQLException {
@@ -111,6 +126,11 @@ public class OverdueHandler {
       requestList.add(sanitationReq);
     }
     requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      SanitationRequest overdueReq = sanitationRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      sanitationRequestDAO.update(overdueReq);
+    }
   }
 
   private void checkEquipmentCleanReq() throws SQLException {
