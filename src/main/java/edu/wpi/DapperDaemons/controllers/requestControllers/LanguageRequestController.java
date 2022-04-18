@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
@@ -113,7 +114,7 @@ public class LanguageRequestController extends ParentController {
   public void initBoxes() {
     languageBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
-    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

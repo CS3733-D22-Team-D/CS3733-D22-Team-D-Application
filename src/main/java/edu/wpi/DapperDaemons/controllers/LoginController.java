@@ -1,17 +1,23 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import arduino.Arduino;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.map.serial.SerialCOM;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -82,7 +88,7 @@ public class LoginController extends AppController {
                     Arduino arduino;
                     SerialCOM serialCOM = new SerialCOM();
                     try {
-                      arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+                      arduino = serialCOM.setupArduino();
                       RFIDPageController.COM = arduino.getPortDescription();
                     } catch (UnableToConnectException e) {
                       RFIDPageController.COM = null;
@@ -91,6 +97,12 @@ public class LoginController extends AppController {
                 },
                 () -> {
                   SecurityController.setUser(user.get(0));
+                  // TODO: Find out why this is not working
+                  try {
+                    switchScene("RFIDScanPage.fxml", 635, 510);
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
                 });
             return;
           }

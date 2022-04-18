@@ -6,7 +6,7 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class LanguageRequest extends TableObject {
+public class LanguageRequest extends TableObject implements Request {
 
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
@@ -16,6 +16,21 @@ public class LanguageRequest extends TableObject {
   @TableHandler(table = 0, col = 1)
   public Language getLanguage() {
     return language;
+  }
+
+  @Override
+  public String requestType() {
+    return "Language Request";
+  }
+
+  @Override
+  public Priority getPriority() {
+    return this.priority;
+  }
+
+  @Override
+  public boolean requiresTransport() {
+    return false;
   }
 
   @TableHandler(table = 0, col = 2)
@@ -54,10 +69,15 @@ public class LanguageRequest extends TableObject {
   }
 
   private String nodeID;
-  private Language language;
+  private Request.Priority priority = Priority.LOW;
   private String roomID;
   private String requester;
   private String assignee;
+  private Language language;
+
+  public void setPriority(Priority priority) {
+    this.priority = priority;
+  }
 
   public enum Language {
     CHINESE,
@@ -114,13 +134,15 @@ public class LanguageRequest extends TableObject {
       case 1:
         return nodeID;
       case 2:
-        return String.valueOf(language);
+        return priority.toString();
       case 3:
         return roomID;
       case 4:
         return requester;
       case 5:
         return assignee;
+      case 6:
+        return language.toString();
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -133,7 +155,7 @@ public class LanguageRequest extends TableObject {
         nodeID = newAttribute;
         break;
       case 2:
-        language = Language.valueOf(newAttribute);
+        priority = Priority.valueOf(newAttribute);
         break;
       case 3:
         roomID = newAttribute;
@@ -143,6 +165,9 @@ public class LanguageRequest extends TableObject {
         break;
       case 5:
         assignee = newAttribute;
+        break;
+      case 6:
+        language = language.valueOf(newAttribute);
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
@@ -175,6 +200,9 @@ public class LanguageRequest extends TableObject {
         break;
       case "assignee":
         assignee = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
