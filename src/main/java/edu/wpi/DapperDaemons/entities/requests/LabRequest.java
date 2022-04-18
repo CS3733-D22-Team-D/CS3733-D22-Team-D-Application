@@ -187,7 +187,8 @@ public class LabRequest extends TableObject implements Request {
       String assigneeID,
       String patientID,
       LabType labType,
-      RequestStatus status) {
+      RequestStatus status,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -197,6 +198,7 @@ public class LabRequest extends TableObject implements Request {
     this.patientID = patientID;
     this.labType = labType;
     this.status = status;
+    this.dateNeeded = dateNeeded;
   }
 
   public LabRequest() {}
