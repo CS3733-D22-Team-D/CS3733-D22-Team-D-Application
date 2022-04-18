@@ -155,6 +155,7 @@ public class App extends Application {
             }
             DAO<Location> locationDAO = DAOPouch.getLocationDAO();
             DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+            DAO<MedicalEquipmentRequest> equipmentRequestDAO = DAOPouch.getMedicalEquipmentRequestDAO();
 
             new Thread(
                     () -> {
@@ -168,8 +169,6 @@ public class App extends Application {
 
                         if (tempMap.size() >= 6) {
                           // TODO: ADD ALERT
-                          DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                              DAOPouch.getMedicalEquipmentRequestDAO();
                           for (MedicalEquipment equipment : tempMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
@@ -195,8 +194,6 @@ public class App extends Application {
 
                         if (tempMap.size() >= 10) {
                           // TODO: ADD ALERT
-                          DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                              DAOPouch.getMedicalEquipmentRequestDAO();
                           for (MedicalEquipment equipment : tempMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
@@ -231,10 +228,6 @@ public class App extends Application {
                                     "UNCLEAN");
                             dirtyTempMap =
                                 medicalEquipmentDAO.filter(dirtyTempMap, 3, "INFUSIONPUMP");
-
-                            DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                                DAOPouch.getMedicalEquipmentRequestDAO();
-
                             for (MedicalEquipment equipment : dirtyTempMap.values()) {
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
