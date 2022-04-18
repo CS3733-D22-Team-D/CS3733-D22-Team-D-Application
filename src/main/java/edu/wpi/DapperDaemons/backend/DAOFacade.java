@@ -1,9 +1,12 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class DAOFacade {
 
@@ -75,5 +78,23 @@ public class DAOFacade {
       }
     }
     return searchReq;
+  }
+
+  /**
+   * Filters Medical Equipment in a certain LOCATION by a given TYPE and a given CLEANSTATUS
+   *
+   * @param loc location to check for equipment
+   * @param medicalEquipmentDAO database DAO
+   * @param type type of equipment to look for
+   * @param cleanStatus the desired clean status
+   * @return A Map containing the filtered Equipment
+   */
+  public static Map<String, MedicalEquipment> filterEquipByTypeAndStatus(
+      Location loc, DAO<MedicalEquipment> medicalEquipmentDAO, String type, String cleanStatus) {
+    Map<String, MedicalEquipment> tempMap =
+        medicalEquipmentDAO.filter(
+            medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, cleanStatus);
+    tempMap = medicalEquipmentDAO.filter(tempMap, 3, type);
+    return tempMap;
   }
 }

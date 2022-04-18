@@ -134,6 +134,7 @@ public class App extends Application {
   }
 
   // TODO : STOP THIS FROM ADDING THREE REQUESTS EVERYTIME: CHECK DAO
+
   /**
    * 1. When there are six beds or more in a dirty area an alert appears on the dashboard. Service
    * requests are created to move the beds to the OR Park for cleaning.
@@ -151,25 +152,34 @@ public class App extends Application {
             try {
               Thread.sleep(100);
             } catch (InterruptedException e) {
+              System.err.println("Something went wrong");
               throw new RuntimeException(e);
             }
+            /* Declare the DAOs we will use */
             DAO<Location> locationDAO = DAOPouch.getLocationDAO();
             DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-            DAO<MedicalEquipmentRequest> equipmentRequestDAO = DAOPouch.getMedicalEquipmentRequestDAO();
+            DAO<MedicalEquipmentRequest> equipmentRequestDAO =
+                DAOPouch.getMedicalEquipmentRequestDAO();
 
             new Thread(
                     () -> {
-                      // Part (B):
+                      // For each dirty storage location...
                       for (Location loc : locationDAO.filter(6, "DIRT").values()) {
 
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "UNCLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "BED");
+                        // Get dirty all dirty beds in current dirty location
+                        Map<String, MedicalEquipment> dirtyBedMap =
+                            DAOFacade.filterEquipByTypeAndStatus(
+                                loc, medicalEquipmentDAO, "BED", "UNClEAN");
+                        // Get all dirty infusion pumps in current dirty location
+                        Map<String, MedicalEquipment> dirtyInfusionPumpMap =
+                            DAOFacade.filterEquipByTypeAndStatus(
+                                loc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
-                        if (tempMap.size() >= 6) {
+                        // If there are more than 6 dirty beds in the current location create
+                        // request for each
+                        if (dirtyBedMap.size() >= 6) {
                           // TODO: ADD ALERT
-                          for (MedicalEquipment equipment : tempMap.values()) {
+                          for (MedicalEquipment equipment : dirtyBedMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
                                     Request.Priority.OVERDUE,
@@ -179,22 +189,14 @@ public class App extends Application {
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(request.getNodeID()) == null) {
+                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
                               equipmentRequestDAO.add(request);
                             }
                           }
                         }
-                      }
-                      // Part (C1):
-                      for (Location loc : locationDAO.filter(6, "DIRT").values()) {
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "UNCLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
-
-                        if (tempMap.size() >= 10) {
+                        if (dirtyInfusionPumpMap.size() >= 10) {
                           // TODO: ADD ALERT
-                          for (MedicalEquipment equipment : tempMap.values()) {
+                          for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
                                     Request.Priority.OVERDUE,
@@ -204,21 +206,21 @@ public class App extends Application {
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(request.getNodeID()) == null) {
+                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
                               equipmentRequestDAO.add(request);
                             }
                           }
                         }
                       }
-                      // Part (C2):
+                      // For each clean location...
                       for (Location loc : locationDAO.filter(6, "STOR").values()) {
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "CLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
 
-                        if (tempMap.size() <= 5) {
+                        // Get all clean infusion pumps at the given clean location...
+                        Map<String, MedicalEquipment> cleanInfusionMap =
+                                DAOFacade.filterEquipByTypeAndStatus(loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
 
+                        // If there are less than 5 clean infusion pumps in a clean location
+                        if (cleanInfusionMap.size() <= 5) {
                           for (Location dirtyLoc : locationDAO.filter(6, "DIRT").values()) {
 
                             Map<String, MedicalEquipment> dirtyTempMap =
