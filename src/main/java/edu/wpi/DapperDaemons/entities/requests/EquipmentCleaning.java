@@ -4,11 +4,12 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class EquipmentCleaning extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(80) PRIMARY KEY,"
             + "priority varchar(20),"
             + "roomID varchar(60),"
@@ -16,11 +17,12 @@ public class EquipmentCleaning extends TableObject implements Request {
             + "assigneeID varchar(60),"
             + "equipmentID varchar(20),"
             + "equipmentType varchar(20),"
-            + "cleanStatus varchar(20))";
+            + "cleanStatus varchar(20),"
+            + "cleanBy varchar(10))";
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "EQUIPMENTCLEANINGREQUESTS";
   }
 
@@ -43,6 +45,8 @@ public class EquipmentCleaning extends TableObject implements Request {
         return equipmentType.toString();
       case 8:
         return cleanStatus.toString();
+      case 9:
+        return cleanBy;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -76,19 +80,61 @@ public class EquipmentCleaning extends TableObject implements Request {
       case 8:
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
         break;
+      case 9:
+        cleanBy = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
   }
 
   @Override
-  public Object get() {
-    return new MedicalEquipmentRequest();
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        equipmentID = newAttribute;
+        break;
+      case "labType":
+        equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
+        break;
+      case "status":
+        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        break;
+      case "cleabBy":
+        cleanBy = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Medical Equipment Request";
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
@@ -111,6 +157,7 @@ public class EquipmentCleaning extends TableObject implements Request {
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
+  private String cleanBy;
 
   // CONSTRUCTORS
 
@@ -121,7 +168,8 @@ public class EquipmentCleaning extends TableObject implements Request {
           String assigneeID,
           String equipmentID,
           MedicalEquipment.EquipmentType equipmentType,
-          MedicalEquipment.CleanStatus cleanStatus) {
+          MedicalEquipment.CleanStatus cleanStatus,
+          String cleanBy) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -131,6 +179,7 @@ public class EquipmentCleaning extends TableObject implements Request {
     this.equipmentID = equipmentID;
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
+    this.cleanBy = cleanBy;
   }
 
   public EquipmentCleaning() {}
@@ -201,5 +250,19 @@ public class EquipmentCleaning extends TableObject implements Request {
 
   public void setCleanStatus(MedicalEquipment.CleanStatus cleanStatus) {
     this.cleanStatus = cleanStatus;
+  }
+
+  @TableHandler(table = 0, col = 8)
+  public String getCleanBy() {
+    return cleanBy;
+  }
+
+  public void setCleanBy(String cleanBy) {
+    this.cleanBy = cleanBy;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return cleanBy;
   }
 }
