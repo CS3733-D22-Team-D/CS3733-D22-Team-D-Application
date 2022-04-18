@@ -62,9 +62,8 @@ public class Account extends TableObject {
       case 6:
         return twoFactor;
       default:
-        break;
+        throw new ArrayIndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override
