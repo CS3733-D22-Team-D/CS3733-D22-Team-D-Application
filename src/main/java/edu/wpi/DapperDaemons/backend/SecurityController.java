@@ -51,6 +51,8 @@ public class SecurityController {
       return clearance >= 2;
     } else if (tableName.equals("NOTIFICATIONS")) {
       return clearance >= 1;
+    } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
+      return clearance >= 2;
     }
     return false;
   }
@@ -82,6 +84,12 @@ public class SecurityController {
       return clearance >= 3;
     } else if (tableName.equals("PATIENTS")) {
       return clearance >= 3;
+    } else if (tableName.equals("LANGUAGEREQUESTS")) {
+      return clearance >= 2;
+    } else if (tableName.equals("NOTIFICATIONS")) {
+      return clearance >= 1;
+    } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
+      return clearance >= 2;
     }
     return false;
   }
@@ -113,6 +121,12 @@ public class SecurityController {
       return clearance >= 3;
     } else if (tableName.equals("PATIENTS")) {
       return clearance >= 3;
+    } else if (tableName.equals("LANGUAGEREQUESTS")) {
+      return clearance >= 2;
+    } else if (tableName.equals("NOTIFICATIONS")) {
+      return clearance >= 1;
+    } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
+      return clearance >= 2;
     }
     return false;
   }
