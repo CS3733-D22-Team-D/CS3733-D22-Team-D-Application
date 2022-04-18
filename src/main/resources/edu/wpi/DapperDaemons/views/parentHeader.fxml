@@ -505,7 +505,7 @@
                         <Insets right="70.0" top="49.0" />
                      </HBox.margin>
                      <content>
-                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="70.0" prefWidth="140.0" />
+                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 0 0 7.5 7.5;" />
                      </content>
                   </ScrollPane>
                </children>

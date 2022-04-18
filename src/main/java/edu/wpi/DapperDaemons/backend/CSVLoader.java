@@ -125,7 +125,7 @@ public class CSVLoader {
       for (Integer i = 0; i < line.length; i++) {
         data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
       }
-      map.put(line[0], data);
+      map.put(FireBaseCoder.encodeForFirebaseKey(line[0]), data);
     }
     ref.setValueAsync(map);
   }

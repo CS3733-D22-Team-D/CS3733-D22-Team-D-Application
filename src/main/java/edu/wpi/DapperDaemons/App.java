@@ -90,11 +90,13 @@ public class App extends Application {
 //              throw new RuntimeException(e);
 //            }
 //            CSVSaver.saveAll();
-//            try {
-//              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(), "MedEquipReq.csv");
-//            } catch (IOException e) {
-//              throw new RuntimeException(e);
-//            }
+            //            try {
+            //              //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
+            // "MedEquipReq.csv");
+            //            } catch (IOException e) {
+            //              throw new RuntimeException(e);
+            //            }
+//            CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;
