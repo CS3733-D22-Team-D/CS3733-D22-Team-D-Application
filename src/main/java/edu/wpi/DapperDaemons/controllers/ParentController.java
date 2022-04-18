@@ -96,7 +96,7 @@ public class ParentController extends AppController {
     //    } catch (IOException e) {
     //      throw new RuntimeException(e);
     //    }
-    notifs = new NotificationHandler(notifications);
+    notifs = new NotificationHandler(notifications, notifBell);
     new ThemeHandler(mainBox);
 
     updateWeather();
