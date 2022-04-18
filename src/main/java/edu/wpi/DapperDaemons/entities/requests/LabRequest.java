@@ -25,6 +25,7 @@ public class LabRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
 
+  // TODO : Setup DAO and Backend
   @Override
   public String tableInit() {
     return "CREATE TABLE LABREQUESTS(nodeid varchar(80) PRIMARY KEY,"

@@ -83,6 +83,7 @@ public class LabRequestController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
+    dateNeeded.setValue(null);
   }
 
   @FXML

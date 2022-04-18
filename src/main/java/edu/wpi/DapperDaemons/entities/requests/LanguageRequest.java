@@ -118,12 +118,13 @@ public class LanguageRequest extends TableObject implements Request {
 
   public LanguageRequest() {}
 
-  public LanguageRequest(Language language, String roomID) {
+  public LanguageRequest(Language language, String roomID, String dateNeeded) {
     this.language = language;
     this.roomID = roomID;
     this.assignee = "none";
     this.nodeID = String.valueOf(language) + roomID + LocalDateTime.now();
     this.requester = SecurityController.getUser().getAttribute(1);
+    this.dateNeeded = dateNeeded;
   }
 
   @Override

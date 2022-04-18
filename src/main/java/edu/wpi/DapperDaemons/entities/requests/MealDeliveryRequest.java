@@ -186,7 +186,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String entree,
       String side,
       String drink,
-      String dessert) {
+      String dessert,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -198,6 +199,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
+    this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
