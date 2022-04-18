@@ -176,7 +176,6 @@ public class App extends Application {
                     () -> {
                       // For each dirty storage location...
                       for (Location loc : locationDAO.filter(6, "DIRT").values()) {
-
                         // Get dirty all dirty beds in current dirty location
                         Map<String, MedicalEquipment> dirtyBedMap =
                             DAOFacade.filterEquipByTypeAndStatus(
@@ -186,33 +185,29 @@ public class App extends Application {
                             DAOFacade.filterEquipByTypeAndStatus(
                                 loc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
-                        // If there are more than 6 dirty beds in the current location create
-                        // request for each
+                        // If there are more than 6 dirty beds in the current location creat request for each
                         if (dirtyBedMap.size() >= 6) {
                           // TODO: ADD ALERT
                           for (MedicalEquipment equipment : dirtyBedMap.values()) {
                             MedicalEquipmentRequest request =
-                                new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
-                                    "dSTOR001L1",
-                                    "AUTOMATIC REQUEST",
-                                    "NONE",
-                                    equipment.getNodeID(),
-                                    equipment.getEquipmentType(),
-                                    equipment.getCleanStatus(),
-                                    dateRepresentation);
-                            if (equipmentRequestDAO.get(request.getNodeID())
-                                == null) { // No idea why this is here
-                              equipment.getCleanStatus();
-                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
-                                equipmentRequestDAO.add(request);
-                              }
+                                    new MedicalEquipmentRequest(
+                                            Request.Priority.OVERDUE,
+                                            "dSTOR001L1",
+                                            "AUTOMATIC REQUEST",
+                                            "NONE",
+                                            equipment.getNodeID(),
+                                            equipment.getEquipmentType(),
+                                            equipment.getCleanStatus(),
+                                            dateRepresentation);
+                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                              equipmentRequestDAO.add(request);
                             }
                           }
-                          if (dirtyInfusionPumpMap.size() >= 10) {
-                            // TODO: ADD ALERT
-                            for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
-                              MedicalEquipmentRequest request =
+                        }
+                        if (dirtyInfusionPumpMap.size() >= 10) {
+                          // TODO: ADD ALERT
+                          for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
+                            MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
                                       Request.Priority.OVERDUE,
                                       "dEXIT00401",
@@ -222,16 +217,14 @@ public class App extends Application {
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus(),
                                       dateRepresentation);
-                              if (equipmentRequestDAO.get(request.getNodeID()) == null) {
-                                equipment.getCleanStatus();
-                                if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
                                   equipmentRequestDAO.add(request);
-                                }
-                              }
                             }
                           }
                         }
+                        // END LOOP
                       }
+                      // ==================================This is Separate======================================
                       // For each clean location...
                       for (Location loc : locationDAO.filter(6, "STOR").values()) {
 
