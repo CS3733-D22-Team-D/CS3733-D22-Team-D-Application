@@ -61,7 +61,7 @@
                                     <TableColumn id="col" fx:id="Priority22" prefWidth="75.0" text="Priority" />
                                     <TableColumn id="col" fx:id="RoomID22" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester22" prefWidth="75.0" text="Requester" />
-                                    <TableColumn id="col" fx:id="Assignee22" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn id="col" fx:id="Assignee22" onEditCommit="#assigneeNewPleb" prefWidth="75.0" text="Assignee" />
                                     <TableColumn id="col" fx:id="Status22" prefWidth="75.0" text="Status" />
                                  </columns>
                               </TableView>
@@ -80,7 +80,7 @@
                                     <TableColumn id="col" fx:id="RoomID221" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester221" prefWidth="75.0" text="Requester" />
                                     <TableColumn id="col" fx:id="Assignee221" prefWidth="75.0" text="Assignee" />
-                                    <TableColumn id="col" fx:id="Status221" prefWidth="75.0" text="Status" />
+                                    <TableColumn id="col" fx:id="Status221" onEditCommit="#onEditStatus" prefWidth="75.0" text="Status" />
                                  </columns>
                               </TableView>
                            </children>
@@ -97,7 +97,7 @@
                                     <TableColumn id="col" fx:id="Priority222" prefWidth="75.0" text="Priority" />
                                     <TableColumn id="col" fx:id="RoomID222" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester222" prefWidth="75.0" text="Requester" />
-                                    <TableColumn id="col" fx:id="Assignee222" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn id="col" fx:id="Assignee222" onEditCommit="#onVolunteer" prefWidth="75.0" text="Assignee" />
                                     <TableColumn id="col" fx:id="Status222" prefWidth="75.0" text="Status" />
                                  </columns>
                               </TableView>

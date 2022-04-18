@@ -157,6 +157,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String equipmentID,
       MedicalEquipment.EquipmentType equipmentType,
       MedicalEquipment.CleanStatus cleanStatus) {
@@ -208,6 +209,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
+  }
+
+  @Override
+  public RequestStatus getStatus() {
+    return null;
   }
 
   public void setAssigneeID(String assigneeID) {
