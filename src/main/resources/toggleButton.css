@@ -17,15 +17,3 @@
     -fx-background-color: #ebebeb;
     -fx-background-radius: 7.5;
 }
-
-
-.tableToggle.toggle-button{
-    -fx-background-color:  #C1C5D4;
-    -fx-background-radius:  7.5 7.5 0 0;
-
-}
-.tableToggle.toggle-button:selected{
-    -fx-background-color: #4b5b81;
-    -fx-background-radius: 7.5 7.5 0 0;
-
-}
