@@ -26,6 +26,6 @@ public class SessionTimeout {
           }
         },
         0,
-        quickTimeout);
+        timeout);
   }
 }
