@@ -162,7 +162,41 @@ public class MapDashboardController extends ParentController {
                         }
                       }
                       // Part (C2):
+                      for (Location loc : locationDAO.filter(6, "STOR").values()) {
+                        Map<String, MedicalEquipment> tempMap =
+                            medicalEquipmentDAO.filter(
+                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "CLEAN");
+                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
 
+                        if (tempMap.size() <= 5) {
+
+                          for (Location dirtyLoc : locationDAO.filter(6, "DIRT").values()) {
+
+                            Map<String, MedicalEquipment> dirtyTempMap =
+                                medicalEquipmentDAO.filter(
+                                    medicalEquipmentDAO.filter(6, loc.getAttribute(1)),
+                                    5,
+                                    "UNCLEAN");
+                            dirtyTempMap =
+                                medicalEquipmentDAO.filter(dirtyTempMap, 3, "INFUSIONPUMP");
+
+                            DAO<MedicalEquipmentRequest> equipmentRequestDAO =
+                                DAOPouch.getMedicalEquipmentRequestDAO();
+
+                            for (MedicalEquipment equipment : dirtyTempMap.values()) {
+                              equipmentRequestDAO.add(
+                                  new MedicalEquipmentRequest(
+                                      Request.Priority.OVERDUE,
+                                      "dEXIT00401",
+                                      "AUTOMATIC REQUEST",
+                                      "NONE",
+                                      equipment.getNodeID(),
+                                      equipment.getEquipmentType(),
+                                      equipment.getCleanStatus()));
+                            }
+                          }
+                        }
+                      }
                     })
                 .start();
           }
