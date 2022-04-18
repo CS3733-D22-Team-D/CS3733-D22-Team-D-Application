@@ -34,6 +34,7 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
   @FXML private TableColumn<MealDeliveryRequest, String> reqID;
@@ -107,6 +108,7 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -122,6 +124,12 @@ public class EquipmentRequestController extends ParentController {
       MedicalEquipment.EquipmentType equipmentType =
           MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
       MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       ArrayList<MedicalEquipment> equipments = new ArrayList<>();
       MedicalEquipment equipment = new MedicalEquipment();
@@ -188,7 +196,8 @@ public class EquipmentRequestController extends ParentController {
                       assigneeID,
                       equipment.getNodeID(),
                       equipmentType,
-                      cleanStatus));
+                      cleanStatus,
+                      dateStr));
           // check if user has permission
           if (!hadClearance) {
             showError("You do not have permission to do this.");
@@ -213,7 +222,8 @@ public class EquipmentRequestController extends ParentController {
   private boolean allFieldsFilled() {
     return !(priorityBox.getValue().equals("")
         || equipmentTypeBox.getValue().equals("")
-        || roomBox.getValue().equals(""));
+        || roomBox.getValue().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {

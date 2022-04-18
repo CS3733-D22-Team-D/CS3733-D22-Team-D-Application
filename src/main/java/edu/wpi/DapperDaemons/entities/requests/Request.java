@@ -32,4 +32,8 @@ public interface Request {
 
   /** @return roomID of a given request */
   public String getRoomID();
+
+  public String getNodeID();
+
+  public String getDateNeeded();
 }

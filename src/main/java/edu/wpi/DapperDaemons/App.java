@@ -10,13 +10,14 @@ import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
-import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
@@ -81,7 +82,14 @@ public class App extends Application {
             } else {
               switchToEmbedded();
             }
+
             AutoSave.start(10);
+            //            try {//this is to save everything from the firebase database
+            //              Thread.sleep(2000);
+            //            } catch (InterruptedException e) {
+            //              throw new RuntimeException(e);
+            //            }
+            //            CSVSaver.saveAll();
           },
           () -> {
             Parent root = null;
@@ -158,6 +166,9 @@ public class App extends Application {
             /* Declare the DAOs we will use */
             DAO<Location> locationDAO = DAOPouch.getLocationDAO();
             DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+            Date dateDat = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+            String dateRepresentation = dateFormat.format(dateDat);
             DAO<MedicalEquipmentRequest> equipmentRequestDAO =
                 DAOPouch.getMedicalEquipmentRequestDAO();
 
@@ -188,26 +199,35 @@ public class App extends Application {
                                     "NONE",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
-                              equipmentRequestDAO.add(request);
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
+                            if (equipmentRequestDAO.get(request.getNodeID())
+                                == null) { // No idea why this is here
+                              equipment.getCleanStatus();
+                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                equipmentRequestDAO.add(request);
+                              }
                             }
                           }
-                        }
-                        if (dirtyInfusionPumpMap.size() >= 10) {
-                          // TODO: ADD ALERT
-                          for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
-                            MedicalEquipmentRequest request =
-                                new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
-                                    "dEXIT00401",
-                                    "AUTOMATIC REQUEST",
-                                    "NONE",
-                                    equipment.getNodeID(),
-                                    equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
-                              equipmentRequestDAO.add(request);
+                          if (dirtyInfusionPumpMap.size() >= 10) {
+                            // TODO: ADD ALERT
+                            for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
+                              MedicalEquipmentRequest request =
+                                  new MedicalEquipmentRequest(
+                                      Request.Priority.OVERDUE,
+                                      "dEXIT00401",
+                                      "AUTOMATIC REQUEST",
+                                      "NONE",
+                                      equipment.getNodeID(),
+                                      equipment.getEquipmentType(),
+                                      equipment.getCleanStatus(),
+                                      dateRepresentation);
+                              if (equipmentRequestDAO.get(request.getNodeID()) == null) {
+                                equipment.getCleanStatus();
+                                if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                  equipmentRequestDAO.add(request);
+                                }
+                              }
                             }
                           }
                         }
@@ -242,7 +262,8 @@ public class App extends Application {
                                       "NONE",
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
-                                      equipment.getCleanStatus());
+                                      equipment.getCleanStatus(),
+                                      dateRepresentation);
                               if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
                                 equipmentRequestDAO.add(request);
                               }

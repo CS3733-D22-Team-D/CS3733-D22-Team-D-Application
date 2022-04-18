@@ -44,6 +44,7 @@ public class MealController extends ParentController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private DatePicker dateNeeded;
 
   /* Buttons */
   @FXML private Button clearButton;
@@ -125,6 +126,12 @@ public class MealController extends ParentController {
               + patientDOB.getValue().getMonthValue()
               + patientDOB.getValue().getDayOfMonth()
               + patientDOB.getValue().getYear();
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = false;
       patient = patientDAO.get(patientID);
@@ -151,7 +158,8 @@ public class MealController extends ParentController {
                     entree,
                     side,
                     drink,
-                    dessert));
+                    dessert,
+                    dateStr));
 
         if (!hadClearance) {
           // throw error that user aint got no clearance
@@ -181,6 +189,7 @@ public class MealController extends ParentController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    dateNeeded.setValue(null);
   }
 
   /**
@@ -217,7 +226,8 @@ public class MealController extends ParentController {
         || dessertBox.getValue().equals("")
         || patientName.getText().equals("")
         || patientDOB.getValue() == null
-        || patientLastName.getText().equals("")));
+        || patientLastName.getText().equals("")
+        || dateNeeded.getValue() == null));
   }
 
   public void saveToCSV() {

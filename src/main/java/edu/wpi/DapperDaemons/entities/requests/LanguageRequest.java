@@ -8,6 +8,7 @@ import java.util.List;
 
 public class LanguageRequest extends TableObject implements Request {
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -25,7 +26,7 @@ public class LanguageRequest extends TableObject implements Request {
 
   @Override
   public Priority getPriority() {
-    return this.priority;
+    return priority;
   }
 
   @Override
@@ -68,16 +69,27 @@ public class LanguageRequest extends TableObject implements Request {
     this.assignee = assignee;
   }
 
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
+  }
+
+  public void setPriority(Priority priority) {
+    this.priority = priority;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 5)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
   private String nodeID;
   private Request.Priority priority = Priority.LOW;
   private String roomID;
   private String requester;
   private String assignee;
   private Language language;
-
-  public void setPriority(Priority priority) {
-    this.priority = priority;
-  }
+  private String dateNeeded;
 
   public enum Language {
     CHINESE,
@@ -106,12 +118,13 @@ public class LanguageRequest extends TableObject implements Request {
 
   public LanguageRequest() {}
 
-  public LanguageRequest(Language language, String roomID) {
+  public LanguageRequest(Language language, String roomID, String dateNeeded) {
     this.language = language;
     this.roomID = roomID;
     this.assignee = "none";
     this.nodeID = String.valueOf(language) + roomID + LocalDateTime.now();
     this.requester = SecurityController.getUser().getAttribute(1);
+    this.dateNeeded = dateNeeded;
   }
 
   @Override
@@ -120,7 +133,8 @@ public class LanguageRequest extends TableObject implements Request {
         + "language varchar(20),"
         + "roomID varchar(100),"
         + "requester varchar(100),"
-        + "assignee varchar(100))";
+        + "assignee varchar(100),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -143,6 +157,8 @@ public class LanguageRequest extends TableObject implements Request {
         return assignee;
       case 6:
         return language.toString();
+      case 7:
+        return dateNeeded;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -168,6 +184,9 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case 6:
         language = language.valueOf(newAttribute);
+        break;
+      case 7:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
@@ -200,6 +219,9 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case "assignee":
         assignee = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
         break;
       case "priority":
         priority = Priority.valueOf(newAttribute);

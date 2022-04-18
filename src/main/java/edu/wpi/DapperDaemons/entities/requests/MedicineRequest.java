@@ -25,7 +25,8 @@ public class MedicineRequest extends TableObject implements Request {
         + "assigneeID varchar(60) DEFAULT 'Unselected',"
         + "patientID varchar(60) DEFAULT 'Someone',"
         + "medicationName varchar(60) ,"
-        + "quantity varchar(20))";
+        + "quantity varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -52,6 +53,8 @@ public class MedicineRequest extends TableObject implements Request {
         return medicationName;
       case 8:
         return Integer.toString(quantity);
+      case 9:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -83,6 +86,9 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case 8:
         quantity = Integer.parseInt(newAttribute);
+        break;
+      case 9:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -125,6 +131,9 @@ public class MedicineRequest extends TableObject implements Request {
       case "quantity":
         quantity = Integer.valueOf(newAttribute);
         break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -155,6 +164,7 @@ public class MedicineRequest extends TableObject implements Request {
   private String patientID;
   private String medicationName;
   private int quantity;
+  private String dateNeeded;
 
   // CONTSTRUCTORS
 
@@ -165,7 +175,8 @@ public class MedicineRequest extends TableObject implements Request {
       String assigneeID,
       String patientID,
       String medicationName,
-      int quantity) {
+      int quantity,
+      String dateNeeded) {
     SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy-HH:MM:SS");
     this.nodeID = priority.toString() + requesterID + format.format(new Date());
 
@@ -176,10 +187,12 @@ public class MedicineRequest extends TableObject implements Request {
     this.patientID = patientID;
     this.medicationName = medicationName;
     this.quantity = quantity;
+    this.dateNeeded = dateNeeded;
   }
 
   public MedicineRequest() {}
   // SETTERS AND GETTERS
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -245,5 +258,15 @@ public class MedicineRequest extends TableObject implements Request {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 8)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }
