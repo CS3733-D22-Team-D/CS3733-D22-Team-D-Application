@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
@@ -155,6 +157,9 @@ public class App extends Application {
             }
             DAO<Location> locationDAO = DAOPouch.getLocationDAO();
             DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+            Date dateDat = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+            String dateRepresentation = dateFormat.format(dateDat);
 
             new Thread(
                     () -> {
@@ -179,7 +184,8 @@ public class App extends Application {
                                     "NONE",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
                             if (equipmentRequestDAO.get(request.getNodeID()) == null) {
                               equipmentRequestDAO.add(request);
                             }
@@ -206,7 +212,8 @@ public class App extends Application {
                                     "NONE",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
                             if (equipmentRequestDAO.get(request.getNodeID()) == null) {
                               equipmentRequestDAO.add(request);
                             }
@@ -244,7 +251,8 @@ public class App extends Application {
                                       "NONE",
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
-                                      equipment.getCleanStatus());
+                                      equipment.getCleanStatus(),
+                                      dateRepresentation);
                               if (equipmentRequestDAO.get(request.getNodeID()) == null) {
                                 equipmentRequestDAO.add(request);
                               }

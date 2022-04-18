@@ -160,7 +160,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       String assigneeID,
       String equipmentID,
       MedicalEquipment.EquipmentType equipmentType,
-      MedicalEquipment.CleanStatus cleanStatus) {
+      MedicalEquipment.CleanStatus cleanStatus,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -170,6 +171,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentID = equipmentID;
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
+    this.dateNeeded = dateNeeded;
   }
 
   public MedicalEquipmentRequest() {}

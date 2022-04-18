@@ -126,6 +126,12 @@ public class MealController extends ParentController {
               + patientDOB.getValue().getMonthValue()
               + patientDOB.getValue().getDayOfMonth()
               + patientDOB.getValue().getYear();
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = false;
       patient = patientDAO.get(patientID);
@@ -141,12 +147,6 @@ public class MealController extends ParentController {
         // request is formed correctly and the patient exists send it and check for clearance
         roomID = patient.getLocationID();
         requesterID = SecurityController.getUser().getNodeID();
-        String dateStr =
-            ""
-                + dateNeeded.getValue().getMonthValue()
-                + dateNeeded.getValue().getDayOfMonth()
-                + dateNeeded.getValue().getYear();
-
         boolean hadClearance =
             addMealRequest(
                 new MealDeliveryRequest(
