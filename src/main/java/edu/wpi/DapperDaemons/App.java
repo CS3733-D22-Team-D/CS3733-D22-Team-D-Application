@@ -204,7 +204,7 @@ public class App extends Application {
                                             equipment.getEquipmentType(),
                                             equipment.getCleanStatus(),
                                             dateRepresentation);
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                            if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                               equipmentRequestDAO.add(request);
                             }
                           }
@@ -222,7 +222,7 @@ public class App extends Application {
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus(),
                                       dateRepresentation);
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                            if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                                   equipmentRequestDAO.add(request);
                             }
                           }
@@ -262,7 +262,7 @@ public class App extends Application {
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus(),
                                       dateRepresentation);
-                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                              if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                                 equipmentRequestDAO.add(request);
                               }
                             }
