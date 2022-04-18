@@ -101,7 +101,7 @@ public class LanguageRequestController extends ParentController {
               LanguageRequest.Language.valueOf(languageBox.getValue()), roomBox.getValue()));
     } else {
       // TODO uncomment when fixed
-      //      showError("All fields must be filled.");
+      //   showError("All fields must be filled.");
     }
     onClearClicked();
   }
