@@ -6,7 +6,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Notification;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Objects;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javax.sound.sampled.LineUnavailableException;
@@ -22,9 +25,11 @@ public class NotificationHandler {
 
   private static ValueEventListener notifListener;
   private final VBox notifications;
+  private final ImageView notifBell;
 
-  public NotificationHandler(VBox notificationsBox) {
+  public NotificationHandler(VBox notificationsBox, ImageView notifBell) {
     this.notifications = notificationsBox;
+    this.notifBell = notifBell;
     setNotificationListener();
   }
 
@@ -46,6 +51,12 @@ public class NotificationHandler {
               Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
     } catch (IOException ignored) {
     }
+    notif.setOnMouseClicked(
+        event -> {
+          System.out.println("Notif Handler");
+          n.setAttribute(5, "true");//sets action when clicking on notification
+          DAOPouch.getNotificationDAO().add(n);
+        });
     Label sub = (Label) notif.getChildren().get(0);
     sub.setText(n.getSubject());
     Label body = (Label) notif.getChildren().get(1);
@@ -93,12 +104,14 @@ public class NotificationHandler {
     List<Notification> unReadUnChimed =
         new ArrayList<>(DAOPouch.getNotificationDAO().filter(unRead, 6, "false").values());
     if (unRead.size() == 0) {
+      notifBell.setImage(Images.BELL);
       Text t = new Text();
       t.setText("Looks empty in here");
       this.notifications.getChildren().add(new Text("Looks empty in here"));
       return;
     }
     if (unRead.size() > 0) {
+      notifBell.setImage(Images.UNREAD);
       if (unReadUnChimed.size() > 0) {
         SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
         try {
