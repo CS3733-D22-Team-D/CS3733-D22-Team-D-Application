@@ -217,7 +217,8 @@ public class App extends Application {
 
                         // Get all clean infusion pumps at the given clean location...
                         Map<String, MedicalEquipment> cleanInfusionMap =
-                                DAOFacade.filterEquipByTypeAndStatus(loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
+                            DAOFacade.filterEquipByTypeAndStatus(
+                                loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
 
                         // If there are less than 5 clean infusion pumps in a clean location
                         if (cleanInfusionMap.size() <= 5) {
