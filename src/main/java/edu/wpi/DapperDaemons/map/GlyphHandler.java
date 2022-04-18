@@ -29,9 +29,13 @@ public class GlyphHandler {
   private List<String> floorFilter;
   private List<String> nodeTypeFilter;
   private List<String> longNameFilter;
+  private List<String> equipTypeFilter;
 
   public GlyphHandler(
-      AnchorPane glyphLayer,AnchorPane equipLayer, List<PositionInfo> imageLocs, MapController controller) {
+      AnchorPane glyphLayer,
+      AnchorPane equipLayer,
+      List<PositionInfo> imageLocs,
+      MapController controller) {
     this.glyphLayer = glyphLayer;
     this.equipLayer = equipLayer;
     this.controller = controller;
@@ -63,17 +67,19 @@ public class GlyphHandler {
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
 
-    List<MedicalEquipment> all = DAOPouch.getMedicalEquipmentDAO().filter(6,pos.getId()).values());
+    List<MedicalEquipment> all =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
     equipLocs.addAll(all);
-    all.forEach(e -> {
-      ImageView equip = getEquipImage(e.getEquipmentType().name());
-      equip.setX(pos.getX()-16);
-      equip.setY(pos.getY()-16);
-      equip.setVisible(true);
+    all.forEach(
+        e -> {
+          ImageView equip = getEquipImage(e.getEquipmentType().name());
+          equip.setX(pos.getX() - 16);
+          equip.setY(pos.getY() - 16);
+          equip.setVisible(true);
 
-      image.setOnMouseClicked(i -> controller.onMapClicked(i));
-      equipLayer.getChildren().add(equip);
-    });
+          image.setOnMouseClicked(i -> controller.onMapClicked(i));
+          equipLayer.getChildren().add(equip);
+        });
 
     imageLocs.add(pos);
   }
@@ -195,50 +201,13 @@ public class GlyphHandler {
 
   public void makeAllInVisible() {
     glyphLayer.getChildren().forEach(c -> c.setVisible(false));
+    equipLayer.getChildren().forEach(c -> c.setVisible(false));
   }
 
   public void makeAllVisible() {
     glyphLayer.getChildren().forEach(c -> c.setVisible(true));
+    equipLayer.getChildren().forEach(c -> c.setVisible(true));
   }
-
-  //  public void filterByFloor(String floor) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByNodeType(String floor, String nodeType) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getType().equals(nodeType)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByLongName(String floor, String longName) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getLongName().equals(longName)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByShortName(String floor, String shortName) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getShortName().equals(shortName)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
 
   public void filterByReqType(String floor, List<Request> searchReq) {
     makeAllInVisible();
@@ -268,12 +237,27 @@ public class GlyphHandler {
     for (int i = 0; i < imageLocs.size(); i++) {
       if (!floorFilter.contains(imageLocs.get(i).getFloor())) {
         glyphLayer.getChildren().get(i).setVisible(false);
+
+        for (int j = 0; j < equipLocs.size(); j++) {
+          if (equipLocs.get(j).getLocationID().equals(imageLocs.get(i).getId())) {
+            equipLayer.getChildren().get(j).setVisible(false);
+          }
+        }
       }
       if (!nodeTypeFilter.contains(imageLocs.get(i).getType())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
       if (!longNameFilter.isEmpty() && !longNameIsSearched(imageLocs.get(i).getLongName())) {
         glyphLayer.getChildren().get(i).setVisible(false);
+      }
+    }
+    filterAllEquipment();
+  }
+
+  private void filterAllEquipment() {
+    for (int i = 0; i < equipLocs.size(); i++) {
+      if (!equipTypeFilter.contains(equipLocs.get(i).getEquipmentType().name())) {
+        equipLayer.getChildren().get(i).setVisible(false);
       }
     }
   }
@@ -320,10 +304,26 @@ public class GlyphHandler {
     filter();
   }
 
+  public void addEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.add(equipTypeFilter);
+    filter();
+  }
+
+  public void removeEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.remove(equipTypeFilter);
+    filter();
+  }
+
+  public void setEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.clear();
+    addEquipTypeFilter(equipTypeFilter);
+  }
+
   public void clearFilters() {
     floorFilter = new ArrayList<>();
     nodeTypeFilter = new ArrayList<>();
     longNameFilter = new ArrayList<>();
+    equipTypeFilter = new ArrayList<>();
     filter();
   }
 }

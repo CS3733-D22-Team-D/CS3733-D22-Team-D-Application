@@ -65,6 +65,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton staiTG;
   @FXML private ToggleButton storTG;
   @FXML private ToggleButton directionTG;
+  @FXML private ToggleButton bedTG;
+  @FXML private ToggleButton pumpTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -259,8 +261,8 @@ public class MapController extends ParentController {
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
     try {
-      equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
-      patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
+      equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
+      patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
       requests = DAOFacade.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
@@ -469,7 +471,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void deptToggle(ActionEvent event) {
+  void deptToggle() {
     if (deptTG.isSelected()) {
       glyphs.addNodeTypeFilter("DEPT");
     } else {
@@ -478,7 +480,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void dirtToggle(ActionEvent event) {
+  void dirtToggle() {
     if (dirtTG.isSelected()) {
       glyphs.addNodeTypeFilter("DIRT");
     } else {
@@ -487,7 +489,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void elevToggle(ActionEvent event) {
+  void elevToggle() {
     if (elevTG.isSelected()) {
       glyphs.addNodeTypeFilter("ELEV");
     } else {
@@ -496,7 +498,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void exitToggle(ActionEvent event) {
+  void exitToggle() {
     if (exitTG.isSelected()) {
       glyphs.addNodeTypeFilter("EXIT");
     } else {
@@ -505,7 +507,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void hallToggle(ActionEvent event) {
+  void hallToggle() {
     if (hallTG.isSelected()) {
       glyphs.addNodeTypeFilter("HALL");
     } else {
@@ -514,7 +516,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void infoToggle(ActionEvent event) {
+  void infoToggle() {
     if (infoTG.isSelected()) {
       glyphs.addNodeTypeFilter("INFO");
     } else {
@@ -523,7 +525,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void labsToggle(ActionEvent event) {
+  void labsToggle() {
     if (labsTG.isSelected()) {
       glyphs.addNodeTypeFilter("LABS");
     } else {
@@ -532,7 +534,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void patiToggle(ActionEvent event) {
+  void patiToggle() {
     if (patiTG.isSelected()) {
       glyphs.addNodeTypeFilter("PATI");
     } else {
@@ -541,7 +543,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void restToggle(ActionEvent event) {
+  void restToggle() {
     if (restTG.isSelected()) {
       glyphs.addNodeTypeFilter("REST");
       glyphs.addNodeTypeFilter("BATH");
@@ -552,7 +554,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void retlToggle(ActionEvent event) {
+  void retlToggle() {
     if (retlTG.isSelected()) {
       glyphs.addNodeTypeFilter("RETL");
     } else {
@@ -561,7 +563,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void servToggle(ActionEvent event) {
+  void servToggle() {
     if (servTG.isSelected()) {
       glyphs.addNodeTypeFilter("SERV");
     } else {
@@ -570,7 +572,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void staiToggle(ActionEvent event) {
+  void staiToggle() {
     if (staiTG.isSelected()) {
       glyphs.addNodeTypeFilter("STAI");
     } else {
@@ -579,7 +581,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void storToggle(ActionEvent event) {
+  void storToggle() {
     if (storTG.isSelected()) {
       glyphs.addNodeTypeFilter("STOR");
     } else {
@@ -588,7 +590,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void dirToggle(ActionEvent event) {
+  void dirToggle() {
     if (directionTG.isSelected()) {
       try {
         directionsFields =
@@ -600,6 +602,24 @@ public class MapController extends ParentController {
       }
     } else {
       filterMenu.getChildren().remove(2);
+    }
+  }
+
+  @FXML
+  void bedToggle() {
+    if (bedTG.isSelected()) {
+      glyphs.addEquipTypeFilter("BED");
+    } else {
+      glyphs.removeEquipTypeFilter("BED");
+    }
+  }
+
+  @FXML
+  void pumpToggle() {
+    if (pumpTG.isSelected()) {
+      glyphs.addEquipTypeFilter("INFUSIONPUMP");
+    } else {
+      glyphs.removeEquipTypeFilter("INFUSIONPUMP");
     }
   }
 
