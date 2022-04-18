@@ -3,8 +3,11 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -78,6 +81,11 @@ public class MapController extends ParentController {
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
 
+  @FXML private ToggleButton bubbleMenu;
+  @FXML private StackPane circle2;
+  @FXML private StackPane circle3;
+  @FXML private StackPane circle4;
+
   /* Map Handlers */
   private MapHandler maps;
   private GlyphHandler glyphs;
@@ -97,6 +105,11 @@ public class MapController extends ParentController {
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(searchBar, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(typeIn, new FuzzySearchComparatorMethod());
+  }
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -140,7 +153,7 @@ public class MapController extends ParentController {
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
     try {
       List<String> allReqNames = new ArrayList<>();
-      RequestHandler.getAllRequests()
+      DAOFacade.getAllRequests()
           .forEach(
               r -> {
                 if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
@@ -163,6 +176,47 @@ public class MapController extends ParentController {
     closeRoom();
 
     //    filterSlider(mapFilter, burg, burgBack);
+  }
+
+  @FXML
+  void mapMenu(ActionEvent event) throws InterruptedException {
+    if (bubbleMenu.isSelected()) {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(-56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(-112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(-168);
+      translateTransition3.play();
+    } else {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(168);
+      translateTransition3.play();
+    }
   }
 
   /**
@@ -206,7 +260,7 @@ public class MapController extends ParentController {
     try {
       equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
       patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
-      requests = RequestHandler.getFilteredRequests(pos.getId());
+      requests = DAOFacade.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
@@ -309,7 +363,7 @@ public class MapController extends ParentController {
 
   private boolean onFilterRequestType() {
     try {
-      List<Request> searchReq = RequestHandler.getSearchedRequestsByLongName(searchBar.getValue());
+      List<Request> searchReq = DAOFacade.searchRequestsByName(searchBar.getValue());
       if (searchReq.size() == 0) return false;
       glyphs.filterByReqType(maps.getFloor(), searchReq);
     } catch (Exception e) {

@@ -35,7 +35,7 @@
                               <Insets bottom="5.0" left="30.0" right="30.0" top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="sanitationBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
+                        <JFXComboBox id="jButton" fx:id="sanitationBox" focusColor="#059da7" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
                            <VBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </VBox.margin>
@@ -51,7 +51,7 @@
                               <Insets bottom="5.0" left="30.0" top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="priorityBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
+                        <JFXComboBox id="jButton" fx:id="priorityBox" focusColor="#059da7" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -67,7 +67,7 @@
                               <Insets bottom="5.0" left="30.0" top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="locationBox" focusColor="#059da7" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
+                        <JFXComboBox id="jButton" fx:id="locationBox" focusColor="#059da7" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" unFocusColor="#4b5b81">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

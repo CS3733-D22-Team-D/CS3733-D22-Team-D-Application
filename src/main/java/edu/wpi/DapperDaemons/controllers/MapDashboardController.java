@@ -1,18 +1,14 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.CSVLoader;
-import edu.wpi.DapperDaemons.backend.DAO;
-import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -111,11 +107,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setLanguageRequestListener(
@@ -123,11 +115,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMealDeliveryRequestListener(
@@ -135,11 +123,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMedicalEquipmentRequestListener(
@@ -147,11 +131,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMedicinRequestListener(
@@ -159,11 +139,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setPatientTrasportRequestListener(
@@ -171,11 +147,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setSanitationRequestListener(
@@ -183,11 +155,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setLocationListener(
@@ -218,18 +186,10 @@ public class MapDashboardController extends ParentController {
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
-      try {
-        equipTable
-            .getItems()
-            .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
-        patientTable
-            .getItems()
-            .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
-        reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-        locTable.getItems().add(l);
-      } catch (SQLException e) {
-        showError("Failed to show data on tables.");
-      }
+      equipTable.getItems().addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
+      patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
+      reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
+      locTable.getItems().add(l);
     }
   }
 

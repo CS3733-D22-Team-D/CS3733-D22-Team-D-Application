@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -259,28 +260,6 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox prefHeight="32.0" prefWidth="32.0">
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/Glyphs/moonWithBG.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </StackPane>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="14.0" />
-                           </HBox.margin>
-                        </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="8.0">
                            <children>
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" />
@@ -514,25 +493,29 @@
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
                      </children>
                      <HBox.margin>
-                        <Insets left="284.0" top="50.0" />
+                        <Insets left="254.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox fx:id="notifications" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
+                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="200.0" minHeight="0.0" prefHeight="0.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;" vbarPolicy="NEVER" visible="false">
+                     <content>
+                        <VBox fx:id="notifications" maxHeight="200.0" minHeight="0.0" pickOnBounds="false" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;">
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                     </content>
                      <HBox.margin>
-                        <Insets right="65.0" top="50.0" />
+                        <Insets right="70.0" top="49.0" />
                      </HBox.margin>
-                  </VBox>
+                  </ScrollPane>
                </children>
             </HBox>
          </children>
@@ -542,5 +525,6 @@
       <URL value="@../assets/themeBlue.css" />
       <URL value="@../assets/themeDark.css" />
       <URL value="@../assets/themeRed.css" />
+      <URL value="@../assets/buttons.css" />
    </stylesheets>
 </VBox>

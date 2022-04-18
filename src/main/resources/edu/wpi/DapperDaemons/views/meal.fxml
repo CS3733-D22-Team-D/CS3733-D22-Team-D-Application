@@ -38,25 +38,25 @@
             <VBox prefHeight="271.0" prefWidth="465.0" VBox.vgrow="ALWAYS">
                <children>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Entree:" />
-                  <JFXComboBox id="jButton" fx:id="entreeBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="entreeBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Side: " />
-                  <JFXComboBox id="jButton" fx:id="sideBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="sideBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
-                  <JFXComboBox id="jButton" fx:id="drinkBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="drinkBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert:" />
-                  <JFXComboBox id="jButton" fx:id="dessertBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="dessertBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
