@@ -2,7 +2,9 @@ package edu.wpi.DapperDaemons.backend;
 
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -96,6 +98,29 @@ public class DAOFacade {
             medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, cleanStatus);
     tempMap = medicalEquipmentDAO.filter(tempMap, 3, type);
     return tempMap;
+  }
+
+  /**
+   * determines if an AUTOMATIC equip req has already been submitted and added to the DAO
+   *
+   * @param requestToCheck the request to check
+   * @return true if it is already in the DAO
+   */
+  public static boolean automaticRequestAlreadyExists(MedicalEquipmentRequest requestToCheck) {
+    try {
+      DAOPouch.init();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    Map<String, MedicalEquipmentRequest> requestMap =
+        DAOPouch.getMedicalEquipmentRequestDAO().getAll();
+
+    for (MedicalEquipmentRequest request : requestMap.values()) {
+      // This should be enough to determine that the automatic request has already been submitted
+      if (request.getEquipmentID().equals(requestToCheck.getEquipmentID())
+          && request.getPriority().equals(requestToCheck.getPriority())) return true;
+    }
+    return false;
   }
 
   /**
