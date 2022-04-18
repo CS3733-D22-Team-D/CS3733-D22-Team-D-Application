@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -140,7 +141,7 @@ public class MapController extends ParentController {
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
     try {
       List<String> allReqNames = new ArrayList<>();
-      RequestHandler.getAllRequests()
+      DAOFacade.getAllRequests()
           .forEach(
               r -> {
                 if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
@@ -206,7 +207,7 @@ public class MapController extends ParentController {
     try {
       equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
       patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
-      requests = RequestHandler.getFilteredRequests(pos.getId());
+      requests = DAOFacade.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
@@ -309,7 +310,7 @@ public class MapController extends ParentController {
 
   private boolean onFilterRequestType() {
     try {
-      List<Request> searchReq = RequestHandler.getSearchedRequestsByLongName(searchBar.getValue());
+      List<Request> searchReq = DAOFacade.searchRequestsByName(searchBar.getValue());
       if (searchReq.size() == 0) return false;
       glyphs.filterByReqType(maps.getFloor(), searchReq);
     } catch (Exception e) {
