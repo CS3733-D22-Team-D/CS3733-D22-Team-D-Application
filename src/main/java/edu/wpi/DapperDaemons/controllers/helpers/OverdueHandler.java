@@ -16,6 +16,7 @@ public class OverdueHandler {
   private static DAO<MedicineRequest> medicineRequestDAO;
   private static DAO<PatientTransportRequest> patientTransportRequestDAO;
   private static DAO<SanitationRequest> sanitationRequestDAO;
+  private static DAO<EquipmentCleaning> equipmentCleaningDAO;
   private static OverdueHandler handler;
   private static int dateRepresentation;
 
@@ -28,6 +29,7 @@ public class OverdueHandler {
     medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
     patientTransportRequestDAO = DAOPouch.getPatientTransportRequestDAO();
     sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
+    equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
     handler = new OverdueHandler();
   }
 
@@ -134,6 +136,15 @@ public class OverdueHandler {
   }
 
   private void checkEquipmentCleanReq() throws SQLException {
-    // TODO : Add this once the database connection for this gets made
+    List<Request> requestList = new ArrayList<>();
+    for (Request sanitationReq : (List<Request>) equipmentCleaningDAO.getAll()) {
+      requestList.add(sanitationReq);
+    }
+    requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      EquipmentCleaning overdueReq = equipmentCleaningDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      equipmentCleaningDAO.update(overdueReq);
+    }
   }
 }

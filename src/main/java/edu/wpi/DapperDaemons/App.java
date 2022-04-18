@@ -10,8 +10,7 @@ import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
-import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -83,6 +82,7 @@ public class App extends Application {
             } else {
               switchToEmbedded();
             }
+
             AutoSave.start(10);
           },
           () -> {
