@@ -227,8 +227,8 @@ public class App extends Application {
 
                             // Find all dirty infusion pumps in that location
                             Map<String, MedicalEquipment> dirtyInfusionMap =
-                                    DAOFacade.filterEquipByTypeAndStatus(
-                                            dirtyLoc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
+                                DAOFacade.filterEquipByTypeAndStatus(
+                                    dirtyLoc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
                             // For all the dirty infusion pumps at the dirty location
                             for (MedicalEquipment equipment : dirtyInfusionMap.values()) {
