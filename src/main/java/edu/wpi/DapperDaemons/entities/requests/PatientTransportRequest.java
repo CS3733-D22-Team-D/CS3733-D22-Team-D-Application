@@ -24,7 +24,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         + "assigneeID varchar(60) ,"
         + "patientID varchar(60) ,"
         + "nextRoomID varchar(60),"
-        + "status varchar(20))";
+        + "status varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -52,6 +53,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         return nextRoomID;
       case 8:
         return status.toString();
+      case 9:
+        return dateNeeded;
 
       default:
         throw new IndexOutOfBoundsException();
@@ -85,6 +88,9 @@ public class PatientTransportRequest extends TableObject implements Request {
         break;
       case 8:
         status = RequestStatus.valueOf(newAttribute);
+        break;
+      case 9:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -126,6 +132,9 @@ public class PatientTransportRequest extends TableObject implements Request {
         break;
       case "status":
         status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();

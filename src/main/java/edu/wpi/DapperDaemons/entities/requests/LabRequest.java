@@ -35,7 +35,8 @@ public class LabRequest extends TableObject implements Request {
         + "assigneeID varchar(60),"
         + "patientID varchar(28),"
         + "labType varchar(20),"
-        + "status varchar(20))";
+        + "status varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -75,6 +76,8 @@ public class LabRequest extends TableObject implements Request {
         return labType.toString();
       case 8:
         return status.toString();
+      case 9:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -108,7 +111,9 @@ public class LabRequest extends TableObject implements Request {
       case 8:
         status = RequestStatus.valueOf(newAttribute);
         break;
-
+      case 9:
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -141,7 +146,9 @@ public class LabRequest extends TableObject implements Request {
       case "status":
         status = RequestStatus.valueOf(newAttribute);
         break;
-
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

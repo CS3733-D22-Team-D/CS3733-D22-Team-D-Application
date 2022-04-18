@@ -26,7 +26,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         + "entree varchar(20),"
         + "side varchar(20),"
         + "drink varchar(20),"
-        + "dessert varchar(20))";
+        + "dessert varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -57,6 +58,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         return drink;
       case 10:
         return dessert;
+      case 11:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -94,6 +97,9 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case 10:
         dessert = newAttribute;
+        break;
+      case 11:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -149,8 +155,13 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case "drink":
         drink = newAttribute;
+        break;
       case "dessert":
         dessert = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

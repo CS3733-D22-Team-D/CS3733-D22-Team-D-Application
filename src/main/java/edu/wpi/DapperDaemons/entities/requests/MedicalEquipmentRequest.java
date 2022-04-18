@@ -17,7 +17,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         + "assigneeID varchar(60),"
         + "equipmentID varchar(20),"
         + "equipmentType varchar(20),"
-        + "cleanStatus varchar(20))";
+        + "cleanStatus varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -44,6 +45,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         return equipmentType.toString();
       case 8:
         return cleanStatus.toString();
+      case 9:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -76,6 +79,9 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         break;
       case 8:
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        break;
+      case 9:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -123,7 +129,9 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case "status":
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
         break;
-
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

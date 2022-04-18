@@ -25,7 +25,8 @@ public class MedicineRequest extends TableObject implements Request {
         + "assigneeID varchar(60) DEFAULT 'Unselected',"
         + "patientID varchar(60) DEFAULT 'Someone',"
         + "medicationName varchar(60) ,"
-        + "quantity varchar(20))";
+        + "quantity varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -52,6 +53,8 @@ public class MedicineRequest extends TableObject implements Request {
         return medicationName;
       case 8:
         return Integer.toString(quantity);
+      case 9:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -83,6 +86,9 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case 8:
         quantity = Integer.parseInt(newAttribute);
+        break;
+      case 9:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -124,6 +130,9 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case "quantity":
         quantity = Integer.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();

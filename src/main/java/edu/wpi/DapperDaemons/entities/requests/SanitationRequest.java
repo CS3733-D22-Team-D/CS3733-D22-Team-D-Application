@@ -16,7 +16,8 @@ public class SanitationRequest extends TableObject implements Request {
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
         + "sanitationType varchar(20),"
-        + "cleanStatus varchar(20))";
+        + "cleanStatus varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -42,6 +43,8 @@ public class SanitationRequest extends TableObject implements Request {
         return sanitationType;
       case 7:
         return cleanStatus.toString();
+      case 8:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -71,6 +74,9 @@ public class SanitationRequest extends TableObject implements Request {
         break;
       case 7:
         cleanStatus = RequestStatus.valueOf(newAttribute);
+        break;
+      case 8:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -109,6 +115,9 @@ public class SanitationRequest extends TableObject implements Request {
         break;
       case "cleanStatus":
         cleanStatus = RequestStatus.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();

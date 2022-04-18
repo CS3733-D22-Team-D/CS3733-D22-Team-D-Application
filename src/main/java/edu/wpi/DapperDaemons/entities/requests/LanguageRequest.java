@@ -133,7 +133,8 @@ public class LanguageRequest extends TableObject implements Request {
         + "language varchar(20),"
         + "roomID varchar(100),"
         + "requester varchar(100),"
-        + "assignee varchar(100))";
+        + "assignee varchar(100),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -154,6 +155,8 @@ public class LanguageRequest extends TableObject implements Request {
         return requester;
       case 5:
         return assignee;
+      case 6:
+        return dateNeeded;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -176,6 +179,9 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case 5:
         assignee = newAttribute;
+        break;
+      case 6:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
@@ -208,6 +214,9 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case "assignee":
         assignee = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
