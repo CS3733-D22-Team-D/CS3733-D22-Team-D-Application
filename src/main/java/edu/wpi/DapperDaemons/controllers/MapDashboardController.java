@@ -82,6 +82,7 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
 
+    autoRequestsListeners();
     // Default floor
     floor = "1";
     updatePage();
@@ -111,6 +112,7 @@ public class MapDashboardController extends ParentController {
 
             new Thread(
                     () -> {
+                      // Part (B):
                       for (Location loc : locationDAO.filter(6, "DIRT").values()) {
 
                         Map<String, MedicalEquipment> tempMap =
@@ -135,6 +137,32 @@ public class MapDashboardController extends ParentController {
                           }
                         }
                       }
+                      // Part (C1):
+                      for (Location loc : locationDAO.filter(6, "DIRT").values()) {
+                        Map<String, MedicalEquipment> tempMap =
+                            medicalEquipmentDAO.filter(
+                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "UNCLEAN");
+                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
+
+                        if (tempMap.size() >= 10) {
+                          // TODO: ADD ALERT
+                          DAO<MedicalEquipmentRequest> equipmentRequestDAO =
+                              DAOPouch.getMedicalEquipmentRequestDAO();
+                          for (MedicalEquipment equipment : tempMap.values()) {
+                            equipmentRequestDAO.add(
+                                new MedicalEquipmentRequest(
+                                    Request.Priority.OVERDUE,
+                                    "dEXIT00401",
+                                    "AUTOMATIC REQUEST",
+                                    "NONE",
+                                    equipment.getNodeID(),
+                                    equipment.getEquipmentType(),
+                                    equipment.getCleanStatus()));
+                          }
+                        }
+                      }
+                      // Part (C2):
+
                     })
                 .start();
           }
