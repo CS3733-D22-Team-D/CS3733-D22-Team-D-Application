@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.backend.SHA;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class Account extends TableObject {
   private String username;
@@ -9,6 +10,7 @@ public class Account extends TableObject {
   private String password;
   private String phoneNumber;
   private String settingsFile = "none";
+  private String twoFactor = "false";
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
@@ -30,16 +32,17 @@ public class Account extends TableObject {
   public Account() {}
 
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,"
-        + "employeeID varchar(20) UNIQUE,"
+        + "employeeID varchar(20),"
         + "password varchar(255),"
         + "phoneNumber varchar(12),"
-        + "settingsFile varchar(255))";
+        + "settingsFile varchar(255),"
+        + "twoFactor varchar(5))";
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "ACCOUNTS";
   }
 
@@ -56,6 +59,8 @@ public class Account extends TableObject {
         return this.phoneNumber;
       case 5:
         return this.settingsFile;
+      case 6:
+        return twoFactor;
       default:
         break;
     }
@@ -67,22 +72,60 @@ public class Account extends TableObject {
     switch (columnNumber) {
       case 1:
         this.username = newAttribute;
+        break;
       case 2:
         this.employeeID = newAttribute;
+        break;
       case 3:
         this.password = newAttribute;
+        break;
       case 4:
         this.phoneNumber = newAttribute;
+        break;
       case 5:
         this.settingsFile = newAttribute;
+        break;
+      case 6:
+        this.twoFactor = newAttribute;
+        break;
       default:
         break;
     }
   }
 
   @Override
-  public Object get() {
-    return new Account();
+  public TableObject newInstance(List<String> l) {
+    Account temp = new Account();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "username":
+        username = newAttribute;
+        break;
+      case "employeeID":
+        employeeID = newAttribute;
+        break;
+      case "password":
+        password = newAttribute;
+        break;
+      case "phoneNumber":
+        phoneNumber = newAttribute;
+        break;
+      case "settingsFile":
+        settingsFile = newAttribute;
+        break;
+      case "twoFactor":
+        twoFactor = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public boolean checkPassword(String password) throws NoSuchAlgorithmException {

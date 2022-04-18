@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class Location extends TableObject {
 
@@ -41,7 +42,7 @@ public class Location extends TableObject {
     return 8;
   }
 
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE LOCATIONS(nodeid varchar(20) PRIMARY KEY,"
         + "xcoord varchar(20) DEFAULT '-1',"
@@ -53,7 +54,7 @@ public class Location extends TableObject {
         + "shortname varchar(255) DEFAULT 'r')";
   }
 
-  public String getTableName() {
+  public String tableName() {
     return "LOCATIONS";
   }
 
@@ -76,8 +77,9 @@ public class Location extends TableObject {
         return longName;
       case 8:
         return shortName;
+      default:
+        throw new ArrayIndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override
@@ -193,8 +195,47 @@ public class Location extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Location();
+  public TableObject newInstance(List<String> l) {
+    Location temp = new Location();
+    //    System.out.println("Size in location new instance" + l.size());
+    for (int i = 0; i < l.size(); i++) {
+      //      System.out.println(temp);
+      //      System.out.println(l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "xcoord":
+        xcoord = Integer.parseInt(newAttribute);
+        break;
+      case "ycoord":
+        ycoord = Integer.parseInt(newAttribute);
+        break;
+      case "floor":
+        floor = newAttribute;
+        break;
+      case "building":
+        building = newAttribute;
+        break;
+      case "nodeType":
+        nodeType = newAttribute;
+        break;
+      case "longName":
+        longName = newAttribute;
+        break;
+      case "shortName":
+        shortName = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public String toString() {

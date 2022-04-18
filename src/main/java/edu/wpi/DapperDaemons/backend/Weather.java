@@ -1,11 +1,12 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javafx.scene.image.Image;
-import org.json.*;
 
 public class Weather {
 
@@ -30,8 +31,9 @@ public class Weather {
     con.disconnect();
 
     String jsonString = content.toString(); // assign your JSON String here
-    JSONObject obj = new JSONObject(jsonString);
-    return (int) obj.getJSONObject("main").getFloat("temp");
+    JsonObject obj = JsonParser.parseString(jsonString).getAsJsonObject();
+    return obj.getAsJsonObject("main").get("temp").getAsInt();
+    //    return (int) obj.getJSONObject("main").getFloat("temp");
   }
 
   public static Image getIcon(String location) throws Exception {
@@ -53,8 +55,10 @@ public class Weather {
     con.disconnect();
 
     String jsonString = content.toString(); // assign your JSON String here
-    JSONObject obj = new JSONObject(jsonString);
-    String icon = obj.getJSONArray("weather").getJSONObject(0).getString("icon");
+    JsonObject obj = JsonParser.parseString(jsonString).getAsJsonObject();
+    String icon = obj.getAsJsonArray("weather").get(0).getAsJsonObject().get("icon").getAsString();
+    //    JSONObject obj = new JSONObject(jsonString);
+    //    String icon = obj.getJSONArray("weather").getJSONObject(0).getString("icon");
 
     return new Image(
         Weather.class

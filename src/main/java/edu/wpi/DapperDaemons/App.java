@@ -1,10 +1,15 @@
 package edu.wpi.DapperDaemons;
 
-import edu.wpi.DapperDaemons.backend.AutoSave;
-import edu.wpi.DapperDaemons.backend.ConnectionHandler;
+import static edu.wpi.DapperDaemons.backend.ConnectionHandler.switchToEmbedded;
+
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.backend.preload.Images;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 import javafx.application.Application;
@@ -13,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.net.ssl.HttpsURLConnection;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,42 +38,74 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) throws IOException {
-    // Setup app icons
-    primaryStage
-        .getIcons()
-        .add(
-            new Image(
-                String.valueOf(
-                    App.class.getResource("assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
-    primaryStage.setTitle("BWH");
+  public void start(Stage primaryStage) {
+    //    CSVLoader.resetFirebase();
+    startWithLoadingScreen(primaryStage);
+  }
 
-    // Load app
+  private void startWithLoadingScreen(Stage primaryStage) {
     LoadingScreen ls = new LoadingScreen(primaryStage);
-    ls.display(
-        () -> {
-          ConnectionHandler.init();
-          ConnectionHandler.switchToClientServer();
-          AutoSave.start(10);
-        },
-        () -> {
-          Parent root = null;
-          try {
-            root =
-                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/login.fxml")));
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-          Scene scene = new Scene(root);
-          primaryStage.setMinWidth(635);
-          primaryStage.setMinHeight(510);
-          primaryStage.setScene(scene);
-          primaryStage.show();
-        });
+    try {
+      ls.display(
+          () -> {
+            Images.init();
+            HttpsURLConnection testCon = null;
+            boolean connected = false;
+            try {
+              URL url = new URL("https://google.com");
+              testCon = (HttpsURLConnection) url.openConnection();
+              testCon.connect();
+              connected = true;
+            } catch (MalformedURLException e) {
+              System.out.println("Not connected to the internet");
+            } catch (IOException e) {
+              System.out.println("Not connected to the internet");
+            }
+            if (connected) {
+              FireBase.init();
+              try {
+                DAOPouch.init();
+              } catch (IOException e) {
+                System.out.println("DAOPouch could not initialize");
+              }
+            } else {
+              switchToEmbedded();
+            }
+            AutoSave.start(10);
+          },
+          () -> {
+            Parent root = null;
+            try {
+              root =
+                  FXMLLoader.load(
+                      Objects.requireNonNull(getClass().getResource("views/login.fxml")));
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+            Scene scene = new Scene(root);
+            primaryStage.setMinWidth(635);
+            primaryStage.setMinHeight(510);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            primaryStage
+                .getIcons()
+                .add(
+                    new Image(
+                        String.valueOf(
+                            App.class.getResource(
+                                "assets/" + "Brigham_and_Womens_Hospital_logo.png"))));
+            primaryStage.setTitle("BWH");
+          });
+    } catch (IOException e) {
+      System.out.println("Loading Screen broke :(");
+    }
   }
 
   private void createLogger() {
     try {
+      File logDir = new File(getClass().getClassLoader().getResource("logs").getPath());
+      if (!logDir.exists()) logDir.mkdirs();
+
       Properties properties = new Properties();
       InputStream propFile =
           getClass().getClassLoader().getResourceAsStream("simplelogger.properties");

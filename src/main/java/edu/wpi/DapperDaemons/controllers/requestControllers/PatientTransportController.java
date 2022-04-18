@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.controllers.UIController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
@@ -13,20 +15,18 @@ import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
-public class PatientTransportController extends UIController implements Initializable {
+public class PatientTransportController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<PatientTransportRequest> transportRequests;
@@ -68,11 +68,26 @@ public class PatientTransportController extends UIController implements Initiali
     //    initializeInputs(); TODO: Get all long names problem
 
     try {
-      transportRequests.getItems().addAll(patientTransportRequestDAO.getAll());
+      transportRequests
+          .getItems()
+          .addAll(new ArrayList<>(patientTransportRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Something went wrong making Patient Transport Req table");
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setPatientTrasportRequestListener(
+        tl.eventListener(
+            () -> {
+              transportRequests.getItems().clear();
+              transportRequests
+                  .getItems()
+                  .addAll(new ArrayList(patientTransportRequestDAO.getAll().values()));
+            }));
   }
 
   @FXML
@@ -111,11 +126,7 @@ public class PatientTransportController extends UIController implements Initiali
       // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
       boolean nextLocationExists = false;
-      try {
-        locations = (ArrayList<Location>) locationDAO.getAll();
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      locations = new ArrayList(locationDAO.getAll().values());
       for (Location l : locations) {
         if (l.getAttribute(7).equals(roomBox.getValue())) {
           nextRoomID = l.getNodeID();
@@ -134,11 +145,7 @@ public class PatientTransportController extends UIController implements Initiali
                 + patientDOB.getValue().getDayOfMonth()
                 + patientDOB.getValue().getYear();
 
-        try {
-          patient = patientDAO.get(patientID);
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
+        patient = patientDAO.get(patientID);
         try {
           isAPatient = patient.getFirstName().equals(patientFirstName.getText());
         } catch (NullPointerException e) {
@@ -201,11 +208,7 @@ public class PatientTransportController extends UIController implements Initiali
   private boolean addItem(PatientTransportRequest request) {
     boolean hasClearance = false;
 
-    try {
-      hasClearance = patientTransportRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hasClearance = patientTransportRequestDAO.add(request);
 
     if (hasClearance) {
       transportRequests.getItems().add(request);
@@ -219,11 +222,7 @@ public class PatientTransportController extends UIController implements Initiali
     ArrayList<String> locationNames = new ArrayList<>();
     String value = roomBox.getValue() + "";
 
-    try {
-      locations = locationDAO.search(locationDAO.getAll(), 7, value);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    locations = new ArrayList(locationDAO.search(locationDAO.getAll(), 7, value).values());
     for (Location l : locations) {
       locationNames.add(l.getAttribute(7));
     }

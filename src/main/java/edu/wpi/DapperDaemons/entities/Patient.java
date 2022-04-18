@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.util.List;
 
 public class Patient extends TableObject {
 
@@ -41,7 +42,7 @@ public class Patient extends TableObject {
 
   // TableObject Methods
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTS(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(20) DEFAULT 'John',"
         + "lastname varchar(20) DEFAULT 'Doe',"
@@ -51,7 +52,7 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTS";
   }
 
@@ -102,9 +103,40 @@ public class Patient extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Patient();
+  public TableObject newInstance(List<String> l) {
+    Patient temp = new Patient();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = Integer.parseInt(newAttribute);
+        break;
+      case "bloodType":
+        bloodType = BloodType.valueOf(newAttribute);
+        break;
+      case "locationID":
+        locationID = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
   // getters and setters
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {

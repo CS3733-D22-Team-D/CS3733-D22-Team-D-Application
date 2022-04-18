@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
+<HBox id="background" prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
    <children>
       <VBox id="foreground" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="300.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;" HBox.hgrow="ALWAYS">
          <children>
@@ -37,7 +37,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="medNameIn" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" VBox.vgrow="ALWAYS">
+                        <JFXComboBox id="jButton" fx:id="medNameIn" prefHeight="30.0" prefWidth="250.0" promptText="Select" VBox.vgrow="ALWAYS">
                            <stylesheets>
                               <URL value="@../assets/buttons.css" />
                            </stylesheets>
@@ -70,7 +70,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="priorityIn" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                        <JFXComboBox id="jButton" fx:id="priorityIn" prefHeight="30.0" prefWidth="250.0" promptText="Select" stylesheets="@../assets/buttons.css" />
                      </children>
                      <padding>
                         <Insets right="20.0" />

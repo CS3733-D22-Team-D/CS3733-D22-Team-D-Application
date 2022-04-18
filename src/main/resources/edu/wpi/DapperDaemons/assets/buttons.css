@@ -23,11 +23,11 @@
     -fx-translate-x: 6;
 }
 
-.default{
+#default{
     -fx-cursor: hand;
 }
 
-.default:hover {
+#default:hover {
     -fx-translate-y: -5;
 }
 
@@ -38,4 +38,8 @@
 
 #mapButton:hover{
     -fx-opacity: 90%;
+}
+
+#field{
+    -fx-cursor: text;
 }
