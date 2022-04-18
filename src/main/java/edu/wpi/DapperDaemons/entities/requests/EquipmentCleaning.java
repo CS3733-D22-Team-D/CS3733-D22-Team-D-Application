@@ -11,14 +11,14 @@ public class EquipmentCleaning extends TableObject implements Request {
   @Override
   public String tableInit() {
     return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-            + "priority varchar(20),"
-            + "roomID varchar(60),"
-            + "requesterID varchar(60),"
-            + "assigneeID varchar(60),"
-            + "equipmentID varchar(20),"
-            + "equipmentType varchar(20),"
-            + "cleanStatus varchar(20),"
-            + "cleanBy varchar(10))";
+        + "priority varchar(20),"
+        + "roomID varchar(60),"
+        + "requesterID varchar(60),"
+        + "assigneeID varchar(60),"
+        + "equipmentID varchar(20),"
+        + "equipmentType varchar(20),"
+        + "cleanStatus varchar(20),"
+        + "cleanBy varchar(10))";
   }
 
   @Override
@@ -162,14 +162,14 @@ public class EquipmentCleaning extends TableObject implements Request {
   // CONSTRUCTORS
 
   public EquipmentCleaning(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String assigneeID,
-          String equipmentID,
-          MedicalEquipment.EquipmentType equipmentType,
-          MedicalEquipment.CleanStatus cleanStatus,
-          String cleanBy) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String assigneeID,
+      String equipmentID,
+      MedicalEquipment.EquipmentType equipmentType,
+      MedicalEquipment.CleanStatus cleanStatus,
+      String cleanBy) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

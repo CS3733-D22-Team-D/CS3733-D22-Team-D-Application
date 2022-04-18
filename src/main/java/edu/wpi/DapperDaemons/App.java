@@ -195,30 +195,33 @@ public class App extends Application {
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus(),
                                     dateRepresentation);
-                            if (equipmentRequestDAO.get(request.getNodeID()) == null) {
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
-                              equipmentRequestDAO.add(request);
+                            if (equipmentRequestDAO.get(request.getNodeID())
+                                == null) { // No idea why this is here
+                              equipment.getCleanStatus();
+                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                equipmentRequestDAO.add(request);
+                              }
                             }
                           }
-                        }
-                        if (dirtyInfusionPumpMap.size() >= 10) {
-                          // TODO: ADD ALERT
-                          for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
-                            MedicalEquipmentRequest request =
-                                new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
-                                    "dEXIT00401",
-                                    "AUTOMATIC REQUEST",
-                                    "NONE",
-                                    equipment.getNodeID(),
-                                    equipment.getEquipmentType(),
-                                    equipment.getCleanStatus(),
-                                    dateRepresentation);
-                            if (equipmentRequestDAO.get(request.getNodeID()) == null) {
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
-                              equipmentRequestDAO.add(request);
+                          if (dirtyInfusionPumpMap.size() >= 10) {
+                            // TODO: ADD ALERT
+                            for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
+                              MedicalEquipmentRequest request =
+                                  new MedicalEquipmentRequest(
+                                      Request.Priority.OVERDUE,
+                                      "dEXIT00401",
+                                      "AUTOMATIC REQUEST",
+                                      "NONE",
+                                      equipment.getNodeID(),
+                                      equipment.getEquipmentType(),
+                                      equipment.getCleanStatus(),
+                                      dateRepresentation);
+                              if (equipmentRequestDAO.get(request.getNodeID()) == null) {
+                                equipment.getCleanStatus();
+                                if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                  equipmentRequestDAO.add(request);
+                                }
+                              }
                             }
                           }
                         }
@@ -228,7 +231,8 @@ public class App extends Application {
 
                         // Get all clean infusion pumps at the given clean location...
                         Map<String, MedicalEquipment> cleanInfusionMap =
-                                DAOFacade.filterEquipByTypeAndStatus(loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
+                            DAOFacade.filterEquipByTypeAndStatus(
+                                loc, medicalEquipmentDAO, "INFUSIONPUMP", "CLEAN");
 
                         // If there are less than 5 clean infusion pumps in a clean location
                         if (cleanInfusionMap.size() <= 5) {
