@@ -142,10 +142,10 @@ public class App extends Application {
   // TODO : STOP THIS FROM ADDING THREE REQUESTS EVERYTIME: CHECK DAO
 
   /**
-   * 1. When there are six beds or more in a dirty area an alert appears on the dashboard. Service
+   * When there are six beds or more in a dirty area an alert appears on the dashboard. Service
    * requests are created to move the beds to the OR Park for cleaning.
    *
-   * <p>2. For a floor, when there are 10 infusion pumps or more in a dirty area, or fewer than 5
+   * <p>For a floor, when there are 10 infusion pumps or more in a dirty area, or fewer than 5
    * infusion pumps in the clean area, an alert appears on the dashboard indicating that infusion
    * pumps need to be cleaned. Service requests are created to move the dirty infusion pumps on that
    * floor to the West Plaza for cleaning
@@ -238,6 +238,7 @@ public class App extends Application {
 
                             // For all the dirty infusion pumps at the dirty location
                             for (MedicalEquipment equipment : dirtyInfusionMap.values()) {
+                              // TODO: Add an alert
                               // create a request
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(

@@ -500,21 +500,13 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="200.0" minHeight="0.0" prefHeight="0.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;" vbarPolicy="NEVER" visible="false">
-                     <content>
-                        <VBox fx:id="notifications" maxHeight="200.0" minHeight="0.0" pickOnBounds="false" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </content>
+                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="70.0" minHeight="0.0" prefHeight="0.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;" vbarPolicy="NEVER" visible="false">
                      <HBox.margin>
                         <Insets right="70.0" top="49.0" />
                      </HBox.margin>
+                     <content>
+                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="70.0" prefWidth="140.0" />
+                     </content>
                   </ScrollPane>
                </children>
             </HBox>
