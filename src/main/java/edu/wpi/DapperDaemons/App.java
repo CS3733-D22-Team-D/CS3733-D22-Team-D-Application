@@ -84,17 +84,18 @@ public class App extends Application {
             }
 
             AutoSave.start(10);
-//            try { // this is to save everything from the firebase database
-//              Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//              throw new RuntimeException(e);
-//            }
-//            CSVSaver.saveAll();
-//            try {
-//              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(), "MedEquipReq.csv");
-//            } catch (IOException e) {
-//              throw new RuntimeException(e);
-//            }
+            //            try { // this is to save everything from the firebase database
+            //              Thread.sleep(2000);
+            //            } catch (InterruptedException e) {
+            //              throw new RuntimeException(e);
+            //            }
+            //            CSVSaver.saveAll();
+            //            try {
+            //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
+            // "MedEquipReq.csv");
+            //            } catch (IOException e) {
+            //              throw new RuntimeException(e);
+            //            }
           },
           () -> {
             Parent root = null;
@@ -190,20 +191,21 @@ public class App extends Application {
                             DAOFacade.filterEquipByTypeAndStatus(
                                 loc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
-                        // If there are more than 6 dirty beds in the current location creat request for each
+                        // If there are more than 6 dirty beds in the current location creat request
+                        // for each
                         if (dirtyBedMap.size() >= 6) {
                           // TODO: ADD ALERT
                           for (MedicalEquipment equipment : dirtyBedMap.values()) {
                             MedicalEquipmentRequest request =
-                                    new MedicalEquipmentRequest(
-                                            Request.Priority.OVERDUE,
-                                            "dSTOR001L1",
-                                            "AUTOMATIC REQUEST",
-                                            "NONE",
-                                            equipment.getNodeID(),
-                                            equipment.getEquipmentType(),
-                                            equipment.getCleanStatus(),
-                                            dateRepresentation);
+                                new MedicalEquipmentRequest(
+                                    Request.Priority.OVERDUE,
+                                    "dSTOR001L1",
+                                    "AUTOMATIC REQUEST",
+                                    "NONE",
+                                    equipment.getNodeID(),
+                                    equipment.getEquipmentType(),
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
                             if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                               equipmentRequestDAO.add(request);
                             }
@@ -213,23 +215,24 @@ public class App extends Application {
                           // TODO: ADD ALERT
                           for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
                             MedicalEquipmentRequest request =
-                                  new MedicalEquipmentRequest(
-                                      Request.Priority.OVERDUE,
-                                      "dEXIT00401",
-                                      "AUTOMATIC REQUEST",
-                                      "NONE",
-                                      equipment.getNodeID(),
-                                      equipment.getEquipmentType(),
-                                      equipment.getCleanStatus(),
-                                      dateRepresentation);
+                                new MedicalEquipmentRequest(
+                                    Request.Priority.OVERDUE,
+                                    "dEXIT00401",
+                                    "AUTOMATIC REQUEST",
+                                    "NONE",
+                                    equipment.getNodeID(),
+                                    equipment.getEquipmentType(),
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
                             if (!DAOFacade.automaticRequestAlreadyExists(request)) {
-                                  equipmentRequestDAO.add(request);
+                              equipmentRequestDAO.add(request);
                             }
                           }
                         }
                         // END LOOP
                       }
-                      // ==================================This is Separate======================================
+                      // ==================================This is
+                      // Separate======================================
                       // For each clean location...
                       for (Location loc : locationDAO.filter(6, "STOR").values()) {
 
