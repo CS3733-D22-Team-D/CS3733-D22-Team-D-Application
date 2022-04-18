@@ -54,7 +54,7 @@ public class NotificationHandler {
     notif.setOnMouseClicked(
         event -> {
           System.out.println("Notif Handler");
-          n.setAttribute(5, "true");//sets action when clicking on notification
+          n.setAttribute(5, "true"); // sets action when clicking on notification
           DAOPouch.getNotificationDAO().add(n);
         });
     Label sub = (Label) notif.getChildren().get(0);
