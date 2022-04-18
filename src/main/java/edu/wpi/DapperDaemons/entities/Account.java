@@ -10,6 +10,7 @@ public class Account extends TableObject {
   private String password;
   private String phoneNumber;
   private String settingsFile = "none";
+  private String twoFactor = "false";
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
@@ -33,10 +34,11 @@ public class Account extends TableObject {
   @Override
   public String tableInit() {
     return "CREATE TABLE ACCOUNTS(username varchar(100) PRIMARY KEY,"
-        + "employeeID varchar(20) UNIQUE,"
+        + "employeeID varchar(20),"
         + "password varchar(255),"
         + "phoneNumber varchar(12),"
-        + "settingsFile varchar(255))";
+        + "settingsFile varchar(255),"
+        + "twoFactor varchar(5))";
   }
 
   @Override
@@ -57,6 +59,8 @@ public class Account extends TableObject {
         return this.phoneNumber;
       case 5:
         return this.settingsFile;
+      case 6:
+        return twoFactor;
       default:
         break;
     }
@@ -80,6 +84,9 @@ public class Account extends TableObject {
         break;
       case 5:
         this.settingsFile = newAttribute;
+        break;
+      case 6:
+        this.twoFactor = newAttribute;
         break;
       default:
         break;
@@ -112,6 +119,9 @@ public class Account extends TableObject {
         break;
       case "settingsFile":
         settingsFile = newAttribute;
+        break;
+      case "twoFactor":
+        twoFactor = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();

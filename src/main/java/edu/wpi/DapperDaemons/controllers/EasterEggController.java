@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javax.sound.sampled.LineUnavailableException;
 
-public class EasterEggController extends UIController {
+public class EasterEggController extends AppController {
   @FXML ImageView homeIcon;
   @FXML private VBox sceneBox;
   private SoundPlayer player;

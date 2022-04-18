@@ -299,7 +299,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0" visible="false">
+                        <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0">
                            <children>
                               <ToggleButton fx:id="serverToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openServerDropdown" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #012D5A;" text="ToggleButton">
                                  <graphic>

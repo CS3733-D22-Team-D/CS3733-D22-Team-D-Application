@@ -42,7 +42,7 @@ public class CSVLoader {
             try {
               stmt.execute(v.tableInit());
             } catch (SQLException e) {
-              //              System.out.printf("%s table already created\n", v.getTableName());
+              System.out.printf("%s table already created\n", v.tableName());
             }
             load(v, k + ".csv");
           } catch (IOException e) {
@@ -60,7 +60,7 @@ public class CSVLoader {
             Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
-    if (entries.size() < 1) return;
+    if (entries.size() <= 1) return;
     entries.remove(0);
     String tableName = type.tableName();
     String query = "SELECT * FROM " + tableName;

@@ -185,6 +185,12 @@ public class DAOPouch {
       return medicalEquipmentDAO;
     } else if (tableName.equals("PATIENTS")) {
       return patientDAO;
+    } else if (tableName.equals("NOTIFICATIONS")) {
+      return notificationDAO;
+    } else if (tableName.equals("LANGUAGEREQUESTS")) {
+      return languageRequestDAO;
+    } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
+      return nodeDAO;
     }
     return null;
   }
