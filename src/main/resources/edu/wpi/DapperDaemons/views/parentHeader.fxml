@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="background" fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -258,28 +258,6 @@
                                  </cursor>
                               </ImageView>
                            </children>
-                        </HBox>
-                        <HBox prefHeight="32.0" prefWidth="32.0">
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="darkSwitch" fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/Glyphs/moonWithBG.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </StackPane>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="14.0" />
-                           </HBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="8.0">
                            <children>
@@ -542,5 +520,6 @@
       <URL value="@../assets/themeBlue.css" />
       <URL value="@../assets/themeDark.css" />
       <URL value="@../assets/themeRed.css" />
+      <URL value="@../assets/buttons.css" />
    </stylesheets>
 </VBox>

@@ -166,3 +166,4 @@ Baw_database/
 Ddb/Baw_database/
 .idea/
 
+src/main/resources/logs/app.log
