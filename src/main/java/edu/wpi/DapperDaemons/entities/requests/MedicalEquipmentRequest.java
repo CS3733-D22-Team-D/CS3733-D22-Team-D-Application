@@ -251,4 +251,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
+    return (request.getNodeID().equals(this.getNodeID())
+        && request.getEquipmentID().equals(this.getNodeID()));
+  }
 }

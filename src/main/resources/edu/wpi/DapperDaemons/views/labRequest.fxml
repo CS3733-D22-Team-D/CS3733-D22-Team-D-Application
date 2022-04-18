@@ -34,7 +34,7 @@
                         <Insets bottom="5.0" left="30.0" right="30.0" />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="procedureComboBox" focusColor="#059da7" minHeight="-Infinity" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                  <JFXComboBox id="jButton" fx:id="procedureComboBox" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -114,7 +114,7 @@
                         <Insets bottom="5.0" left="30.0" right="30.0" />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="priorityChoiceBox" focusColor="#059da7" minHeight="-Infinity" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                  <JFXComboBox id="jButton" fx:id="priorityChoiceBox" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" />
                      </VBox.margin>
