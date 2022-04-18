@@ -38,6 +38,21 @@ public class Images {
                 Images.class
                     .getClassLoader()
                     .getResourceAsStream("edu/wpi/DapperDaemons/assets/loading.gif")));
+
+    UNREAD =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/Glyphs/bellNotif.png")));
+
+    BELL =
+        new Image(
+            Objects.requireNonNull(
+                Images.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/Glyphs/bell.png")));
+
     mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
     mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
     mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
@@ -51,6 +66,8 @@ public class Images {
   public static Image SERVER;
   public static Image CLOUD;
   public static Image LOAD;
+  public static Image UNREAD;
+  public static Image BELL;
 
   public static Image mapFloorL2;
   public static Image mapFloorL1;
