@@ -149,7 +149,8 @@ public class SanitationRequest extends TableObject implements Request {
       String requesterID,
       String assigneeID,
       String sanitationType,
-      RequestStatus cleanStatus) {
+      RequestStatus cleanStatus,
+      String dateNeeded) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
@@ -159,6 +160,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
     this.sanitationType = sanitationType;
     this.cleanStatus = cleanStatus;
+    this.dateNeeded = dateNeeded;
   }
 
   public SanitationRequest() {}
