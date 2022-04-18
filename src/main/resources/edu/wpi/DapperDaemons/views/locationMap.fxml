@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -367,6 +366,30 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
+                                                <ToggleButton id="foreground" fx:id="pumpTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" prefWidth="220.0" selected="true" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Infusion Pumps">
+                                                   <graphic>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/pump.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.43" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
+                                                <ToggleButton id="foreground" fx:id="bedTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitToggle" prefWidth="220.0" selected="true" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Beds">
+                                                   <graphic>
+                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/bed.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.43" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Get Directions">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
@@ -379,15 +402,6 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <Pane fx:id="BGContainer1" prefHeight="200.0" prefWidth="200.0">
-                                                   <children>
-                                                      <ImageView fx:id="BGImage1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
-                                                         <image>
-                                                            <Image url="@../assets/Brigham-Blurred.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </Pane>
                                              </children>
                                           </VBox>
                                        </children>
