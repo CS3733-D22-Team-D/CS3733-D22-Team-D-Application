@@ -84,12 +84,12 @@ public class LanguageRequest extends TableObject implements Request {
   }
 
   private String nodeID;
-  private Language language;
+  private Request.Priority priority = Priority.LOW;
   private String roomID;
   private String requester;
   private String assignee;
+  private Language language;
   private String dateNeeded;
-  private Priority priority;
 
   public enum Language {
     CHINESE,
@@ -148,7 +148,7 @@ public class LanguageRequest extends TableObject implements Request {
       case 1:
         return nodeID;
       case 2:
-        return String.valueOf(language);
+        return priority.toString();
       case 3:
         return roomID;
       case 4:
@@ -156,6 +156,8 @@ public class LanguageRequest extends TableObject implements Request {
       case 5:
         return assignee;
       case 6:
+        return language.toString();
+      case 7:
         return dateNeeded;
       default:
         throw new ArrayIndexOutOfBoundsException();
@@ -169,7 +171,7 @@ public class LanguageRequest extends TableObject implements Request {
         nodeID = newAttribute;
         break;
       case 2:
-        language = Language.valueOf(newAttribute);
+        priority = Priority.valueOf(newAttribute);
         break;
       case 3:
         roomID = newAttribute;
@@ -181,6 +183,9 @@ public class LanguageRequest extends TableObject implements Request {
         assignee = newAttribute;
         break;
       case 6:
+        language = language.valueOf(newAttribute);
+        break;
+      case 7:
         dateNeeded = newAttribute;
         break;
       default:
@@ -217,6 +222,9 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case "dateNeeded":
         dateNeeded = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
