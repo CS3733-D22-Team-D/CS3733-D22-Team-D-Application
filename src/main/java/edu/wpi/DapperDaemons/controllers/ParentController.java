@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -66,6 +67,7 @@ public class ParentController extends AppController {
   private static NotificationHandler notifs;
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
+  @FXML private ScrollPane notificationsScroller;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -82,6 +84,16 @@ public class ParentController extends AppController {
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
     notifs = new NotificationHandler(notifications);
+    //    try {
+    //      this.notifications
+    //          .getChildren()
+    //          .add(
+    //              FXMLLoader.load(
+    //                  Objects.requireNonNull(
+    //                      App.class.getResource("views/" + "notification" + ".fxml"))));
+    //    } catch (IOException e) {
+    //      throw new RuntimeException(e);
+    //    }
     new ThemeHandler(mainBox);
 
     updateWeather();
@@ -123,7 +135,7 @@ public class ParentController extends AppController {
 
   @FXML
   void openNotifications() {
-    notifications.setVisible(alertButton.isSelected());
+    notificationsScroller.setVisible(alertButton.isSelected());
   }
 
   private void setServerToggleMenu() {
