@@ -69,6 +69,8 @@ public class ParentController extends AppController {
   @FXML private VBox notifications;
   @FXML private ScrollPane notificationsScroller;
 
+  @FXML private ImageView notifBell;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -83,6 +85,17 @@ public class ParentController extends AppController {
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
+    notifs = new NotificationHandler(notifications, notifBell);
+    //    try {
+    //      this.notifications
+    //          .getChildren()
+    //          .add(
+    //              FXMLLoader.load(
+    //                  Objects.requireNonNull(
+    //                      App.class.getResource("views/" + "notification" + ".fxml"))));
+    //    } catch (IOException e) {
+    //      throw new RuntimeException(e);
+    //    }
     notifs = new NotificationHandler(notifications);
     new ThemeHandler(mainBox);
 
