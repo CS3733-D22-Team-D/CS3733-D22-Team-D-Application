@@ -45,7 +45,7 @@ public abstract class UIController extends AppController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    super.initialize(location, resources);
+    // super.initialize(location, resources);
     // Init a menu slider for all that extend this class
     menuSlider(slider, burg, burgBack);
 

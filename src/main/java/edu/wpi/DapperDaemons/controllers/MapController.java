@@ -80,6 +80,11 @@ public class MapController extends ParentController {
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
 
+  @FXML private ToggleButton bubbleMenu;
+  @FXML private StackPane circle2;
+  @FXML private StackPane circle3;
+  @FXML private StackPane circle4;
+
   /* Map Handlers */
   private MapHandler maps;
   private GlyphHandler glyphs;
@@ -174,6 +179,47 @@ public class MapController extends ParentController {
     closeRoom();
 
     //    filterSlider(mapFilter, burg, burgBack);
+  }
+
+  @FXML
+  void mapMenu(ActionEvent event) throws InterruptedException {
+    if (bubbleMenu.isSelected()) {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(-56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(-112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(-168);
+      translateTransition3.play();
+    } else {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(168);
+      translateTransition3.play();
+    }
   }
 
   /**
