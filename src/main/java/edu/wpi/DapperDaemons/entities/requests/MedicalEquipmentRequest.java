@@ -240,4 +240,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   public void setCleanStatus(MedicalEquipment.CleanStatus cleanStatus) {
     this.cleanStatus = cleanStatus;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
+    return (request.getNodeID().equals(this.getNodeID())
+        && request.getEquipmentID().equals(this.getNodeID()));
+  }
 }

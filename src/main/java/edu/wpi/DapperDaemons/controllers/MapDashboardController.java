@@ -1,14 +1,10 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
@@ -66,8 +62,6 @@ public class MapDashboardController extends ParentController {
 
   private TableListeners tl;
 
-  private ValueEventListener valueEventListener;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     bindImage(mapImage, mapImageContainer);
@@ -82,131 +76,9 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
 
-    autoRequestsListeners();
     // Default floor
     floor = "1";
     updatePage();
-  }
-
-  /**
-   * 1. When there are six beds or more in a dirty area an alert appears on the dashboard. Service
-   * requests are created to move the beds to the OR Park for cleaning.
-   *
-   * <p>2. For a floor, when there are 10 infusion pumps or more in a dirty area, or fewer than 5
-   * infusion pumps in the clean area, an alert appears on the dashboard indicating that infusion
-   * pumps need to be cleaned. Service requests are created to move the dirty infusion pumps on that
-   * floor to the West Plaza for cleaning
-   */
-  public void autoRequestsListeners() {
-    this.valueEventListener =
-        new ValueEventListener() {
-          @Override
-          public void onDataChange(DataSnapshot snapshot) {
-            try {
-              Thread.sleep(100);
-            } catch (InterruptedException e) {
-              throw new RuntimeException(e);
-            }
-            DAO<Location> locationDAO = DAOPouch.getLocationDAO();
-            DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
-
-            new Thread(
-                    () -> {
-                      // Part (B):
-                      for (Location loc : locationDAO.filter(6, "DIRT").values()) {
-
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "UNCLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "BED");
-
-                        if (tempMap.size() >= 6) {
-                          // TODO: ADD ALERT
-                          DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                              DAOPouch.getMedicalEquipmentRequestDAO();
-                          for (MedicalEquipment equipment : tempMap.values()) {
-                            equipmentRequestDAO.add(
-                                new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
-                                    "dSTOR001L1",
-                                    "AUTOMATIC REQUEST",
-                                    "NONE",
-                                    equipment.getNodeID(),
-                                    equipment.getEquipmentType(),
-                                    equipment.getCleanStatus()));
-                          }
-                        }
-                      }
-                      // Part (C1):
-                      for (Location loc : locationDAO.filter(6, "DIRT").values()) {
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "UNCLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
-
-                        if (tempMap.size() >= 10) {
-                          // TODO: ADD ALERT
-                          DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                              DAOPouch.getMedicalEquipmentRequestDAO();
-                          for (MedicalEquipment equipment : tempMap.values()) {
-                            equipmentRequestDAO.add(
-                                new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
-                                    "dEXIT00401",
-                                    "AUTOMATIC REQUEST",
-                                    "NONE",
-                                    equipment.getNodeID(),
-                                    equipment.getEquipmentType(),
-                                    equipment.getCleanStatus()));
-                          }
-                        }
-                      }
-                      // Part (C2):
-                      for (Location loc : locationDAO.filter(6, "STOR").values()) {
-                        Map<String, MedicalEquipment> tempMap =
-                            medicalEquipmentDAO.filter(
-                                medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, "CLEAN");
-                        tempMap = medicalEquipmentDAO.filter(tempMap, 3, "INFUSIONPUMP");
-
-                        if (tempMap.size() <= 5) {
-
-                          for (Location dirtyLoc : locationDAO.filter(6, "DIRT").values()) {
-
-                            Map<String, MedicalEquipment> dirtyTempMap =
-                                medicalEquipmentDAO.filter(
-                                    medicalEquipmentDAO.filter(6, loc.getAttribute(1)),
-                                    5,
-                                    "UNCLEAN");
-                            dirtyTempMap =
-                                medicalEquipmentDAO.filter(dirtyTempMap, 3, "INFUSIONPUMP");
-
-                            DAO<MedicalEquipmentRequest> equipmentRequestDAO =
-                                DAOPouch.getMedicalEquipmentRequestDAO();
-
-                            for (MedicalEquipment equipment : dirtyTempMap.values()) {
-                              equipmentRequestDAO.add(
-                                  new MedicalEquipmentRequest(
-                                      Request.Priority.OVERDUE,
-                                      "dEXIT00401",
-                                      "AUTOMATIC REQUEST",
-                                      "NONE",
-                                      equipment.getNodeID(),
-                                      equipment.getEquipmentType(),
-                                      equipment.getCleanStatus()));
-                            }
-                          }
-                        }
-                      }
-                    })
-                .start();
-          }
-
-          @Override
-          public void onCancelled(DatabaseError error) {}
-        };
-    FireBase.getReference()
-        .child("MEDICALEQUIPMENT")
-        .addValueEventListener(this.valueEventListener);
   }
 
   private void setListeners() {
