@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -26,6 +27,8 @@ public class MapDashboardController extends ParentController {
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private TableView<Request> reqTable;
 
+  @FXML private TableView<Alert> alertTable;
+
   @FXML private ToggleButton L1;
   @FXML private ToggleButton L10;
   @FXML private ToggleButton L11;
@@ -46,7 +49,6 @@ public class MapDashboardController extends ParentController {
   @FXML private ToggleButton M1;
   @FXML private ToggleButton M2;
   @FXML private Label floorSummary;
-  @FXML private Label locOfInterest;
   @FXML private TabPane tabs;
 
   @FXML private Text cleanEquipNum;
@@ -54,14 +56,19 @@ public class MapDashboardController extends ParentController {
   @FXML private Text inUseEquipNum;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
+  private final String floorTxtPath = "floorSummary.txt";
 
   public static String floor;
 
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
+  private TableHelper<Alert> alerts;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
+
     bindImage(mapImage, mapImageContainer);
 
     setListeners();
@@ -72,6 +79,8 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
+    alerts = new TableHelper<>(alertTable, 1);
+    alerts.linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
@@ -103,17 +112,15 @@ public class MapDashboardController extends ParentController {
             }));
     List<String> tableNames =
         Arrays.asList(
-            new String[] {
-              new EquipmentCleaning().tableName(),
-              new LabRequest().tableName(),
-              new LanguageRequest().tableName(),
-              new MealDeliveryRequest().tableName(),
-              new MedicalEquipmentRequest().tableName(),
-              new MedicineRequest().tableName(),
-              new PatientTransportRequest().tableName(),
-              new SanitationRequest().tableName(),
-              new SecurityRequest().tableName()
-            });
+            new EquipmentCleaning().tableName(),
+            new LabRequest().tableName(),
+            new LanguageRequest().tableName(),
+            new MealDeliveryRequest().tableName(),
+            new MedicalEquipmentRequest().tableName(),
+            new MedicineRequest().tableName(),
+            new PatientTransportRequest().tableName(),
+            new SanitationRequest().tableName(),
+            new SecurityRequest().tableName());
     TableListeners.addListeners(
         tableNames,
         TableListeners.eventListener(
@@ -129,7 +136,6 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
-    updateLocOfInterest();
   }
 
   private List<Location> locsByFloor;
@@ -140,6 +146,9 @@ public class MapDashboardController extends ParentController {
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
+    alertTable.getItems().clear();
+    alertTable.getItems().addAll(DAOPouch.getAlertDAO().filter(5, floor).values());
+
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
@@ -189,20 +198,10 @@ public class MapDashboardController extends ParentController {
 
   private void updateSummary() {
     try {
-      String floorTxtPath = "floorSummary.txt";
       String floorText = getFileText(floorTxtPath, getFloorNum());
       floorSummary.setText(floorText);
     } catch (IOException e) {
       showError("Error 404: File Not Found");
-    }
-  }
-
-  private void updateLocOfInterest() {
-    try {
-      String locOfInterestTxtPath = "locOfInterest.txt";
-      String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
-      locOfInterest.setText(floorText);
-    } catch (IOException ignored) {
     }
   }
 

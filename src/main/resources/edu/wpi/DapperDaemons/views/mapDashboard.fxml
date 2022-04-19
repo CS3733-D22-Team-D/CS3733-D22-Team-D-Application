@@ -252,23 +252,25 @@
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Locations of Interest">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Alerts">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Label id="label" fx:id="locOfInterest" text="Surgery is a medical or dental specialty that uses operative manual and instrumental techniques on a person to investigate or treat. Surgery is a medical or dental specialty" wrapText="true">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets left="15.0" right="15.0" />
-                                 </VBox.margin>
-                              </Label>
+                              <TableView fx:id="alertTable" prefHeight="200.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="Description" />
+                                  <TableColumn prefWidth="75.0" text="Type" />
+                                    <TableColumn prefWidth="75.0" text="Priority" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
                            </children>
                         </VBox>
                      </children>
