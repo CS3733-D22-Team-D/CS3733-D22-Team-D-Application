@@ -41,7 +41,7 @@ public class CleanEquipmentHandler {
                     if(!inProgressEqOfType.isEmpty()) {// While its not empty, set the ones in it to be high priority
                         // Set all in progress uncleanEQOfType to High priority and the rest of either dirty or in progress to medium
                         MedicalEquipment makeCleaningRequestFor = inProgressEquipment.remove(0); // remove the bottom from the stack
-                        EquipmentCleaning requestInProgress = new ArrayList<>(cleaningDAO.filter(6,makeCleaningRequestFor.getSerialNumber()).values()).get(0);
+                        EquipmentCleaning requestInProgress = new ArrayList<>(cleaningDAO.filter(9,makeCleaningRequestFor.getSerialNumber()).values()).get(0); // TODO : If there is an error, it would be here
                         cleaningDAO.delete(requestInProgress); // Deletes the current
                         EquipmentCleaning request = new EquipmentCleaning(Request.Priority.HIGH,makeCleaningRequestFor.getLocationID(),requestInProgress.getRequesterID(),requestInProgress.getAssigneeID(),requestInProgress.getNotes(),makeCleaningRequestFor.getSerialNumber(),makeCleaningRequestFor.getEquipmentType(), MedicalEquipment.CleanStatus.INPROGRESS,nextDate);
                         cleaningDAO.add(request);
