@@ -7,6 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -108,6 +109,19 @@
                   </VBox>
                </children>
             </HBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+               <children>
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
                <children>
                   <Button id="defaultButton" fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />

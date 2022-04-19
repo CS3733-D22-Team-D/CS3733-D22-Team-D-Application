@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.entities.Notification;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -78,7 +79,18 @@ public class RequestController extends ParentController implements Initializable
     DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
 
     ((TableObject) request).setAttribute(5, event.getNewValue());
-    if (requestDAO.update(((TableObject) request))) {}
+    if (requestDAO.update(((TableObject) request))) {
+      DAOPouch.getNotificationDAO()
+          .add(
+              new Notification(
+                  request.requestType(),
+                  "You have been assigned by"
+                      + SecurityController.getUser().getFirstName()
+                      + " "
+                      + SecurityController.getUser().getLastName()
+                      + ".",
+                  event.getNewValue()));
+    }
   }
 
   @FXML
@@ -101,15 +113,15 @@ public class RequestController extends ParentController implements Initializable
     createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
     relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
 
-    tableHelper.filterTable(Assignee221, SecurityController.getUser().getAttribute(0));
-    tableHelper1.filterTable(ReqID22, SecurityController.getUser().getAttribute(0));
+    tableHelper.filterTable(Assignee221, SecurityController.getUser().getAttribute(1));
+    tableHelper1.filterTable(ReqID22, SecurityController.getUser().getAttribute(1));
     tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED.toString());
 
     assignedRequestsTable.setPickOnBounds(false);
     createdRequestsTable.setPickOnBounds(false);
     relevantRequestsTable.setPickOnBounds(false);
 
-    String[] plebs = (String[]) DAOFacade.getAllPlebs().toArray();
+    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[1]);
     tableHelper.addEnumEditProperty(Status221, Request.RequestStatus.class);
     tableHelper1.addDropDownEditProperty(Assignee22, plebs);
     tableHelper2.addDropDownEditProperty(Assignee222, "yourself");

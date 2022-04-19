@@ -1,9 +1,10 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
-import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class SecurityRequest extends TableObject {
@@ -58,24 +59,46 @@ public class SecurityRequest extends TableObject {
   private String roomID;
   private String requester;
   private String assignee;
+  private Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+  private String notes = "";
+  private String dateTime = "";
+  private String dateNeeded;
 
   public SecurityRequest() {}
 
-  public SecurityRequest(Request.Priority priority, String roomID) {
+  public SecurityRequest(
+      Request.Priority priority,
+      String roomID,
+      String requesterID,
+      String assigneeID,
+      // add notes after Assignee JOE
+      String notes,
+      // thats it, should be pretty easy
+      String dateNeeded) {
+    this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
     this.priority = priority;
     this.roomID = roomID;
-    this.assignee = "none";
-    this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
-    this.requester = SecurityController.getUser().getAttribute(1);
+    this.assignee = assigneeID;
+    this.requester = requesterID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = Request.RequestStatus.REQUESTED;
+    this.dateNeeded = dateNeeded;
   }
 
   @Override
   public String tableInit() {
-    return "CREATE TABLE SECURITYREQUESTS(nodeID varchar(20) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(100),"
-        + "requester varchar(100),"
-        + "assignee varchar(100))";
+    return "CREATE TABLE SECURITYREQUESTS(nodeID varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requester varchar(1000),"
+        + "assignee varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "dateNeeded varchar(1000),";
   }
 
   @Override
@@ -96,6 +119,14 @@ public class SecurityRequest extends TableObject {
         return requester;
       case 5:
         return assignee;
+      case 6:
+        return status.toString();
+      case 7:
+        return notes;
+      case 8:
+        return dateTime;
+      case 9:
+        return dateNeeded;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -118,6 +149,18 @@ public class SecurityRequest extends TableObject {
         break;
       case 5:
         assignee = newAttribute;
+        break;
+      case 6:
+        status = Request.RequestStatus.valueOf(newAttribute);
+        break;
+      case 7:
+        notes = newAttribute;
+        break;
+      case 8:
+        dateTime = newAttribute;
+        break;
+      case 9:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
@@ -151,8 +194,43 @@ public class SecurityRequest extends TableObject {
       case "assignee":
         assignee = newAttribute;
         break;
+      case "status":
+        status = Request.RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
+  }
+
+  public Request.RequestStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(Request.RequestStatus status) {
+    this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 }

@@ -1,19 +1,21 @@
 package edu.wpi.DapperDaemons.map.pathfinder;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.AppController;
 import edu.wpi.DapperDaemons.controllers.MapController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.LocationNodeConnections;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -24,7 +26,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 /** Creates a path on the map */
-public class PathfinderHandler implements Initializable {
+public class PathfinderHandler extends AppController implements Initializable {
 
   private static AnchorPane lineLayer;
   private static MapController controller;
@@ -49,28 +51,39 @@ public class PathfinderHandler implements Initializable {
   public PathfinderHandler() {}
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+    toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+  }
 
   @FXML
   public void showPath() {
     fromLocation.setValue(fromLocation.getValue().trim());
     toLocation.setValue(toLocation.getValue().trim());
     try {
-      if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
-          != -1) { // if from location is valid
-        if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
-            != -1) { // and to location is valid
-          showPather(fromLocation.getValue(), toLocation.getValue());
+      List<Location> filterJuan =
+          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
+      List<Location> filterDos =
+          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
+      Location startLoc = filterJuan.get(0);
+      Location toLoc = filterDos.get(0);
+      if (checkIfConnectedNode(startLoc.getNodeID())) {
+        if (checkIfConnectedNode(toLoc.getNodeID())) {
+          //          System.out.println("Showing path but everything might be broken");
+          //          System.out.println(
+          //              "Starting at " + startLoc.getNodeID() + " And going to " +
+          // toLoc.getNodeID());
+          showPather(startLoc.getNodeID(), toLoc.getNodeID());
           makeAllInVisible();
+          filterByFloor(startLoc.getFloor());
         } else {
-          System.out.println("Not a valid end location!");
+          showError("Not a valid end location!");
         }
       } else {
-        System.out.println("Not a valid start location!");
+        showError("Not a valid start location!");
       }
-      filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
     } catch (Exception e) {
-      //      e.printStackTrace();
+      e.printStackTrace();
       // TODO : Show the error message?
     }
     makeAllInVisible(); // For some reason I need two of these to make it actually invisible
@@ -117,23 +130,27 @@ public class PathfinderHandler implements Initializable {
         System.out.println("Location not found");
       }
     }
+    try {
+      locations.add(DAOPouch.getLocationDAO().get(startNode));
+    } catch (Exception e) {
+      System.out.println("Something went wrong adding the start location");
+    }
 
     double overflow = 0.0;
-    for (int i = 0; i < locations.size(); i++) {
+    for (int i = 0; i < locations.size() - 1; i++) {
       // Add a new line to the list of lines
-      //      System.out.println(
-      //          "Position " + locations.get(i).getNodeID() + " to " + locations.get(i +
-      // 1).getNodeID());
-      //      System.out.println(
-      //          "X Start : "
-      //              + locations.get(i).getXcoord()
-      //              + " Start Y: "
-      //              + locations.get(i).getYcoord());
-      //      System.out.println(
-      //          "X End : "
-      //              + locations.get(i + 1).getXcoord()
-      //              + " End Y: "
-      //              + locations.get(i + 1).getYcoord());
+      System.out.println(
+          "Position " + locations.get(i).getNodeID() + " to " + locations.get(i + 1).getNodeID());
+      System.out.println(
+          "X Start : "
+              + locations.get(i).getXcoord()
+              + " Start Y: "
+              + locations.get(i).getYcoord());
+      System.out.println(
+          "X End : "
+              + locations.get(i + 1).getXcoord()
+              + " End Y: "
+              + locations.get(i + 1).getYcoord());
       Line pathLine =
           new Line(
               locations.get(i).getXcoord(),
@@ -198,14 +215,26 @@ public class PathfinderHandler implements Initializable {
     lineLayer.getChildren().forEach(c -> c.setVisible(false));
   }
 
+  public Boolean checkIfConnectedNode(String nodeID) {
+    List<LocationNodeConnections> connected;
+    // List of walkable connected nodes as strings using their nodeID
+    connected = new ArrayList(DAOPouch.getLocationNodeDAO().filter(3, nodeID).values());
+    for (LocationNodeConnections connection :
+        DAOPouch.getLocationNodeDAO().filter(2, nodeID).values()) {
+      connected.add(connection);
+    }
+    if (connected.isEmpty()) return false;
+    return true;
+  }
+
   public void filterByFloor(String floor) {
     makeAllInVisible();
     for (int i = 0;
-        i < locations.size();
+        i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
       // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
-        System.out.println("Showing " + locations.get(i).getNodeID());
+        //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);
       }
     }

@@ -110,8 +110,9 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
-    notes.setText("");
+    // notes.setText("");
     dateNeeded.setValue(null);
+    notes.setText("");
   }
 
   @FXML
