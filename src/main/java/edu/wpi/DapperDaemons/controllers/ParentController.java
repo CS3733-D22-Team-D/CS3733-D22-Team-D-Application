@@ -114,7 +114,15 @@ public class ParentController extends AppController {
 
   @FXML
   void goHome() {
-    swapPage("default", "Home");
+    if (headerName != null && headerName.getText().equals("Home")) {
+      try {
+        easterEgg();
+      } catch (IOException e) {
+        showError("Dr. Mario is not home ):");
+      }
+    } else {
+      swapPage("default", "Home");
+    }
   }
 
   @FXML
@@ -414,5 +422,22 @@ public class ParentController extends AppController {
   // TODO: Remove this or move it
   protected List<String> getAllLongNames() {
     return new ArrayList<>();
+  }
+
+  private long startTime;
+  private int count = 0;
+
+  public void easterEgg() throws IOException {
+    if (count == 0) {
+      startTime = System.currentTimeMillis();
+    }
+    count++;
+    if ((System.currentTimeMillis() - startTime) > 10000) {
+      count = 0;
+    }
+    if (count == 10 & (System.currentTimeMillis() - startTime) < 10000) {
+      count = 0;
+      swapPage("easterEgg", "Dr. Mario");
+    }
   }
 }
