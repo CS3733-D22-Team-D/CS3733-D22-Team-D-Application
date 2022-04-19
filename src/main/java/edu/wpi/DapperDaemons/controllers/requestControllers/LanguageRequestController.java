@@ -8,7 +8,6 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
