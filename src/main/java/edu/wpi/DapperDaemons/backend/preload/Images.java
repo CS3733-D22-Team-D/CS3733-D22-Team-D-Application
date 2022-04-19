@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend.preload;
 
+import edu.wpi.DapperDaemons.backend.AutoSave;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import java.util.Objects;
 import javafx.scene.image.Image;
@@ -53,6 +54,13 @@ public class Images {
                     .getClassLoader()
                     .getResourceAsStream("edu/wpi/DapperDaemons/assets/Glyphs/bell.png")));
 
+    AUTOSAVE =
+        new Image(
+            Objects.requireNonNull(
+                AutoSave.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/DapperDaemons/assets/refresh.gif")));
+
     mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
     mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
     mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
@@ -68,6 +76,7 @@ public class Images {
   public static Image LOAD;
   public static Image UNREAD;
   public static Image BELL;
+  public static Image AUTOSAVE;
 
   public static Image mapFloorL2;
   public static Image mapFloorL1;

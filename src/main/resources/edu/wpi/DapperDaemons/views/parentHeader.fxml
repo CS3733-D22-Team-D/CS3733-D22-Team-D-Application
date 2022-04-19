@@ -520,6 +520,11 @@
                   </ScrollPane>
                </children>
             </HBox>
+            <ImageView fx:id="autoSaveIcon" fitHeight="40.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+               <image>
+                  <Image url="@../assets/refresh.gif" />
+               </image>
+            </ImageView>
          </children>
       </StackPane>
    </children>
