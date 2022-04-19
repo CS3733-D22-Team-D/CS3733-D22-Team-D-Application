@@ -201,7 +201,7 @@ public class EquipmentRequestController extends ParentController {
                       equipment.getNodeID(),
                       equipmentType,
                       cleanStatus,
-                          dateNeeded.getValue().toString()));
+                      dateNeeded.getValue().toString()));
           // check if user has permission
           if (!hadClearance) {
             showError("You do not have permission to do this.");

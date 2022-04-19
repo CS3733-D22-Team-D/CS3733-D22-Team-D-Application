@@ -36,21 +36,16 @@ public interface Request {
   public String getRoomID();
 
   @TableHandler(table = 2, col = 0)
-public String getNodeID();
+  public String getNodeID();
 
   @TableHandler(table = 2, col = 3)
-public String getRequesterID();
+  public String getRequesterID();
 
   @TableHandler(table = 2, col = 4)
-public String getAssigneeID();
-
+  public String getAssigneeID();
 
   @TableHandler(table = 2, col = 5)
-public RequestStatus getStatus();
-
-
-
-
+  public RequestStatus getStatus();
 
   public String getDateNeeded();
 }
