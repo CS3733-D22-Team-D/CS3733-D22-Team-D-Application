@@ -47,7 +47,7 @@ public class Account extends TableObject {
         + "password varchar(255),"
         + "phoneNumber varchar(12),"
         + "settingsFile varchar(255),"
-        + "twoFactor varchar(5)"
+        + "twoFactor varchar(5),"
         + "email varchar(255))";
   }
 

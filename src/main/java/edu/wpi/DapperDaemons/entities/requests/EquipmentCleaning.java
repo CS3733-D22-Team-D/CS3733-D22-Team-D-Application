@@ -10,15 +10,15 @@ public class EquipmentCleaning extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60),"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
-        + "equipmentID varchar(20),"
-        + "equipmentType varchar(20),"
-        + "cleanStatus varchar(20),"
-        + "cleanBy varchar(10))";
+    return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
+        + "equipmentID varchar(1000),"
+        + "equipmentType varchar(1000),"
+        + "cleanStatus varchar(1000),"
+        + "cleanBy varchar(1000))";
   }
 
   @Override

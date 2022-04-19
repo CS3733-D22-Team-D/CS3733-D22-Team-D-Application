@@ -6,9 +6,7 @@ import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ConnectionHandler {
@@ -70,65 +68,7 @@ public class ConnectionHandler {
         DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
         DAO<LocationNodeConnections> locationNodeConnectionsDAO = DAOPouch.getLocationNodeDAO();
         DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
-        //
-        //        Map<String, LabRequest> labRequestMap = labRequestDAO.getAll();
-        //        Map<String, MealDeliveryRequest> mealDeliveryRequestMap =
-        // mealDeliveryRequestDAO.getAll();
-        //        Map<String, MedicalEquipmentRequest> medicalEquipmentRequestMap =
-        //            medicalEquipmentRequestDAO.getAll();
-        //        Map<String, MedicineRequest> medicineRequestMap = medicineRequestDAO.getAll();
-        //        Map<String, PatientTransportRequest> patientTransportRequestMap =
-        //            patientTransportRequestDAO.getAll();
-        //        Map<String, SanitationRequest> sanitationRequestMap =
-        // sanitationRequestDAO.getAll();
-        //        Map<String, Account> accountMap = accountDAO.getAll();
-        //        Map<String, Employee> employeeMap = employeeDAO.getAll();
-        //        Map<String, Location> locationMap = locationDAO.getAll();
-        //        Map<String, MedicalEquipment> medicalEquipmentMap = medicalEquipmentDAO.getAll();
-        //        Map<String, Patient> patientMap = patientDAO.getAll();
-        //        Map<String, LocationNodeConnections> locationNodeConnectionsMap =
-        //            locationNodeConnectionsDAO.getAll();
-        //        Map<String, LanguageRequest> languageRequestMap = languageRequestDAO.getAll();
-        //
-        //        for (LabRequest lr : labRequestMap.values()) {
-        //          labRequestDAO.add(lr);
-        //        }
-        //        for (MealDeliveryRequest lr : mealDeliveryRequestMap.values()) {
-        //          mealDeliveryRequestDAO.add(lr);
-        //        }
-        //        for (MedicalEquipmentRequest lr : medicalEquipmentRequestMap.values()) {
-        //          medicalEquipmentRequestDAO.add(lr);
-        //        }
-        //        for (MedicineRequest lr : medicineRequestMap.values()) {
-        //          medicineRequestDAO.add(lr);
-        //        }
-        //        for (PatientTransportRequest lr : patientTransportRequestMap.values()) {
-        //          patientTransportRequestDAO.add(lr);
-        //        }
-        //        for (SanitationRequest lr : sanitationRequestMap.values()) {
-        //          sanitationRequestDAO.add(lr);
-        //        }
-        //        for (Account lr : accountMap.values()) {
-        //          accountDAO.add(lr);
-        //        }
-        //        for (Employee lr : employeeMap.values()) {
-        //          employeeDAO.add(lr);
-        //        }
-        //        for (Location lr : locationMap.values()) {
-        //          locationDAO.add(lr);
-        //        }
-        //        for (MedicalEquipment lr : medicalEquipmentMap.values()) {
-        //          medicalEquipmentDAO.add(lr);
-        //        }
-        //        for (Patient lr : patientMap.values()) {
-        //          patientDAO.add(lr);
-        //        }
-        //        for (LocationNodeConnections lr : locationNodeConnectionsMap.values()) {
-        //          locationNodeConnectionsDAO.add(lr);
-        //        }
-        //        for (LanguageRequest lr : languageRequestMap.values()) {
-        //          languageRequestDAO.add(lr);
-        //        }
+
         new FireBaseLoader(labRequestDAO, new LabRequest());
         new FireBaseLoader(mealDeliveryRequestDAO, new MealDeliveryRequest());
         new FireBaseLoader(medicalEquipmentRequestDAO, new MedicalEquipmentRequest());
@@ -160,26 +100,18 @@ public class ConnectionHandler {
 
   public static boolean switchToClientServer() {
     try {
-      //      if (!type.equals(connectionType.CLOUD) && connection != null) CSVSaver.saveAll();
       Class.forName("org.apache.derby.jdbc.ClientDriver");
       System.out.println("Connecting to client");
       connection =
           DriverManager.getConnection("jdbc:derby://localhost:1527/BaW_Database;create=true");
       System.out.println("Connected to the client server");
-      //      CSVLoader.loadAll();
       type = connectionType.CLIENTSERVER;
-      //      try {
-      //        DAOPouch.init();
-      //      } catch (Exception e) {
-      //        System.out.println("DAOPouch could not initialize");
-      //      }
+      loadToSQL();
     } catch (SQLException e) {
       System.out.println("Could not connect to the client server");
-      //      type = connectionType.EMBEDDED;
       return false;
     } catch (ClassNotFoundException e) {
       System.out.println("Driver error, try making sure you don't have any other instances open!");
-      //      type = connectionType.EMBEDDED;
       return false;
     }
     return true;
@@ -187,26 +119,58 @@ public class ConnectionHandler {
 
   public static boolean switchToEmbedded() {
     try {
-      //      if (!type.equals(connectionType.CLOUD) && connection != null) CSVSaver.saveAll();
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       System.out.println("Connecting to embedded");
       connection = DriverManager.getConnection("jdbc:derby:BaW_database;create = true");
-      //      CSVLoader.loadAll();
       System.out.println("Connected to the embedded server");
       type = connectionType.EMBEDDED;
-      //      try {
-      //        DAOPouch.init();
-      //      } catch (Exception e) {
-      //        System.out.println("DAOPouch could not initialize");
-      //      }
+      loadToSQL();
     } catch (SQLException e) {
       System.out.println("Could not connect to the embedded server");
       return false;
     } catch (ClassNotFoundException e) {
-      //      System.out.println("Driver error, try making sure you don't have any other instances
-      // open!");
       return false;
     }
     return true;
+  }
+
+  private static void loadToSQL() throws SQLException {
+    for (String filename : CSVLoader.filenames.keySet()) {
+      TableObject temp = CSVLoader.filenames.get(filename);
+      Statement stmt;
+      stmt = ConnectionHandler.getConnection().createStatement();
+      try {
+        stmt.execute(temp.tableInit());
+      } catch (SQLException ignored) {
+        // table already created
+      }
+      String query = "SELECT * FROM " + temp.tableName();
+      ResultSet resultSet = stmt.executeQuery(query);
+      ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+      int numAttributes = resultSetMetaData.getColumnCount();
+      String updateStatement = "INSERT INTO " + temp.tableName() + " VALUES(";
+      for (int i = 1; i < numAttributes; i++) {
+        updateStatement += "?,";
+      }
+      updateStatement += "?)";
+      PreparedStatement prepStmt =
+          ConnectionHandler.getConnection().prepareStatement(updateStatement);
+      DAO<TableObject> dao = DAOPouch.getDAO(temp);
+      dao.getAll()
+          .forEach(
+              (k, v) -> {
+                try {
+                  if (!KeyChecker.validID(temp, v.getAttribute(1))) {
+                    for (int i = 1; i <= numAttributes; i++) {
+                      prepStmt.setString(i, v.getAttribute(i));
+                    }
+                    prepStmt.executeUpdate();
+                  }
+                } catch (SQLException e) {
+                  e.printStackTrace();
+                }
+              });
+      prepStmt.close();
+    }
   }
 }
