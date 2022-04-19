@@ -36,9 +36,9 @@ public class RequestController extends ParentController implements Initializable
   @FXML private TableColumn<Request, String> RoomID22;
   @FXML private TableColumn<Request, String> RoomID221;
   @FXML private TableColumn<Request, String> RoomID222;
-  @FXML private TableColumn<Request, String> Status22;
+  @FXML private TableColumn<Request, Request.RequestStatus> Status22;
   @FXML private TableColumn<Request, String> Status221;
-  @FXML private TableColumn<Request, String> Status222;
+  @FXML private TableColumn<Request, Request.RequestStatus> Status222;
   @FXML private ToggleButton assignedRequests;
   @FXML private TableView<Request> assignedRequestsTable;
   @FXML private ToggleButton createdRequests;
@@ -113,9 +113,9 @@ public class RequestController extends ParentController implements Initializable
     createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
     relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
 
-    tableHelper.filterTable(Assignee221, SecurityController.getUser().getAttribute(1));
-    tableHelper1.filterTable(ReqID22, SecurityController.getUser().getAttribute(1));
-    tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED.toString());
+    tableHelper.filterTable(Assignee221, SecurityController.getUser().getNodeID());
+    tableHelper1.filterTable(ReqID22, SecurityController.getUser().getNodeID());
+    tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED);
 
     assignedRequestsTable.setPickOnBounds(false);
     createdRequestsTable.setPickOnBounds(false);
