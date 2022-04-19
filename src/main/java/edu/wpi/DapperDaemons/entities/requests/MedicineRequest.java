@@ -179,7 +179,7 @@ public class MedicineRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
-  private RequestStatus status;
+  private RequestStatus status = RequestStatus.REQUESTED;
   private String notes;
   private String dateTime;
   private String patientID;
