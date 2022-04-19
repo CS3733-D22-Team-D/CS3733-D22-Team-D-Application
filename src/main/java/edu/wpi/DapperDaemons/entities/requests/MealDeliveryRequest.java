@@ -208,22 +208,22 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // ATTRIBUTES
 
-  private String nodeID;
-  private Priority priority;
-  private String roomID;
-  private String requesterID;
-  private String assigneeID;
+  private String nodeID = "";
+  private Priority priority = Priority.LOW;
+  private String roomID = "";
+  private String requesterID = "";
+  private String assigneeID = "";
   // the three below this comment
-  private RequestStatus status;
-  private String notes;
-  private String dateTime;
+  private RequestStatus status = RequestStatus.REQUESTED;
+  private String notes = "";
+  private String dateTime = "";
   // the three above this comment
-  private String patientID;
-  private String entree;
-  private String side;
-  private String drink;
-  private String dessert;
-  private String dateNeeded;
+  private String patientID = "";
+  private String entree = "";
+  private String side = "";
+  private String drink = "";
+  private String dessert = "";
+  private String dateNeeded = "";
 
   // CONSTRUCTORS
 

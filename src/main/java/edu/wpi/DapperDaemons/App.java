@@ -96,7 +96,7 @@ public class App extends Application {
             //            } catch (IOException e) {
             //              throw new RuntimeException(e);
             //            }
-            //            CSVLoader.resetFirebase();
+            //                        CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;
