@@ -30,8 +30,14 @@ public class DragHandler {
     displayed.setOnMouseDragged(
         e -> {
           displayed.setVisible(true);
-          displayed.setX(e.getX() - 16);
-          displayed.setY(e.getY() - 16);
+          PositionInfo snapped = glyphs.getNearestPos((int) e.getX(), (int) e.getY());
+          if (snapped != null) {
+            displayed.setX(snapped.getX() - 48);
+            displayed.setY(snapped.getY() - 16);
+          } else {
+            displayed.setX(e.getX() - 16);
+            displayed.setY(e.getY() - 16);
+          }
         });
     displayed.setOnMouseReleased(
         e -> {
@@ -42,7 +48,7 @@ public class DragHandler {
                   "ID19824",
                   null);
           boolean worked =
-              glyphs.addEquipment((int) displayed.getX(), (int) displayed.getY(), equip);
+              glyphs.addEquipment((int) displayed.getX() - 16, (int) displayed.getY() - 16, equip);
           if (worked) enable();
         });
   }

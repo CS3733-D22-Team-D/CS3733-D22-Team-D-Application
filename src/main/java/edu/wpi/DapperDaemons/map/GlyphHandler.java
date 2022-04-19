@@ -141,6 +141,13 @@ public class GlyphHandler {
     return false;
   }
 
+  public PositionInfo getNearestPos(int x, int y) {
+    for (PositionInfo p : imageLocs) {
+      if (p.isNear(x, y, controller.getFloor())) return p;
+    }
+    return null;
+  }
+
   private ColorAdjust getPriorityColor(PositionInfo pos) {
     switch (pos.getHighestPriority()) {
       case LOW:
