@@ -68,7 +68,7 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH));
+    DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
 
     bindImage(mapImage, mapImageContainer);
 

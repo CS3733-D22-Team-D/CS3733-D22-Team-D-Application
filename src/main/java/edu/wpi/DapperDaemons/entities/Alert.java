@@ -16,7 +16,7 @@ public class Alert extends TableObject {
 
   public Alert(String description, String type, Request.Priority priority, String floor) {
     this.description = description;
-    this.nodeID = priority.toString() + description + LocalDateTime.now().toString();
+    this.nodeID = priority.toString() + description + type;
     this.priority = priority;
     this.type = type;
     this.floor = floor;
