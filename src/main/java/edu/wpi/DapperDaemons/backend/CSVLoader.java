@@ -28,6 +28,8 @@ public class CSVLoader {
     filenames.put("AllEdges", new LocationNodeConnections());
     filenames.put("LanguageRequests", new LanguageRequest());
     filenames.put("Notifications", new Notification());
+    filenames.put("SecurityRequests", new SecurityRequest());
+    filenames.put("EquipmentCleanRequest", new EquipmentCleaning());
   }
 
   private CSVLoader() {}
@@ -124,7 +126,7 @@ public class CSVLoader {
       for (Integer i = 0; i < line.length; i++) {
         data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
       }
-      map.put(line[0], data);
+      map.put(FireBaseCoder.encodeForFirebaseKey(line[0]), data);
     }
     ref.setValueAsync(map);
   }

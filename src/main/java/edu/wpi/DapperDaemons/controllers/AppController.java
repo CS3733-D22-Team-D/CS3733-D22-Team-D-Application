@@ -72,11 +72,16 @@ public class AppController implements Initializable {
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    Stage window = (Stage) sceneBox.getScene().getWindow();
+    switchScene(fileName, minWidth, minHeight, window);
+  }
+
+  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
+      throws IOException {
     TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) sceneBox.getScene().getWindow();
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
     window.setOnCloseRequest(e -> quitProgram());
@@ -106,9 +111,9 @@ public class AppController implements Initializable {
     HBox.setHgrow(child, Priority.ALWAYS);
   }
 
-  protected void saveToCSV(TableObject type) {
+  protected void saveToCSV(TableObject type, Stage window) {
     FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) sceneBox.getScene().getWindow();
+    //    Stage window = (Stage) sceneBox.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {

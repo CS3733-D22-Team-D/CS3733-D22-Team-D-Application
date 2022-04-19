@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -178,6 +179,11 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </JFXButton>
+                        <JFXButton id="slider" layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -330,7 +336,7 @@
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT">
+                                    <ImageView fx:id="notifBell" fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT">
                                        <image>
                                           <Image url="@../assets/Glyphs/bell.png" />
                                        </image>
@@ -492,25 +498,21 @@
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
                      </children>
                      <HBox.margin>
-                        <Insets left="284.0" top="50.0" />
+                        <Insets left="254.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox fx:id="notifications" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
+                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="70.0" minHeight="0.0" prefHeight="0.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;" vbarPolicy="NEVER" visible="false">
                      <HBox.margin>
-                        <Insets right="65.0" top="50.0" />
+                        <Insets right="70.0" top="49.0" />
                      </HBox.margin>
-                  </VBox>
+                     <content>
+                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 0 0 7.5 7.5;" />
+                     </content>
+                  </ScrollPane>
                </children>
             </HBox>
          </children>

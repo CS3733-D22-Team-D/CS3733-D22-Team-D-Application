@@ -78,6 +78,7 @@ public class ORM<T extends TableObject> {
                           //                                temp.setAttribute(k, String.valueOf(v));
                           //                              });
                           //                          map.put(attributes.get(0), temp);
+                        } catch (NullPointerException ignored) {
                         }
                       })
                   .start();
