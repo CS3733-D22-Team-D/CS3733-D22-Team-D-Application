@@ -60,6 +60,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         return patientID;
       case 10:
         return nextRoomID;
+      case 8:
+        return status.toString();
 
       default:
         throw new IndexOutOfBoundsException();
@@ -147,6 +149,12 @@ public class PatientTransportRequest extends TableObject implements Request {
       case "nextRoomID":
         nextRoomID = newAttribute;
         break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -179,6 +187,8 @@ public class PatientTransportRequest extends TableObject implements Request {
   private String dateTime;
   private String patientID;
   private String nextRoomID;
+  private RequestStatus status;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -203,11 +213,14 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.status = RequestStatus.REQUESTED;
     this.patientID = patientID;
     this.nextRoomID = nextRoomID;
+    this.status = status;
+    this.dateNeeded = dateNeeded;
   }
 
   public PatientTransportRequest() {}
 
   // SETTERS AND GETTERS
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -289,5 +302,15 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 8)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

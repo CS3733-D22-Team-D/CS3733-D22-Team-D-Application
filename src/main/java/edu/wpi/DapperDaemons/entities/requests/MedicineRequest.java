@@ -185,6 +185,7 @@ public class MedicineRequest extends TableObject implements Request {
   private String patientID;
   private String medicationName;
   private int quantity;
+  private String dateNeeded;
 
   // CONTSTRUCTORS
 
@@ -196,7 +197,8 @@ public class MedicineRequest extends TableObject implements Request {
       String notes,
       String patientID,
       String medicationName,
-      int quantity) {
+      int quantity,
+      String dateNeeded) {
     SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy-HH:MM:SS");
     this.nodeID = priority.toString() + requesterID + format.format(new Date());
 
@@ -211,10 +213,12 @@ public class MedicineRequest extends TableObject implements Request {
     this.patientID = patientID;
     this.medicationName = medicationName;
     this.quantity = quantity;
+    this.dateNeeded = dateNeeded;
   }
 
   public MedicineRequest() {}
   // SETTERS AND GETTERS
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -304,5 +308,15 @@ public class MedicineRequest extends TableObject implements Request {
 
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 8)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

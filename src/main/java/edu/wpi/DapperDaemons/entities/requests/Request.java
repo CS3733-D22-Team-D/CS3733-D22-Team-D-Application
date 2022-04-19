@@ -50,4 +50,7 @@ public RequestStatus getStatus();
 
 
 
+
+
+  public String getDateNeeded();
 }

@@ -34,11 +34,9 @@ public class LabRequest extends TableObject implements Request {
         + "roomID varchar(20) ,"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
         + "patientID varchar(28),"
-        + "labType varchar(20))";
+        + "labType varchar(20),"
+        + "status varchar(20))";
   }
 
   @Override
@@ -121,6 +119,7 @@ public class LabRequest extends TableObject implements Request {
       case 10:
         labType = LabType.valueOf(newAttribute);
         break;
+
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -226,6 +225,7 @@ public class LabRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;

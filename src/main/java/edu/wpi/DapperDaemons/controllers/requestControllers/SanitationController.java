@@ -43,6 +43,8 @@ public class SanitationController extends ParentController {
   @FXML private JFXComboBox<String> locationBox;
   /* Text Field */
   @FXML private TextField notes;
+  @FXML private DatePicker dateNeeded;
+
   DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
   DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
@@ -79,7 +81,6 @@ public class SanitationController extends ParentController {
     sanitationBox.setValue("");
     priorityBox.setValue("");
     locationBox.setValue("");
-    notes.setText("");
   }
 
   @FXML
@@ -99,6 +100,12 @@ public class SanitationController extends ParentController {
       String assigneeID = "null";
       String sanitationType = sanitationBox.getValue().toString();
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       /*Make sure the room exists*/
       boolean isALocation = false;
@@ -151,7 +158,8 @@ public class SanitationController extends ParentController {
   private boolean allFieldsFilled() {
     return !((sanitationBox.getValue().equals(""))
         || priorityBox.getValue().equals("")
-        || locationBox.getValue().equals(""));
+        || locationBox.getValue().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   /** Adds new sanitationRequest to table of pending requests * */

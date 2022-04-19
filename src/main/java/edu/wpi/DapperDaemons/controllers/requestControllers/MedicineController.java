@@ -34,6 +34,7 @@ public class MedicineController extends ParentController {
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
   @FXML private TextField notes;
+  @FXML private DatePicker dateNeeded;
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
@@ -81,6 +82,7 @@ public class MedicineController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     notes.setText("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -115,7 +117,8 @@ public class MedicineController extends ParentController {
         || priorityIn.getValue().equals("")
         || patientName.getText().equals("")
         || patientLastName.getText().equals("")
-        || patientDOB.getValue() == null)) {
+        || patientDOB.getValue() == null
+        || dateNeeded.getValue() == null)) {
 
       Request.Priority priority;
       int quantity = 0;
@@ -124,6 +127,12 @@ public class MedicineController extends ParentController {
       String requesterID;
       String assigneeID;
       String roomID;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       // check if quantity is an int and not letters
       boolean isAnInt = true;

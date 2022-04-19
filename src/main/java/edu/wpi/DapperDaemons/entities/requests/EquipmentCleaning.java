@@ -6,11 +6,11 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class MedicalEquipmentRequest extends TableObject implements Request {
+public class EquipmentCleaning extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE MEDICALEQUIPMENTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
+    return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60),"
         + "requesterID varchar(60),"
@@ -18,12 +18,12 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         + "equipmentID varchar(20),"
         + "equipmentType varchar(20),"
         + "cleanStatus varchar(20),"
-        + "dateNeed varchar(10))";
+        + "cleanBy varchar(10))";
   }
 
   @Override
   public String tableName() {
-    return "MEDICALEQUIPMENTREQUESTS";
+    return "EQUIPMENTCLEANINGREQUESTS";
   }
 
   @Override
@@ -46,7 +46,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case 8:
         return cleanStatus.toString();
       case 9:
-        return dateNeeded;
+        return cleanBy;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -81,25 +81,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
         break;
       case 9:
-        dateNeeded = newAttribute;
+        cleanBy = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
     }
-  }
-
-  @Override
-  public String requestType() {
-    return "Medical Equipment Request";
-  }
-
-  @Override
-  public TableObject newInstance(List<String> l) {
-    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
-    for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i + 1, l.get(i));
-    }
-    return temp;
   }
 
   @Override
@@ -129,12 +115,26 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case "status":
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
         break;
-      case "dateNeeded":
-        dateNeeded = newAttribute;
+      case "cleabBy":
+        cleanBy = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
     }
+  }
+
+  @Override
+  public String requestType() {
+    return "Medical Equipment Request";
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
@@ -157,20 +157,19 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
-  private String dateNeeded;
+  private String cleanBy;
 
   // CONSTRUCTORS
 
-  public MedicalEquipmentRequest(
+  public EquipmentCleaning(
       Priority priority,
       String roomID,
       String requesterID,
       String assigneeID,
-      String notes,
       String equipmentID,
       MedicalEquipment.EquipmentType equipmentType,
       MedicalEquipment.CleanStatus cleanStatus,
-      String dateNeeded) {
+      String cleanBy) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -180,10 +179,10 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentID = equipmentID;
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
-    this.dateNeeded = dateNeeded;
+    this.cleanBy = cleanBy;
   }
 
-  public MedicalEquipmentRequest() {}
+  public EquipmentCleaning() {}
 
   // SETTERS AND GETTERS
   @TableHandler(table = 0, col = 0)
@@ -222,11 +221,6 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     return assigneeID;
   }
 
-  @Override
-  public RequestStatus getStatus() {
-    return null;
-  }
-
   public void setAssigneeID(String assigneeID) {
     this.assigneeID = assigneeID;
   }
@@ -258,20 +252,17 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.cleanStatus = cleanStatus;
   }
 
-  @Override
   @TableHandler(table = 0, col = 8)
-  public String getDateNeeded() {
-    return dateNeeded;
+  public String getCleanBy() {
+    return cleanBy;
   }
 
-  public void setDateNeeded(String dateNeeded) {
-    this.dateNeeded = dateNeeded;
+  public void setCleanBy(String cleanBy) {
+    this.cleanBy = cleanBy;
   }
 
   @Override
-  public boolean equals(Object obj) {
-    MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
-    return (request.getNodeID().equals(this.getNodeID())
-        && request.getEquipmentID().equals(this.getNodeID()));
+  public String getDateNeeded() {
+    return cleanBy;
   }
 }

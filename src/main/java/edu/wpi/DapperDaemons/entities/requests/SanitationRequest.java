@@ -130,6 +130,12 @@ public class SanitationRequest extends TableObject implements Request {
       case "sanitationType":
         sanitationType = newAttribute;
         break;
+      case "cleanStatus":
+        cleanStatus = RequestStatus.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -161,6 +167,8 @@ public class SanitationRequest extends TableObject implements Request {
   private String notes;
   private String dateTime;
   private String sanitationType;
+  private RequestStatus cleanStatus;
+  private String dateNeeded;
 
   // CONSTRUCTOR
 
@@ -170,7 +178,9 @@ public class SanitationRequest extends TableObject implements Request {
       String requesterID,
       String assigneeID,
       String notes,
-      String sanitationType) {
+      String sanitationType,
+      RequestStatus cleanStatus,
+      String dateNeeded) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
@@ -184,6 +194,8 @@ public class SanitationRequest extends TableObject implements Request {
     this.dateTime = formatter.format(now);
     this.status = RequestStatus.REQUESTED;
     this.sanitationType = sanitationType;
+    this.cleanStatus = cleanStatus;
+    this.dateNeeded = dateNeeded;
   }
 
   public SanitationRequest() {}
@@ -261,5 +273,15 @@ public class SanitationRequest extends TableObject implements Request {
 
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 7)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

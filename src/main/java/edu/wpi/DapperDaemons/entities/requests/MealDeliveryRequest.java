@@ -33,7 +33,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         + "entree varchar(20),"
         + "side varchar(20),"
         + "drink varchar(20),"
-        + "dessert varchar(20))";
+        + "dessert varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -190,6 +191,10 @@ public class MealDeliveryRequest extends TableObject implements Request {
         dateTime = newAttribute;
         break;
         // the three above this comment
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -251,12 +256,14 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
+    //this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -365,5 +372,15 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 10)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

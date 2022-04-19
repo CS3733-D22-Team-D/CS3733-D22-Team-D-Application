@@ -10,13 +10,14 @@ import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
-import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
@@ -81,7 +82,21 @@ public class App extends Application {
             } else {
               switchToEmbedded();
             }
+
             AutoSave.start(10);
+            //            try { // this is to save everything from the firebase database
+            //              Thread.sleep(2000);
+            //            } catch (InterruptedException e) {
+            //              throw new RuntimeException(e);
+            //            }
+            //            CSVSaver.saveAll();
+            //            try {
+            //              //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
+            // "MedEquipReq.csv");
+            //            } catch (IOException e) {
+            //              throw new RuntimeException(e);
+            //            }
+            //            CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;
@@ -136,10 +151,10 @@ public class App extends Application {
   // TODO : STOP THIS FROM ADDING THREE REQUESTS EVERYTIME: CHECK DAO
 
   /**
-   * 1. When there are six beds or more in a dirty area an alert appears on the dashboard. Service
+   * When there are six beds or more in a dirty area an alert appears on the dashboard. Service
    * requests are created to move the beds to the OR Park for cleaning.
    *
-   * <p>2. For a floor, when there are 10 infusion pumps or more in a dirty area, or fewer than 5
+   * <p>For a floor, when there are 10 infusion pumps or more in a dirty area, or fewer than 5
    * infusion pumps in the clean area, an alert appears on the dashboard indicating that infusion
    * pumps need to be cleaned. Service requests are created to move the dirty infusion pumps on that
    * floor to the West Plaza for cleaning
@@ -158,6 +173,9 @@ public class App extends Application {
             /* Declare the DAOs we will use */
             DAO<Location> locationDAO = DAOPouch.getLocationDAO();
             DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+            Date dateDat = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+            String dateRepresentation = dateFormat.format(dateDat);
             DAO<MedicalEquipmentRequest> equipmentRequestDAO =
                 DAOPouch.getMedicalEquipmentRequestDAO();
 
@@ -165,7 +183,6 @@ public class App extends Application {
                     () -> {
                       // For each dirty storage location...
                       for (Location loc : locationDAO.filter(6, "DIRT").values()) {
-
                         // Get dirty all dirty beds in current dirty location
                         Map<String, MedicalEquipment> dirtyBedMap =
                             DAOFacade.filterEquipByTypeAndStatus(
@@ -175,8 +192,8 @@ public class App extends Application {
                             DAOFacade.filterEquipByTypeAndStatus(
                                 loc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
-                        // If there are more than 6 dirty beds in the current location create
-                        // request for each
+                        // If there are more than 6 dirty beds in the current location creat request
+                        // for each
                         if (dirtyBedMap.size() >= 6) {
                           // TODO: ADD ALERT
                           for (MedicalEquipment equipment : dirtyBedMap.values()) {
@@ -189,8 +206,9 @@ public class App extends Application {
                                     "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
+                            if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                               equipmentRequestDAO.add(request);
                             }
                           }
@@ -207,13 +225,17 @@ public class App extends Application {
                                     "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
-                                    equipment.getCleanStatus());
-                            if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                    equipment.getCleanStatus(),
+                                    dateRepresentation);
+                            if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                               equipmentRequestDAO.add(request);
                             }
                           }
                         }
+                        // END LOOP
                       }
+                      // ==================================This is
+                      // Separate======================================
                       // For each clean location...
                       for (Location loc : locationDAO.filter(6, "STOR").values()) {
 
@@ -229,11 +251,12 @@ public class App extends Application {
 
                             // Find all dirty infusion pumps in that location
                             Map<String, MedicalEquipment> dirtyInfusionMap =
-                                    DAOFacade.filterEquipByTypeAndStatus(
-                                            dirtyLoc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
+                                DAOFacade.filterEquipByTypeAndStatus(
+                                    dirtyLoc, medicalEquipmentDAO, "INFUSIONPUMP", "UNCLEAN");
 
                             // For all the dirty infusion pumps at the dirty location
                             for (MedicalEquipment equipment : dirtyInfusionMap.values()) {
+                              // TODO: Add an alert
                               // create a request
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
@@ -244,8 +267,9 @@ public class App extends Application {
                                       "",
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
-                                      equipment.getCleanStatus());
-                              if (equipmentRequestDAO.get(equipment.getNodeID()) == null) {
+                                      equipment.getCleanStatus(),
+                                      dateRepresentation);
+                              if (!DAOFacade.automaticRequestAlreadyExists(request)) {
                                 equipmentRequestDAO.add(request);
                               }
                             }

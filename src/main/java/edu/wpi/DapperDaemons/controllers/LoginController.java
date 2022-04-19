@@ -7,6 +7,7 @@ import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.map.serial.SerialCOM;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class LoginController extends AppController {
                     Arduino arduino;
                     SerialCOM serialCOM = new SerialCOM();
                     try {
-                      arduino = serialCOM.setupArduino(); // can throw UnableToConnectException
+                      arduino = serialCOM.setupArduino();
                       RFIDPageController.COM = arduino.getPortDescription();
                     } catch (UnableToConnectException e) {
                       RFIDPageController.COM = null;
@@ -91,6 +92,12 @@ public class LoginController extends AppController {
                 },
                 () -> {
                   SecurityController.setUser(user.get(0));
+                  // TODO: Find out why this is not working
+                  try {
+                    switchScene("RFIDScanPage.fxml", 635, 510);
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
                 });
             return;
           }

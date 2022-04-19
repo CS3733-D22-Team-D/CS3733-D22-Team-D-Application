@@ -32,6 +32,7 @@ public class LabRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityChoiceBox;
   @FXML private JFXComboBox<String> procedureComboBox;
   @FXML private TextField notes;
+  @FXML private DatePicker dateNeeded;
 
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
@@ -84,6 +85,7 @@ public class LabRequestController extends ParentController {
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
     notes.setText("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -114,6 +116,11 @@ public class LabRequestController extends ParentController {
       }
       if (isAPatient) {
         roomID = patient.getLocationID();
+        String dateStr =
+            ""
+                + dateNeeded.getValue().getMonthValue()
+                + dateNeeded.getValue().getDayOfMonth()
+                + dateNeeded.getValue().getYear();
 
         boolean hadClearance =
             addItem(
@@ -144,11 +151,13 @@ public class LabRequestController extends ParentController {
   }
 
   private boolean allItemsFilled() {
+    System.out.println(patientDOB.getValue());
     return !(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
         || patientDOB.getValue() == null
-        || priorityChoiceBox.getValue().trim().equals(""));
+        || priorityChoiceBox.getValue().trim().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   private boolean addItem(LabRequest request) {
