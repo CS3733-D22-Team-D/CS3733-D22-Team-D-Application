@@ -19,19 +19,15 @@ public class ConfirmationController {
   /*Button*/
   @FXML Button tryAgainButton1;
 
-
   @FXML
   public boolean cancel(MouseEvent event) {
     errorPopup.setVisible(false);
     return false;
   }
 
-
-
   @FXML
   public boolean confirm(MouseEvent event) {
     errorPopup.setVisible(false);
     return true;
   }
-
 }

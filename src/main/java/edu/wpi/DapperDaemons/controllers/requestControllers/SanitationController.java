@@ -122,7 +122,13 @@ public class SanitationController extends ParentController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority, roomID, requesterID, assigneeID, notes.getText(), sanitationType, dateNeeded.getValue().toString()));
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    notes.getText(),
+                    sanitationType,
+                    dateNeeded.getValue().toString()));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.
