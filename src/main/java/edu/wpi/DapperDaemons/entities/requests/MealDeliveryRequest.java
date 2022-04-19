@@ -2,7 +2,9 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class MealDeliveryRequest extends TableObject implements Request {
@@ -22,6 +24,11 @@ public class MealDeliveryRequest extends TableObject implements Request {
         + "roomID varchar(60),"
         + "requesterID varchar(60),"
         + "assigneeID varchar(60),"
+        // copy paste these three JOE
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
+        // Stop after this^^^ one HU
         + "patientID varchar(60),"
         + "entree varchar(20),"
         + "side varchar(20),"
@@ -48,17 +55,25 @@ public class MealDeliveryRequest extends TableObject implements Request {
         return requesterID;
       case 5:
         return assigneeID;
+        // add these three here!!!!
       case 6:
-        return patientID;
+        return status.toString();
       case 7:
-        return entree;
+        return notes;
       case 8:
-        return side;
+        return dateTime;
+        // done not the ones below JO
       case 9:
-        return drink;
+        return patientID;
       case 10:
-        return dessert;
+        return entree;
       case 11:
+        return side;
+      case 12:
+        return drink;
+      case 13:
+        return dessert;
+      case 14:
         return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
@@ -83,23 +98,31 @@ public class MealDeliveryRequest extends TableObject implements Request {
       case 5:
         assigneeID = newAttribute;
         break;
+        // the three below this comment
       case 6:
-        patientID = newAttribute;
+        status = RequestStatus.valueOf(newAttribute);
         break;
       case 7:
-        entree = newAttribute;
+        notes = newAttribute;
         break;
       case 8:
-        side = newAttribute;
+        dateTime = newAttribute;
         break;
+        // the three above this comment ^^^^
       case 9:
-        drink = newAttribute;
+        patientID = newAttribute;
         break;
       case 10:
-        dessert = newAttribute;
+        entree = newAttribute;
         break;
       case 11:
-        dateNeeded = newAttribute;
+        side = newAttribute;
+        break;
+      case 12:
+        drink = newAttribute;
+        break;
+      case 13:
+        dessert = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -159,6 +182,17 @@ public class MealDeliveryRequest extends TableObject implements Request {
       case "dessert":
         dessert = newAttribute;
         break;
+        // add these three at the bottom
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
+        // the three above this comment
       case "dateNeeded":
         dateNeeded = newAttribute;
         break;
@@ -179,6 +213,11 @@ public class MealDeliveryRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  // the three below this comment
+  private RequestStatus status;
+  private String notes;
+  private String dateTime;
+  // the three above this comment
   private String patientID;
   private String entree;
   private String side;
@@ -193,24 +232,33 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      // add notes after Assignee JOE
+      String notes,
+      // thats it, should be pretty easy
       String patientID,
       String entree,
       String side,
       String drink,
-      String dessert,
-      String dateNeeded) {
+      String dessert) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    // This is what you add Joanna
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
+    // end of what you add
     this.patientID = patientID;
     this.entree = entree;
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
-    this.dateNeeded = dateNeeded;
+    //this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
@@ -301,6 +349,31 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   public void setDessert(String dessert) {
     this.dessert = dessert;
+  }
+
+  // add setters and getters here
+  public RequestStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(RequestStatus status) {
+    this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 
   @Override

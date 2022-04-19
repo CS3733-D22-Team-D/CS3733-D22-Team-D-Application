@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="542.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.15000000596046448" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ToggleButton id="tableToggle" fx:id="createdRequests" mnemonicParsing="false" onAction="#selectCreated" prefHeight="75.0" prefWidth="1000.0" selected="true" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Created Requests" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="requestTables" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton id="tableToggle" fx:id="assignedRequests" mnemonicParsing="false" onAction="#selectAssigned" prefHeight="75.0" prefWidth="1000.0" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Assigned Requests" textFill="WHITE" toggleGroup="$requestTables">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </ToggleButton>
+                        <ToggleButton id="tableToggle" fx:id="relevantRequests" mnemonicParsing="false" onAction="#selectRelevant" prefHeight="75.0" prefWidth="1000.0" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Relevant Requests" textFill="WHITE" toggleGroup="$requestTables">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </ToggleButton>
+                     </children>
+                  </HBox>
+                  <StackPane minWidth="-Infinity" prefHeight="150.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="177.0" prefWidth="508.0">
+                           <children>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="508.0" style="-fx-background-color: #4b5b81;" />
+                              <TableView id="table" fx:id="createdRequestsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn id="col" fx:id="ReqID22" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="Priority22" prefWidth="75.0" text="Priority" />
+                                    <TableColumn id="col" fx:id="RoomID22" prefWidth="75.0" text="RoomID" />
+                                    <TableColumn id="col" fx:id="Requester22" prefWidth="75.0" text="Requester" />
+                                    <TableColumn id="col" fx:id="Assignee22" onEditCommit="#assigneeNewPleb" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn id="col" fx:id="Status22" prefWidth="75.0" text="Status" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="177.0" prefWidth="508.0">
+                           <children>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="508.0" style="-fx-background-color: #4b5b81;" />
+                              <TableView id="table" fx:id="assignedRequestsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn id="col" fx:id="ReqID221" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="Priority221" prefWidth="75.0" text="Priority" />
+                                    <TableColumn id="col" fx:id="RoomID221" prefWidth="75.0" text="RoomID" />
+                                    <TableColumn id="col" fx:id="Requester221" prefWidth="75.0" text="Requester" />
+                                    <TableColumn id="col" fx:id="Assignee221" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn id="col" fx:id="Status221" onEditCommit="#onEditStatus" prefWidth="75.0" text="Status" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="177.0" prefWidth="508.0">
+                           <children>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="508.0" style="-fx-background-color: #4b5b81;" />
+                              <TableView id="table" fx:id="relevantRequestsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn id="col" fx:id="ReqID222" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="Priority222" prefWidth="75.0" text="Priority" />
+                                    <TableColumn id="col" fx:id="RoomID222" prefWidth="75.0" text="RoomID" />
+                                    <TableColumn id="col" fx:id="Requester222" prefWidth="75.0" text="Requester" />
+                                    <TableColumn id="col" fx:id="Assignee222" onEditCommit="#onVolunteer" prefWidth="75.0" text="Assignee" />
+                                    <TableColumn id="col" fx:id="Status222" prefWidth="75.0" text="Status" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="40.0" left="30.0" right="30.0" top="40.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>

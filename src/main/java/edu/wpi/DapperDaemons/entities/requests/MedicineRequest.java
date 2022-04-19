@@ -23,10 +23,12 @@ public class MedicineRequest extends TableObject implements Request {
         + "roomID varchar(20) DEFAULT 'Unknown',"
         + "requesterID varchar(60) ,"
         + "assigneeID varchar(60) DEFAULT 'Unselected',"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "patientID varchar(60) DEFAULT 'Someone',"
         + "medicationName varchar(60) ,"
-        + "quantity varchar(20),"
-        + "dateNeed varchar(10))";
+        + "quantity varchar(20))";
   }
 
   @Override
@@ -48,13 +50,17 @@ public class MedicineRequest extends TableObject implements Request {
       case 5:
         return assigneeID;
       case 6:
-        return patientID;
+        return status.toString();
       case 7:
-        return medicationName;
+        return notes;
       case 8:
-        return Integer.toString(quantity);
+        return dateTime;
       case 9:
-        return dateNeeded;
+        return patientID;
+      case 10:
+        return medicationName;
+      case 11:
+        return Integer.toString(quantity);
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -79,16 +85,22 @@ public class MedicineRequest extends TableObject implements Request {
         assigneeID = newAttribute;
         break;
       case 6:
-        patientID = newAttribute;
+        status = RequestStatus.valueOf(newAttribute);
         break;
       case 7:
-        medicationName = newAttribute;
+        notes = newAttribute;
         break;
       case 8:
-        quantity = Integer.parseInt(newAttribute);
+        dateTime = newAttribute;
         break;
       case 9:
-        dateNeeded = newAttribute;
+        patientID = newAttribute;
+        break;
+      case 10:
+        medicationName = newAttribute;
+        break;
+      case 11:
+        quantity = Integer.parseInt(newAttribute);
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -122,6 +134,15 @@ public class MedicineRequest extends TableObject implements Request {
       case "assigneeID":
         assigneeID = newAttribute;
         break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
       case "patientID":
         patientID = newAttribute;
         break;
@@ -130,9 +151,6 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case "quantity":
         quantity = Integer.valueOf(newAttribute);
-        break;
-      case "dateNeeded":
-        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -161,6 +179,9 @@ public class MedicineRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private RequestStatus status;
+  private String notes;
+  private String dateTime;
   private String patientID;
   private String medicationName;
   private int quantity;
@@ -173,6 +194,7 @@ public class MedicineRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String patientID,
       String medicationName,
       int quantity,
@@ -184,6 +206,10 @@ public class MedicineRequest extends TableObject implements Request {
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
     this.patientID = patientID;
     this.medicationName = medicationName;
     this.quantity = quantity;
@@ -258,6 +284,30 @@ public class MedicineRequest extends TableObject implements Request {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  public RequestStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(RequestStatus status) {
+    this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 
   @Override

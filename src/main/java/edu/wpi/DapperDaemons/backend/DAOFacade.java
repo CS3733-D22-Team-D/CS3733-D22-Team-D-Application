@@ -1,9 +1,13 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Account;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import java.util.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -107,11 +111,6 @@ public class DAOFacade {
    * @return true if it is already in the DAO
    */
   public static boolean automaticRequestAlreadyExists(MedicalEquipmentRequest requestToCheck) {
-    try {
-      DAOPouch.init();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
     Map<String, MedicalEquipmentRequest> requestMap =
         DAOPouch.getMedicalEquipmentRequestDAO().getAll();
 
@@ -130,5 +129,29 @@ public class DAOFacade {
    */
   public static Location getLocationOfEquip(MedicalEquipment equipment) {
     return DAOPouch.getLocationDAO().get(equipment.getLocationID());
+  }
+
+  public static List<String> getAllPlebs(){
+    DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+    Map<String,Employee> map = new HashMap();
+
+
+    for(int i = 0; i < SecurityController.getUser().getSecurityClearance(); i++) {
+      map.putAll( employeeDAO.filter(6, String.valueOf(i)));
+    }
+    List<String> plebs = (List<String>) map.keySet();
+
+    return plebs;
+  }
+
+
+  public static Employee getEmployee(String username) throws IllegalAccessException {
+    Account account = DAOPouch.getAccountDAO().get(username);
+    List<Employee> employees =
+        new ArrayList<Employee>(
+            DAOPouch.getEmployeeDAO().filter(1, account.getAttribute(2)).values());
+    if (!(employees.size() == 1))
+      throw new IllegalAccessException("Duplicate or No Employee Account(s) Found: " + username);
+    else return employees.get(0);
   }
 }

@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class SanitationController extends ParentController {
 
@@ -42,6 +43,7 @@ public class SanitationController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> locationBox;
   /* Text Field */
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
@@ -80,7 +82,6 @@ public class SanitationController extends ParentController {
     sanitationBox.setValue("");
     priorityBox.setValue("");
     locationBox.setValue("");
-    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -121,7 +122,7 @@ public class SanitationController extends ParentController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority, roomID, requesterID, assigneeID, sanitationType, status, dateStr));
+                    priority, roomID, requesterID, assigneeID, notes.getText(), sanitationType, dateNeeded.getValue().toString()));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.
@@ -182,6 +183,6 @@ public class SanitationController extends ParentController {
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new SanitationRequest());
+    super.saveToCSV(new SanitationRequest(), (Stage) locationBox.getScene().getWindow());
   }
 }

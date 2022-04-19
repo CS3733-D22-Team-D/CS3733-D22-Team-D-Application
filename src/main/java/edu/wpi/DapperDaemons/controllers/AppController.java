@@ -30,9 +30,11 @@ public class AppController implements Initializable {
   @FXML private VBox sceneBox;
 
   private static VBox error;
-
+  private static VBox confirmation;
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    /* Sets up the error message*/
     try {
       error =
           FXMLLoader.load(
@@ -49,6 +51,27 @@ public class AppController implements Initializable {
     errorContainer.getChildren().add(error);
     errorContainer.setAlignment(Pos.CENTER);
     errorContainer.setPadding(new Insets(20, 20, 20, 20));
+
+
+  /* Sets up the confirmation message*/
+    try {
+      confirmation =
+              FXMLLoader.load(
+                      Objects.requireNonNull(App.class.getResource("views/" + "confirmationMessage.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    confirmation.setVisible(false);
+    confirmation.setPickOnBounds(false);
+    HBox confirmationContainer = new HBox();
+    confirmationContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(confirmationContainer);
+    confirmationContainer.getChildren().add(confirmation);
+    confirmationContainer.setAlignment(Pos.CENTER);
+    confirmationContainer.setPadding(new Insets(20, 20, 20, 20));
+
+
   }
 
   /** Creates an error box pop-up on the screen */
@@ -72,11 +95,16 @@ public class AppController implements Initializable {
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
+    Stage window = (Stage) sceneBox.getScene().getWindow();
+    switchScene(fileName, minWidth, minHeight, window);
+  }
+
+  protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
+      throws IOException {
     TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + fileName + ">");
     Parent root =
         FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + fileName)));
-    Stage window = (Stage) sceneBox.getScene().getWindow();
     window.setMinWidth(minWidth);
     window.setMinHeight(minHeight);
     window.setOnCloseRequest(e -> quitProgram());
@@ -106,9 +134,9 @@ public class AppController implements Initializable {
     HBox.setHgrow(child, Priority.ALWAYS);
   }
 
-  protected void saveToCSV(TableObject type) {
+  protected void saveToCSV(TableObject type, Stage window) {
     FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) sceneBox.getScene().getWindow();
+    //    Stage window = (Stage) sceneBox.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {
@@ -116,5 +144,28 @@ public class AppController implements Initializable {
     } catch (Exception e) {
       App.LOG.error("Unable to Save CSV of type: " + type);
     }
+  }
+
+
+
+
+
+  /** Creates an error box pop-up on the screen */
+  public static void showConfirmation(String confirmationMessage) {
+    confirmation.setVisible(true);
+    Node nodeOut = confirmation.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(confirmationMessage);
+        }
+      }
+    }
+  }
+
+  /** Creates an error box pop-up based on a specific location */
+  public static void showConfirmation(String confirmationMessage, Pos pos) {
+    ((HBox) confirmation.getParent()).setAlignment(pos);
+    showConfirmation(confirmationMessage);
   }
 }

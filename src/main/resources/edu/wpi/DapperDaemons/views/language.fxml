@@ -56,10 +56,10 @@
                <children>
                   <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="30.0" right="30.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Text>
-                  <DatePicker id="specialField" fx:id="dateNeeded" prefHeight="30.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                  <DatePicker fx:id="dateNeeded" prefHeight="30.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                </children>
                <opaqueInsets>
                   <Insets />
