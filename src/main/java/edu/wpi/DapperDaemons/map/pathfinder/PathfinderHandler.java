@@ -3,6 +3,8 @@ package edu.wpi.DapperDaemons.map.pathfinder;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +34,11 @@ public class PathfinderHandler implements Initializable {
   @FXML private JFXComboBox<String> fromLocation;
   @FXML private JFXComboBox<String> toLocation;
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(fromLocation, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(toLocation, new FuzzySearchComparatorMethod());
+  }
   public PathfinderHandler(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
     this.controller = controller;

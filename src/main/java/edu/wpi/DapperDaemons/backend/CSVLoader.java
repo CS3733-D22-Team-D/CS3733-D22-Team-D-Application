@@ -28,6 +28,7 @@ public class CSVLoader {
     filenames.put("AllEdges", new LocationNodeConnections());
     filenames.put("LanguageRequests", new LanguageRequest());
     filenames.put("Notifications", new Notification());
+    filenames.put("SecurityRequests", new SecurityRequest());
     filenames.put("EquipmentCleanRequest", new EquipmentCleaning());
   }
 

@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /** Controller for Meal UI Page UPDATED 4/5/22 at 12:08 AM */
 public class MealController extends ParentController {
@@ -233,6 +234,6 @@ public class MealController extends ParentController {
   }
 
   public void saveToCSV() {
-    super.saveToCSV(new MealDeliveryRequest());
+    super.saveToCSV(new MealDeliveryRequest(), (Stage) patientName.getScene().getWindow());
   }
 }

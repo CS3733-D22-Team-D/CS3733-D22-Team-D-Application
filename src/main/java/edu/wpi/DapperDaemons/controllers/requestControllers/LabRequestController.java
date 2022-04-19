@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
 
@@ -131,7 +132,8 @@ public class LabRequestController extends ParentController {
                     assigneeID,
                     notes.getText(),
                     patientID,
-                    labType));
+                    labType,
+                        dateNeeded.getValue().toString()));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada
@@ -172,7 +174,7 @@ public class LabRequestController extends ParentController {
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LabRequest());
+    super.saveToCSV(new LabRequest(), (Stage) patientName.getScene().getWindow());
   }
 
   private class LabRequestInitializer {

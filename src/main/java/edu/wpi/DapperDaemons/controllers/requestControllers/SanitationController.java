@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class SanitationController extends ParentController {
 
@@ -182,6 +183,6 @@ public class SanitationController extends ParentController {
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new SanitationRequest());
+    super.saveToCSV(new SanitationRequest(), (Stage) locationBox.getScene().getWindow());
   }
 }
