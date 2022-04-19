@@ -124,7 +124,7 @@ public class EquipmentRequestController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "null";
+      String assigneeID = "none";
       MedicalEquipment.EquipmentType equipmentType =
           MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
       MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;

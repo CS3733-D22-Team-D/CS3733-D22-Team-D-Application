@@ -54,6 +54,7 @@ public class EmployeesController extends ParentController implements Initializab
   public void initialize(URL location, ResourceBundle resources) {
     initializeTable();
     initializeInputs();
+    onClearClicked();
   }
 
   @FXML

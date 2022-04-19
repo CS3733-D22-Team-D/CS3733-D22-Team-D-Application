@@ -115,7 +115,7 @@ public class MealController extends ParentController {
       Request.Priority priority = Request.Priority.LOW;
       String roomID;
       String requesterID;
-      String assigneeID = "null";
+      String assigneeID = "none";
       String patientID;
       String entree = entreeBox.getValue();
       String side = sideBox.getValue();
