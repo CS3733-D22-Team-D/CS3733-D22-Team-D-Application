@@ -114,6 +114,9 @@ public class MapController extends ParentController {
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
 
+  /*confirm cancel popup*/
+  @FXML private VBox confirmPopup;
+
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(searchBar, new FuzzySearchComparatorMethod());
@@ -346,6 +349,18 @@ public class MapController extends ParentController {
 
   @FXML
   public void onDeleteLocation() {
+    // confirmation box
+    confirmPopup.setVisible(true);
+  }
+
+  @FXML
+  public void onCancelDelete() {
+    // confirmation box
+    confirmPopup.setVisible(false);
+  }
+
+  @FXML
+  public void onConfirmDelete() {
     try {
       locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());
