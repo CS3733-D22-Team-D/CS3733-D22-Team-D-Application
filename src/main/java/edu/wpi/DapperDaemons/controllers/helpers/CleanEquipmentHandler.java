@@ -43,12 +43,14 @@ public class CleanEquipmentHandler {
                         MedicalEquipment makeCleaningRequestFor = inProgressEquipment.remove(0); // remove the bottom from the stack
                         EquipmentCleaning requestInProgress = new ArrayList<>(cleaningDAO.filter(6,makeCleaningRequestFor.getSerialNumber()).values()).get(0);
                         cleaningDAO.delete(requestInProgress); // Deletes the current
-                        EquipmentCleaning request = new EquipmentCleaning(Request.Priority.HIGH,makeCleaningRequestFor.getLocationID(),requestInProgress.getRequesterID(),requestInProgress.getAssigneeID(),makeCleaningRequestFor.getSerialNumber(),makeCleaningRequestFor.getEquipmentType(), MedicalEquipment.CleanStatus.INPROGRESS,nextDate);
+                        EquipmentCleaning request = new EquipmentCleaning(Request.Priority.HIGH,makeCleaningRequestFor.getLocationID(),requestInProgress.getRequesterID(),requestInProgress.getAssigneeID(),requestInProgress.getNotes(),makeCleaningRequestFor.getSerialNumber(),makeCleaningRequestFor.getEquipmentType(), MedicalEquipment.CleanStatus.INPROGRESS,nextDate);
                         cleaningDAO.add(request);
                     } else{
                         MedicalEquipment makeCleaningRequestFor = uncleanEquipment.remove(0); // remove the bottom from the stack
-                        EquipmentCleaning request = new EquipmentCleaning(Request.Priority.HIGH,makeCleaningRequestFor.getLocationID(),"admin","Needed",makeCleaningRequestFor.getSerialNumber(),makeCleaningRequestFor.getEquipmentType(), MedicalEquipment.CleanStatus.INPROGRESS,nextDate);
+                        EquipmentCleaning request = new EquipmentCleaning(Request.Priority.HIGH,makeCleaningRequestFor.getLocationID(),"admin","Needed","Needed Now!!",makeCleaningRequestFor.getSerialNumber(),makeCleaningRequestFor.getEquipmentType(), MedicalEquipment.CleanStatus.INPROGRESS,nextDate);
                         cleaningDAO.add(request);
+                        makeCleaningRequestFor.setCleanStatus(MedicalEquipment.CleanStatus.INPROGRESS);
+                        medicalEquipmentDAO.update(makeCleaningRequestFor);
                     }
                     highPriorityNeeded--;
                 }
