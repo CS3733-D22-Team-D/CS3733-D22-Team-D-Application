@@ -10,21 +10,24 @@ public class Alert extends TableObject {
   private String nodeID;
   private Request.Priority priority;
   private String type;
+  private String floor;
 
   public Alert() {}
 
-  public Alert(String description, String type, Request.Priority priority) {
+  public Alert(String description, String type, Request.Priority priority, String floor) {
     this.description = description;
     this.nodeID = priority.toString() + description + LocalDateTime.now().toString();
     this.priority = priority;
     this.type = type;
+    this.floor = floor;
   }
 
   public String tableInit() {
     return "CREATE TABLE ALERTS(nodeID varchar(100) PRIMARY KEY,"
         + "type varchar(255),"
         + "description varchar(255),"
-        + "priority varchar(255))";
+        + "priority varchar(255),"
+        + "floor varchar(5))";
   }
 
   public String tableName() {
@@ -42,6 +45,8 @@ public class Alert extends TableObject {
         return this.description;
       case 4:
         return this.priority.toString();
+      case 5:
+        return this.floor;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -62,6 +67,8 @@ public class Alert extends TableObject {
       case 4:
         this.priority = Request.Priority.valueOf(newAttribute);
         break;
+      case 5:
+        this.floor = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -90,6 +97,9 @@ public class Alert extends TableObject {
         break;
       case "priority":
         priority = Request.Priority.valueOf(newAttribute);
+        break;
+      case "floor":
+        floor = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -131,4 +141,6 @@ public class Alert extends TableObject {
   public void setType(String type) {
     this.type = type;
   }
+
+  public String getFloor() {return this.floor;}
 }
