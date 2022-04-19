@@ -361,6 +361,11 @@ public class ParentController extends AppController {
   }
 
   @FXML
+  void switchToUserRequests() {
+    swapPage("UserRequests", "User Requests");
+  }
+
+  @FXML
   private void updateWeather() {
     weather.update();
   }
