@@ -135,6 +135,11 @@ public class ORM<T extends TableObject> {
     } else {
       try {
         String updateStatement = "INSERT INTO " + tableName + " VALUES(";
+        Statement stmt = ConnectionHandler.getConnection().createStatement();
+        String query = "SELECT * FROM " + tableName;
+        ResultSet resultSet = stmt.executeQuery(query);
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        this.numAttributes = resultSetMetaData.getColumnCount();
         for (int i = 1; i < numAttributes; i++) {
           updateStatement += "?,";
         }
@@ -147,6 +152,7 @@ public class ORM<T extends TableObject> {
           }
           prepStmt.executeUpdate();
         }
+        stmt.close();
         prepStmt.close();
       } catch (SQLException e) {
         System.out.println("SQLException");
@@ -175,6 +181,11 @@ public class ORM<T extends TableObject> {
     if (ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) add(type);
     else {
       try {
+        Statement stmt = ConnectionHandler.getConnection().createStatement();
+        String query = "SELECT * FROM " + tableName;
+        ResultSet resultSet = stmt.executeQuery(query);
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        this.numAttributes = resultSetMetaData.getColumnCount();
         T instance = (T) type.newInstance(new ArrayList<>());
         String statement = "UPDATE " + tableName + " SET " + columnNames.get(1) + " = ?,";
         for (int i = 2; i < numAttributes - 1; i++) {
@@ -190,6 +201,8 @@ public class ORM<T extends TableObject> {
         }
         prepStmt.setString(numAttributes, type.getAttribute(1));
         prepStmt.executeUpdate();
+        stmt.close();
+        prepStmt.close();
       } catch (SQLException e) {
         System.out.println("SQLException");
       }
@@ -202,6 +215,11 @@ public class ORM<T extends TableObject> {
         Statement stmt = ConnectionHandler.getConnection().createStatement();
         String query = "SELECT * FROM " + tableName;
         ResultSet resultSet = stmt.executeQuery(query);
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        this.numAttributes = resultSetMetaData.getColumnCount();
+        stmt = ConnectionHandler.getConnection().createStatement();
+        query = "SELECT * FROM " + tableName;
+        resultSet = stmt.executeQuery(query);
         while (resultSet.next()) {
           List<String> attributes = new ArrayList<>();
           for (int i = 1; i <= numAttributes; i++) {
