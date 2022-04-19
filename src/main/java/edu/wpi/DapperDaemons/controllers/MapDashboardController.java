@@ -11,7 +11,6 @@ import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -180,7 +179,6 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
-    updateLocOfInterest();
   }
 
   private List<Location> locsByFloor;
@@ -198,14 +196,7 @@ public class MapDashboardController extends ParentController {
       patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
       reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
       locTable.getItems().add(l);
-      try {
-        equipTable.getItems().addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
-        patientTable.getItems().addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
-        reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-        locTable.getItems().add(l);
-      } catch (SQLException e) {
-        showError("Failed to show data on tables.");
-      }
+      showError("Failed to show data on tables.");
     }
   }
 
