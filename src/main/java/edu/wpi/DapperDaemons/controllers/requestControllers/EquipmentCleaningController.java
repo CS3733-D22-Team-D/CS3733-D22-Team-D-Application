@@ -108,34 +108,41 @@ public class EquipmentCleaningController extends ParentController {
 
   @FXML
   public void onSubmitClicked() {
-    if (allFieldsFilled()){
+    if (allFieldsFilled()) {
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "null";
 
-      MedicalEquipment medicalEquipment = medicalEquipmentDAO.get(equipmentIDBox.getValue()); // Gets the current EQ
-      if(medicalEquipment == null){
+      MedicalEquipment medicalEquipment =
+          medicalEquipmentDAO.get(equipmentIDBox.getValue()); // Gets the current EQ
+      if (medicalEquipment == null) {
         showError("Invalid Medical Equipment");
-      }else {
-        String dateStr = "" + cleanByDate.getValue().getMonthValue()
+      } else {
+        String dateStr =
+            ""
+                + cleanByDate.getValue().getMonthValue()
                 + cleanByDate.getValue().getDayOfMonth()
                 + cleanByDate.getValue().getYear();
 
-        medicalEquipment.setCleanStatus(MedicalEquipment.CleanStatus.INPROGRESS); // TODO : Add a REQUESTED field to clean status?
-        medicalEquipmentDAO.update(medicalEquipment); // Show in the medical equipment that it has been requested / put in progress
+        medicalEquipment.setCleanStatus(
+            MedicalEquipment.CleanStatus
+                .INPROGRESS); // TODO : Add a REQUESTED field to clean status?
+        medicalEquipmentDAO.update(
+            medicalEquipment); // Show in the medical equipment that it has been requested / put in
+        // progress
 
         boolean hadClearance =
-                addItem(
-                        new EquipmentCleaning(
-                                priority,
-                                roomID,
-                                requesterID,
-                                assigneeID,
-                                medicalEquipment.getNodeID(),
-                                medicalEquipment.getEquipmentType(),
-                                MedicalEquipment.CleanStatus.INPROGRESS,
-                                dateStr));
+            addItem(
+                new EquipmentCleaning(
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    medicalEquipment.getNodeID(),
+                    medicalEquipment.getEquipmentType(),
+                    MedicalEquipment.CleanStatus.INPROGRESS,
+                    dateStr));
         // check if user has permission
         if (!hadClearance) {
           showError("You do not have permission to do this.");
