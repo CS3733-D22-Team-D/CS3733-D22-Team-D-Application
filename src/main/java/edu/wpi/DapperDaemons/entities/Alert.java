@@ -13,7 +13,7 @@ public class Alert extends TableObject {
 
   public Alert() {}
 
-  public Alert(String description, Request.Priority priority, String type) {
+  public Alert(String description, String type, Request.Priority priority) {
     this.description = description;
     this.nodeID = priority.toString() + description + LocalDateTime.now().toString();
     this.priority = priority;
@@ -43,9 +43,8 @@ public class Alert extends TableObject {
       case 4:
         return this.priority.toString();
       default:
-        break;
+        throw new IndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override
@@ -60,7 +59,7 @@ public class Alert extends TableObject {
       case 4:
         this.priority = Request.Priority.valueOf(newAttribute);
       default:
-        break;
+        throw new IndexOutOfBoundsException();
     }
   }
 
@@ -68,13 +67,30 @@ public class Alert extends TableObject {
   public TableObject newInstance(List<String> l) {
     Alert temp = new Alert();
     for (int i = 0; i < l.size(); i++) {
-      temp.setAttribute(i, l.get(i));
+      temp.setAttribute(i + 1, l.get(i));
     }
     return temp;
   }
 
   @Override
-  public void setAttribute(String attribute, String newAttribute) {}
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "description":
+        description = newAttribute;
+        break;
+      case "type":
+        type = newAttribute;
+        break;
+      case "priority":
+        priority = Request.Priority.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
 
   @TableHandler(table = 1, col = 0)
   public String getDescription() {

@@ -68,7 +68,7 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    DAOPouch.getAlertDAO().add(new Alert("22", Request.Priority.HIGH, "234"));
+    DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH));
 
     bindImage(mapImage, mapImageContainer);
 
@@ -189,6 +189,9 @@ public class MapDashboardController extends ParentController {
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
+    alertTable.getItems().clear();
+    alertTable.getItems().addAll(DAOPouch.getAlertDAO().getAll().values());
+
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
@@ -196,7 +199,6 @@ public class MapDashboardController extends ParentController {
       patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
       reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
       locTable.getItems().add(l);
-      showError("Failed to show data on tables.");
     }
   }
 
