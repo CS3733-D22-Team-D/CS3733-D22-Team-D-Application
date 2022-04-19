@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import javafx.fxml.FXML;
@@ -36,9 +35,6 @@ public class DefaultController extends ParentController {
 
   private final List<KeyCode> easterEggSequence = new ArrayList<>();
   private int easterEggInd = 0;
-
-  private long startTime;
-  private int count = 0;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -87,21 +83,6 @@ public class DefaultController extends ParentController {
       }
     } else {
       easterEggInd = 0;
-    }
-  }
-
-  @FXML
-  public void easterEgg() throws IOException {
-    if (count == 0) {
-      startTime = System.currentTimeMillis();
-    }
-    count++;
-    if ((System.currentTimeMillis() - startTime) > 10000) {
-      count = 0;
-    }
-    if (count == 10 & (System.currentTimeMillis() - startTime) < 10000) {
-      count = 0;
-      switchScene("easterEgg.fxml", 761, 626);
     }
   }
 }
