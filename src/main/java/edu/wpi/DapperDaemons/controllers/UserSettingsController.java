@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UserSettingsController extends ParentController {
 
@@ -59,5 +60,15 @@ public class UserSettingsController extends ParentController {
   @FXML
   private void redSwitch() {
     ThemeHandler.toggleTheme(ThemeHandler.Theme.Red);
+  }
+
+  @FXML
+  private void saveToCSV() {
+    super.saveToCSV((Stage) accountUserName.getScene().getWindow());
+  }
+
+  @FXML
+  private void loadFromCSV() {
+    super.loadFromCSV((Stage) accountUserName.getScene().getWindow());
   }
 }
