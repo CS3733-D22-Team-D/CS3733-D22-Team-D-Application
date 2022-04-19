@@ -19,22 +19,22 @@ public class MealDeliveryRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60),"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
+    return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
         // copy paste these three JOE
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
         // Stop after this^^^ one HU
-        + "patientID varchar(60),"
-        + "entree varchar(20),"
-        + "side varchar(20),"
-        + "drink varchar(20),"
-        + "dessert varchar(20),"
-        + "dateNeed varchar(10))";
+        + "patientID varchar(1000),"
+        + "entree varchar(1000),"
+        + "side varchar(1000),"
+        + "drink varchar(1000),"
+        + "dessert varchar(1000),"
+        + "dateNeed varchar(1000))";
   }
 
   @Override
@@ -124,6 +124,9 @@ public class MealDeliveryRequest extends TableObject implements Request {
       case 13:
         dessert = newAttribute;
         break;
+      case 14:
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -208,22 +211,22 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   // ATTRIBUTES
 
-  private String nodeID;
-  private Priority priority;
-  private String roomID;
-  private String requesterID;
-  private String assigneeID;
+  private String nodeID = "";
+  private Priority priority = Priority.LOW;
+  private String roomID = "";
+  private String requesterID = "";
+  private String assigneeID = "";
   // the three below this comment
-  private RequestStatus status;
-  private String notes;
-  private String dateTime;
+  private RequestStatus status = RequestStatus.REQUESTED;
+  private String notes = "";
+  private String dateTime = "";
   // the three above this comment
-  private String patientID;
-  private String entree;
-  private String side;
-  private String drink;
-  private String dessert;
-  private String dateNeeded;
+  private String patientID = "";
+  private String entree = "";
+  private String side = "";
+  private String drink = "";
+  private String dessert = "";
+  private String dateNeeded = "";
 
   // CONSTRUCTORS
 
@@ -239,7 +242,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String entree,
       String side,
       String drink,
-      String dessert) {
+      String dessert,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -258,7 +262,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
-    // this.dateNeeded = dateNeeded;
+    this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}

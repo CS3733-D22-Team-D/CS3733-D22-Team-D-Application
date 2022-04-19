@@ -22,6 +22,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -33,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javax.swing.*;
 
 /** Controller Class for interactive Map Page */
 public class MapController extends ParentController {
@@ -41,10 +43,13 @@ public class MapController extends ParentController {
   @FXML private ImageView mapView;
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane equipLayer;
+  @FXML private AnchorPane dragPane;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
   @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
+  @FXML private VBox centerBox;
+  @FXML private VBox emptyBox;
 
   /* Map Filter */
   @FXML private StackPane mapFilter;
@@ -86,6 +91,12 @@ public class MapController extends ParentController {
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
 
+  /* Drag elements */
+  @FXML private ImageView infusionDragImage;
+  @FXML private ImageView bedDragImage;
+  private static DragHandler bedDrag;
+  private static DragHandler infusionDrag;
+
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
   @FXML private ToggleButton circle3;
@@ -109,6 +120,9 @@ public class MapController extends ParentController {
 
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
+
+  /*confirm cancel popup*/
+  @FXML private VBox confirmPopup;
 
   @FXML
   public void startFuzzySearch() {
@@ -342,6 +356,18 @@ public class MapController extends ParentController {
 
   @FXML
   public void onDeleteLocation() {
+    // confirmation box
+    confirmPopup.setVisible(true);
+  }
+
+  @FXML
+  public void onCancelDelete() {
+    // confirmation box
+    confirmPopup.setVisible(false);
+  }
+
+  @FXML
+  public void onConfirmDelete() {
     try {
       locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());
@@ -440,9 +466,15 @@ public class MapController extends ParentController {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
+      bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
+      infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
+      bedDrag.enable();
+      infusionDrag.enable();
     } else {
       mapContents.setPannable(true);
       glyphs.disableEditing();
+      if (bedDrag != null) bedDrag.disable();
+      if (infusionDrag != null) infusionDrag.disable();
     }
   }
 
@@ -609,12 +641,15 @@ public class MapController extends ParentController {
         directionsFields =
             FXMLLoader.load(
                 Objects.requireNonNull(App.class.getResource("views/" + "directionsSearch.fxml")));
-        filterMenu.getChildren().add(directionsFields);
+        emptyBox.getChildren().add(directionsFields);
+        emptyBox.setAlignment(Pos.TOP_LEFT);
+        emptyBox.setVisible(true);
       } catch (IOException e) {
         e.printStackTrace();
       }
     } else {
-      filterMenu.getChildren().remove(2);
+      emptyBox.getChildren().remove(directionsFields);
+      emptyBox.setVisible(false);
     }
   }
 
@@ -656,5 +691,9 @@ public class MapController extends ParentController {
     ft.setAutoReverse(false);
 
     ft.play();
+  }
+
+  public String getFloor() {
+    return maps.getFloor();
   }
 }
