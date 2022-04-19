@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -63,7 +64,6 @@ public class EquipmentRequestController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //        super.initialize(location, resources);
     initBoxes();
     //    bindImage(BGImage, BGContainer);
 
@@ -237,7 +237,7 @@ public class EquipmentRequestController extends ParentController {
     equipmentTypeBox.setItems(
         FXCollections.observableArrayList(
             TableHelper.convertEnum(MedicalEquipment.EquipmentType.class)));
-    //    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

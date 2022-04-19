@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.SecurityRequestController">
+<HBox prefHeight="577.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.SecurityRequestController">
     <children>
-        <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+        <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
             <children>
                 <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
                     <children>
@@ -52,6 +53,36 @@
                         <Insets left="30.0" right="30.0" top="15.0" />
                     </padding>
                 </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+               <children>
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="61.0" prefWidth="307.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </Text>
+                  <DatePicker fx:id="dateNeeded" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
                 <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
                     <children>
                         <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />
@@ -62,11 +93,6 @@
                         </Button>
                     </children>
                 </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="notes" />
-               </children>
-            </HBox>
             </children>
             <HBox.margin>
                 <Insets bottom="30.0" left="20.0" right="10.0" top="30.0" />
