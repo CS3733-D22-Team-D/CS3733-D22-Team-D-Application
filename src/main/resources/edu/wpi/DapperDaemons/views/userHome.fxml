@@ -17,55 +17,7 @@
 
 <HBox prefHeight="577.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserHomeController">
    <children>
-      <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="220.0" HBox.hgrow="NEVER">
-         <children>
-            <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ToggleButton>
-            <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ToggleButton>
-            <ToggleButton id="foreground" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ToggleButton>
-            <ToggleButton id="foreground" fx:id="aboutButton" alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAboutUs" onMouseClicked="#switchToAboutUs" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="About">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ToggleButton>
-         </children>
-      </VBox>
-      <StackPane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+      <StackPane alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
          <children>
             <VBox id="background" fx:id="homeSettingsPage" alignment="TOP_CENTER" pickOnBounds="false" prefHeight="565.0" prefWidth="444.0" spacing="16.0">
                <children>
@@ -153,7 +105,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;">
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="210.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" HBox.hgrow="ALWAYS">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>
@@ -198,7 +150,7 @@
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <VBox id="foreground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="420.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" VBox.vgrow="NEVER">
+                  <VBox id="foreground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="460.0" style="-fx-background-radius: 7.5; -fx-background-color: #FFFEFE;" VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;">
                            <children>
@@ -279,6 +231,54 @@
                         </DropShadow>
                      </effect>
                   </VBox>
+               </children>
+            </VBox>
+            <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="220.0">
+               <children>
+                  <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+                  <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+                  <ToggleButton id="foreground" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+                  <ToggleButton id="foreground" fx:id="aboutButton" alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAboutUs" onMouseClicked="#switchToAboutUs" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="About">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
                </children>
             </VBox>
          </children>

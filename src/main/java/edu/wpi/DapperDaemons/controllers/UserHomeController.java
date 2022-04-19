@@ -1,6 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import java.net.URL;
 import java.util.Objects;
@@ -60,8 +60,7 @@ public class UserHomeController extends ParentController {
     accountName.setText(employeeName);
     fullName.setText(employeeName);
 
-    accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    accountUserName.setText(DAOFacade.getUserAccount().getAttribute(1));
 
     // set security access level
     securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
@@ -85,8 +84,7 @@ public class UserHomeController extends ParentController {
     birthday.setText(employeeBirth);
 
     // set email
-    email.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+    email.setText(DAOFacade.getUserAccount().getAttribute(7));
   }
 
   /**

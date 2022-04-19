@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UserSettingsController extends ParentController {
 
@@ -69,11 +71,9 @@ public class UserSettingsController extends ParentController {
     accountName.setText(employeeName);
     name.setText(employeeName);
 
-    accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    accountUserName.setText(DAOFacade.getUsername());
 
-    username.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    username.setText(DAOFacade.getUsername());
 
     // set profile picture
     profilePic.setFill(
@@ -92,18 +92,27 @@ public class UserSettingsController extends ParentController {
     birthday.setText(employeeBirth);
 
     // set email
-    email.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+    email.setText(DAOFacade.getUserAccount().getAttribute(7));
 
     // set themeBox
     themeBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(ThemeHandler.Theme.class)));
   }
 
+  @FXML
+  private void saveToCSV() {
+    saveToCSV((Stage) email.getScene().getWindow());
+  }
+
+  @FXML
+  private void loadFromCSV() {
+    loadFromCSV((Stage) email.getScene().getWindow());
+  }
+
   public void onSaveChanges() {
     // set email
     String newEmail = email.getText();
-    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    Account toChange = DAOFacade.getUserAccount();
     if (!newEmail.equals(toChange.getAttribute(7))) {
       toChange.setAttribute(7, newEmail);
       DAOPouch.getAccountDAO().update(toChange);

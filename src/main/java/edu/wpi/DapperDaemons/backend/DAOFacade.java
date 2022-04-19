@@ -131,14 +131,12 @@ public class DAOFacade {
 
   public static List<String> getAllPlebs() {
     DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
-    Map<String, Employee> map = new HashMap();
+    Map<String, Employee> map = new HashMap<>();
 
     for (int i = 0; i < SecurityController.getUser().getSecurityClearance(); i++) {
       map.putAll(employeeDAO.filter(6, String.valueOf(i)));
     }
-    List<String> plebs = new ArrayList(map.keySet());
-
-    return plebs;
+    return new ArrayList<>(map.keySet());
   }
 
   public static Employee getEmployee(String username) throws IllegalAccessException {
@@ -149,5 +147,9 @@ public class DAOFacade {
     if (!(employees.size() == 1))
       throw new IllegalAccessException("Duplicate or No Employee Account(s) Found: " + username);
     else return employees.get(0);
+  }
+
+  public static Account getUserAccount() {
+    return DAOPouch.getAccountDAO().get(getUsername());
   }
 }
