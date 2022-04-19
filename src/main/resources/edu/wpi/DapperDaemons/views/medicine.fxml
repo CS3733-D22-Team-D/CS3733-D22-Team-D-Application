@@ -182,6 +182,11 @@
                   <Insets bottom="12.0" />
                </padding>
             </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="notes" />
+               </children>
+            </HBox>
          </children>
          <HBox.margin>
             <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
