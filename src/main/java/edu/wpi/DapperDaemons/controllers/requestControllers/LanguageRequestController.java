@@ -130,6 +130,6 @@ public class LanguageRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest());
+    super.saveToCSV(new LanguageRequest());
   }
 }
