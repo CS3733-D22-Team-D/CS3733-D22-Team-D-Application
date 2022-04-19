@@ -86,7 +86,7 @@ public class ParentController extends AppController {
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
     notifs = new NotificationHandler(notifications, notifBell);
-    new ThemeHandler(mainBox);
+    ThemeHandler themeHandler = new ThemeHandler(mainBox);
 
     updateWeather();
     swapPage("default", "Home");
@@ -99,6 +99,7 @@ public class ParentController extends AppController {
     mainBox.getChildren().clear();
     mainBox.setOnMouseMoved(e -> SessionTimeout.reset());
     if (burgBack != null && burgBack.isVisible()) closeSlider();
+    if (EasterEggController.player != null) EasterEggController.player.stop();
 
     try {
       HBox childPage =
