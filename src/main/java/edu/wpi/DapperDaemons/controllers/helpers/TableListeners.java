@@ -25,7 +25,6 @@ public class TableListeners {
   private static ValueEventListener pL;
   private static ValueEventListener ssrL;
 
-
   public static void setLabRequestListener(ValueEventListener labRequestListener) {
     lbrL = labRequestListener;
     ref.child("LABREQUESTS").addValueEventListener(lbrL);
