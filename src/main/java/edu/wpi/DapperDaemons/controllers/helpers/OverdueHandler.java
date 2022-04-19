@@ -3,16 +3,14 @@ package edu.wpi.DapperDaemons.controllers.helpers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.FireBase;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class OverdueHandler {
   private static DAO<LabRequest> labRequestDAO;
@@ -24,40 +22,8 @@ public class OverdueHandler {
   private static DAO<EquipmentCleaning> equipmentCleaningDAO;
   private static OverdueHandler handler;
   private static int dateRepresentation;
-  private static ValueEventListener valueEventListener;
-
-  public OverdueHandler() {}
-
-  public static void setListener() {
-    List<String> tableNames =
-            Arrays.asList(
-                    new EquipmentCleaning().tableName(),
-                    new LabRequest().tableName(),
-                    new LanguageRequest().tableName(),
-                    new MealDeliveryRequest().tableName(),
-                    new MedicalEquipmentRequest().tableName(),
-                    new MedicineRequest().tableName(),
-                    new PatientTransportRequest().tableName(),
-                    new SanitationRequest().tableName(),
-                    new SecurityRequest().tableName());
-
-    valueEventListener = new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot snapshot) {
-        updateOverdue();
-
-      }
-
-      @Override
-      public void onCancelled(DatabaseError error) {
-
-      }
-    };
-
-    for(String table : tableNames) {
-      FireBase.getReference().child(table).addValueEventListener(valueEventListener);
-    }
-  }
+  private static Timer overdueTimer;
+  private static final int updateTime = 180; // Every 3 minutes check if something is overdue
 
   public static void init() {
     labRequestDAO = DAOPouch.getLabRequestDAO();
@@ -68,24 +34,38 @@ public class OverdueHandler {
     sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
     equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
     handler = new OverdueHandler();
-    setListener();
+
+    updateOverdue();
   }
 
   public static void updateOverdue() {
-    try {
-      Date dateDat = new Date();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-      dateRepresentation = Integer.parseInt(dateFormat.format(dateDat));
-      handler.checkLabReq();
-      handler.checkEquipmentCleanReq();
-      handler.checkMealReq();
-      handler.checkMedicineReq();
-      handler.checkMedicalEqReq();
-      handler.checkPatientTransportReq();
-      handler.checkSanitaitonReq();
-    } catch (Exception e) {
+    if (overdueTimer != null)
+      overdueTimer.cancel();
+    overdueTimer = new Timer();
+    overdueTimer.schedule(
+            new TimerTask() {
+              @Override
+              public void run() {
+                App.LOG.info("Checking for overdue things");
+                try {
+                  Date dateDat = new Date();
+                  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+                  dateRepresentation = Integer.parseInt(dateFormat.format(dateDat));
+                  handler.checkLabReq();
+                  handler.checkEquipmentCleanReq();
+                  handler.checkMealReq();
+                  handler.checkMedicineReq();
+                  handler.checkMedicalEqReq();
+                  handler.checkPatientTransportReq();
+                  handler.checkSanitaitonReq();
+                } catch (Exception e) {
 
-    }
+                }
+              }
+            },
+            0,
+            updateTime * 1000 // every 180 * 1000ms so 180 seconds
+    );
   }
 
   private List<Request> checkOverdue(List<Request> requestList) {
@@ -96,6 +76,7 @@ public class OverdueHandler {
       int dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
       if (dateOf < dateRepresentation) // If the due date has passed,
       overdueList.add(req); // Add the req to the list
+      App.LOG.info("Request " + req.getNodeID() + " Was overdue, updating priority");
     }
     return overdueList;
   }
