@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class MedicineRequest extends TableObject implements Request {
         + "dateTime varchar(1000),"
         + "patientID varchar(1000) DEFAULT 'Someone',"
         + "medicationName varchar(1000) ,"
-        + "quantity varchar(1000))";
+        + "quantity varchar(1000),"
+            + "dateNeeded varchar(1000))"   ;
   }
 
   @Override
@@ -61,6 +63,8 @@ public class MedicineRequest extends TableObject implements Request {
         return medicationName;
       case 11:
         return Integer.toString(quantity);
+      case 12:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -102,6 +106,8 @@ public class MedicineRequest extends TableObject implements Request {
       case 11:
         quantity = Integer.parseInt(newAttribute);
         break;
+      case 12:
+        dateNeeded = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -152,6 +158,8 @@ public class MedicineRequest extends TableObject implements Request {
       case "quantity":
         quantity = Integer.valueOf(newAttribute);
         break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -199,8 +207,7 @@ public class MedicineRequest extends TableObject implements Request {
       String medicationName,
       int quantity,
       String dateNeeded) {
-    SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy-HH:MM:SS");
-    this.nodeID = priority.toString() + requesterID + format.format(new Date());
+    this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
     this.roomID = roomID;
@@ -319,4 +326,7 @@ public class MedicineRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
+
+
+
 }

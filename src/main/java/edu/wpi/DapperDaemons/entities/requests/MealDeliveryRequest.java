@@ -26,7 +26,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
         + "assigneeID varchar(1000),"
         // copy paste these three JOE
         + "status varchar(1000),"
-        + "notes varchar(10005),"
+        + "notes varchar(1000),"
         + "dateTime varchar(1000),"
         // Stop after this^^^ one HU
         + "patientID varchar(1000),"
@@ -124,6 +124,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
       case 13:
         dessert = newAttribute;
         break;
+      case 14:
+        dateNeeded = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -239,7 +241,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String entree,
       String side,
       String drink,
-      String dessert) {
+      String dessert,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -258,7 +261,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
-    // this.dateNeeded = dateNeeded;
+    this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
@@ -385,4 +388,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
+
+
+
+
 }

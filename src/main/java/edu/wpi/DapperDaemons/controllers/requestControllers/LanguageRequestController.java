@@ -8,6 +8,7 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -32,7 +34,7 @@ public class LanguageRequestController extends ParentController {
   @FXML private JFXComboBox<String> languageBox;
   @FXML private JFXComboBox<String> roomBox;
   @FXML private DatePicker dateNeeded;
-
+ @FXML private TextField notes;
   /* Table Columns */
   @FXML private TableColumn<LanguageRequest, String> reqID;
   @FXML private TableColumn<LanguageRequest, String> language;
@@ -93,6 +95,7 @@ public class LanguageRequestController extends ParentController {
     languageBox.setValue("");
     roomBox.setValue("");
     dateNeeded.setValue(null);
+    notes.setText("");
   }
 
   @FXML
@@ -107,9 +110,7 @@ public class LanguageRequestController extends ParentController {
               + dateNeeded.getValue().getYear();
       addItem(
           new LanguageRequest(
-              LanguageRequest.Language.valueOf(languageBox.getValue()),
-              roomBox.getValue(),
-              dateRep));
+              ));
     } else {
       // TODO uncomment when fixed
       //   showError("All fields must be filled.");

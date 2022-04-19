@@ -28,7 +28,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         + "notes varchar(1000),"
         + "dateTime varchar(1000),"
         + "patientID varchar(1000) ,"
-        + "nextRoomID varchar(1000))";
+        + "nextRoomID varchar(1000),"
+            + "dateNeeded varchar(1000))";
   }
 
   @Override
@@ -60,7 +61,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         return patientID;
       case 10:
         return nextRoomID;
-
+      case 11:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -100,6 +102,8 @@ public class PatientTransportRequest extends TableObject implements Request {
       case 10:
         nextRoomID = newAttribute;
         break;
+      case 11:
+        dateNeeded = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -194,7 +198,8 @@ public class PatientTransportRequest extends TableObject implements Request {
       String assigneeID,
       String notes,
       String patientID,
-      String nextRoomID) {
+      String nextRoomID,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -308,4 +313,6 @@ public class PatientTransportRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
+
+
 }
