@@ -315,6 +315,11 @@ public class ParentController extends AppController {
   }
 
   @FXML
+  void switchToEmployeesBitch() {
+    swapPage("employees", "Employee Manager");
+  }
+
+  @FXML
   void switchToAboutUs() {
     swapPage("aboutUs", "About Us");
   }

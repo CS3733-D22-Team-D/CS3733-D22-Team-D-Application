@@ -236,7 +236,7 @@ public class SecurityRequest extends TableObject implements Request {
 
   @Override
   public String getDateNeeded() {
-    return null;
+    return dateNeeded;
   }
 
   public void setStatus(Request.RequestStatus status) {

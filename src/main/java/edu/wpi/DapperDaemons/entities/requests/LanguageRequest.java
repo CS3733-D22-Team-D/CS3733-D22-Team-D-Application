@@ -27,7 +27,7 @@ public class LanguageRequest extends TableObject implements Request {
 
   @Override
   public RequestStatus getStatus() {
-    return getStatus();
+    return status;
   }
 
   @TableHandler(table = 0, col = 1)

@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -52,7 +53,7 @@ public class SanitationController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
-    //    initializeInputs(); TODO: Get all long names problem
+    initializeInputs();
     initializeTable();
 
     try {
@@ -98,7 +99,7 @@ public class SanitationController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
       String roomID = locationBox.getValue();
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "null";
+      String assigneeID = "none";
       String sanitationType = sanitationBox.getValue().toString();
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
@@ -157,7 +158,7 @@ public class SanitationController extends ParentController {
     sanitationBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
 
-    locationBox.setItems((FXCollections.observableArrayList(getAllLongNames())));
+    locationBox.setItems((FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames())));
 
     // locationBox.getItems().removeAll();
   }
