@@ -88,7 +88,6 @@ public class App extends Application {
               switchToEmbedded();
             }
 
-            AutoSave.start(10);
             //            try { // this is to save everything from the firebase database
             //              Thread.sleep(2000);
             //            } catch (InterruptedException e) {

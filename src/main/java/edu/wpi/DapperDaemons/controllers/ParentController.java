@@ -75,10 +75,12 @@ public class ParentController extends AppController {
   @FXML private ScrollPane notificationsScroller;
 
   @FXML private ImageView notifBell;
+  @FXML private ImageView autoSaveIcon;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    if (!AutoSave.started()) AutoSave.start(1, autoSaveIcon);
     bindImage(BGImage, BGContainer);
     menuSlider(slider, burg, burgBack);
     initSequence();
