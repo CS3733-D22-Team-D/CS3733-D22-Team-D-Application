@@ -60,8 +60,7 @@ public class PatientTransportRequest extends TableObject implements Request {
         return patientID;
       case 10:
         return nextRoomID;
-      case 8:
-        return status.toString();
+
 
       default:
         throw new IndexOutOfBoundsException();
@@ -134,9 +133,7 @@ public class PatientTransportRequest extends TableObject implements Request {
       case "assigneeID":
         assigneeID = newAttribute;
         break;
-      case "status":
-        status = RequestStatus.valueOf(newAttribute);
-        break;
+
       case "notes":
         notes = newAttribute;
         break;
@@ -187,7 +184,6 @@ public class PatientTransportRequest extends TableObject implements Request {
   private String dateTime;
   private String patientID;
   private String nextRoomID;
-  private RequestStatus status;
   private String dateNeeded;
 
   // CONSTRUCTORS

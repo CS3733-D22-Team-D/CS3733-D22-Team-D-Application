@@ -132,6 +132,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case "dateNeeded":
         dateNeeded = newAttribute;
         break;
+      case "notes":
+        notes = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -154,6 +156,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private String notes;
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
@@ -181,6 +184,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
     this.dateNeeded = dateNeeded;
+    this.notes = notes;
   }
 
   public MedicalEquipmentRequest() {}

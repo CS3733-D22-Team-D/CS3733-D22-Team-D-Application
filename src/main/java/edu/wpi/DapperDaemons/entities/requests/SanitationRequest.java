@@ -130,9 +130,6 @@ public class SanitationRequest extends TableObject implements Request {
       case "sanitationType":
         sanitationType = newAttribute;
         break;
-      case "cleanStatus":
-        cleanStatus = RequestStatus.valueOf(newAttribute);
-        break;
       case "dateNeeded":
         dateNeeded = newAttribute;
         break;
@@ -167,7 +164,6 @@ public class SanitationRequest extends TableObject implements Request {
   private String notes;
   private String dateTime;
   private String sanitationType;
-  private RequestStatus cleanStatus;
   private String dateNeeded;
 
   // CONSTRUCTOR
@@ -179,7 +175,6 @@ public class SanitationRequest extends TableObject implements Request {
       String assigneeID,
       String notes,
       String sanitationType,
-      RequestStatus cleanStatus,
       String dateNeeded) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
@@ -194,7 +189,6 @@ public class SanitationRequest extends TableObject implements Request {
     this.dateTime = formatter.format(now);
     this.status = RequestStatus.REQUESTED;
     this.sanitationType = sanitationType;
-    this.cleanStatus = cleanStatus;
     this.dateNeeded = dateNeeded;
   }
 

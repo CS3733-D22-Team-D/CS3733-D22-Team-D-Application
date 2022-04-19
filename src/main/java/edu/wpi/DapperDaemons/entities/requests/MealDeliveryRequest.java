@@ -73,6 +73,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         return drink;
       case 13:
         return dessert;
+      case 14:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -191,7 +193,6 @@ public class MealDeliveryRequest extends TableObject implements Request {
         dateTime = newAttribute;
         break;
         // the three above this comment
-        break;
       case "dateNeeded":
         dateNeeded = newAttribute;
         break;
@@ -222,6 +223,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   private String side;
   private String drink;
   private String dessert;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
