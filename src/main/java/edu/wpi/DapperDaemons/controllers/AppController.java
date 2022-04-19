@@ -106,9 +106,9 @@ public class AppController implements Initializable {
     HBox.setHgrow(child, Priority.ALWAYS);
   }
 
-  protected void saveToCSV(TableObject type) {
+  protected void saveToCSV(TableObject type, Stage window) {
     FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) sceneBox.getScene().getWindow();
+    //    Stage window = (Stage) sceneBox.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {
