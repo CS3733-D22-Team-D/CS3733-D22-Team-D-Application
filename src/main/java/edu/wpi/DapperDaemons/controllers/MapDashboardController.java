@@ -56,14 +56,11 @@ public class MapDashboardController extends ParentController {
   @FXML private Text inUseEquipNum;
   @FXML private Text patientNum;
   @FXML private Text requestNum;
-  private final String floorTxtPath = "floorSummary.txt";
 
   public static String floor;
 
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
-
-  private TableHelper<Alert> alerts;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -79,8 +76,7 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    alerts = new TableHelper<>(alertTable, 1);
-    alerts.linkColumns(Alert.class);
+    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
@@ -198,6 +194,7 @@ public class MapDashboardController extends ParentController {
 
   private void updateSummary() {
     try {
+      String floorTxtPath = "floorSummary.txt";
       String floorText = getFileText(floorTxtPath, getFloorNum());
       floorSummary.setText(floorText);
     } catch (IOException e) {
