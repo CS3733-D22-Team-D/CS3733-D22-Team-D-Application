@@ -1,5 +1,5 @@
-nodeID,priority,roomID,requesterID,assigneeID,patientID,medicationName,quantity,dateNeed
-Minecraft247,HIGH,Fuller,Jacob,TK,Rosemary,Minecraft,5,04262022
-DatGoodGood7,HIGH,Zoo Lab,Cole,Cole,Cole,Weed,13,04202022
-Happiness22,HIGH,Foisie,Wong,Students,Laurie's Lesson,Tesla,601,04282022
-Shafath31,HIGH,Wooberry,Chandler,Shafath,Cole,A Hug,2,04222022
+nodeID,priority,roomID,requesterID,assigneeID,status,notes,dateTime,patientID,medicationName,quantity
+Minecraft247,HIGH,Fuller,Jacob,TK,REQUESTED,,,Rosemary,Minecraft,5
+DatGoodGood7,HIGH,Zoo Lab,Cole,Cole,REQUESTED,,,Cole,Weed,13
+Happiness22,HIGH,Foisie,Wong,Students,REQUESTED,,,Laurie's Lesson,Tesla,601
+Shafath31,HIGH,Wooberry,Chandler,Shafath,REQUESTED,,,Cole,A Hug,2
