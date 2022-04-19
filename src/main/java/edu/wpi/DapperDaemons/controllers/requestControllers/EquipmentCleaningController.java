@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
@@ -107,24 +108,47 @@ public class EquipmentCleaningController extends ParentController {
 
   @FXML
   public void onSubmitClicked() {
+    if (allFieldsFilled()){
+      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      String roomID = "";
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assigneeID = "null";
+
+      MedicalEquipment medicalEquipment = medicalEquipmentDAO.get(equipmentIDBox.getValue()); // Gets the current EQ
+      if(medicalEquipment == null){
+        showError("Invalid Medical Equipment");
+      }else {
+        String dateStr = "" + cleanByDate.getValue().getMonthValue()
+                + cleanByDate.getValue().getDayOfMonth()
+                + cleanByDate.getValue().getYear();
+
+        medicalEquipment.setCleanStatus(MedicalEquipment.CleanStatus.INPROGRESS); // TODO : Add a REQUESTED field to clean status?
+        medicalEquipmentDAO.update(medicalEquipment); // Show in the medical equipment that it has been requested / put in progress
+
+        boolean hadClearance =
+                addItem(
+                        new EquipmentCleaning(
+                                priority,
+                                roomID,
+                                requesterID,
+                                assigneeID,
+                                medicalEquipment.getNodeID(),
+                                medicalEquipment.getEquipmentType(),
+                                MedicalEquipment.CleanStatus.INPROGRESS,
+                                dateStr));
+        // check if user has permission
+        if (!hadClearance) {
+          showError("You do not have permission to do this.");
+        } else {
+          onClearClicked();
+        }
+      }
+    } else {
+      showError("All fields but be filled");
+    }
 
     // make sure all fields are filled
     //    if (allFieldsFilled()) {
-    //      // get all the variables ready to go
-    //      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
-    //      String roomID = "";
-    //      String requesterID = SecurityController.getUser().getNodeID();
-    //      String assigneeID = "null";
-    //      MedicalEquipment.EquipmentType equipmentType =
-    //          MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
-    //      MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
-    //
-    //      String dateStr =
-    //          ""
-    //              + dateNeeded.getValue().getMonthValue()
-    //              + dateNeeded.getValue().getDayOfMonth()
-    //              + dateNeeded.getValue().getYear();
-    //
     //      ArrayList<MedicalEquipment> equipments = new ArrayList<>();
     //      MedicalEquipment equipment = new MedicalEquipment();
     //      // is there equipment with that Type?
@@ -212,7 +236,6 @@ public class EquipmentCleaningController extends ParentController {
     //    } else {
     //      showError("All fields must be filled.");
     //    }
-    onClearClicked();
   }
 
   private boolean allFieldsFilled() {
