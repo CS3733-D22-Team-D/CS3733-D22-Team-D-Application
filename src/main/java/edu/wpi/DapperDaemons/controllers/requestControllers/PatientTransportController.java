@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -49,6 +51,7 @@ public class PatientTransportController extends ParentController {
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private DatePicker dateNeeded;
 
   List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
@@ -100,6 +103,13 @@ public class PatientTransportController extends ParentController {
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+    dateNeeded.setValue(null);
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -113,6 +123,12 @@ public class PatientTransportController extends ParentController {
       String patientID;
       String nextRoomID = "";
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
@@ -151,7 +167,14 @@ public class PatientTransportController extends ParentController {
           boolean hadPermission =
               addItem(
                   new PatientTransportRequest(
-                      priority, roomID, requesterID, assigneeID, patientID, nextRoomID, status));
+                      priority,
+                      roomID,
+                      requesterID,
+                      assigneeID,
+                      patientID,
+                      nextRoomID,
+                      status,
+                      dateStr));
           if (!hadPermission) {
             // display error that employee does not have permission
 
@@ -178,7 +201,8 @@ public class PatientTransportController extends ParentController {
         || pBox.getValue().equals("")
         || patientFirstName.getText().equals("")
         || patientLastName.getText().equals("")
-        || patientDOB.getValue() == null);
+        || patientDOB.getValue() == null
+        || dateNeeded.getValue() == null);
   }
 
   private void initializeTable() {

@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -42,21 +43,21 @@ public class UserSettingsController extends ParentController {
 
   @FXML
   private void lightSwitch() {
-    toggleTheme(Theme.Light);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Light);
   }
 
   @FXML
   private void darkSwitch() {
-    toggleTheme(Theme.Dark);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Dark);
   }
 
   @FXML
   private void blueSwitch() {
-    toggleTheme(Theme.Blue);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Blue);
   }
 
   @FXML
   private void redSwitch() {
-    toggleTheme(Theme.Red);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Red);
   }
 }

@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.map;
 
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.List;
@@ -103,7 +104,7 @@ public class PositionInfo {
   public Request.Priority getHighestPriority() {
     Request.Priority highestPriority = Request.Priority.LOW;
     try {
-      List<Request> filteredRequests = RequestHandler.getFilteredRequests(getId());
+      List<Request> filteredRequests = DAOFacade.getFilteredRequests(getId());
       for (Request r : filteredRequests) {
         if (r.getPriority().compareTo(highestPriority) > 0) {
           highestPriority = r.getPriority();

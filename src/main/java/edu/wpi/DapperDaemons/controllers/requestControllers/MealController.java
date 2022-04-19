@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -42,6 +44,7 @@ public class MealController extends ParentController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private DatePicker dateNeeded;
 
   /* Buttons */
   @FXML private Button clearButton;
@@ -95,6 +98,13 @@ public class MealController extends ParentController {
             }));
   }
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(entreeBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(sideBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(drinkBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(dessertBox, new FuzzySearchComparatorMethod());
+  }
   /** Creates service request, executes when submit button is pressed */
   public void onSubmit() {
 
@@ -116,6 +126,12 @@ public class MealController extends ParentController {
               + patientDOB.getValue().getMonthValue()
               + patientDOB.getValue().getDayOfMonth()
               + patientDOB.getValue().getYear();
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
       Patient patient = new Patient();
       boolean isAPatient = false;
       patient = patientDAO.get(patientID);
@@ -142,7 +158,8 @@ public class MealController extends ParentController {
                     entree,
                     side,
                     drink,
-                    dessert));
+                    dessert,
+                    dateStr));
 
         if (!hadClearance) {
           // throw error that user aint got no clearance
@@ -172,6 +189,7 @@ public class MealController extends ParentController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    dateNeeded.setValue(null);
   }
 
   /**
@@ -208,7 +226,8 @@ public class MealController extends ParentController {
         || dessertBox.getValue().equals("")
         || patientName.getText().equals("")
         || patientDOB.getValue() == null
-        || patientLastName.getText().equals("")));
+        || patientLastName.getText().equals("")
+        || dateNeeded.getValue() == null));
   }
 
   public void saveToCSV() {

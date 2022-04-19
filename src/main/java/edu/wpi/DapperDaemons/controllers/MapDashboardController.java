@@ -1,19 +1,15 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.CSVLoader;
-import edu.wpi.DapperDaemons.backend.DAO;
-import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.map.RequestHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -119,11 +115,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     tl.setLanguageRequestListener(
@@ -131,11 +123,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMealDeliveryRequestListener(
@@ -143,11 +131,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMedicalEquipmentRequestListener(
@@ -155,11 +139,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setMedicinRequestListener(
@@ -167,11 +147,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setPatientTrasportRequestListener(
@@ -179,11 +155,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setSanitationRequestListener(
@@ -191,11 +163,7 @@ public class MapDashboardController extends ParentController {
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
-                try {
-                  reqTable.getItems().addAll(RequestHandler.getFilteredRequests(l.getNodeID()));
-                } catch (SQLException e) {
-                  throw new RuntimeException(e);
-                }
+                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
               }
             }));
     TableListeners.setLocationListener(
@@ -212,6 +180,7 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
+    updateLocOfInterest();
   }
 
   private List<Location> locsByFloor;
@@ -225,6 +194,10 @@ public class MapDashboardController extends ParentController {
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
+      equipTable.getItems().addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
+      patientTable.getItems().addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
+      reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
+      locTable.getItems().add(l);
       try {
         equipTable.getItems().addAll(new ArrayList(equipmentDAO.filter(6, l.getNodeID()).values()));
         patientTable.getItems().addAll(new ArrayList(patientDAO.filter(6, l.getNodeID()).values()));
@@ -360,153 +333,153 @@ public class MapDashboardController extends ParentController {
   }
 
   @FXML
-  void switchToL1(ActionEvent event) {
+  void switchToL1() {
     if (L1.isSelected()) {
-      this.floor = "1";
+      floor = "1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL10(ActionEvent event) {
+  void switchToL10() {
     if (L10.isSelected()) {
-      this.floor = "10";
+      floor = "10";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL11(ActionEvent event) {
+  void switchToL11() {
     if (L11.isSelected()) {
-      this.floor = "11";
+      floor = "11";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL12(ActionEvent event) {
+  void switchToL12() {
     if (L12.isSelected()) {
-      this.floor = "12";
+      floor = "12";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL14(ActionEvent event) {
+  void switchToL14() {
     if (L14.isSelected()) {
-      this.floor = "14";
+      floor = "14";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL15(ActionEvent event) {
+  void switchToL15() {
     if (L15.isSelected()) {
-      this.floor = "15";
+      floor = "15";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL16(ActionEvent event) {
+  void switchToL16() {
     if (L16.isSelected()) {
-      this.floor = "16";
+      floor = "16";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL2(ActionEvent event) {
+  void switchToL2() {
     if (L2.isSelected()) {
-      this.floor = "2";
+      floor = "2";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL3(ActionEvent event) {
+  void switchToL3() {
     if (L3.isSelected()) {
-      this.floor = "3";
+      floor = "3";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL4(ActionEvent event) {
+  void switchToL4() {
     if (L4.isSelected()) {
-      this.floor = "4";
+      floor = "4";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL5(ActionEvent event) {
+  void switchToL5() {
     if (L5.isSelected()) {
-      this.floor = "5";
+      floor = "5";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL6(ActionEvent event) {
+  void switchToL6() {
     if (L6.isSelected()) {
-      this.floor = "6";
+      floor = "6";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL7(ActionEvent event) {
+  void switchToL7() {
     if (L7.isSelected()) {
-      this.floor = "7";
+      floor = "7";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL8(ActionEvent event) {
+  void switchToL8() {
     if (L8.isSelected()) {
-      this.floor = "8";
+      floor = "8";
       updatePage();
     }
   }
 
   @FXML
-  void switchToL9(ActionEvent event) {
+  void switchToL9() {
     if (L9.isSelected()) {
-      this.floor = "9";
+      floor = "9";
       updatePage();
     }
   }
 
   @FXML
-  void switchToLL1(ActionEvent event) {
+  void switchToLL1() {
     if (LL1.isSelected()) {
-      this.floor = "L1";
+      floor = "L1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToLL2(ActionEvent event) {
+  void switchToLL2() {
     if (LL2.isSelected()) {
-      this.floor = "L2";
+      floor = "L2";
       updatePage();
     }
   }
 
   @FXML
-  void switchToM1(ActionEvent event) {
+  void switchToM1() {
     if (M1.isSelected()) {
-      this.floor = "M1";
+      floor = "M1";
       updatePage();
     }
   }
 
   @FXML
-  void switchToM2(ActionEvent event) {
+  void switchToM2() {
     if (M2.isSelected()) {
-      this.floor = "M2";
+      floor = "M2";
       updatePage();
     }
   }

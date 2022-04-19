@@ -21,6 +21,8 @@ public class DAOPouch {
   private static DAO<LanguageRequest> languageRequestDAO;
   private static DAO<Notification> notificationDAO;
   private static DAO<Alert> alertDAO;
+  private static DAO<SecurityRequest> securityRequestDAO;
+  private static DAO<EquipmentCleaning> cleaningDAO;
 
   private DAOPouch() {}
 
@@ -76,9 +78,17 @@ public class DAOPouch {
     languageRequestDAO = new DAO<>(new LanguageRequest());
     App.LOG.info("Languages has been produced");
 
+    App.LOG.info("Initializing Security Requests");
+    securityRequestDAO = new DAO<>(new SecurityRequest());
+    App.LOG.info("Security Requests has been produced");
+
     App.LOG.info("Initializing Notifications");
     notificationDAO = new DAO<>(new Notification());
     App.LOG.info("Notifications has been produced");
+
+    App.LOG.info("Initializing Cleaning Requests");
+    cleaningDAO = new DAO<>(new EquipmentCleaning());
+    App.LOG.info("Cleaning Request has been produced");
 
     App.LOG.info("Initializing Node Connections");
     alertDAO = new DAO<>(new Alert());
@@ -99,6 +109,8 @@ public class DAOPouch {
       nodeDAO.load();
       languageRequestDAO.load();
       notificationDAO.load();
+      cleaningDAO.load();
+      securityRequestDAO.load();
       alertDAO.load();
     }
   }
@@ -159,6 +171,14 @@ public class DAOPouch {
     return notificationDAO;
   }
 
+  public static DAO<SecurityRequest> getSecurityRequestDAO() {
+    return securityRequestDAO;
+  }
+
+  public static DAO<EquipmentCleaning> getEquipmentCleaningDAO() {
+    return cleaningDAO;
+  }
+
   public static DAO getDAO(TableObject type) {
     String tableName = type.tableName();
     if (tableName.equals("")) {
@@ -185,12 +205,16 @@ public class DAOPouch {
       return medicalEquipmentDAO;
     } else if (tableName.equals("PATIENTS")) {
       return patientDAO;
+    } else if (tableName.equals("SECURITYREQUESTS")) {
+      return securityRequestDAO;
     } else if (tableName.equals("NOTIFICATIONS")) {
       return notificationDAO;
     } else if (tableName.equals("LANGUAGEREQUESTS")) {
       return languageRequestDAO;
     } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
       return nodeDAO;
+    } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
+      return cleaningDAO;
     }
     return null;
   }
