@@ -341,6 +341,11 @@ public class ParentController extends AppController {
   }
 
   @FXML
+  void switchToSecurity() {
+    swapPage("SecurityRequest", "Security Services");
+  }
+
+  @FXML
   void switchToLanguage() {
     swapPage("language", "Interpreter Request");
   }
