@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-public class SecurityRequest extends TableObject implements Request{
+public class SecurityRequest extends TableObject implements Request {
 
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {

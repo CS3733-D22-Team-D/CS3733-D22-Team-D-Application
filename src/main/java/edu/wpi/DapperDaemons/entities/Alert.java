@@ -2,7 +2,6 @@ package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Alert extends TableObject {
@@ -142,5 +141,7 @@ public class Alert extends TableObject {
     this.type = type;
   }
 
-  public String getFloor() {return this.floor;}
+  public String getFloor() {
+    return this.floor;
+  }
 }

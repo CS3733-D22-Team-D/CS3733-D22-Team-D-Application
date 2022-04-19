@@ -128,7 +128,7 @@ public class SanitationController extends ParentController {
                     assigneeID,
                     notes.getText(),
                     sanitationType,
-                   dateStr));
+                    dateStr));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.

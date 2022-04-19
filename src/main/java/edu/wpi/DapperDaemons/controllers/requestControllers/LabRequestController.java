@@ -107,7 +107,6 @@ public class LabRequestController extends ParentController {
       LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
-
       // Check if the patient info points to a real patient
       boolean isAPatient = false;
       Patient patient = new Patient();
@@ -119,7 +118,7 @@ public class LabRequestController extends ParentController {
       }
       if (isAPatient) {
         roomID = patient.getLocationID();
-         dateStr =
+        dateStr =
             ""
                 + dateNeeded.getValue().getMonthValue()
                 + dateNeeded.getValue().getDayOfMonth()

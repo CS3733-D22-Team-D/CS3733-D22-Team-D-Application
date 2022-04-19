@@ -66,6 +66,8 @@ public class MapDashboardController extends ParentController {
 
   private TableListeners tl;
 
+  private TableHelper<Alert> alerts;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
@@ -81,7 +83,8 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
+    alerts = new TableHelper<>(alertTable, 1);
+    alerts.linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
@@ -190,7 +193,7 @@ public class MapDashboardController extends ParentController {
     reqTable.getItems().clear();
     locTable.getItems().clear();
     alertTable.getItems().clear();
-    alertTable.getItems().addAll(DAOPouch.getAlertDAO().getAll().values());
+    alertTable.getItems().addAll(DAOPouch.getAlertDAO().filter(5, floor).values());
 
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
