@@ -104,6 +104,7 @@ public class PatientTransportRequest extends TableObject implements Request {
         break;
       case 11:
         dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

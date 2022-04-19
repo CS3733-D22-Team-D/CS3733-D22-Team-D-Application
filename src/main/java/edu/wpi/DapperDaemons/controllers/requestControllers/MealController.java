@@ -89,9 +89,9 @@ public class MealController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setMealDeliveryRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MealDeliveryRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               mealRequestsTable.getItems().clear();
               mealRequestsTable

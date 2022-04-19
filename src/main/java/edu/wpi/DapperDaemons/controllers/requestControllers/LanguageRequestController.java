@@ -69,9 +69,9 @@ public class LanguageRequestController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setLanguageRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new LanguageRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               //              System.out.println("LanguageRequestsTable");
               languageRequestsTable.getItems().clear();

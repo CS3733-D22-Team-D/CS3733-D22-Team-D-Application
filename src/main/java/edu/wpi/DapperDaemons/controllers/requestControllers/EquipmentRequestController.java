@@ -84,9 +84,9 @@ public class EquipmentRequestController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setMedicalEquipmentRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MedicalEquipmentRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               equipmentRequestsTable.getItems().clear();
               equipmentRequestsTable

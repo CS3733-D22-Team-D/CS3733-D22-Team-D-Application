@@ -61,9 +61,9 @@ public class LabRequestController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setLabRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new LabRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               labReqTable.getItems().clear();
               labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));

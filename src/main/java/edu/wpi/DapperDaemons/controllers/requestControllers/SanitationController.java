@@ -65,9 +65,9 @@ public class SanitationController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setSanitationRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new SanitationRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               pendingRequests.getItems().clear();
               pendingRequests

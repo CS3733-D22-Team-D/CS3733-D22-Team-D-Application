@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -67,7 +68,7 @@ public class PatientTransportController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initializeTable();
-    //    initializeInputs(); TODO: Get all long names problem
+    initializeInputs();
 
     try {
       transportRequests
@@ -81,9 +82,9 @@ public class PatientTransportController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setPatientTrasportRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new PatientTransportRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               transportRequests.getItems().clear();
               transportRequests
@@ -215,8 +216,9 @@ public class PatientTransportController extends ParentController {
 
   private void initializeInputs() {
 
-    pBox.setItems(FXCollections.observableArrayList("LOW", "MEDIUM", "HIGH"));
-    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    pBox.setItems(
+        FXCollections.observableArrayList(tableHelper.convertEnum(Request.Priority.class)));
+    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
 
     // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
     // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
