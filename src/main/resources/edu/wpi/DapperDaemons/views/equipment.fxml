@@ -34,7 +34,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="equipmentTypeBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                  <JFXComboBox id="jButton" fx:id="equipmentTypeBox" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" top="15.0" />
@@ -47,7 +47,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="roomBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                  <JFXComboBox id="jButton" fx:id="roomBox" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" top="15.0" />
@@ -65,7 +65,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="priorityBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                        <JFXComboBox id="jButton" fx:id="priorityBox" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER">
@@ -75,7 +75,7 @@
                               <Insets bottom="5.0" left="30.0" right="30.0" />
                            </VBox.margin>
                         </Text>
-                        <DatePicker fx:id="dateNeeded" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                        <DatePicker fx:id="dateNeeded" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin>
@@ -93,11 +93,19 @@
                   <Insets left="30.0" right="30.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                <children>
-                  <TextField fx:id="notes" />
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                </children>
-            </HBox>
+               <padding>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
                <children>
                   <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />

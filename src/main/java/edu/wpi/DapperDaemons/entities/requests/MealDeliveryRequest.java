@@ -19,22 +19,22 @@ public class MealDeliveryRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60),"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
+    return "CREATE TABLE MEALDELIVERYREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
         // copy paste these three JOE
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
+        + "status varchar(1000),"
+        + "notes varchar(10005),"
+        + "dateTime varchar(1000),"
         // Stop after this^^^ one HU
-        + "patientID varchar(60),"
-        + "entree varchar(20),"
-        + "side varchar(20),"
-        + "drink varchar(20),"
-        + "dessert varchar(20),"
-        + "dateNeed varchar(10))";
+        + "patientID varchar(1000),"
+        + "entree varchar(1000),"
+        + "side varchar(1000),"
+        + "drink varchar(1000),"
+        + "dessert varchar(1000),"
+        + "dateNeed varchar(1000))";
   }
 
   @Override

@@ -22,6 +22,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -33,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javax.swing.*;
 
 /** Controller Class for interactive Map Page */
 public class MapController extends ParentController {
@@ -46,6 +48,8 @@ public class MapController extends ParentController {
   @FXML private StackPane mapAssets;
   @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
+  @FXML private VBox centerBox;
+  @FXML private VBox emptyBox;
 
   /* Map Filter */
   @FXML private StackPane mapFilter;
@@ -622,12 +626,15 @@ public class MapController extends ParentController {
         directionsFields =
             FXMLLoader.load(
                 Objects.requireNonNull(App.class.getResource("views/" + "directionsSearch.fxml")));
-        filterMenu.getChildren().add(directionsFields);
+        emptyBox.getChildren().add(directionsFields);
+        emptyBox.setAlignment(Pos.TOP_LEFT);
+        emptyBox.setVisible(true);
       } catch (IOException e) {
         e.printStackTrace();
       }
     } else {
-      filterMenu.getChildren().remove(2);
+      emptyBox.getChildren().remove(directionsFields);
+      emptyBox.setVisible(false);
     }
   }
 

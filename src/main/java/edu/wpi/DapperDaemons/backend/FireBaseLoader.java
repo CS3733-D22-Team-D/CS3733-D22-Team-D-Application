@@ -15,7 +15,10 @@ public class FireBaseLoader {
       data = new HashMap<>();
       for (Integer i = 0; i < 100; i++) {
         try {
-          data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(t.getAttribute(i + 1)));
+          data.put(
+              i.toString(),
+              FireBaseCoder.encodeForFirebaseKey(
+                  t.getAttribute(i + 1) != null ? t.getAttribute(i + 1) : ""));
         } catch (IndexOutOfBoundsException ignored) {
           break;
         }
