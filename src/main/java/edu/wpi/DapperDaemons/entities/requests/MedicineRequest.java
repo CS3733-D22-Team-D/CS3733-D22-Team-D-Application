@@ -30,7 +30,7 @@ public class MedicineRequest extends TableObject implements Request {
         + "patientID varchar(1000) DEFAULT 'Someone',"
         + "medicationName varchar(1000) ,"
         + "quantity varchar(1000),"
-            + "dateNeeded varchar(1000))"   ;
+        + "dateNeeded varchar(1000))";
   }
 
   @Override
@@ -326,7 +326,4 @@ public class MedicineRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
-
-
-
 }

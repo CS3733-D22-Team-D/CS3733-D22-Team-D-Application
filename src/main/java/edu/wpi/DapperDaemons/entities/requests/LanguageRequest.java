@@ -1,10 +1,7 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
-import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-import org.apache.commons.codec.language.bm.Lang;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -140,7 +137,14 @@ public class LanguageRequest extends TableObject implements Request {
 
   public LanguageRequest() {}
 
-  public LanguageRequest(Priority priority, String roomID, String requesterID, String assignee, String notes, Language language,String dateNeeded) {
+  public LanguageRequest(
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String assignee,
+      String notes,
+      Language language,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -155,20 +159,19 @@ public class LanguageRequest extends TableObject implements Request {
     this.status = RequestStatus.REQUESTED;
     this.language = language;
     this.dateNeeded = dateNeeded;
-
   }
 
   @Override
   public String tableInit() {
     return "CREATE TABLE LANGUAGEREQUESTS(nodeID varchar(1000) PRIMARY KEY,"
-            + "priority varchar(1000),"
+        + "priority varchar(1000),"
         + "roomID varchar(1000),"
         + "requester varchar(1000),"
         + "assignee varchar(1000),"
-            + "status varchar(1000),"
-            + "notes varchar(1000),"
-            + "dateTime varchar(1000),"
-            + "language varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "language varchar(1000),"
         + "dateNeed varchar(1000))";
   }
 
@@ -289,7 +292,6 @@ public class LanguageRequest extends TableObject implements Request {
         throw new ArrayIndexOutOfBoundsException();
     }
   }
-
 
   public void setRequesterID(String requesterID) {
     this.requesterID = requesterID;

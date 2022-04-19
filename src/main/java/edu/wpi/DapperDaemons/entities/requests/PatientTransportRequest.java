@@ -29,7 +29,7 @@ public class PatientTransportRequest extends TableObject implements Request {
         + "dateTime varchar(1000),"
         + "patientID varchar(1000) ,"
         + "nextRoomID varchar(1000),"
-            + "dateNeeded varchar(1000))";
+        + "dateNeeded varchar(1000))";
   }
 
   @Override
@@ -313,6 +313,4 @@ public class PatientTransportRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
-
-
 }

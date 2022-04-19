@@ -1,9 +1,7 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
-import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -65,16 +63,18 @@ public class SecurityRequest extends TableObject {
   private String notes = "";
   private String dateTime = "";
   private String dateNeeded;
+
   public SecurityRequest() {}
 
-  public SecurityRequest(  Request.Priority priority,
-                           String roomID,
-                           String requesterID,
-                           String assigneeID,
-                           // add notes after Assignee JOE
-                           String notes,
-                           // thats it, should be pretty easy
-                           String dateNeeded) {
+  public SecurityRequest(
+      Request.Priority priority,
+      String roomID,
+      String requesterID,
+      String assigneeID,
+      // add notes after Assignee JOE
+      String notes,
+      // thats it, should be pretty easy
+      String dateNeeded) {
     this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
     this.priority = priority;
     this.roomID = roomID;
@@ -95,10 +95,10 @@ public class SecurityRequest extends TableObject {
         + "roomID varchar(1000),"
         + "requester varchar(1000),"
         + "assignee varchar(1000),"
-            + "status varchar(1000),"
-            + "notes varchar(1000),"
-            + "dateTime varchar(1000),"
-            + "dateNeeded varchar(1000),";
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "dateNeeded varchar(1000),";
   }
 
   @Override

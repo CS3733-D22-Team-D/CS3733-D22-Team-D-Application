@@ -388,8 +388,4 @@ public class MealDeliveryRequest extends TableObject implements Request {
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
   }
-
-
-
-
 }

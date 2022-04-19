@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,9 +17,9 @@ public class EquipmentCleaning extends TableObject implements Request {
         + "roomID varchar(1000),"
         + "requesterID varchar(1000),"
         + "assigneeID varchar(1000),"
-            + "status varchar(1000),"
-            + "notes varchar(1000),"
-            + "dateTime varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
         + "equipmentID varchar(1000),"
         + "equipmentType varchar(1000),"
         + "cleanStatus varchar(1000),"
@@ -309,7 +308,6 @@ public class EquipmentCleaning extends TableObject implements Request {
   public String getDateNeeded() {
     return cleanBy;
   }
-
 
   public void setStatus(RequestStatus status) {
     this.status = status;
