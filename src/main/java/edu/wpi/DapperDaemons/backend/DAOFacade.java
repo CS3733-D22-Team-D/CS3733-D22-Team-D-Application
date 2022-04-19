@@ -136,7 +136,7 @@ public class DAOFacade {
     for (int i = 0; i < SecurityController.getUser().getSecurityClearance(); i++) {
       map.putAll(employeeDAO.filter(6, String.valueOf(i)));
     }
-    List<String> plebs = (List<String>) map.keySet();
+    List<String> plebs = new ArrayList(map.keySet());
 
     return plebs;
   }

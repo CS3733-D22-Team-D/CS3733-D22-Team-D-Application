@@ -1,13 +1,11 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import edu.wpi.DapperDaemons.entities.Account;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,21 +18,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class UserSettingsController extends ParentController {
+public class UserSecurityController extends ParentController {
 
   // account profile
   @FXML private Circle profilePic;
   @FXML private Text accountName;
   @FXML private Text accountUserName;
 
-  // account settings
-  @FXML private Label username;
-  @FXML private Label name;
-  @FXML private Label birthday;
-  @FXML private TextField email;
-  @FXML private JFXComboBox<String> themeBox;
-  @FXML private JFXButton resetButton;
-  @FXML private JFXButton saveChangesButton;
+  // security page
+  @FXML private Label securityLevel;
+  @FXML private TextField oldPasswordBox;
+  @FXML private TextField newPasswordBox;
+  @FXML private TextField numberBox;
+  @FXML private JFXComboBox<String> type2FABox;
 
   // switch pages
   @FXML
@@ -67,12 +63,8 @@ public class UserSettingsController extends ParentController {
             + " "
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
-    name.setText(employeeName);
 
     accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
-
-    username.setText(
         DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
 
     // set profile picture
@@ -87,41 +79,61 @@ public class UserSettingsController extends ParentController {
                                 + SecurityController.getUser().getNodeID()
                                 + ".png")))));
 
-    // set birthday
-    String employeeBirth = SecurityController.getUser().getDateOfBirth();
-    birthday.setText(employeeBirth);
+    // set security access level
+    securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
 
-    // set email
-    email.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+    // set phone number
+    numberBox.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
 
-    // set themeBox
-    themeBox.setItems(
-        FXCollections.observableArrayList(TableHelper.convertEnum(ThemeHandler.Theme.class)));
+    // set types of 2FA types
+    type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid", "none"));
+    type2FABox.setValue(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(6));
   }
 
-  public void onSaveChanges() {
-    // set email
-    String newEmail = email.getText();
-    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
-    if (!newEmail.equals(toChange.getAttribute(7))) {
-      toChange.setAttribute(7, newEmail);
-      DAOPouch.getAccountDAO().update(toChange);
-    }
+  public void onRequestNewAccess() {
+    // TODO: come back maybe
+  }
 
-    // set theme
-    if (themeBox.getValue() != null && !themeBox.getValue().equals("")) {
-      ThemeHandler.toggleTheme(ThemeHandler.Theme.valueOf(themeBox.getValue()));
+  // TODO: get password to work?
+  public void onSaveChanges() throws NoSuchAlgorithmException {
+    // set new password
+    /*String newPassword = newPasswordBox.getText();
+    String oldPassword = oldPasswordBox.getText();
+    try {
+      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+      if (toChange.checkPassword(oldPassword)) {
+        toChange.setAttribute(3, newPassword);
+        DAOPouch.getAccountDAO().update(toChange);
+        System.out.println("Password Reset");
+      } else System.out.println("Could not reset password");
+    } catch (SQLException e) {
+      throw new RuntimeException();
+    } */
+
+    // set new phone number
+    String newNumber = numberBox.getText();
+    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    toChange.setAttribute(4, newNumber);
+    DAOPouch.getAccountDAO().update(toChange);
+    System.out.println("New Phone Number Reset");
+
+    // set 2FA type
+    if (type2FABox.getValue() != null && !type2FABox.getValue().equals("")) {
+      String newTwoFactor = type2FABox.getValue();
+      toChange.setAttribute(6, newTwoFactor);
+      DAOPouch.getAccountDAO().update(toChange);
     }
   }
 
   public void onReset() {
+    // set password
+    /*oldPasswordBox.setText("");
+    newPasswordBox.setText("");*/
 
-    // reset email
-    email.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
-
-    // reset theme
-    themeBox.setValue("");
+    // set phone number
+    numberBox.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
   }
 }

@@ -270,8 +270,8 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void openUserSettings() {
-    swapPage("userSettings", "User Settings");
+  public void openUserSettings(ActionEvent event) {
+    swapPage("userHome", "User Home Page");
   }
 
   @FXML
@@ -358,6 +358,11 @@ public class ParentController extends AppController {
   @FXML
   void goToServicePage() {
     swapPage("serviceRequestPage", "Service Page");
+  }
+
+  @FXML
+  void switchToUserRequests() {
+    swapPage("UserRequests", "User Requests");
   }
 
   @FXML
