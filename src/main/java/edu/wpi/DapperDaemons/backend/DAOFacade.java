@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.backend;
 
-import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -8,7 +7,6 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -131,19 +129,17 @@ public class DAOFacade {
     return DAOPouch.getLocationDAO().get(equipment.getLocationID());
   }
 
-  public static List<String> getAllPlebs(){
+  public static List<String> getAllPlebs() {
     DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
-    Map<String,Employee> map = new HashMap();
+    Map<String, Employee> map = new HashMap();
 
-
-    for(int i = 0; i < SecurityController.getUser().getSecurityClearance(); i++) {
-      map.putAll( employeeDAO.filter(6, String.valueOf(i)));
+    for (int i = 0; i < SecurityController.getUser().getSecurityClearance(); i++) {
+      map.putAll(employeeDAO.filter(6, String.valueOf(i)));
     }
     List<String> plebs = (List<String>) map.keySet();
 
     return plebs;
   }
-
 
   public static Employee getEmployee(String username) throws IllegalAccessException {
     Account account = DAOPouch.getAccountDAO().get(username);

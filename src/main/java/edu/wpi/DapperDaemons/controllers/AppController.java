@@ -31,6 +31,7 @@ public class AppController implements Initializable {
 
   private static VBox error;
   private static VBox confirmation;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -52,12 +53,11 @@ public class AppController implements Initializable {
     errorContainer.setAlignment(Pos.CENTER);
     errorContainer.setPadding(new Insets(20, 20, 20, 20));
 
-
-  /* Sets up the confirmation message*/
+    /* Sets up the confirmation message*/
     try {
       confirmation =
-              FXMLLoader.load(
-                      Objects.requireNonNull(App.class.getResource("views/" + "confirmationMessage.fxml")));
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "confirmationMessage.fxml")));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -70,8 +70,6 @@ public class AppController implements Initializable {
     confirmationContainer.getChildren().add(confirmation);
     confirmationContainer.setAlignment(Pos.CENTER);
     confirmationContainer.setPadding(new Insets(20, 20, 20, 20));
-
-
   }
 
   /** Creates an error box pop-up on the screen */
@@ -145,10 +143,6 @@ public class AppController implements Initializable {
       App.LOG.error("Unable to Save CSV of type: " + type);
     }
   }
-
-
-
-
 
   /** Creates an error box pop-up on the screen */
   public static void showConfirmation(String confirmationMessage) {

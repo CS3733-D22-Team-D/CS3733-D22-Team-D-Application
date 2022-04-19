@@ -342,6 +342,11 @@ public class MapController extends ParentController {
 
   @FXML
   public void onDeleteLocation() {
+    // confirmation box
+  }
+
+  @FXML
+  public void onConfirmDelete() {
     try {
       locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());

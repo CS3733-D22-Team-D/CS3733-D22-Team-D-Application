@@ -102,6 +102,4 @@ public class EmployeesController extends ParentController implements Initializab
   public void saveToCSV() {
     super.saveToCSV(new Employee(), (Stage) employees.getScene().getWindow());
   }
-
-
 }

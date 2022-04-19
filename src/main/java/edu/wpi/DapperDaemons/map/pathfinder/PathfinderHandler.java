@@ -39,6 +39,7 @@ public class PathfinderHandler implements Initializable {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(fromLocation, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(toLocation, new FuzzySearchComparatorMethod());
   }
+
   public PathfinderHandler(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
     this.controller = controller;

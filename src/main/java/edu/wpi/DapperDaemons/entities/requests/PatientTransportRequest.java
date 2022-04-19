@@ -61,7 +61,6 @@ public class PatientTransportRequest extends TableObject implements Request {
       case 10:
         return nextRoomID;
 
-
       default:
         throw new IndexOutOfBoundsException();
     }
