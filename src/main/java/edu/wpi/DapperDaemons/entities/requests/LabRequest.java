@@ -37,7 +37,7 @@ public class LabRequest extends TableObject implements Request {
         + "patientID varchar(28),"
         + "labType varchar(20),"
         + "status varchar(20),"
-            + "dateNeeded varchar(20))";
+        + "dateNeeded varchar(20))";
   }
 
   @Override

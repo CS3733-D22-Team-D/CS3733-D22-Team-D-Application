@@ -258,7 +258,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
-    //this.dateNeeded = dateNeeded;
+    // this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
