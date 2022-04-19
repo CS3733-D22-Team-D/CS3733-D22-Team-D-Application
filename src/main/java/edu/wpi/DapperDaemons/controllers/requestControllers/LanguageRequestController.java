@@ -112,7 +112,7 @@ public class LanguageRequestController extends ParentController {
               dateRep));
     } else {
       // TODO uncomment when fixed
-      //      showError("All fields must be filled.");
+      //   showError("All fields must be filled.");
     }
     onClearClicked();
   }

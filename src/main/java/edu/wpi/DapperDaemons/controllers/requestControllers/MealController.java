@@ -44,6 +44,7 @@ public class MealController extends ParentController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   /* Buttons */
@@ -154,12 +155,12 @@ public class MealController extends ParentController {
                     roomID,
                     requesterID,
                     assigneeID,
+                    notes.getText(),
                     patientID,
                     entree,
                     side,
                     drink,
-                    dessert,
-                    dateStr));
+                    dessert));
 
         if (!hadClearance) {
           // throw error that user aint got no clearance
@@ -190,6 +191,7 @@ public class MealController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     dateNeeded.setValue(null);
+    notes.setText("");
   }
 
   /**

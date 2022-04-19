@@ -84,19 +84,19 @@ public class App extends Application {
             }
 
             AutoSave.start(10);
-//            try { // this is to save everything from the firebase database
-//              Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//              throw new RuntimeException(e);
-//            }
-//            CSVSaver.saveAll();
+            //            try { // this is to save everything from the firebase database
+            //              Thread.sleep(2000);
+            //            } catch (InterruptedException e) {
+            //              throw new RuntimeException(e);
+            //            }
+            //            CSVSaver.saveAll();
             //            try {
             //              //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
             // "MedEquipReq.csv");
             //            } catch (IOException e) {
             //              throw new RuntimeException(e);
             //            }
-//            CSVLoader.resetFirebase();
+            //            CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;
@@ -203,6 +203,7 @@ public class App extends Application {
                                     "dSTOR001L1",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
+                                    "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus(),
@@ -221,6 +222,7 @@ public class App extends Application {
                                     "dEXIT00401",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
+                                    "",
                                     equipment.getNodeID(),
                                     equipment.getEquipmentType(),
                                     equipment.getCleanStatus(),
@@ -262,6 +264,7 @@ public class App extends Application {
                                       "dEXIT00401",
                                       "AUTOMATIC REQUEST",
                                       "NONE",
+                                      "",
                                       equipment.getNodeID(),
                                       equipment.getEquipmentType(),
                                       equipment.getCleanStatus(),

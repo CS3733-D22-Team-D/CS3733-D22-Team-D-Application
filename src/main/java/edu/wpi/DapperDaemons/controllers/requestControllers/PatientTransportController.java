@@ -51,6 +51,7 @@ public class PatientTransportController extends ParentController {
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   List<String> names;
@@ -103,6 +104,7 @@ public class PatientTransportController extends ParentController {
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -171,10 +173,9 @@ public class PatientTransportController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       patientID,
-                      nextRoomID,
-                      status,
-                      dateStr));
+                      nextRoomID));
           if (!hadPermission) {
             // display error that employee does not have permission
 

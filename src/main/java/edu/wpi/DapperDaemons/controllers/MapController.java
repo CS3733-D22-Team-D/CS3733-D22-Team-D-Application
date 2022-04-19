@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,7 @@ public class MapController extends ParentController {
   @FXML private AnchorPane equipLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
+  @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
 
   /* Map Filter */
@@ -86,7 +88,7 @@ public class MapController extends ParentController {
 
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
-  @FXML private StackPane circle3;
+  @FXML private ToggleButton circle3;
   @FXML private StackPane circle4;
 
   /* Map Handlers */
@@ -436,6 +438,17 @@ public class MapController extends ParentController {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");
+  }
+
+  @FXML
+  public void editMode(ActionEvent event) {
+    if (circle3.isSelected()) {
+      mapContents.setPannable(false);
+      glyphs.enableEditing();
+    } else {
+      mapContents.setPannable(true);
+      glyphs.disableEditing();
+    }
   }
 
   @FXML

@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.map;
 
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
@@ -51,11 +52,47 @@ public class GlyphHandler {
     nodeTypeFilter.addAll(List.of(allFilters));
   }
 
+  public void enableEditing() {
+    for (int i = 0; i < imageLocs.size(); i++) {
+      ImageView image = (ImageView) glyphLayer.getChildren().get(i);
+      image.setOnMouseDragged(
+          event -> {
+            image.setX(event.getX() - 16);
+            image.setY(event.getY() - 16);
+          });
+      Location oldPos = imageLocs.get(i).getLoc();
+      image.setOnMouseReleased(
+          event -> {
+            Location newLoc =
+                new Location(
+                    oldPos.getNodeID(),
+                    (int) event.getX(),
+                    (int) event.getY(),
+                    oldPos.getFloor(),
+                    oldPos.getBuilding(),
+                    oldPos.getNodeType(),
+                    oldPos.getLongName(),
+                    oldPos.getShortName());
+            DAOPouch.getLocationDAO().update(newLoc);
+            System.out.println("DRAG EXITED");
+          });
+    }
+  }
+
+  public void disableEditing() {
+    for (int i = 0; i < imageLocs.size(); i++) {
+      ImageView image = (ImageView) glyphLayer.getChildren().get(i);
+      image.setOnMouseDragged(event -> {});
+      image.setOnMouseReleased(event -> {});
+    }
+  }
+
   public void addPosition(PositionInfo pos) {
     ImageView image = getIconImage(pos.getType());
     image.setVisible(true);
     image.setX(pos.getX() - 16);
     image.setY(pos.getY() - 16);
+    image.setPickOnBounds(true);
 
     DropShadow dropShadow = new DropShadow();
     dropShadow.setOffsetX(-2.00);
