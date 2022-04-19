@@ -8,6 +8,7 @@ import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.controllers.homePage.*;
+import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -21,9 +22,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ParentController extends AppController {
@@ -76,6 +80,7 @@ public class ParentController extends AppController {
     super.initialize(location, resources);
     bindImage(BGImage, BGContainer);
     menuSlider(slider, burg, burgBack);
+    initSequence();
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -86,7 +91,7 @@ public class ParentController extends AppController {
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
     notifs = new NotificationHandler(notifications, notifBell);
-    new ThemeHandler(mainBox);
+    ThemeHandler themeHandler = new ThemeHandler(mainBox);
 
     updateWeather();
     swapPage("default", "Home");
@@ -99,6 +104,7 @@ public class ParentController extends AppController {
     mainBox.getChildren().clear();
     mainBox.setOnMouseMoved(e -> SessionTimeout.reset());
     if (burgBack != null && burgBack.isVisible()) closeSlider();
+    if (EasterEggController.player != null) EasterEggController.player.stop();
 
     try {
       HBox childPage =
@@ -438,6 +444,43 @@ public class ParentController extends AppController {
     if (count == 10 & (System.currentTimeMillis() - startTime) < 10000) {
       count = 0;
       swapPage("easterEgg", "Dr. Mario");
+    }
+  }
+
+  private final List<KeyCode> easterEggSequence = new ArrayList<>();
+  private int easterEggInd = 0;
+
+  private void initSequence() {
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.UP);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.DOWN);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
+    easterEggSequence.add(KeyCode.LEFT);
+    easterEggSequence.add(KeyCode.RIGHT);
+    easterEggSequence.add(KeyCode.B);
+    easterEggSequence.add(KeyCode.A);
+    easterEggSequence.add(KeyCode.ENTER);
+  }
+
+  @FXML
+  public void konami(KeyEvent e) {
+    if (e.getCode().equals(easterEggSequence.get(easterEggInd))) {
+      System.out.println(e.getCode() + " : " + easterEggSequence.get(easterEggInd));
+      easterEggInd++;
+      if (easterEggInd == easterEggSequence.size()) {
+        easterEggInd = 0;
+        try {
+          //          switchScene("konami.fxml", 700, 500);
+          MinesweeperZN ms = new MinesweeperZN();
+          ms.begin(new Stage());
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+      }
+    } else {
+      easterEggInd = 0;
     }
   }
 }
