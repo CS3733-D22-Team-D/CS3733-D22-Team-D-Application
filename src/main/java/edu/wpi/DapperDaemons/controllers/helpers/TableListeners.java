@@ -23,6 +23,8 @@ public class TableListeners {
   private static ValueEventListener meL;
   private static ValueEventListener nL;
   private static ValueEventListener pL;
+  private static ValueEventListener ssrL;
+
 
   public static void setLabRequestListener(ValueEventListener labRequestListener) {
     lbrL = labRequestListener;
@@ -98,6 +100,11 @@ public class TableListeners {
     ref.child("PATIENTS").addValueEventListener(pL);
   }
 
+  public static void setSecurityRequestListener(ValueEventListener securityRequestListener) {
+    ssrL = securityRequestListener;
+    ref.child("SECURITYREQUESTS").addValueEventListener(ssrL);
+  }
+
   public ValueEventListener eventListener(Runnable r) {
     return new ValueEventListener() {
       @Override
@@ -170,6 +177,10 @@ public class TableListeners {
     }
     try {
       ref.child("PATIENTS").removeEventListener(pL);
+    } catch (NullPointerException ignored) {
+    }
+    try {
+      ref.child("SECURITYREQUESTS").removeEventListener(ssrL);
     } catch (NullPointerException ignored) {
     }
   }
