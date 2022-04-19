@@ -126,6 +126,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case 14:
         dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
