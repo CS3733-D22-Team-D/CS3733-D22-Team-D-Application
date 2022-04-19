@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -180,6 +180,11 @@
                            </font>
                         </JFXButton>
                         <JFXButton id="slider" layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToUserRequests" stylesheets="@../assets/buttons.css" text="User Requests" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

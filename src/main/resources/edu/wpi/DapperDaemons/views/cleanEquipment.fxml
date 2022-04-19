@@ -16,7 +16,7 @@
 
 <HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EquipmentRequestController">
    <children>
-      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
+      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
                <children>
@@ -62,12 +62,29 @@
                   </Text>
                   <DatePicker fx:id="cleanByDate" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </DatePicker>
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" top="15.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+               <children>
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" top="10.0" />
                </padding>
             </VBox>
             <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;">
@@ -78,11 +95,6 @@
                         <Insets left="30.0" />
                      </HBox.margin>
                   </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="notes" />
                </children>
             </HBox>
          </children>

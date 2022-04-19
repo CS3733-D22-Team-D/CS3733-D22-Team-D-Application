@@ -4,10 +4,12 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -32,7 +35,7 @@ public class LanguageRequestController extends ParentController {
   @FXML private JFXComboBox<String> languageBox;
   @FXML private JFXComboBox<String> roomBox;
   @FXML private DatePicker dateNeeded;
-
+  @FXML private TextField notes;
   /* Table Columns */
   @FXML private TableColumn<LanguageRequest, String> reqID;
   @FXML private TableColumn<LanguageRequest, String> language;
@@ -78,21 +81,19 @@ public class LanguageRequestController extends ParentController {
             }));
   }
 
-  public boolean addItem(LanguageRequest request) {
-    boolean hadClearance = true;
-
-    hadClearance = languageRequestDAO.add(request);
-    if (hadClearance) {
-      languageRequestsTable.getItems().add(request);
-    }
-    return hadClearance;
-  }
-
   @FXML
   public void onClearClicked() {
     languageBox.setValue("");
     roomBox.setValue("");
     dateNeeded.setValue(null);
+    notes.setText("");
+  }
+
+  private boolean addItem(LanguageRequest request) {
+    boolean hadClearance = false;
+    hadClearance = languageRequestDAO.add(request);
+
+    return hadClearance;
   }
 
   @FXML
@@ -105,14 +106,25 @@ public class LanguageRequestController extends ParentController {
               + dateNeeded.getValue().getMonthValue()
               + dateNeeded.getValue().getDayOfMonth()
               + dateNeeded.getValue().getYear();
-      addItem(
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assignee = "null";
+      String roomID = DAOPouch.getLocationDAO().filter(7, roomBox.getValue()).get(0).getNodeID();
+      if (!addItem(
           new LanguageRequest(
+              Request.Priority.LOW,
+              roomID,
+              requesterID,
+              assignee,
+              notes.getText(),
               LanguageRequest.Language.valueOf(languageBox.getValue()),
-              roomBox.getValue(),
-              dateRep));
+              dateRep))) {
+
+        showError("you do not have access to do this");
+      }
+
     } else {
       // TODO uncomment when fixed
-      //   showError("All fields must be filled.");
+      showError("All fields must be filled.");
     }
     onClearClicked();
   }
@@ -120,7 +132,7 @@ public class LanguageRequestController extends ParentController {
   private boolean allFieldsFilled() {
     return !(languageBox.getValue().equals("")
         || roomBox.getValue().equals("")
-        || dateNeeded.getValue() != null);
+        || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {

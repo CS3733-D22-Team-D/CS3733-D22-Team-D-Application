@@ -29,15 +29,17 @@ public class LabRequest extends TableObject implements Request {
 
   @Override
   public String tableInit() {
-    return "CREATE TABLE LABREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(20) ,"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
-        + "patientID varchar(28),"
-        + "labType varchar(20),"
-        + "status varchar(20),"
-        + "dateNeeded varchar(20))";
+    return "CREATE TABLE LABREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000) ,"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "patientID varchar(1000),"
+        + "labType varchar(1000),"
+        + "dateNeeded varchar(1000))";
   }
 
   @Override
@@ -123,7 +125,9 @@ public class LabRequest extends TableObject implements Request {
       case 10:
         labType = LabType.valueOf(newAttribute);
         break;
-
+      case 11:
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

@@ -3,22 +3,27 @@ package edu.wpi.DapperDaemons.entities.requests;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class EquipmentCleaning extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60),"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
-        + "equipmentID varchar(20),"
-        + "equipmentType varchar(20),"
-        + "cleanStatus varchar(20),"
-        + "cleanBy varchar(10))";
+    return "CREATE TABLE EQUIPMENTCLEANINGREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "equipmentID varchar(1000),"
+        + "equipmentType varchar(1000),"
+        + "cleanStatus varchar(1000),"
+        + "cleanBy varchar(1000))";
   }
 
   @Override
@@ -40,12 +45,18 @@ public class EquipmentCleaning extends TableObject implements Request {
       case 5:
         return assigneeID;
       case 6:
-        return equipmentID;
+        return status.toString();
       case 7:
-        return equipmentType.toString();
+        return notes;
       case 8:
-        return cleanStatus.toString();
+        return dateTime;
       case 9:
+        return equipmentID;
+      case 10:
+        return equipmentType.toString();
+      case 11:
+        return cleanStatus.toString();
+      case 12:
         return cleanBy;
       default:
         throw new IndexOutOfBoundsException();
@@ -72,15 +83,24 @@ public class EquipmentCleaning extends TableObject implements Request {
         assigneeID = newAttribute;
         break;
       case 6:
-        equipmentID = newAttribute;
+        status = RequestStatus.valueOf(newAttribute);
         break;
       case 7:
-        equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
+        notes = newAttribute;
         break;
       case 8:
-        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        dateTime = newAttribute;
         break;
       case 9:
+        equipmentID = newAttribute;
+        break;
+      case 10:
+        equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
+        break;
+      case 11:
+        cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
+        break;
+      case 12:
         cleanBy = newAttribute;
         break;
       default:
@@ -112,11 +132,20 @@ public class EquipmentCleaning extends TableObject implements Request {
       case "labType":
         equipmentType = MedicalEquipment.EquipmentType.valueOf(newAttribute);
         break;
-      case "status":
+      case "cleanStatus":
         cleanStatus = MedicalEquipment.CleanStatus.valueOf(newAttribute);
         break;
       case "cleabBy":
         cleanBy = newAttribute;
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -154,7 +183,9 @@ public class EquipmentCleaning extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
-  private RequestStatus status;
+  private RequestStatus status = RequestStatus.REQUESTED;
+  private String notes = "";
+  private String dateTime = "";
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
@@ -167,6 +198,7 @@ public class EquipmentCleaning extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String equipmentID,
       MedicalEquipment.EquipmentType equipmentType,
       MedicalEquipment.CleanStatus cleanStatus,
@@ -177,6 +209,10 @@ public class EquipmentCleaning extends TableObject implements Request {
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
     this.equipmentID = equipmentID;
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
@@ -271,5 +307,25 @@ public class EquipmentCleaning extends TableObject implements Request {
   @Override
   public String getDateNeeded() {
     return cleanBy;
+  }
+
+  public void setStatus(RequestStatus status) {
+    this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 }

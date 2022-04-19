@@ -4,14 +4,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.opencsv.CSVReader;
 import edu.wpi.DapperDaemons.entities.*;
 import edu.wpi.DapperDaemons.entities.requests.*;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 
 public class CSVLoader {
 
-  static HashMap<String, TableObject> filenames = new HashMap<>();
+  public static HashMap<String, TableObject> filenames = new HashMap<>();
 
   static {
     filenames.put("TowerLocations", new Location());
@@ -116,6 +115,27 @@ public class CSVLoader {
     List<String[]> entries = read.readAll();
     if (entries.size() < 1) return;
     entries.remove(0);
+    String tableName = type.tableName();
+
+    DatabaseReference ref = FireBase.getReference();
+    ref = ref.child(type.tableName());
+    Map<String, Map<String, String>> map = new HashMap<>();
+    Map<String, String> data;
+    for (String[] line : entries) {
+      data = new HashMap<>();
+      for (Integer i = 0; i < line.length; i++) {
+        data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
+      }
+      map.put(FireBaseCoder.encodeForFirebaseKey(line[0]), data);
+    }
+    ref.setValueAsync(map);
+  }
+
+  public static void loadPCToFirebase(TableObject type, String filename) throws IOException {
+    InputStreamReader f = new InputStreamReader(new FileInputStream(filename));
+    CSVReader read = new CSVReader(f);
+    List<String[]> entries = read.readAll();
+    if (entries.size() < 1) return;
     String tableName = type.tableName();
 
     DatabaseReference ref = FireBase.getReference();

@@ -19,16 +19,17 @@ public class PatientTransportRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60) ,"
-        + "requesterID varchar(60) ,"
-        + "assigneeID varchar(60) ,"
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
-        + "patientID varchar(60) ,"
-        + "nextRoomID varchar(60),";
+    return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000) ,"
+        + "requesterID varchar(1000) ,"
+        + "assigneeID varchar(1000) ,"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "patientID varchar(1000) ,"
+        + "nextRoomID varchar(1000),"
+        + "dateNeeded varchar(1000))";
   }
 
   @Override
@@ -60,7 +61,8 @@ public class PatientTransportRequest extends TableObject implements Request {
         return patientID;
       case 10:
         return nextRoomID;
-
+      case 11:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -100,6 +102,8 @@ public class PatientTransportRequest extends TableObject implements Request {
       case 10:
         nextRoomID = newAttribute;
         break;
+      case 11:
+        dateNeeded = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -194,7 +198,8 @@ public class PatientTransportRequest extends TableObject implements Request {
       String assigneeID,
       String notes,
       String patientID,
-      String nextRoomID) {
+      String nextRoomID,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

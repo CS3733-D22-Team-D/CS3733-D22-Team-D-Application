@@ -91,12 +91,12 @@ public class App extends Application {
             //            }
             //            CSVSaver.saveAll();
             //            try {
-            //              //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
+            //              CSVLoader.loadToFirebase(new MedicalEquipmentRequest(),
             // "MedEquipReq.csv");
             //            } catch (IOException e) {
             //              throw new RuntimeException(e);
             //            }
-            //            CSVLoader.resetFirebase();
+            //                        CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;

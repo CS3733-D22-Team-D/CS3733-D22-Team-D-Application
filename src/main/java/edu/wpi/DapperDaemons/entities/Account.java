@@ -11,6 +11,7 @@ public class Account extends TableObject {
   private String phoneNumber;
   private String settingsFile = "none";
   private String twoFactor = "false";
+  private String email;
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
@@ -20,13 +21,21 @@ public class Account extends TableObject {
   }
 
   public Account(
-      String employeeID, String username, String password, String phoneNumber, String fileName)
+      String employeeID,
+      String username,
+      String password,
+      String phoneNumber,
+      String fileName,
+      String twofactor,
+      String email)
       throws NoSuchAlgorithmException {
     this.username = username;
     this.employeeID = employeeID;
     this.password = SHA.toHexString(SHA.getSHA(password));
     this.phoneNumber = phoneNumber;
     this.settingsFile = fileName;
+    this.twoFactor = twofactor;
+    this.email = email;
   }
 
   public Account() {}
@@ -38,7 +47,8 @@ public class Account extends TableObject {
         + "password varchar(255),"
         + "phoneNumber varchar(12),"
         + "settingsFile varchar(255),"
-        + "twoFactor varchar(5))";
+        + "twoFactor varchar(5),"
+        + "email varchar(255))";
   }
 
   @Override
@@ -60,7 +70,9 @@ public class Account extends TableObject {
       case 5:
         return this.settingsFile;
       case 6:
-        return twoFactor;
+        return this.twoFactor;
+      case 7:
+        return this.email;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -86,6 +98,9 @@ public class Account extends TableObject {
         break;
       case 6:
         this.twoFactor = newAttribute;
+        break;
+      case 7:
+        this.email = newAttribute;
         break;
       default:
         break;
@@ -122,6 +137,8 @@ public class Account extends TableObject {
       case "twoFactor":
         twoFactor = newAttribute;
         break;
+      case "email":
+        email = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }

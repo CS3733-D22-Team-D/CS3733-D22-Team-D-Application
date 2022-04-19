@@ -17,7 +17,7 @@
 
 <HBox id="background" prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
    <children>
-      <VBox id="foreground" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="300.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;" HBox.hgrow="NEVER">
+      <VBox id="foreground" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" prefHeight="340.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #fffefe;" HBox.hgrow="NEVER">
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="0.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="NEVER">
                <children>
@@ -34,10 +34,10 @@
                      <children>
                         <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Medication Name:">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="medNameIn" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="Select" VBox.vgrow="ALWAYS">
+                        <JFXComboBox id="jButton" fx:id="medNameIn" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="Select" VBox.vgrow="ALWAYS">
                            <stylesheets>
                               <URL value="@../assets/buttons.css" />
                            </stylesheets>
@@ -54,10 +54,13 @@
                      <children>
                         <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField id="field" fx:id="quantityIn" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: f1f0f0; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS" />
+                        <TextField id="field" fx:id="quantityIn" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: f1f0f0; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets right="10.0" />
+                           </VBox.margin></TextField>
                      </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />
@@ -74,10 +77,10 @@
                      <children>
                         <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField id="field" fx:id="patientName" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                        <TextField id="field" fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -91,7 +94,7 @@
                      <children>
                         <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
                         <TextField id="field" fx:id="patientLastName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
@@ -108,10 +111,10 @@
                      <children>
                         <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                        <DatePicker fx:id="patientDOB" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -131,10 +134,10 @@
                      <children>
                         <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                            <VBox.margin>
-                              <Insets bottom="5.0" left="30.0" right="30.0" />
+                              <Insets left="30.0" right="30.0" top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="priorityIn" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                        <JFXComboBox id="jButton" fx:id="priorityIn" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
                            <VBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </VBox.margin>
@@ -151,10 +154,10 @@
                      <children>
                         <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
                            <VBox.margin>
-                              <Insets bottom="5.0" left="30.0" right="30.0" />
+                              <Insets left="30.0" right="30.0" top="10.0" />
                            </VBox.margin>
                         </Text>
-                        <DatePicker fx:id="dateNeeded" prefHeight="30.0" prefWidth="100.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                        <DatePicker fx:id="dateNeeded" minHeight="-Infinity" prefHeight="30.0" prefWidth="100.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin>
@@ -166,6 +169,19 @@
                   </VBox>
                </children>
             </HBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+               <children>
+                  <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
                   <Button id="defaultButton" mnemonicParsing="false" onAction="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />
@@ -181,11 +197,6 @@
                <padding>
                   <Insets bottom="12.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="notes" />
-               </children>
             </HBox>
          </children>
          <HBox.margin>

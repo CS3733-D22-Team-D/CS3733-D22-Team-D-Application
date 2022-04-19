@@ -21,6 +21,17 @@ public class CSVSaver {
         });
   }
 
+  public static void saveAll(String path) {
+    CSVLoader.filenames.forEach(
+        (k, v) -> {
+          try {
+            save(v, path + "/" + k + ".csv");
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        });
+  }
+
   public static void save(TableObject type, String filename) throws IOException {
 
     DAO<TableObject> dao = DAOPouch.getDAO(type);

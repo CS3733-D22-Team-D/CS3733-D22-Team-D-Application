@@ -63,8 +63,14 @@ public class AStar {
           //          System.out.println("Saving the location " + nextLocation + " in the path");
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
-          Double priority =
-              Math.sqrt(new_cost) + Math.pow(getDistance(nextLocation, endLocation), 3);
+          Double priority = new_cost + Math.pow(getDistance(nextLocation, endLocation), 3);
+          System.out.println(
+              "Going from "
+                  + nextLocation
+                  + " To "
+                  + endLocation
+                  + " Had a distance of "
+                  + getDistance(nextLocation, endLocation));
           // Priority is the distance from this node to the goal + costSoFar of this node
           queue.add(new WalkableNode(nextLocation, priority));
           moveOrder.put(nextLocation, current);
@@ -156,17 +162,19 @@ public class AStar {
     Location next =
         new Location("Unknown", 1000, 1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
     try {
-      current = locationDAO.filter(locations, 1, currentLocation).get(0);
-      next = locationDAO.filter(locations, 1, nextLocation).get(0);
+      current =
+          new ArrayList<Location>(locationDAO.filter(locations, 1, currentLocation).values())
+              .get(0);
+      next =
+          new ArrayList<Location>(locationDAO.filter(locations, 1, nextLocation).values()).get(0);
     } catch (Exception e) {
       //      e.printStackTrace();
-      //      System.out.println("Couldn't find location in table");
+      System.out.println("Couldn't find location in table");
     }
     Double distance =
         Math.sqrt(
-            (current.getXcoord() - next.getXcoord())
-                ^ 2 + (current.getYcoord() - next.getYcoord())
-                ^ 2);
+            Math.pow(Math.abs((current.getXcoord() - next.getXcoord())), 2)
+                + Math.pow(Math.abs((current.getYcoord() - next.getYcoord())), 2));
     if (!current.getFloor().equals(next.getFloor())) {
       //      System.out.println(
       //          "Its on a separate floor, adding something"); // Comment out after it works -
@@ -183,9 +191,9 @@ public class AStar {
       case "L2":
         return 0;
       case "L1":
-        return 100;
+        return 200;
     }
-    return Integer.parseInt(currentFloor) * 100 + 100;
+    return Integer.parseInt(currentFloor) * 200 + 200;
   }
 
   private double heuristic(String current, String next) {

@@ -5,6 +5,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.FireBase;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TableListeners {
 
@@ -24,6 +26,13 @@ public class TableListeners {
   private static ValueEventListener nL;
   private static ValueEventListener pL;
   private static ValueEventListener ssrL;
+
+  private static Map<String, ValueEventListener> listeners = new HashMap<>();
+
+  public static void addListener(String tableName, ValueEventListener listener) {
+    listeners.put(tableName, listener);
+    ref.child(tableName).addValueEventListener(listener);
+  }
 
   public static void setLabRequestListener(ValueEventListener labRequestListener) {
     lbrL = labRequestListener;
@@ -182,6 +191,11 @@ public class TableListeners {
       ref.child("SECURITYREQUESTS").removeEventListener(ssrL);
     } catch (NullPointerException ignored) {
     }
+
+    listeners.forEach(
+        (k, v) -> {
+          ref.child(k).removeEventListener(v);
+        });
   }
 
   public TableListeners() {}
