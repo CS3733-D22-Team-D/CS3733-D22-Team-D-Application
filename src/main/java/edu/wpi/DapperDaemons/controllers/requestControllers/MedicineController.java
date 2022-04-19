@@ -166,7 +166,7 @@ public class MedicineController extends ParentController {
 
           roomID = patient.getLocationID();
           requesterID = SecurityController.getUser().getNodeID();
-          assigneeID = "null";
+          assigneeID = "none";
           priority = Request.Priority.valueOf(priorityIn.getValue());
           medName = medNameIn.getValue();
 

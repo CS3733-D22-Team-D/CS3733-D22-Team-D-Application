@@ -107,7 +107,7 @@ public class LanguageRequestController extends ParentController {
               + dateNeeded.getValue().getDayOfMonth()
               + dateNeeded.getValue().getYear();
       String requesterID = SecurityController.getUser().getNodeID();
-      String assignee = "null";
+      String assignee = "none";
       String roomID =
           (new ArrayList<Location>(DAOPouch.getLocationDAO().filter(7, roomBox.getValue()).values())
               .get(0)

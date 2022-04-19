@@ -123,7 +123,7 @@ public class PatientTransportController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
       String roomID;
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "null";
+      String assigneeID = "none";
       String patientID;
       String nextRoomID = "";
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;

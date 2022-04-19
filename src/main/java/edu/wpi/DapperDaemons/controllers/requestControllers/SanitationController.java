@@ -99,7 +99,7 @@ public class SanitationController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
       String roomID = locationBox.getValue();
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "null";
+      String assigneeID = "none";
       String sanitationType = sanitationBox.getValue().toString();
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
