@@ -28,7 +28,7 @@
    <children>
       <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
-            <ScrollPane hbarPolicy="NEVER" hvalue="0.55" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.44">
+            <ScrollPane fx:id="mapContents" hbarPolicy="NEVER" hvalue="0.55" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.44">
                <content>
                   <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0" scaleX="0.4" scaleY="0.4">
                      <children>
@@ -38,6 +38,7 @@
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
+                        <AnchorPane fx:id="equipLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pathPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
@@ -116,19 +117,15 @@
                                                       </ImageView>
                                                    </children>
                                                 </StackPane>
-                                                <StackPane fx:id="circle3" prefHeight="150.0" prefWidth="20.0">
-                                                   <children>
-                                                      <Circle fill="#059da7" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE">
-                                                         <effect>
-                                                            <DropShadow>
-                                                               <color>
-                                                                  <Color opacity="0.15000000596046448" />
-                                                               </color>
-                                                            </DropShadow>
-                                                         </effect>
-                                                      </Circle>
-                                                   </children>
-                                                </StackPane>
+                                                <ToggleButton fx:id="circle3" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 20; -fx-background-color: #059DA7;" text="ToggleButton">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color opacity="0.15000000596046448" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                </ToggleButton>
                                                 <StackPane fx:id="circle2" onMouseClicked="#openCreate" prefHeight="150.0" prefWidth="20.0">
                                                    <children>
                                                       <Circle fill="#059da7" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE">
@@ -366,7 +363,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton id="foreground" fx:id="pumpTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" prefWidth="220.0" selected="true" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Infusion Pumps">
+                                                <ToggleButton id="foreground" fx:id="pumpTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#pumpToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Infusion Pumps">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
@@ -378,7 +375,7 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
-                                                <ToggleButton id="foreground" fx:id="bedTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitToggle" prefWidth="220.0" selected="true" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Beds">
+                                                <ToggleButton id="foreground" fx:id="bedTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#bedToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Beds">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>

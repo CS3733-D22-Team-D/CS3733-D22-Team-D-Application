@@ -64,8 +64,13 @@ public class LoginController extends AppController {
       player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
+    // Get account based on inputted username
     Account acc = accountDAO.get(username.getText());
+
+    // check for correct password
     if (acc != null && acc.checkPassword(password.getText())) {
+
+      // check for mobile 2FA
       if (acc.getAttribute(4).equals("") || acc.getAttribute(6).equals("false")) {
         List<Employee> user =
             new ArrayList<>(

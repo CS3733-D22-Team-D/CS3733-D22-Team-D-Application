@@ -122,4 +122,13 @@ public class DAOFacade {
     }
     return false;
   }
+
+  /**
+   * Gets the location of an equipment
+   *
+   * @param equipment - The Medical Equipment table object
+   */
+  public static Location getLocationOfEquip(MedicalEquipment equipment) {
+    return DAOPouch.getLocationDAO().get(equipment.getLocationID());
+  }
 }
