@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -17,14 +19,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
-public class PatientTransportController extends UIController implements Initializable {
+public class PatientTransportController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<PatientTransportRequest> transportRequests;
@@ -50,6 +51,7 @@ public class PatientTransportController extends UIController implements Initiali
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private DatePicker dateNeeded;
 
   List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
@@ -101,6 +103,13 @@ public class PatientTransportController extends UIController implements Initiali
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+    dateNeeded.setValue(null);
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -114,6 +123,12 @@ public class PatientTransportController extends UIController implements Initiali
       String patientID;
       String nextRoomID = "";
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       // Determine if the next Location exists
       ArrayList<Location> locations = new ArrayList<>();
@@ -152,7 +167,14 @@ public class PatientTransportController extends UIController implements Initiali
           boolean hadPermission =
               addItem(
                   new PatientTransportRequest(
-                      priority, roomID, requesterID, assigneeID, patientID, nextRoomID, status));
+                      priority,
+                      roomID,
+                      requesterID,
+                      assigneeID,
+                      patientID,
+                      nextRoomID,
+                      status,
+                      dateStr));
           if (!hadPermission) {
             // display error that employee does not have permission
 
@@ -179,7 +201,8 @@ public class PatientTransportController extends UIController implements Initiali
         || pBox.getValue().equals("")
         || patientFirstName.getText().equals("")
         || patientLastName.getText().equals("")
-        || patientDOB.getValue() == null);
+        || patientDOB.getValue() == null
+        || dateNeeded.getValue() == null);
   }
 
   private void initializeTable() {

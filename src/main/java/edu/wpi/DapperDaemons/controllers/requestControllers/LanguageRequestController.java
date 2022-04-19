@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -29,6 +31,7 @@ public class LanguageRequestController extends ParentController {
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> languageBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
   @FXML private TableColumn<LanguageRequest, String> reqID;
@@ -89,6 +92,7 @@ public class LanguageRequestController extends ParentController {
   public void onClearClicked() {
     languageBox.setValue("");
     roomBox.setValue("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -96,9 +100,16 @@ public class LanguageRequestController extends ParentController {
 
     // make sure all fields are filled
     if (allFieldsFilled()) {
+      String dateRep =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
       addItem(
           new LanguageRequest(
-              LanguageRequest.Language.valueOf(languageBox.getValue()), roomBox.getValue()));
+              LanguageRequest.Language.valueOf(languageBox.getValue()),
+              roomBox.getValue(),
+              dateRep));
     } else {
       // TODO uncomment when fixed
       //      showError("All fields must be filled.");
@@ -107,16 +118,18 @@ public class LanguageRequestController extends ParentController {
   }
 
   private boolean allFieldsFilled() {
-    return !(languageBox.getValue().equals("") || roomBox.getValue().equals(""));
+    return !(languageBox.getValue().equals("")
+        || roomBox.getValue().equals("")
+        || dateNeeded.getValue() != null);
   }
 
   public void initBoxes() {
     languageBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
-    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest());
+    super.saveToCSV(new LanguageRequest());
   }
 }

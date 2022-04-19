@@ -2,13 +2,12 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -31,39 +30,34 @@ public class UserSettingsController extends ParentController {
             + SecurityController.getUser().getLastName();
     accountName1.setText(employeeName);
     accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+        DAOPouch.getAccountDAO().filter(2, SecurityController.getUser().getNodeID()).values()
+            .stream()
+            .findFirst()
+            .get()
+            .getAttribute(1));
     accessLevel.setText(String.valueOf(SecurityController.getUser().getSecurityClearance()));
     protectionMessage.setText("Must make this refer to users 2FA setting");
 
-    profilePic1.setFill(
-        new ImagePattern(
-            new Image(
-                Objects.requireNonNull(
-                    getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/profilepictures/"
-                                + SecurityController.getUser().getNodeID()
-                                + ".png")))));
+    profilePic1.setFill(Images.getAccountImage());
   }
 
   @FXML
   private void lightSwitch() {
-    toggleTheme(Theme.Light);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Light);
   }
 
   @FXML
   private void darkSwitch() {
-    toggleTheme(Theme.Dark);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Dark);
   }
 
   @FXML
   private void blueSwitch() {
-    toggleTheme(Theme.Blue);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Blue);
   }
 
   @FXML
   private void redSwitch() {
-    toggleTheme(Theme.Red);
+    ThemeHandler.toggleTheme(ThemeHandler.Theme.Red);
   }
 }

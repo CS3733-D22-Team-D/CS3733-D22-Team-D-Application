@@ -21,6 +21,7 @@ public class DAOPouch {
   private static DAO<LanguageRequest> languageRequestDAO;
   private static DAO<Notification> notificationDAO;
   private static DAO<SecurityRequest> securityRequestDAO;
+  private static DAO<EquipmentCleaning> cleaningDAO;
 
   private DAOPouch() {}
 
@@ -84,6 +85,10 @@ public class DAOPouch {
     notificationDAO = new DAO<>(new Notification());
     App.LOG.info("Notifications has been produced");
 
+    App.LOG.info("Initializing Cleaning Requests");
+    cleaningDAO = new DAO<>(new EquipmentCleaning());
+    App.LOG.info("Cleaning Request has been produced");
+
     if (!ConnectionHandler.getType().equals(ConnectionHandler.connectionType.CLOUD)) {
       labRequestDAO.load();
       mealDeliveryRequestDAO.load();
@@ -99,6 +104,7 @@ public class DAOPouch {
       nodeDAO.load();
       languageRequestDAO.load();
       notificationDAO.load();
+      cleaningDAO.load();
       securityRequestDAO.load();
     }
   }
@@ -163,6 +169,10 @@ public class DAOPouch {
     return securityRequestDAO;
   }
 
+  public static DAO<EquipmentCleaning> getEquipmentCleaningDAO() {
+    return cleaningDAO;
+  }
+
   public static DAO getDAO(TableObject type) {
     String tableName = type.tableName();
     if (tableName.equals("")) {
@@ -191,6 +201,14 @@ public class DAOPouch {
       return patientDAO;
     }else if (tableName.equals("SECURITYREQUESTS")) {
       return securityRequestDAO;
+    } else if (tableName.equals("NOTIFICATIONS")) {
+      return notificationDAO;
+    } else if (tableName.equals("LANGUAGEREQUESTS")) {
+      return languageRequestDAO;
+    } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
+      return nodeDAO;
+    } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
+      return cleaningDAO;
     }
     return null;
   }

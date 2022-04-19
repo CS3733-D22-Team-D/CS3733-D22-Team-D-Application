@@ -38,25 +38,25 @@
             <VBox prefHeight="271.0" prefWidth="465.0" VBox.vgrow="ALWAYS">
                <children>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Entree:" />
-                  <JFXComboBox id="jButton" fx:id="entreeBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="entreeBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Side: " />
-                  <JFXComboBox id="jButton" fx:id="sideBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="sideBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
-                  <JFXComboBox id="jButton" fx:id="drinkBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="drinkBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert:" />
-                  <JFXComboBox id="jButton" fx:id="dessertBox" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
+                  <JFXComboBox id="jButton" fx:id="dessertBox" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" visibleRowCount="5">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -117,6 +117,19 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+                     <children>
+                        <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <DatePicker id="specialField" fx:id="dateNeeded" prefHeight="30.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" top="20.0" />
@@ -195,6 +208,7 @@
                               <TableColumn id="col" fx:id="side" prefWidth="75.0" text="Side" />
                               <TableColumn id="col" fx:id="drink" prefWidth="75.0" text="Drink" />
                               <TableColumn id="col" fx:id="dessert" prefWidth="75.0" text="Dessert" />
+                              <TableColumn id="col" fx:id="dessert1" prefWidth="75.0" text="Date Requested" />
                            </columns>
                         </TableView>
                      </children>

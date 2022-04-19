@@ -140,7 +140,7 @@ public class ConnectionHandler {
         new FireBaseLoader(medicalEquipmentDAO, new MedicalEquipment());
         new FireBaseLoader(patientDAO, new Patient());
         new FireBaseLoader(locationNodeConnectionsDAO, new LocationNodeConnections());
-        new FireBaseLoader(labRequestDAO, new LanguageRequest());
+        new FireBaseLoader(languageRequestDAO, new LanguageRequest());
       } catch (Exception e) {
         return false;
       }

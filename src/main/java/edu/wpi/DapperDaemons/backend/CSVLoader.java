@@ -29,6 +29,7 @@ public class CSVLoader {
     filenames.put("LanguageRequests", new LanguageRequest());
     filenames.put("Notifications", new Notification());
     filenames.put("SecurityRequests", new SecurityRequest());
+    filenames.put("EquipmentCleanRequest", new EquipmentCleaning());
   }
 
   private CSVLoader() {}
@@ -42,7 +43,7 @@ public class CSVLoader {
             try {
               stmt.execute(v.tableInit());
             } catch (SQLException e) {
-              //              System.out.printf("%s table already created\n", v.getTableName());
+              System.out.printf("%s table already created\n", v.tableName());
             }
             load(v, k + ".csv");
           } catch (IOException e) {
@@ -60,7 +61,7 @@ public class CSVLoader {
             Objects.requireNonNull(CSVLoader.class.getClassLoader().getResourceAsStream(filename)));
     CSVReader read = new CSVReader(f);
     List<String[]> entries = read.readAll();
-    if (entries.size() < 1) return;
+    if (entries.size() <= 1) return;
     entries.remove(0);
     String tableName = type.tableName();
     String query = "SELECT * FROM " + tableName;
@@ -125,7 +126,7 @@ public class CSVLoader {
       for (Integer i = 0; i < line.length; i++) {
         data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(line[i]));
       }
-      map.put(line[0], data);
+      map.put(FireBaseCoder.encodeForFirebaseKey(line[0]), data);
     }
     ref.setValueAsync(map);
   }

@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.controllers.UIController;
+import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -18,7 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class SanitationController extends UIController {
+public class SanitationController extends ParentController {
 
   /* Table Object */
   @FXML private TableView<SanitationRequest> pendingRequests;
@@ -40,6 +42,7 @@ public class SanitationController extends UIController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> locationBox;
   /* Text Field */
+  @FXML private DatePicker dateNeeded;
 
   DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
   DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -77,8 +80,15 @@ public class SanitationController extends UIController {
     sanitationBox.setValue("");
     priorityBox.setValue("");
     locationBox.setValue("");
+    dateNeeded.setValue(null);
   }
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(sanitationBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+  }
   /** What happens when the submit button is clicked * */
   @FXML
   public void onSubmitClicked() {
@@ -90,6 +100,12 @@ public class SanitationController extends UIController {
       String assigneeID = "null";
       String sanitationType = sanitationBox.getValue().toString();
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
+
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
 
       /*Make sure the room exists*/
       boolean isALocation = false;
@@ -105,7 +121,7 @@ public class SanitationController extends UIController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority, roomID, requesterID, assigneeID, sanitationType, status));
+                    priority, roomID, requesterID, assigneeID, sanitationType, status, dateStr));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.
@@ -142,7 +158,8 @@ public class SanitationController extends UIController {
   private boolean allFieldsFilled() {
     return !((sanitationBox.getValue().equals(""))
         || priorityBox.getValue().equals("")
-        || locationBox.getValue().equals(""));
+        || locationBox.getValue().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   /** Adds new sanitationRequest to table of pending requests * */

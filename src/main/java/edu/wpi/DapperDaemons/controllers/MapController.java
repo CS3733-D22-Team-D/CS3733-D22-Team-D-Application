@@ -3,7 +3,11 @@ package edu.wpi.DapperDaemons.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -19,9 +23,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -35,11 +39,11 @@ public class MapController extends ParentController {
 
   /* UI Assets */
   @FXML private ImageView mapView;
-  public final String MAP_PATH =
-      getClass().getClassLoader().getResource("edu/wpi/DapperDaemons/assets/Maps") + "/";
   @FXML private AnchorPane glyphsLayer;
+  @FXML private AnchorPane equipLayer;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
+  @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
 
   /* Map Filter */
@@ -63,6 +67,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton staiTG;
   @FXML private ToggleButton storTG;
   @FXML private ToggleButton directionTG;
+  @FXML private ToggleButton bedTG;
+  @FXML private ToggleButton pumpTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -79,6 +85,11 @@ public class MapController extends ParentController {
   @FXML private TextField roomNameIn;
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
+
+  @FXML private ToggleButton bubbleMenu;
+  @FXML private StackPane circle2;
+  @FXML private ToggleButton circle3;
+  @FXML private StackPane circle4;
 
   /* Map Handlers */
   private MapHandler maps;
@@ -99,19 +110,15 @@ public class MapController extends ParentController {
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(searchBar, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(typeIn, new FuzzySearchComparatorMethod());
+  }
   // TODO: Initialize table with a DAO<Location>, fill values automagically
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     mapFilter.setTranslateX(160);
-
-    Image mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
-    Image mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
-    Image mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
-    Image mapFloor2 = new Image(MAP_PATH + "02_thesecondfloor.png");
-    Image mapFloor3 = new Image(MAP_PATH + "03_thethirdfloor.png");
-    Image mapFloor4 = new Image(MAP_PATH + "04_thefourthfloor.png");
-    Image mapFloor5 = new Image(MAP_PATH + "05_thefifthfloor.png");
-
     //    super.initialize(location, resources);
     //    bindImage(BGImage, BGContainer);
     List<PositionInfo> origPositions = new ArrayList<>();
@@ -126,16 +133,16 @@ public class MapController extends ParentController {
         new MapHandler(
             mapAssets,
             mapView,
-            mapFloorL2,
-            mapFloorL1,
-            mapFloor1,
-            mapFloor2,
-            mapFloor3,
-            mapFloor4,
-            mapFloor5);
+            Images.mapFloorL2,
+            Images.mapFloorL1,
+            Images.mapFloor1,
+            Images.mapFloor2,
+            Images.mapFloor3,
+            Images.mapFloor4,
+            Images.mapFloor5);
     maps.setMap(MapDashboardController.floor);
 
-    this.glyphs = new GlyphHandler(glyphsLayer, origPositions, this);
+    this.glyphs = new GlyphHandler(glyphsLayer, equipLayer, origPositions, this);
     glyphs.setFloorFilter(maps.getFloor());
 
     this.pathfinder = new PathfinderHandler(pathPane, this);
@@ -151,7 +158,7 @@ public class MapController extends ParentController {
         new CreateBox(createBox, roomNameIn, roomNumberIn, typeIn, selectLocationText);
     try {
       List<String> allReqNames = new ArrayList<>();
-      RequestHandler.getAllRequests()
+      DAOFacade.getAllRequests()
           .forEach(
               r -> {
                 if (!allReqNames.contains(r.requestType())) allReqNames.add(r.requestType());
@@ -174,6 +181,47 @@ public class MapController extends ParentController {
     closeRoom();
 
     //    filterSlider(mapFilter, burg, burgBack);
+  }
+
+  @FXML
+  void mapMenu(ActionEvent event) throws InterruptedException {
+    if (bubbleMenu.isSelected()) {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(-56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(-112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(-168);
+      translateTransition3.play();
+    } else {
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setDuration(Duration.millis(300));
+      translateTransition.setNode(circle2);
+      translateTransition.setByX(56);
+      translateTransition.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition();
+      translateTransition2.setDuration(Duration.millis(300));
+      translateTransition2.setNode(circle3);
+      translateTransition2.setByX(112);
+      translateTransition2.play();
+
+      TranslateTransition translateTransition3 = new TranslateTransition();
+      translateTransition3.setDuration(Duration.millis(300));
+      translateTransition3.setNode(circle4);
+      translateTransition3.setByX(168);
+      translateTransition3.play();
+    }
   }
 
   /**
@@ -215,9 +263,9 @@ public class MapController extends ParentController {
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
     try {
-      equipment = new ArrayList(equipmentDAO.filter(6, pos.getId()).values());
-      patients = new ArrayList(patientDAO.filter(6, pos.getId()).values());
-      requests = RequestHandler.getFilteredRequests(pos.getId());
+      equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
+      patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
+      requests = DAOFacade.getFilteredRequests(pos.getId());
     } catch (Exception e) {
       System.err.println("Could not filter through DAO");
     }
@@ -320,7 +368,7 @@ public class MapController extends ParentController {
 
   private boolean onFilterRequestType() {
     try {
-      List<Request> searchReq = RequestHandler.getSearchedRequestsByLongName(searchBar.getValue());
+      List<Request> searchReq = DAOFacade.searchRequestsByName(searchBar.getValue());
       if (searchReq.size() == 0) return false;
       glyphs.filterByReqType(maps.getFloor(), searchReq);
     } catch (Exception e) {
@@ -388,6 +436,17 @@ public class MapController extends ParentController {
   }
 
   @FXML
+  public void editMode(ActionEvent event) {
+    if (circle3.isSelected()) {
+      mapContents.setPannable(false);
+      glyphs.enableEditing();
+    } else {
+      mapContents.setPannable(true);
+      glyphs.disableEditing();
+    }
+  }
+
+  @FXML
   public void filterSlider() {
     //    mapFilter.setTranslateX(160);
 
@@ -425,7 +484,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void deptToggle(ActionEvent event) {
+  void deptToggle() {
     if (deptTG.isSelected()) {
       glyphs.addNodeTypeFilter("DEPT");
     } else {
@@ -434,7 +493,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void dirtToggle(ActionEvent event) {
+  void dirtToggle() {
     if (dirtTG.isSelected()) {
       glyphs.addNodeTypeFilter("DIRT");
     } else {
@@ -443,7 +502,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void elevToggle(ActionEvent event) {
+  void elevToggle() {
     if (elevTG.isSelected()) {
       glyphs.addNodeTypeFilter("ELEV");
     } else {
@@ -452,7 +511,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void exitToggle(ActionEvent event) {
+  void exitToggle() {
     if (exitTG.isSelected()) {
       glyphs.addNodeTypeFilter("EXIT");
     } else {
@@ -461,7 +520,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void hallToggle(ActionEvent event) {
+  void hallToggle() {
     if (hallTG.isSelected()) {
       glyphs.addNodeTypeFilter("HALL");
     } else {
@@ -470,7 +529,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void infoToggle(ActionEvent event) {
+  void infoToggle() {
     if (infoTG.isSelected()) {
       glyphs.addNodeTypeFilter("INFO");
     } else {
@@ -479,7 +538,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void labsToggle(ActionEvent event) {
+  void labsToggle() {
     if (labsTG.isSelected()) {
       glyphs.addNodeTypeFilter("LABS");
     } else {
@@ -488,7 +547,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void patiToggle(ActionEvent event) {
+  void patiToggle() {
     if (patiTG.isSelected()) {
       glyphs.addNodeTypeFilter("PATI");
     } else {
@@ -497,7 +556,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void restToggle(ActionEvent event) {
+  void restToggle() {
     if (restTG.isSelected()) {
       glyphs.addNodeTypeFilter("REST");
       glyphs.addNodeTypeFilter("BATH");
@@ -508,7 +567,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void retlToggle(ActionEvent event) {
+  void retlToggle() {
     if (retlTG.isSelected()) {
       glyphs.addNodeTypeFilter("RETL");
     } else {
@@ -517,7 +576,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void servToggle(ActionEvent event) {
+  void servToggle() {
     if (servTG.isSelected()) {
       glyphs.addNodeTypeFilter("SERV");
     } else {
@@ -526,7 +585,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void staiToggle(ActionEvent event) {
+  void staiToggle() {
     if (staiTG.isSelected()) {
       glyphs.addNodeTypeFilter("STAI");
     } else {
@@ -535,7 +594,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void storToggle(ActionEvent event) {
+  void storToggle() {
     if (storTG.isSelected()) {
       glyphs.addNodeTypeFilter("STOR");
     } else {
@@ -544,7 +603,7 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  void dirToggle(ActionEvent event) {
+  void dirToggle() {
     if (directionTG.isSelected()) {
       try {
         directionsFields =
@@ -556,6 +615,24 @@ public class MapController extends ParentController {
       }
     } else {
       filterMenu.getChildren().remove(2);
+    }
+  }
+
+  @FXML
+  void bedToggle() {
+    if (bedTG.isSelected()) {
+      glyphs.addEquipTypeFilter("BED");
+    } else {
+      glyphs.removeEquipTypeFilter("BED");
+    }
+  }
+
+  @FXML
+  void pumpToggle() {
+    if (pumpTG.isSelected()) {
+      glyphs.addEquipTypeFilter("INFUSIONPUMP");
+    } else {
+      glyphs.removeEquipTypeFilter("INFUSIONPUMP");
     }
   }
 

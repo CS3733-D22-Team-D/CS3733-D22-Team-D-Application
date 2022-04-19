@@ -44,7 +44,7 @@ public class Notification extends TableObject {
         + "userID varchar(100),"
         + "subject varchar(100),"
         + "body varchar(255),"
-        + "read varchar(5),"
+        + "isRead varchar(5),"
         + "chimed varchar(5))";
   }
 
