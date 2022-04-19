@@ -1,43 +1,32 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.entities.Account;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class UserSettingsController extends ParentController {
+public class UserHomeController extends ParentController {
 
   // account profile
   @FXML private Circle profilePic;
   @FXML private Text accountName;
   @FXML private Text accountUserName;
 
-  // account settings
-  @FXML private Label username;
-  @FXML private Label name;
+  // home
+  @FXML private Label fullName;
   @FXML private Label birthday;
-  @FXML private TextField email;
-  @FXML private JFXComboBox<String> themeBox;
-  @FXML private JFXButton resetButton;
-  @FXML private JFXButton saveChangesButton;
-
-  // TODO: themes
-  public enum Themes {}
+  @FXML private Label email;
+  @FXML private Text securityLevel;
+  @FXML private Label securityLevelDescription;
 
   // switch pages
   @FXML
@@ -70,7 +59,7 @@ public class UserSettingsController extends ParentController {
             + " "
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
-    name.setText(employeeName);
+    fullName.setText(employeeName);
 
     try {
       accountUserName.setText(
@@ -79,12 +68,10 @@ public class UserSettingsController extends ParentController {
       throw new RuntimeException(e);
     }
 
-    try {
-      username.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    // set security access level
+    securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
+
+    securityLevelDescription.setText(SecurityController.getUser().getSecurityDescription());
 
     // set profile picture
     profilePic.setFill(
@@ -109,34 +96,25 @@ public class UserSettingsController extends ParentController {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-
-    // set themeBox
-    themeBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(Themes.class)));
   }
 
-  public void onSaveChanges() {
-    // set email
-    String newEmail = email.getText();
-    try {
-      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
-      toChange.setAttribute(7, newEmail);
-      DAOPouch.getAccountDAO().update(toChange);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
+  /**
+   * A short description of the security level the user has, can probably be moved to employee
+   *
+   * @param securityLevel
+   */
+  private void securityDescription(String securityLevel) {
+    switch (securityLevel) {
+      case "1":
+        break;
+      case "2":
+        break;
+      case "3":
+        break;
+      case "4":
+        break;
+      case "5":
+        break;
     }
-    // TODO: set theme
-  }
-
-  public void onReset() {
-
-    // reset email
-    try {
-      email.setText(
-              DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-
-    // TODO: reset theme
   }
 }

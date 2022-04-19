@@ -109,7 +109,7 @@ public class EasterEggController extends UIController {
   @FXML
   public void openUserSettings() throws IOException {
     stopEasterEgg();
-    switchScene("userSettings.fxml", 941, 592);
+    switchScene("userHome.fxml", 941, 592);
   }
 
   @FXML

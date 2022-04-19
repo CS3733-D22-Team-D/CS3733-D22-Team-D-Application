@@ -1,12 +1,11 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Account;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -20,24 +19,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class UserSettingsController extends ParentController {
+public class UserSecurityController extends ParentController {
 
   // account profile
   @FXML private Circle profilePic;
   @FXML private Text accountName;
   @FXML private Text accountUserName;
 
-  // account settings
-  @FXML private Label username;
-  @FXML private Label name;
-  @FXML private Label birthday;
-  @FXML private TextField email;
-  @FXML private JFXComboBox<String> themeBox;
-  @FXML private JFXButton resetButton;
-  @FXML private JFXButton saveChangesButton;
-
-  // TODO: themes
-  public enum Themes {}
+  // security page
+  @FXML private Label securityLevel;
+  @FXML private TextField oldPasswordBox;
+  @FXML private TextField newPasswordBox;
+  @FXML private TextField numberBox;
+  @FXML private JFXComboBox<String> type2FABox;
 
   // switch pages
   @FXML
@@ -70,17 +64,9 @@ public class UserSettingsController extends ParentController {
             + " "
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
-    name.setText(employeeName);
 
     try {
       accountUserName.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-
-    try {
-      username.setText(
           DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
     } catch (SQLException e) {
       throw new RuntimeException(e);
@@ -98,45 +84,74 @@ public class UserSettingsController extends ParentController {
                                 + SecurityController.getUser().getNodeID()
                                 + ".png")))));
 
-    // set birthday
-    String employeeBirth = SecurityController.getUser().getDateOfBirth();
-    birthday.setText(employeeBirth);
+    // set security access level
+    securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
 
-    // set email
+    // set phone number
     try {
-      email.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+      numberBox.setText(
+          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
 
-    // set themeBox
-    themeBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(Themes.class)));
+    // set types of 2FA types
+    type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid"));
   }
 
-  public void onSaveChanges() {
-    // set email
-    String newEmail = email.getText();
+  public void onRequestNewAccess() {
+    // TODO: come back maybe
+  }
+
+  // TODO: get password to work?
+  public void onSaveChanges() throws NoSuchAlgorithmException {
+    // set new password
+    /*String newPassword = newPasswordBox.getText();
+    String oldPassword = oldPasswordBox.getText();
     try {
       Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
-      toChange.setAttribute(7, newEmail);
+      if (toChange.checkPassword(oldPassword)) {
+        toChange.setAttribute(3, newPassword);
+        DAOPouch.getAccountDAO().update(toChange);
+        System.out.println("Password Reset");
+      } else System.out.println("Could not reset password");
+    } catch (SQLException e) {
+      throw new RuntimeException();
+    } */
+
+    // set new phone number
+    String newNumber = numberBox.getText();
+    try {
+      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+      toChange.setAttribute(4, newNumber);
+      DAOPouch.getAccountDAO().update(toChange);
+      System.out.println("New Phone Number Reset");
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    // set 2FA type
+    String newTwoFactor = type2FABox.getValue();
+    try {
+      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+      toChange.setAttribute(6, newTwoFactor);
       DAOPouch.getAccountDAO().update(toChange);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-    // TODO: set theme
   }
 
   public void onReset() {
+    // set password
+    /*oldPasswordBox.setText("");
+    newPasswordBox.setText("");*/
 
-    // reset email
+    // set phone number
     try {
-      email.setText(
-              DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+      numberBox.setText(
+          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-
-    // TODO: reset theme
   }
 }

@@ -9,6 +9,8 @@ public class Account extends TableObject {
   private String password;
   private String phoneNumber;
   private String settingsFile = "none";
+  private String twofactor;
+  private String email;
 
   public Account(String employeeID, String username, String password)
       throws NoSuchAlgorithmException {
@@ -18,13 +20,21 @@ public class Account extends TableObject {
   }
 
   public Account(
-      String employeeID, String username, String password, String phoneNumber, String fileName)
+      String employeeID,
+      String username,
+      String password,
+      String phoneNumber,
+      String fileName,
+      String twofactor,
+      String email)
       throws NoSuchAlgorithmException {
     this.username = username;
     this.employeeID = employeeID;
     this.password = SHA.toHexString(SHA.getSHA(password));
     this.phoneNumber = phoneNumber;
     this.settingsFile = fileName;
+    this.twofactor = twofactor;
+    this.email = email;
   }
 
   public Account() {}
@@ -35,7 +45,9 @@ public class Account extends TableObject {
         + "employeeID varchar(20) UNIQUE,"
         + "password varchar(255),"
         + "phoneNumber varchar(12),"
-        + "settingsFile varchar(255))";
+        + "settingsFile varchar(255),"
+        + "twoFactor varchar(5)"
+        + "email varchar(255))";
   }
 
   @Override
@@ -56,6 +68,10 @@ public class Account extends TableObject {
         return this.phoneNumber;
       case 5:
         return this.settingsFile;
+      case 6:
+        return this.twofactor;
+      case 7:
+        return this.email;
       default:
         break;
     }
@@ -75,6 +91,10 @@ public class Account extends TableObject {
         this.phoneNumber = newAttribute;
       case 5:
         this.settingsFile = newAttribute;
+      case 6:
+        this.twofactor = newAttribute;
+      case 7:
+        this.email = newAttribute;
       default:
         break;
     }

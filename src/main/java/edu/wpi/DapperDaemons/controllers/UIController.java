@@ -224,7 +224,7 @@ public abstract class UIController extends AppController {
 
   @FXML
   public void openUserSettings() throws IOException {
-    switchScene("userSettings.fxml", 941, 592);
+    switchScene("userHome.fxml", 941, 592);
   }
 
   @FXML

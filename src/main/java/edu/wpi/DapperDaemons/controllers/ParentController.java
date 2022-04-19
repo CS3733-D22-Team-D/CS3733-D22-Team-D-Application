@@ -142,8 +142,8 @@ public class ParentController extends UIController {
   }
 
   @FXML
-  void openUserSettings(ActionEvent event) {
-    swapPage("userSettings", "User Settings");
+  public void openUserSettings(ActionEvent event) {
+    swapPage("userHome", "User Home Page");
   }
 
   @FXML
