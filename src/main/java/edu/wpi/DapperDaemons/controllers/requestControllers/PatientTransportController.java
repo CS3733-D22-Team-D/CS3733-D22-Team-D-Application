@@ -23,6 +23,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends ParentController {
@@ -51,6 +52,7 @@ public class PatientTransportController extends ParentController {
   @FXML private TextField patientFirstName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   List<String> names;
@@ -103,6 +105,7 @@ public class PatientTransportController extends ParentController {
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -171,10 +174,9 @@ public class PatientTransportController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       patientID,
-                      nextRoomID,
-                      status,
-                      dateStr));
+                      nextRoomID));
           if (!hadPermission) {
             // display error that employee does not have permission
 
@@ -246,6 +248,6 @@ public class PatientTransportController extends ParentController {
   }
 
   public void saveToCSV() {
-    super.saveToCSV(new PatientTransportRequest());
+    super.saveToCSV(new PatientTransportRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }

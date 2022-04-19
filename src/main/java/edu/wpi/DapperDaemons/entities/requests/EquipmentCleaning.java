@@ -154,6 +154,7 @@ public class EquipmentCleaning extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private RequestStatus status;
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
@@ -180,6 +181,7 @@ public class EquipmentCleaning extends TableObject implements Request {
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
     this.cleanBy = cleanBy;
+    this.status = RequestStatus.REQUESTED;
   }
 
   public EquipmentCleaning() {}
@@ -219,6 +221,11 @@ public class EquipmentCleaning extends TableObject implements Request {
   @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
+  }
+
+  @Override
+  public RequestStatus getStatus() {
+    return status;
   }
 
   public void setAssigneeID(String assigneeID) {

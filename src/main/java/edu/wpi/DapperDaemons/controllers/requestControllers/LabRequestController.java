@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
 
@@ -31,6 +32,7 @@ public class LabRequestController extends ParentController {
   @FXML private DatePicker patientDOB;
   @FXML private JFXComboBox<String> priorityChoiceBox;
   @FXML private JFXComboBox<String> procedureComboBox;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   /* Lab request DAO */
@@ -83,11 +85,13 @@ public class LabRequestController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
   @FXML
   public void onSubmitClicked() {
+
     if (allItemsFilled()) {
       Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
       String roomID = "";
@@ -126,10 +130,9 @@ public class LabRequestController extends ParentController {
                     roomID,
                     requesterID,
                     assigneeID,
+                    notes.getText(),
                     patientID,
-                    labType,
-                    status,
-                    dateStr));
+                    labType));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada
@@ -170,7 +173,7 @@ public class LabRequestController extends ParentController {
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LabRequest());
+    super.saveToCSV(new LabRequest(), (Stage) patientName.getScene().getWindow());
   }
 
   private class LabRequestInitializer {

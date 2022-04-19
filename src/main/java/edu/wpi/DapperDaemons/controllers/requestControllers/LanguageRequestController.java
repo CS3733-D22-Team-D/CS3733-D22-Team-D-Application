@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class LanguageRequestController extends ParentController {
@@ -111,7 +112,7 @@ public class LanguageRequestController extends ParentController {
               dateRep));
     } else {
       // TODO uncomment when fixed
-      //      showError("All fields must be filled.");
+      //   showError("All fields must be filled.");
     }
     onClearClicked();
   }
@@ -129,6 +130,6 @@ public class LanguageRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LanguageRequest());
+    super.saveToCSV(new LanguageRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }

@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
   @FXML private TableView<MedicineRequest> medicineRequests;
@@ -33,6 +34,7 @@ public class MedicineController extends ParentController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
@@ -80,6 +82,7 @@ public class MedicineController extends ParentController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -174,10 +177,10 @@ public class MedicineController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       patientID,
                       medName,
-                      quantity,
-                      dateStr));
+                      quantity));
 
           if (!wentThrough) {
 
@@ -202,7 +205,7 @@ public class MedicineController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicineRequest());
+    super.saveToCSV(new MedicineRequest(), (Stage) patientName.getScene().getWindow());
   }
 
   @FXML

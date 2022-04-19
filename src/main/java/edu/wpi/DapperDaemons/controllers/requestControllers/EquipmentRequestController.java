@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends ParentController {
@@ -34,6 +35,7 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
@@ -108,6 +110,7 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -194,10 +197,11 @@ public class EquipmentRequestController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       equipment.getNodeID(),
                       equipmentType,
                       cleanStatus,
-                      dateStr));
+                          dateNeeded.getValue().toString()));
           // check if user has permission
           if (!hadClearance) {
             showError("You do not have permission to do this.");
@@ -236,6 +240,6 @@ public class EquipmentRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest());
+    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }
