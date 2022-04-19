@@ -171,26 +171,10 @@ public class AStar {
       //      e.printStackTrace();
       System.out.println("Couldn't find location in table");
     }
-    System.out.println(
-        "Going from y "
-            + current.getXcoord()
-            + " - "
-            + next.getXcoord()
-            + " To "
-            + current.getYcoord()
-            + " - "
-            + next.getYcoord());
     Double distance =
         Math.sqrt(
             Math.pow(Math.abs((current.getXcoord() - next.getXcoord())), 2)
                 + Math.pow(Math.abs((current.getYcoord() - next.getYcoord())), 2));
-    System.out.println(
-        "Going from "
-            + current.getNodeID()
-            + " To "
-            + next.getNodeID()
-            + " With a distance "
-            + distance);
     if (!current.getFloor().equals(next.getFloor())) {
       //      System.out.println(
       //          "Its on a separate floor, adding something"); // Comment out after it works -
