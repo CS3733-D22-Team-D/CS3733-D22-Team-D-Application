@@ -115,7 +115,7 @@
                   </DropShadow>
                </effect>
             </VBox>
-            <VBox fx:id="tfaBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="380.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;">
+            <VBox fx:id="tfaBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="380.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;" visible="false">
                <children>
                   <StackPane pickOnBounds="false" prefHeight="340.0" prefWidth="380.0" VBox.vgrow="ALWAYS">
                      <children>
