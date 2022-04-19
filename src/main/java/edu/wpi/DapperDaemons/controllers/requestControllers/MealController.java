@@ -162,7 +162,7 @@ public class MealController extends ParentController {
                     side,
                     drink,
                     dessert,
-                    dateNeeded.getValue().toString()));
+                    dateStr));
 
         if (!hadClearance) {
           // throw error that user aint got no clearance

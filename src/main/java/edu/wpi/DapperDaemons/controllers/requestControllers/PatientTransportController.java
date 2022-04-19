@@ -177,7 +177,7 @@ public class PatientTransportController extends ParentController {
                       notes.getText(),
                       patientID,
                       nextRoomID,
-                      dateNeeded.getValue().toString()));
+                      dateStr));
           if (!hadPermission) {
             // display error that employee does not have permission
 

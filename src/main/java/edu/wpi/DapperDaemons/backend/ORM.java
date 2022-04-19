@@ -61,24 +61,8 @@ public class ORM<T extends TableObject> {
                           // TODO test if this is ever reached, I dont think it ever does oop
                           System.out.println(
                               "Caught in event listener, make sure the data is correct in firebase!\nAll of it!");
-                          //                          HashMap<String, Object> res =
-                          //                              (HashMap<String, Object>)
-                          // snapshot.getValue();
-                          //                          ArrayList<String> attributes = new
-                          // ArrayList<>();
-                          //                          T temp = (T) type.newInstance(new
-                          // ArrayList<>());
-                          //                          res.forEach(
-                          //                              (k, v) -> {
-                          //                                if (k.equals("nodeID")) {
-                          //                                  attributes.add(0, v.toString());
-                          //                                } else {
-                          //                                  attributes.add(v.toString());
-                          //                                }
-                          //                                temp.setAttribute(k, String.valueOf(v));
-                          //                              });
-                          //                          map.put(attributes.get(0), temp);
-                        } catch (NullPointerException ignored) {
+                        } catch (NullPointerException e) {
+                          map = new HashMap<>();
                         }
                       })
                   .start();
