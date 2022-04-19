@@ -34,6 +34,7 @@ public class EquipmentCleaningController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentIDBox;
   @FXML private DatePicker cleanByDate;
+  @FXML private TextField notes;
 
   /* Table Columns */
   @FXML private TableColumn<EquipmentCleaning, String> reqID;
@@ -105,6 +106,7 @@ public class EquipmentCleaningController extends ParentController {
     priorityBox.setValue("");
     equipmentIDBox.setValue("");
     cleanByDate.setValue(null);
+    notes.setText("");
   }
 
   @FXML
@@ -140,6 +142,7 @@ public class EquipmentCleaningController extends ParentController {
                     roomID,
                     requesterID,
                     assigneeID,
+                    notes.getText(),
                     medicalEquipment.getNodeID(),
                     medicalEquipment.getEquipmentType(),
                     MedicalEquipment.CleanStatus.INPROGRESS,

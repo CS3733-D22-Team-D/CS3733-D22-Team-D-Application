@@ -34,9 +34,11 @@ public class LabRequest extends TableObject implements Request {
         + "roomID varchar(1000) ,"
         + "requesterID varchar(1000),"
         + "assigneeID varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
         + "patientID varchar(1000),"
         + "labType varchar(1000),"
-        + "status varchar(1000),"
         + "dateNeeded varchar(1000))";
   }
 
@@ -124,6 +126,9 @@ public class LabRequest extends TableObject implements Request {
         labType = LabType.valueOf(newAttribute);
         break;
 
+      case 11:
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
