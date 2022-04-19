@@ -39,6 +39,7 @@
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="equipLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
+                        <AnchorPane fx:id="dragPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pathPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
@@ -365,7 +366,7 @@
                                                 </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="pumpTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#pumpToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Infusion Pumps">
                                                    <graphic>
-                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                      <ImageView fx:id="infusionDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
                                                             <Image url="@../assets/Glyphs/MapIcons/pump.png" />
                                                          </image>
@@ -377,7 +378,7 @@
                                                 </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="bedTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#bedToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Beds">
                                                    <graphic>
-                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                      <ImageView fx:id="bedDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
                                                             <Image url="@../assets/Glyphs/MapIcons/bed.png" />
                                                          </image>

@@ -43,6 +43,7 @@ public class MapController extends ParentController {
   @FXML private ImageView mapView;
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane equipLayer;
+  @FXML private AnchorPane dragPane;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
   @FXML private ScrollPane mapContents;
@@ -89,6 +90,12 @@ public class MapController extends ParentController {
   @FXML private TextField roomNameIn;
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
+
+  /* Drag elements */
+  @FXML private ImageView infusionDragImage;
+  @FXML private ImageView bedDragImage;
+  private static DragHandler bedDrag;
+  private static DragHandler infusionDrag;
 
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
@@ -459,9 +466,15 @@ public class MapController extends ParentController {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
+      bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
+      infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
+      bedDrag.enable();
+      infusionDrag.enable();
     } else {
       mapContents.setPannable(true);
       glyphs.disableEditing();
+      if (bedDrag != null) bedDrag.disable();
+      if (infusionDrag != null) infusionDrag.disable();
     }
   }
 
@@ -678,5 +691,9 @@ public class MapController extends ParentController {
     ft.setAutoReverse(false);
 
     ft.play();
+  }
+
+  public String getFloor() {
+    return maps.getFloor();
   }
 }
