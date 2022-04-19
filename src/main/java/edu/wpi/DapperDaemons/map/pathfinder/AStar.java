@@ -156,12 +156,16 @@ public class AStar {
     Location next =
         new Location("Unknown", 1000, 1000, "Unknown", "Unknown", "Unknown", "Unknown", "Unknown");
     try {
-      current = locationDAO.filter(locations, 1, currentLocation).get(0);
-      next = locationDAO.filter(locations, 1, nextLocation).get(0);
+      current =
+          new ArrayList<Location>(locationDAO.filter(locations, 1, currentLocation).values())
+              .get(0);
+      next =
+          new ArrayList<Location>(locationDAO.filter(locations, 1, nextLocation).values()).get(0);
     } catch (Exception e) {
       //      e.printStackTrace();
-      //      System.out.println("Couldn't find location in table");
+      System.out.println("Couldn't find location in table");
     }
+    System.out.println("Going from " + current.getNodeID() + " To " + next.getNodeID());
     Double distance =
         Math.sqrt(
             (current.getXcoord() - next.getXcoord())
