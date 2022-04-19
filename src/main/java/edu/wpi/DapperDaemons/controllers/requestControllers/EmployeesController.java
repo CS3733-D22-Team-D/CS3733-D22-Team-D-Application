@@ -5,7 +5,6 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.entities.Employee;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,8 +65,7 @@ public class EmployeesController extends ParentController implements Initializab
     employeeDOB.setValue(null);
   }
 
-
- private boolean addItem(Employee request) {
+  private boolean addItem(Employee request) {
     boolean hadClearance = false;
 
     hadClearance = employeeDAO.add(request);
@@ -79,32 +77,29 @@ public class EmployeesController extends ParentController implements Initializab
 
   @FXML
   public void onSubmitClicked() {
-    if(fieldsNonEmpty()){
+    if (fieldsNonEmpty()) {
       String firstName = employeeFirstName.getText();
       String lastName = employeeLastName.getText();
-      String dob = "" + employeeDOB.getValue().getMonthValue()
+      String dob =
+          ""
+              + employeeDOB.getValue().getMonthValue()
               + employeeDOB.getValue().getDayOfMonth()
               + employeeDOB.getValue().getYear();
 
-
-      if(!addItem(new Employee(firstName,lastName,dob, Employee.EmployeeType.valueOf(typeBox.getValue()),Integer.parseInt(clearanceBox.getValue())))){
+      if (!addItem(
+          new Employee(
+              firstName,
+              lastName,
+              dob,
+              Employee.EmployeeType.valueOf(typeBox.getValue()),
+              Integer.parseInt(clearanceBox.getValue())))) {
 
         showError("you do not have access to this function");
-
       }
 
-
-
-
-    }else{
+    } else {
       showError("not all fields have been filled");
     }
-
-
-
-
-
-
   }
 
   public boolean fieldsNonEmpty() {

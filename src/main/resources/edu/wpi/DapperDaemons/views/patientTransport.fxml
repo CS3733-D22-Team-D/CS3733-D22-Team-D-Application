@@ -72,7 +72,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <DatePicker id="specialField" fx:id="patientDOB" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                              <DatePicker fx:id="patientDOB" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                            </children>
                            <padding>
                               <Insets left="5.0" />
