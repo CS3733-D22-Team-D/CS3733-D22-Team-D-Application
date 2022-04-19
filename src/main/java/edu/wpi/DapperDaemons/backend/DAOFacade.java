@@ -1,6 +1,8 @@
 package edu.wpi.DapperDaemons.backend;
 
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Account;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
@@ -148,4 +150,14 @@ public class DAOFacade {
     return plebs;
   }
 
+
+  public static Employee getEmployee(String username) throws IllegalAccessException {
+    Account account = DAOPouch.getAccountDAO().get(username);
+    List<Employee> employees =
+        new ArrayList<Employee>(
+            DAOPouch.getEmployeeDAO().filter(1, account.getAttribute(2)).values());
+    if (!(employees.size() == 1))
+      throw new IllegalAccessException("Duplicate or No Employee Account(s) Found: " + username);
+    else return employees.get(0);
+  }
 }

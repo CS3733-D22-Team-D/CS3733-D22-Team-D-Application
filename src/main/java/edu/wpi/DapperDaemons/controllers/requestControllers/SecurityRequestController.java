@@ -7,40 +7,39 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
+import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
-public class LanguageRequestController extends ParentController {
+public class SecurityRequestController extends ParentController {
 
   /* Table Object */
-  @FXML private TableView<LanguageRequest> languageRequestsTable;
+  @FXML private TableView<SecurityRequest> SecurityRequestTable;
 
   /* Table Helper */
-  private TableHelper<LanguageRequest> tableHelper;
+  private TableHelper<SecurityRequest> tableHelper;
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
-  @FXML private JFXComboBox<String> languageBox;
+  @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> roomBox;
-  @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
-  @FXML private TableColumn<LanguageRequest, String> reqID;
-  @FXML private TableColumn<LanguageRequest, String> language;
-  @FXML private TableColumn<LanguageRequest, String> roomID;
-  @FXML private TableColumn<LanguageRequest, String> requester;
-  @FXML private TableColumn<LanguageRequest, String> assignee;
+  @FXML private TableColumn<SecurityRequest, String> reqID;
+  @FXML private TableColumn<SecurityRequest, Request.Priority> priority;
+  @FXML private TableColumn<SecurityRequest, String> roomID;
+  @FXML private TableColumn<SecurityRequest, String> requester;
+  @FXML private TableColumn<SecurityRequest, String> assignee;
 
   /* DAO Object */
-  private DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
+  private DAO<SecurityRequest> securityRequestDAO = DAOPouch.getSecurityRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
 
   @Override
@@ -49,12 +48,12 @@ public class LanguageRequestController extends ParentController {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
 
-    tableHelper = new TableHelper<>(languageRequestsTable, 0);
-    tableHelper.linkColumns(LanguageRequest.class);
+    tableHelper = new TableHelper<>(SecurityRequestTable, 0);
+    tableHelper.linkColumns(SecurityRequest.class);
 
     try { // Removed second field (filename) since everything is
       // loaded on startup
-      languageRequestsTable.getItems().addAll(new ArrayList(languageRequestDAO.getAll().values()));
+      SecurityRequestTable.getItems().addAll(new ArrayList(securityRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, table was unable to be created\n");
@@ -66,32 +65,30 @@ public class LanguageRequestController extends ParentController {
 
   private void setListeners() {
     TableListeners tl = new TableListeners();
-    tl.setLanguageRequestListener(
+    tl.setSecurityRequestListener(
         tl.eventListener(
             () -> {
               //              System.out.println("LanguageRequestsTable");
-              languageRequestsTable.getItems().clear();
-              languageRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(languageRequestDAO.getAll().values()));
+              SecurityRequestTable.getItems().clear();
+              SecurityRequestTable.getItems()
+                  .addAll(new ArrayList(securityRequestDAO.getAll().values()));
             }));
   }
 
-  public boolean addItem(LanguageRequest request) {
+  public boolean addItem(SecurityRequest request) {
     boolean hadClearance = true;
 
-    hadClearance = languageRequestDAO.add(request);
+    hadClearance = securityRequestDAO.add(request);
     if (hadClearance) {
-      languageRequestsTable.getItems().add(request);
+      SecurityRequestTable.getItems().add(request);
     }
     return hadClearance;
   }
 
   @FXML
   public void onClearClicked() {
-    languageBox.setValue("");
+    priorityBox.setValue("");
     roomBox.setValue("");
-    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -99,36 +96,27 @@ public class LanguageRequestController extends ParentController {
 
     // make sure all fields are filled
     if (allFieldsFilled()) {
-      String dateRep =
-          ""
-              + dateNeeded.getValue().getMonthValue()
-              + dateNeeded.getValue().getDayOfMonth()
-              + dateNeeded.getValue().getYear();
       addItem(
-          new LanguageRequest(
-              LanguageRequest.Language.valueOf(languageBox.getValue()),
-              roomBox.getValue(),
-              dateRep));
+          new SecurityRequest(
+              Request.Priority.valueOf(priorityBox.getValue()), roomBox.getValue()));
     } else {
       // TODO uncomment when fixed
-      //   showError("All fields must be filled.");
+      //      showError("All fields must be filled.");
     }
     onClearClicked();
   }
 
   private boolean allFieldsFilled() {
-    return !(languageBox.getValue().equals("")
-        || roomBox.getValue().equals("")
-        || dateNeeded.getValue() != null);
+    return !(priorityBox.getValue().equals("") || roomBox.getValue().equals(""));
   }
 
   public void initBoxes() {
-    languageBox.setItems(
-        FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
+    priorityBox.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LanguageRequest());
+    super.saveToCSV(new SecurityRequest());
   }
 }
