@@ -132,6 +132,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case "dateNeeded":
         dateNeeded = newAttribute;
         break;
+      case "notes":
+        notes = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -154,6 +156,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private String notes;
   private String equipmentID;
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
@@ -166,6 +169,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String equipmentID,
       MedicalEquipment.EquipmentType equipmentType,
       MedicalEquipment.CleanStatus cleanStatus,
@@ -180,6 +184,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
     this.dateNeeded = dateNeeded;
+    this.notes = notes;
   }
 
   public MedicalEquipmentRequest() {}
@@ -219,6 +224,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
+  }
+
+  @Override
+  public RequestStatus getStatus() {
+    return null;
   }
 
   public void setAssigneeID(String assigneeID) {
