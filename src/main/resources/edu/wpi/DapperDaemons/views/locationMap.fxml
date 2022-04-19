@@ -442,7 +442,7 @@
                   </StackPane>
                </right>
                <center>
-                  <VBox pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="centerBox" pickOnBounds="false" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
                         <StackPane alignment="TOP_LEFT" pickOnBounds="false" prefHeight="150.0" prefWidth="260.0" VBox.vgrow="ALWAYS">
                            <children>
