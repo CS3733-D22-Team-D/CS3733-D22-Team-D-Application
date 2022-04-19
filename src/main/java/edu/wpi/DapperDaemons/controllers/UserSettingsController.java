@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UserSettingsController extends ParentController {
 
@@ -98,6 +99,16 @@ public class UserSettingsController extends ParentController {
     // set themeBox
     themeBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(ThemeHandler.Theme.class)));
+  }
+
+  @FXML
+  private void saveToCSV() {
+    saveToCSV((Stage) email.getScene().getWindow());
+  }
+
+  @FXML
+  private void loadFromCSV() {
+    loadFromCSV((Stage) email.getScene().getWindow());
   }
 
   public void onSaveChanges() {

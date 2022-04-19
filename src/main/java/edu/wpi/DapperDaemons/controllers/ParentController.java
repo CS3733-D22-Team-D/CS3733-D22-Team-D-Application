@@ -271,7 +271,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void openUserSettings(ActionEvent event) {
-    swapPage("userHome", "User Home Page");
+    swapPage("userAccountSettings", "User Home Page");
   }
 
   @FXML
