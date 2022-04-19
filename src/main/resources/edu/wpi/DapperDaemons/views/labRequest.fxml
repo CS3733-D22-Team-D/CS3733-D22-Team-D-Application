@@ -147,6 +147,11 @@
                   </VBox>
                </children>
             </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="notes" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="106.0" prefWidth="308.0" style="-fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
                   <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE" />

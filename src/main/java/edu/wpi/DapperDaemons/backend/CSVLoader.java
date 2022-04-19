@@ -11,7 +11,7 @@ import java.util.*;
 
 public class CSVLoader {
 
-  static HashMap<String, TableObject> filenames = new HashMap<>();
+  public static HashMap<String, TableObject> filenames = new HashMap<>();
 
   static {
     filenames.put("TowerLocations", new Location());
