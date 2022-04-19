@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class SecurityRequestController extends ParentController {
@@ -117,6 +118,6 @@ public class SecurityRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new SecurityRequest());
+    super.saveToCSV(new SecurityRequest(), (Stage) priorityBox.getScene().getWindow());
   }
 }

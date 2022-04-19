@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends ParentController {
@@ -236,6 +237,6 @@ public class EquipmentRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest());
+    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }
