@@ -52,12 +52,16 @@ public class Alert extends TableObject {
     switch (columnNumber) {
       case 1:
         this.nodeID = newAttribute;
+        break;
       case 2:
         this.type = newAttribute;
+        break;
       case 3:
         this.description = newAttribute;
+        break;
       case 4:
         this.priority = Request.Priority.valueOf(newAttribute);
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
