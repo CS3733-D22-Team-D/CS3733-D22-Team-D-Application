@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="222.0" style="-fx-background-color: #FFFEFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler">
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="222.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler">
    <children>
       <VBox id="foreground" fx:id="createDirectionsBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5;">
          <children>

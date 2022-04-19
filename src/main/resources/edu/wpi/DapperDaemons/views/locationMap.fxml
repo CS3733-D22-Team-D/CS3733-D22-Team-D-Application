@@ -752,6 +752,18 @@
                                     </DropShadow>
                                  </effect>
                               </VBox>
+                              <VBox id="foreground" fx:id="emptyBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="230.0" prefWidth="230.0" style="-fx-background-color: WHite; -fx-background-radius: 7.5;" visible="false">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </VBox>
                            </children>
                            <VBox.margin>
                               <Insets left="20.0" top="30.0" />

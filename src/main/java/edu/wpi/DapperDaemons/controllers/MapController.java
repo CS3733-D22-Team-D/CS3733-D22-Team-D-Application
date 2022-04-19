@@ -48,6 +48,7 @@ public class MapController extends ParentController {
   @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
   @FXML private VBox centerBox;
+  @FXML private VBox emptyBox;
 
   /* Map Filter */
   @FXML private StackPane mapFilter;
@@ -612,13 +613,15 @@ public class MapController extends ParentController {
         directionsFields =
             FXMLLoader.load(
                 Objects.requireNonNull(App.class.getResource("views/" + "directionsSearch.fxml")));
-        centerBox.getChildren().add(directionsFields);
-        centerBox.setAlignment(Pos.TOP_LEFT);
+        emptyBox.getChildren().add(directionsFields);
+        emptyBox.setAlignment(Pos.TOP_LEFT);
+        emptyBox.setVisible(true);
       } catch (IOException e) {
         e.printStackTrace();
       }
     } else {
-      centerBox.getChildren().remove(directionsFields);
+      emptyBox.getChildren().remove(directionsFields);
+      emptyBox.setVisible(false);
     }
   }
 
