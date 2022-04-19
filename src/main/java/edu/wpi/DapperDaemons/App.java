@@ -8,6 +8,7 @@ import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.*;
@@ -193,7 +194,13 @@ public class App extends Application {
                         // If there are more than 6 dirty beds in the current location creat request
                         // for each
                         if (dirtyBedMap.size() >= 6) {
-                          // TODO: ADD ALERT
+                          DAOPouch.getAlertDAO()
+                              .add(
+                                  new Alert(
+                                      ">6 dirty beds",
+                                      "SANITATION",
+                                      Request.Priority.HIGH,
+                                      loc.getFloor()));
                           for (MedicalEquipment equipment : dirtyBedMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
@@ -212,7 +219,13 @@ public class App extends Application {
                           }
                         }
                         if (dirtyInfusionPumpMap.size() >= 10) {
-                          // TODO: ADD ALERT
+                          DAOPouch.getAlertDAO()
+                              .add(
+                                  new Alert(
+                                      ">10 Dirty Unfusion Pumps",
+                                      "SANITATION",
+                                      Request.Priority.HIGH,
+                                      loc.getFloor()));
                           for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
@@ -241,6 +254,13 @@ public class App extends Application {
 
                         // If there are less than 5 clean infusion pumps in a clean location...
                         if (cleanInfusionMap.size() <= 5) {
+                          DAOPouch.getAlertDAO()
+                              .add(
+                                  new Alert(
+                                      "<5 Clean Infusion Pumps",
+                                      "SANITATION",
+                                      Request.Priority.MEDIUM,
+                                      loc.getFloor()));
                           // Iterate through dirty locations
                           for (Location dirtyLoc : locationDAO.filter(6, "DIRT").values()) {
 
@@ -251,7 +271,6 @@ public class App extends Application {
 
                             // For all the dirty infusion pumps at the dirty location
                             for (MedicalEquipment equipment : dirtyInfusionMap.values()) {
-                              // TODO: Add an alert
                               // create a request
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
