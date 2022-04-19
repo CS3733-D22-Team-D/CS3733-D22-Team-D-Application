@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
@@ -40,13 +39,8 @@ public class BackendInfoController extends ParentController {
   private DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
-  private static ValueEventListener tableListener;
-
-  private TableListeners tl;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    tl = new TableListeners();
     setListeners();
     // TODO : The patient DAO is broken :(
     patientTableHelper = new TableHelper<>(patientsTable, 0);
@@ -78,28 +72,32 @@ public class BackendInfoController extends ParentController {
   }
 
   private void setListeners() {
-    tl.setLocationListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new Location().tableName(),
+        TableListeners.eventListener(
             () -> {
               locationsTable.getItems().clear();
               locationsTable.getItems().addAll(new ArrayList<>(locationDAO.getAll().values()));
             }));
-    tl.setEmployeeListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new Employee().tableName(),
+        TableListeners.eventListener(
             () -> {
               employeesTable.getItems().clear();
               employeesTable.getItems().addAll(new ArrayList<>(employeeDAO.getAll().values()));
             }));
-    tl.setMedicalEquipmentListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MedicalEquipment().tableName(),
+        TableListeners.eventListener(
             () -> {
               equipmentTable.getItems().clear();
               equipmentTable
                   .getItems()
                   .addAll(new ArrayList<>(medicalEquipmentDAO.getAll().values()));
             }));
-    tl.setPatientListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new Patient().tableName(),
+        TableListeners.eventListener(
             () -> {
               patientsTable.getItems().clear();
               patientsTable.getItems().addAll(new ArrayList<>(patientDAO.getAll().values()));

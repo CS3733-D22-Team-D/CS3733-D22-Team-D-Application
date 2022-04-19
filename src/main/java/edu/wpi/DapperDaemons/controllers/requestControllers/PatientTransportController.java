@@ -82,9 +82,9 @@ public class PatientTransportController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setPatientTrasportRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new PatientTransportRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               transportRequests.getItems().clear();
               transportRequests

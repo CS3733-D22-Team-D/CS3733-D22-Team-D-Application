@@ -70,9 +70,9 @@ public class SecurityRequestController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setSecurityRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new SecurityRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               //              System.out.println("LanguageRequestsTable");
               SecurityRequestTable.getItems().clear();

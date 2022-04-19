@@ -2,10 +2,11 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.*;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
@@ -25,6 +26,8 @@ public class MapDashboardController extends ParentController {
   @FXML private TableView<Patient> patientTable;
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private TableView<Request> reqTable;
+
+  @FXML private TableView<Alert> alertTable;
 
   @FXML private ToggleButton L1;
   @FXML private ToggleButton L10;
@@ -46,7 +49,6 @@ public class MapDashboardController extends ParentController {
   @FXML private ToggleButton M1;
   @FXML private ToggleButton M2;
   @FXML private Label floorSummary;
-  @FXML private Label locOfInterest;
   @FXML private TabPane tabs;
 
   @FXML private Text cleanEquipNum;
@@ -60,13 +62,12 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
-  private TableListeners tl;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
+
     bindImage(mapImage, mapImageContainer);
 
-    tl = new TableListeners();
     setListeners();
 
     // Init tables
@@ -75,6 +76,7 @@ public class MapDashboardController extends ParentController {
     new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
     new TableHelper<>(reqTable, 1).linkColumns(Request.class);
+    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
@@ -82,8 +84,9 @@ public class MapDashboardController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners.setMedicalEquipmentListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MedicalEquipment().tableName(),
+        TableListeners.eventListener(
             () -> {
               equipTable.getItems().clear();
               for (Location l : locsByFloor) {
@@ -92,8 +95,9 @@ public class MapDashboardController extends ParentController {
                     .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    TableListeners.setPatientListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new Patient().tableName(),
+        TableListeners.eventListener(
             () -> {
               patientTable.getItems().clear();
               for (Location l : locsByFloor) {
@@ -102,68 +106,24 @@ public class MapDashboardController extends ParentController {
                     .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    TableListeners.setLabRequestListener(
-        tl.eventListener(
+    List<String> tableNames =
+        Arrays.asList(
+            new EquipmentCleaning().tableName(),
+            new LabRequest().tableName(),
+            new LanguageRequest().tableName(),
+            new MealDeliveryRequest().tableName(),
+            new MedicalEquipmentRequest().tableName(),
+            new MedicineRequest().tableName(),
+            new PatientTransportRequest().tableName(),
+            new SanitationRequest().tableName(),
+            new SecurityRequest().tableName());
+    TableListeners.addListeners(
+        tableNames,
+        TableListeners.eventListener(
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
                 reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setLanguageRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMealDeliveryRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMedicalEquipmentRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMedicinRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setPatientTrasportRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setSanitationRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setLocationListener(
-        tl.eventListener(
-            () -> {
-              locTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                locTable.getItems().add(l);
               }
             }));
   }
@@ -172,7 +132,6 @@ public class MapDashboardController extends ParentController {
     updateTables();
     updateIcons();
     updateSummary();
-    updateLocOfInterest();
   }
 
   private List<Location> locsByFloor;
@@ -183,6 +142,9 @@ public class MapDashboardController extends ParentController {
     patientTable.getItems().clear();
     reqTable.getItems().clear();
     locTable.getItems().clear();
+    alertTable.getItems().clear();
+    alertTable.getItems().addAll(DAOPouch.getAlertDAO().filter(5, floor).values());
+
     locsByFloor = new ArrayList<>(locationDAO.filter(4, floor).values());
 
     for (Location l : locsByFloor) {
@@ -237,15 +199,6 @@ public class MapDashboardController extends ParentController {
       floorSummary.setText(floorText);
     } catch (IOException e) {
       showError("Error 404: File Not Found");
-    }
-  }
-
-  private void updateLocOfInterest() {
-    try {
-      String locOfInterestTxtPath = "locOfInterest.txt";
-      String floorText = getFileText(locOfInterestTxtPath, getFloorNum());
-      locOfInterest.setText(floorText);
-    } catch (IOException ignored) {
     }
   }
 
