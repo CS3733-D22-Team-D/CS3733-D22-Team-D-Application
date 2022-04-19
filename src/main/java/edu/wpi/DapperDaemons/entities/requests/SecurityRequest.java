@@ -71,11 +71,11 @@ public class SecurityRequest extends TableObject {
 
   @Override
   public String tableInit() {
-    return "CREATE TABLE SECURITYREQUESTS(nodeID varchar(20) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(100),"
-        + "requester varchar(100),"
-        + "assignee varchar(100))";
+    return "CREATE TABLE SECURITYREQUESTS(nodeID varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requester varchar(1000),"
+        + "assignee varchar(1000))";
   }
 
   @Override

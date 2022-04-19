@@ -18,17 +18,17 @@ public class MedicineRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE MEDICINEREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20) DEFAULT 'LOW',"
-        + "roomID varchar(20) DEFAULT 'Unknown',"
-        + "requesterID varchar(60) ,"
-        + "assigneeID varchar(60) DEFAULT 'Unselected',"
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
-        + "patientID varchar(60) DEFAULT 'Someone',"
-        + "medicationName varchar(60) ,"
-        + "quantity varchar(20))";
+    return "CREATE TABLE MEDICINEREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000) DEFAULT 'LOW',"
+        + "roomID varchar(1000) DEFAULT 'Unknown',"
+        + "requesterID varchar(1000) ,"
+        + "assigneeID varchar(1000) DEFAULT 'Unselected',"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "patientID varchar(1000) DEFAULT 'Someone',"
+        + "medicationName varchar(1000) ,"
+        + "quantity varchar(1000))";
   }
 
   @Override

@@ -12,15 +12,15 @@ public class SanitationRequest extends TableObject implements Request {
   // TABLEOBJECT METHODS
   @Override
   public String tableInit() {
-    return "CREATE TABLE SANITATIONREQUESTS(nodeid varchar(80) PRIMARY KEY,"
-        + "priority varchar(20),"
-        + "roomID varchar(60),"
-        + "requesterID varchar(60),"
-        + "assigneeID varchar(60),"
-        + "status varchar(20),"
-        + "notes varchar(255),"
-        + "dateTime varchar(20),"
-        + "sanitationType varchar(20),";
+    return "CREATE TABLE SANITATIONREQUESTS(nodeid varchar(1000) PRIMARY KEY,"
+        + "priority varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requesterID varchar(1000),"
+        + "assigneeID varchar(1000),"
+        + "status varchar(1000),"
+        + "notes varchar(1000),"
+        + "dateTime varchar(1000),"
+        + "sanitationType varchar(1000))";
   }
 
   @Override

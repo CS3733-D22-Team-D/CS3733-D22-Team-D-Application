@@ -144,12 +144,12 @@ public class LanguageRequest extends TableObject implements Request {
 
   @Override
   public String tableInit() {
-    return "CREATE TABLE LANGUAGEREQUESTS(nodeID varchar(20) PRIMARY KEY,"
-        + "language varchar(20),"
-        + "roomID varchar(100),"
-        + "requester varchar(100),"
-        + "assignee varchar(100),"
-        + "dateNeed varchar(10))";
+    return "CREATE TABLE LANGUAGEREQUESTS(nodeID varchar(1000) PRIMARY KEY,"
+        + "language varchar(1000),"
+        + "roomID varchar(1000),"
+        + "requester varchar(1000),"
+        + "assignee varchar(1000),"
+        + "dateNeed varchar(1000))";
   }
 
   @Override
