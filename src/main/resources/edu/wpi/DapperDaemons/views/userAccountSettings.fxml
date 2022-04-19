@@ -183,32 +183,32 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="470.0" spacing="10.0" VBox.vgrow="NEVER">
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="460.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
-                        <JFXButton fx:id="saveChangesButton1" onAction="#saveToCSV" style="-fx-background-color: #059DA7;" text="Save To csv" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveToCSV" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #059DA7;" text="Save To csv" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="saveChangesButton11" onAction="#loadFromCSV" style="-fx-background-color: #059DA7;" text="Load From csv" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadFromCSV" prefHeight="26.0" prefWidth="103.0" style="-fx-background-color: #059DA7;" text="Load From csv" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
-                              <Insets right="125.0" />
+                              <Insets right="85.0" />
                            </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="resetButton" onAction="#onReset" style="-fx-background-color: #C1C5D4;" text="Reset" textFill="WHITE">
+                        <JFXButton fx:id="resetButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onReset" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #C1C5D4;" text="Reset" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></JFXButton>
-                        <JFXButton fx:id="saveChangesButton" onAction="#onSaveChanges" style="-fx-background-color: #059DA7;" text="Save Changes" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSaveChanges" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #059DA7;" text="Save Changes" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></JFXButton>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" right="10.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" />
                      </VBox.margin>
                   </HBox>
                     </children>

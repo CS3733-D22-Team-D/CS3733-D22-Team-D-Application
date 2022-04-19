@@ -57,6 +57,7 @@ public class ParentController extends AppController {
   @FXML private Pane BGContainer;
 
   /* Common UI */
+  @FXML protected ImageView homeIcon;
   @FXML private JFXHamburger burg;
   @FXML private JFXHamburger burgBack;
   @FXML private VBox slider;
