@@ -179,14 +179,15 @@ public class AppController implements Initializable {
   }
 
   protected void loadFromCSV(Stage window) {
-    FileChooser fileSys = new FileChooser();//TODO filenotfoundexception
+    FileChooser fileSys = new FileChooser(); // TODO filenotfoundexception
     //    Stage window = (Stage) sceneBox.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("Load From CSV", "*.csv"));
     List<File> csvs = fileSys.showOpenMultipleDialog(window);
     try {
       for (File f : csvs) {
         if (CSVLoader.filenames.get(f.getName().replace(".csv", "")) != null) {
-          CSVLoader.loadToFirebase(CSVLoader.filenames.get(f.getName()), f.getAbsolutePath());
+          CSVLoader.loadPCToFirebase(
+              CSVLoader.filenames.get(f.getName().replace(".csv", "")), f.getAbsolutePath());
         }
       }
     } catch (Exception e) {
