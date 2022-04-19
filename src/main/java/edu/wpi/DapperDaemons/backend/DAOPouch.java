@@ -215,6 +215,8 @@ public class DAOPouch {
       return nodeDAO;
     } else if (tableName.equals("EQUIPMENTCLEANINGREQUESTS")) {
       return cleaningDAO;
+    } else if (tableName.equals("ALERTS")) {
+      return alertDAO;
     }
     return null;
   }
