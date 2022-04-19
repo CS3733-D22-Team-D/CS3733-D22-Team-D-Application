@@ -270,8 +270,10 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  public void openUserSettings(ActionEvent event) {
-    swapPage("userAccountSettings", "User Home Page");
+  public void openUserSettings() {
+    userSettingsToggle.setSelected(false);
+    openUserDropdown();
+    swapPage("userHome", "User Home");
   }
 
   @FXML

@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
@@ -70,11 +71,9 @@ public class UserSettingsController extends ParentController {
     accountName.setText(employeeName);
     name.setText(employeeName);
 
-    accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    accountUserName.setText(DAOFacade.getUsername());
 
-    username.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    username.setText(DAOFacade.getUsername());
 
     // set profile picture
     profilePic.setFill(
@@ -93,8 +92,7 @@ public class UserSettingsController extends ParentController {
     birthday.setText(employeeBirth);
 
     // set email
-    email.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(7));
+    email.setText(DAOFacade.getUserAccount().getAttribute(7));
 
     // set themeBox
     themeBox.setItems(
@@ -114,7 +112,7 @@ public class UserSettingsController extends ParentController {
   public void onSaveChanges() {
     // set email
     String newEmail = email.getText();
-    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    Account toChange = DAOFacade.getUserAccount();
     if (!newEmail.equals(toChange.getAttribute(7))) {
       toChange.setAttribute(7, newEmail);
       DAOPouch.getAccountDAO().update(toChange);

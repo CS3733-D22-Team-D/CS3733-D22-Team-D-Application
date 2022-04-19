@@ -38,7 +38,7 @@ public class SecurityController {
     } else if (tableName.equals("SANITATIONREQUESTS")) {
       return clearance >= 3;
     } else if (tableName.equals("ACCOUNTS")) {
-      return clearance >= 5;
+      return clearance >= 1;
     } else if (tableName.equals("EMPLOYEES")) {
       return clearance >= 5;
     } else if (tableName.equals("LOCATIONS")) {
@@ -77,7 +77,7 @@ public class SecurityController {
     } else if (tableName.equals("SANITATIONREQUESTS")) {
       return clearance >= 2;
     } else if (tableName.equals("ACCOUNTS")) {
-      return clearance >= 5;
+      return clearance >= 1;
     } else if (tableName.equals("EMPLOYEES")) {
       return clearance >= 5;
     } else if (tableName.equals("LOCATIONS")) {
@@ -114,7 +114,7 @@ public class SecurityController {
     } else if (tableName.equals("SANITATIONREQUESTS")) {
       return clearance >= 2;
     } else if (tableName.equals("ACCOUNTS")) {
-      return clearance >= 5;
+      return clearance >= 1;
     } else if (tableName.equals("EMPLOYEES")) {
       return clearance >= 5;
     } else if (tableName.equals("LOCATIONS")) {

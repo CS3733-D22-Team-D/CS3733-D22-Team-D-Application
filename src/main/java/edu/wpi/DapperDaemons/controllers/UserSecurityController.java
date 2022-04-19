@@ -1,11 +1,11 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Account;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -64,8 +64,7 @@ public class UserSecurityController extends ParentController {
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
 
-    accountUserName.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
+    accountUserName.setText(DAOFacade.getUserAccount().getAttribute(1));
 
     // set profile picture
     profilePic.setFill(
@@ -83,13 +82,11 @@ public class UserSecurityController extends ParentController {
     securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
 
     // set phone number
-    numberBox.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
+    numberBox.setText(DAOFacade.getUserAccount().getAttribute(4));
 
     // set types of 2FA types
     type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid", "none"));
-    type2FABox.setValue(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(6));
+    type2FABox.setValue(DAOFacade.getUserAccount().getAttribute(6));
   }
 
   public void onRequestNewAccess() {
@@ -97,7 +94,7 @@ public class UserSecurityController extends ParentController {
   }
 
   // TODO: get password to work?
-  public void onSaveChanges() throws NoSuchAlgorithmException {
+  public void onSaveChanges() {
     // set new password
     /*String newPassword = newPasswordBox.getText();
     String oldPassword = oldPasswordBox.getText();
@@ -114,7 +111,7 @@ public class UserSecurityController extends ParentController {
 
     // set new phone number
     String newNumber = numberBox.getText();
-    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    Account toChange = DAOFacade.getUserAccount();
     toChange.setAttribute(4, newNumber);
     DAOPouch.getAccountDAO().update(toChange);
     System.out.println("New Phone Number Reset");
@@ -133,7 +130,6 @@ public class UserSecurityController extends ParentController {
     newPasswordBox.setText("");*/
 
     // set phone number
-    numberBox.setText(
-        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
+    numberBox.setText(DAOFacade.getUserAccount().getAttribute(4));
   }
 }

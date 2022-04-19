@@ -20,92 +20,35 @@
 
 <HBox prefHeight="579.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserSettingsController">
     <children>
-        <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="390.0" prefWidth="220.0" HBox.hgrow="NEVER">
+        <StackPane alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="579.0" prefWidth="538.0" HBox.hgrow="ALWAYS">
             <children>
-                <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ToggleButton>
-                <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ToggleButton>
-                <ToggleButton id="foreground" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security">
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ToggleButton>
-                <ToggleButton id="foreground" fx:id="aboutButton" alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAboutUs" onMouseClicked="#switchToAboutUs" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="About">
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ToggleButton>
-            <JFXButton fx:id="saveChangesButton1" onAction="#saveToCSV" style="-fx-background-color: #059DA7;" text="Save To csv" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="saveChangesButton11" onAction="#loadFromCSV" style="-fx-background-color: #059DA7;" text="Load From csv" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </JFXButton>
-            </children>
-        </VBox>
-        <StackPane maxWidth="1.7976931348623157E308" prefHeight="579.0" prefWidth="538.0" HBox.hgrow="ALWAYS">
-            <children>
-                <VBox id="background" fx:id="homeSettingsPage" alignment="TOP_CENTER" pickOnBounds="false" prefHeight="579.0" prefWidth="467.0" spacing="16.0">
+                <VBox id="background" fx:id="homeSettingsPage" alignment="TOP_CENTER" pickOnBounds="false" prefHeight="565.0" prefWidth="444.0" spacing="16.0">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="234.0" prefWidth="481.0" VBox.vgrow="NEVER">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
                             <children>
-                                <VBox alignment="CENTER" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
                                     <children>
-                                        <Circle fx:id="profilePic" fill="#d2d2d2" radius="90.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                              <VBox alignment="CENTER" opacity="0.52" prefHeight="64.0" prefWidth="180.0" translateY="-100.0">
+                              <StackPane>
                                  <children>
-                                    <JFXButton alignment="CENTER" text="Edit Photo">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </JFXButton>
+                                              <Circle fx:id="profilePic" fill="#d2d2d2" radius="90.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <VBox alignment="CENTER" opacity="0.52" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <JFXButton alignment="CENTER" text="Edit Photo">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </StackPane>
                                     </children>
-                                    <padding>
-                                        <Insets bottom="6.0" />
-                                    </padding>
                                     <VBox.margin>
                                         <Insets left="40.0" right="40.0" />
                                     </VBox.margin>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
                                 </VBox>
                                 <Text id="label" fx:id="accountName" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name">
                                     <font>
@@ -242,6 +185,19 @@
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="470.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
+                        <JFXButton fx:id="saveChangesButton1" onAction="#saveToCSV" style="-fx-background-color: #059DA7;" text="Save To csv" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="saveChangesButton11" onAction="#loadFromCSV" style="-fx-background-color: #059DA7;" text="Load From csv" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets right="125.0" />
+                           </HBox.margin>
+                        </JFXButton>
                         <JFXButton fx:id="resetButton" onAction="#onReset" style="-fx-background-color: #C1C5D4;" text="Reset" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -257,6 +213,54 @@
                   </HBox>
                     </children>
                 </VBox>
+              <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="390.0" prefWidth="220.0">
+                  <children>
+                      <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0;" text="Home" VBox.vgrow="ALWAYS">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                          <font>
+                              <Font size="12.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="HAND" />
+                          </cursor>
+                      </ToggleButton>
+                      <ToggleButton id="foreground" fx:id="accountSettingsButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Account Settings">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                          <font>
+                              <Font size="12.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="HAND" />
+                          </cursor>
+                      </ToggleButton>
+                      <ToggleButton id="foreground" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0; -fx-background-radius: 0;" text="Security">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                          <font>
+                              <Font size="12.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="HAND" />
+                          </cursor>
+                      </ToggleButton>
+                      <ToggleButton id="foreground" fx:id="aboutButton" alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openAboutUs" onMouseClicked="#switchToAboutUs" pickOnBounds="false" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 0; -fx-border-color: #C4C4C4; -fx-border-width: 1 0 0 0;" text="About">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                          <font>
+                              <Font size="12.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="HAND" />
+                          </cursor>
+                      </ToggleButton>
+                  </children>
+              </VBox>
             </children>
         </StackPane>
     </children>
