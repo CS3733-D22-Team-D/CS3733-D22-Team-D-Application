@@ -125,7 +125,6 @@ public class LabRequest extends TableObject implements Request {
       case 10:
         labType = LabType.valueOf(newAttribute);
         break;
-
       case 11:
         dateNeeded = newAttribute;
         break;

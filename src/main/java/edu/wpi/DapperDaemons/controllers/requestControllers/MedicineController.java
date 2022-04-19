@@ -181,7 +181,7 @@ public class MedicineController extends ParentController {
                       patientID,
                       medName,
                       quantity,
-                      dateNeeded.getValue().toString()));
+                      dateStr));
 
           if (!wentThrough) {
 

@@ -7,16 +7,36 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-public class SecurityRequest extends TableObject {
+public class SecurityRequest extends TableObject implements Request{
 
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
 
+  @Override
+  public String getRequesterID() {
+    return getRequester();
+  }
+
+  @Override
+  public String getAssigneeID() {
+    return getAssignee();
+  }
+
+  @Override
+  public String requestType() {
+    return "Security Request";
+  }
+
   @TableHandler(table = 0, col = 1)
   public Request.Priority getPriority() {
     return priority;
+  }
+
+  @Override
+  public boolean requiresTransport() {
+    return false;
   }
 
   @TableHandler(table = 0, col = 2)
@@ -212,6 +232,11 @@ public class SecurityRequest extends TableObject {
 
   public Request.RequestStatus getStatus() {
     return status;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return null;
   }
 
   public void setStatus(Request.RequestStatus status) {

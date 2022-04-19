@@ -93,6 +93,7 @@ public class LabRequestController extends ParentController {
   public void onSubmitClicked() {
 
     if (allItemsFilled()) {
+      String dateStr = "";
       Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
@@ -106,6 +107,7 @@ public class LabRequestController extends ParentController {
       LabRequest.LabType labType = LabRequest.LabType.valueOf(procedureComboBox.getValue());
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
 
+
       // Check if the patient info points to a real patient
       boolean isAPatient = false;
       Patient patient = new Patient();
@@ -117,7 +119,7 @@ public class LabRequestController extends ParentController {
       }
       if (isAPatient) {
         roomID = patient.getLocationID();
-        String dateStr =
+         dateStr =
             ""
                 + dateNeeded.getValue().getMonthValue()
                 + dateNeeded.getValue().getDayOfMonth()
@@ -133,7 +135,7 @@ public class LabRequestController extends ParentController {
                     notes.getText(),
                     patientID,
                     labType,
-                    dateNeeded.getValue().toString()));
+                    dateStr));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada
