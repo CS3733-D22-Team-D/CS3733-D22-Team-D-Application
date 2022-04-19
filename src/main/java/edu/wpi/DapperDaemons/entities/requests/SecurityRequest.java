@@ -6,32 +6,16 @@ import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class LanguageRequest extends TableObject implements Request {
+public class SecurityRequest extends TableObject {
 
-  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
 
   @TableHandler(table = 0, col = 1)
-  public Language getLanguage() {
-    return language;
-  }
-
-  @Override
-  public String requestType() {
-    return "Language Request";
-  }
-
-  @Override
-  public Priority getPriority() {
+  public Request.Priority getPriority() {
     return priority;
-  }
-
-  @Override
-  public boolean requiresTransport() {
-    return false;
   }
 
   @TableHandler(table = 0, col = 2)
@@ -53,8 +37,8 @@ public class LanguageRequest extends TableObject implements Request {
     this.nodeID = nodeID;
   }
 
-  public void setLanguage(Language language) {
-    this.language = language;
+  public void setPriority(Request.Priority priority) {
+    this.priority = priority;
   }
 
   public void setRoomID(String roomID) {
@@ -69,77 +53,34 @@ public class LanguageRequest extends TableObject implements Request {
     this.assignee = assignee;
   }
 
-  public void setDateNeeded(String dateNeeded) {
-    this.dateNeeded = dateNeeded;
-  }
-
-  public void setPriority(Priority priority) {
-    this.priority = priority;
-  }
-
-  @Override
-  @TableHandler(table = 0, col = 5)
-  public String getDateNeeded() {
-    return dateNeeded;
-  }
-
   private String nodeID;
-  private Request.Priority priority = Priority.LOW;
+  private Request.Priority priority;
   private String roomID;
   private String requester;
   private String assignee;
-  private Language language;
-  private String dateNeeded;
 
-  public enum Language {
-    CHINESE,
-    SPANISH,
-    ENGLISH,
-    HINDI,
-    BENGALI,
-    PORTUGUESE,
-    RUSSIAN,
-    JAPANESE,
-    TURKISH,
-    KOREAN,
-    FRENCH,
-    ITALIAN,
-    ARABIC,
-    GERMAN,
-    VIETNAMESE,
-    POLISH,
-    THAI,
-    DUTCH,
-    GREEK,
-    SWEDISH,
-    NORWEGIAN,
-    FINNISH
-  }
+  public SecurityRequest() {}
 
-  public LanguageRequest() {}
-
-  public LanguageRequest(Language language, String roomID, String dateNeeded) {
-    this.language = language;
+  public SecurityRequest(Request.Priority priority, String roomID) {
+    this.priority = priority;
     this.roomID = roomID;
     this.assignee = "none";
-    this.nodeID = String.valueOf(language) + roomID + LocalDateTime.now();
+    this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
     this.requester = SecurityController.getUser().getAttribute(1);
-    this.dateNeeded = dateNeeded;
   }
 
   @Override
   public String tableInit() {
-    return "CREATE TABLE LANGUAGEREQUESTS(nodeID varchar(20) PRIMARY KEY,"
-        + "language varchar(20),"
+    return "CREATE TABLE SECURITYREQUESTS(nodeID varchar(20) PRIMARY KEY,"
+        + "priority varchar(20),"
         + "roomID varchar(100),"
         + "requester varchar(100),"
-        + "assignee varchar(100),"
-        + "dateNeed varchar(10))";
+        + "assignee varchar(100))";
   }
 
   @Override
   public String tableName() {
-    return "LANGUAGEREQUESTS";
+    return "SECURITYREQUESTS";
   }
 
   @Override
@@ -148,17 +89,13 @@ public class LanguageRequest extends TableObject implements Request {
       case 1:
         return nodeID;
       case 2:
-        return priority.toString();
+        return String.valueOf(priority);
       case 3:
         return roomID;
       case 4:
         return requester;
       case 5:
         return assignee;
-      case 6:
-        return language.toString();
-      case 7:
-        return dateNeeded;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -171,7 +108,7 @@ public class LanguageRequest extends TableObject implements Request {
         nodeID = newAttribute;
         break;
       case 2:
-        priority = Priority.valueOf(newAttribute);
+        priority = Request.Priority.valueOf(newAttribute);
         break;
       case 3:
         roomID = newAttribute;
@@ -182,12 +119,6 @@ public class LanguageRequest extends TableObject implements Request {
       case 5:
         assignee = newAttribute;
         break;
-      case 6:
-        language = Language.valueOf(newAttribute);
-        break;
-      case 7:
-        dateNeeded = newAttribute;
-        break;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -195,7 +126,7 @@ public class LanguageRequest extends TableObject implements Request {
 
   @Override
   public TableObject newInstance(List<String> l) {
-    LanguageRequest temp = new LanguageRequest();
+    SecurityRequest temp = new SecurityRequest();
     for (int i = 0; i < l.size(); i++) {
       temp.setAttribute(i + 1, l.get(i));
     }
@@ -208,8 +139,8 @@ public class LanguageRequest extends TableObject implements Request {
       case "nodeID":
         nodeID = newAttribute;
         break;
-      case "language":
-        language = Language.valueOf(newAttribute);
+      case "priority":
+        priority = Request.Priority.valueOf(newAttribute);
         break;
       case "roomID":
         roomID = newAttribute;
@@ -219,12 +150,6 @@ public class LanguageRequest extends TableObject implements Request {
         break;
       case "assignee":
         assignee = newAttribute;
-        break;
-      case "dateNeeded":
-        dateNeeded = newAttribute;
-        break;
-      case "priority":
-        priority = Priority.valueOf(newAttribute);
         break;
       default:
         throw new ArrayIndexOutOfBoundsException();
