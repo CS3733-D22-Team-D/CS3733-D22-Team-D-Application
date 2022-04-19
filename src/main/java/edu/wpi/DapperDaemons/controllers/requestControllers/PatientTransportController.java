@@ -23,6 +23,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends ParentController {
@@ -247,6 +248,6 @@ public class PatientTransportController extends ParentController {
   }
 
   public void saveToCSV() {
-    super.saveToCSV(new PatientTransportRequest());
+    super.saveToCSV(new PatientTransportRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }

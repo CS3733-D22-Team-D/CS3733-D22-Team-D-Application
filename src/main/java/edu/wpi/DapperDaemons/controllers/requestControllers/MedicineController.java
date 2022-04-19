@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
   @FXML private TableView<MedicineRequest> medicineRequests;
@@ -204,7 +205,7 @@ public class MedicineController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicineRequest());
+    super.saveToCSV(new MedicineRequest(), (Stage) patientName.getScene().getWindow());
   }
 
   @FXML

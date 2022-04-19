@@ -96,7 +96,7 @@ public class AppController implements Initializable {
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Stage window = (Stage) sceneBox.getScene().getWindow();
-    switchScene(fileName,minWidth,minHeight,window);
+    switchScene(fileName, minWidth, minHeight, window);
   }
 
   protected void switchScene(String fileName, int minWidth, int minHeight, Stage window)
@@ -134,9 +134,9 @@ public class AppController implements Initializable {
     HBox.setHgrow(child, Priority.ALWAYS);
   }
 
-  protected void saveToCSV(TableObject type) {
+  protected void saveToCSV(TableObject type, Stage window) {
     FileChooser fileSys = new FileChooser();
-    Stage window = (Stage) sceneBox.getScene().getWindow();
+    //    Stage window = (Stage) sceneBox.getScene().getWindow();
     fileSys.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     File csv = fileSys.showSaveDialog(window);
     try {
