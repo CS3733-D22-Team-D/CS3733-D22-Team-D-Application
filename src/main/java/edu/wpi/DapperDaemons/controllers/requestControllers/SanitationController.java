@@ -65,9 +65,9 @@ public class SanitationController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setSanitationRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new SanitationRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               pendingRequests.getItems().clear();
               pendingRequests
@@ -128,7 +128,7 @@ public class SanitationController extends ParentController {
                     assigneeID,
                     notes.getText(),
                     sanitationType,
-                   dateStr));
+                    dateStr));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.

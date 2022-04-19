@@ -5,7 +5,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.entities.requests.*;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
@@ -60,13 +60,10 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   @FXML private Pane mapImageContainer;
 
-  private TableListeners tl;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     bindImage(mapImage, mapImageContainer);
 
-    tl = new TableListeners();
     setListeners();
 
     // Init tables
@@ -82,8 +79,9 @@ public class MapDashboardController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners.setMedicalEquipmentListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MedicalEquipment().tableName(),
+        TableListeners.eventListener(
             () -> {
               equipTable.getItems().clear();
               for (Location l : locsByFloor) {
@@ -92,8 +90,9 @@ public class MapDashboardController extends ParentController {
                     .addAll(new ArrayList<>(equipmentDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    TableListeners.setPatientListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new Patient().tableName(),
+        TableListeners.eventListener(
             () -> {
               patientTable.getItems().clear();
               for (Location l : locsByFloor) {
@@ -102,68 +101,26 @@ public class MapDashboardController extends ParentController {
                     .addAll(new ArrayList<>(patientDAO.filter(6, l.getNodeID()).values()));
               }
             }));
-    TableListeners.setLabRequestListener(
-        tl.eventListener(
+    List<String> tableNames =
+        Arrays.asList(
+            new String[] {
+              new EquipmentCleaning().tableName(),
+              new LabRequest().tableName(),
+              new LanguageRequest().tableName(),
+              new MealDeliveryRequest().tableName(),
+              new MedicalEquipmentRequest().tableName(),
+              new MedicineRequest().tableName(),
+              new PatientTransportRequest().tableName(),
+              new SanitationRequest().tableName(),
+              new SecurityRequest().tableName()
+            });
+    TableListeners.addListeners(
+        tableNames,
+        TableListeners.eventListener(
             () -> {
               reqTable.getItems().clear();
               for (Location l : locsByFloor) {
                 reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setLanguageRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMealDeliveryRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMedicalEquipmentRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setMedicinRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setPatientTrasportRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setSanitationRequestListener(
-        tl.eventListener(
-            () -> {
-              reqTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                reqTable.getItems().addAll(DAOFacade.getFilteredRequests(l.getNodeID()));
-              }
-            }));
-    TableListeners.setLocationListener(
-        tl.eventListener(
-            () -> {
-              locTable.getItems().clear();
-              for (Location l : locsByFloor) {
-                locTable.getItems().add(l);
               }
             }));
   }

@@ -62,9 +62,9 @@ public class MedicineController extends ParentController {
   }
 
   private void setListeners() {
-    TableListeners tl = new TableListeners();
-    tl.setMedicinRequestListener(
-        tl.eventListener(
+    TableListeners.addListener(
+        new MedicineRequest().tableName(),
+        TableListeners.eventListener(
             () -> {
               medicineRequests.getItems().clear();
               medicineRequests
