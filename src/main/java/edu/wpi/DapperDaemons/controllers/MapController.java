@@ -451,8 +451,8 @@ public class MapController extends ParentController {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
-      bedDrag = new DragHandler(dragPane, mapContents, bedDragImage, glyphs);
-      infusionDrag = new DragHandler(dragPane, mapContents, infusionDragImage, glyphs);
+      bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
+      infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
       bedDrag.enable();
       infusionDrag.enable();
     } else {

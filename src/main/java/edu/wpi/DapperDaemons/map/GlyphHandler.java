@@ -74,7 +74,34 @@ public class GlyphHandler {
                     oldPos.getLongName(),
                     oldPos.getShortName());
             DAOPouch.getLocationDAO().update(newLoc);
-            System.out.println("DRAG EXITED");
+          });
+    }
+
+    for (int i = 0; i < equipLocs.size(); i++) {
+      ImageView image = (ImageView) equipLayer.getChildren().get(i);
+      image.setOnMouseDragged(
+          e -> {
+            PositionInfo snapped = getNearestPos((int) e.getX(), (int) e.getY());
+            if (snapped != null) {
+              image.setX(snapped.getX() - 16);
+              image.setY(snapped.getY() - 16);
+            } else {
+              image.setX(e.getX() - 16);
+              image.setY(e.getY() - 16);
+            }
+          });
+      int finalI = i;
+      image.setOnMouseReleased(
+          e -> {
+            boolean worked =
+                moveEquipment(
+                    (int) image.getX() + 16, (int) image.getY() + 16, equipLocs.get(finalI));
+            if (!worked) {
+              Location original =
+                  DAOPouch.getLocationDAO().get(equipLocs.get(finalI).getLocationID());
+              image.setX(original.getXcoord() - 16);
+              image.setY(original.getYcoord() - 16);
+            }
           });
     }
   }
@@ -113,6 +140,7 @@ public class GlyphHandler {
           equip.setX(pos.getX() - 16);
           equip.setY(pos.getY() - 16);
           equip.setVisible(true);
+          equip.setPickOnBounds(true);
 
           image.setOnMouseClicked(i -> controller.onMapClicked(i));
           equipLayer.getChildren().add(equip);
@@ -122,18 +150,12 @@ public class GlyphHandler {
     return true;
   }
 
-  public boolean addEquipment(int x, int y, MedicalEquipment e) {
-    System.out.println("Checking equipment: " + x + ", " + y);
+  public boolean moveEquipment(int x, int y, MedicalEquipment equipment) {
     for (PositionInfo p : imageLocs) {
       if (p.isNear(x, y, controller.getFloor())) {
-        System.out.println("Found valid position");
-        e.setLocationID(p.getId());
-        equipLocs.add(e);
-        ImageView equip = getEquipImage(e.getEquipmentType().name());
-        equip.setX(x - 16);
-        equip.setY(y - 16);
-        equip.setVisible(true);
-        equipLayer.getChildren().add(equip);
+        equipment.setLocationID(p.getId());
+        System.out.println("Updating equipment info...");
+        DAOPouch.getMedicalEquipmentDAO().update(equipment);
         filter();
         return true;
       }

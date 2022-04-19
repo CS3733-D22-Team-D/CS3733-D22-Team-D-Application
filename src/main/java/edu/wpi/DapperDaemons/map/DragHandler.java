@@ -1,42 +1,43 @@
 package edu.wpi.DapperDaemons.map;
 
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 public class DragHandler {
 
   private final AnchorPane dragPane;
-  private final ImageView draggable;
-  private final ScrollPane window;
+  private final ImageView node;
+  private final StackPane window;
   private GlyphHandler glyphs;
 
   private ImageView displayed;
 
   public DragHandler(
-      AnchorPane dragPane, ScrollPane window, ImageView toDragFrom, GlyphHandler glyphs) {
+      AnchorPane dragPane, StackPane window, ImageView toDragFrom, GlyphHandler glyphs) {
     this.dragPane = dragPane;
-    this.draggable = toDragFrom;
+    this.node = toDragFrom;
     this.window = window;
     this.glyphs = glyphs;
   }
 
   public void enable() {
     if (displayed != null) dragPane.getChildren().remove(displayed);
-    displayed = new ImageView(draggable.getImage());
+    displayed = new ImageView(node.getImage());
     displayed.setPickOnBounds(true);
     dragPane.getChildren().add(displayed);
+
     displayed.setOnMouseDragged(
         e -> {
           displayed.setVisible(true);
           PositionInfo snapped = glyphs.getNearestPos((int) e.getX(), (int) e.getY());
           if (snapped != null) {
-            displayed.setX(snapped.getX() - 48);
-            displayed.setY(snapped.getY() - 16);
+            displayed.setX(snapped.getX() + 48);
+            displayed.setY(snapped.getY());
           } else {
-            displayed.setX(e.getX() - 16);
-            displayed.setY(e.getY() - 16);
+            displayed.setX(e.getX());
+            displayed.setY(e.getY());
           }
         });
     displayed.setOnMouseReleased(
@@ -47,14 +48,14 @@ public class DragHandler {
                   MedicalEquipment.EquipmentType.valueOf(getImageType()),
                   "ID19824",
                   null);
-          boolean worked =
-              glyphs.addEquipment((int) displayed.getX() - 16, (int) displayed.getY() - 16, equip);
-          if (worked) enable();
+          // boolean worked =
+          //  glyphs.addEquipment((int) displayed.getX() - 16, (int) displayed.getY() - 16, equip);
+          // if (worked) enable();
         });
   }
 
   private String getImageType() {
-    switch (draggable.getId()) {
+    switch (node.getId()) {
       case "infusionDragImage":
         return "INFUSIONPUMP";
       case "bedDragImage":
