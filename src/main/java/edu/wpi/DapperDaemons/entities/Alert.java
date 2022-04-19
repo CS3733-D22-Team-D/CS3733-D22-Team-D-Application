@@ -68,6 +68,7 @@ public class Alert extends TableObject {
         break;
       case 5:
         this.floor = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }

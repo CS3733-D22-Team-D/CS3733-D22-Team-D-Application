@@ -57,7 +57,6 @@ public class MapDashboardController extends ParentController {
   @FXML private Text patientNum;
   @FXML private Text requestNum;
   private final String floorTxtPath = "floorSummary.txt";
-  private final String locOfInterestTxtPath = "locOfInterest.txt";
 
   public static String floor;
 
@@ -113,15 +112,15 @@ public class MapDashboardController extends ParentController {
             }));
     List<String> tableNames =
         Arrays.asList(
-                new EquipmentCleaning().tableName(),
-                new LabRequest().tableName(),
-                new LanguageRequest().tableName(),
-                new MealDeliveryRequest().tableName(),
-                new MedicalEquipmentRequest().tableName(),
-                new MedicineRequest().tableName(),
-                new PatientTransportRequest().tableName(),
-                new SanitationRequest().tableName(),
-                new SecurityRequest().tableName());
+            new EquipmentCleaning().tableName(),
+            new LabRequest().tableName(),
+            new LanguageRequest().tableName(),
+            new MealDeliveryRequest().tableName(),
+            new MedicalEquipmentRequest().tableName(),
+            new MedicineRequest().tableName(),
+            new PatientTransportRequest().tableName(),
+            new SanitationRequest().tableName(),
+            new SecurityRequest().tableName());
     TableListeners.addListeners(
         tableNames,
         TableListeners.eventListener(
