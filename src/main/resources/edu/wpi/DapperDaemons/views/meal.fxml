@@ -109,7 +109,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <DatePicker id="specialField" fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                              <DatePicker fx:id="patientDOB" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                            </children>
                            <padding>
                               <Insets left="5.0" />
@@ -124,7 +124,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Text>
-                        <DatePicker id="specialField" fx:id="dateNeeded" prefHeight="30.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                        <DatePicker fx:id="dateNeeded" prefHeight="30.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
                      </children>
                      <opaqueInsets>
                         <Insets />

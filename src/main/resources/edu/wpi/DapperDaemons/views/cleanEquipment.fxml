@@ -15,7 +15,7 @@
 
 <HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EquipmentRequestController">
    <children>
-      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
                <children>
@@ -59,7 +59,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Text>
-                  <DatePicker id="specialField" fx:id="cleanByDate" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                  <DatePicker fx:id="cleanByDate" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -119,6 +119,7 @@
                               <TableColumn id="col" fx:id="equipID" prefWidth="75.0" text="EquipID" />
                               <TableColumn id="col" fx:id="equipType" prefWidth="75.0" text="EquipType" />
                               <TableColumn id="col" fx:id="cleanStatus" prefWidth="75.0" text="CleanStatus" />
+                              <TableColumn id="col" fx:id="cleanBy" prefWidth="75.0" text="Clean By" />
                            </columns>
                         </TableView>
                      </children>
