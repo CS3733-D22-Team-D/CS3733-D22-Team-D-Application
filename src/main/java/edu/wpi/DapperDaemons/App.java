@@ -96,7 +96,7 @@ public class App extends Application {
             //            } catch (IOException e) {
             //              throw new RuntimeException(e);
             //            }
-//            CSVLoader.resetFirebase();
+            //            CSVLoader.resetFirebase();
           },
           () -> {
             Parent root = null;
@@ -148,8 +148,6 @@ public class App extends Application {
     log.info("Shutting Down");
   }
 
-  // TODO : STOP THIS FROM ADDING THREE REQUESTS EVERYTIME: CHECK DAO
-
   /**
    * When there are six beds or more in a dirty area an alert appears on the dashboard. Service
    * requests are created to move the beds to the OR Park for cleaning.
@@ -199,7 +197,7 @@ public class App extends Application {
                           for (MedicalEquipment equipment : dirtyBedMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
+                                    Request.Priority.HIGH,
                                     "dSTOR001L1",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
@@ -217,7 +215,7 @@ public class App extends Application {
                           for (MedicalEquipment equipment : dirtyInfusionPumpMap.values()) {
                             MedicalEquipmentRequest request =
                                 new MedicalEquipmentRequest(
-                                    Request.Priority.OVERDUE,
+                                    Request.Priority.HIGH,
                                     "dEXIT00401",
                                     "AUTOMATIC REQUEST",
                                     "NONE",
@@ -232,9 +230,6 @@ public class App extends Application {
                         }
                         // END LOOP
                       }
-                      // ==================================This is
-                      // Separate======================================
-                      // For each clean location...
                       for (Location loc : locationDAO.filter(6, "STOR").values()) {
 
                         // Get all clean infusion pumps at the given clean location...
@@ -258,7 +253,7 @@ public class App extends Application {
                               // create a request
                               MedicalEquipmentRequest request =
                                   new MedicalEquipmentRequest(
-                                      Request.Priority.OVERDUE,
+                                      Request.Priority.HIGH,
                                       "dEXIT00401",
                                       "AUTOMATIC REQUEST",
                                       "NONE",

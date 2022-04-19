@@ -6,7 +6,6 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -109,11 +108,6 @@ public class DAOFacade {
    * @return true if it is already in the DAO
    */
   public static boolean automaticRequestAlreadyExists(MedicalEquipmentRequest requestToCheck) {
-    try {
-      DAOPouch.init();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
     Map<String, MedicalEquipmentRequest> requestMap =
         DAOPouch.getMedicalEquipmentRequestDAO().getAll();
 
