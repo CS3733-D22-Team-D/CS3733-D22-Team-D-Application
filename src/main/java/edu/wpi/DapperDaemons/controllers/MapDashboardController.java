@@ -113,17 +113,15 @@ public class MapDashboardController extends ParentController {
             }));
     List<String> tableNames =
         Arrays.asList(
-            new String[] {
-              new EquipmentCleaning().tableName(),
-              new LabRequest().tableName(),
-              new LanguageRequest().tableName(),
-              new MealDeliveryRequest().tableName(),
-              new MedicalEquipmentRequest().tableName(),
-              new MedicineRequest().tableName(),
-              new PatientTransportRequest().tableName(),
-              new SanitationRequest().tableName(),
-              new SecurityRequest().tableName()
-            });
+                new EquipmentCleaning().tableName(),
+                new LabRequest().tableName(),
+                new LanguageRequest().tableName(),
+                new MealDeliveryRequest().tableName(),
+                new MedicalEquipmentRequest().tableName(),
+                new MedicineRequest().tableName(),
+                new PatientTransportRequest().tableName(),
+                new SanitationRequest().tableName(),
+                new SecurityRequest().tableName());
     TableListeners.addListeners(
         tableNames,
         TableListeners.eventListener(
