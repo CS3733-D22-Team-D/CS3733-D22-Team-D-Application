@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class LocationNodeConnections extends TableObject {
   private String startNodeID = "";
@@ -23,14 +24,14 @@ public class LocationNodeConnections extends TableObject {
     return 8;
   }
 
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE LOCATIONNODECONNECTIONS(nodeID varchar(60) PRIMARY KEY,"
         + "connectionOne varchar(60) DEFAULT '',"
         + "connectionTwo varchar(60) DEFAULT '')";
   }
 
-  public String getTableName() {
+  public String tableName() {
     return "LOCATIONNODECONNECTIONS";
   }
 
@@ -43,8 +44,9 @@ public class LocationNodeConnections extends TableObject {
         return connectionOne;
       case 3:
         return connectionTwo;
+      default:
+        throw new IndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override
@@ -87,13 +89,34 @@ public class LocationNodeConnections extends TableObject {
     this.connectionTwo = connectionTwo;
   }
 
-  @Override
-  public Object get() {
-    return new LocationNodeConnections();
-  }
-
   public String toString() {
     return startNodeID + "," + connectionOne + "," + connectionTwo + "\n";
+  }
+
+  @Override
+  public TableObject newInstance(List<String> l) {
+    LocationNodeConnections temp = new LocationNodeConnections();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "startNodeID":
+        startNodeID = newAttribute;
+        break;
+      case "connectionOne":
+        connectionOne = newAttribute;
+        break;
+      case "connectionTwo":
+        connectionTwo = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   public boolean equals(Location l) {

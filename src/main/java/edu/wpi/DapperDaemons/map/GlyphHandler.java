@@ -1,6 +1,9 @@
 package edu.wpi.DapperDaemons.map;
 
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,9 @@ import javafx.scene.paint.Color;
 public class GlyphHandler {
 
   private List<PositionInfo> imageLocs;
+  private List<MedicalEquipment> equipLocs;
   private AnchorPane glyphLayer;
+  private AnchorPane equipLayer;
   private MapController controller;
   private PositionInfo selected;
   public final String GLYPH_PATH =
@@ -25,11 +30,17 @@ public class GlyphHandler {
   private List<String> floorFilter;
   private List<String> nodeTypeFilter;
   private List<String> longNameFilter;
+  private List<String> equipTypeFilter;
 
   public GlyphHandler(
-      AnchorPane glyphLayer, List<PositionInfo> imageLocs, MapController controller) {
+      AnchorPane glyphLayer,
+      AnchorPane equipLayer,
+      List<PositionInfo> imageLocs,
+      MapController controller) {
     this.glyphLayer = glyphLayer;
+    this.equipLayer = equipLayer;
     this.controller = controller;
+    this.equipLocs = new ArrayList<>();
     this.imageLocs = new ArrayList<>();
     imageLocs.forEach(this::addPosition);
     this.imageLocs = imageLocs;
@@ -41,11 +52,47 @@ public class GlyphHandler {
     nodeTypeFilter.addAll(List.of(allFilters));
   }
 
+  public void enableEditing() {
+    for (int i = 0; i < imageLocs.size(); i++) {
+      ImageView image = (ImageView) glyphLayer.getChildren().get(i);
+      image.setOnMouseDragged(
+          event -> {
+            image.setX(event.getX() - 16);
+            image.setY(event.getY() - 16);
+          });
+      Location oldPos = imageLocs.get(i).getLoc();
+      image.setOnMouseReleased(
+          event -> {
+            Location newLoc =
+                new Location(
+                    oldPos.getNodeID(),
+                    (int) event.getX(),
+                    (int) event.getY(),
+                    oldPos.getFloor(),
+                    oldPos.getBuilding(),
+                    oldPos.getNodeType(),
+                    oldPos.getLongName(),
+                    oldPos.getShortName());
+            DAOPouch.getLocationDAO().update(newLoc);
+            System.out.println("DRAG EXITED");
+          });
+    }
+  }
+
+  public void disableEditing() {
+    for (int i = 0; i < imageLocs.size(); i++) {
+      ImageView image = (ImageView) glyphLayer.getChildren().get(i);
+      image.setOnMouseDragged(event -> {});
+      image.setOnMouseReleased(event -> {});
+    }
+  }
+
   public void addPosition(PositionInfo pos) {
     ImageView image = getIconImage(pos.getType());
     image.setVisible(true);
     image.setX(pos.getX() - 16);
     image.setY(pos.getY() - 16);
+    image.setPickOnBounds(true);
 
     DropShadow dropShadow = new DropShadow();
     dropShadow.setOffsetX(-2.00);
@@ -56,6 +103,21 @@ public class GlyphHandler {
 
     image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
+
+    List<MedicalEquipment> all =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
+    equipLocs.addAll(all);
+    all.forEach(
+        e -> {
+          ImageView equip = getEquipImage(e.getEquipmentType().name());
+          equip.setX(pos.getX() - 16);
+          equip.setY(pos.getY() - 16);
+          equip.setVisible(true);
+
+          image.setOnMouseClicked(i -> controller.onMapClicked(i));
+          equipLayer.getChildren().add(equip);
+        });
+
     imageLocs.add(pos);
   }
 
@@ -67,6 +129,8 @@ public class GlyphHandler {
         return new ColorAdjust(0.3333, 1, -0.2, 0.5);
       case HIGH:
         return new ColorAdjust(0, 1, -0.5, 0.5);
+      case OVERDUE:
+        return new ColorAdjust(0, 0, -1, -1);
     }
     return new ColorAdjust();
   }
@@ -104,6 +168,22 @@ public class GlyphHandler {
       node.setScaleY(1);
     }
     this.selected = null;
+  }
+
+  private ImageView getEquipImage(String type) {
+    String png = "";
+    switch (type) {
+      case "INFUSIONPUMP":
+        png = "pump.png";
+        break;
+      case "BED":
+        png = "bed.png";
+        break;
+      default:
+        png = "error.png";
+    }
+
+    return new ImageView(GLYPH_PATH + png);
   }
 
   private ImageView getIconImage(String type) {
@@ -158,50 +238,13 @@ public class GlyphHandler {
 
   public void makeAllInVisible() {
     glyphLayer.getChildren().forEach(c -> c.setVisible(false));
+    equipLayer.getChildren().forEach(c -> c.setVisible(false));
   }
 
   public void makeAllVisible() {
     glyphLayer.getChildren().forEach(c -> c.setVisible(true));
+    equipLayer.getChildren().forEach(c -> c.setVisible(true));
   }
-
-  //  public void filterByFloor(String floor) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByNodeType(String floor, String nodeType) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getType().equals(nodeType)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByLongName(String floor, String longName) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getLongName().equals(longName)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
-  //
-  //  public void filterByShortName(String floor, String shortName) {
-  //    makeAllInVisible();
-  //    for (int i = 0; i < imageLocs.size(); i++) {
-  //      if (imageLocs.get(i).getFloor().equals(floor)
-  //          && imageLocs.get(i).getShortName().equals(shortName)) {
-  //        glyphLayer.getChildren().get(i).setVisible(true);
-  //      }
-  //    }
-  //  }
 
   public void filterByReqType(String floor, List<Request> searchReq) {
     makeAllInVisible();
@@ -231,12 +274,27 @@ public class GlyphHandler {
     for (int i = 0; i < imageLocs.size(); i++) {
       if (!floorFilter.contains(imageLocs.get(i).getFloor())) {
         glyphLayer.getChildren().get(i).setVisible(false);
+
+        for (int j = 0; j < equipLocs.size(); j++) {
+          if (equipLocs.get(j).getLocationID().equals(imageLocs.get(i).getId())) {
+            equipLayer.getChildren().get(j).setVisible(false);
+          }
+        }
       }
       if (!nodeTypeFilter.contains(imageLocs.get(i).getType())) {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
       if (!longNameFilter.isEmpty() && !longNameIsSearched(imageLocs.get(i).getLongName())) {
         glyphLayer.getChildren().get(i).setVisible(false);
+      }
+    }
+    filterAllEquipment();
+  }
+
+  private void filterAllEquipment() {
+    for (int i = 0; i < equipLocs.size(); i++) {
+      if (!equipTypeFilter.contains(equipLocs.get(i).getEquipmentType().name())) {
+        equipLayer.getChildren().get(i).setVisible(false);
       }
     }
   }
@@ -283,10 +341,26 @@ public class GlyphHandler {
     filter();
   }
 
+  public void addEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.add(equipTypeFilter);
+    filter();
+  }
+
+  public void removeEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.remove(equipTypeFilter);
+    filter();
+  }
+
+  public void setEquipTypeFilter(String equipTypeFilter) {
+    this.equipTypeFilter.clear();
+    addEquipTypeFilter(equipTypeFilter);
+  }
+
   public void clearFilters() {
     floorFilter = new ArrayList<>();
     nodeTypeFilter = new ArrayList<>();
     longNameFilter = new ArrayList<>();
+    equipTypeFilter = new ArrayList<>();
     filter();
   }
 }

@@ -5,6 +5,9 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -12,12 +15,12 @@ import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends ParentController {
@@ -32,6 +35,8 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private TextField notes;
+  @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
   @FXML private TableColumn<MealDeliveryRequest, String> reqID;
@@ -49,6 +54,13 @@ public class EquipmentRequestController extends ParentController {
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentTypeBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     //        super.initialize(location, resources);
@@ -60,23 +72,33 @@ public class EquipmentRequestController extends ParentController {
 
     try { // Removed second field (filename) since everything is
       // loaded on startup
-      equipmentRequestsTable.getItems().addAll(medicalEquipmentRequestDAO.getAll());
+      equipmentRequestsTable
+          .getItems()
+          .addAll(new ArrayList(medicalEquipmentRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, table was unable to be created\n");
     }
-
+    setListeners();
     onClearClicked();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setMedicalEquipmentRequestListener(
+        tl.eventListener(
+            () -> {
+              equipmentRequestsTable.getItems().clear();
+              equipmentRequestsTable
+                  .getItems()
+                  .addAll(new ArrayList(medicalEquipmentRequestDAO.getAll().values()));
+            }));
   }
 
   public boolean addItem(MedicalEquipmentRequest request) {
     boolean hadClearance = false;
 
-    try {
-      hadClearance = medicalEquipmentRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = medicalEquipmentRequestDAO.add(request);
     if (hadClearance) {
       equipmentRequestsTable.getItems().add(request);
     }
@@ -88,6 +110,8 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
+    notes.setText("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -104,36 +128,43 @@ public class EquipmentRequestController extends ParentController {
           MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
       MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
 
+      String dateStr =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
+
       ArrayList<MedicalEquipment> equipments = new ArrayList<>();
       MedicalEquipment equipment = new MedicalEquipment();
       // is there equipment with that Type?
       boolean equipmentExists = true;
 
       // get all equipment of that type.
-      try {
-        equipments =
-            (ArrayList<MedicalEquipment>)
-                medicalEquipmentDAO.filter(
-                    medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue());
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      equipments =
+          new ArrayList(
+              medicalEquipmentDAO
+                  .filter(medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue())
+                  .values());
 
       if (medicalEquipmentDAO
               .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
+            new ArrayList<MedicalEquipment>(
+                    (medicalEquipmentDAO.filter(
+                            equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString()))
+                        .values())
                 .get(0);
       } else if (medicalEquipmentDAO
               .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
+            new ArrayList<MedicalEquipment>(
+                    medicalEquipmentDAO
+                        .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
+                        .values())
                 .get(0);
 
       } else if (medicalEquipmentDAO
@@ -141,8 +172,10 @@ public class EquipmentRequestController extends ParentController {
               .size()
           != 0) {
         equipment =
-            medicalEquipmentDAO
-                .filter(equipments, 5, MedicalEquipment.CleanStatus.UNCLEAN.toString())
+            new ArrayList<MedicalEquipment>(
+                    medicalEquipmentDAO
+                        .filter(equipments, 5, MedicalEquipment.CleanStatus.UNCLEAN.toString())
+                        .values())
                 .get(0);
       } else {
 
@@ -154,11 +187,7 @@ public class EquipmentRequestController extends ParentController {
         cleanStatus = equipment.getCleanStatus();
         roomID = roomBox.getValue();
         int numCorrectLocations = 0;
-        try {
-          numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
+        numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
         if (numCorrectLocations >= 1) {
 
           boolean hadClearance =
@@ -168,9 +197,11 @@ public class EquipmentRequestController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       equipment.getNodeID(),
                       equipmentType,
-                      cleanStatus));
+                      cleanStatus,
+                      dateNeeded.getValue().toString()));
           // check if user has permission
           if (!hadClearance) {
             showError("You do not have permission to do this.");
@@ -195,7 +226,8 @@ public class EquipmentRequestController extends ParentController {
   private boolean allFieldsFilled() {
     return !(priorityBox.getValue().equals("")
         || equipmentTypeBox.getValue().equals("")
-        || roomBox.getValue().equals(""));
+        || roomBox.getValue().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {
@@ -208,6 +240,6 @@ public class EquipmentRequestController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest());
+    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) roomBox.getScene().getWindow());
   }
 }

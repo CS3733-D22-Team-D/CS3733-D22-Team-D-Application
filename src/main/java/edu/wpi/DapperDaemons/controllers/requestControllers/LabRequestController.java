@@ -5,16 +5,20 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
 
@@ -28,6 +32,8 @@ public class LabRequestController extends ParentController {
   @FXML private DatePicker patientDOB;
   @FXML private JFXComboBox<String> priorityChoiceBox;
   @FXML private JFXComboBox<String> procedureComboBox;
+  @FXML private TextField notes;
+  @FXML private DatePicker dateNeeded;
 
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
@@ -46,11 +52,30 @@ public class LabRequestController extends ParentController {
     init.initializeInputs();
 
     try {
-      labReqTable.getItems().addAll(labRequestDAO.getAll());
+      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
     } catch (Exception e) {
       e.printStackTrace();
       System.err.print("Error, Lab Req table was unable to be created\n");
     }
+    setListeners();
+  }
+
+  private void setListeners() {
+    TableListeners tl = new TableListeners();
+    tl.setLabRequestListener(
+        tl.eventListener(
+            () -> {
+              labReqTable.getItems().clear();
+              labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
+            }));
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(
+        priorityChoiceBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(
+        procedureComboBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -60,6 +85,8 @@ public class LabRequestController extends ParentController {
     patientLastName.clear();
     patientDOB.setValue(null);
     priorityChoiceBox.setValue("");
+    notes.setText("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -82,11 +109,7 @@ public class LabRequestController extends ParentController {
       // Check if the patient info points to a real patient
       boolean isAPatient = false;
       Patient patient = new Patient();
-      try {
-        patient = patientDAO.get(patientID);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      patient = patientDAO.get(patientID);
       try {
         isAPatient = patient.getFirstName().equals(patientName.getText());
       } catch (NullPointerException e) {
@@ -94,11 +117,23 @@ public class LabRequestController extends ParentController {
       }
       if (isAPatient) {
         roomID = patient.getLocationID();
+        String dateStr =
+            ""
+                + dateNeeded.getValue().getMonthValue()
+                + dateNeeded.getValue().getDayOfMonth()
+                + dateNeeded.getValue().getYear();
 
         boolean hadClearance =
             addItem(
                 new LabRequest(
-                    priority, roomID, requesterID, assigneeID, patientID, labType, status));
+                    priority,
+                    roomID,
+                    requesterID,
+                    assigneeID,
+                    notes.getText(),
+                    patientID,
+                    labType,
+                    dateNeeded.getValue().toString()));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada
@@ -118,20 +153,18 @@ public class LabRequestController extends ParentController {
   }
 
   private boolean allItemsFilled() {
+    System.out.println(patientDOB.getValue());
     return !(procedureComboBox.getValue().trim().equals("")
         || patientName.getText().trim().equals("")
         || patientLastName.getText().trim().equals("")
         || patientDOB.getValue() == null
-        || priorityChoiceBox.getValue().trim().equals(""));
+        || priorityChoiceBox.getValue().trim().equals("")
+        || dateNeeded.getValue() == null);
   }
 
   private boolean addItem(LabRequest request) {
     boolean hadClearance = false;
-    try {
-      hadClearance = labRequestDAO.add(request);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    hadClearance = labRequestDAO.add(request);
     if (hadClearance) {
       labReqTable.getItems().add(request);
     }
@@ -141,7 +174,7 @@ public class LabRequestController extends ParentController {
 
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LabRequest());
+    super.saveToCSV(new LabRequest(), (Stage) patientName.getScene().getWindow());
   }
 
   private class LabRequestInitializer {

@@ -1,8 +1,12 @@
 package edu.wpi.DapperDaemons.map.pathfinder;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.AppController;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +27,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 /** Creates a path on the map */
-public class PathfinderHandler implements Initializable {
+public class PathfinderHandler extends AppController implements Initializable {
 
   private static AnchorPane lineLayer;
   private static MapController controller;
@@ -31,6 +36,12 @@ public class PathfinderHandler implements Initializable {
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
   @FXML private JFXComboBox<String> toLocation;
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(fromLocation, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(toLocation, new FuzzySearchComparatorMethod());
+  }
 
   public PathfinderHandler(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
@@ -41,24 +52,31 @@ public class PathfinderHandler implements Initializable {
   public PathfinderHandler() {}
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+    toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+  }
 
   @FXML
   public void showPath() {
     fromLocation.setValue(fromLocation.getValue().trim());
     toLocation.setValue(toLocation.getValue().trim());
     try {
-      if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
-          != -1) { // if from location is valid
-        if (DAOPouch.getLocationDAO().get(fromLocation.getValue()).getXcoord()
-            != -1) { // and to location is valid
-          showPather(fromLocation.getValue(), toLocation.getValue());
+      List<Location> filterJuan =
+          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
+      List<Location> filterDos =
+          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
+      Location startLoc = filterJuan.get(0);
+      Location toLoc = filterDos.get(0);
+      if (startLoc.getXcoord() != -1) {
+        if (toLoc.getXcoord() != -1) {
+          showPather(startLoc.getNodeID(), toLoc.getNodeID());
           makeAllInVisible();
         } else {
-          System.out.println("Not a valid end location!");
+          showError("Not a valid end location!");
         }
       } else {
-        System.out.println("Not a valid start location!");
+        showError("Not a valid start location!");
       }
       filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
     } catch (Exception e) {

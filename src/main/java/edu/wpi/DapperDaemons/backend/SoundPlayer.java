@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend;
 
+import java.io.BufferedInputStream;
 import java.util.Objects;
 import javax.sound.sampled.*;
 
@@ -25,7 +26,8 @@ public class SoundPlayer {
                 try {
                   AudioInputStream audioStream =
                       AudioSystem.getAudioInputStream(
-                          getClass().getClassLoader().getResourceAsStream(file));
+                          new BufferedInputStream(
+                              getClass().getClassLoader().getResourceAsStream(file)));
                   clip.open(audioStream);
                   clip.start();
                 } catch (Exception e) {

@@ -2,7 +2,10 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 public class LabRequest extends TableObject implements Request {
 
@@ -25,7 +28,7 @@ public class LabRequest extends TableObject implements Request {
   // TABLE OBJECT AND REQUEST METHODS
 
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE LABREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(20) ,"
@@ -33,11 +36,21 @@ public class LabRequest extends TableObject implements Request {
         + "assigneeID varchar(60),"
         + "patientID varchar(28),"
         + "labType varchar(20),"
-        + "status varchar(20))";
+        + "status varchar(20),"
+        + "dateNeeded varchar(20))";
   }
 
   @Override
-  public String getTableName() {
+  public TableObject newInstance(List<String> l) {
+    LabRequest temp = new LabRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public String tableName() {
     return "LABREQUESTS";
   }
 
@@ -59,11 +72,18 @@ public class LabRequest extends TableObject implements Request {
       case 5:
         return assigneeID;
       case 6:
-        return patientID;
-      case 7:
-        return labType.toString();
-      case 8:
         return status.toString();
+      case 7:
+        return notes;
+      case 8:
+        return dateTime;
+      case 9:
+        return patientID;
+      case 10:
+        return labType.toString();
+      case 11:
+        return dateNeeded;
+
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -89,15 +109,62 @@ public class LabRequest extends TableObject implements Request {
         assigneeID = newAttribute;
         break;
       case 6:
-        patientID = newAttribute;
-        break;
-      case 7:
-        labType = LabType.valueOf(newAttribute);
-        break;
-      case 8:
         status = RequestStatus.valueOf(newAttribute);
         break;
+      case 7:
+        notes = newAttribute;
+        break;
+      case 8:
+        dateTime = newAttribute;
+        break;
+      case 9:
+        patientID = newAttribute;
+        break;
+      case 10:
+        labType = LabType.valueOf(newAttribute);
+        break;
 
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  public void setAttribute(String attribute, String newAttribute) {
+
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "labType":
+        labType = LabType.valueOf(newAttribute);
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -109,12 +176,12 @@ public class LabRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new LabRequest();
+  public String getDateNeeded() {
+    return dateNeeded;
   }
 
   @Override
-  public String getRequestType() {
+  public String requestType() {
     return "Lab Request";
   }
 
@@ -138,6 +205,9 @@ public class LabRequest extends TableObject implements Request {
   private String patientID;
   private LabType labType;
   private RequestStatus status;
+  private String notes;
+  private String dateTime;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -146,9 +216,10 @@ public class LabRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String patientID,
       LabType labType,
-      RequestStatus status) {
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -157,13 +228,19 @@ public class LabRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
     this.patientID = patientID;
     this.labType = labType;
-    this.status = status;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
+    this.dateNeeded = dateNeeded;
   }
 
   public LabRequest() {}
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -224,5 +301,21 @@ public class LabRequest extends TableObject implements Request {
 
   public void setStatus(RequestStatus status) {
     this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 }

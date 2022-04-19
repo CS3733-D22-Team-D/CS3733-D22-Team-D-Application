@@ -2,7 +2,10 @@ package edu.wpi.DapperDaemons.entities.requests;
 
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 public class PatientTransportRequest extends TableObject implements Request {
 
@@ -15,19 +18,21 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   // TABLE OBJECT AND REQUEST METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
     return "CREATE TABLE PATIENTTRANSPORTREQUESTS(nodeid varchar(80) PRIMARY KEY,"
         + "priority varchar(20),"
         + "roomID varchar(60) ,"
         + "requesterID varchar(60) ,"
         + "assigneeID varchar(60) ,"
+        + "status varchar(20),"
+        + "notes varchar(255),"
+        + "dateTime varchar(20),"
         + "patientID varchar(60) ,"
-        + "nextRoomID varchar(60),"
-        + "status varchar(20))";
+        + "nextRoomID varchar(60),";
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "PATIENTTRANSPORTREQUESTS";
   }
 
@@ -46,11 +51,15 @@ public class PatientTransportRequest extends TableObject implements Request {
       case 5:
         return assigneeID;
       case 6:
-        return patientID;
-      case 7:
-        return nextRoomID;
-      case 8:
         return status.toString();
+      case 7:
+        return notes;
+      case 8:
+        return dateTime;
+      case 9:
+        return patientID;
+      case 10:
+        return nextRoomID;
 
       default:
         throw new IndexOutOfBoundsException();
@@ -77,13 +86,19 @@ public class PatientTransportRequest extends TableObject implements Request {
         assigneeID = newAttribute;
         break;
       case 6:
-        patientID = newAttribute;
+        status = RequestStatus.valueOf(newAttribute);
         break;
       case 7:
-        nextRoomID = newAttribute;
+        notes = newAttribute;
         break;
       case 8:
-        status = RequestStatus.valueOf(newAttribute);
+        dateTime = newAttribute;
+        break;
+      case 9:
+        patientID = newAttribute;
+        break;
+      case 10:
+        nextRoomID = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -91,12 +106,58 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  public Object get() {
-    return new PatientTransportRequest();
+  public TableObject newInstance(List<String> l) {
+    PatientTransportRequest temp = new PatientTransportRequest();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
   }
 
   @Override
-  public String getRequestType() {
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "priority":
+        priority = Priority.valueOf(newAttribute);
+        break;
+      case "roomID":
+        roomID = newAttribute;
+        break;
+      case "requesterID":
+        requesterID = newAttribute;
+        break;
+      case "assigneeID":
+        assigneeID = newAttribute;
+        break;
+
+      case "notes":
+        notes = newAttribute;
+        break;
+      case "dateTime":
+        dateTime = newAttribute;
+        break;
+      case "patientID":
+        patientID = newAttribute;
+        break;
+      case "nextRoomID":
+        nextRoomID = newAttribute;
+        break;
+      case "status":
+        status = RequestStatus.valueOf(newAttribute);
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
+  }
+
+  @Override
+  public String requestType() {
     return "Patient Transport Request";
   }
 
@@ -117,9 +178,12 @@ public class PatientTransportRequest extends TableObject implements Request {
   private String roomID;
   private String requesterID;
   private String assigneeID;
+  private RequestStatus status;
+  private String notes;
+  private String dateTime;
   private String patientID;
   private String nextRoomID;
-  private RequestStatus status;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -128,23 +192,30 @@ public class PatientTransportRequest extends TableObject implements Request {
       String roomID,
       String requesterID,
       String assigneeID,
+      String notes,
       String patientID,
-      String nextRoomID,
-      RequestStatus status) {
+      String nextRoomID) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
     this.patientID = patientID;
     this.nextRoomID = nextRoomID;
     this.status = status;
+    this.dateNeeded = dateNeeded;
   }
 
   public PatientTransportRequest() {}
 
   // SETTERS AND GETTERS
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -210,5 +281,31 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   public void setStatus(RequestStatus status) {
     this.status = status;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getDateTime() {
+    return dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 8)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

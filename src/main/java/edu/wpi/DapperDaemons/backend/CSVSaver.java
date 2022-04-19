@@ -5,10 +5,7 @@ import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 
 public class CSVSaver {
   private CSVSaver() {}
@@ -20,33 +17,40 @@ public class CSVSaver {
             save(v, k + "_save.csv");
           } catch (IOException e) {
             e.printStackTrace();
-          } catch (SQLException e) {
+          }
+        });
+  }
+
+  public static void saveAll(String path) {
+    CSVLoader.filenames.forEach(
+        (k, v) -> {
+          try {
+            save(v, path + "/" + k + ".csv");
+          } catch (IOException e) {
             e.printStackTrace();
           }
         });
   }
 
-  public static void save(TableObject type, String filename) throws SQLException, IOException {
+  public static void save(TableObject type, String filename) throws IOException {
+
+    DAO<TableObject> dao = DAOPouch.getDAO(type);
     File file = new File(filename);
     FileWriter outputFile = new FileWriter(file);
     CSVWriter writer =
         new CSVWriter(outputFile, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER);
-
-    String tableName = type.getTableName();
-    String query = "SELECT * FROM " + tableName;
-
-    Statement stmt = ConnectionHandler.getConnection().createStatement();
-    ResultSet resultSet = stmt.executeQuery(query);
-    ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-    int numAttributes = resultSetMetaData.getColumnCount();
-    String[] save_tableObject = new String[numAttributes];
-
-    while (resultSet.next()) {
-      for (int i = 1; i <= numAttributes; i++) save_tableObject[i - 1] = resultSet.getString(i);
-      writer.writeNext(save_tableObject);
+    ArrayList<String> line = new ArrayList<>();
+    for (TableObject t : dao.getAll().values()) {
+      line = new ArrayList<>();
+      for (int i = 1; i < 100; i++) {
+        try {
+          line.add(t.getAttribute(i));
+        } catch (IndexOutOfBoundsException ignored) {
+          break;
+        }
+      }
+      writer.writeNext((String[]) line.toArray(new String[line.size()]));
     }
-
-    stmt.close();
     writer.close();
   }
 }

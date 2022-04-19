@@ -90,30 +90,57 @@
                      <children>
                         <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Destination:">
                            <VBox.margin>
-                              <Insets left="50.0" right="50.0" />
+                              <Insets left="30.0" right="30.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="roomBox" focusColor="#059da7" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
+                        <JFXComboBox id="jButton" fx:id="roomBox" focusColor="#059da7" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
                            <VBox.margin>
-                              <Insets left="50.0" right="50.0" />
+                              <Insets left="30.0" right="30.0" />
                            </VBox.margin>
                         </JFXComboBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
-                           <VBox.margin>
-                              <Insets left="50.0" right="50.0" />
-                           </VBox.margin>
-                        </Text>
-                        <JFXComboBox id="jButton" fx:id="pBox" focusColor="#059da7" prefHeight="34.0" prefWidth="314.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
-                           <VBox.margin>
-                              <Insets left="50.0" right="50.0" />
-                           </VBox.margin>
-                        </JFXComboBox>
+                        <VBox prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="30.0" right="30.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <JFXComboBox id="jButton" fx:id="pBox" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="34.0" prefWidth="250.0" promptText="Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                                 <VBox.margin>
+                                    <Insets left="30.0" right="30.0" />
+                                 </VBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXComboBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="30.0" right="30.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <DatePicker fx:id="dateNeeded" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="82.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="38.0" prefWidth="83.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE">
@@ -130,6 +157,11 @@
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="notes" />
+                     </children>
                   </HBox>
                </children>
                <effect>
@@ -176,6 +208,7 @@
                               <TableColumn id="col" fx:id="Patient" prefWidth="75.0" text="Patient" />
                               <TableColumn id="col" fx:id="Destination" prefWidth="75.0" text="Destination" />
                               <TableColumn id="col" fx:id="Status" prefWidth="75.0" text="Status" />
+                              <TableColumn id="col" fx:id="DateReq" prefWidth="75.0" text="Scheduled For" />
                            </columns>
                         </TableView>
                      </children>

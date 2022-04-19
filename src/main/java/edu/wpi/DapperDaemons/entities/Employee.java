@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.tables.TableHandler;
+import java.util.List;
 
 public class Employee extends TableObject {
 
@@ -15,7 +16,7 @@ public class Employee extends TableObject {
 
   // TABLEOBJECT METHODS
   @Override
-  public String getTableInit() {
+  public String tableInit() {
 
     return "CREATE TABLE EMPLOYEES(nodeid varchar(48) PRIMARY KEY,"
         + "firstname varchar(60),"
@@ -26,7 +27,7 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public String getTableName() {
+  public String tableName() {
     return "EMPLOYEES";
   }
 
@@ -78,8 +79,38 @@ public class Employee extends TableObject {
   }
 
   @Override
-  public Object get() {
-    return new Employee();
+  public TableObject newInstance(List<String> l) {
+    Employee temp = new Employee();
+    for (int i = 0; i < l.size(); i++) {
+      temp.setAttribute(i + 1, l.get(i));
+    }
+    return temp;
+  }
+
+  @Override
+  public void setAttribute(String attribute, String newAttribute) {
+    switch (attribute) {
+      case "nodeID":
+        nodeID = newAttribute;
+        break;
+      case "firstName":
+        firstName = newAttribute;
+        break;
+      case "lastName":
+        lastName = newAttribute;
+        break;
+      case "dateOfBirth":
+        dateOfBirth = newAttribute;
+        break;
+      case "employeeType":
+        employeeType = EmployeeType.valueOf(newAttribute);
+        break;
+      case "securityClearance":
+        securityClearance = Integer.valueOf(newAttribute);
+        break;
+      default:
+        throw new IndexOutOfBoundsException();
+    }
   }
 
   // ATTRIBUTES
