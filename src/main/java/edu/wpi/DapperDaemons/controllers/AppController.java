@@ -33,9 +33,12 @@ public class AppController implements Initializable {
   @FXML private VBox sceneBox;
 
   private static VBox error;
+  private static VBox confirmation;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    /* Sets up the error message*/
     try {
       error =
           FXMLLoader.load(
@@ -52,6 +55,24 @@ public class AppController implements Initializable {
     errorContainer.getChildren().add(error);
     errorContainer.setAlignment(Pos.CENTER);
     errorContainer.setPadding(new Insets(20, 20, 20, 20));
+
+    /* Sets up the confirmation message*/
+    try {
+      confirmation =
+          FXMLLoader.load(
+              Objects.requireNonNull(App.class.getResource("views/" + "confirmationMessage.fxml")));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    confirmation.setVisible(false);
+    confirmation.setPickOnBounds(false);
+    HBox confirmationContainer = new HBox();
+    confirmationContainer.setPickOnBounds(false);
+    windowContents.getChildren().add(confirmationContainer);
+    confirmationContainer.getChildren().add(confirmation);
+    confirmationContainer.setAlignment(Pos.CENTER);
+    confirmationContainer.setPadding(new Insets(20, 20, 20, 20));
   }
 
   /** Creates an error box pop-up on the screen */
@@ -124,6 +145,25 @@ public class AppController implements Initializable {
     } catch (Exception e) {
       App.LOG.error("Unable to Save CSV of type: " + type);
     }
+  }
+
+  /** Creates an error box pop-up on the screen */
+  public static void showConfirmation(String confirmationMessage) {
+    confirmation.setVisible(true);
+    Node nodeOut = confirmation.getChildren().get(1);
+    if (nodeOut instanceof VBox) {
+      for (Node nodeIn : ((VBox) nodeOut).getChildren()) {
+        if (nodeIn instanceof Label) {
+          ((Label) nodeIn).setText(confirmationMessage);
+        }
+      }
+    }
+  }
+
+  /** Creates an error box pop-up based on a specific location */
+  public static void showConfirmation(String confirmationMessage, Pos pos) {
+    ((HBox) confirmation.getParent()).setAlignment(pos);
+    showConfirmation(confirmationMessage);
   }
 
   protected void saveToCSV(Stage window) {

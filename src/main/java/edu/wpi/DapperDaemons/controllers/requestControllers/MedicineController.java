@@ -34,6 +34,7 @@ public class MedicineController extends ParentController {
   @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
@@ -81,6 +82,7 @@ public class MedicineController extends ParentController {
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -175,10 +177,11 @@ public class MedicineController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       patientID,
                       medName,
                       quantity,
-                      dateStr));
+                      dateNeeded.getValue().toString()));
 
           if (!wentThrough) {
 

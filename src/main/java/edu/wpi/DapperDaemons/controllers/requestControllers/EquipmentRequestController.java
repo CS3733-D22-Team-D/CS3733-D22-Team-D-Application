@@ -35,6 +35,7 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   /* Table Columns */
@@ -109,6 +110,7 @@ public class EquipmentRequestController extends ParentController {
     priorityBox.setValue("");
     equipmentTypeBox.setValue("");
     roomBox.setValue("");
+    notes.setText("");
     dateNeeded.setValue(null);
   }
 
@@ -195,10 +197,11 @@ public class EquipmentRequestController extends ParentController {
                       roomID,
                       requesterID,
                       assigneeID,
+                      notes.getText(),
                       equipment.getNodeID(),
                       equipmentType,
                       cleanStatus,
-                      dateStr));
+                      dateNeeded.getValue().toString()));
           // check if user has permission
           if (!hadClearance) {
             showError("You do not have permission to do this.");
