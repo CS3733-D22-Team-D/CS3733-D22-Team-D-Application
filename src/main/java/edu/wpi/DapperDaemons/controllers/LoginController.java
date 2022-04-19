@@ -9,8 +9,6 @@ import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectExcepti
 import edu.wpi.DapperDaemons.map.serial.SerialCOM;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -26,7 +24,7 @@ public class LoginController extends AppController {
 
   @FXML private TextField username;
   @FXML private PasswordField password;
-  @FXML private VBox TwoFactor;
+  @FXML private VBox tfaBox;
   @FXML private TextField code;
 
   /* Background */
@@ -53,6 +51,39 @@ public class LoginController extends AppController {
         });
   }
 
+  /** Loads RFID with loading screen */
+  public void loadRFID() {
+    Stage window = (Stage) username.getScene().getWindow();
+    LoadingScreen ls = new LoadingScreen(window);
+    try {
+      ls.display(
+          () -> {
+            if (!System.getProperty("os.name").trim().toLowerCase().contains("windows")) {
+              RFIDPageController.errorOS = System.getProperty("os.name").trim();
+            } else {
+              RFIDPageController.errorOS = null;
+              Arduino arduino;
+              SerialCOM serialCOM = new SerialCOM();
+              try {
+                arduino = serialCOM.setupArduino();
+                RFIDPageController.COM = arduino.getPortDescription();
+              } catch (UnableToConnectException e) {
+                RFIDPageController.COM = null;
+              }
+            }
+          },
+          () -> {
+            try {
+              switchScene("RFIDScanPage.fxml", 635, 510, window);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          });
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * The login method invoked when the user attempts to log into the program
    *
@@ -60,67 +91,41 @@ public class LoginController extends AppController {
    */
   @FXML
   void login() throws Exception {
+    // Easter egg
     if (username.getText().trim().equals("Rick") && password.getText().trim().equals("Astley")) {
       player = new SoundPlayer("edu/wpi/DapperDaemons/assets/unsuspectingWavFile.wav");
       player.play();
     }
-    Account acc = accountDAO.get(username.getText());
-    if (acc != null && acc.checkPassword(password.getText())) {
-      if (acc.getAttribute(4).equals("") || acc.getAttribute(6).equals("false")) {
-        List<Employee> user =
-            new ArrayList<>(
-                employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
-        if (user.size() == 1) {
-          if (acc.getAttribute(6).equals("rfid")) {
-            Stage window = (Stage) username.getScene().getWindow();
-            LoadingScreen ls = new LoadingScreen(window);
-            ls.display(
-                () -> {
-                  if (!System.getProperty("os.name").trim().toLowerCase().contains("windows")) {
-                    RFIDPageController.errorOS = System.getProperty("os.name").trim();
-                  } else {
-                    RFIDPageController.errorOS = null;
-                    Arduino arduino;
-                    SerialCOM serialCOM = new SerialCOM();
-                    try {
-                      arduino = serialCOM.setupArduino();
-                      RFIDPageController.COM = arduino.getPortDescription();
-                    } catch (UnableToConnectException e) {
-                      RFIDPageController.COM = null;
-                    }
-                  }
-                },
-                () -> {
-                  SecurityController.setUser(user.get(0));
-                  // TODO: Find out why this is not working
-                  try {
-                    switchScene("RFIDScanPage.fxml", 635, 510);
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                });
-            return;
-          }
-          SecurityController.setUser(user.get(0)); // Correctly finds the user
-          switchScene("parentHeader.fxml", 635, 510);
-          return;
-        } else {
-          throw new Exception(
-              "More than one user with the same username?"); // theoretically this is unreachable
-        }
-      }
-      TwoFactor.setVisible(true);
-      Authentication.sendAuthCode(acc);
-    } else {
 
-      // incorrect username or password
+    // Get account
+    Account acc = accountDAO.get(username.getText());
+
+    // Ensure valid account
+    if (acc == null || !acc.checkPassword(password.getText())) {
       showError("Either your username or password is incorrect.");
+      return;
+    }
+
+    // Get valid Employee (throws error if system has a problem)
+    switch (acc.getAttribute(6)) {
+      case "SMS":
+        tfaBox.setVisible(true);
+        Authentication.sendAuthCode(acc);
+        break;
+      case "rfid":
+        loadRFID();
+        break;
+      default:
+        // No 2fa Specified
+        Employee user = DAOFacade.getEmployee(username.getText());
+        SecurityController.setUser(user);
+        switchScene("parentHeader.fxml", 635, 510);
     }
   }
 
   @FXML
   void hidePopup() {
-    TwoFactor.setVisible(false);
+    tfaBox.setVisible(false);
   }
 
   @FXML
@@ -128,23 +133,14 @@ public class LoginController extends AppController {
     try {
       int authCode = Integer.parseInt(code.getText());
       if (Authentication.authenticate(authCode)) {
-        List<Employee> user =
-            new ArrayList<>(
-                employeeDAO.filter(1, accountDAO.get(username.getText()).getAttribute(2)).values());
-        if (user.size() == 1) {
-          SecurityController.setUser(user.get(0));
-          switchScene("parentHeader.fxml", 635, 510);
-        } else {
-          throw new Exception(
-              "More than one user with the same username?"); // theoretically this is unreachable
-        }
-      } else {
-        showError("Invalid code");
+        Employee user = DAOFacade.getEmployee(username.getText());
+        SecurityController.setUser(user);
+        switchScene("parentHeader.fxml", 635, 510);
+        return;
       }
-    } catch (NumberFormatException e) {
-      System.out.println("int was not entered");
-      showError("Invalid code");
+    } catch (NumberFormatException skipCode) {
     }
+    showError("Invalid code");
   }
 
   @FXML

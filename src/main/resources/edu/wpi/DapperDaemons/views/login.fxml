@@ -131,7 +131,7 @@
                <children>
                   <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <VBox fx:id="TwoFactor" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" visible="false" BorderPane.alignment="CENTER">
+                        <VBox fx:id="tfaBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="380.0" visible="false" BorderPane.alignment="CENTER">
                            <children>
                               <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
                                  <children>
