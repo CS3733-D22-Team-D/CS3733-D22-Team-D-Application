@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -31,6 +34,8 @@ public class SecurityRequestController extends ParentController {
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityBox;
   @FXML private JFXComboBox<String> roomBox;
+  @FXML private DatePicker dateNeeded;
+  @FXML private TextField notes;
 
   /* Table Columns */
   @FXML private TableColumn<SecurityRequest, String> reqID;
@@ -90,6 +95,7 @@ public class SecurityRequestController extends ParentController {
   public void onClearClicked() {
     priorityBox.setValue("");
     roomBox.setValue("");
+    dateNeeded.setValue(null);
   }
 
   @FXML
@@ -97,12 +103,25 @@ public class SecurityRequestController extends ParentController {
 
     // make sure all fields are filled
     if (allFieldsFilled()) {
+      String dateRep =
+          ""
+              + dateNeeded.getValue().getMonthValue()
+              + dateNeeded.getValue().getDayOfMonth()
+              + dateNeeded.getValue().getYear();
+      String requesterID = SecurityController.getUser().getNodeID();
+      String assignee = "null";
+      String roomID = DAOPouch.getLocationDAO().filter(7, roomBox.getValue()).get(0).getNodeID();
       addItem(
           new SecurityRequest(
-              Request.Priority.valueOf(priorityBox.getValue()), roomBox.getValue()));
+              Request.Priority.valueOf(priorityBox.getValue()),
+              roomID,
+              requesterID,
+              assignee,
+              notes.getText(),
+              dateRep));
     } else {
       // TODO uncomment when fixed
-      //      showError("All fields must be filled.");
+      showError("All fields must be filled.");
     }
     onClearClicked();
   }

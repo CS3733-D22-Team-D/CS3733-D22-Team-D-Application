@@ -112,6 +112,7 @@ public class EquipmentRequestController extends ParentController {
     roomBox.setValue("");
     // notes.setText("");
     dateNeeded.setValue(null);
+    notes.setText("");
   }
 
   @FXML
