@@ -44,8 +44,9 @@ public class LocationNodeConnections extends TableObject {
         return connectionOne;
       case 3:
         return connectionTwo;
+      default:
+        throw new IndexOutOfBoundsException();
     }
-    return null;
   }
 
   @Override

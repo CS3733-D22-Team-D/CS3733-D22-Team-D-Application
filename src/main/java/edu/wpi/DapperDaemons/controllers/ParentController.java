@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -66,6 +67,9 @@ public class ParentController extends AppController {
   private static NotificationHandler notifs;
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
+  @FXML private ScrollPane notificationsScroller;
+
+  @FXML private ImageView notifBell;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -81,7 +85,7 @@ public class ParentController extends AppController {
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
-    notifs = new NotificationHandler(notifications);
+    notifs = new NotificationHandler(notifications, notifBell);
     new ThemeHandler(mainBox);
 
     updateWeather();
@@ -89,9 +93,11 @@ public class ParentController extends AppController {
   }
 
   public void swapPage(String page, String pageName) {
+    SessionTimeout.reset();
     TableListeners.removeAllListeners();
     App.LOG.info("Switching to page: <" + page + ">");
     mainBox.getChildren().clear();
+    mainBox.setOnMouseMoved(e -> SessionTimeout.reset());
     if (burgBack != null && burgBack.isVisible()) closeSlider();
 
     try {
@@ -123,7 +129,7 @@ public class ParentController extends AppController {
 
   @FXML
   void openNotifications() {
-    notifications.setVisible(alertButton.isSelected());
+    notificationsScroller.setVisible(alertButton.isSelected());
   }
 
   private void setServerToggleMenu() {
@@ -275,6 +281,20 @@ public class ParentController extends AppController {
     SecurityController.setUser(null);
   }
 
+  public static void logoutUser() {
+    App.LOG.info("Session timeout, user logged out.");
+    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    try {
+      mainBox
+          .getScene()
+          .setRoot(
+              FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/login.fxml"))));
+      AppController.showError("Session Timed Out");
+    } catch (Exception e) {
+    }
+    SecurityController.setUser(null);
+  }
+
   @FXML
   void switchToAboutUs() {
     swapPage("aboutUs", "About Us");
@@ -318,6 +338,11 @@ public class ParentController extends AppController {
   @FXML
   void switchToSanitation() {
     swapPage("sanitation", "Sanitation Services");
+  }
+
+  @FXML
+  void switchToSecurity() {
+    swapPage("SecurityRequest", "Security Services");
   }
 
   @FXML

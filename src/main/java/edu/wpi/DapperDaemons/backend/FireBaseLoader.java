@@ -1,29 +1,27 @@
 package edu.wpi.DapperDaemons.backend;
 
+import com.google.firebase.database.DatabaseReference;
 import edu.wpi.DapperDaemons.entities.TableObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FireBaseLoader {
 
-  // TODO idk what I was doing, but pretty sure this needs to also push from DAO to firebase, this
-  // is the reverse and is handled by ORM
-  public FireBaseLoader(DAO dao, TableObject type) {
-    //    DatabaseReference ref = FireBase.getReference();
-    //    ref = ref.child(new ArrayList<TableObject>(dao.getAll().values()).get(0).tableName());
-    //    ref.addListenerForSingleValueEvent(
-    //        new ValueEventListener() {
-    //          @Override
-    //          public void onDataChange(DataSnapshot dataSnapshot) {
-    //            HashMap<String, List<String>> data =
-    //                (HashMap<String, List<String>>) dataSnapshot.getValue();
-    //            for (List<String> l : data.values()) {
-    //              dao.add(type.newInstance(l));
-    //            }
-    //          }
-    //
-    //          @Override
-    //          public void onCancelled(DatabaseError databaseError) {
-    //            System.out.println("Database Error");
-    //          }
-    //        });
+  public FireBaseLoader(DAO<? extends TableObject> dao, TableObject type) {
+    DatabaseReference ref = FireBase.getReference().child(type.tableName());
+    Map<String, Map<String, String>> map = new HashMap<>();
+    Map<String, String> data = new HashMap<>();
+    for (TableObject t : dao.getAll().values()) {
+      data = new HashMap<>();
+      for (Integer i = 0; i < 100; i++) {
+        try {
+          data.put(i.toString(), FireBaseCoder.encodeForFirebaseKey(t.getAttribute(i + 1)));
+        } catch (IndexOutOfBoundsException ignored) {
+          break;
+        }
+      }
+      map.put(FireBaseCoder.encodeForFirebaseKey(t.getAttribute(1)), data);
+    }
+    ref.setValueAsync(map);
   }
 }

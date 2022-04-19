@@ -26,7 +26,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         + "entree varchar(20),"
         + "side varchar(20),"
         + "drink varchar(20),"
-        + "dessert varchar(20))";
+        + "dessert varchar(20),"
+        + "dateNeed varchar(10))";
   }
 
   @Override
@@ -57,6 +58,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
         return drink;
       case 10:
         return dessert;
+      case 11:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -94,6 +97,9 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case 10:
         dessert = newAttribute;
+        break;
+      case 11:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -149,8 +155,13 @@ public class MealDeliveryRequest extends TableObject implements Request {
         break;
       case "drink":
         drink = newAttribute;
+        break;
       case "dessert":
         dessert = newAttribute;
+        break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -173,6 +184,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   private String side;
   private String drink;
   private String dessert;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -185,7 +197,8 @@ public class MealDeliveryRequest extends TableObject implements Request {
       String entree,
       String side,
       String drink,
-      String dessert) {
+      String dessert,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -197,12 +210,14 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
     this.drink = drink;
     this.dessert = dessert;
+    this.dateNeeded = dateNeeded;
   }
 
   public MealDeliveryRequest() {}
 
   // SETTERS AND GETTERS
 
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
@@ -286,5 +301,15 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   public void setDessert(String dessert) {
     this.dessert = dessert;
+  }
+
+  @Override
+  @TableHandler(table = 0, col = 10)
+  public String getDateNeeded() {
+    return dateNeeded;
+  }
+
+  public void setDateNeeded(String dateNeeded) {
+    this.dateNeeded = dateNeeded;
   }
 }

@@ -1,9 +1,16 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.entities.Account;
+import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.MedicalEquipment;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class DAOFacade {
 
@@ -75,5 +82,65 @@ public class DAOFacade {
       }
     }
     return searchReq;
+  }
+
+  /**
+   * Filters Medical Equipment in a certain LOCATION by a given TYPE and a given CLEANSTATUS
+   *
+   * @param loc location to check for equipment
+   * @param medicalEquipmentDAO database DAO
+   * @param type type of equipment to look for
+   * @param cleanStatus the desired clean status
+   * @return A Map containing the filtered Equipment
+   */
+  public static Map<String, MedicalEquipment> filterEquipByTypeAndStatus(
+      Location loc, DAO<MedicalEquipment> medicalEquipmentDAO, String type, String cleanStatus) {
+    Map<String, MedicalEquipment> tempMap =
+        medicalEquipmentDAO.filter(
+            medicalEquipmentDAO.filter(6, loc.getAttribute(1)), 5, cleanStatus);
+    tempMap = medicalEquipmentDAO.filter(tempMap, 3, type);
+    return tempMap;
+  }
+
+  /**
+   * determines if an AUTOMATIC equip req has already been submitted and added to the DAO
+   *
+   * @param requestToCheck the request to check
+   * @return true if it is already in the DAO
+   */
+  public static boolean automaticRequestAlreadyExists(MedicalEquipmentRequest requestToCheck) {
+    try {
+      DAOPouch.init();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    Map<String, MedicalEquipmentRequest> requestMap =
+        DAOPouch.getMedicalEquipmentRequestDAO().getAll();
+
+    for (MedicalEquipmentRequest request : requestMap.values()) {
+      // This should be enough to determine that the automatic request has already been submitted
+      if (request.getEquipmentID().equals(requestToCheck.getEquipmentID())
+          && request.getPriority().equals(requestToCheck.getPriority())) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Gets the location of an equipment
+   *
+   * @param equipment - The Medical Equipment table object
+   */
+  public static Location getLocationOfEquip(MedicalEquipment equipment) {
+    return DAOPouch.getLocationDAO().get(equipment.getLocationID());
+  }
+
+  public static Employee getEmployee(String username) throws IllegalAccessException {
+    Account account = DAOPouch.getAccountDAO().get(username);
+    List<Employee> employees =
+        new ArrayList<Employee>(
+            DAOPouch.getEmployeeDAO().filter(1, account.getAttribute(2)).values());
+    if (!(employees.size() == 1))
+      throw new IllegalAccessException("Duplicate or No Employee Account(s) Found: " + username);
+    else return employees.get(0);
   }
 }

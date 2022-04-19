@@ -184,7 +184,7 @@ public class MedicalEquipment extends TableObject {
   }
 
   @TableHandler(table = 2, col = 2)
-  @TableHandler(table = 1, col = 3)
+  @TableHandler(table = 1, col = 2)
   @TableHandler(table = 0, col = 4)
   public CleanStatus getCleanStatus() {
     return cleanStatus;
