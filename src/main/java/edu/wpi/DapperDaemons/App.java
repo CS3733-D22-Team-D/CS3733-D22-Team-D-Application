@@ -8,6 +8,8 @@ import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.CleanEquipmentHandler;
+import edu.wpi.DapperDaemons.controllers.helpers.OverdueHandler;
 import edu.wpi.DapperDaemons.entities.Alert;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
@@ -75,6 +77,8 @@ public class App extends Application {
             if (connected) {
               FireBase.init();
               autoRequestsListeners();
+              OverdueHandler.init();
+              CleanEquipmentHandler.init();
               try {
                 DAOPouch.init();
               } catch (IOException e) {

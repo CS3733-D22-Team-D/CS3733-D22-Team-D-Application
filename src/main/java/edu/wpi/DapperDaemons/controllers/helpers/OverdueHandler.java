@@ -1,11 +1,16 @@
 package edu.wpi.DapperDaemons.controllers.helpers;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.FireBase;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +24,42 @@ public class OverdueHandler {
   private static DAO<EquipmentCleaning> equipmentCleaningDAO;
   private static OverdueHandler handler;
   private static int dateRepresentation;
+  private static ValueEventListener valueEventListener;
 
   public OverdueHandler() {}
 
-  public void init() {
+  public static void setListener() {
+    List<String> tableNames =
+            Arrays.asList(
+                    new EquipmentCleaning().tableName(),
+                    new LabRequest().tableName(),
+                    new LanguageRequest().tableName(),
+                    new MealDeliveryRequest().tableName(),
+                    new MedicalEquipmentRequest().tableName(),
+                    new MedicineRequest().tableName(),
+                    new PatientTransportRequest().tableName(),
+                    new SanitationRequest().tableName(),
+                    new SecurityRequest().tableName());
+
+    valueEventListener = new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot snapshot) {
+        updateOverdue();
+
+      }
+
+      @Override
+      public void onCancelled(DatabaseError error) {
+
+      }
+    };
+
+    for(String table : tableNames) {
+      FireBase.getReference().child(table).addValueEventListener(valueEventListener);
+    }
+  }
+
+  public static void init() {
     labRequestDAO = DAOPouch.getLabRequestDAO();
     mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
     medicalEquipmentRequestDAO = DAOPouch.getMedicalEquipmentRequestDAO();
@@ -31,6 +68,7 @@ public class OverdueHandler {
     sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
     equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
     handler = new OverdueHandler();
+    setListener();
   }
 
   public static void updateOverdue() {

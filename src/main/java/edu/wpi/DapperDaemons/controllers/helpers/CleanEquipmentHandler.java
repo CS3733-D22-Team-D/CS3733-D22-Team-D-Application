@@ -1,31 +1,61 @@
 package edu.wpi.DapperDaemons.controllers.helpers;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.backend.FireBase;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class CleanEquipmentHandler {
-  private DAO<MedicalEquipment> medicalEquipmentDAO;
-  private DAO<EquipmentCleaning> cleaningDAO;
-  private String nextDate;
+  private static DAO<MedicalEquipment> medicalEquipmentDAO;
+  private static DAO<EquipmentCleaning> cleaningDAO;
+  private static String nextDate;
+  private static ValueEventListener valueEventListener;
 
-  public void init() {
+  public static void setListener() {
+    List<String> tableNames =
+            Arrays.asList(
+                    new EquipmentCleaning().tableName(),
+                    new MedicalEquipment().tableName());
+
+    valueEventListener = new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot snapshot) {
+        checkAndUpdateCleanRequests();
+      }
+
+      @Override
+      public void onCancelled(DatabaseError error) {
+
+      }
+    };
+
+    for(String table : tableNames) {
+      FireBase.getReference().child(table).addValueEventListener(valueEventListener);
+    }
+  }
+
+  public static void init() {
     medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
     cleaningDAO = DAOPouch.getEquipmentCleaningDAO();
     Date dateDat = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     int nextDateRepresentation = Integer.parseInt(dateFormat.format(dateDat)) + 1;
     nextDate = Integer.toString(nextDateRepresentation);
+    setListener();
   }
 
-  public void checkAndUpdateCleanRequests() {
+  public static void checkAndUpdateCleanRequests() {
     List<MedicalEquipment> cleanEquipment =
         new ArrayList<>(medicalEquipmentDAO.filter(5, "CLEAN").values());
     List<MedicalEquipment> uncleanEquipment =
