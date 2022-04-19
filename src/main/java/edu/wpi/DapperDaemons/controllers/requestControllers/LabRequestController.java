@@ -97,7 +97,7 @@ public class LabRequestController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "null";
+      String assigneeID = "none";
       String patientID =
           patientName.getText()
               + patientLastName.getText()
