@@ -97,9 +97,13 @@ public class TableHelper<R> {
 
   /** Converts an enum into a ComboBox of strings as an edit property of the column */
   public <E extends Enum<E>> void addEnumEditProperty(
-      TableColumn<R, String> column, Class<E> enumClass) {
-    addDropDownEditProperty(
-        column, Arrays.stream(enumClass.getEnumConstants()).map(Enum::name).toArray(String[]::new));
+      TableColumn<R, E> column, Class<E> enumClass) {
+    column.setCellFactory(
+            cb -> {
+              ComboBoxTableCell<R, E> cellDropDown = new ComboBoxTableCell<>();
+              cellDropDown.getItems().addAll(enumClass.getEnumConstants());
+              return cellDropDown;
+            });
   }
 
   /** Helper function to convert an enum into a list of its values as strings */
