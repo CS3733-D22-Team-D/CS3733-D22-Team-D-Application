@@ -39,6 +39,7 @@
                         </ImageView>
                         <AnchorPane fx:id="glyphsLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="equipLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
+                        <AnchorPane fx:id="dragPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pathPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
@@ -365,7 +366,7 @@
                                                 </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="pumpTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#pumpToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Infusion Pumps">
                                                    <graphic>
-                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                      <ImageView fx:id="infusionDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
                                                             <Image url="@../assets/Glyphs/MapIcons/pump.png" />
                                                          </image>
@@ -377,7 +378,7 @@
                                                 </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="bedTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#bedToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Beds">
                                                    <graphic>
-                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                      <ImageView fx:id="bedDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
                                                             <Image url="@../assets/Glyphs/MapIcons/bed.png" />
                                                          </image>
@@ -760,6 +761,61 @@
                                     <DropShadow>
                                        <color>
                                           <Color opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </VBox>
+                              <VBox fx:id="confirmPopup" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="281.0" style="-fx-background-radius: 8.5; -fx-background-color: #fffefe;" visible="false" StackPane.alignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fitHeight="56.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/warning.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Location?">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="230.0" spacing="6.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Button id="defaultButton" fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#onCancelDelete" prefHeight="36.0" prefWidth="246.0" style="-fx-background-color: #999DAF;" stylesheets="@../assets/buttons.css" text="Cancel" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button id="defaultButton" fx:id="tryAgainButton1" mnemonicParsing="false" onMouseClicked="#onConfirmDelete" prefHeight="36.0" prefWidth="246.0" style="-fx-background-color: #FF4F4B;" stylesheets="@../assets/buttons.css" text="Confirm" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets left="15.0" right="15.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.30000001192092896" />
                                        </color>
                                     </DropShadow>
                                  </effect>

@@ -43,6 +43,7 @@ public class MapController extends ParentController {
   @FXML private ImageView mapView;
   @FXML private AnchorPane glyphsLayer;
   @FXML private AnchorPane equipLayer;
+  @FXML private AnchorPane dragPane;
   @FXML private AnchorPane pinPane;
   @FXML private StackPane mapAssets;
   @FXML private ScrollPane mapContents;
@@ -90,6 +91,12 @@ public class MapController extends ParentController {
   @FXML private TextField roomNumberIn;
   @FXML private JFXComboBox<String> typeIn;
 
+  /* Drag elements */
+  @FXML private ImageView infusionDragImage;
+  @FXML private ImageView bedDragImage;
+  private static DragHandler bedDrag;
+  private static DragHandler infusionDrag;
+
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
   @FXML private ToggleButton circle3;
@@ -113,6 +120,9 @@ public class MapController extends ParentController {
 
   /* Request filter stuff */
   @FXML private JFXComboBox<String> searchBar;
+
+  /*confirm cancel popup*/
+  @FXML private VBox confirmPopup;
 
   @FXML
   public void startFuzzySearch() {
@@ -346,6 +356,18 @@ public class MapController extends ParentController {
 
   @FXML
   public void onDeleteLocation() {
+    // confirmation box
+    confirmPopup.setVisible(true);
+  }
+
+  @FXML
+  public void onCancelDelete() {
+    // confirmation box
+    confirmPopup.setVisible(false);
+  }
+
+  @FXML
+  public void onConfirmDelete() {
     try {
       locationDAO.delete(positions.getSelected().getLoc());
       glyphs.remove(positions.getSelected());
@@ -444,9 +466,15 @@ public class MapController extends ParentController {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
+      bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
+      infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
+      bedDrag.enable();
+      infusionDrag.enable();
     } else {
       mapContents.setPannable(true);
       glyphs.disableEditing();
+      if (bedDrag != null) bedDrag.disable();
+      if (infusionDrag != null) infusionDrag.disable();
     }
   }
 
@@ -663,5 +691,9 @@ public class MapController extends ParentController {
     ft.setAutoReverse(false);
 
     ft.play();
+  }
+
+  public String getFloor() {
+    return maps.getFloor();
   }
 }

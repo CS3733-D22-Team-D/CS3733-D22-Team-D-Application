@@ -108,6 +108,7 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case 12:
         dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -160,6 +161,7 @@ public class MedicineRequest extends TableObject implements Request {
         break;
       case "dateNeeded":
         dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
