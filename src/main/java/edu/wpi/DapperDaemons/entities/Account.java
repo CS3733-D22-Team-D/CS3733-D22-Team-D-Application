@@ -10,7 +10,7 @@ public class Account extends TableObject {
   private String password;
   private String phoneNumber;
   private String settingsFile = "none";
-  private String twofactor = "false";
+  private String twoFactor = "false";
   private String email;
 
   public Account(String employeeID, String username, String password)
@@ -34,7 +34,7 @@ public class Account extends TableObject {
     this.password = SHA.toHexString(SHA.getSHA(password));
     this.phoneNumber = phoneNumber;
     this.settingsFile = fileName;
-    this.twofactor = twofactor;
+    this.twoFactor = twofactor;
     this.email = email;
   }
 
@@ -70,7 +70,7 @@ public class Account extends TableObject {
       case 5:
         return this.settingsFile;
       case 6:
-        return this.twofactor;
+        return this.twoFactor;
       case 7:
         return this.email;
       default:
@@ -97,7 +97,7 @@ public class Account extends TableObject {
         this.settingsFile = newAttribute;
         break;
       case 6:
-        this.twofactor = newAttribute;
+        this.twoFactor = newAttribute;
         break;
       case 7:
         this.email = newAttribute;
@@ -137,6 +137,8 @@ public class Account extends TableObject {
       case "twoFactor":
         twoFactor = newAttribute;
         break;
+      case "email":
+        email = newAttribute;
       default:
         throw new IndexOutOfBoundsException();
     }

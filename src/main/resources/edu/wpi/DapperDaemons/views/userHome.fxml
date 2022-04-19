@@ -116,9 +116,9 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                              <children>
-                                                <Label text="Full Name:" />
-                                                <Label layoutX="10.0" layoutY="10.0" text="Birthday:" />
-                                                <Label layoutX="10.0" layoutY="27.0" text="Email:" />
+                                                <Label id="label" text="Full Name:" />
+                                                <Label id="label" layoutX="10.0" layoutY="10.0" text="Birthday:" />
+                                                <Label id="label" layoutX="10.0" layoutY="27.0" text="Email:" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets left="10.0" top="10.0" />
@@ -126,9 +126,9 @@
                                           </VBox>
                                           <VBox prefHeight="100.0" prefWidth="138.0" spacing="10.0">
                                              <children>
-                                                <Label fx:id="fullName" text="First M Last" />
-                                                <Label fx:id="birthday" layoutX="10.0" layoutY="10.0" text="MM/DD/YYYY" />
-                                                <Label fx:id="email" layoutX="10.0" layoutY="27.0" text="email@wong.com" />
+                                                <Label id="label" fx:id="fullName" text="First M Last" />
+                                                <Label id="label" fx:id="birthday" layoutX="10.0" layoutY="10.0" text="MM/DD/YYYY" />
+                                                <Label id="label" fx:id="email" layoutX="10.0" layoutY="27.0" text="email@wong.com" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets right="10.0" top="10.0" />
@@ -216,7 +216,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Theme">
+                                          <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Your Portal's Theme">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -234,7 +234,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Request New Security Access">
+                                          <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Request New Security Access">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -249,10 +249,10 @@
                               </Button>
                               <Button id="label" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" VBox.vgrow="ALWAYS">
                                  <graphic>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox id="label" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
+                                          <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="See Help Options">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>

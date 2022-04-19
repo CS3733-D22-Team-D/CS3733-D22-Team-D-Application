@@ -126,14 +126,14 @@
                               <Insets left="5.0" right="5.0" />
                            </VBox.margin>
                         </VBox>
-                        <HBox prefHeight="143.0" prefWidth="471.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="NEVER">
+                        <HBox id="foreground" prefHeight="143.0" prefWidth="471.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="NEVER">
                            <children>
                               <VBox prefHeight="36.0" prefWidth="260.0" spacing="15.0" HBox.hgrow="NEVER">
                                  <children>
-                                    <Label text="Username:" />
-                                    <Label text="Name:" />
-                                    <Label text="Birthday:" />
-                                    <Label text="Email:" />
+                                    <Label id="label" text="Username:" />
+                                    <Label id="label" text="Name:" />
+                                    <Label id="label" text="Birthday:" />
+                                    <Label id="label" text="Email:" />
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" left="10.0" top="5.0" />
@@ -141,9 +141,9 @@
                               </VBox>
                               <VBox prefHeight="154.0" prefWidth="264.0" spacing="15.0" HBox.hgrow="NEVER">
                                  <children>
-                                    <Label fx:id="username" text="username" />
-                                    <Label fx:id="name" text="First M Last" />
-                                    <Label fx:id="birthday" text="MM/DD/YYYY" />
+                                    <Label id="label" fx:id="username" text="username" />
+                                    <Label id="label" fx:id="name" text="First M Last" />
+                                    <Label id="label" fx:id="birthday" text="MM/DD/YYYY" />
                                     <TextField fx:id="email" text="email@wong.com" />
                                  </children>
                                  <HBox.margin>
@@ -166,7 +166,7 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="461.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="NEVER">
+                  <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="461.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="460.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="NEVER">
                            <children>
@@ -184,7 +184,7 @@
                            <children>
                               <VBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="260.0" spacing="20.0" HBox.hgrow="NEVER">
                                  <children>
-                                    <Label text="Theme:" />
+                                    <Label id="label" text="Theme:" />
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" left="10.0" top="5.0" />

@@ -6,7 +6,6 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.entities.Account;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -65,12 +64,8 @@ public class UserSecurityController extends ParentController {
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
 
-    try {
-      accountUserName.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    accountUserName.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(1));
 
     // set profile picture
     profilePic.setFill(
@@ -88,15 +83,13 @@ public class UserSecurityController extends ParentController {
     securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
 
     // set phone number
-    try {
-      numberBox.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    numberBox.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
 
     // set types of 2FA types
-    type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid"));
+    type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid", "none"));
+    type2FABox.setValue(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(6));
   }
 
   public void onRequestNewAccess() {
@@ -121,23 +114,16 @@ public class UserSecurityController extends ParentController {
 
     // set new phone number
     String newNumber = numberBox.getText();
-    try {
-      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
-      toChange.setAttribute(4, newNumber);
-      DAOPouch.getAccountDAO().update(toChange);
-      System.out.println("New Phone Number Reset");
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    toChange.setAttribute(4, newNumber);
+    DAOPouch.getAccountDAO().update(toChange);
+    System.out.println("New Phone Number Reset");
 
     // set 2FA type
-    String newTwoFactor = type2FABox.getValue();
-    try {
-      Account toChange = DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID());
+    if (type2FABox.getValue() != null && !type2FABox.getValue().equals("")) {
+      String newTwoFactor = type2FABox.getValue();
       toChange.setAttribute(6, newTwoFactor);
       DAOPouch.getAccountDAO().update(toChange);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
     }
   }
 
@@ -147,11 +133,7 @@ public class UserSecurityController extends ParentController {
     newPasswordBox.setText("");*/
 
     // set phone number
-    try {
-      numberBox.setText(
-          DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    numberBox.setText(
+        DAOPouch.getAccountDAO().get(SecurityController.getUser().getNodeID()).getAttribute(4));
   }
 }
