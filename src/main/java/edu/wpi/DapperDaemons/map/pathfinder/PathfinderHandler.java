@@ -69,9 +69,10 @@ public class PathfinderHandler extends AppController implements Initializable {
       Location toLoc = filterDos.get(0);
       if (checkIfConnectedNode(startLoc.getNodeID())) {
         if (checkIfConnectedNode(toLoc.getNodeID())) {
-          System.out.println("Showing path but everything might be broken");
-          System.out.println(
-              "Starting at " + startLoc.getNodeID() + " And going to " + toLoc.getNodeID());
+          //          System.out.println("Showing path but everything might be broken");
+          //          System.out.println(
+          //              "Starting at " + startLoc.getNodeID() + " And going to " +
+          // toLoc.getNodeID());
           showPather(startLoc.getNodeID(), toLoc.getNodeID());
           makeAllInVisible();
           filterByFloor(startLoc.getFloor());
@@ -128,6 +129,11 @@ public class PathfinderHandler extends AppController implements Initializable {
         e.printStackTrace();
         System.out.println("Location not found");
       }
+    }
+    try {
+      locations.add(DAOPouch.getLocationDAO().get(startNode));
+    } catch (Exception e) {
+      System.out.println("Something went wrong adding the start location");
     }
 
     double overflow = 0.0;
@@ -224,11 +230,11 @@ public class PathfinderHandler extends AppController implements Initializable {
   public void filterByFloor(String floor) {
     makeAllInVisible();
     for (int i = 0;
-        i < locations.size();
+        i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
       // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
-        System.out.println("Showing " + locations.get(i).getNodeID());
+        //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);
       }
     }
