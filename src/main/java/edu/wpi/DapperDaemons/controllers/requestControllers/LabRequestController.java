@@ -132,7 +132,8 @@ public class LabRequestController extends ParentController {
                     assigneeID,
                     notes.getText(),
                     patientID,
-                    labType));
+                    labType,
+                        dateNeeded.getValue().toString()));
 
         if (!hadClearance) {
           //  throw error saying that the user does not have clearance yada yada

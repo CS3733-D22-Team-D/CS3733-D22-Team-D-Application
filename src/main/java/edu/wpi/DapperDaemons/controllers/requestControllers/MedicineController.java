@@ -180,7 +180,8 @@ public class MedicineController extends ParentController {
                       notes.getText(),
                       patientID,
                       medName,
-                      quantity));
+                      quantity,
+                          dateNeeded.getValue().toString()));
 
           if (!wentThrough) {
 

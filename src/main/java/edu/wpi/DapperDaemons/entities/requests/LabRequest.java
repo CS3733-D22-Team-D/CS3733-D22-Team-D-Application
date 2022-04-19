@@ -36,7 +36,8 @@ public class LabRequest extends TableObject implements Request {
         + "assigneeID varchar(60),"
         + "patientID varchar(28),"
         + "labType varchar(20),"
-        + "status varchar(20))";
+        + "status varchar(20),"
+            + "dateNeeded varchar(20))";
   }
 
   @Override
@@ -80,6 +81,9 @@ public class LabRequest extends TableObject implements Request {
         return patientID;
       case 10:
         return labType.toString();
+      case 11:
+        return dateNeeded;
+
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -158,6 +162,9 @@ public class LabRequest extends TableObject implements Request {
       case "dateTime":
         dateTime = newAttribute;
         break;
+      case "dateNeeded":
+        dateNeeded = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -166,6 +173,11 @@ public class LabRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 7)
   public RequestStatus getStatus() {
     return status;
+  }
+
+  @Override
+  public String getDateNeeded() {
+    return dateNeeded;
   }
 
   @Override
@@ -195,6 +207,7 @@ public class LabRequest extends TableObject implements Request {
   private RequestStatus status;
   private String notes;
   private String dateTime;
+  private String dateNeeded;
 
   // CONSTRUCTORS
 
@@ -205,7 +218,8 @@ public class LabRequest extends TableObject implements Request {
       String assigneeID,
       String notes,
       String patientID,
-      LabType labType) {
+      LabType labType,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
@@ -219,6 +233,7 @@ public class LabRequest extends TableObject implements Request {
     Date now = new Date();
     this.dateTime = formatter.format(now);
     this.status = RequestStatus.REQUESTED;
+    this.dateNeeded = dateNeeded;
   }
 
   public LabRequest() {}
