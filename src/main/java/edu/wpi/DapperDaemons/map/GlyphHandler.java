@@ -87,7 +87,7 @@ public class GlyphHandler {
     }
   }
 
-  public void addPosition(PositionInfo pos) {
+  public boolean addPosition(PositionInfo pos) {
     ImageView image = getIconImage(pos.getType());
     image.setVisible(true);
     image.setX(pos.getX() - 16);
@@ -119,6 +119,26 @@ public class GlyphHandler {
         });
 
     imageLocs.add(pos);
+    return true;
+  }
+
+  public boolean addEquipment(int x, int y, MedicalEquipment e) {
+    System.out.println("Checking equipment: " + x + ", " + y);
+    for (PositionInfo p : imageLocs) {
+      if (p.isNear(x, y, controller.getFloor())) {
+        System.out.println("Found valid position");
+        e.setLocationID(p.getId());
+        equipLocs.add(e);
+        ImageView equip = getEquipImage(e.getEquipmentType().name());
+        equip.setX(x - 16);
+        equip.setY(y - 16);
+        equip.setVisible(true);
+        equipLayer.getChildren().add(equip);
+        filter();
+        return true;
+      }
+    }
+    return false;
   }
 
   private ColorAdjust getPriorityColor(PositionInfo pos) {
