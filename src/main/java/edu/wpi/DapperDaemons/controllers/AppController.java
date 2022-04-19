@@ -97,6 +97,7 @@ public class AppController implements Initializable {
 
   protected void switchScene(String fileName, int minWidth, int minHeight) throws IOException {
     Stage window = (Stage) sceneBox.getScene().getWindow();
+    if (EasterEggController.player != null) EasterEggController.player.stop();
     switchScene(fileName, minWidth, minHeight, window);
   }
 
