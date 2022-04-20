@@ -65,18 +65,16 @@ public class OverdueHandler {
 
   private List<Request> checkOverdue(List<Request> requestList) {
     List<Request> overdueList = new ArrayList<>();
-    System.out.println("The size of this request list is " + requestList.size());
     for (Request req : requestList) {
       // Convert date into the same format to get a linear reqresentation
-      System.out.println(req.getNodeID());
       int dateOf;
       try {
         String reqDate = req.getDateNeeded();
         if (reqDate.length() < 8) {
-          dateOf = Integer.parseInt(reqDate.substring(3) + reqDate.substring(0, 3));
-        } else {
-          dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
+          reqDate = "0" + reqDate;
         }
+        dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
+
       } catch (Exception e) {
         e.printStackTrace();
         App.LOG.info("The date for request " + req.getNodeID() + " Was wrong or nonexistent");
@@ -84,9 +82,11 @@ public class OverdueHandler {
       }
       System.out.println(
           "Date being checked : " + dateOf + " Today's date : " + dateRepresentation);
-      if (dateOf < dateRepresentation) // If the due date has passed,
-      overdueList.add(req); // Add the req to the list
-      App.LOG.info("Request " + req.getNodeID() + " Was overdue, updating priority");
+      if (dateOf < dateRepresentation) { // If the due date has passed,
+        System.out.println("Date has passed, making overdue");
+        overdueList.add(req); // Add the req to the list
+        App.LOG.info("Request " + req.getNodeID() + " Was overdue, updating priority");
+      }
     }
     return overdueList;
   }
