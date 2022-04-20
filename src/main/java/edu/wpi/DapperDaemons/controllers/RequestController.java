@@ -119,7 +119,7 @@ public class RequestController extends ParentController implements Initializable
                       + " "
                       + SecurityController.getUser().getLastName()
                       + ".",
-                  event.getNewValue()));
+                  SecurityController.getUser().getNodeID()));
     }
     tableupdate();
   }
@@ -141,7 +141,7 @@ public class RequestController extends ParentController implements Initializable
                       + " "
                       + SecurityController.getUser().getLastName()
                       + ".",
-                  event.getNewValue()));
+                      SecurityController.getUser().getNodeID()));
     }
     tableupdate();
   }
