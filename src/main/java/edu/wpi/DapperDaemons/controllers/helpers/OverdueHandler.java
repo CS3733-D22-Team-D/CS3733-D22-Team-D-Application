@@ -80,10 +80,7 @@ public class OverdueHandler {
         App.LOG.info("The date for request " + req.getNodeID() + " Was wrong or nonexistent");
         dateOf = dateRepresentation;
       }
-      System.out.println(
-          "Date being checked : " + dateOf + " Today's date : " + dateRepresentation);
       if (dateOf < dateRepresentation) { // If the due date has passed,
-        System.out.println("Date has passed, making overdue");
         overdueList.add(req); // Add the req to the list
         App.LOG.info("Request " + req.getNodeID() + " Was overdue, updating priority");
       }
