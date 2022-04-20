@@ -3,8 +3,6 @@ package edu.wpi.DapperDaemons.controllers;
 import arduino.Arduino;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
-import edu.wpi.DapperDaemons.controllers.helpers.CleanEquipmentHandler;
-import edu.wpi.DapperDaemons.controllers.helpers.OverdueHandler;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
@@ -107,9 +105,6 @@ public class LoginController extends AppController {
       showError("Either your username or password is incorrect.");
       return;
     }
-
-    OverdueHandler.init();
-    CleanEquipmentHandler.init();
 
     // Get valid Employee (throws error if system has a problem)
     switch (acc.getAttribute(6)) {
