@@ -29,3 +29,14 @@
     -fx-background-radius: 7.5 7.5 0 0;
 
 }
+
+.bubbles.toggle-button{
+    -fx-background-color:  #059DA7;
+    -fx-background-radius:  20;
+
+}
+.bubbles.toggle-button:selected{
+    -fx-background-color: #07c7d5;
+    -fx-background-radius: 20;
+
+}
