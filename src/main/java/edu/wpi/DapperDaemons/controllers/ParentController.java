@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.CleanEquipmentHandler;
+import edu.wpi.DapperDaemons.controllers.helpers.OverdueHandler;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.controllers.homePage.*;
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
@@ -80,6 +82,8 @@ public class ParentController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    OverdueHandler.init();
+    CleanEquipmentHandler.init();
     if (!AutoSave.started()) AutoSave.start(1, autoSaveIcon);
     bindImage(BGImage, BGContainer);
     menuSlider(slider, burg, burgBack);
