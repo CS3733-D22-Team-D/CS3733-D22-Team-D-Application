@@ -77,7 +77,7 @@ public class OverdueHandler {
         } else {
           dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
         }
-      } catch (Exception e){
+      } catch (Exception e) {
         e.printStackTrace();
         App.LOG.info("The date for request " + req.getNodeID() + " Was wrong or nonexistent");
         dateOf = dateRepresentation;
