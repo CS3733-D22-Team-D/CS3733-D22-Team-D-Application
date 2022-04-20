@@ -1,12 +1,8 @@
 package edu.wpi.DapperDaemons.controllers.helpers;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.backend.FireBase;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -39,41 +35,55 @@ public class OverdueHandler {
   }
 
   public static void updateOverdue() {
-    if (overdueTimer != null)
-      overdueTimer.cancel();
+    if (overdueTimer != null) overdueTimer.cancel();
     overdueTimer = new Timer();
     overdueTimer.schedule(
-            new TimerTask() {
-              @Override
-              public void run() {
-                App.LOG.info("Checking for overdue things");
-                try {
-                  Date dateDat = new Date();
-                  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-                  dateRepresentation = Integer.parseInt(dateFormat.format(dateDat));
-                  handler.checkLabReq();
-                  handler.checkEquipmentCleanReq();
-                  handler.checkMealReq();
-                  handler.checkMedicineReq();
-                  handler.checkMedicalEqReq();
-                  handler.checkPatientTransportReq();
-                  handler.checkSanitaitonReq();
-                } catch (Exception e) {
-
-                }
-              }
-            },
-            0,
-            updateTime * 1000 // every 180 * 1000ms so 180 seconds
-    );
+        new TimerTask() {
+          @Override
+          public void run() {
+            App.LOG.info("Checking for overdue things");
+            try {
+              Date dateDat = new Date();
+              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+              dateRepresentation = Integer.parseInt(dateFormat.format(dateDat));
+              handler.checkLabReq();
+              handler.checkEquipmentCleanReq();
+              handler.checkMealReq();
+              handler.checkMedicineReq();
+              handler.checkMedicalEqReq();
+              handler.checkPatientTransportReq();
+              handler.checkSanitaitonReq();
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        },
+        0,
+        updateTime * 1000 // every 180 * 1000ms so 180 seconds
+        );
   }
 
   private List<Request> checkOverdue(List<Request> requestList) {
     List<Request> overdueList = new ArrayList<>();
+    System.out.println("The size of this request list is " + requestList.size());
     for (Request req : requestList) {
       // Convert date into the same format to get a linear reqresentation
-      String reqDate = req.getDateNeeded();
-      int dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
+      System.out.println(req.getNodeID());
+      int dateOf;
+      try {
+        String reqDate = req.getDateNeeded();
+        if (reqDate.length() < 8) {
+          dateOf = Integer.parseInt(reqDate.substring(3) + reqDate.substring(0, 3));
+        } else {
+          dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
+        }
+      } catch (Exception e){
+        e.printStackTrace();
+        App.LOG.info("The date for request " + req.getNodeID() + " Was wrong or nonexistent");
+        dateOf = dateRepresentation;
+      }
+      System.out.println(
+          "Date being checked : " + dateOf + " Today's date : " + dateRepresentation);
       if (dateOf < dateRepresentation) // If the due date has passed,
       overdueList.add(req); // Add the req to the list
       App.LOG.info("Request " + req.getNodeID() + " Was overdue, updating priority");
@@ -82,10 +92,8 @@ public class OverdueHandler {
   }
 
   private void checkLabReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request labReq : (List<Request>) labRequestDAO.getAll()) {
-      requestList.add(labReq);
-    }
+    List<Request> requestList = new ArrayList<>(labRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       LabRequest overdueReq = labRequestDAO.get(req.getNodeID());
@@ -95,18 +103,19 @@ public class OverdueHandler {
   }
 
   private void checkMealReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request mealReq : (List<Request>) mealDeliveryRequestDAO.getAll()) {
-      requestList.add(mealReq);
-    }
+    List<Request> requestList = new ArrayList<>(mealDeliveryRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
+    for (Request req : requestList) {
+      MealDeliveryRequest overdueReq = mealDeliveryRequestDAO.get(req.getNodeID());
+      overdueReq.setPriority(Request.Priority.OVERDUE);
+      mealDeliveryRequestDAO.update(overdueReq);
+    }
   }
 
   private void checkMedicalEqReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request medEqReq : (List<Request>) medicalEquipmentRequestDAO.getAll()) {
-      requestList.add(medEqReq);
-    }
+    List<Request> requestList = new ArrayList<>(medicalEquipmentRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       MedicalEquipmentRequest overdueReq = medicalEquipmentRequestDAO.get(req.getNodeID());
@@ -116,10 +125,8 @@ public class OverdueHandler {
   }
 
   private void checkMedicineReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request medicineReq : (List<Request>) medicineRequestDAO.getAll()) {
-      requestList.add(medicineReq);
-    }
+    List<Request> requestList = new ArrayList<>(medicineRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       MedicineRequest overdueReq = medicineRequestDAO.get(req.getNodeID());
@@ -129,10 +136,8 @@ public class OverdueHandler {
   }
 
   private void checkPatientTransportReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request patTranReq : (List<Request>) patientTransportRequestDAO.getAll()) {
-      requestList.add(patTranReq);
-    }
+    List<Request> requestList = new ArrayList<>(patientTransportRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       PatientTransportRequest overdueReq = patientTransportRequestDAO.get(req.getNodeID());
@@ -142,10 +147,8 @@ public class OverdueHandler {
   }
 
   private void checkSanitaitonReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request sanitationReq : (List<Request>) sanitationRequestDAO.getAll()) {
-      requestList.add(sanitationReq);
-    }
+    List<Request> requestList = new ArrayList<>(sanitationRequestDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       SanitationRequest overdueReq = sanitationRequestDAO.get(req.getNodeID());
@@ -155,10 +158,8 @@ public class OverdueHandler {
   }
 
   private void checkEquipmentCleanReq() throws SQLException {
-    List<Request> requestList = new ArrayList<>();
-    for (Request sanitationReq : (List<Request>) equipmentCleaningDAO.getAll()) {
-      requestList.add(sanitationReq);
-    }
+    List<Request> requestList = new ArrayList<>(equipmentCleaningDAO.getAll().values());
+
     requestList = checkOverdue(requestList);
     for (Request req : requestList) {
       EquipmentCleaning overdueReq = equipmentCleaningDAO.get(req.getNodeID());
