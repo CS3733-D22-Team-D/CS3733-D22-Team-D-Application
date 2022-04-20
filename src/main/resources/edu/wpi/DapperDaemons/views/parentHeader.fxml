@@ -153,6 +153,66 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToLanguage" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/language.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="slider" layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/security.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToUserRequests" stylesheets="@../assets/buttons.css" text="User Requests" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/userRequests.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToEmployeesBitch" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/employees.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                         <JFXButton id="slider" onMouseClicked="#switchToMapDashboard" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -168,28 +228,13 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToTKSPoggersPage" stylesheets="@../assets/buttons.css" text="TK's Poggers Page" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
 
                         <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToLanguage" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton id="slider" layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToUserRequests" stylesheets="@../assets/buttons.css" text="User Requests" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToEmployeesBitch" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -314,7 +359,7 @@
                               </Text>
                            </children>
                            <HBox.margin>
-                              <Insets right="35.0" />
+                              <Insets left="70.0" />
                            </HBox.margin>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="85.0">

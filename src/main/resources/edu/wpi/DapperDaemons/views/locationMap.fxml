@@ -118,7 +118,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </StackPane>
-                                                <ToggleButton fx:id="circle3" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 20; -fx-background-color: #059DA7;" text="ToggleButton">
+                                                <ToggleButton fx:id="circle3" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" styleClass="bubbles" stylesheets="@../../../../toggleButton.css" text="ToggleButton">
                                                    <effect>
                                                       <DropShadow>
                                                          <color>
@@ -126,6 +126,16 @@
                                                          </color>
                                                       </DropShadow>
                                                    </effect>
+                                                   <graphic>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/pencil.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="1.0" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
                                                 </ToggleButton>
                                                 <StackPane fx:id="circle2" onMouseClicked="#openCreate" prefHeight="150.0" prefWidth="20.0">
                                                    <children>
