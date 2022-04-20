@@ -49,7 +49,7 @@ public class RequestController extends ParentController implements Initializable
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     tableinit();
-    selectAssigned(new ActionEvent());
+    selectCreated(new ActionEvent());
   }
 
   @FXML
@@ -57,6 +57,9 @@ public class RequestController extends ParentController implements Initializable
     assignedRequestsTable.setVisible(true);
     createdRequestsTable.setVisible(false);
     relevantRequestsTable.setVisible(false);
+    assignedRequestsTable.setPickOnBounds(true);
+    createdRequestsTable.setPickOnBounds(false);
+    relevantRequestsTable.setPickOnBounds(false);
   }
 
   @FXML
@@ -64,6 +67,9 @@ public class RequestController extends ParentController implements Initializable
     assignedRequestsTable.setVisible(false);
     createdRequestsTable.setVisible(true);
     relevantRequestsTable.setVisible(false);
+    assignedRequestsTable.setPickOnBounds(false);
+    createdRequestsTable.setPickOnBounds(true);
+    relevantRequestsTable.setPickOnBounds(false);
   }
 
   @FXML
@@ -71,6 +77,9 @@ public class RequestController extends ParentController implements Initializable
     assignedRequestsTable.setVisible(false);
     createdRequestsTable.setVisible(false);
     relevantRequestsTable.setVisible(true);
+    assignedRequestsTable.setPickOnBounds(false);
+    createdRequestsTable.setPickOnBounds(false);
+    relevantRequestsTable.setPickOnBounds(true);
   }
 
   @FXML
