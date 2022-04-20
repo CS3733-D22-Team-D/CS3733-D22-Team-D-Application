@@ -146,6 +146,7 @@ public class UserSettingsController extends ParentController {
           new SoundPlayer("edu/wpi/DapperDaemons/notifications/" + soundBox.getValue() + ".wav");
       DAOFacade.getUserAccount()
           .setAttribute(5, "edu/wpi/DapperDaemons/notifications/" + soundBox.getValue() + ".wav");
+      DAOPouch.getAccountDAO().add(DAOPouch.getAccountDAO().get(DAOFacade.getUsername()));
     }
   }
 

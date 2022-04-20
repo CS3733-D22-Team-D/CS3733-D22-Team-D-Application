@@ -31,7 +31,7 @@ public class SoundPlayer {
                   clip.open(audioStream);
                   clip.start();
                 } catch (Exception e) {
-                  System.err.println(e.getMessage());
+                  System.err.println("No sound file found" + e.getMessage());
                 }
                 while (!Thread.interrupted()) ;
                 stop();
