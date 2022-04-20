@@ -165,11 +165,30 @@
                   <Insets right="20.0" />
                </padding>
                <children>
-                  <JFXButton id="about us service page" onAction="#goToServicePage" onMouseClicked="#goToServicePage" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Service Page" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </JFXButton>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton id="about us service page" onMouseClicked="#runAPI" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Try our API" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton id="about us service page" onAction="#goToServicePage" onMouseClicked="#goToServicePage" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Service Page" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </HBox>
                </children>
             </HBox>
          </children>
