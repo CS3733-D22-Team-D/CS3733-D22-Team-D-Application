@@ -13,6 +13,8 @@ import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -117,6 +119,7 @@ public class EquipmentCleaningController extends ParentController {
                 + cleanByDate.getValue().getMonthValue()
                 + cleanByDate.getValue().getDayOfMonth()
                 + cleanByDate.getValue().getYear();
+        roomID = medicalEquipment.getLocationID();
 
         medicalEquipment.setCleanStatus(
             MedicalEquipment.CleanStatus
@@ -158,7 +161,12 @@ public class EquipmentCleaningController extends ParentController {
   public void initBoxes() {
     priorityBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-    // TODO : Put all the equipment ID types in the box for fuzzy wuzzy
+
+    List<MedicalEquipment> medicalEquipmentList =
+        new ArrayList<>(medicalEquipmentDAO.getAll().values());
+    List<String> idNames = new ArrayList<>();
+    for (MedicalEquipment equipment : medicalEquipmentList) idNames.add(equipment.getNodeID());
+    equipmentIDBox.setItems(FXCollections.observableArrayList(idNames));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
