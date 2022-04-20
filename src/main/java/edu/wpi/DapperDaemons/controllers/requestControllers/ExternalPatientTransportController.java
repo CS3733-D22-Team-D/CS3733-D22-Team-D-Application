@@ -219,7 +219,7 @@ public class ExternalPatientTransportController extends ParentController {
 
     pBox.setItems(
         FXCollections.observableArrayList(tableHelper.convertEnum(Request.Priority.class)));
-    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNamesExit()));
 
     // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
     // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
