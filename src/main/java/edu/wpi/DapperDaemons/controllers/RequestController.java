@@ -37,7 +37,7 @@ public class RequestController extends ParentController implements Initializable
   @FXML private TableColumn<Request, String> RoomID221;
   @FXML private TableColumn<Request, String> RoomID222;
   @FXML private TableColumn<Request, Request.RequestStatus> Status22;
-  @FXML private TableColumn<Request, Request.RequestStatus> Status221;
+  @FXML private TableColumn<Request, String> Status221;
   @FXML private TableColumn<Request, Request.RequestStatus> Status222;
   @FXML private ToggleButton assignedRequests;
   @FXML private TableView<Request> assignedRequestsTable;
@@ -121,6 +121,7 @@ public class RequestController extends ParentController implements Initializable
     DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
 
     ((TableObject) request).setAttribute(5, SecurityController.getUser().getNodeID());
+    ((TableObject) request).setAttribute(6, Request.RequestStatus.IN_PROGRESS.toString());
     if (requestDAO.update(((TableObject) request))) {
       DAOPouch.getNotificationDAO()
           .add(
@@ -152,13 +153,22 @@ public class RequestController extends ParentController implements Initializable
     createdRequestsTable.setPickOnBounds(false);
     relevantRequestsTable.setPickOnBounds(false);
 
-    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[1]);
-    tableHelper.addEnumEditProperty(Status221, Request.RequestStatus.class);
+    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[DAOFacade.getAllPlebs().size()]);
+    tableHelper.addDropDownEditProperty(
+        Status221,
+        Request.RequestStatus.REQUESTED.toString(),
+        Request.RequestStatus.IN_PROGRESS.toString(),
+        Request.RequestStatus.CANCELLED.toString(),
+        Request.RequestStatus.COMPLETED.toString());
     tableHelper1.addDropDownEditProperty(Assignee22, plebs);
     tableHelper2.addDropDownEditProperty(Assignee222, "yourself");
   }
 
   private void tableupdate() {
+
+    assignedRequestsTable.getItems().clear();
+    createdRequestsTable.getItems().clear();
+    relevantRequestsTable.getItems().clear();
     assignedRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
     createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
     relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
@@ -166,9 +176,5 @@ public class RequestController extends ParentController implements Initializable
     tableHelper.filterTable(Assignee221, SecurityController.getUser().getNodeID());
     tableHelper1.filterTable(Requester22, SecurityController.getUser().getNodeID());
     tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED);
-
-    tableHelper.update();
-    tableHelper1.update();
-    tableHelper2.update();
   }
 }
