@@ -55,3 +55,5 @@
 2022-04-19 23:34:12:046 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <equipment>
 2022-04-19 23:34:17:514 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <medicine>
 2022-04-19 23:34:24:566 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <UserRequests>
+2022-04-19 23:36:33:515 [Timer-2] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-19 23:36:33:515 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:17:58.488909 Was overdue, updating priority

@@ -141,6 +141,10 @@ public class GlyphHandler {
           equip.setY(pos.getY() - 16);
           equip.setVisible(true);
           equip.setPickOnBounds(true);
+          DropShadow ds = new DropShadow();
+          ds.setOffsetX(-2.00);
+          ds.setOffsetY(4.00);
+          equip.setEffect(ds);
 
           image.setOnMouseClicked(i -> controller.onMapClicked(i));
           equipLayer.getChildren().add(equip);
@@ -154,7 +158,6 @@ public class GlyphHandler {
     for (PositionInfo p : imageLocs) {
       if (p.isNear(x, y, controller.getFloor())) {
         equipment.setLocationID(p.getId());
-        System.out.println("Updating equipment info...");
         DAOPouch.getMedicalEquipmentDAO().update(equipment);
         filter();
         return true;

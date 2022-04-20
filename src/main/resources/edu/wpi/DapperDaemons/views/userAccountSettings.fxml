@@ -122,7 +122,7 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="461.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="NEVER">
+                  <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="461.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="460.0" style="-fx-background-color: #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="NEVER">
                            <children>
@@ -141,6 +141,7 @@
                               <VBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="260.0" spacing="20.0" HBox.hgrow="NEVER">
                                  <children>
                                     <Label id="label" text="Theme:" />
+                                    <Label id="label" text="Notification Sound:" />
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" left="10.0" top="5.0" />
@@ -151,7 +152,7 @@
                               </VBox>
                               <VBox prefHeight="154.0" prefWidth="264.0" spacing="10.0" HBox.hgrow="NEVER">
                                  <HBox.margin>
-                                    <Insets bottom="5.0" right="10.0" top="5.0" />
+                                    <Insets bottom="5.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                                  <children>
                                     <JFXComboBox id="jButton" fx:id="themeBox" focusColor="#059da7" promptText="Select Theme" unFocusColor="#4b5b81">
@@ -165,6 +166,26 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXComboBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <JFXComboBox id="jButton" fx:id="soundBox" focusColor="#059da7" promptText="Select Sound" unFocusColor="#4b5b81">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <stylesheets>
+                                                <URL value="@../assets/buttons.css" />
+                                             </stylesheets>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXComboBox>
+                                          <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTestSound" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #059DA7;" text="Test Sound" textFill="WHITE">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>
