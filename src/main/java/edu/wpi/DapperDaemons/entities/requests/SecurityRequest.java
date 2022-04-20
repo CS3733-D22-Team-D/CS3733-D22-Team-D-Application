@@ -118,7 +118,7 @@ public class SecurityRequest extends TableObject implements Request {
         + "status varchar(1000),"
         + "notes varchar(1000),"
         + "dateTime varchar(1000),"
-        + "dateNeeded varchar(1000),";
+        + "dateNeeded varchar(1000))";
   }
 
   @Override

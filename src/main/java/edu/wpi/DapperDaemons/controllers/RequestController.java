@@ -36,9 +36,9 @@ public class RequestController extends ParentController implements Initializable
   @FXML private TableColumn<Request, String> RoomID22;
   @FXML private TableColumn<Request, String> RoomID221;
   @FXML private TableColumn<Request, String> RoomID222;
-  @FXML private TableColumn<Request, String> Status22;
+  @FXML private TableColumn<Request, Request.RequestStatus> Status22;
   @FXML private TableColumn<Request, String> Status221;
-  @FXML private TableColumn<Request, String> Status222;
+  @FXML private TableColumn<Request, Request.RequestStatus> Status222;
   @FXML private ToggleButton assignedRequests;
   @FXML private TableView<Request> assignedRequestsTable;
   @FXML private ToggleButton createdRequests;
@@ -91,13 +91,51 @@ public class RequestController extends ParentController implements Initializable
                       + ".",
                   event.getNewValue()));
     }
+    tableupdate();
   }
 
   @FXML
-  void onEditStatus(TableColumn.CellEditEvent<Request, String> event) {}
+  void onEditStatus(TableColumn.CellEditEvent<Request, String> event) {
+    Request request = event.getRowValue();
+    DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
+
+    ((TableObject) request).setAttribute(6, event.getNewValue());
+    if (requestDAO.update(((TableObject) request))) {
+      DAOPouch.getNotificationDAO()
+          .add(
+              new Notification(
+                  request.requestType(),
+                  "You have been assigned by"
+                      + SecurityController.getUser().getFirstName()
+                      + " "
+                      + SecurityController.getUser().getLastName()
+                      + ".",
+                  event.getNewValue()));
+    }
+    tableupdate();
+  }
 
   @FXML
-  void onVolunteer(TableColumn.CellEditEvent<Request, String> event) {}
+  void onVolunteer(TableColumn.CellEditEvent<Request, String> event) {
+    Request request = event.getRowValue();
+    DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
+
+    ((TableObject) request).setAttribute(5, SecurityController.getUser().getNodeID());
+    ((TableObject) request).setAttribute(6, Request.RequestStatus.IN_PROGRESS.toString());
+    if (requestDAO.update(((TableObject) request))) {
+      DAOPouch.getNotificationDAO()
+          .add(
+              new Notification(
+                  request.requestType(),
+                  "You have been assigned by"
+                      + SecurityController.getUser().getFirstName()
+                      + " "
+                      + SecurityController.getUser().getLastName()
+                      + ".",
+                  event.getNewValue()));
+    }
+    tableupdate();
+  }
 
   public void tableinit() {
     tableHelper = new TableHelper<>(assignedRequestsTable, 2);
@@ -109,21 +147,34 @@ public class RequestController extends ParentController implements Initializable
     tableHelper2 = new TableHelper<>(relevantRequestsTable, 2);
     tableHelper2.linkColumns(Request.class);
 
-    assignedRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-    createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-    relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-
-    tableHelper.filterTable(Assignee221, SecurityController.getUser().getAttribute(1));
-    tableHelper1.filterTable(ReqID22, SecurityController.getUser().getAttribute(1));
-    tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED.toString());
+    tableupdate();
 
     assignedRequestsTable.setPickOnBounds(false);
     createdRequestsTable.setPickOnBounds(false);
     relevantRequestsTable.setPickOnBounds(false);
 
-    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[1]);
-    tableHelper.addEnumEditProperty(Status221, Request.RequestStatus.class);
+    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[DAOFacade.getAllPlebs().size()]);
+    tableHelper.addDropDownEditProperty(
+        Status221,
+        Request.RequestStatus.REQUESTED.toString(),
+        Request.RequestStatus.IN_PROGRESS.toString(),
+        Request.RequestStatus.CANCELLED.toString(),
+        Request.RequestStatus.COMPLETED.toString());
     tableHelper1.addDropDownEditProperty(Assignee22, plebs);
     tableHelper2.addDropDownEditProperty(Assignee222, "yourself");
+  }
+
+  private void tableupdate() {
+
+    assignedRequestsTable.getItems().clear();
+    createdRequestsTable.getItems().clear();
+    relevantRequestsTable.getItems().clear();
+    assignedRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
+    createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
+    relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
+
+    tableHelper.filterTable(Assignee221, SecurityController.getUser().getNodeID());
+    tableHelper1.filterTable(Requester22, SecurityController.getUser().getNodeID());
+    tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED);
   }
 }
