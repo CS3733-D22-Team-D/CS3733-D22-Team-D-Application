@@ -14,6 +14,10 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -21,11 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class ExternalPatientTransportController extends ParentController {
