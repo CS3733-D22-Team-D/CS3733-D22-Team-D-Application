@@ -154,12 +154,12 @@ public class EquipmentCleaning extends TableObject implements Request {
 
   @Override
   public String requestType() {
-    return "Medical Equipment Request";
+    return "Equipment Cleaning Request";
   }
 
   @Override
   public TableObject newInstance(List<String> l) {
-    MedicalEquipmentRequest temp = new MedicalEquipmentRequest();
+    EquipmentCleaning temp = new EquipmentCleaning();
     for (int i = 0; i < l.size(); i++) {
       temp.setAttribute(i + 1, l.get(i));
     }
@@ -178,18 +178,18 @@ public class EquipmentCleaning extends TableObject implements Request {
   }
 
   // ATTRIBUTES
-  private String nodeID;
-  private Priority priority;
-  private String roomID;
-  private String requesterID;
-  private String assigneeID;
+  private String nodeID = "";
+  private Priority priority = Priority.HIGH;
+  private String roomID = "";
+  private String requesterID = "";
+  private String assigneeID = "";
   private RequestStatus status = RequestStatus.REQUESTED;
   private String notes = "";
   private String dateTime = "";
-  private String equipmentID;
-  private MedicalEquipment.EquipmentType equipmentType;
-  private MedicalEquipment.CleanStatus cleanStatus;
-  private String cleanBy;
+  private String equipmentID = "ID";
+  private MedicalEquipment.EquipmentType equipmentType = MedicalEquipment.EquipmentType.BED;
+  private MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
+  private String cleanBy = "";
 
   // CONSTRUCTORS
 
