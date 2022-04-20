@@ -5,19 +5,17 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -76,16 +74,17 @@ public class UserSettingsController extends ParentController {
     username.setText(DAOFacade.getUsername());
 
     // set profile picture
-    profilePic.setFill(
-        new ImagePattern(
-            new Image(
-                Objects.requireNonNull(
-                    getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(
-                            "edu/wpi/DapperDaemons/profilepictures/"
-                                + SecurityController.getUser().getNodeID()
-                                + ".png")))));
+    new AccountHandler(accountName, profilePic);
+    //    profilePic.setFill(
+    //        new ImagePattern(
+    //            new Image(
+    //                Objects.requireNonNull(
+    //                    getClass()
+    //                        .getClassLoader()
+    //                        .getResourceAsStream(
+    //                            "edu/wpi/DapperDaemons/profilepictures/"
+    //                                + SecurityController.getUser().getNodeID()
+    //                                + ".png")))));
 
     // set birthday
     String employeeBirth = SecurityController.getUser().getDateOfBirth();
