@@ -28,6 +28,14 @@ public class DefaultController extends ParentController {
   @FXML private ImageView patientPageImage;
   @FXML private Pane backendPageContainer;
   @FXML private ImageView backendPageImage;
+  @FXML private Pane equipSaniPageContainer;
+  @FXML private ImageView equipSaniPageImage;
+  @FXML private Pane languagePageContainer;
+  @FXML private ImageView languagePageImage;
+  @FXML private Pane securityPageContainer;
+  @FXML private ImageView securityPageImage;
+  @FXML private Pane extTransportPageContainer;
+  @FXML private ImageView extTransportPageImage;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -43,5 +51,9 @@ public class DefaultController extends ParentController {
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
     bindImage(backendPageImage, backendPageContainer);
+    bindImage(equipSaniPageImage, equipSaniPageContainer);
+    bindImage(languagePageImage, languagePageContainer);
+    bindImage(securityPageImage, securityPageContainer);
+    bindImage(extTransportPageImage, extTransportPageContainer);
   }
 }
