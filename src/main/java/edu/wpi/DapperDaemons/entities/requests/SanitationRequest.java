@@ -51,6 +51,8 @@ public class SanitationRequest extends TableObject implements Request {
         return dateTime;
       case 9:
         return sanitationType;
+      case 10:
+        return dateNeeded;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -86,6 +88,9 @@ public class SanitationRequest extends TableObject implements Request {
         break;
       case 9:
         sanitationType = newAttribute;
+        break;
+      case 10:
+        dateNeeded = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
