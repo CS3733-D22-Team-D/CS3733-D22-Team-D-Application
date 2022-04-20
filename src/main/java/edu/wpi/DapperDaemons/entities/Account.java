@@ -9,7 +9,7 @@ public class Account extends TableObject {
   private String employeeID;
   private String password;
   private String phoneNumber;
-  private String settingsFile = "Bloop";
+  private String settingsFile = "edu/wpi/DapperDaemons/notifications/Bloop.wav";
   private String twoFactor = "false";
   private String email;
 
