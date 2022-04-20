@@ -108,14 +108,29 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Patient Transport" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Int. Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/Glyphs/patient.png" />
+                                    <Image url="@../assets/Glyphs/patientInt.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToExtPatientTransport" stylesheets="@../assets/buttons.css" text="Ext. Patient Transport" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/patientExt.png" />
                                  </image>
                                  <effect>
                                     <ColorAdjust brightness="1.0" />
@@ -131,6 +146,21 @@
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/Glyphs/shower.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToEquipSani" stylesheets="@../assets/buttons.css" text="Equipment Sanitation" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Glyphs/equipSani.png" />
                                  </image>
                                  <effect>
                                     <ColorAdjust brightness="1.0" />
@@ -198,7 +228,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToEmployeesBitch" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
+                        <JFXButton id="slider" onMouseClicked="#switchToEmployeeManager" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -227,11 +257,6 @@
                                  </effect>
                               </ImageView>
                            </graphic>
-                        </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToTKSPoggersPage" stylesheets="@../assets/buttons.css" text="TK's Poggers Page" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
                         </JFXButton>
 
                         <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">

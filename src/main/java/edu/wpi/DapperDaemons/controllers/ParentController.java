@@ -315,12 +315,12 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void switchToTKSPoggersPage() {
+  void switchToExtPatientTransport() {
     swapPage("externalPatientTransport", "External Patient Transport");
   }
 
   @FXML
-  void switchToEmployeesBitch() {
+  void switchToEmployeeManager() {
     swapPage("employees", "Employee Manager");
   }
 
@@ -377,6 +377,11 @@ public class ParentController extends AppController {
   @FXML
   void switchToLanguage() {
     swapPage("language", "Interpreter Request");
+  }
+
+  @FXML
+  void switchToEquipSani() {
+    swapPage("cleanEquipment", "Equipment Sanitation");
   }
 
   @FXML

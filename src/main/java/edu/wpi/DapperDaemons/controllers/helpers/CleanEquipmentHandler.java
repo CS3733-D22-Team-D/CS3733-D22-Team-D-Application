@@ -43,6 +43,7 @@ public class CleanEquipmentHandler {
                 new ArrayList<>(medicalEquipmentDAO.filter(5, "INPROGRESS").values());
 
             for (MedicalEquipment.EquipmentType type : MedicalEquipment.EquipmentType.values()) {
+              App.LOG.info("Checking " + type.name() + " For if it needs cleaning");
               List<MedicalEquipment> uncleanEqOfType =
                   new ArrayList<>(
                       medicalEquipmentDAO.filter(uncleanEquipment, 3, type.name()).values());
