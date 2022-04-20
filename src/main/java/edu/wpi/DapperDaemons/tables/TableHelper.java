@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -18,8 +19,9 @@ import javafx.util.converter.LongStringConverter;
 public class TableHelper<R> {
 
   private final TableView<R> table;
-  private ObservableList<TableColumn<R, ?>> columns;
-  private int tableNum;
+  private final ObservableList<TableColumn<R, ?>> columns;
+  private final int tableNum;
+  private final HashMap<TableColumn<R, ?>, Object> filters;
 
   /**
    * Constructs a TableHelper to give a facade of useful features involving a JavaFX TableView (and
@@ -32,6 +34,7 @@ public class TableHelper<R> {
   public TableHelper(TableView<R> jfxTable, int tableNum) {
     this.table = jfxTable;
     this.columns = jfxTable.getColumns();
+    filters = new HashMap<>();
     jfxTable.getColumns().forEach(e -> e.setReorderable(false));
     table.setEditable(true);
 
@@ -124,8 +127,8 @@ public class TableHelper<R> {
   }
 
   /**
-   * Filters a table based on a data value that can be contained in a specific column Need to have a
-   * reference to the JavaFX column in order to filter by its data (including its type)
+   * Adds a filter to the table based on a data value from the column given (Need reference to the
+   * JavaFX column in order to filter by its data (including its type))
    *
    * @param column - The TableColumn to be filtered
    * @param toFilter - The thing to filter for. Ex: If a TableColumn<X,String> is given, only String
@@ -133,20 +136,54 @@ public class TableHelper<R> {
    * @param <T> - The data type stored in the column (can all be cast to Object, but not
    *     recommended)
    */
-  public <T> void filterTable(TableColumn<R, T> column, T toFilter) {
-    ObservableList<R> filteredItems = FXCollections.observableArrayList();
-    for (R row : column.getTableView().getItems()) {
-      T columnValue = column.getCellObservableValue(row).getValue();
-      if (columnValue != null && column.getCellObservableValue(row).getValue().equals(toFilter)) {
-        filteredItems.add(row);
-      }
-    }
-    column.getTableView().setItems(filteredItems);
+  public <T> void addFilter(TableColumn<R, T> column, T toFilter) {
+    filters.put(column, toFilter);
+    filter();
   }
 
-  // TODO: Refresh data from database
-  public void update() {
+  /**
+   * Adds a filter to the table based on a column number
+   *
+   * @param column - The column number using indexing
+   * @param toFilter - The data to filter for
+   */
+  @Deprecated
+  public void addFilter(int column, Object toFilter) {
+    if (column < table.getColumns().size()) {
+      filters.put(table.getColumns().get(column), toFilter);
+      filter();
+    }
+  }
+
+  private void filter() {
+    ObservableList<R> filteredItems = FXCollections.observableArrayList(table.getItems());
+    filters.forEach(
+        (column, value) -> {
+          for (R row : new ArrayList<>(filteredItems)) {
+            Object columnValue = column.getCellObservableValue(row).getValue();
+            if (columnValue == null || !columnValue.equals(value)) {
+              filteredItems.remove(row);
+            }
+          }
+        });
+    table.setItems(filteredItems);
+  }
+
+  /**
+   * Updates the table with new (or the same) data
+   *
+   * @param data - List of values that should be shown on the table (pull from database)
+   */
+  public void update(List<R> data) {
+    table.getItems().clear();
+    table.setItems(FXCollections.observableArrayList(data));
+    filter();
     table.refresh();
-    // Database refresh
+  }
+
+  /** Refreshes the table values */
+  public void update() {
+    filter();
+    table.refresh();
   }
 }

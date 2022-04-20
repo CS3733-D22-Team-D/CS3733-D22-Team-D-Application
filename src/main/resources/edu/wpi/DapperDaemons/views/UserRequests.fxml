@@ -57,7 +57,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn id="col" fx:id="ReqID22" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="ReqID22" prefWidth="75.0" text="Request Type" />
                                     <TableColumn id="col" fx:id="Priority22" prefWidth="75.0" text="Priority" />
                                     <TableColumn id="col" fx:id="RoomID22" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester22" prefWidth="75.0" text="Requester" />
@@ -75,7 +75,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn id="col" fx:id="ReqID221" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="ReqID221" prefWidth="75.0" text="Request Type" />
                                     <TableColumn id="col" fx:id="Priority221" prefWidth="75.0" text="Priority" />
                                     <TableColumn id="col" fx:id="RoomID221" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester221" prefWidth="75.0" text="Requester" />
@@ -93,7 +93,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn id="col" fx:id="ReqID222" prefWidth="75.0" text="ReqID" />
+                                    <TableColumn id="col" fx:id="ReqID222" prefWidth="75.0" text="Request Type" />
                                     <TableColumn id="col" fx:id="Priority222" prefWidth="75.0" text="Priority" />
                                     <TableColumn id="col" fx:id="RoomID222" prefWidth="75.0" text="RoomID" />
                                     <TableColumn id="col" fx:id="Requester222" prefWidth="75.0" text="Requester" />
