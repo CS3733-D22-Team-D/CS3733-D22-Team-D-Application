@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.backend.SoundPlayer;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -21,6 +22,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
 
 public class UserSettingsController extends ParentController {
 
@@ -35,6 +37,7 @@ public class UserSettingsController extends ParentController {
   @FXML private Label birthday;
   @FXML private TextField email;
   @FXML private JFXComboBox<String> themeBox;
+  @FXML private JFXComboBox<String> soundBox;
   @FXML private JFXButton resetButton;
   @FXML private JFXButton saveChangesButton;
 
@@ -97,6 +100,21 @@ public class UserSettingsController extends ParentController {
     // set themeBox
     themeBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(ThemeHandler.Theme.class)));
+
+    // set soundBox
+    soundBox.setItems(
+        FXCollections.observableArrayList(
+            "Bloop",
+            "BloopBloop",
+            "BloopBlop",
+            "BuDaLing",
+            "BuDoi",
+            "DaDing",
+            "DooDoDaLoo",
+            "DooDooooo",
+            "Ring",
+            "Shing",
+            "Ayo"));
   }
 
   @FXML
@@ -122,6 +140,14 @@ public class UserSettingsController extends ParentController {
     if (themeBox.getValue() != null && !themeBox.getValue().equals("")) {
       ThemeHandler.toggleTheme(ThemeHandler.Theme.valueOf(themeBox.getValue()));
     }
+
+    // set sound
+    if (soundBox.getValue() != null && !soundBox.getValue().equals("")) {
+      SoundPlayer newSound =
+          new SoundPlayer("edu/wpi/DapperDaemons/notifications/" + soundBox.getValue() + ".wav");
+      DAOFacade.getUserAccount()
+          .setAttribute(5, "edu/wpi/DapperDaemons/notifications/" + soundBox.getValue() + ".wav");
+    }
   }
 
   public void onReset() {
@@ -132,5 +158,14 @@ public class UserSettingsController extends ParentController {
 
     // reset theme
     themeBox.setValue("");
+
+    // reset sound
+    soundBox.setValue("");
+  }
+
+  public void onTestSound() throws LineUnavailableException {
+    String sound = soundBox.getValue();
+    SoundPlayer player = new SoundPlayer("edu/wpi/DapperDaemons/notifications/" + sound + ".wav");
+    player.play();
   }
 }
