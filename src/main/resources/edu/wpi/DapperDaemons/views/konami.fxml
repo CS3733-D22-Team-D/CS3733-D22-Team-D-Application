@@ -95,7 +95,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/Glyphs/patient.png" />
+                                    <Image url="@../assets/Glyphs/patientInt.png" />
                                  </image>
                                  <effect>
                                     <ColorAdjust brightness="1.0" />
