@@ -79,8 +79,6 @@ public class CreateBox {
           Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, floor).size());
       numberRoomTypes = "000" + numberRoomTypes;
       numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
-      floor = "00" + floor;
-      floor = floor.substring(floor.length() - 2);
       System.out.println("Room number for my test is : " + numberRoomTypes);
       String nodeID = "d" + nodeType.toUpperCase() + numberRoomTypes + floor;
       return new Location(nodeID, x, y, floor, building, nodeType, longName, shortName);
