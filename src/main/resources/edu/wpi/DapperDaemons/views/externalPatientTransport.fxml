@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox prefHeight="542.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.PatientTransportController">
+   <children>
+      <VBox prefHeight="542.0" prefWidth="433.0">
+         <children>
+            <VBox id="foreground" maxHeight="350.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="433.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule Requests">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+                     <children>
+                        <VBox prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField id="field" fx:id="patientFirstName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField id="field" fx:id="patientLastName" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <DatePicker fx:id="patientDOB" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;" />
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Destination:">
+                           <VBox.margin>
+                              <Insets left="30.0" top="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXComboBox id="jButton" fx:id="roomBox" focusColor="#059da7" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
+                           <VBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </VBox.margin>
+                        </JFXComboBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <VBox prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                                 <VBox.margin>
+                                    <Insets left="30.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <JFXComboBox id="jButton" fx:id="pBox" focusColor="#059da7" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                                 <VBox.margin>
+                                    <Insets left="30.0" right="30.0" />
+                                 </VBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXComboBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="61.0" prefWidth="307.0">
+                           <children>
+                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Needed:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <DatePicker fx:id="dateNeeded" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
+                     <children>
+                        <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Notes:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Text>
+                        <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" right="30.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="82.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onClearClicked" prefHeight="38.0" prefWidth="83.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Clear" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button id="defaultButton" mnemonicParsing="false" onMouseClicked="#onSubmitClicked" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Submit" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.15000000596046448" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="40.0" left="60.0" right="20.0" top="40.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="508.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Active Requests">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="177.0" prefWidth="508.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <TableView id="table" fx:id="transportRequests" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn id="col" fx:id="ReqID" prefWidth="75.0" text="ReqID" />
+                              <TableColumn id="col" fx:id="Priority" prefWidth="75.0" text="Priority" />
+                              <TableColumn id="col" fx:id="RoomID" prefWidth="75.0" text="RoomID" />
+                              <TableColumn id="col" fx:id="Requester" prefWidth="75.0" text="Requester" />
+                              <TableColumn id="col" fx:id="Assignee" prefWidth="75.0" text="Assignee" />
+                              <TableColumn id="col" fx:id="Patient" prefWidth="75.0" text="Patient" />
+                              <TableColumn id="col" fx:id="Destination" prefWidth="75.0" text="Destination" />
+                              <TableColumn id="col" fx:id="Status" prefWidth="75.0" text="Status" />
+                              <TableColumn id="col" fx:id="DateReq" prefWidth="75.0" text="Scheduled For" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.15000000596046448" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </VBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="96.0">
+               <children>
+                  <Button id="defaultButton" fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Save to CSV" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.30000001192092896" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="40.0" left="20.0" right="30.0" top="40.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>
