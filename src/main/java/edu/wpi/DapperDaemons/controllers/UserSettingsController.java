@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.SoundPlayer;
+import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.tables.TableHelper;
