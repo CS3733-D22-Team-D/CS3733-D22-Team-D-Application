@@ -9,7 +9,7 @@ public class Account extends TableObject {
   private String employeeID;
   private String password;
   private String phoneNumber;
-  private String settingsFile = "none";
+  private String settingsFile = "Bloop";
   private String twoFactor = "false";
   private String email;
 
