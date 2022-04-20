@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 public class MedicineController extends ParentController {
   @FXML private TableView<MedicineRequest> medicineRequests;
   private TableHelper<MedicineRequest> helper;
-  @FXML private TableColumn<MedicineRequest, String> priorityCol;
+  @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
