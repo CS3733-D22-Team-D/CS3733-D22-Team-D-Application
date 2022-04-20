@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -25,38 +27,30 @@
                         </Text>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="190.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="292.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label id="label" text="WPI Computer Science Department" />
                         <Label id="label" text="Professor Wilson Wong" />
                         <Label id="label" text="Nestor Lopez" />
-                        <Label id="label" prefHeight="104.0" prefWidth="301.0" text="We'd like to thank Brigham and Women’s Hospital and their representative, Andrew Shinn, for their time and input" textAlignment="CENTER" wrapText="true" />
-                        <Label id="label" text="Developers:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Label>
+                        <Label id="label" prefHeight="112.0" prefWidth="280.0" text="We'd like to thank Brigham and Women’s Hospital and their representative, Andrew Shinn, for their time and input" textAlignment="CENTER" wrapText="true" />
                      </children>
                      <padding>
                         <Insets left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="365.0" prefWidth="321.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="469.0" prefWidth="300.0">
                      <children>
-                        <Label id="label" prefHeight="164.0" prefWidth="321.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak (BackEnd), Chandler Garcia (BackEnd, Lead Software Engineer), Cole Ouellette (FrontEnd, Documentation Analyst), Jacob Adams (BackEnd, Lead BackEnd Engineer), Joanna Hu (FrontEnd), Luke Gardone(FrontEnd, Project Manager), Rosemary Shelton (FrontEnd, Scrum Master), Samuel Karkache (FrontEnd, Lead FrontEnd), Shafath Zaman (FrontEnd, Product Owner), Tyler Evans (BackEnd). " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
+                        <ImageView fitHeight="129.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../../../2022Dterm/teamPic.png" />
+                           </image>
+                        </ImageView>
+                        <Label id="label" prefHeight="246.0" prefWidth="300.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Alpay Ariyak (BackEnd), Chandler Garcia (BackEnd, Lead Software Engineer), Cole Ouellette (FrontEnd, Documentation Analyst), Jacob Adams (BackEnd, Lead BackEnd Engineer), Joanna Hu (FrontEnd), Luke Gardone(FrontEnd, Project Manager), Rosemary Shelton (FrontEnd, Scrum Master), Samuel Karkache (FrontEnd, Lead FrontEnd), Shafath Zaman (FrontEnd, Product Owner), Tyler Evans (BackEnd). " textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <padding>
                               <Insets left="20.0" right="20.0" />
-                           </padding>
-                        </Label>
-                        <Label id="label" prefHeight="154.0" prefWidth="321.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Our team lives on pasture day and night through the growing season where they eat grasses and herbs. In the winter they are fed dried and fermented grasses, clover, and alfalfa. They never eat grain or other energy concentrates. Rotational grazing improves the biological health of the land and provides the developers with optimal nutrition, so they can produce the most nutritious milk for you." textAlignment="CENTER" textFill="#2f2f2f" wrapText="true">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
                            </padding>
                         </Label>
                      </children>
