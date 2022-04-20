@@ -315,6 +315,14 @@ public class ParentController extends AppController {
   }
 
   @FXML
+<<<<<<< Updated upstream
+=======
+  void switchToTKSPoggersPage() {
+    swapPage("externalPatientTransport", "External Patient Transport");
+  }
+
+  @FXML
+>>>>>>> Stashed changes
   void switchToEmployeesBitch() {
     swapPage("employees", "Employee Manager");
   }

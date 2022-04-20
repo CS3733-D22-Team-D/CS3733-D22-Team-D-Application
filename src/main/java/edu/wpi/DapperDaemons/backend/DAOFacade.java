@@ -23,6 +23,22 @@ public class DAOFacade {
     return all;
   }
 
+<<<<<<< Updated upstream
+=======
+  /** Gets a list of all long names of locations */
+  public static List<String> getAllLocationLongNamesExit() {
+    List<String> all = new ArrayList<>();
+    DAOPouch.getLocationDAO()
+        .getAll()
+        .values()
+        .forEach(
+            e -> {
+              if (e.getNodeType().equals("EXIT")) all.add(e.getLongName());
+            });
+    return all;
+  }
+
+>>>>>>> Stashed changes
   /** Gets the username of the current user */
   public static String getUsername() {
     String username =
