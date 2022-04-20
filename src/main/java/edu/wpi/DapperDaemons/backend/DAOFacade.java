@@ -23,8 +23,6 @@ public class DAOFacade {
     return all;
   }
 
-<<<<<<< Updated upstream
-=======
   /** Gets a list of all long names of locations */
   public static List<String> getAllLocationLongNamesExit() {
     List<String> all = new ArrayList<>();
@@ -38,7 +36,6 @@ public class DAOFacade {
     return all;
   }
 
->>>>>>> Stashed changes
   /** Gets the username of the current user */
   public static String getUsername() {
     String username =

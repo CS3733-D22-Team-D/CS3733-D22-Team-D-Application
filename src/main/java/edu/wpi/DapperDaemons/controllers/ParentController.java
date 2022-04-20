@@ -320,7 +320,6 @@ public class ParentController extends AppController {
   }
 
   @FXML
-
   void switchToEmployeesBitch() {
     swapPage("employees", "Employee Manager");
   }
