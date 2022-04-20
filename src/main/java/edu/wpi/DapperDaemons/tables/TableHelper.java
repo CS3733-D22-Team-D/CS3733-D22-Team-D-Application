@@ -136,7 +136,8 @@ public class TableHelper<R> {
   public <T> void filterTable(TableColumn<R, T> column, T toFilter) {
     ObservableList<R> filteredItems = FXCollections.observableArrayList();
     for (R row : column.getTableView().getItems()) {
-      if (column.getCellObservableValue(row).getValue().equals(toFilter)) {
+      T columnValue = column.getCellObservableValue(row).getValue();
+      if (columnValue != null && column.getCellObservableValue(row).getValue().equals(toFilter)) {
         filteredItems.add(row);
       }
     }
