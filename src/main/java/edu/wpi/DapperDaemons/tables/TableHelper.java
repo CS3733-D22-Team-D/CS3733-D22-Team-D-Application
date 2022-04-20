@@ -99,11 +99,11 @@ public class TableHelper<R> {
   public <E extends Enum<E>> void addEnumEditProperty(
       TableColumn<R, E> column, Class<E> enumClass) {
     column.setCellFactory(
-            cb -> {
-              ComboBoxTableCell<R, E> cellDropDown = new ComboBoxTableCell<>();
-              cellDropDown.getItems().addAll(enumClass.getEnumConstants());
-              return cellDropDown;
-            });
+        cb -> {
+          ComboBoxTableCell<R, E> cellDropDown = new ComboBoxTableCell<>();
+          cellDropDown.getItems().addAll(enumClass.getEnumConstants());
+          return cellDropDown;
+        });
   }
 
   /** Helper function to convert an enum into a list of its values as strings */
