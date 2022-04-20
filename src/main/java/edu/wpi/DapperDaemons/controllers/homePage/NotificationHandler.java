@@ -113,7 +113,7 @@ public class NotificationHandler {
     if (unRead.size() > 0) {
       notifBell.setImage(Images.UNREAD);
       if (unReadUnChimed.size() > 0) {
-        SoundPlayer sp = new SoundPlayer("edu/wpi/DapperDaemons/notifications/Bloop.wav");
+        SoundPlayer sp = new SoundPlayer(DAOFacade.getUserAccount().getAttribute(5));
         try {
           sp.play();
         } catch (LineUnavailableException e) {
