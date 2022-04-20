@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EquipmentRequestController">
+<HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EquipmentCleaningController">
    <children>
-      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
+      <VBox id="foreground" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="300.0" style="-fx-background-color: fffefe; -fx-background-radius: 7.5;" HBox.hgrow="NEVER">
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
                <children>
@@ -29,45 +29,45 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <padding>
-                  <Insets left="30.0" right="30.0" top="15.0" />
+                  <Insets left="30.0" right="30.0" top="10.0" />
                </padding>
                <children>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="priorityBox" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                  <JFXComboBox id="jButton" fx:id="priorityBox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                </children>
             </VBox>
             <VBox prefHeight="100.0" prefWidth="100.0">
                <children>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment ID">
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </Text>
-                  <JFXComboBox id="jButton" fx:id="equipmentIDBox" prefHeight="34.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
+                  <JFXComboBox id="jButton" fx:id="equipmentIDBox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" />
                </children>
                <padding>
-                  <Insets left="30.0" right="30.0" top="15.0" />
+                  <Insets left="30.0" right="30.0" top="10.0" />
                </padding>
             </VBox>
             <VBox layoutX="10.0" layoutY="142.0" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Clean By">
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </Text>
-                  <DatePicker fx:id="cleanByDate" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
+                  <DatePicker fx:id="cleanByDate" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0;">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </DatePicker>
                </children>
                <padding>
-                  <Insets left="30.0" right="30.0" top="15.0" />
+                  <Insets left="30.0" right="30.0" top="10.0" />
                </padding>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
@@ -124,7 +124,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView id="table" fx:id="equipmentRequestsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
+                        <TableView id="table" fx:id="equipmentCleanTable" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>

@@ -10,11 +10,11 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 public class EquipmentCleaningController extends ParentController {
 
   /* Table Object */
-  @FXML private TableView<EquipmentCleaning> equipmentRequestsTable;
+  @FXML private TableView<EquipmentCleaning> equipmentCleanTable;
 
   /* Table Helper */
   private TableHelper<EquipmentCleaning> tableHelper;
@@ -38,18 +38,18 @@ public class EquipmentCleaningController extends ParentController {
 
   /* Table Columns */
   @FXML private TableColumn<EquipmentCleaning, String> reqID;
-  @FXML private TableColumn<EquipmentCleaning, String> priority;
+  @FXML private TableColumn<EquipmentCleaning, Request.Priority> priority;
   @FXML private TableColumn<EquipmentCleaning, String> roomID;
   @FXML private TableColumn<EquipmentCleaning, String> requester;
   @FXML private TableColumn<EquipmentCleaning, String> assignee;
   @FXML private TableColumn<EquipmentCleaning, String> equipID;
-  @FXML private TableColumn<EquipmentCleaning, String> equipType;
-  @FXML private TableColumn<EquipmentCleaning, String> cleanStatus;
+  @FXML private TableColumn<EquipmentCleaning, MedicalEquipment.EquipmentType> equipType;
+  @FXML private TableColumn<EquipmentCleaning, MedicalEquipment.CleanStatus> cleanStatus;
   @FXML private TableColumn<EquipmentCleaning, String> dateRequested;
 
   /* DAO Object */
-  private DAO<EquipmentCleaning> equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
-  private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<EquipmentCleaning> equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
+  private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
   @FXML
   public void startFuzzySearch() {
@@ -59,20 +59,14 @@ public class EquipmentCleaningController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //        super.initialize(location, resources);
-    initBoxes();
-    //    bindImage(BGImage, BGContainer);
-
-    tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
+    tableHelper = new TableHelper<>(equipmentCleanTable, 0);
     tableHelper.linkColumns(EquipmentCleaning.class);
 
-    try { // Removed second field (filename) since everything is
-      // loaded on startup
-      equipmentRequestsTable
-          .getItems()
-          .addAll(new ArrayList(equipmentCleaningDAO.getAll().values()));
+    initBoxes();
+
+    try {
+      equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
     } catch (Exception e) {
-      e.printStackTrace();
       System.err.print("Error, table was unable to be created\n");
     }
     setListeners();
@@ -81,13 +75,11 @@ public class EquipmentCleaningController extends ParentController {
 
   private void setListeners() {
     TableListeners.addListener(
-        new MedicalEquipmentRequest().tableName(),
+        new EquipmentCleaning().tableName(),
         TableListeners.eventListener(
             () -> {
-              equipmentRequestsTable.getItems().clear();
-              equipmentRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(equipmentCleaningDAO.getAll().values()));
+              equipmentCleanTable.getItems().clear();
+              equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
             }));
   }
 
@@ -96,7 +88,7 @@ public class EquipmentCleaningController extends ParentController {
 
     hadClearance = equipmentCleaningDAO.add(request);
     if (hadClearance) {
-      equipmentRequestsTable.getItems().add(request);
+      equipmentCleanTable.getItems().add(request);
     }
     return hadClearance;
   }
@@ -127,6 +119,7 @@ public class EquipmentCleaningController extends ParentController {
                 + cleanByDate.getValue().getMonthValue()
                 + cleanByDate.getValue().getDayOfMonth()
                 + cleanByDate.getValue().getYear();
+        roomID = medicalEquipment.getLocationID();
 
         medicalEquipment.setCleanStatus(
             MedicalEquipment.CleanStatus
@@ -157,96 +150,6 @@ public class EquipmentCleaningController extends ParentController {
     } else {
       showError("All fields but be filled");
     }
-
-    // make sure all fields are filled
-    //    if (allFieldsFilled()) {
-    //      ArrayList<MedicalEquipment> equipments = new ArrayList<>();
-    //      MedicalEquipment equipment = new MedicalEquipment();
-    //      // is there equipment with that Type?
-    //      boolean equipmentExists = true;
-    //
-    //      // get all equipment of that type.
-    //      equipments =
-    //          new ArrayList(
-    //              medicalEquipmentDAO
-    //                  .filter(medicalEquipmentDAO.getAll(), 3, equipmentTypeBox.getValue())
-    //                  .values());
-    //
-    //      if (medicalEquipmentDAO
-    //              .filter(equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString())
-    //              .size()
-    //          != 0) {
-    //        equipment =
-    //            new ArrayList<MedicalEquipment>(
-    //                    (medicalEquipmentDAO.filter(
-    //                            equipments, 5, MedicalEquipment.CleanStatus.CLEAN.toString()))
-    //                        .values())
-    //                .get(0);
-    //      } else if (medicalEquipmentDAO
-    //              .filter(equipments, 5, MedicalEquipment.CleanStatus.INPROGRESS.toString())
-    //              .size()
-    //          != 0) {
-    //        equipment =
-    //            new ArrayList<MedicalEquipment>(
-    //                    medicalEquipmentDAO
-    //                        .filter(equipments, 5,
-    // MedicalEquipment.CleanStatus.INPROGRESS.toString())
-    //                        .values())
-    //                .get(0);
-    //
-    //      } else if (medicalEquipmentDAO
-    //              .filter(equipments, 5, MedicalEquipment.CleanStatus.UNCLEAN.toString())
-    //              .size()
-    //          != 0) {
-    //        equipment =
-    //            new ArrayList<MedicalEquipment>(
-    //                    medicalEquipmentDAO
-    //                        .filter(equipments, 5,
-    // MedicalEquipment.CleanStatus.UNCLEAN.toString())
-    //                        .values())
-    //                .get(0);
-    //      } else {
-    //
-    //        equipmentExists = false;
-    //      }
-    //      if (equipmentExists) {
-    //
-    //        // check if room exists
-    //        cleanStatus = equipment.getCleanStatus();
-    //        roomID = roomBox.getValue();
-    //        int numCorrectLocations = 0;
-    //        numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
-    //        if (numCorrectLocations >= 1) {
-    //
-    //          boolean hadClearance =
-    //              addItem(
-    //                  new MedicalEquipmentRequest(
-    //                      priority,
-    //                      roomID,
-    //                      requesterID,
-    //                      assigneeID,
-    //                      equipment.getNodeID(),
-    //                      equipmentType,
-    //                      cleanStatus,
-    //                      dateStr));
-    //          // check if user has permission
-    //          if (!hadClearance) {
-    //            showError("You do not have permission to do this.");
-    //          }
-    //
-    //        } else {
-    //          // throw error that room does not exist
-    //          showError("A room with that name does not exist.");
-    //        }
-    //
-    //      } else {
-    //        // Throw error that no equipment of that type exist
-    //
-    //        showError("No equipment of that type exists.");
-    //      }
-    //    } else {
-    //      showError("All fields must be filled.");
-    //    }
   }
 
   private boolean allFieldsFilled() {
@@ -258,11 +161,15 @@ public class EquipmentCleaningController extends ParentController {
   public void initBoxes() {
     priorityBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-    // TODO : Put all the equipment ID types in the box for fuzzy wuzzy
-    //    roomBox.setItems(FXCollections.observableArrayList(getAllLongNames()));
+
+    List<MedicalEquipment> medicalEquipmentList =
+        new ArrayList<>(medicalEquipmentDAO.getAll().values());
+    List<String> idNames = new ArrayList<>();
+    for (MedicalEquipment equipment : medicalEquipmentList) idNames.add(equipment.getNodeID());
+    equipmentIDBox.setItems(FXCollections.observableArrayList(idNames));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) priorityBox.getScene().getWindow());
+    super.saveToCSV(new EquipmentCleaning(), (Stage) priorityBox.getScene().getWindow());
   }
 }
