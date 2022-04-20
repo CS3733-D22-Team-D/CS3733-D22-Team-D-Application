@@ -228,6 +228,11 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton id="slider" onMouseClicked="#switchToTKSPoggersPage" stylesheets="@../assets/buttons.css" text="TK's Poggers Page" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
 
                         <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
                            <font>
