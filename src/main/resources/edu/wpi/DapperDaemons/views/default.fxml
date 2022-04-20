@@ -65,7 +65,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a medication delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Send out a delivery request for a given patient, date, medicine type, and quantity." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -116,7 +116,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a sanitation service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify sanitation services of an area that needs to be cleaned." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -145,7 +145,7 @@
                                  <children>
                                     <ImageView fx:id="equipSaniPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/sanitationIcon.png" />
+                                          <Image url="@../assets/HomeIcons/equipmentCleanRequestIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -167,7 +167,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request an equipment get cleaned" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify sanitation services of equipment that needs to be cleaned." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -221,7 +221,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a lab test" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request any type lab test for a given date and patient." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -272,7 +272,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request medical equipment" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Have a selected type of equipment moved to a given room." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -301,7 +301,7 @@
                                  <children>
                                     <ImageView fx:id="languagePageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/equipmentIcon.png" />
+                                          <Image url="@../assets/HomeIcons/translateRequestIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -323,7 +323,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request language interpreters" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Send a request for a language interpreter of a given language." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -377,7 +377,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request a meal delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Order a meal for a patient consisting of an entree, side, drink, and dessert." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -428,7 +428,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map, to get information or edit map data." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -457,7 +457,7 @@
                                  <children>
                                     <ImageView fx:id="securityPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/mapIcon.png" />
+                                          <Image url="@../assets/HomeIcons/securityServiceIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -479,7 +479,7 @@
                               </HBox>
                               <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request additional security at a location" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify security services of areas where additional security is required." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -533,7 +533,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request patient transport within the hospital" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Have a patient moved to a given room." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -587,7 +587,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
@@ -616,7 +616,7 @@
                                  <children>
                                     <ImageView fx:id="extTransportPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/databaseIcon.png" />
+                                          <Image url="@../assets/HomeIcons/externalPatientTransportIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -641,7 +641,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request patient transport outside of the hospital" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request patient transport outside of the hospital." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
