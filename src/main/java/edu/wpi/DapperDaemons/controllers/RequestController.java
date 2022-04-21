@@ -37,7 +37,7 @@ public class RequestController extends ParentController implements Initializable
   @FXML private TableColumn<Request, String> RoomID221;
   @FXML private TableColumn<Request, String> RoomID222;
   @FXML private TableColumn<Request, Request.RequestStatus> Status22;
-  @FXML private TableColumn<Request, String> Status221;
+  @FXML private TableColumn<Request, Request.RequestStatus> Status221;
   @FXML private TableColumn<Request, Request.RequestStatus> Status222;
   @FXML private ToggleButton assignedRequests;
   @FXML private TableView<Request> assignedRequestsTable;
@@ -104,11 +104,11 @@ public class RequestController extends ParentController implements Initializable
   }
 
   @FXML
-  void onEditStatus(TableColumn.CellEditEvent<Request, String> event) {
+  void onEditStatus(TableColumn.CellEditEvent<Request, Request.RequestStatus> event) {
     Request request = event.getRowValue();
     DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
 
-    ((TableObject) request).setAttribute(6, event.getNewValue());
+    ((TableObject) request).setAttribute(6, event.getNewValue().toString());
     if (requestDAO.update(((TableObject) request))) {
       DAOPouch.getNotificationDAO()
           .add(
@@ -149,12 +149,15 @@ public class RequestController extends ParentController implements Initializable
   public void tableinit() {
     tableHelper = new TableHelper<>(assignedRequestsTable, 2);
     tableHelper.linkColumns(Request.class);
+    tableHelper.addFilter(Assignee221, SecurityController.getUser().getNodeID());
 
     tableHelper1 = new TableHelper<>(createdRequestsTable, 2);
     tableHelper1.linkColumns(Request.class);
+    tableHelper1.addFilter(Requester22, SecurityController.getUser().getNodeID());
 
     tableHelper2 = new TableHelper<>(relevantRequestsTable, 2);
     tableHelper2.linkColumns(Request.class);
+    tableHelper2.addFilter(Status222, Request.RequestStatus.REQUESTED);
 
     tableupdate();
 
@@ -162,28 +165,15 @@ public class RequestController extends ParentController implements Initializable
     createdRequestsTable.setPickOnBounds(false);
     relevantRequestsTable.setPickOnBounds(false);
 
-    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[DAOFacade.getAllPlebs().size()]);
-    tableHelper.addDropDownEditProperty(
-        Status221,
-        Request.RequestStatus.REQUESTED.toString(),
-        Request.RequestStatus.IN_PROGRESS.toString(),
-        Request.RequestStatus.CANCELLED.toString(),
-        Request.RequestStatus.COMPLETED.toString());
+    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[] {});
+    tableHelper.addEnumEditProperty(Status221, Request.RequestStatus.class);
     tableHelper1.addDropDownEditProperty(Assignee22, plebs);
-    tableHelper2.addDropDownEditProperty(Assignee222, "yourself");
+    tableHelper2.addDropDownEditProperty(Assignee222, "admin");
   }
 
   private void tableupdate() {
-
-    assignedRequestsTable.getItems().clear();
-    createdRequestsTable.getItems().clear();
-    relevantRequestsTable.getItems().clear();
-    assignedRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-    createdRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-    relevantRequestsTable.getItems().addAll(DAOFacade.getAllRequests());
-
-    tableHelper.filterTable(Assignee221, SecurityController.getUser().getNodeID());
-    tableHelper1.filterTable(Requester22, SecurityController.getUser().getNodeID());
-    tableHelper2.filterTable(Status222, Request.RequestStatus.REQUESTED);
+    tableHelper.update(DAOFacade.getAllRequests());
+    tableHelper1.update(DAOFacade.getAllRequests());
+    tableHelper2.update(DAOFacade.getAllRequests());
   }
 }

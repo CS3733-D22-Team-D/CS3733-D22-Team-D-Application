@@ -307,9 +307,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
 
   @Override
   public boolean equals(Object obj) {
-    MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
-    return (request.getNodeID().equals(this.getNodeID())
-        && request.getEquipmentID().equals(this.getNodeID()));
+    if (obj instanceof MedicalEquipmentRequest) {
+      MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
+      return (request.getNodeID().equals(this.getNodeID())
+          && request.getEquipmentID().equals(this.getNodeID()));
+    } else return false;
   }
 
   public void setStatus(RequestStatus status) {
