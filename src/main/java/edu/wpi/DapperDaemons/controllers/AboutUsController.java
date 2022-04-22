@@ -9,17 +9,14 @@ import javafx.scene.control.Button;
 
 public class AboutUsController extends ParentController {
 
-  @FXML private Button apiButton;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
+  /**
+   * Allows for access to the API landing page
+   * @throws IOException
+   */
   public void startAPI() throws IOException {
     swapPage("apiLandingPage", "API Landing Page");
-    /*
-    Stage window = (Stage) apiButton.getScene().getWindow();
-    switchScene("apiLandingPage.fxml", 635, 510, window);
-
-     */
   }
 }
