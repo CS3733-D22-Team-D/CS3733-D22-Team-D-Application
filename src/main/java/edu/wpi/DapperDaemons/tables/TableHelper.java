@@ -80,6 +80,29 @@ public class TableHelper<R> {
     }
   }
 
+  public static List<Object> getDataList(Object instance, int tableNum) {
+    HashMap<Integer, SimpleObjectProperty<?>> indexes = new HashMap<>();
+    // Search for any TableHandler methods
+    for (Method m : instance.getClass().getDeclaredMethods()) {
+      m.setAccessible(true);
+      TableHandler[] annotations = m.getAnnotationsByType(TableHandler.class);
+
+      // Find methods with the same table number association (or none)
+      for (int i = 0; i < annotations.length; i++) {
+        if (annotations[i].table() == tableNum) {
+          try {
+            indexes.put(annotations[i].col(), new SimpleObjectProperty<>(m.invoke(instance)));
+          } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    }
+    Object[] toReturn = new Object[indexes.size()];
+    indexes.keySet().forEach(i -> toReturn[i] = indexes.get(i));
+    return List.of(toReturn);
+  }
+
   /** Makes a column containing Strings editable */
   public void addStringEditProperty(TableColumn<R, String> column) {
     column.setEditable(true);

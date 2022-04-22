@@ -9,7 +9,7 @@ public class MedicalEquipment extends TableObject {
   private String equipmentName;
   private EquipmentType equipmentType;
   private String serialNumber;
-  private CleanStatus cleanStatus;
+  private CleanStatus cleanStatus = CleanStatus.UNCLEAN;;
 
   private String locationID;
 
