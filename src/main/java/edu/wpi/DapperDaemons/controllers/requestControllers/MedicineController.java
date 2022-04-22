@@ -13,18 +13,19 @@ import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
-  @FXML private TableView<MedicineRequest> medicineRequests;
+  @FXML private VBox table;
+  @FXML private HBox header;
   private TableHelper<MedicineRequest> helper;
   @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
 
@@ -42,21 +43,21 @@ public class MedicineController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    helper = new TableHelper<>(medicineRequests, 0);
-    helper.linkColumns(MedicineRequest.class);
+    //    helper = new TableHelper<>(medicineRequests, 0);
+    //    helper.linkColumns(MedicineRequest.class);
 
-    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
+    //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
     priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
 
-    try {
-      medicineRequests.getItems().addAll(new ArrayList(medicineRequestDAO.getAll().values()));
-      //      System.out.println("Created table");
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, Medicine Request table was unable to be created\n");
-    }
+    //    try {
+    //      medicineRequests.getItems().addAll(new ArrayList(medicineRequestDAO.getAll().values()));
+    //      //      System.out.println("Created table");
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //      System.err.print("Error, Medicine Request table was unable to be created\n");
+    //    }
     setListeners();
     onClearClicked();
   }
@@ -66,10 +67,10 @@ public class MedicineController extends ParentController {
         new MedicineRequest().tableName(),
         TableListeners.eventListener(
             () -> {
-              medicineRequests.getItems().clear();
-              medicineRequests
-                  .getItems()
-                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
+              //              medicineRequests.getItems().clear();
+              //              medicineRequests
+              //                  .getItems()
+              //                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
             }));
   }
 
@@ -213,7 +214,7 @@ public class MedicineController extends ParentController {
   private boolean addItem(MedicineRequest request) {
     boolean hasClearance = false;
     hasClearance = medicineRequestDAO.add(request);
-    if (hasClearance) medicineRequests.getItems().add(request);
+    //    if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
   }
