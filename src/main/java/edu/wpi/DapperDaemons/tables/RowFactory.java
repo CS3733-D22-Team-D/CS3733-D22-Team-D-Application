@@ -34,6 +34,7 @@ public class RowFactory {
         Enum<?> e = (Enum<?>) attr;
         List<String> allAttrs = TableHelper.convertEnum(e.getClass());
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
+        box.setValue(attr.toString());
         row.getChildren().add(box);
       } else {
         row.getChildren().add(new Text(attr.toString()));
