@@ -3,10 +3,7 @@ package edu.wpi.DapperDaemons.tables;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.util.List;
 import javafx.scene.Node;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 public class Table {
@@ -21,6 +18,8 @@ public class Table {
 
   public static void addRow(GridPane table, TableObject type, int tableNum, int rowNum) {
     List<Node> row = RowFactory.createRow(type, tableNum);
+    ((VBox) row.get(row.size() - 1))
+        .setStyle("-fx-background-radius: 0 10 10 0;-fx-backgound-color: white");
     table.addRow(rowNum, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
