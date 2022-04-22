@@ -21,7 +21,7 @@ public class RowFactory {
   private RowFactory() {}
 
   public static List<Node> createRow(TableObject type, int tableNum) {
-    HBox row = new HBox();
+    HBox row;
     FXMLLoader loader;
     loader =
         new FXMLLoader(Objects.requireNonNull(App.class.getResource("views/" + "row" + ".fxml")));
@@ -62,9 +62,7 @@ public class RowFactory {
     }
     List<Node> ret = new ArrayList<>();
     ret.add(loaded.getChildren().get(0));
-    for (Node node : row.getChildren()) {
-      ret.add(node);
-    }
+    ret.addAll(row.getChildren());
     return ret;
   }
 }
