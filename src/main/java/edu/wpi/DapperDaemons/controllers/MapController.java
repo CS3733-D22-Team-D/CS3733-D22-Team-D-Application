@@ -8,15 +8,19 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -196,7 +200,31 @@ public class MapController extends ParentController {
     closeCreate();
     closeRoom();
 
+    setListeners();
     //    filterSlider(mapFilter, burg, burgBack);
+  }
+
+  private void setListeners() {
+    TableListeners.addListener(
+        new Location().tableName(),
+        TableListeners.eventListener(
+            () -> {
+              // change whatever needs to be for the map
+            }));
+    TableListeners.addListener(
+        new MedicalEquipment().tableName(),
+        TableListeners.eventListener(
+            () -> {
+              // change whatever needs to be for the map
+            }));
+        TableListeners.addListeners(DAOFacade.getAllRequests().stream().map((r)->{
+          return ((TableObject) r).tableName();
+                }).collect(
+                Collectors.toCollection(ArrayList<String>::new)),
+                TableListeners.eventListener(
+                () -> {
+                  //change whatever needs to be for the map
+                }));
   }
 
   @FXML

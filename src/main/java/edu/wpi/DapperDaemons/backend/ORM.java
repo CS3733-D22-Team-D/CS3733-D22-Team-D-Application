@@ -40,21 +40,23 @@ public class ORM<T extends TableObject> {
                               ((HashMap<String, List<String>>) snapshot.getValue());
                           snap.forEach(
                               (k, v) -> {
-                                temp.put(
-                                    FireBaseCoder.decodeFirebaseKey(k),
-                                    (T)
-                                        type.newInstance(
-                                            v.stream()
-                                                .map(
-                                                    e -> {
-                                                      if (e != null) {
-                                                        return FireBaseCoder.decodeFirebaseKey(e);
-                                                      }
-                                                      return e;
-                                                    })
-                                                .collect(
-                                                    Collectors.toCollection(
-                                                        ArrayList<String>::new))));
+                                try {
+                                  TableObject x =
+                                      type.newInstance(
+                                          v.stream()
+                                              .map(
+                                                  e -> {
+                                                    if (e != null) {
+                                                      return FireBaseCoder.decodeFirebaseKey(e);
+                                                    }
+                                                    return e;
+                                                  })
+                                              .collect(
+                                                  Collectors.toCollection(ArrayList<String>::new)));
+                                  temp.put(FireBaseCoder.decodeFirebaseKey(k), (T) x);
+                                } catch (Exception e) {
+                                  System.out.println("Malformed Data in Firebase");
+                                }
                               });
                           map = temp;
                         } catch (ClassCastException e) {
