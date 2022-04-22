@@ -85,10 +85,6 @@ public class PathfinderHandler extends AppController implements Initializable {
       toLoc = filterDos.get(0);
       if (checkIfConnectedNode(startLoc.getNodeID())) {
         if (checkIfConnectedNode(toLoc.getNodeID())) {
-          //          System.out.println("Showing path but everything might be broken");
-          //          System.out.println(
-          //              "Starting at " + startLoc.getNodeID() + " And going to " +
-          // toLoc.getNodeID());
           showPather(startLoc.getNodeID(), toLoc.getNodeID());
         } else {
           showError("Not a valid end location!");

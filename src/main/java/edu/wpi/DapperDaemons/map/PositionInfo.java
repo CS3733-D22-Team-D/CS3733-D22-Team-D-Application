@@ -24,7 +24,8 @@ public class PositionInfo {
     ELEV,
     STOR,
     PATI,
-    DIRT
+    DIRT,
+    PATH
   }
 
   private Location loc;
