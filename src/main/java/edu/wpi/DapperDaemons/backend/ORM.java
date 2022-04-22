@@ -55,7 +55,7 @@ public class ORM<T extends TableObject> {
                                                   Collectors.toCollection(ArrayList<String>::new)));
                                   temp.put(FireBaseCoder.decodeFirebaseKey(k), (T) x);
                                 } catch (Exception e) {
-                                  System.out.println("Malformed Data in Firebase");
+                                  System.out.println("Malformed Data in " + tableName + "\n" + v);
                                 }
                               });
                           map = temp;

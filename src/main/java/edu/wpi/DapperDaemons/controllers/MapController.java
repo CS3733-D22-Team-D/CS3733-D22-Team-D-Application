@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -217,14 +216,17 @@ public class MapController extends ParentController {
             () -> {
               // change whatever needs to be for the map
             }));
-        TableListeners.addListeners(DAOFacade.getAllRequests().stream().map((r)->{
-          return ((TableObject) r).tableName();
-                }).collect(
-                Collectors.toCollection(ArrayList<String>::new)),
-                TableListeners.eventListener(
-                () -> {
-                  //change whatever needs to be for the map
-                }));
+    TableListeners.addListeners(
+        DAOFacade.getAllRequests().stream()
+            .map(
+                (r) -> {
+                  return ((TableObject) r).tableName();
+                })
+            .collect(Collectors.toCollection(ArrayList<String>::new)),
+        TableListeners.eventListener(
+            () -> {
+              // change whatever needs to be for the map
+            }));
   }
 
   @FXML
