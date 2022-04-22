@@ -15,6 +15,8 @@ public class APILandingController implements Initializable {
   @FXML private Label errorLabel;
   private static String destID;
 
+  // TODO: Implement 3 Other APIs
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     teamDLoc.setText("");
@@ -42,7 +44,7 @@ public class APILandingController implements Initializable {
   /**
    * Checks team D's location database for a given location ID
    *
-   * @return
+   * @return true if the location is present in the API database
    */
   public boolean isInTeamDLocations(String locID) {
     LocationAPI locationAPI = new LocationAPI();
