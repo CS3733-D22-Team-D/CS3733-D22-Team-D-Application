@@ -11,8 +11,11 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -58,8 +61,16 @@ public class MedicineController extends ParentController {
     //      e.printStackTrace();
     //      System.err.print("Error, Medicine Request table was unable to be created\n");
     //    }
+    createTable();
     setListeners();
     onClearClicked();
+  }
+
+  private void createTable() {
+    Table.setHeader(header, new ArrayList<String>(List.of(new String[] {"Test", "Test", "Test"})));
+    for (MedicineRequest req : DAOPouch.getMedicineRequestDAO().getAll().values()) {
+      Table.addRow(table, req, 0);
+    }
   }
 
   private void setListeners() {

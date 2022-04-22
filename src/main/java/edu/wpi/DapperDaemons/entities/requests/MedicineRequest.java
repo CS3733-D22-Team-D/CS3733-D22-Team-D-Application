@@ -173,7 +173,7 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 7)
   public Priority getPriority() {
     return priority;
   }
@@ -228,7 +228,6 @@ public class MedicineRequest extends TableObject implements Request {
   public MedicineRequest() {}
   // SETTERS AND GETTERS
   @Override
-  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -241,7 +240,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 0)
   public String getRoomID() {
     return roomID;
   }
@@ -250,7 +249,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 1)
   public String getRequesterID() {
     return requesterID;
   }
@@ -259,7 +258,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 2)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -268,7 +267,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
-  @TableHandler(table = 0, col = 5)
+  @TableHandler(table = 0, col = 3)
   public String getPatientID() {
     return patientID;
   }
@@ -277,7 +276,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
-  @TableHandler(table = 0, col = 6)
+  @TableHandler(table = 0, col = 4)
   public String getMedicationName() {
     return medicationName;
   }
@@ -286,7 +285,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.medicationName = medicationName;
   }
 
-  @TableHandler(table = 0, col = 7)
+  @TableHandler(table = 0, col = 5)
   public int getQuantity() {
     return quantity;
   }
@@ -320,7 +319,7 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 8)
+  @TableHandler(table = 0, col = 6)
   public String getDateNeeded() {
     return dateNeeded;
   }

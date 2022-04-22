@@ -81,7 +81,7 @@ public class TableHelper<R> {
   }
 
   public static List<Object> getDataList(Object instance, int tableNum) {
-    HashMap<Integer, SimpleObjectProperty<?>> indexes = new HashMap<>();
+    HashMap<Integer, Object> indexes = new HashMap<>();
     // Search for any TableHandler methods
     for (Method m : instance.getClass().getDeclaredMethods()) {
       m.setAccessible(true);
@@ -91,7 +91,7 @@ public class TableHelper<R> {
       for (int i = 0; i < annotations.length; i++) {
         if (annotations[i].table() == tableNum) {
           try {
-            indexes.put(annotations[i].col(), new SimpleObjectProperty<>(m.invoke(instance)));
+            indexes.put(annotations[i].col(), m.invoke(instance));
           } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
           }
