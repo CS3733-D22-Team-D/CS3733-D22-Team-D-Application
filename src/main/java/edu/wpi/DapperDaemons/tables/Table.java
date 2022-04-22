@@ -17,13 +17,13 @@ public class Table {
   }
 
   public static void addRow(GridPane table, TableObject type, int tableNum, int rowNum) {
-    //EF5353 - RED
-    //F5EC42 - YELLOW
-    //69FF69 - GREEN
+    // EF5353 - RED
+    // F5EC42 - YELLOW
+    // 69FF69 - GREEN
     List<Node> row = RowFactory.createRow(type, tableNum);
     if (row.size() > 0) {
-      ((VBox) row.get(row.size() - 1))
-          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 9 9 0;");
+      ((VBox) row.get(0))
+          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 10 0 0 10;");
     }
     table.addRow(rowNum, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
@@ -31,6 +31,9 @@ public class Table {
     c.setHgrow(Priority.ALWAYS);
     table.getColumnConstraints().add(c);
     table.getColumnConstraints().get(0).setHgrow(Priority.NEVER);
-    table.getColumnConstraints().get(0).setMaxWidth(((HBox) row.get(0)).getPrefWidth());
+    table
+        .getColumnConstraints()
+        .get(0)
+        .setMaxWidth(((HBox) row.get(row.size() - 1)).getPrefWidth());
   }
 }

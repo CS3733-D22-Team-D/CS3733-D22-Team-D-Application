@@ -61,8 +61,8 @@ public class RowFactory {
       row.getChildren().add(toMakeThingsEasier);
     }
     List<Node> ret = new ArrayList<>();
-    ret.add(loaded.getChildren().get(0));
     ret.addAll(row.getChildren());
+    ret.add(loaded.getChildren().get(1));
     return ret;
   }
 }
