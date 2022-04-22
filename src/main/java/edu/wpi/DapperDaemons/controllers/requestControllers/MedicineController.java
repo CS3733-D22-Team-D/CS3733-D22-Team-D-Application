@@ -16,6 +16,7 @@ import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -44,6 +45,7 @@ public class MedicineController extends ParentController {
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private HashMap<String, Integer> rows = new HashMap<>();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -54,27 +56,18 @@ public class MedicineController extends ParentController {
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
     priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
-
-    //    try {
-    //      medicineRequests.getItems().addAll(new ArrayList(medicineRequestDAO.getAll().values()));
-    //      //      System.out.println("Created table");
-    //    } catch (Exception e) {
-    //      e.printStackTrace();
-    //      System.err.print("Error, Medicine Request table was unable to be created\n");
-    //    }
-    //    table.getRowConstraints().clear();
-    //    table.getColumnConstraints().clear();
     table.getColumnConstraints().get(0).fillWidthProperty().setValue(false);
     createTable();
     setListeners();
     onClearClicked();
+    //    Table.removeRow(table, 1);
   }
 
   private void createTable() {
     Table.setHeader(header, new ArrayList<String>(List.of(new String[] {"Test", "Test", "Test"})));
     List<TableObject> reqs = new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {
-      Table.addRow(table, reqs.get(i), 0, i);
+      rows.put(reqs.get(i).getAttribute(1), Table.addRow(table, reqs.get(i), 0, i));
     }
   }
 

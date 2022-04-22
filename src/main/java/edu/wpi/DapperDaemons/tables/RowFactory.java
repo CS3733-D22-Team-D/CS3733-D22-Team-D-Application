@@ -42,6 +42,10 @@ public class RowFactory {
         Enum<?> e = (Enum<?>) attr;
         List<String> allAttrs = TableHelper.convertEnum(e.getClass());
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
+        box.setOnAction(event->{
+          TableObject t = type.newInstance(new ArrayList<>());
+          Enum.valueOf(e.getClass(),box.getValue());
+        });
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
         box.setMinWidth(Region.USE_COMPUTED_SIZE);
