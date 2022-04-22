@@ -16,6 +16,7 @@ import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
+import edu.wpi.DapperDaemons.map.pathfinder.ShowConnections;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -112,6 +113,7 @@ public class MapController extends ParentController {
   private PinHandler pin;
 
   private PathfinderHandler pathfinder;
+  private ShowConnections connectionShower;
 
   /* Database stuff */
   private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -165,6 +167,10 @@ public class MapController extends ParentController {
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
     pathfinder.filterByFloor(MapDashboardController.floor);
+
+    connectionShower = new ShowConnections(pathPane, this);
+
+    connectionShower.showAllLines(MapDashboardController.floor);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -449,6 +455,7 @@ public class MapController extends ParentController {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
+    connectionShower.filterByFloor("1");
   }
 
   @FXML
@@ -456,6 +463,7 @@ public class MapController extends ParentController {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
     pathfinder.filterByFloor("2");
+    connectionShower.filterByFloor("2");
   }
 
   @FXML
@@ -463,6 +471,7 @@ public class MapController extends ParentController {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
     pathfinder.filterByFloor("3");
+    connectionShower.filterByFloor("3");
   }
 
   @FXML
@@ -470,6 +479,7 @@ public class MapController extends ParentController {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
     pathfinder.filterByFloor("4");
+    connectionShower.filterByFloor("4");
   }
 
   @FXML
@@ -477,6 +487,7 @@ public class MapController extends ParentController {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
     pathfinder.filterByFloor("5");
+    connectionShower.filterByFloor("5");
   }
 
   @FXML
@@ -484,6 +495,7 @@ public class MapController extends ParentController {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
     pathfinder.filterByFloor("L1");
+    connectionShower.filterByFloor("L1");
   }
 
   @FXML
@@ -491,6 +503,7 @@ public class MapController extends ParentController {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");
+    connectionShower.filterByFloor("L2");
   }
 
   @FXML
