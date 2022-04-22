@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.map.pathfinder;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.AppController;
@@ -31,6 +32,8 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static AnchorPane lineLayer;
   private static MapController controller;
   private static List<Location> locations;
+  private static Double lineSize;
+  private static String currentFloor;
 
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
@@ -54,19 +57,32 @@ public class PathfinderHandler extends AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
     fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    setLineSize(4.0);
+  }
+
+  public void setLineSize(Double size) {
+    this.lineSize = size;
+  }
+
+  public void setCurrentFloor(String floor) {
+    this.currentFloor = floor;
   }
 
   @FXML
   public void showPath() {
     fromLocation.setValue(fromLocation.getValue().trim());
     toLocation.setValue(toLocation.getValue().trim());
+    List<Location> filterJuan;
+    List<Location> filterDos;
+    Location startLoc = new Location();
+    Location toLoc;
     try {
-      List<Location> filterJuan =
+      filterJuan =
           new ArrayList<>(DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
-      List<Location> filterDos =
+      filterDos =
           new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
-      Location startLoc = filterJuan.get(0);
-      Location toLoc = filterDos.get(0);
+      startLoc = filterJuan.get(0);
+      toLoc = filterDos.get(0);
       if (checkIfConnectedNode(startLoc.getNodeID())) {
         if (checkIfConnectedNode(toLoc.getNodeID())) {
           //          System.out.println("Showing path but everything might be broken");
@@ -74,8 +90,6 @@ public class PathfinderHandler extends AppController implements Initializable {
           //              "Starting at " + startLoc.getNodeID() + " And going to " +
           // toLoc.getNodeID());
           showPather(startLoc.getNodeID(), toLoc.getNodeID());
-          makeAllInVisible();
-          filterByFloor(startLoc.getFloor());
         } else {
           showError("Not a valid end location!");
         }
@@ -86,10 +100,12 @@ public class PathfinderHandler extends AppController implements Initializable {
       e.printStackTrace();
       // TODO : Show the error message?
     }
-    makeAllInVisible(); // For some reason I need two of these to make it actually invisible
+    makeAllInVisible();
     try {
-      filterByFloor(DAOPouch.getLocationDAO().get(fromLocation.getValue()).getFloor());
+//      System.out.println("Current floor is " + currentFloor);
+      filterByFloor(currentFloor);
     } catch (Exception e) {
+      e.printStackTrace();
       // Do thing
     }
   }
@@ -120,14 +136,14 @@ public class PathfinderHandler extends AppController implements Initializable {
     try {
       locations.add(DAOPouch.getLocationDAO().get(endNode));
     } catch (Exception e) {
-      System.out.println("Something went wrong adding the last location");
+      App.LOG.info("Something went wrong adding the last location");
     }
     for (String node : nodePath) {
       try {
         locations.add(DAOPouch.getLocationDAO().get(node));
       } catch (Exception e) {
         e.printStackTrace();
-        System.out.println("Location not found");
+        App.LOG.info("Location " + node + " not found");
       }
     }
     try {
@@ -139,33 +155,20 @@ public class PathfinderHandler extends AppController implements Initializable {
     double overflow = 0.0;
     for (int i = 0; i < locations.size() - 1; i++) {
       // Add a new line to the list of lines
-      System.out.println(
-          "Position " + locations.get(i).getNodeID() + " to " + locations.get(i + 1).getNodeID());
-      System.out.println(
-          "X Start : "
-              + locations.get(i).getXcoord()
-              + " Start Y: "
-              + locations.get(i).getYcoord());
-      System.out.println(
-          "X End : "
-              + locations.get(i + 1).getXcoord()
-              + " End Y: "
-              + locations.get(i + 1).getYcoord());
-      Line pathLine =
-          new Line(
-              locations.get(i).getXcoord(),
-              locations.get(i).getYcoord(),
-              locations.get(i + 1).getXcoord(),
-              locations.get(i + 1).getYcoord());
-      pathLine.setFill(Color.RED);
-      pathLine.setStroke(Color.RED);
-      pathLine.setStrokeWidth(6.0);
-      pathLine.setStrokeLineCap(StrokeLineCap.SQUARE);
-      double lineLength =
-          Math.sqrt(
-              Math.pow(locations.get(i).getXcoord() + locations.get(i + 1).getXcoord(), 2)
-                  + Math.pow(locations.get(i).getYcoord() + locations.get(i + 1).getYcoord(), 2));
-
+      //      System.out.println(
+      //          "Position " + locations.get(i).getNodeID() + " to " + locations.get(i +
+      // 1).getNodeID());
+      //      System.out.println(
+      //          "X Start : "
+      //              + locations.get(i).getXcoord()
+      //              + " Start Y: "
+      //              + locations.get(i).getYcoord());
+      //      System.out.println(
+      //          "X End : "
+      //              + locations.get(i + 1).getXcoord()
+      //              + " End Y: "
+      //              + locations.get(i + 1).getYcoord());
+      Line pathLine;
       Circle ifNecessary;
       if (!locations
           .get(i)
@@ -175,39 +178,54 @@ public class PathfinderHandler extends AppController implements Initializable {
         ifNecessary = new Circle(locations.get(i).getXcoord(), locations.get(i).getYcoord(), 6);
         ifNecessary.setFill(Color.RED);
         lineLayer.getChildren().add(ifNecessary);
-        System.out.println("Added new point since it went up a floor");
-      }
-      // Start is 0d 24d
-      double whiteSpace = 24;
-      double lineSpace = 32;
-      boolean chancla = true;
-      while (lineLength > 0) {
-        if (chancla) {
-          pathLine.getStrokeDashArray().add(lineSpace);
-          lineLength -= lineSpace;
-          overflow = Math.abs(lineLength);
-        } else {
-          pathLine.getStrokeDashArray().add(whiteSpace);
-          lineLength -= whiteSpace;
-          overflow = 0;
+        //        System.out.println("Added new point since it went up a floor");
+      } else { // If on the same floor, show the path
+        pathLine =
+            new Line(
+                locations.get(i).getXcoord(),
+                locations.get(i).getYcoord(),
+                locations.get(i + 1).getXcoord(),
+                locations.get(i + 1).getYcoord());
+        pathLine.setFill(Color.RED);
+        pathLine.setStroke(Color.RED);
+        pathLine.setStrokeWidth(lineSize);
+        pathLine.setStrokeLineCap(StrokeLineCap.SQUARE);
+        double lineLength =
+            Math.sqrt(
+                Math.pow(locations.get(i).getXcoord() + locations.get(i + 1).getXcoord(), 2)
+                    + Math.pow(locations.get(i).getYcoord() + locations.get(i + 1).getYcoord(), 2));
+
+        // Start is 0d 24d
+        double whiteSpace = 24;
+        double lineSpace = 32;
+        boolean chancla = true;
+        while (lineLength > 0) {
+          if (chancla) {
+            pathLine.getStrokeDashArray().add(lineSpace);
+            lineLength -= lineSpace;
+            overflow = Math.abs(lineLength);
+          } else {
+            pathLine.getStrokeDashArray().add(whiteSpace);
+            lineLength -= whiteSpace;
+            overflow = 0;
+          }
         }
+
+        double maxOffset = -pathLine.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+        Timeline timeline =
+            new Timeline(
+                new KeyFrame(
+                    Duration.ZERO,
+                    new KeyValue(pathLine.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+                new KeyFrame(
+                    Duration.seconds(100),
+                    new KeyValue(
+                        pathLine.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+        lineLayer.getChildren().add(pathLine);
       }
-
-      double maxOffset = pathLine.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
-      Timeline timeline =
-          new Timeline(
-              new KeyFrame(
-                  Duration.ZERO,
-                  new KeyValue(pathLine.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
-              new KeyFrame(
-                  Duration.seconds(100),
-                  new KeyValue(
-                      pathLine.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
-      timeline.setCycleCount(Timeline.INDEFINITE);
-      timeline.play(); // maybe this'll work
-
-      lineLayer.getChildren().add(pathLine);
-      //      System.out.println("added new line to lineLayer");
     }
   }
 
@@ -228,6 +246,7 @@ public class PathfinderHandler extends AppController implements Initializable {
   }
 
   public void filterByFloor(String floor) {
+    setCurrentFloor(floor);
     makeAllInVisible();
     for (int i = 0;
         i < locations.size() - 1;

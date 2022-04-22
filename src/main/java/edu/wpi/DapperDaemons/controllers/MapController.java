@@ -161,6 +161,8 @@ public class MapController extends ParentController {
 
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
+    pathfinder.filterByFloor(MapDashboardController.floor);
+
     this.positions = new PositionHandler(origPositions);
 
     this.pin = new PinHandler(new ImageView(glyphs.GLYPH_PATH + "pin.png"), pinPane);
