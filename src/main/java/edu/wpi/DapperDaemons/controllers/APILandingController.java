@@ -14,15 +14,28 @@ public class APILandingController implements Initializable {
 
   @FXML private TextField teamDLoc;
   @FXML private Label errorLabel;
-  private static String destID;
+  private static String destIDTeamD;
 
-  // TODO: Implement 3 Other APIs
+  @FXML private TextField zDest;
+  @FXML private Label zErrorLabel;
+  @FXML private TextField zOrigin;
+  private static String teamZOriginID;
+  private static String teamZDestinationID;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    // Team D API Init
     teamDLoc.setText("");
     errorLabel.setText("");
-    destID = "null";
+    destIDTeamD = "null";
+
+    // Team Z API Init
+    zDest.setText("");
+    zOrigin.setText("");
+    zErrorLabel.setText("");
+    teamZOriginID = "null";
+    teamZDestinationID = "null";
+
   }
 
   /** Starts Team D Sanitation Request API (ours) */
@@ -31,12 +44,12 @@ public class APILandingController implements Initializable {
       errorLabel.setText("Error Invalid Location ID");
       return;
     }
-    destID = teamDLoc.getText();
+    destIDTeamD = teamDLoc.getText();
     teamDLoc.setText("");
     errorLabel.setText("");
     StartAPI api = new StartAPI();
     try {
-      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destID);
+      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destIDTeamD);
     } catch (Exception e) {
       errorLabel.setText("Something Went Wrong");
     }
@@ -55,7 +68,13 @@ public class APILandingController implements Initializable {
     return false;
   }
 
+  /**
+   * Starts Team-Z's External Patient Request API
+   * Note: Uses custom CSS to fix some styling issues
+   */
   public void startTeamZApi() {
+
+
     API api = new API();
     try {
       api.run(
