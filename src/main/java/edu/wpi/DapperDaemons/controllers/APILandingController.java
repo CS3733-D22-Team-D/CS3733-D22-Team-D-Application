@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
+import edu.wpi.cs3733.D22.teamZ.api.API;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -54,14 +55,13 @@ public class APILandingController implements Initializable {
     return false;
   }
 
-  public void startTeamUApi() {
-    /*
+  public void startTeamZApi() {
+    API api = new API();
     try {
-      MedicineRequest.run(
-          0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", "dPATI01505");
+      api.run(
+          0, 0, 800, 500, "edu/wpi/DapperDaemons/assets/teamZAPI.css", "dPATI01505", "dPATI01505");
     } catch (Exception e) {
-      System.err.println("Team U's API Broke");
+      System.err.println("Team Z's API Broke");
     }
-     */
   }
 }
