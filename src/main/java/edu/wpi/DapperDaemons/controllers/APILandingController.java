@@ -1,14 +1,11 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import javafx.fxml.Initializable;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 public class APILandingController implements Initializable {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {}
 }

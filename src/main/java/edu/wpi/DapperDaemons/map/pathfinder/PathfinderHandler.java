@@ -102,7 +102,7 @@ public class PathfinderHandler extends AppController implements Initializable {
     }
     makeAllInVisible();
     try {
-//      System.out.println("Current floor is " + currentFloor);
+      //      System.out.println("Current floor is " + currentFloor);
       filterByFloor(currentFloor);
     } catch (Exception e) {
       e.printStackTrace();

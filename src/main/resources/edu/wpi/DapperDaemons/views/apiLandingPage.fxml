@@ -27,7 +27,7 @@
          <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                       <children>
-                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
                               <children>
                                   <Pane fx:id="labPageContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                                   <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
@@ -73,7 +73,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                       <children>
-                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                               <children>
                                   <Pane fx:id="medicinePageContainer" prefHeight="200.0" prefWidth="200.0" />
                                   <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="158.0" VBox.vgrow="ALWAYS">
@@ -119,7 +119,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                       <children>
-                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
                               <children>
                                   <Pane fx:id="sanitationPageContainer" prefHeight="200.0" prefWidth="200.0" />
                                   <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -162,7 +162,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                       <children>
-                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                          <VBox id="default" maxHeight="260.0" maxWidth="270.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
                               <children>
                                   <Pane fx:id="equipmentPageContainer" prefHeight="200.0" prefWidth="200.0" />
                                   <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
