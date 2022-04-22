@@ -61,13 +61,6 @@ public class NotificationHandler {
     sub.setText(n.getSubject());
     Label body = (Label) notif.getChildren().get(1);
     body.setText(n.getBody());
-    //    notifications.getChildren().add(notif);
-    //    Label notifSubject = new Label(n.getSubject());
-    //    notifSubject.setFont(Font.font("System", FontWeight.BOLD, 14));
-    //    Label notifBody = new Label(n.getBody());
-    //    notifBody.setFont(Font.font("System", FontWeight.NORMAL, 11));
-    //    notif.getChildren().add(notifSubject);
-    //    notif.getChildren().add(notifBody);
     return notif;
   }
 
