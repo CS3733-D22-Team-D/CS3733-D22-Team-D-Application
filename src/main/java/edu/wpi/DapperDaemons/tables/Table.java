@@ -18,8 +18,10 @@ public class Table {
 
   public static void addRow(GridPane table, TableObject type, int tableNum, int rowNum) {
     List<Node> row = RowFactory.createRow(type, tableNum);
-    ((VBox) row.get(row.size() - 1))
-        .setStyle("-fx-background-radius: 0 10 10 0;-fx-backgound-color: white");
+    if (row.size() > 0) {
+      ((VBox) row.get(row.size() - 1))
+          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 9 9 0;");
+    }
     table.addRow(rowNum, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
