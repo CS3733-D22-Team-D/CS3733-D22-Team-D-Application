@@ -35,7 +35,7 @@ public class APILandingController implements Initializable {
     errorLabel.setText("");
     StartAPI api = new StartAPI();
     try {
-      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeDark.css", destID);
+      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destID);
     } catch (Exception e) {
       errorLabel.setText("Something Went Wrong");
     }
@@ -52,5 +52,16 @@ public class APILandingController implements Initializable {
       if (loc.getNodeID().equals(locID)) return true;
     }
     return false;
+  }
+
+  public void startTeamUApi() {
+    /*
+    try {
+      MedicineRequest.run(
+          0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", "dPATI01505");
+    } catch (Exception e) {
+      System.err.println("Team U's API Broke");
+    }
+     */
   }
 }
