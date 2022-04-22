@@ -86,9 +86,9 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="160.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Please do not contact us.">
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Please direct all questions and concerns to swkarkache@wpi.edu">
                                  <VBox.margin>
-                                    <Insets top="40.0" />
+                                    <Insets top="15.0" />
                                  </VBox.margin>
                                  <font>
                                     <Font name="System Bold" size="16.0" />
