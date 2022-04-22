@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -28,7 +29,12 @@ public class RowFactory {
         List<Object> attributes = TableHelper.getDataList(type, tableNum);
         for(Object attr: attributes){
             if(attr instanceof Node) row.getChildren().add((Node)attr);
-            if(attr instanceof Enum) row.getChildren().add(new ComboBox<>());//figure this out
+            if(attr instanceof Enum) {
+                Enum<?> e = (Enum<?>)attr;
+                List<String> allAttrs = TableHelper.convertEnum(e.getClass());
+                ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
+                row.getChildren().add(box);
+            }
             else{
                 row.getChildren().add(new Text(attr.toString()));
             }
