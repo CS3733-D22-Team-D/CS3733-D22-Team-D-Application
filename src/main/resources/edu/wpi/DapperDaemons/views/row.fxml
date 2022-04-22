@@ -2,10 +2,9 @@
 
 <?import javafx.scene.layout.HBox?>
 
-
-<HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" style="-fx-background-radius: 7.5 7.5 7.5 7.5; -fx-background-color: FFFEFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_RIGHT" prefHeight="50.0" style="-fx-background-radius: 7.5; -fx-background-color: FFFEFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="contents" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="585.0" style="-fx-background-color: FFFEFE;" HBox.hgrow="ALWAYS" />
-      <HBox fx:id="priority" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="309.0" style="-fx-background-color: FF0000;" />
+      <HBox fx:id="priority" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="15.0" style="-fx-background-color: #FF0000; -fx-background-radius: 7.5 0 0 7.5;" />
+      <HBox fx:id="contents" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: FFFEFE;" />
    </children>
 </HBox>

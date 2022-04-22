@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -22,12 +23,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
-  @FXML private VBox table;
+  @FXML private GridPane table;
   @FXML private HBox header;
   private TableHelper<MedicineRequest> helper;
   @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
@@ -61,6 +62,9 @@ public class MedicineController extends ParentController {
     //      e.printStackTrace();
     //      System.err.print("Error, Medicine Request table was unable to be created\n");
     //    }
+    //    table.getRowConstraints().clear();
+    //    table.getColumnConstraints().clear();
+    table.getColumnConstraints().get(0).fillWidthProperty().setValue(false);
     createTable();
     setListeners();
     onClearClicked();
@@ -68,8 +72,9 @@ public class MedicineController extends ParentController {
 
   private void createTable() {
     Table.setHeader(header, new ArrayList<String>(List.of(new String[] {"Test", "Test", "Test"})));
-    for (MedicineRequest req : DAOPouch.getMedicineRequestDAO().getAll().values()) {
-      Table.addRow(table, req, 0);
+    List<TableObject> reqs = new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
+    for (int i = 0; i < reqs.size(); i++) {
+      Table.addRow(table, reqs.get(i), 0, i);
     }
   }
 

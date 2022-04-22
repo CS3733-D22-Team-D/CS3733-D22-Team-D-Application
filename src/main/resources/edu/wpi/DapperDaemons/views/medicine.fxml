@@ -7,6 +7,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -222,15 +224,18 @@
                   </Text>
                   <HBox fx:id="header" prefHeight="100.0" prefWidth="200.0" />
                </children>
-            </VBox>
-            <VBox id="foreground" fx:id="table" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
                </VBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
             </VBox>
+            <GridPane fx:id="table" alignment="CENTER" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </GridPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Button id="defaultButton" fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Save to CSV" textFill="WHITE">
