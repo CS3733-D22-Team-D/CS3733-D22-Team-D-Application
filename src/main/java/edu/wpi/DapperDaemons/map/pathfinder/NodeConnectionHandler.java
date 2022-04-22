@@ -41,7 +41,7 @@ public class NodeConnectionHandler {
       App.LOG.info("Linking node " + newNode.getNodeID() + " To " + bestLocation.getNodeID());
       LocationNodeConnections newConnection =
           new LocationNodeConnections(
-              newNode.getNodeID() + "____" + bestLocation.getNodeID(),
+              newNode.getNodeID() + "_" + bestLocation.getNodeID(),
               newNode.getNodeID(),
               bestLocation.getNodeID());
       DAOPouch.getLocationNodeDAO().add(newConnection);
