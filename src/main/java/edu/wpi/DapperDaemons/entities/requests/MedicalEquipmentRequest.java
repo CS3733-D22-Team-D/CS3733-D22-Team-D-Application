@@ -9,6 +9,23 @@ import java.util.Date;
 import java.util.List;
 
 public class MedicalEquipmentRequest extends TableObject implements Request {
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assigneeID.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + equipmentID.hashCode();
+    result = 31 * result + equipmentType.hashCode();
+    result = 31 * result + cleanStatus.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
+  }
+
   // TABLE OBJECT AND REQUEST METHODS
   @Override
   public String tableInit() {

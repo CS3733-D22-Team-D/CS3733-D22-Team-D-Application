@@ -10,7 +10,9 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -50,6 +54,9 @@ public class EquipmentCleaningController extends ParentController {
   /* DAO Object */
   private final DAO<EquipmentCleaning> equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
   private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<MedicalEquipmentRequest> t;
 
   @FXML
   public void startFuzzySearch() {
@@ -59,18 +66,20 @@ public class EquipmentCleaningController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    tableHelper = new TableHelper<>(equipmentCleanTable, 0);
-    tableHelper.linkColumns(EquipmentCleaning.class);
 
     initBoxes();
 
-    try {
-      equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
-    } catch (Exception e) {
-      System.err.print("Error, table was unable to be created\n");
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
     onClearClicked();
+  }
+
+  private void createTable() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicalEquipmentRequest> reqs =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
+    t.setRows(reqs);
+    //          t.setListeners(new MedicalEquipmentRequest());
   }
 
   private void setListeners() {

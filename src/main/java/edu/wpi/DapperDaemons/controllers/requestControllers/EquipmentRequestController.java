@@ -14,13 +14,17 @@ import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -55,6 +59,10 @@ public class EquipmentRequestController extends ParentController {
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
 
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<MedicalEquipmentRequest> t;
+
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
@@ -66,21 +74,17 @@ public class EquipmentRequestController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
-
-    tableHelper = new TableHelper<>(equipmentRequestsTable, 0);
-    tableHelper.linkColumns(MedicalEquipmentRequest.class);
-
-    try { // Removed second field (filename) since everything is
-      // loaded on startup
-      equipmentRequestsTable
-          .getItems()
-          .addAll(new ArrayList(medicalEquipmentRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, table was unable to be created\n");
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
     onClearClicked();
+  }
+
+  private void createTable() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicalEquipmentRequest> reqs =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new MedicalEquipmentRequest());
   }
 
   private void setListeners() {

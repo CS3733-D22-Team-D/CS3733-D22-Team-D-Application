@@ -10,6 +10,40 @@ import java.util.List;
 public class LanguageRequest extends TableObject implements Request {
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LanguageRequest that = (LanguageRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assignee.equals(that.assignee)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    if (language != that.language) return false;
+    return dateNeeded.equals(that.dateNeeded);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assignee.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + language.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
+  }
+
+  @Override
   @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;

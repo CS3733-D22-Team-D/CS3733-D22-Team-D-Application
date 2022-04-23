@@ -10,9 +10,11 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -20,6 +22,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -46,6 +50,9 @@ public class LanguageRequestController extends ParentController {
   /* DAO Object */
   private DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<LanguageRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -53,19 +60,17 @@ public class LanguageRequestController extends ParentController {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
 
-    tableHelper = new TableHelper<>(languageRequestsTable, 0);
-    tableHelper.linkColumns(LanguageRequest.class);
-
-    try { // Removed second field (filename) since everything is
-      // loaded on startup
-      languageRequestsTable.getItems().addAll(new ArrayList(languageRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, table was unable to be created\n");
-    }
-
     onClearClicked();
-    setListeners();
+    t = new Table<>(table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<LanguageRequest> reqs =
+        new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new LanguageRequest());
   }
 
   private void setListeners() {

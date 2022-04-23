@@ -11,13 +11,17 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Controller for Meal UI Page UPDATED 4/5/22 at 12:08 AM */
@@ -63,6 +67,9 @@ public class MealController extends ParentController {
 
   private DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
   private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<MealDeliveryRequest> t;
 
   /**
    * Runs at compile time, specified from Initializable interface Sets up meal request table and
@@ -75,17 +82,20 @@ public class MealController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
 
     /* Init Request table */
-    helper = new TableHelper<>(mealRequestsTable, 0);
-    helper.linkColumns(MealDeliveryRequest.class);
+
     initBoxes();
     onClear();
 
-    try {
-      mealRequestsTable.getItems().addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      mealRequestsTable.getItems().setAll(new ArrayList<>());
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MealDeliveryRequest> reqs =
+        new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new MealDeliveryRequest());
   }
 
   private void setListeners() {

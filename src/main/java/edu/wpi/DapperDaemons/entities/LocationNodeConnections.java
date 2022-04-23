@@ -6,6 +6,26 @@ import java.util.List;
 public class LocationNodeConnections extends TableObject {
   private String startNodeID = "";
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LocationNodeConnections that = (LocationNodeConnections) o;
+
+    if (!startNodeID.equals(that.startNodeID)) return false;
+    if (!connectionOne.equals(that.connectionOne)) return false;
+    return connectionTwo.equals(that.connectionTwo);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = startNodeID.hashCode();
+    result = 31 * result + connectionOne.hashCode();
+    result = 31 * result + connectionTwo.hashCode();
+    return result;
+  }
+
   private String connectionOne = "";
 
   private String connectionTwo = "";

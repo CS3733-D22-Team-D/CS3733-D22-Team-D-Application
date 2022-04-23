@@ -9,6 +9,33 @@ public class Notification extends TableObject {
   private String userID;
   private String subject;
   private String body;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Notification that = (Notification) o;
+
+    if (read != that.read) return false;
+    if (chimed != that.chimed) return false;
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (!userID.equals(that.userID)) return false;
+    if (!subject.equals(that.subject)) return false;
+    return body.equals(that.body);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + userID.hashCode();
+    result = 31 * result + subject.hashCode();
+    result = 31 * result + body.hashCode();
+    result = 31 * result + (read ? 1 : 0);
+    result = 31 * result + (chimed ? 1 : 0);
+    return result;
+  }
+
   private boolean read = false;
 
   public String getNodeID() {
