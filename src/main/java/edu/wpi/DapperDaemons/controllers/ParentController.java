@@ -370,7 +370,7 @@ public class ParentController extends AppController {
 
   @FXML
   void switchToSecurity() {
-    swapPage("SecurityRequest", "Security Services");
+    swapPage("security", "Security Services");
   }
 
   @FXML

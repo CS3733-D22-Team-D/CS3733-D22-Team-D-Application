@@ -15,13 +15,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="467.0" prefWidth="393.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.LanguageRequestController">
+<HBox id="background" prefHeight="467.0" prefWidth="393.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.SecurityRequestController">
    <children>
       <VBox maxHeight="440.0" maxWidth="520.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
          <children>
             <HBox prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
                <children>
-                  <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Request an Interpreter">
+                  <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Security Services">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -36,27 +36,6 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Language:" />
-                              <JFXComboBox id="jButton" fx:id="languageBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select">
-                                 <stylesheets>
-                                    <URL value="@../assets/buttons.css" />
-                                 </stylesheets>
-                                 <effect>
-                                    <DropShadow offsetX="-2.0" offsetY="2.0">
-                                       <color>
-                                          <Color red="0.19607843458652496" green="0.19607843458652496" blue="0.19607843458652496" opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </JFXComboBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
