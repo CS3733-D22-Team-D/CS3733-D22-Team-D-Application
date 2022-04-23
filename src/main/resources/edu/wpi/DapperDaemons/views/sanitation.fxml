@@ -219,6 +219,9 @@
                            </color>
                         </DropShadow>
                      </effect>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>
