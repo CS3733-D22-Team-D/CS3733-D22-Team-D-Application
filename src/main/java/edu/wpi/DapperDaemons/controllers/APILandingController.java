@@ -7,17 +7,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 
 public class APILandingController implements Initializable {
 
-  @FXML private Label dbLabel;
-
   @FXML private TextField teamDLoc;
   @FXML private Label errorLabel;
+  @FXML private Button dSave;
   private static String destIDTeamD;
+
 
   @FXML private TextField zDest;
   @FXML private Label zErrorLabel;
@@ -28,13 +29,13 @@ public class APILandingController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     // Global init
-    dbLabel.setText("");
     saveToDatabase();
 
     // Team D API Init
     teamDLoc.setText("");
     errorLabel.setText("");
     destIDTeamD = "null";
+    dSave.setVisible(false);
 
     // Team Z API Init
     zDest.setText("");
@@ -77,13 +78,11 @@ public class APILandingController implements Initializable {
       errorLabel.setText("Team-D API Broke");
       return;
     }
-    dbLabel.setText("You may have unsaved requests!");
-    dbLabel.setTextFill(Paint.valueOf("EF5353"));
+    errorLabel.setText("You may have unsaved requests!");
+    errorLabel.setTextFill(Paint.valueOf("EF5353"));
   }
 
-  /**
-   * Starts Team-Z's External Patient Request
-   */
+  /** Starts Team-Z's External Patient Request */
   public void startTeamZApi() {
     if (!isInLocationDatabase(zDest.getText().trim())
         || !isInLocationDatabase(zOrigin.getText().trim())) {
@@ -107,7 +106,7 @@ public class APILandingController implements Initializable {
       System.err.println("Team Z's API Broke");
       return;
     }
-    dbLabel.setText("You may have unsaved requests!");
-    dbLabel.setTextFill(Paint.valueOf("EF5353"));
+    zErrorLabel.setText("You may have unsaved requests!");
+    zErrorLabel.setTextFill(Paint.valueOf("EF5353"));
   }
 }
