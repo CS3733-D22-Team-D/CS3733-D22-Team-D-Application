@@ -8,12 +8,11 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.Table;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,33 +20,19 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
 public class PatientTransportController extends ParentController {
 
-  /* Table Object */
-  @FXML private TableView<PatientTransportRequest> transportRequests;
-
-  /*Table Helper */
-  private TableHelper<PatientTransportRequest> tableHelper;
-
-  /* Table Columns */
-  @FXML private TableColumn<PatientTransportRequest, String> ReqID;
-  @FXML private TableColumn<PatientTransportRequest, String> Priority;
-  @FXML private TableColumn<PatientTransportRequest, String> RoomID;
-  @FXML private TableColumn<PatientTransportRequest, String> Requester;
-  @FXML private TableColumn<PatientTransportRequest, String> Assignee;
-  @FXML private TableColumn<PatientTransportRequest, String> Patient;
-  @FXML private TableColumn<PatientTransportRequest, String> Destination;
-  @FXML private TableColumn<PatientTransportRequest, String> Status;
-
   /* Dropdown boxes */
   @FXML private JFXComboBox<String> roomBox;
   @FXML private JFXComboBox<String> pBox;
+
+  @FXML private GridPane table;
+  private Table<PatientTransportRequest> requestTable;
 
   /* Text Boxes */
   @FXML private TextField patientFirstName;
@@ -67,36 +52,12 @@ public class PatientTransportController extends ParentController {
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    initializeTable();
     initializeInputs();
 
-    try {
-      transportRequests
-          .getItems()
-          .addAll(new ArrayList<>(patientTransportRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Something went wrong making Patient Transport Req table");
-    }
-    setListeners();
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new PatientTransportRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              transportRequests.getItems().clear();
-              transportRequests
-                  .getItems()
-                  .addAll(new ArrayList(patientTransportRequestDAO.getAll().values()));
-            }));
-  }
-
-  @FXML
-  public void editStatus(TableColumn.CellEditEvent<PatientTransportRequest, String> editEvent) {
-    editEvent.getRowValue().setStatus(Request.RequestStatus.valueOf(editEvent.getNewValue()));
-    tableHelper.update(); // Commented out so it can run
+    requestTable = new Table<>(table, 0);
+    requestTable.setRows(
+        new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values()));
+    requestTable.setListeners(new PatientTransportRequest());
   }
 
   @FXML
@@ -209,31 +170,16 @@ public class PatientTransportController extends ParentController {
         || dateNeeded.getValue() == null);
   }
 
-  private void initializeTable() {
-    tableHelper = new TableHelper<>(transportRequests, 0);
-    tableHelper.linkColumns(PatientTransportRequest.class);
-  }
-
   private void initializeInputs() {
-
-    pBox.setItems(
-        FXCollections.observableArrayList(tableHelper.convertEnum(Request.Priority.class)));
     roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
-
-    // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
-    // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
   }
 
   private boolean addItem(PatientTransportRequest request) {
-    boolean hasClearance = false;
-
-    hasClearance = patientTransportRequestDAO.add(request);
-
-    if (hasClearance) {
-      transportRequests.getItems().add(request);
+    if (patientTransportRequestDAO.add(request)) {
+      requestTable.addRow(request);
+      return true;
     }
-    return hasClearance;
+    return false;
   }
 
   private void searchRoomsDropDown() {
