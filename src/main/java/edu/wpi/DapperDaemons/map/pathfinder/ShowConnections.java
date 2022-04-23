@@ -20,13 +20,15 @@ public class ShowConnections {
   public ShowConnections(AnchorPane lineLayer, MapController controller) {
     this.lineLayer = lineLayer;
     this.controller = controller;
+    actualConnections = new ArrayList<>();
   }
 
   public void showAllLines(String floor) {
+    lineLayer.getChildren().clear();
+    actualConnections.clear();
     List<Location> allLocations = new ArrayList<>(DAOPouch.getLocationDAO().getAll().values());
     List<LocationNodeConnections> connections =
         new ArrayList<>(DAOPouch.getLocationNodeDAO().getAll().values());
-    actualConnections = new ArrayList<>();
     for (Location location : allLocations) {
       List<LocationNodeConnections> connected =
           new ArrayList(
