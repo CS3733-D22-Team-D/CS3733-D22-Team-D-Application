@@ -25,7 +25,7 @@
 
 <VBox fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
-      <StackPane fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <StackPane id="pageBackground" fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" stylesheets="@../styling/lightMode.css" VBox.vgrow="ALWAYS">
          <children>
             <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -330,21 +330,6 @@
                               <Insets left="15.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="42.0">
-                           <children>
-                              <ImageView fx:id="homeIcon1" fitHeight="37.0" fitWidth="29.0" onMouseClicked="#quitProgram" preserveRatio="true" HBox.hgrow="ALWAYS">
-                                 <image>
-                                    <Image url="@../assets/Glyphs/exitWithBG.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="12.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </children>
-                        </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="8.0">
                            <children>
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" />
@@ -365,7 +350,7 @@
                         </HBox>
                         <HBox fx:id="serverBox" alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="30.0">
                            <children>
-                              <ToggleButton fx:id="serverToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openServerDropdown" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #012D5A;" text="ToggleButton">
+                              <ToggleButton fx:id="serverToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openServerDropdown" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="ToggleButton">
                                  <graphic>
                                     <ImageView fx:id="serverIcon" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
                                  </graphic>
@@ -374,9 +359,9 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text fx:id="headerNameField" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Name" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Text id="title" fx:id="headerNameField" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Name" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="System Bold" size="28.0" />
+                                    <Font name="Unispace-Bold" size="28.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
@@ -389,7 +374,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="85.0">
                            <children>
-                              <Label fx:id="time" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="85.0" text="00:00 - 00/00" textAlignment="RIGHT" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label id="normalText" fx:id="time" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="85.0" stylesheets="@../styling/lightMode.css" text="00:00 - 00/00" textAlignment="RIGHT" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -404,14 +389,6 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <JFXButton onMouseClicked="#switchToAboutUs" text="?" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
                         <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
@@ -424,12 +401,15 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <HBox.margin>
+                              <Insets left="7.0" />
+                           </HBox.margin>
                         </ToggleButton>
-                        <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                        <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent;" textFill="WHITE">
                            <graphic>
                               <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0">
                                  <children>
-                                    <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="account Name">
+                                    <Text id="normalText" fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="account Name">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
