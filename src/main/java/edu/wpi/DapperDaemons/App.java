@@ -27,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.net.ssl.HttpsURLConnection;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,20 @@ public class App extends Application {
   public void init() {
     createLogger();
     log.info("Starting Up");
+    Font semiBold =
+        Font.loadFont(
+            Main.class
+                .getClassLoader()
+                .getResourceAsStream(
+                    "/resources/edu/wpi/DapperDeamons/styling/interFont/Inter_SemiBold.ttf"),
+            12);
+    Font Bold =
+        Font.loadFont(
+            Main.class
+                .getClassLoader()
+                .getResourceAsStream(
+                    "/resources/edu/wpi/DapperDeamons/styling/interFont/Inter_Bold.ttf"),
+            12);
   }
 
   @Override
