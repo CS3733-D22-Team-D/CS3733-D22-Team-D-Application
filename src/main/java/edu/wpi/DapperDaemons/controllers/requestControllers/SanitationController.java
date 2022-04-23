@@ -45,8 +45,9 @@ public class SanitationController extends ParentController {
 
   /* Dropdown Boxes */
   @FXML private JFXComboBox<String> sanitationBox;
-  @FXML private JFXComboBox<String> priorityBox;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> locationBox;
+
   /* Text Field */
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
@@ -67,7 +68,7 @@ public class SanitationController extends ParentController {
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
     t.setRows(reqs);
@@ -90,7 +91,7 @@ public class SanitationController extends ParentController {
   @FXML
   public void onClearClicked() {
     sanitationBox.setValue("");
-    priorityBox.setValue("");
+    priorityIn.setValue("");
     locationBox.setValue("");
   }
 
@@ -98,14 +99,14 @@ public class SanitationController extends ParentController {
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(sanitationBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
   /** What happens when the submit button is clicked * */
   @FXML
   public void onSubmitClicked() {
 
     if (allFieldsFilled()) {
-      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = locationBox.getValue();
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -162,7 +163,7 @@ public class SanitationController extends ParentController {
   }
 
   private void initializeInputs() {
-    priorityBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     sanitationBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
@@ -174,7 +175,7 @@ public class SanitationController extends ParentController {
 
   private boolean allFieldsFilled() {
     return !((sanitationBox.getValue().equals(""))
-        || priorityBox.getValue().equals("")
+        || priorityIn.getValue().equals("")
         || locationBox.getValue().equals("")
         || dateNeeded.getValue() == null);
   }
