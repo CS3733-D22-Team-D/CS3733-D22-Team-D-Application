@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
@@ -37,6 +38,8 @@ public class RowFactory {
       item.setAlignment(Pos.CENTER_LEFT);
       HBox.setHgrow(item, Priority.ALWAYS);
       item.setPrefHeight(50);
+      item.setMinHeight(Control.USE_PREF_SIZE);
+      item.setMaxHeight(Control.USE_PREF_SIZE);
       if (attr instanceof Node) row.getChildren().add((Node) attr);
       if (attr instanceof Enum) {
         Enum<?> e = (Enum<?>) attr;

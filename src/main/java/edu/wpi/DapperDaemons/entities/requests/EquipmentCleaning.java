@@ -328,4 +328,42 @@ public class EquipmentCleaning extends TableObject implements Request {
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    EquipmentCleaning that = (EquipmentCleaning) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assigneeID.equals(that.assigneeID)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    if (!equipmentID.equals(that.equipmentID)) return false;
+    if (equipmentType != that.equipmentType) return false;
+    if (cleanStatus != that.cleanStatus) return false;
+    return cleanBy.equals(that.cleanBy);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assigneeID.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + equipmentID.hashCode();
+    result = 31 * result + equipmentType.hashCode();
+    result = 31 * result + cleanStatus.hashCode();
+    result = 31 * result + cleanBy.hashCode();
+    return result;
+  }
 }

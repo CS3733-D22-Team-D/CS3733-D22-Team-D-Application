@@ -7,12 +7,16 @@ import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /** Controller for Backend Info Page, allows for the database tables to be displayed */
 public class BackendInfoController extends ParentController {
@@ -38,37 +42,50 @@ public class BackendInfoController extends ParentController {
   private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   private DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  @FXML private GridPane table;
+  @FXML private GridPane table1;
+  @FXML private GridPane table2;
+  @FXML private GridPane table3;
+  @FXML private HBox header;
+  @FXML private HBox header1;
+  @FXML private HBox header2;
+  @FXML private HBox header3;
+  private Table<Patient> t;
+  private Table<Employee> t1;
+  private Table<Location> t2;
+  private Table<MedicalEquipment> t3;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setListeners();
     // TODO : The patient DAO is broken :(
-    patientTableHelper = new TableHelper<>(patientsTable, 0);
-    patientTableHelper.linkColumns(Patient.class);
+    t = new Table<>(table, 0);
+    t1 = new Table<>(table1, 0);
+    t2 = new Table<>(table2, 0);
+    t3 = new Table<>(table3, 0);
+    createTables();
+  }
 
-    locationTableHelper = new TableHelper<>(locationsTable, 0);
-    locationTableHelper.linkColumns(Location.class);
+  private void createTables() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<Patient> reqs = new ArrayList<>(DAOPouch.getPatientDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new Patient());
 
-    employeeTableHelper = new TableHelper<>(employeesTable, 0);
-    employeeTableHelper.linkColumns(Employee.class);
+    t1.setHeader(header1, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<Employee> reqs1 = new ArrayList<>(DAOPouch.getEmployeeDAO().getAll().values());
+    t1.setRows(reqs1);
+    t1.setListeners(new Employee());
 
-    equipmentTableHelper = new TableHelper<>(equipmentTable, 0);
-    equipmentTableHelper.linkColumns(MedicalEquipment.class);
+    t2.setHeader(header2, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<Location> reqs2 = new ArrayList<>(DAOPouch.getLocationDAO().getAll().values());
+    t2.setRows(reqs2);
+    t2.setListeners(new Location());
 
-    try {
-      locationsTable.getItems().addAll(new ArrayList<>(locationDAO.getAll().values()));
-
-      employeesTable.getItems().addAll(new ArrayList<>(employeeDAO.getAll().values()));
-
-      equipmentTable.getItems().addAll(new ArrayList<>(medicalEquipmentDAO.getAll().values()));
-
-      //      System.out.println(patientDAO.getAll());
-      patientsTable.getItems().addAll(new ArrayList<>(patientDAO.getAll().values()));
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, table was unable to be created\n");
-    }
+    t3.setHeader(header3, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicalEquipment> reqs3 =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().getAll().values());
+    t3.setRows(reqs3);
+    t3.setListeners(new MedicalEquipment());
   }
 
   private void setListeners() {

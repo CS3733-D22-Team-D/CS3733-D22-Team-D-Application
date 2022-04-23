@@ -124,9 +124,9 @@ public class Table<R> {
     return ret;
   }
 
-  public void setRows(List<R> rows) {
-    this.rows = rows;
-    for (R r : rows) {
+  public void setRows(List<R> newRows) {
+    this.rows = newRows;
+    for (R r : newRows) {
       addRow(r);
     }
   }

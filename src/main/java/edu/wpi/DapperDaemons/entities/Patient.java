@@ -8,6 +8,33 @@ public class Patient extends TableObject {
   private String nodeID;
   private String firstName;
   private String lastName;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Patient patient = (Patient) o;
+
+    if (dateOfBirth != patient.dateOfBirth) return false;
+    if (!nodeID.equals(patient.nodeID)) return false;
+    if (!firstName.equals(patient.firstName)) return false;
+    if (!lastName.equals(patient.lastName)) return false;
+    if (bloodType != patient.bloodType) return false;
+    return locationID.equals(patient.locationID);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + firstName.hashCode();
+    result = 31 * result + lastName.hashCode();
+    result = 31 * result + dateOfBirth;
+    result = 31 * result + bloodType.hashCode();
+    result = 31 * result + locationID.hashCode();
+    return result;
+  }
+
   private int dateOfBirth;
   private BloodType bloodType;
   private String locationID;
