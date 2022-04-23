@@ -54,9 +54,6 @@ public class ParentController extends AppController {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
 
   /* Common UI */
   @FXML protected ImageView homeIcon;
@@ -85,7 +82,6 @@ public class ParentController extends AppController {
     OverdueHandler.init();
     CleanEquipmentHandler.init();
     if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
-    bindImage(BGImage, BGContainer);
     menuSlider(slider, burg, burgBack);
     initSequence();
     if (childContainer != null) mainBox = childContainer;
