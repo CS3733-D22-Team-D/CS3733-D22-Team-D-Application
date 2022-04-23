@@ -22,6 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,6 +127,7 @@ public class MapController extends ParentController {
 
   /*confirm cancel popup*/
   @FXML private VBox confirmPopup;
+  private List<PositionInfo> origPositions = new ArrayList<>();
 
   @FXML
   public void startFuzzySearch() {
@@ -138,7 +140,6 @@ public class MapController extends ParentController {
     mapFilter.setTranslateX(160);
     //    super.initialize(location, resources);
     //    bindImage(BGImage, BGContainer);
-    List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
       locationDAO.getAll().values().forEach(l -> origPositions.add(new PositionInfo(l)));
@@ -203,18 +204,65 @@ public class MapController extends ParentController {
     //    filterSlider(mapFilter, burg, burgBack);
   }
 
+  private void difference(List<PositionInfo> newPos, List<PositionInfo> oldPos) {
+    List<PositionInfo> dif = new ArrayList<>(oldPos);
+    for (int i = 0; i < newPos.size(); i++) {
+      if (!oldPos.contains(newPos.get(i))) {
+        boolean added = false;
+        for (int j = 0; j < oldPos.size(); j++) {
+          if (newPos.get(i).getId().equals(oldPos.get(j).getId())) {
+            added = true;
+            dif.remove(oldPos.get(j));
+            glyphs.remove(oldPos.get(j));
+            glyphs.addPosition(newPos.get(i));
+          }
+        }
+        if (!added) {
+          glyphs.addPosition(newPos.get(i));
+        }
+      } else {
+        dif.remove(newPos.get(i));
+      }
+    }
+    for (PositionInfo l : dif) {
+      glyphs.remove(l);
+    }
+  }
+
   private void setListeners() {
     TableListeners.addListener(
         new Location().tableName(),
         TableListeners.eventListener(
             () -> {
-              // change whatever needs to be for the map
+              Platform.runLater(
+                  () -> {
+                    List<PositionInfo> newPos = new ArrayList<>();
+                    // Initialize DAO objects
+                    try {
+                      locationDAO.getAll().values().forEach(l -> newPos.add(new PositionInfo(l)));
+                    } catch (Exception e) {
+                      System.err.println("DAO could not be created in MapController\n");
+                    };
+                    difference(newPos, origPositions);
+                    glyphs.setFloorFilter(maps.getFloor());
+                  });
             }));
     TableListeners.addListener(
         new MedicalEquipment().tableName(),
         TableListeners.eventListener(
             () -> {
-              // change whatever needs to be for the map
+              Platform.runLater(
+                      () -> {
+//                        List<PositionInfo> newPos = new ArrayList<>();
+//                        // Initialize DAO objects
+//                        try {
+//                          equipmentDAO.getAll().values().forEach(l -> newPos.add(new PositionInfo(l)));
+//                        } catch (Exception e) {
+//                          System.err.println("DAO could not be created in MapController\n");
+//                        };
+//                        difference(newPos, origPositions);
+//                        glyphs.setFloorFilter(maps.getFloor());
+                      });
             }));
     TableListeners.addListeners(
         DAOFacade.getAllRequests().stream()
@@ -225,7 +273,18 @@ public class MapController extends ParentController {
             .collect(Collectors.toCollection(ArrayList<String>::new)),
         TableListeners.eventListener(
             () -> {
-              // change whatever needs to be for the map
+              Platform.runLater(
+                      () -> {
+//                        List<PositionInfo> newPos = new ArrayList<>();
+//                        // Initialize DAO objects
+//                        try {
+//                          DAOFacade.getAllRequests().stream().forEach(l -> newPos.add(new PositionInfo(l)));
+//                        } catch (Exception e) {
+//                          System.err.println("DAO could not be created in MapController\n");
+//                        };
+//                        difference(newPos, origPositions);
+//                        glyphs.setFloorFilter(maps.getFloor());
+                      });
             }));
   }
 
