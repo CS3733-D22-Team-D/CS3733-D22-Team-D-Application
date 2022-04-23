@@ -62,9 +62,6 @@ public class MealController extends ParentController {
   @FXML private JFXComboBox<String> drinkBox;
   @FXML private JFXComboBox<String> dessertBox;
 
-  /* Unknown room label */
-  @FXML private Label errorLabel;
-
   private DAO<MealDeliveryRequest> mealDeliveryRequestDAO = DAOPouch.getMealDeliveryRequestDAO();
   private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   @FXML private GridPane table;
@@ -82,16 +79,15 @@ public class MealController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
 
     /* Init Request table */
-
     initBoxes();
-    onClear();
+    onClearClicked();
 
     t = new Table(table, 0);
     createTable();
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MealDeliveryRequest> reqs =
         new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
     t.setRows(reqs);
@@ -118,7 +114,7 @@ public class MealController extends ParentController {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(dessertBox, new FuzzySearchComparatorMethod());
   }
   /** Creates service request, executes when submit button is pressed */
-  public void onSubmit() {
+  public void onSubmitClicked() {
 
     // Check if all inputs are filled
     if (allFilled()) {
@@ -189,16 +185,15 @@ public class MealController extends ParentController {
       // throw error that not all fields are filled in
       showError("All fields must be filled.");
     }
-    onClear();
+    onClearClicked();
   }
 
   /** clears all options for creating service request, executes when clear button is pressed */
-  public void onClear() {
+  public void onClearClicked() {
     entreeBox.setValue("");
     sideBox.setValue("");
     drinkBox.setValue("");
     dessertBox.setValue("");
-    errorLabel.setText("");
     patientName.clear();
     patientLastName.clear();
     patientDOB.setValue(null);
