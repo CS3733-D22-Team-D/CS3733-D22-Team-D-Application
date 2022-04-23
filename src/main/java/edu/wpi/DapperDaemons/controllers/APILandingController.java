@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 
 public class APILandingController implements Initializable {
 
+  @FXML private Label dbLabel;
+
   @FXML private TextField teamDLoc;
   @FXML private Label errorLabel;
   private static String destIDTeamD;
@@ -24,6 +26,10 @@ public class APILandingController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    // Global init
+    dbLabel.setText("");
+    saveToDatabase();
+
     // Team D API Init
     teamDLoc.setText("");
     errorLabel.setText("");
@@ -35,12 +41,27 @@ public class APILandingController implements Initializable {
     zErrorLabel.setText("");
     teamZOriginID = "null";
     teamZDestinationID = "null";
+  }
 
+  /** Allows for requests submitted by the API to be saved to our database */
+  public void saveToDatabase() {}
+
+  /**
+   * Checks team D's location database for a given location ID
+   *
+   * @return true if the location is present in the API database
+   */
+  public boolean isInLocationDatabase(String locID) {
+    LocationAPI locationAPI = new LocationAPI();
+    for (LocationObj loc : locationAPI.getAllLocations()) {
+      if (loc.getNodeID().equals(locID)) return true;
+    }
+    return false;
   }
 
   /** Starts Team D Sanitation Request API (ours) */
   public void startTeamDApi() {
-    if (!isInTeamDLocations(teamDLoc.getText().trim())) {
+    if (!isInLocationDatabase(teamDLoc.getText().trim())) {
       errorLabel.setText("Error Invalid Location ID");
       return;
     }
@@ -51,33 +72,32 @@ public class APILandingController implements Initializable {
     try {
       api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destIDTeamD);
     } catch (Exception e) {
-      errorLabel.setText("Something Went Wrong");
+      errorLabel.setText("Team-D API Broke");
     }
   }
 
   /**
-   * Checks team D's location database for a given location ID
-   *
-   * @return true if the location is present in the API database
-   */
-  public boolean isInTeamDLocations(String locID) {
-    LocationAPI locationAPI = new LocationAPI();
-    for (LocationObj loc : locationAPI.getAllLocations()) {
-      if (loc.getNodeID().equals(locID)) return true;
-    }
-    return false;
-  }
-
-  /**
-   * Starts Team-Z's External Patient Request API
-   * Note: Uses custom CSS to fix some styling issues
+   * Starts Team-Z's External Patient Request
    */
   public void startTeamZApi() {
-    // TODO: Use API converter classes to update locations and employees
+    if (!isInLocationDatabase(zDest.getText().trim())
+        || !isInLocationDatabase(zOrigin.getText().trim())) {
+      zErrorLabel.setText("Error Invalid Location ID");
+      return;
+    }
+    teamZOriginID = zOrigin.getText();
+    teamZDestinationID = zDest.getText();
+
     API api = new API();
     try {
       api.run(
-          0, 0, 800, 500, "edu/wpi/DapperDaemons/assets/teamZAPI.css", "dPATI01505", "dPATI01505");
+          0,
+          0,
+          800,
+          500,
+          "edu/wpi/DapperDaemons/assets/teamZAPI.css",
+          teamZDestinationID,
+          teamZOriginID);
     } catch (Exception e) {
       System.err.println("Team Z's API Broke");
     }
