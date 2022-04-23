@@ -103,7 +103,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert::" />
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Dessert:" />
                               <JFXComboBox id="jButton" fx:id="dessertBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="5000.0" promptText="Select">
                                  <stylesheets>
                                     <URL value="@../assets/buttons.css" />
