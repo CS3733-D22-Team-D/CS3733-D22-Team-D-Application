@@ -13,7 +13,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 public class RowFactory {
@@ -45,15 +44,12 @@ public class RowFactory {
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
         item.setPadding(new Insets(0, 0, 0, 30));
-        box.setMaxWidth(Double.MAX_VALUE);
+        box.setMaxWidth(300);
         item.getChildren().add(box);
       } else {
         Text text = new Text(attr.toString());
         item.getChildren().add(text);
       }
-      item.setBackground(
-          new Background(
-              new BackgroundFill(Paint.valueOf("FFFEFE"), CornerRadii.EMPTY, Insets.EMPTY)));
       row.getChildren().add(item);
     }
     List<Node> ret = new ArrayList<>();

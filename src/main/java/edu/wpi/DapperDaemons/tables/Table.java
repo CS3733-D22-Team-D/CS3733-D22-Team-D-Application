@@ -79,36 +79,23 @@ public class Table<R> {
     final int targetRowIndex = rows.indexOf(type);
     List<Node> r = getRow(targetRowIndex);
     animate(0.92F, 0.25F, 0.11F, r);
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(1500);
-              } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-              }
-              Platform.runLater(
-                  () -> {
-                    table
-                        .getChildren()
-                        .removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
+    Platform.runLater(
+        () -> {
+          table.getChildren().removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
 
-                    // Update indexes for elements in further rows
-                    table
-                        .getChildren()
-                        .forEach(
-                            node -> {
-                              final int rowIndex = getRowIndexAsInteger(node);
-                              if (targetRowIndex < rowIndex) {
-                                GridPane.setRowIndex(node, rowIndex - 1);
-                              }
-                            });
-                    rows.remove(type);
+          // Update indexes for elements in further rows
+          table
+              .getChildren()
+              .forEach(
+                  node -> {
+                    final int rowIndex = getRowIndexAsInteger(node);
+                    if (targetRowIndex < rowIndex) {
+                      GridPane.setRowIndex(node, rowIndex - 1);
+                    }
                   });
-            })
-        .start();
-
+          rows.remove(type);
+        });
     // Remove children from row
-
   }
 
   public void removeChildren(R type) {
@@ -151,16 +138,25 @@ public class Table<R> {
     addRow(targetRowIndex, newObj);
     List<Node> r = getRow(targetRowIndex);
     animate(0.98F, 0.73F, 0.01F, r);
-    //    table
-    //        .getChildren()
-    //        .forEach(
-    //            node -> {
-    //              if (getRowIndexAsInteger(node) == targetRowIndex) {
-    //
-    //              }
-    //            });
     rows.remove(old);
     rows.add(targetRowIndex, newObj);
+  }
+
+  private void restyleRow(List<Node> row) {
+    row.forEach(
+        n -> {
+          ((VBox) n).setBackground(Background.EMPTY);
+          n.setStyle("-fx-background-color: FFFEFE;");
+        });
+    if (row.size() > 0) {
+      row.get(0).setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 10 0 0 10;");
+      ((VBox) row.get(0)).setPadding(new Insets(0, 0, 0, 15));
+      row.get(row.size() - 1)
+          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 10 10 0;");
+      Insets norm = ((VBox) row.get(row.size() - 1)).getPadding();
+      ((VBox) row.get(row.size() - 1))
+          .setPadding(new Insets(norm.getTop(), 15, norm.getBottom(), norm.getLeft()));
+    }
   }
 
   private void animate(float r, float g, float b, List<Node> row) {
@@ -190,6 +186,7 @@ public class Table<R> {
 
   public void addRow(int ind, R type) {
     List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
+    restyleRow(row);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
@@ -200,16 +197,7 @@ public class Table<R> {
 
   public void addRow(R type) {
     List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
-    if (row.size() > 0) {
-      ((VBox) row.get(0))
-          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 10 0 0 10;");
-      ((VBox) row.get(0)).setPadding(new Insets(0, 0, 0, 15));
-      ((VBox) row.get(row.size() - 1))
-          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 10 10 0;");
-      Insets norm = ((VBox) row.get(row.size() - 1)).getPadding();
-      ((VBox) row.get(row.size() - 1))
-          .setPadding(new Insets(norm.getTop(), 15, norm.getBottom(), norm.getLeft()));
-    }
+    restyleRow(row);
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
@@ -220,6 +208,16 @@ public class Table<R> {
     if (!rows.contains(type)) {
       rows.add(type);
       animate(0.38F, 1, 0.51F, r);
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                }
+                System.out.println("RESTLING");
+                restyleRow(row);
+              })
+          .start();
     }
   }
 }
