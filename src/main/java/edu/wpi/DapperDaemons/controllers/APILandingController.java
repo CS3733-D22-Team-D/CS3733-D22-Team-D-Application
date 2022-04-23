@@ -73,8 +73,7 @@ public class APILandingController implements Initializable {
    * Note: Uses custom CSS to fix some styling issues
    */
   public void startTeamZApi() {
-
-
+    // TODO: Use API converter classes to update locations and employees
     API api = new API();
     try {
       api.run(
