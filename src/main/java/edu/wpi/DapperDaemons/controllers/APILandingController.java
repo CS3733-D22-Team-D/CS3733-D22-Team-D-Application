@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.cs3733.D22.teamD.API.*;
+import edu.wpi.cs3733.D22.teamD.entities.Location;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,19 +27,24 @@ public class APILandingController implements Initializable {
 
   /** Starts Team D Sanitation Request API (ours) */
   public void startTeamDApi() {
-    if (!isInTeamDLocations(teamDLoc.getText().trim())) {
-      errorLabel.setText("Error Invalid Location ID");
-      return;
-    }
-    destID = teamDLoc.getText();
-    teamDLoc.setText("");
-    errorLabel.setText("");
-    StartAPI api = new StartAPI();
+       if (!isInTeamDLocations(teamDLoc.getText().trim())) {
+          errorLabel.setText("Error Invalid Location ID");
+          return;
+       }
+        destID = teamDLoc.getText();
+        teamDLoc.setText("");
+        errorLabel.setText("");
+    StartAPI api = null;
     try {
-      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeDark.css", destID);
-    } catch (Exception e) {
-      errorLabel.setText("Something Went Wrong");
+      api = new StartAPI();
+    } catch (ServiceException e) {
+      e.printStackTrace();
     }
+    try {
+         api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeDark.css", destID);
+       } catch (Exception e) {
+          errorLabel.setText("Something Went Wrong");
+       }
   }
 
   /**
@@ -47,10 +53,10 @@ public class APILandingController implements Initializable {
    * @return true if the location is present in the API database
    */
   public boolean isInTeamDLocations(String locID) {
-    LocationAPI locationAPI = new LocationAPI();
-    for (LocationObj loc : locationAPI.getAllLocations()) {
-      if (loc.getNodeID().equals(locID)) return true;
-    }
+       LocationAPI locationAPI = new LocationAPI();
+       for (Location loc : locationAPI.getAllLocations()) {
+         if (loc.getNodeID().equals(locID)) return true;
+        }
     return false;
   }
 }

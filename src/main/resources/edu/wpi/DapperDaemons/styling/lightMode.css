@@ -1,0 +1,114 @@
+
+/* file url: ../resources/edu/wpi/DapperDaemons/styling/lightMode.css */
+
+
+/* Fonts */
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Black.ttf');
+}
+
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Bold.ttf');
+}
+
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_ExtraBold.ttf');
+}
+
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_ExtraLight.ttf');
+}
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Light.ttf');
+}
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Medium.ttf');
+}
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Regular.ttf');
+}
+
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_SemiBold.ttf');
+}
+
+@font-face {
+    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Thin.ttf');
+}
+
+/* Header and Parent */
+.normalText{
+    -fx-font-family: Inter-SemiBold;
+    -fx-color: #FFFFFF;
+    -fx-font-size: 14px;
+}
+.title{
+    -fx-font-family: Inter-Bold;
+    -fx-color: #FFFFFF;
+    -fx-font-size: 28px;
+}
+
+.headerBackground{
+    -fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A);
+
+}
+
+
+
+/* Request Page Elements */
+
+#pageBackground {
+    -fx-background-color: #F1F0F0;
+}
+
+#pageCard{
+    -fx-border-radius: 7.5;
+    -fx-border-width: 1px;
+    -fx-border-color: #323232 15%;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, #323232 ,8, 0.15, -2, 2);
+}
+
+#cardTitle{
+    -fx-font-family: Inter-SemiBold;
+    -fx-color: #052F92;
+    -fx-font-size: 18px;
+}
+
+#cardText{
+    -fx-font-family: Inter-SemiBold;
+    -fx-color: #2F2F2F;
+    -fx-font-size: 14px;
+}
+
+#cardInput{
+    -fx-border-radius: 7.5;
+    -fx-border-width: 1px;
+    -fx-border-color: #323232 15%;
+    -fx-background-color: #F1F0F0;
+    -fx-effect: dropshadow(gaussian, #323232 ,8, 0.15, -2, 2);
+
+}
+
+#confirmButton {
+    -fx-border-radius: 7.5;
+    -fx-background-color: #052F92;
+}
+
+#cancelButton{
+
+
+}
+
+
+/* Table Specific Elements */
+.columnLabel{
+    -fx-font-family: Inter-Regular;
+    -fx-color: #2F2F2F;
+    -fx-font-size: 12px;
+}
+
+
+
+
+

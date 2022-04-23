@@ -46,7 +46,7 @@
             </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <VBox fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
+                  <VBox id="headerBackground" fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
                      <children>
                         <JFXButton id="slider" onMouseClicked="#goHome" stylesheets="@../assets/buttons.css" text="Home" textFill="WHITE">
                            <font>
@@ -283,7 +283,7 @@
                   </VBox>
                </left>
                <top>
-                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" BorderPane.alignment="CENTER">
+                  <HBox id="headerBackground" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER" onMouseClicked="#goHome" prefHeight="51.0" prefWidth="42.0">
                            <children>
@@ -429,12 +429,9 @@
                            <graphic>
                               <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0">
                                  <children>
-                                    <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="2.0" />
-                                       </HBox.margin>
+                                    <Text fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="account Name">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Text>
                                     <Circle fx:id="profilePic" fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
@@ -583,7 +580,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
                <children>
                   <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="70.0" minHeight="0.0" prefHeight="0.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 7.5 7.5;" vbarPolicy="NEVER" visible="false">
                      <HBox.margin>
