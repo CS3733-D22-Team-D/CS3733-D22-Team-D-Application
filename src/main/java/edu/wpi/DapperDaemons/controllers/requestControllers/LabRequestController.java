@@ -11,19 +11,23 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
 
   /* Table Object and Helper */
-  @FXML private TableView<LabRequest> labReqTable;
+  @FXML private HBox header;
   private TableHelper<LabRequest> tableHelper;
 
   /* UI Fields */
@@ -38,6 +42,8 @@ public class LabRequestController extends ParentController {
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
   private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  @FXML private GridPane table;
+  private Table<LabRequest> t;
 
   /* Labels */
   @FXML private Label errorLabel;
@@ -51,13 +57,22 @@ public class LabRequestController extends ParentController {
     init.initializeTable();
     init.initializeInputs();
 
-    try {
-      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, Lab Req table was unable to be created\n");
-    }
-    setListeners();
+    //    try {
+    //      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //      System.err.print("Error, Lab Req table was unable to be created\n");
+    //    }
+    //    setListeners();
+    t = new Table(table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new LabRequest());
   }
 
   private void setListeners() {
@@ -65,8 +80,9 @@ public class LabRequestController extends ParentController {
         new LabRequest().tableName(),
         TableListeners.eventListener(
             () -> {
-              labReqTable.getItems().clear();
-              labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
+              //              labReqTable.getItems().clear();
+              //              labReqTable.getItems().addAll(new
+              // ArrayList(labRequestDAO.getAll().values()));
             }));
   }
 
@@ -167,7 +183,7 @@ public class LabRequestController extends ParentController {
     boolean hadClearance = false;
     hadClearance = labRequestDAO.add(request);
     if (hadClearance) {
-      labReqTable.getItems().add(request);
+      //      labReqTable.getItems().add(request);
     }
 
     return hadClearance;
@@ -181,8 +197,8 @@ public class LabRequestController extends ParentController {
   private class LabRequestInitializer {
     private void initializeTable() {
       // Bind values to column values
-      tableHelper = new TableHelper<>(labReqTable, 0);
-      tableHelper.linkColumns(LabRequest.class);
+      //      tableHelper = new TableHelper<>(labReqTable, 0);
+      //      tableHelper.linkColumns(LabRequest.class);
     }
 
     private void initializeInputs() {
