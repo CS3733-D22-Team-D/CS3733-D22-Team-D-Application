@@ -84,7 +84,7 @@ public class ParentController extends AppController {
     super.initialize(location, resources);
     OverdueHandler.init();
     CleanEquipmentHandler.init();
-    if (!AutoSave.started()) AutoSave.start(1, autoSaveIcon);
+    if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
     bindImage(BGImage, BGContainer);
     menuSlider(slider, burg, burgBack);
     initSequence();

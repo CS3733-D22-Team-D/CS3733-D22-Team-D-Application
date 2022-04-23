@@ -43,10 +43,15 @@ public class Table<R extends TableObject> {
     List<R> dif = new ArrayList<>(update);
     for (int i = 0; i < cons.size(); i++) {
       if (!update.contains(cons.get(i))) {
-        if (cons.get(i).getAttribute(1).equals(update.get(i).getAttribute(1))) {
-          dif.remove(update.get(i));
-          updateRow(update.get(i), cons.get(i));
-        } else {
+        boolean added = false;
+        for (int j = 0; j < update.size(); j++) {
+          if (cons.get(i).getAttribute(1).equals(update.get(j).getAttribute(1))) {
+            added = true;
+            dif.remove(update.get(j));
+            updateRow(update.get(j), cons.get(i));
+          }
+        }
+        if (!added) {
           addRow(cons.get(i));
         }
       } else {
@@ -68,20 +73,38 @@ public class Table<R extends TableObject> {
 
   public void removeRow(R type) {
     final int targetRowIndex = rows.indexOf(type);
-    // Remove children from row
-    table.getChildren().removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
-
-    // Update indexes for elements in further rows
-    table
-        .getChildren()
-        .forEach(
-            node -> {
-              final int rowIndex = getRowIndexAsInteger(node);
-              if (targetRowIndex < rowIndex) {
-                GridPane.setRowIndex(node, rowIndex - 1);
+    List<Node> r = getRow(targetRowIndex);
+    animate(0.92F, 0.25F, 0.11F, r);
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(1500);
+              } catch (InterruptedException e) {
+                throw new RuntimeException(e);
               }
-            });
-    rows.remove(type);
+              Platform.runLater(
+                  () -> {
+                    table
+                        .getChildren()
+                        .removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
+
+                    // Update indexes for elements in further rows
+                    table
+                        .getChildren()
+                        .forEach(
+                            node -> {
+                              final int rowIndex = getRowIndexAsInteger(node);
+                              if (targetRowIndex < rowIndex) {
+                                GridPane.setRowIndex(node, rowIndex - 1);
+                              }
+                            });
+                    rows.remove(type);
+                  });
+            })
+        .start();
+
+    // Remove children from row
+
   }
 
   public void removeChildren(R type) {
