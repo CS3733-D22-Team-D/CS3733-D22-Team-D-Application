@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +13,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 
 public class RowFactory {
 
@@ -42,10 +44,12 @@ public class RowFactory {
         Enum<?> e = (Enum<?>) attr;
         List<String> allAttrs = TableHelper.convertEnum(e.getClass());
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
-        box.setOnAction(event->{
-          TableObject t = type.newInstance(new ArrayList<>());
-          Enum.valueOf(e.getClass(),box.getValue());
-        });
+        box.setOnInputMethodTextChanged(
+            event -> {
+              int index = getAttributeIndex(type, attr);
+              if (index != -1) type.setAttribute(index, box.getValue());
+              DAOPouch.getDAO(type).update(type);
+            });
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
         box.setMinWidth(Region.USE_COMPUTED_SIZE);
@@ -56,7 +60,19 @@ public class RowFactory {
         box.setMaxHeight(Region.USE_COMPUTED_SIZE);
         toMakeThingsEasier.getChildren().add(box);
       } else {
-        Text text = new Text(attr.toString());
+        TextField text = new TextField(attr.toString());
+        text.setOnKeyPressed(
+            event -> {
+              if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("Updating: " + type);
+                int index =
+                    getAttributeIndex(type, DAOPouch.getDAO(type).get(type.getAttribute(1)));
+                if (index != -1) {
+                  type.setAttribute(index, text.getText());
+                  DAOPouch.getDAO(type).update(type);
+                }
+              }
+            });
         toMakeThingsEasier.getChildren().add(text);
       }
       toMakeThingsEasier.setBackground(
@@ -68,5 +84,19 @@ public class RowFactory {
     ret.addAll(row.getChildren());
     ret.add(loaded.getChildren().get(1));
     return ret;
+  }
+
+  private static int getAttributeIndex(TableObject object, Object item) {
+    int i = 1;
+    while (true) {
+      try {
+        if (object.getAttribute(i).equals(item.toString())) {
+          return i;
+        }
+      } catch (IndexOutOfBoundsException e) {
+        return -1;
+      }
+      i++;
+    }
   }
 }
