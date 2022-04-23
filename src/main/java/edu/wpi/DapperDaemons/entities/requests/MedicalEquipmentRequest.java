@@ -323,12 +323,24 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof MedicalEquipmentRequest) {
-      MedicalEquipmentRequest request = (MedicalEquipmentRequest) obj;
-      return (request.getNodeID().equals(this.getNodeID())
-          && request.getEquipmentID().equals(this.getNodeID()));
-    } else return false;
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    MedicalEquipmentRequest that = (MedicalEquipmentRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assigneeID.equals(that.assigneeID)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    if (!equipmentID.equals(that.equipmentID)) return false;
+    if (equipmentType != that.equipmentType) return false;
+    if (cleanStatus != that.cleanStatus) return false;
+    return dateNeeded.equals(that.dateNeeded);
   }
 
   public void setStatus(RequestStatus status) {

@@ -79,7 +79,7 @@ public class EquipmentCleaningController extends ParentController {
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     t.setRows(reqs);
-    //          t.setListeners(new MedicalEquipmentRequest());
+    t.setListeners(new MedicalEquipmentRequest());
   }
 
   private void setListeners() {
