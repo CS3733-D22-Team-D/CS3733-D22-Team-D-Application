@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 
 public class APILandingController implements Initializable {
 
@@ -61,6 +62,7 @@ public class APILandingController implements Initializable {
 
   /** Starts Team D Sanitation Request API (ours) */
   public void startTeamDApi() {
+    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
     if (!isInLocationDatabase(teamDLoc.getText().trim())) {
       errorLabel.setText("Error Invalid Location ID");
       return;
@@ -73,7 +75,10 @@ public class APILandingController implements Initializable {
       api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destIDTeamD);
     } catch (Exception e) {
       errorLabel.setText("Team-D API Broke");
+      return;
     }
+    dbLabel.setText("You may have unsaved requests!");
+    dbLabel.setTextFill(Paint.valueOf("EF5353"));
   }
 
   /**
@@ -100,6 +105,9 @@ public class APILandingController implements Initializable {
           teamZOriginID);
     } catch (Exception e) {
       System.err.println("Team Z's API Broke");
+      return;
     }
+    dbLabel.setText("You may have unsaved requests!");
+    dbLabel.setTextFill(Paint.valueOf("EF5353"));
   }
 }
