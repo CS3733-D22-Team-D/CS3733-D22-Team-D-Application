@@ -36,6 +36,7 @@ public class RowFactory {
       VBox item = new VBox();
       item.setAlignment(Pos.CENTER_LEFT);
       HBox.setHgrow(item, Priority.ALWAYS);
+      item.setPrefHeight(50);
       if (attr instanceof Node) row.getChildren().add((Node) attr);
       if (attr instanceof Enum) {
         Enum<?> e = (Enum<?>) attr;
