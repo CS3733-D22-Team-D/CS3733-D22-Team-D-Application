@@ -44,12 +44,6 @@ public class RowFactory {
         Enum<?> e = (Enum<?>) attr;
         List<String> allAttrs = TableHelper.convertEnum(e.getClass());
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
-        box.setOnInputMethodTextChanged(
-            event -> {
-              int index = getAttributeIndex(type, attr);
-              if (index != -1) type.setAttribute(index, box.getValue());
-              DAOPouch.getDAO(type).update(type);
-            });
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
         box.setMinWidth(Region.USE_COMPUTED_SIZE);
@@ -61,18 +55,6 @@ public class RowFactory {
         toMakeThingsEasier.getChildren().add(box);
       } else {
         TextField text = new TextField(attr.toString());
-        text.setOnKeyPressed(
-            event -> {
-              if (event.getCode() == KeyCode.ENTER) {
-                System.out.println("Updating: " + type);
-                int index =
-                    getAttributeIndex(type, DAOPouch.getDAO(type).get(type.getAttribute(1)));
-                if (index != -1) {
-                  type.setAttribute(index, text.getText());
-                  DAOPouch.getDAO(type).update(type);
-                }
-              }
-            });
         toMakeThingsEasier.getChildren().add(text);
       }
       toMakeThingsEasier.setBackground(
@@ -84,19 +66,5 @@ public class RowFactory {
     ret.addAll(row.getChildren());
     ret.add(loaded.getChildren().get(1));
     return ret;
-  }
-
-  private static int getAttributeIndex(TableObject object, Object item) {
-    int i = 1;
-    while (true) {
-      try {
-        if (object.getAttribute(i).equals(item.toString())) {
-          return i;
-        }
-      } catch (IndexOutOfBoundsException e) {
-        return -1;
-      }
-      i++;
-    }
   }
 }
