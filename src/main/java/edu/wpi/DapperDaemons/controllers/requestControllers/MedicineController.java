@@ -7,16 +7,13 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -45,7 +42,7 @@ public class MedicineController extends ParentController {
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
-  private HashMap<String, Integer> rows = new HashMap<>();
+  private Table<MedicineRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -56,31 +53,17 @@ public class MedicineController extends ParentController {
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
     priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
-    table.getColumnConstraints().get(0).fillWidthProperty().setValue(false);
+    t = new Table<>(table, 0);
     createTable();
-    setListeners();
     onClearClicked();
-    //    Table.removeRow(table, 1);
   }
 
   private void createTable() {
-    Table.setHeader(header, new ArrayList<String>(List.of(new String[] {"Test", "Test", "Test"})));
-    List<TableObject> reqs = new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
-    for (int i = 0; i < reqs.size(); i++) {
-      rows.put(reqs.get(i).getAttribute(1), Table.addRow(table, reqs.get(i), 0, i));
-    }
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new MedicineRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              medicineRequests.getItems().clear();
-              //              medicineRequests
-              //                  .getItems()
-              //                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
-            }));
+    t.setHeader(header, new ArrayList<String>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicineRequest> reqs =
+        new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new MedicineRequest());
   }
 
   /** Clears the fields when clicked */

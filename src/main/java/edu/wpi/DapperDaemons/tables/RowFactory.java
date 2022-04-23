@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.App;
-import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,10 +12,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 public class RowFactory {
 
@@ -54,7 +52,7 @@ public class RowFactory {
         box.setMaxHeight(Region.USE_COMPUTED_SIZE);
         toMakeThingsEasier.getChildren().add(box);
       } else {
-        TextField text = new TextField(attr.toString());
+        Text text = new Text(attr.toString());
         toMakeThingsEasier.getChildren().add(text);
       }
       toMakeThingsEasier.setBackground(
@@ -64,7 +62,6 @@ public class RowFactory {
     }
     List<Node> ret = new ArrayList<>();
     ret.addAll(row.getChildren());
-    ret.add(loaded.getChildren().get(1));
     return ret;
   }
 }
