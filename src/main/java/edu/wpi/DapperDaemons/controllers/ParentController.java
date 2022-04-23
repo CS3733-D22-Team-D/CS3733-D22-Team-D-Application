@@ -54,7 +54,6 @@ public class ParentController extends AppController {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
 
-
   /* Common UI */
   @FXML protected ImageView homeIcon;
   @FXML private JFXHamburger burg;

@@ -19,6 +19,7 @@
 
 #slider.button{
     -fx-cursor: hand;
+    /*admin: ;*/
 }
 
 #slider.button:hover {

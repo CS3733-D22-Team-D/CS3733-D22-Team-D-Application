@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="499.0" prefWidth="1034.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
+<HBox id="background" prefHeight="467.0" prefWidth="393.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.MedicineController">
    <children>
       <VBox maxHeight="440.0" maxWidth="520.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
          <children>
@@ -217,19 +217,22 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                  <HBox prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
                      <children>
                         <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Deliveries">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets />
                            </HBox.margin>
                         </Text>
                      </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </padding>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
