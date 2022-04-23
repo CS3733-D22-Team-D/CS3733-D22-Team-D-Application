@@ -323,4 +323,40 @@ public class LabRequest extends TableObject implements Request {
   public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LabRequest that = (LabRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assigneeID.equals(that.assigneeID)) return false;
+    if (!patientID.equals(that.patientID)) return false;
+    if (labType != that.labType) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    return dateNeeded.equals(that.dateNeeded);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assigneeID.hashCode();
+    result = 31 * result + patientID.hashCode();
+    result = 31 * result + labType.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
+  }
 }

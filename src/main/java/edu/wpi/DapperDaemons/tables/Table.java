@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class Table<R extends TableObject> {
+public class Table<R> {
 
   private List<R> rows = new ArrayList<>();
   private GridPane table;
@@ -29,12 +29,14 @@ public class Table<R extends TableObject> {
 
   public void setListeners(R type) {
     TableListeners.addListener(
-        type.tableName(),
+        ((TableObject) type).tableName(),
         TableListeners.eventListener(
             () -> {
               Platform.runLater(
                   () -> {
-                    difference(new ArrayList<R>(DAOPouch.getDAO(type).getAll().values()), rows);
+                    difference(
+                        new ArrayList<R>(DAOPouch.getDAO(((TableObject) type)).getAll().values()),
+                        rows);
                   });
             }));
   }
@@ -45,7 +47,9 @@ public class Table<R extends TableObject> {
       if (!update.contains(cons.get(i))) {
         boolean added = false;
         for (int j = 0; j < update.size(); j++) {
-          if (cons.get(i).getAttribute(1).equals(update.get(j).getAttribute(1))) {
+          if (((TableObject) cons.get(i))
+              .getAttribute(1)
+              .equals(((TableObject) update.get(j)).getAttribute(1))) {
             added = true;
             dif.remove(update.get(j));
             updateRow(update.get(j), cons.get(i));
@@ -185,27 +189,33 @@ public class Table<R extends TableObject> {
   }
 
   public void addRow(int ind, R type) {
-    List<Node> row = RowFactory.createRow(type, tableNum);
+    List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
     c.setHgrow(Priority.ALWAYS);
-    table.getColumnConstraints().add(c);
-    table.getColumnConstraints().get(0).setHgrow(Priority.NEVER);
+    table.getColumnConstraints().clear();
+    row.forEach(e -> table.getColumnConstraints().add(c));
   }
 
   public void addRow(R type) {
-    List<Node> row = RowFactory.createRow(type, tableNum);
+    List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
     if (row.size() > 0) {
       ((VBox) row.get(0))
           .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 10 0 0 10;");
+      ((VBox) row.get(0)).setPadding(new Insets(0, 0, 0, 15));
+      ((VBox) row.get(row.size() - 1))
+          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 10 10 0;");
+      Insets norm = ((VBox) row.get(row.size() - 1)).getPadding();
+      ((VBox) row.get(row.size() - 1))
+          .setPadding(new Insets(norm.getTop(), 15, norm.getBottom(), norm.getLeft()));
     }
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
     c.setHgrow(Priority.ALWAYS);
-    table.getColumnConstraints().add(c);
-    table.getColumnConstraints().get(0).setHgrow(Priority.NEVER);
+    table.getColumnConstraints().clear();
+    row.forEach(e -> table.getColumnConstraints().add(c));
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);

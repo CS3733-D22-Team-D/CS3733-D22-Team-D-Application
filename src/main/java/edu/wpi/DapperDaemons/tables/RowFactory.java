@@ -34,9 +34,9 @@ public class RowFactory {
     row = (HBox) loader.getNamespace().get("contents");
     List<Object> attributes = TableHelper.getDataList(type, tableNum);
     for (Object attr : attributes) {
-      VBox toMakeThingsEasier = new VBox();
-      toMakeThingsEasier.setAlignment(Pos.CENTER);
-      HBox.setHgrow(toMakeThingsEasier, Priority.ALWAYS);
+      VBox item = new VBox();
+      item.setAlignment(Pos.CENTER_LEFT);
+      HBox.setHgrow(item, Priority.ALWAYS);
       if (attr instanceof Node) row.getChildren().add((Node) attr);
       if (attr instanceof Enum) {
         Enum<?> e = (Enum<?>) attr;
@@ -44,21 +44,17 @@ public class RowFactory {
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
-        box.setMinWidth(Region.USE_COMPUTED_SIZE);
-        box.setMinHeight(Region.USE_COMPUTED_SIZE);
-        box.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        box.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        box.setMaxWidth(Region.USE_COMPUTED_SIZE);
-        box.setMaxHeight(Region.USE_COMPUTED_SIZE);
-        toMakeThingsEasier.getChildren().add(box);
+        item.setPadding(new Insets(0, 0, 0, 30));
+        box.setMaxWidth(Double.MAX_VALUE);
+        item.getChildren().add(box);
       } else {
         Text text = new Text(attr.toString());
-        toMakeThingsEasier.getChildren().add(text);
+        item.getChildren().add(text);
       }
-      toMakeThingsEasier.setBackground(
+      item.setBackground(
           new Background(
               new BackgroundFill(Paint.valueOf("FFFEFE"), CornerRadii.EMPTY, Insets.EMPTY)));
-      row.getChildren().add(toMakeThingsEasier);
+      row.getChildren().add(item);
     }
     List<Node> ret = new ArrayList<>();
     ret.addAll(row.getChildren());
