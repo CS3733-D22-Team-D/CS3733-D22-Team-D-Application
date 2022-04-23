@@ -30,6 +30,7 @@ public class NodeConnectionHandler {
         Double currentDistance = getDistance(location, newNode);
         if (currentDistance < bestDistance) {
           bestLocation = location;
+          bestDistance = currentDistance;
         }
       }
     }
@@ -54,7 +55,13 @@ public class NodeConnectionHandler {
         Math.sqrt(
             Math.pow(Math.abs((currentLocation.getXcoord() - nextLocation.getXcoord())), 2)
                 + Math.pow(Math.abs((currentLocation.getYcoord() - nextLocation.getYcoord())), 2));
-    System.out.println("Cap detection spotted at " + distance);
+    System.out.println(
+        "Distance from  "
+            + currentLocation.getNodeID()
+            + " To "
+            + nextLocation.getNodeID()
+            + " Is "
+            + distance);
     return distance;
   }
 }

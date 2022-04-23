@@ -67,7 +67,6 @@ public class ShowConnections {
       pathLine.setStrokeWidth(6.0);
       pathLine.setStrokeLineCap(StrokeLineCap.SQUARE);
       lineLayer.getChildren().add(pathLine);
-      System.out.println("Adding line");
     }
 
     makeAllInVisible();
@@ -77,7 +76,7 @@ public class ShowConnections {
 
   public void filterByFloor(String floor) {
     makeAllInVisible();
-    System.out.println("Should be showing on map");
+    System.out.println("Resetting for your floor");
     for (LocationNodeConnections connection : actualConnections) {
       String nodeID = connection.getConnectionOne();
       if (DAOPouch.getLocationDAO().get(nodeID).getFloor().equals(floor))
