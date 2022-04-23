@@ -59,7 +59,7 @@ public class MedicineController extends ParentController {
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicineRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
     t.setRows(reqs);

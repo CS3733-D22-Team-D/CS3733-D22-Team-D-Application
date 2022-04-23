@@ -69,7 +69,7 @@ public class LabRequestController extends ParentController {
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
     t.setRows(reqs);
     t.setListeners(new LabRequest());

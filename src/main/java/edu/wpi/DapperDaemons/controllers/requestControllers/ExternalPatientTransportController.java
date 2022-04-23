@@ -50,7 +50,7 @@ public class ExternalPatientTransportController extends ParentController {
 
   /* Dropdown boxes */
   @FXML private JFXComboBox<String> roomBox;
-  @FXML private JFXComboBox<String> pBox;
+  @FXML private JFXComboBox<String> priorityIn;
 
   /* Text Boxes */
   @FXML private TextField patientFirstName;
@@ -80,7 +80,7 @@ public class ExternalPatientTransportController extends ParentController {
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
     t.setRows(reqs);
@@ -108,7 +108,7 @@ public class ExternalPatientTransportController extends ParentController {
   @FXML
   public void onClearClicked() {
     roomBox.setValue("");
-    pBox.setValue("");
+    priorityIn.setValue("");
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
@@ -119,14 +119,14 @@ public class ExternalPatientTransportController extends ParentController {
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
 
   @FXML
   public void onSubmitClicked() {
 
     if (fieldsNonEmpty()) {
-      Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID;
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -208,7 +208,7 @@ public class ExternalPatientTransportController extends ParentController {
   public boolean fieldsNonEmpty() {
 
     return !(roomBox.getValue().equals("")
-        || pBox.getValue().equals("")
+        || priorityIn.getValue().equals("")
         || patientFirstName.getText().equals("")
         || patientLastName.getText().equals("")
         || patientDOB.getValue() == null
@@ -222,7 +222,7 @@ public class ExternalPatientTransportController extends ParentController {
 
   private void initializeInputs() {
 
-    pBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(tableHelper.convertEnum(Request.Priority.class)));
     roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNamesExit()));
 

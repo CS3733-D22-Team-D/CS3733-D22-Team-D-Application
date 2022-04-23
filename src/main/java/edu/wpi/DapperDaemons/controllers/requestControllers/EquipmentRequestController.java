@@ -37,9 +37,9 @@ public class EquipmentRequestController extends ParentController {
   private TableHelper<MedicalEquipmentRequest> tableHelper;
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
-  @FXML private JFXComboBox<String> priorityBox;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentTypeBox;
-  @FXML private JFXComboBox<String> roomBox;
+  @FXML private JFXComboBox<String> locationBox;
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
@@ -65,9 +65,9 @@ public class EquipmentRequestController extends ParentController {
 
   @FXML
   public void startFuzzySearch() {
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentTypeBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
   }
 
   @Override
@@ -80,7 +80,7 @@ public class EquipmentRequestController extends ParentController {
   }
 
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     t.setRows(reqs);
@@ -111,9 +111,9 @@ public class EquipmentRequestController extends ParentController {
 
   @FXML
   public void onClearClicked() {
-    priorityBox.setValue("");
+    priorityIn.setValue("");
     equipmentTypeBox.setValue("");
-    roomBox.setValue("");
+    locationBox.setValue("");
     // notes.setText("");
     dateNeeded.setValue(null);
     notes.setText("");
@@ -125,7 +125,7 @@ public class EquipmentRequestController extends ParentController {
     // make sure all fields are filled
     if (allFieldsFilled()) {
       // get all the variables ready to go
-      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -190,7 +190,7 @@ public class EquipmentRequestController extends ParentController {
 
         // check if room exists
         cleanStatus = equipment.getCleanStatus();
-        roomID = roomBox.getValue();
+        roomID = locationBox.getValue();
         int numCorrectLocations = 0;
         numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
         if (numCorrectLocations >= 1) {
@@ -229,22 +229,22 @@ public class EquipmentRequestController extends ParentController {
   }
 
   private boolean allFieldsFilled() {
-    return !(priorityBox.getValue().equals("")
+    return !(priorityIn.getValue().equals("")
         || equipmentTypeBox.getValue().equals("")
-        || roomBox.getValue().equals("")
+        || locationBox.getValue().equals("")
         || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {
-    priorityBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     equipmentTypeBox.setItems(
         FXCollections.observableArrayList(
             TableHelper.convertEnum(MedicalEquipment.EquipmentType.class)));
-    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    locationBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) roomBox.getScene().getWindow());
+    super.saveToCSV(new MedicalEquipmentRequest(), (Stage) locationBox.getScene().getWindow());
   }
 }

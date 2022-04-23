@@ -6,6 +6,8 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
@@ -37,7 +39,7 @@ public class LanguageRequestController extends ParentController {
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> languageBox;
-  @FXML private JFXComboBox<String> roomBox;
+  @FXML private JFXComboBox<String> locationBox;
   @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
   /* Table Columns */
@@ -65,8 +67,14 @@ public class LanguageRequestController extends ParentController {
     createTable();
   }
 
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(languageBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
+  }
+
   private void createTable() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
     t.setRows(reqs);
@@ -89,7 +97,7 @@ public class LanguageRequestController extends ParentController {
   @FXML
   public void onClearClicked() {
     languageBox.setValue("");
-    roomBox.setValue("");
+    locationBox.setValue("");
     dateNeeded.setValue(null);
     notes.setText("");
   }
@@ -114,7 +122,8 @@ public class LanguageRequestController extends ParentController {
       String requesterID = SecurityController.getUser().getNodeID();
       String assignee = "none";
       String roomID =
-          (new ArrayList<Location>(DAOPouch.getLocationDAO().filter(7, roomBox.getValue()).values())
+          (new ArrayList<Location>(
+                  DAOPouch.getLocationDAO().filter(7, locationBox.getValue()).values())
               .get(0)
               .getNodeID());
       if (!addItem(
@@ -139,17 +148,17 @@ public class LanguageRequestController extends ParentController {
 
   private boolean allFieldsFilled() {
     return !(languageBox.getValue().equals("")
-        || roomBox.getValue().equals("")
+        || locationBox.getValue().equals("")
         || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {
     languageBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
-    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    locationBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new LanguageRequest(), (Stage) roomBox.getScene().getWindow());
+    super.saveToCSV(new LanguageRequest(), (Stage) locationBox.getScene().getWindow());
   }
 }

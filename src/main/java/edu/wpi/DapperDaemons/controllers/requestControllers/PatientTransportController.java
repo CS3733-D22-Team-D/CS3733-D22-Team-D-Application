@@ -29,13 +29,13 @@ public class PatientTransportController extends ParentController {
 
   /* Dropdown boxes */
   @FXML private JFXComboBox<String> roomBox;
-  @FXML private JFXComboBox<String> pBox;
+  @FXML private JFXComboBox<String> priorityIn;
 
   @FXML private GridPane table;
   private Table<PatientTransportRequest> requestTable;
 
   /* Text Boxes */
-  @FXML private TextField patientFirstName;
+  @FXML private TextField patientName;
   @FXML private TextField patientLastName;
   @FXML private DatePicker patientDOB;
   @FXML private TextField notes;
@@ -63,8 +63,8 @@ public class PatientTransportController extends ParentController {
   @FXML
   public void onClearClicked() {
     roomBox.setValue("");
-    pBox.setValue("");
-    patientFirstName.setText("");
+    priorityIn.setValue("");
+    patientName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
     notes.setText("");
@@ -74,14 +74,14 @@ public class PatientTransportController extends ParentController {
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
 
   @FXML
   public void onSubmitClicked() {
 
     if (fieldsNonEmpty()) {
-      Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID;
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -111,7 +111,7 @@ public class PatientTransportController extends ParentController {
         boolean isAPatient = false;
         Patient patient = new Patient();
         patientID =
-            patientFirstName.getText()
+            patientName.getText()
                 + patientLastName.getText()
                 + patientDOB.getValue().getMonthValue()
                 + patientDOB.getValue().getDayOfMonth()
@@ -119,7 +119,7 @@ public class PatientTransportController extends ParentController {
 
         patient = patientDAO.get(patientID);
         try {
-          isAPatient = patient.getFirstName().equals(patientFirstName.getText());
+          isAPatient = patient.getFirstName().equals(patientName.getText());
         } catch (NullPointerException e) {
           e.printStackTrace();
         }
@@ -163,8 +163,8 @@ public class PatientTransportController extends ParentController {
   public boolean fieldsNonEmpty() {
 
     return !(roomBox.getValue().equals("")
-        || pBox.getValue().equals("")
-        || patientFirstName.getText().equals("")
+        || priorityIn.getValue().equals("")
+        || patientName.getText().equals("")
         || patientLastName.getText().equals("")
         || patientDOB.getValue() == null
         || dateNeeded.getValue() == null);
