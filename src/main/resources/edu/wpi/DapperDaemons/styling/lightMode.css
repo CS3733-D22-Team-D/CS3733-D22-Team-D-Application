@@ -1,49 +1,23 @@
 
 /* file url: ../resources/edu/wpi/DapperDaemons/styling/lightMode.css */
 
+@font-face {
+    font-family: interBold;
+    src: url('interBold.ttf');
+}
 
-/* Fonts */
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Black.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Bold.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_ExtraBold.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_ExtraLight.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Light.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Medium.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Regular.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_SemiBold.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    src: url('../resources/edu/wpi/DapperDaemons/styling/interFont/Inter_Thin.ttf');*/
-/*}*/
-
+@font-face {
+    font-family: interSemiBold;
+    src: url('interSemiBold.ttf');
+}
 /* Header and Parent */
 #normalText{
-    -fx-font-family: Inter_SemiBold !important;
+    -fx-font-family: "interSemiBold" !important;
     -fx-fill: #FFFFFF !important;
     -fx-font-size: 14px !important;
 }
 #title{
-    -fx-font-family: Inter_Bold !important;
+    -fx-font-family: "interBold" !important;
     -fx-fill: #FFFFFF !important;
     -fx-font-size: 28px !important;
 }
@@ -73,13 +47,13 @@
 }
 
 #cardTitle{
-    -fx-font-family: Inter_SemiBold;
+    -fx-font-family: interSemiBold;
     -fx-fill: #052F92;
     -fx-font-size: 18px;
 }
 
 #cardText{
-    -fx-font-family: Inter_SemiBold;
+    -fx-font-family: interSemiBold;
     -fx-fill: #2F2F2F;
     -fx-font-size: 14px;
 }
@@ -106,7 +80,7 @@
 
 /* Table Specific Elements */
 .columnLabel{
-    -fx-font-family: Inter Regular;
+    -fx-font-family: interRegular;
     -fx-color: #2F2F2F;
     -fx-font-size: 12px;
 }

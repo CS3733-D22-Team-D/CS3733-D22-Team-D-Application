@@ -14,7 +14,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -27,15 +26,6 @@
    <children>
       <StackPane id="pageBackground" fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" stylesheets="@../styling/lightMode.css" VBox.vgrow="ALWAYS">
          <children>
-            <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../assets/Brigham-Blurred.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
             <HBox fx:id="childContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
                <StackPane.margin>
                   <Insets />
