@@ -24,8 +24,9 @@ public class DAOFacade {
         .values()
         .forEach(
             e -> {
-              if (!e.getNodeType().equals("PATH")) // If its not a path node
-              all.add(e.getLongName());
+              if (!e.getNodeType().equals("PATH")) { // If its not a path node
+                all.add(e.getLongName());
+              }
             });
     return all;
   }

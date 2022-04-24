@@ -24,8 +24,7 @@ public class PositionInfo {
     ELEV,
     STOR,
     PATI,
-    DIRT,
-    PATH
+    DIRT
   }
 
   private Location loc;
@@ -46,7 +45,8 @@ public class PositionInfo {
         getX() <= (x + IMAGE_RADIUS)
         && getX() >= (x - IMAGE_RADIUS)
         && getY() <= (y + IMAGE_RADIUS)
-        && getY() >= (y - IMAGE_RADIUS);
+        && getY() >= (y - IMAGE_RADIUS)
+        && !loc.getNodeType().equals("PATH");
   }
 
   public String getId() {
