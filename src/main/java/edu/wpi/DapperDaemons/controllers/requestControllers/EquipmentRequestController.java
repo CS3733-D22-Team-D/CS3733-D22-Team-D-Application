@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
@@ -85,6 +86,7 @@ public class EquipmentRequestController extends ParentController {
     hadClearance = medicalEquipmentRequestDAO.add(request);
     if (hadClearance) {
       t.addRow(request);
+      App.LOG.info("Made a new medical equipment request using the pp!!");
     }
     return hadClearance;
   }
