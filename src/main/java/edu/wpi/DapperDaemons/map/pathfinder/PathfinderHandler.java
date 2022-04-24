@@ -62,7 +62,7 @@ public class PathfinderHandler extends AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
     fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
-    setLineSize(4.0);
+    setLineSize(6.0); // Change this if you want to change the line size
   }
 
   public void setLineSize(Double size) {
