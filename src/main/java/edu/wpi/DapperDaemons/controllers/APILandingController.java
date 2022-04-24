@@ -174,6 +174,11 @@ public class APILandingController implements Initializable {
    * @return true if it already exists
    */
   public boolean checkIfPatitentReqExists(PatientTransportRequest req) {
-    return true; // TODO: Implement this
+    for (PatientTransportRequest dbReq : DAOPouch.getPatientTransportRequestDAO().getAll().values()) {
+      if (req.getRoomID().equals(dbReq.getRoomID())
+         && req.getNextRoomID().equals(dbReq.getNextRoomID())
+         && req.getPatientID().equals(dbReq.getPatientID())) return true;
+    }
+    return false;
   }
 }

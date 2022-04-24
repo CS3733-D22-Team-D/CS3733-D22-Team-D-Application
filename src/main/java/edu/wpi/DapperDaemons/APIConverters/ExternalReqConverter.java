@@ -4,9 +4,6 @@ import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 /** Converts from Team Z's external patient request to our external patient requests */
 public class ExternalReqConverter extends Converter {
 
@@ -23,7 +20,6 @@ public class ExternalReqConverter extends Converter {
   public static PatientTransportRequest convert(
       ExternalTransportRequest extRequest, String origin, String destination) {
 
-
     return new PatientTransportRequest(
         Request.Priority.LOW,
         origin,
@@ -33,7 +29,6 @@ public class ExternalReqConverter extends Converter {
             + extRequest.getTransportMethod().toString(),
         extRequest.getPatientID(),
         destination,
-            determineDateNeeded(120));
+        determineDateNeeded(120));
   }
-
 }
