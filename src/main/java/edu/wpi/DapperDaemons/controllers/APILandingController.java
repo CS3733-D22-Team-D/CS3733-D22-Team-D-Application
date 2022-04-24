@@ -86,7 +86,6 @@ public class APILandingController implements Initializable {
 
   /** Starts Team D Sanitation Request API (ours) */
   public void startTeamDApi() {
-    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
     if (!isInLocationDatabase(teamDLoc.getText().trim())) {
       errorLabel.setText("Error Invalid Location ID");
       return;
