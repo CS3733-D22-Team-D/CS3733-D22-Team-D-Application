@@ -57,6 +57,8 @@ public class SecurityController {
       return clearance >= 2;
     } else if (tableName.equals("ALERTS")) {
       return clearance >= 2;
+    } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
+      return clearance >= 4;
     }
     return false;
   }
@@ -96,6 +98,8 @@ public class SecurityController {
       return clearance >= 2;
     } else if (tableName.equals("ALERTS")) {
       return clearance >= 3;
+    } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
+      return clearance >= 4;
     }
     return false;
   }
@@ -135,6 +139,8 @@ public class SecurityController {
       return clearance >= 2;
     } else if (tableName.equals("ALERTS")) {
       return clearance >= 3;
+    } else if (tableName.equals("LOCATIONNODECONNECTIONS")) {
+      return clearance >= 4;
     }
     return false;
   }

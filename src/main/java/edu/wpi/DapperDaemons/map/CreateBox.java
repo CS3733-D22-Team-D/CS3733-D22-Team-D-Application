@@ -1,8 +1,10 @@
 package edu.wpi.DapperDaemons.map;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.util.Map;
 import javafx.scene.control.Label;
@@ -73,6 +75,7 @@ public class CreateBox {
     } else {
       shortName = floor + longName;
     }
+
     try {
       Map<String, Location> locationList = DAOPouch.getLocationDAO().filter(6, nodeType);
       String numberRoomTypes =
@@ -81,6 +84,12 @@ public class CreateBox {
       numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
       System.out.println("Room number for my test is : " + numberRoomTypes);
       String nodeID = "d" + nodeType.toUpperCase() + numberRoomTypes + floor;
+      if (nodeType.equals("PATH")) {
+        App.LOG.info("Adding a new location to the path stuff");
+        Location location =
+            new Location(nodeID, x, y, floor, building, nodeType, longName, shortName);
+        NodeConnectionHandler.addNode(location);
+      }
       return new Location(nodeID, x, y, floor, building, nodeType, longName, shortName);
     } catch (Exception e) {
       System.out.println("Unable to find number of this type of room on this floor");

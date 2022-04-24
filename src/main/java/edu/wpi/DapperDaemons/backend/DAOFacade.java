@@ -19,7 +19,14 @@ public class DAOFacade {
   /** Gets a list of all long names of locations */
   public static List<String> getAllLocationLongNames() {
     List<String> all = new ArrayList<>();
-    DAOPouch.getLocationDAO().getAll().values().forEach(e -> all.add(e.getLongName()));
+    DAOPouch.getLocationDAO()
+        .getAll()
+        .values()
+        .forEach(
+            e -> {
+              if (!e.getNodeType().equals("PATH")) // If its not a path node
+              all.add(e.getLongName());
+            });
     return all;
   }
 
