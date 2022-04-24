@@ -17,7 +17,7 @@ public class SanitationReqConverter {
      * @param request API sanitation request to be converted
      * @return the converted request
      */
-    public static SanitationRequest sanitationRequestConverter(SanitationIRequest request) {
+    public static SanitationRequest convert(SanitationIRequest request) {
         return new SanitationRequest(parsePriority(request), request.getRoomID(),
                 request.getRequesterID(), request.getAssigneeID(), "Created Using API",
                 request.getSanitationType(), "ASAP");

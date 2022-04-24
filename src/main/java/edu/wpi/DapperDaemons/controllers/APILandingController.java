@@ -1,10 +1,15 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamZ.api.API;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +53,7 @@ public class APILandingController implements Initializable {
 
   /** Allows for requests submitted by the API to be saved to our database */
   public void saveToDatabase() {
-    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
-
+    databaseSaverTeamD();
   }
 
   /**
@@ -64,6 +68,20 @@ public class APILandingController implements Initializable {
     }
     return false;
   }
+
+  /**
+   * Checks if a given Sanitation Request is in the database
+   * @param req request to check
+   * @return true if it is in the database
+   */
+  public boolean checkIfSanitationReqExists(SanitationRequest req) {
+    for(SanitationRequest dbReq : DAOPouch.getSanitationRequestDAO().getAll().values()) {
+      if(req.getNodeID().equals(dbReq.getNodeID()) && req.getPriority().equals(dbReq.getPriority()))
+        return true;
+    }
+    return false;
+  }
+
 
   /** Starts Team D Sanitation Request API (ours) */
   public void startTeamDApi() {
@@ -84,6 +102,18 @@ public class APILandingController implements Initializable {
     }
     errorLabel.setText("You may have unsaved requests!");
     errorLabel.setTextFill(Paint.valueOf("EF5353"));
+  }
+
+  /**
+   * Saves all requests (that do not already exist) from the API to the program database
+   */
+  public void databaseSaverTeamD() {
+    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
+    for(SanitationIRequest iReq : sanitationReqAPI.getAllRequests()) {
+      if(!checkIfSanitationReqExists(SanitationReqConverter.convert(iReq)))
+        DAOPouch.getSanitationRequestDAO().add(SanitationReqConverter.convert(iReq));
+    }
+
   }
 
   /** Starts Team-Z's External Patient Request */
