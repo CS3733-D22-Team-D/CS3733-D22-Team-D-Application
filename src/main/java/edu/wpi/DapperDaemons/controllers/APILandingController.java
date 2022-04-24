@@ -30,6 +30,7 @@ public class APILandingController implements Initializable {
   @FXML private TextField zDest;
   @FXML private Label zErrorLabel;
   @FXML private TextField zOrigin;
+  @FXML private Button zSave;
   private static String teamZOriginID;
   private static String teamZDestinationID;
 
@@ -50,12 +51,15 @@ public class APILandingController implements Initializable {
     zErrorLabel.setText("");
     teamZOriginID = "null";
     teamZDestinationID = "null";
+    zSave.setVisible(false);
   }
 
   /** Allows for requests submitted by the API to be saved to our database */
   public void saveToDatabase() {
     dSave.setVisible(false);
+    zSave.setVisible(false);
     databaseSaverTeamD();
+    databaseSaverTeamZ();
   }
 
   /**
@@ -111,11 +115,14 @@ public class APILandingController implements Initializable {
 
   /** Saves all requests (that do not already exist) from the API to the program database */
   public void databaseSaverTeamD() {
+    dSave.setVisible(false);
     SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
     for (SanitationIRequest iReq : sanitationReqAPI.getAllRequests()) {
       if (!checkIfSanitationReqExists(SanitationReqConverter.convert(iReq)))
         DAOPouch.getSanitationRequestDAO().add(SanitationReqConverter.convert(iReq));
     }
+    dSave.setText("Changes Saved!");
+    dSave.setTextFill(Paint.valueOf("00FF00"));
   }
 
   /** Starts Team-Z's External Patient Request */
@@ -144,17 +151,21 @@ public class APILandingController implements Initializable {
     }
     zErrorLabel.setText("You may have unsaved requests!");
     zErrorLabel.setTextFill(Paint.valueOf("EF5353"));
+    zSave.setVisible(true);
   }
 
   /**
    * Saves the external transport request from team Z's API
    */
   public void databaseSaverTeamZ() {
+    zSave.setVisible(false);
     API teamZAPI = new API();
     for(ExternalTransportRequest extReq : teamZAPI.getAllExternalTransportRequests()) {
         if(!checkIfPatitentReqExists(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID)))
           DAOPouch.getPatientTransportRequestDAO().add(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID));
     }
+    zErrorLabel.setText("Changes Saved!");
+    zErrorLabel.setTextFill(Paint.valueOf("00FF00"));
   }
 
   /**
