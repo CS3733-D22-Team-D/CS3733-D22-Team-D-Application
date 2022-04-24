@@ -15,13 +15,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="467.0" prefWidth="393.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.LabRequestController">
+<HBox id="background" prefHeight="467.0" prefWidth="393.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.SecurityRequestController">
    <children>
       <VBox maxHeight="440.0" maxWidth="520.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
          <children>
             <HBox prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
                <children>
-                  <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule Request">
+                  <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Security Services">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -40,8 +40,8 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Service:" />
-                              <JFXComboBox id="jButton" fx:id="procedureComboBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select">
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" />
+                              <JFXComboBox id="jButton" fx:id="locationBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select">
                                  <stylesheets>
                                     <URL value="@../assets/buttons.css" />
                                  </stylesheets>
@@ -61,54 +61,8 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
-                              <TextField id="field" fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #F1F0F1; -fx-background-radius: 7.5; -fx-border-color: #D5D3D2; -fx-border-radius: 7.5;">
-                                 <effect>
-                                    <DropShadow offsetX="-2.0" offsetY="2.0">
-                                       <color>
-                                          <Color red="0.19607843458652496" green="0.19607843458652496" blue="0.19607843458652496" opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </TextField>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-                              <TextField id="field" fx:id="patientLastName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #F1F0F1; -fx-background-radius: 7.5; -fx-border-color: #D5D3D2; -fx-border-radius: 7.5;">
-                                 <effect>
-                                    <DropShadow offsetX="-2.0" offsetY="2.0">
-                                       <color>
-                                          <Color red="0.19607843458652496" green="0.19607843458652496" blue="0.19607843458652496" opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </TextField>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:" />
-                              <DatePicker fx:id="patientDOB" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Select" style="-fx-background-radius: 7.5; -fx-background-color: #f1f0f0; -fx-border-color: #D5D3D2; -fx-border-radius: 7.5;">
-                                 <effect>
-                                    <DropShadow offsetX="-2.0" offsetY="2.0">
-                                       <color>
-                                          <Color red="0.19607843458652496" green="0.19607843458652496" blue="0.19607843458652496" opacity="0.15000000596046448" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </DatePicker>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                           <children>
                               <Text id="label" fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:" />
-                              <JFXComboBox id="jButton" fx:id="priorityChoiceBox" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
+                              <JFXComboBox id="jButton" fx:id="priorityIn" focusColor="#059da7" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

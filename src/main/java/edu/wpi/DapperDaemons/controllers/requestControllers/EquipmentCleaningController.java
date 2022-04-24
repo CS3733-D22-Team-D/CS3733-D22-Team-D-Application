@@ -10,7 +10,9 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -31,9 +35,9 @@ public class EquipmentCleaningController extends ParentController {
   private TableHelper<EquipmentCleaning> tableHelper;
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
-  @FXML private JFXComboBox<String> priorityBox;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentIDBox;
-  @FXML private DatePicker cleanByDate;
+  @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
 
   /* Table Columns */
@@ -50,27 +54,32 @@ public class EquipmentCleaningController extends ParentController {
   /* DAO Object */
   private final DAO<EquipmentCleaning> equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
   private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<MedicalEquipmentRequest> t;
 
   @FXML
   public void startFuzzySearch() {
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentIDBox, new FuzzySearchComparatorMethod());
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    tableHelper = new TableHelper<>(equipmentCleanTable, 0);
-    tableHelper.linkColumns(EquipmentCleaning.class);
 
     initBoxes();
 
-    try {
-      equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
-    } catch (Exception e) {
-      System.err.print("Error, table was unable to be created\n");
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
     onClearClicked();
+  }
+
+  private void createTable() {
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicalEquipmentRequest> reqs =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new MedicalEquipmentRequest());
   }
 
   private void setListeners() {
@@ -95,16 +104,16 @@ public class EquipmentCleaningController extends ParentController {
 
   @FXML
   public void onClearClicked() {
-    priorityBox.setValue("");
+    priorityIn.setValue("");
     equipmentIDBox.setValue("");
-    cleanByDate.setValue(null);
+    dateNeeded.setValue(null);
     notes.setText("");
   }
 
   @FXML
   public void onSubmitClicked() {
     if (allFieldsFilled()) {
-      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -116,9 +125,9 @@ public class EquipmentCleaningController extends ParentController {
       } else {
         String dateStr =
             ""
-                + cleanByDate.getValue().getMonthValue()
-                + cleanByDate.getValue().getDayOfMonth()
-                + cleanByDate.getValue().getYear();
+                + dateNeeded.getValue().getMonthValue()
+                + dateNeeded.getValue().getDayOfMonth()
+                + dateNeeded.getValue().getYear();
         roomID = medicalEquipment.getLocationID();
 
         medicalEquipment.setCleanStatus(
@@ -153,13 +162,13 @@ public class EquipmentCleaningController extends ParentController {
   }
 
   private boolean allFieldsFilled() {
-    return !(priorityBox.getValue().equals("")
+    return !(priorityIn.getValue().equals("")
         || equipmentIDBox.getValue().equals("")
-        || cleanByDate.getValue() == null);
+        || dateNeeded.getValue() == null);
   }
 
   public void initBoxes() {
-    priorityBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
 
     List<MedicalEquipment> medicalEquipmentList =
@@ -170,6 +179,6 @@ public class EquipmentCleaningController extends ParentController {
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new EquipmentCleaning(), (Stage) priorityBox.getScene().getWindow());
+    super.saveToCSV(new EquipmentCleaning(), (Stage) priorityIn.getScene().getWindow());
   }
 }

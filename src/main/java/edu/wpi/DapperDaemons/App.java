@@ -46,6 +46,10 @@ public class App extends Application {
   public void init() {
     createLogger();
     log.info("Starting Up");
+    /* Trying to get Fonts to work, FML */
+    // Font interSemiBold =
+    // Font.loadFont(App.class.getResource("interSemiBold.TTF").toExternalForm(), 12);
+    // Font interBold = Font.loadFont(App.class.getResource("interBold.TTF").toExternalForm(), 12);
   }
 
   @Override

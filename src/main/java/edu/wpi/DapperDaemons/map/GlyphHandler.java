@@ -189,6 +189,7 @@ public class GlyphHandler {
 
   public void remove(PositionInfo pos) {
     int rmIndex = imageLocs.indexOf(pos);
+    if (rmIndex == -1) return;
     imageLocs.remove(rmIndex);
     glyphLayer.getChildren().remove(rmIndex);
   }

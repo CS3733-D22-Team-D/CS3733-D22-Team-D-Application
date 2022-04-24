@@ -13,6 +13,7 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
@@ -47,7 +50,7 @@ public class ExternalPatientTransportController extends ParentController {
 
   /* Dropdown boxes */
   @FXML private JFXComboBox<String> roomBox;
-  @FXML private JFXComboBox<String> pBox;
+  @FXML private JFXComboBox<String> priorityIn;
 
   /* Text Boxes */
   @FXML private TextField patientFirstName;
@@ -55,6 +58,9 @@ public class ExternalPatientTransportController extends ParentController {
   @FXML private DatePicker patientDOB;
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<PatientTransportRequest> t;
 
   List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
@@ -67,18 +73,18 @@ public class ExternalPatientTransportController extends ParentController {
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    initializeTable();
     initializeInputs();
 
-    try {
-      transportRequests
-          .getItems()
-          .addAll(new ArrayList<>(patientTransportRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Something went wrong making Patient Transport Req table");
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<PatientTransportRequest> reqs =
+        new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new PatientTransportRequest());
   }
 
   private void setListeners() {
@@ -102,7 +108,7 @@ public class ExternalPatientTransportController extends ParentController {
   @FXML
   public void onClearClicked() {
     roomBox.setValue("");
-    pBox.setValue("");
+    priorityIn.setValue("");
     patientFirstName.setText("");
     patientLastName.setText("");
     patientDOB.setValue(null);
@@ -113,14 +119,14 @@ public class ExternalPatientTransportController extends ParentController {
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(pBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
 
   @FXML
   public void onSubmitClicked() {
 
     if (fieldsNonEmpty()) {
-      Request.Priority priority = Request.Priority.valueOf(pBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID;
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -202,7 +208,7 @@ public class ExternalPatientTransportController extends ParentController {
   public boolean fieldsNonEmpty() {
 
     return !(roomBox.getValue().equals("")
-        || pBox.getValue().equals("")
+        || priorityIn.getValue().equals("")
         || patientFirstName.getText().equals("")
         || patientLastName.getText().equals("")
         || patientDOB.getValue() == null
@@ -216,7 +222,7 @@ public class ExternalPatientTransportController extends ParentController {
 
   private void initializeInputs() {
 
-    pBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(tableHelper.convertEnum(Request.Priority.class)));
     roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNamesExit()));
 

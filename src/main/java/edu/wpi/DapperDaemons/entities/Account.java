@@ -9,6 +9,35 @@ public class Account extends TableObject {
   private String employeeID;
   private String password;
   private String phoneNumber;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Account account = (Account) o;
+
+    if (!username.equals(account.username)) return false;
+    if (!employeeID.equals(account.employeeID)) return false;
+    if (!password.equals(account.password)) return false;
+    if (!phoneNumber.equals(account.phoneNumber)) return false;
+    if (!settingsFile.equals(account.settingsFile)) return false;
+    if (!twoFactor.equals(account.twoFactor)) return false;
+    return email.equals(account.email);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = username.hashCode();
+    result = 31 * result + employeeID.hashCode();
+    result = 31 * result + password.hashCode();
+    result = 31 * result + phoneNumber.hashCode();
+    result = 31 * result + settingsFile.hashCode();
+    result = 31 * result + twoFactor.hashCode();
+    result = 31 * result + email.hashCode();
+    return result;
+  }
+
   private String settingsFile = "edu/wpi/DapperDaemons/notifications/Bloop.wav";
   private String twoFactor = "false";
   private String email;
