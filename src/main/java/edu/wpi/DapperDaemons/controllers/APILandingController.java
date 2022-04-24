@@ -9,10 +9,9 @@ import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamZ.api.API;
+import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -121,8 +120,8 @@ public class APILandingController implements Initializable {
       if (!checkIfSanitationReqExists(SanitationReqConverter.convert(iReq)))
         DAOPouch.getSanitationRequestDAO().add(SanitationReqConverter.convert(iReq));
     }
-    dSave.setText("Changes Saved!");
-    dSave.setTextFill(Paint.valueOf("00FF00"));
+    errorLabel.setText("Changes Saved!");
+    errorLabel.setTextFill(Paint.valueOf("00FF00"));
   }
 
   /** Starts Team-Z's External Patient Request */
@@ -154,15 +153,15 @@ public class APILandingController implements Initializable {
     zSave.setVisible(true);
   }
 
-  /**
-   * Saves the external transport request from team Z's API
-   */
+  /** Saves the external transport request from team Z's API */
   public void databaseSaverTeamZ() {
     zSave.setVisible(false);
     API teamZAPI = new API();
-    for(ExternalTransportRequest extReq : teamZAPI.getAllExternalTransportRequests()) {
-        if(!checkIfPatitentReqExists(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID)))
-          DAOPouch.getPatientTransportRequestDAO().add(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID));
+    for (ExternalTransportRequest extReq : teamZAPI.getAllExternalTransportRequests()) {
+      if (!checkIfPatitentReqExists(
+          ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID)))
+        DAOPouch.getPatientTransportRequestDAO()
+            .add(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID));
     }
     zErrorLabel.setText("Changes Saved!");
     zErrorLabel.setTextFill(Paint.valueOf("00FF00"));
@@ -170,11 +169,11 @@ public class APILandingController implements Initializable {
 
   /**
    * Checks if a patient transport req already exists
+   *
    * @param req request to check
    * @return true if it already exists
    */
   public boolean checkIfPatitentReqExists(PatientTransportRequest req) {
     return true; // TODO: Implement this
   }
-
 }
