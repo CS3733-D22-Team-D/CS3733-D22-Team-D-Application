@@ -294,7 +294,7 @@ public class ParentController extends AppController {
   public void openUserSettings() {
     userSettingsToggle.setSelected(false);
     openUserDropdown();
-    swapPage("userHome", "User Home");
+    swapPage("NewUserHome", "User Home");
   }
 
   @FXML

@@ -38,7 +38,7 @@ public class UserSecurityController extends ParentController {
 
   @FXML
   public void goUserHome(ActionEvent event) {
-    swapPage("userHome", "User Home");
+    swapPage("NewUserHome", "User Home");
   }
 
   @FXML
