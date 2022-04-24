@@ -246,7 +246,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
     this.dateNeeded = dateNeeded;
-    this.originID = DAOFacade.getClosestMedicalEquipment(equipmentType.toString(),roomID);
+    this.originID = DAOFacade.getClosestMedicalEquipment(equipmentType.toString(), roomID);
   }
 
   public MedicalEquipmentRequest() {}

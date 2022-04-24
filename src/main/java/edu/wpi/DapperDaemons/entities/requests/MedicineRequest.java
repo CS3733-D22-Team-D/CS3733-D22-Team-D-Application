@@ -1,6 +1,5 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
-import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
