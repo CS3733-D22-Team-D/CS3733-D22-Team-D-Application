@@ -1,7 +1,9 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.APIConverters.ExternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
@@ -9,6 +11,8 @@ import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamZ.api.API;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -142,5 +146,24 @@ public class APILandingController implements Initializable {
     zErrorLabel.setTextFill(Paint.valueOf("EF5353"));
   }
 
-  public void databaseSaverTeamZ() {}
+  /**
+   * Saves the external transport request from team Z's API
+   */
+  public void databaseSaverTeamZ() {
+    API teamZAPI = new API();
+    for(ExternalTransportRequest extReq : teamZAPI.getAllExternalTransportRequests()) {
+        if(!checkIfPatitentReqExists(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID)))
+          DAOPouch.getPatientTransportRequestDAO().add(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID));
+    }
+  }
+
+  /**
+   * Checks if a patient transport req already exists
+   * @param req request to check
+   * @return true if it already exists
+   */
+  public boolean checkIfPatitentReqExists(PatientTransportRequest req) {
+    return true; // TODO: Implement this
+  }
+
 }
