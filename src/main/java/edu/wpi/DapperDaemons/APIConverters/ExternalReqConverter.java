@@ -33,7 +33,7 @@ public class ExternalReqConverter extends Converter {
             + extRequest.getTransportMethod().toString(),
         extRequest.getPatientID(),
         destination,
-        "");
+            determineDateNeeded(120));
   }
 
 }

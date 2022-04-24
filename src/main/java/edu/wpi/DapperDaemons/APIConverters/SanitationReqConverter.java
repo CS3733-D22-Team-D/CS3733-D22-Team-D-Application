@@ -24,7 +24,7 @@ public class SanitationReqConverter extends Converter {
         request.getAssigneeID(),
         "Created Using API",
         request.getSanitationType(),
-        "ASAP");
+        determineDateNeeded(1440));
   }
 
   /**
