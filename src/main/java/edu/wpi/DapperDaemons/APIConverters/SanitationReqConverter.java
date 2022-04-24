@@ -6,7 +6,7 @@ import edu.wpi.cs3733.D22.teamD.request.IRequest;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 
 /** This class contains methods to convert between the two different Sanitation Request */
-public class SanitationReqConverter {
+public class SanitationReqConverter extends Converter {
 
   public SanitationReqConverter() {}
 
