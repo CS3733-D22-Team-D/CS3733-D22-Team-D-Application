@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<HBox id="background" prefHeight="467.0" prefWidth="527.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.TestController">
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+   <children>
+      <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floorLL2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="138.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floorLL1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="115.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floor1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="92.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floor2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="69.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floor3" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="46.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floor4" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="23.0">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="floor5" fitHeight="150.0" fitWidth="200.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+   </children>
+</HBox>

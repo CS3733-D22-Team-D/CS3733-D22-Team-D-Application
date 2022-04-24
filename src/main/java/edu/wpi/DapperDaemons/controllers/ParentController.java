@@ -345,7 +345,7 @@ public class ParentController extends AppController {
 
   @FXML
   void switchToMapDashboard() {
-    swapPage("mapDashboard2", "Map Dashboard");
+    swapPage("dashboardStack", "Map Dashboard");
   }
 
   @FXML
