@@ -146,16 +146,28 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
   }
 
   @FXML
   void openServerDropdown() {
     serverDropdown.setVisible(serverToggle.isSelected());
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   @FXML
   void openNotifications() {
     notificationsScroller.setVisible(alertButton.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   private void setServerToggleMenu() {
