@@ -68,12 +68,17 @@ public class SecurityRequest extends TableObject implements Request {
 
   @Override
   public boolean requiresTransport() {
-    return false;
+    return true;
   }
 
   @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
+  }
+
+  @Override
+  public String transportFromRoomID() {
+    return "FINFO00101";
   }
 
   @TableHandler(table = 0, col = 3)
