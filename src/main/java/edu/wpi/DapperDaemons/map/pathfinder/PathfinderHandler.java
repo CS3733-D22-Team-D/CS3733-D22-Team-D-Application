@@ -35,8 +35,8 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static Double lineSize;
   private static String currentFloor;
 
-  private final int necessaryOffsetX = -150;
-  private final int necessaryOffsetY = 20;
+  private final int necessaryOffsetX = -110;
+  private final int necessaryOffsetY = -5;
   private static int lineOffset = 0;
   private static int numberOfLines = 0;
 
