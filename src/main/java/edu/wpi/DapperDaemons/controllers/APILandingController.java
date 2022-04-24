@@ -95,6 +95,7 @@ public class APILandingController implements Initializable {
   public void startTeamDApi() {
     if (!isInLocationDatabase(teamDLoc.getText().trim())) {
       errorLabel.setText("Error Invalid Location ID");
+      errorLabel.setTextFill(Paint.valueOf("EF5353"));
       return;
     }
     destIDTeamD = teamDLoc.getText();
@@ -102,7 +103,13 @@ public class APILandingController implements Initializable {
     errorLabel.setText("");
     StartAPI api = new StartAPI();
     try {
-      api.run(0, 0, 500, 800, "edu/wpi/DapperDaemons/assets/themeBlue.css", destIDTeamD);
+      api.run(
+              (int) zOrigin.getScene().getWindow().getX(),
+              (int) zOrigin.getScene().getWindow().getY(),
+              (int) zOrigin.getScene().getWindow().getHeight(),
+              (int) zOrigin.getScene().getWindow().getWidth(),
+          "edu/wpi/DapperDaemons/assets/themeBlue.css",
+              destIDTeamD);
     } catch (Exception e) {
       errorLabel.setText("Team-D API Broke");
       return;
@@ -129,6 +136,7 @@ public class APILandingController implements Initializable {
     if (!isInLocationDatabase(zDest.getText().trim())
         || !isInLocationDatabase(zOrigin.getText().trim())) {
       zErrorLabel.setText("Error Invalid Location ID");
+      zErrorLabel.setTextFill(Paint.valueOf("EF5353"));
       return;
     }
     teamZOriginID = zOrigin.getText();
@@ -139,10 +147,10 @@ public class APILandingController implements Initializable {
     API api = new API();
     try {
       api.run(
-          0,
-          0,
-          800,
-          500,
+          (int) zOrigin.getScene().getWindow().getX(),
+          (int) zOrigin.getScene().getWindow().getY(),
+          (int) zOrigin.getScene().getWindow().getWidth(),
+          (int) zOrigin.getScene().getWindow().getHeight(),
           "edu/wpi/DapperDaemons/assets/teamZAPI.css",
           teamZDestinationID,
           teamZOriginID);
