@@ -35,6 +35,11 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static Double lineSize;
   private static String currentFloor;
 
+  private final int necessaryOffsetX = -150;
+  private final int necessaryOffsetY = 20;
+  private static int lineOffset = 0;
+  private static int numberOfLines = 0;
+
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
   @FXML private JFXComboBox<String> toLocation;
@@ -76,15 +81,16 @@ public class PathfinderHandler extends AppController implements Initializable {
     List<Location> filterDos;
     Location startLoc = new Location();
     Location toLoc;
-    try {
-      filterJuan =
-          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
-      filterDos =
-          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
-      startLoc = filterJuan.get(0);
-      toLoc = filterDos.get(0);
-      if (checkIfConnectedNode(startLoc.getNodeID())) {
-        if (checkIfConnectedNode(toLoc.getNodeID())) {
+    if (!fromLocation.getValue().isEmpty()) { // If they are good, lets goo
+      if (!toLocation.getValue().isEmpty()) { // Else tell the user to input an actual location
+        try {
+          filterJuan =
+              new ArrayList<>(
+                  DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
+          filterDos =
+              new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
+          startLoc = filterJuan.get(0);
+          toLoc = filterDos.get(0);
 
           String startNode;
           String endNode;
@@ -92,17 +98,19 @@ public class PathfinderHandler extends AppController implements Initializable {
           startNode = ppFinder.findClosestPathnode(startLoc);
           endNode = ppFinder.findClosestPathnode(toLoc);
 
-          showPather(startLoc.getNodeID(), toLoc.getNodeID()); // TODO : Make this take in the correct nodes instead
-        } else {
-          showError("Not a valid end location!");
+          showPather(startNode, endNode);
+
+        } catch (Exception e) {
+          e.printStackTrace();
+          // TODO : Show the error message?
         }
       } else {
-        showError("Not a valid start location!");
+        showError("Invalid Destination");
       }
-    } catch (Exception e) {
-      e.printStackTrace();
-      // TODO : Show the error message?
+    } else {
+      showError("Invalid Starting Location");
     }
+
     makeAllInVisible();
     try {
       //      System.out.println("Current floor is " + currentFloor);
@@ -136,6 +144,9 @@ public class PathfinderHandler extends AppController implements Initializable {
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
     List<String> nodePath = ppPlanner.getPath(startNode, endNode);
+
+    int offsetX = necessaryOffsetX + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
+    int offsetY = necessaryOffsetY + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
     try {
       locations.add(DAOPouch.getLocationDAO().get(endNode));
     } catch (Exception e) {
@@ -185,10 +196,10 @@ public class PathfinderHandler extends AppController implements Initializable {
       } else { // If on the same floor, show the path
         pathLine =
             new Line(
-                locations.get(i).getXcoord(),
-                locations.get(i).getYcoord(),
-                locations.get(i + 1).getXcoord(),
-                locations.get(i + 1).getYcoord());
+                locations.get(i).getXcoord() + offsetX,
+                locations.get(i).getYcoord() + offsetY,
+                locations.get(i + 1).getXcoord() + offsetX,
+                locations.get(i + 1).getYcoord() + offsetY);
         pathLine.setFill(Color.RED);
         pathLine.setStroke(Color.RED);
         pathLine.setStrokeWidth(lineSize);
