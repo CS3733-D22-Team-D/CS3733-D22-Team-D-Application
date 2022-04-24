@@ -189,7 +189,9 @@ public class PathfinderHandler extends AppController implements Initializable {
           .getFloor()
           .equals(
               locations.get(i + 1).getFloor())) { // If on different floor, create point particle
-        ifNecessary = new Circle(locations.get(i).getXcoord(), locations.get(i).getYcoord(), 6);
+        ifNecessary =
+            new Circle(
+                locations.get(i).getXcoord() + offsetX, locations.get(i).getYcoord() + offsetY, 6);
         ifNecessary.setFill(Color.RED);
         lineLayer.getChildren().add(ifNecessary);
         //        System.out.println("Added new point since it went up a floor");
