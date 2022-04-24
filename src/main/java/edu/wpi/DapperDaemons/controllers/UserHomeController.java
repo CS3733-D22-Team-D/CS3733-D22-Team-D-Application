@@ -47,7 +47,7 @@ public class UserHomeController extends ParentController {
 
   @FXML
   public void goUserHome() {
-    swapPage("userHome", "User Home");
+    swapPage("NewUserHome", "User Home");
   }
 
   @FXML
