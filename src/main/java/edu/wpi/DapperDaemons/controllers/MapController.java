@@ -258,6 +258,7 @@ public class MapController extends ParentController {
                     }
                     difference(newPos, origPositions);
                     glyphs.setFloorFilter(maps.getFloor());
+                    editMode();
                   });
             }));
     TableListeners.addListener(
@@ -551,10 +552,11 @@ public class MapController extends ParentController {
   }
 
   @FXML
-  public void editMode(ActionEvent event) {
+  public void editMode() {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
+      closeRoom();
       bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
       infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
       bedDrag.enable();

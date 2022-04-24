@@ -53,6 +53,7 @@ public class GlyphHandler {
   }
 
   public void enableEditing() {
+    editing = true;
     for (int i = 0; i < imageLocs.size(); i++) {
       ImageView image = (ImageView) glyphLayer.getChildren().get(i);
       image.setOnMouseDragged(
@@ -108,6 +109,7 @@ public class GlyphHandler {
   }
 
   public void disableEditing() {
+    editing = false;
     for (int i = 0; i < imageLocs.size(); i++) {
       ImageView image = (ImageView) glyphLayer.getChildren().get(i);
       image.setOnMouseDragged(event -> {});
@@ -322,6 +324,8 @@ public class GlyphHandler {
     }
   }
 
+  private boolean editing;
+
   public void updateEquipment() {
     equipLayer.getChildren().clear();
     equipLocs.clear();
@@ -344,6 +348,7 @@ public class GlyphHandler {
                 equipLayer.getChildren().add(equip);
               });
         });
+    if (editing) enableEditing();
   }
 
   public void filter() {
