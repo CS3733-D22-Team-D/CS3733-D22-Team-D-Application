@@ -133,6 +133,8 @@ public class APILandingController implements Initializable {
     }
     teamZOriginID = zOrigin.getText();
     teamZDestinationID = zDest.getText();
+    zOrigin.setText("");
+    zDest.setText("");
 
     API api = new API();
     try {
@@ -174,10 +176,11 @@ public class APILandingController implements Initializable {
    * @return true if it already exists
    */
   public boolean checkIfPatitentReqExists(PatientTransportRequest req) {
-    for (PatientTransportRequest dbReq : DAOPouch.getPatientTransportRequestDAO().getAll().values()) {
+    for (PatientTransportRequest dbReq :
+        DAOPouch.getPatientTransportRequestDAO().getAll().values()) {
       if (req.getRoomID().equals(dbReq.getRoomID())
-         && req.getNextRoomID().equals(dbReq.getNextRoomID())
-         && req.getPatientID().equals(dbReq.getPatientID())) return true;
+          && req.getNextRoomID().equals(dbReq.getNextRoomID())
+          && req.getPatientID().equals(dbReq.getPatientID())) return true;
     }
     return false;
   }
