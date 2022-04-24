@@ -33,6 +33,7 @@ public class ShowRequestPaths {
   private final int necessaryOffsetY = -5;
   private static int lineOffset = 4;
   private static int numberOfLines = 0;
+  private static int startingOffset = 0;
 
   private int lastStart = 0;
 
@@ -49,6 +50,7 @@ public class ShowRequestPaths {
   public void showAllPaths(Location location) {
     List<Request> requests = DAOFacade.getFilteredRequests(location.getNodeID());
     AStar ppHelper = new AStar();
+    startingOffset = requests.size() / 2 * lineOffset;
     for (Request request : requests) {
       if (request.requiresTransport()) {
         makeLinePath(
@@ -83,8 +85,8 @@ public class ShowRequestPaths {
     endNode = ppFinder.findClosestPathnode(endLoc);
     List<String> nodePath = ppPlanner.getPath(startNode, endNode);
 
-    int offsetX = necessaryOffsetX + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
-    int offsetY = necessaryOffsetY + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
+    int offsetX = necessaryOffsetX + lineOffset * numberOfLines - startingOffset;
+    int offsetY = necessaryOffsetY + lineOffset * numberOfLines - startingOffset;
     try {
       locations.add(DAOPouch.getLocationDAO().get(endNode));
     } catch (Exception e) {
@@ -104,12 +106,12 @@ public class ShowRequestPaths {
       System.out.println("Something went wrong adding the start location");
     }
 
-//    for (int i = lastStart; i < locations.size() - 1; i++) {
-//      if (locations.get(i).getNodeID().equals(locations.get(i + 1).getNodeID())) {
-//        locations.remove(i);
-//        i--;
-//      }
-//    } // Gets rid of duplicates I hope
+    //    for (int i = lastStart; i < locations.size() - 1; i++) {
+    //      if (locations.get(i).getNodeID().equals(locations.get(i + 1).getNodeID())) {
+    //        locations.remove(i);
+    //        i--;
+    //      }
+    //    } // Gets rid of duplicates I hope
 
     double overflow = 0.0;
     for (int i = lastStart; i < locations.size() - 1; i++) {
