@@ -278,7 +278,7 @@ public class Table<R> {
                   ((VBox) box).getChildren().add(elems);
 
                   // Toggle reset line
-                  table.setOnMouseClicked(
+                  box.setOnMouseClicked(
                       toggle -> {
                         ((VBox) box).getChildren().clear();
                         ((VBox) box).getChildren().add(old);
