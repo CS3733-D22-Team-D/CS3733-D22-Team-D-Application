@@ -5,6 +5,32 @@ import java.util.List;
 
 public class Employee extends TableObject {
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Employee employee = (Employee) o;
+
+    if (securityClearance != employee.securityClearance) return false;
+    if (!nodeID.equals(employee.nodeID)) return false;
+    if (!firstName.equals(employee.firstName)) return false;
+    if (!lastName.equals(employee.lastName)) return false;
+    if (!dateOfBirth.equals(employee.dateOfBirth)) return false;
+    return employeeType == employee.employeeType;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + firstName.hashCode();
+    result = 31 * result + lastName.hashCode();
+    result = 31 * result + dateOfBirth.hashCode();
+    result = 31 * result + employeeType.hashCode();
+    result = 31 * result + securityClearance;
+    return result;
+  }
+
   // CLASS ENUMS
   public enum EmployeeType {
     ADMINISTRATOR,

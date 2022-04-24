@@ -13,13 +13,17 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class SanitationController extends ParentController {
@@ -41,28 +45,34 @@ public class SanitationController extends ParentController {
 
   /* Dropdown Boxes */
   @FXML private JFXComboBox<String> sanitationBox;
-  @FXML private JFXComboBox<String> priorityBox;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> locationBox;
+
   /* Text Field */
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
   DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
   DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<SanitationRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
     initializeInputs();
-    initializeTable();
 
-    try {
-      pendingRequests.getItems().addAll(new ArrayList(sanitationRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Something went wrong making Patient Transport Req table");
-    }
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<SanitationRequest> reqs =
+        new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new SanitationRequest());
   }
 
   private void setListeners() {
@@ -81,7 +91,7 @@ public class SanitationController extends ParentController {
   @FXML
   public void onClearClicked() {
     sanitationBox.setValue("");
-    priorityBox.setValue("");
+    priorityIn.setValue("");
     locationBox.setValue("");
   }
 
@@ -89,14 +99,14 @@ public class SanitationController extends ParentController {
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(sanitationBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
-    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
   /** What happens when the submit button is clicked * */
   @FXML
   public void onSubmitClicked() {
 
     if (allFieldsFilled()) {
-      Request.Priority priority = Request.Priority.valueOf(priorityBox.getValue());
+      Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = locationBox.getValue();
       String requesterID = SecurityController.getUser().getNodeID();
       String assigneeID = "none";
@@ -153,7 +163,7 @@ public class SanitationController extends ParentController {
   }
 
   private void initializeInputs() {
-    priorityBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     sanitationBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(SanitationTypes.class)));
@@ -165,7 +175,7 @@ public class SanitationController extends ParentController {
 
   private boolean allFieldsFilled() {
     return !((sanitationBox.getValue().equals(""))
-        || priorityBox.getValue().equals("")
+        || priorityIn.getValue().equals("")
         || locationBox.getValue().equals("")
         || dateNeeded.getValue() == null);
   }

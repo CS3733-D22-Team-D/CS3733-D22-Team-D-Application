@@ -6,13 +6,17 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
+import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -20,6 +24,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -32,8 +38,8 @@ public class SecurityRequestController extends ParentController {
   private TableHelper<SecurityRequest> tableHelper;
 
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
-  @FXML private JFXComboBox<String> priorityBox;
-  @FXML private JFXComboBox<String> roomBox;
+  @FXML private JFXComboBox<String> priorityIn;
+  @FXML private JFXComboBox<String> locationBox;
   @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
 
@@ -47,6 +53,9 @@ public class SecurityRequestController extends ParentController {
   /* DAO Object */
   private DAO<SecurityRequest> securityRequestDAO = DAOPouch.getSecurityRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  @FXML private GridPane table;
+  @FXML private HBox header;
+  private Table<SecurityRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -54,19 +63,22 @@ public class SecurityRequestController extends ParentController {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
 
-    tableHelper = new TableHelper<>(SecurityRequestTable, 0);
-    tableHelper.linkColumns(SecurityRequest.class);
-
-    try { // Removed second field (filename) since everything is
-      // loaded on startup
-      SecurityRequestTable.getItems().addAll(new ArrayList(securityRequestDAO.getAll().values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, table was unable to be created\n");
-    }
-
     onClearClicked();
-    setListeners();
+    t = new Table(table, 0);
+    createTable();
+  }
+
+  @FXML
+  public void startFuzzySearch() {
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
+  }
+
+  private void createTable() {
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<SecurityRequest> reqs =
+        new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new SecurityRequest());
   }
 
   private void setListeners() {
@@ -93,8 +105,8 @@ public class SecurityRequestController extends ParentController {
 
   @FXML
   public void onClearClicked() {
-    priorityBox.setValue("");
-    roomBox.setValue("");
+    priorityIn.setValue("");
+    locationBox.setValue("");
     dateNeeded.setValue(null);
   }
 
@@ -111,12 +123,13 @@ public class SecurityRequestController extends ParentController {
       String requesterID = SecurityController.getUser().getNodeID();
       String assignee = "none";
       String roomID =
-          (new ArrayList<Location>(DAOPouch.getLocationDAO().filter(7, roomBox.getValue()).values())
+          (new ArrayList<Location>(
+                  DAOPouch.getLocationDAO().filter(7, locationBox.getValue()).values())
               .get(0)
               .getNodeID());
       addItem(
           new SecurityRequest(
-              Request.Priority.valueOf(priorityBox.getValue()),
+              Request.Priority.valueOf(priorityIn.getValue()),
               roomID,
               requesterID,
               assignee,
@@ -130,16 +143,16 @@ public class SecurityRequestController extends ParentController {
   }
 
   private boolean allFieldsFilled() {
-    return !(priorityBox.getValue().equals("") || roomBox.getValue().equals(""));
+    return !(priorityIn.getValue().equals("") || locationBox.getValue().equals(""));
   }
 
   public void initBoxes() {
-    priorityBox.setItems(
+    priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-    roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    locationBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
-    super.saveToCSV(new SecurityRequest(), (Stage) priorityBox.getScene().getWindow());
+    super.saveToCSV(new SecurityRequest(), (Stage) priorityIn.getScene().getWindow());
   }
 }

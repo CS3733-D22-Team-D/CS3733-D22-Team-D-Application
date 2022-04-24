@@ -138,6 +138,30 @@ public class Alert extends TableObject {
     return type;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Alert alert = (Alert) o;
+
+    if (!description.equals(alert.description)) return false;
+    if (!nodeID.equals(alert.nodeID)) return false;
+    if (priority != alert.priority) return false;
+    if (!type.equals(alert.type)) return false;
+    return floor.equals(alert.floor);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = description.hashCode();
+    result = 31 * result + nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + type.hashCode();
+    result = 31 * result + floor.hashCode();
+    return result;
+  }
+
   public void setType(String type) {
     this.type = type;
   }
