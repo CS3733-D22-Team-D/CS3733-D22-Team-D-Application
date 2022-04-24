@@ -48,7 +48,8 @@ public class RowFactory {
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
         item.setPadding(new Insets(0, 0, 0, 30));
-        box.setMaxWidth(300);
+        box.setMaxWidth(100);
+        box.setMinWidth(100);
         item.getChildren().add(box);
       } else {
         Text text = new Text(attr.toString());

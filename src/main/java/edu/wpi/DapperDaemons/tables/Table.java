@@ -234,8 +234,6 @@ public class Table<R> {
 
                   @Override
                   protected void interpolate(double frac) {
-                    System.out.println(frac);
-                    Color white = Color.WHITE;
                     Color vColor =
                         new Color((1 - r) * frac + r, (1 - g) * frac + g, (1 - b) * frac + b, 1);
                     Background old = ((VBox) node).getBackground();
@@ -277,6 +275,7 @@ public class Table<R> {
     if (!rows.contains(type)) {
       rows.add(type);
       animate(0.38, 1, 0.51, r);
+      //      update();
     }
   }
 
@@ -329,24 +328,30 @@ public class Table<R> {
                             });
                       }));
         });
+    update();
   }
 
   public <E extends Enum<E>> void addEnumEditProperty(int col, int sqlCol, Class<E> enumClass) {
-    List<Node> boxesInCol = getColumn(col);
-    boxesInCol.forEach(
-        box -> {
-          Node editable = ((VBox) box).getChildren().get(0);
-          if (editable instanceof ComboBox) {
-            ComboBox<String> editBox = ((ComboBox<String>) editable);
-            editBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
-            editBox.setOnAction(
-                e -> {
-                  TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
-                  item.setAttribute(sqlCol, editBox.getValue());
-                  DAOPouch.getDAO(item).update(item);
-                });
-          }
+    editProperties.add(
+        () -> {
+          List<Node> boxesInCol = getColumn(col);
+          boxesInCol.forEach(
+              box -> {
+                Node editable = ((VBox) box).getChildren().get(0);
+                if (editable instanceof ComboBox) {
+                  ComboBox<String> editBox = ((ComboBox<String>) editable);
+                  editBox.setItems(
+                      FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+                  editBox.setOnAction(
+                      e -> {
+                        TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                        item.setAttribute(sqlCol, editBox.getValue());
+                        DAOPouch.getDAO(item).update(item);
+                      });
+                }
+              });
         });
+    update();
   }
 
   private void editTextWithin(Node n, String toEdit) {
