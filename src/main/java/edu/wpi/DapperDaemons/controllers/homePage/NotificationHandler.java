@@ -70,8 +70,6 @@ public class NotificationHandler {
           new ValueEventListener() {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
-              System.out.println(
-                  "Notification listener for " + SecurityController.getUser().getAttribute(1));
               new Thread(
                       () -> {
                         try {
