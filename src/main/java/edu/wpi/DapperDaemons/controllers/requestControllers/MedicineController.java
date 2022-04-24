@@ -2,29 +2,33 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
-  @FXML private TableView<MedicineRequest> medicineRequests;
+  @FXML private GridPane table;
+  @FXML private HBox header;
   private TableHelper<MedicineRequest> helper;
   @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
 
@@ -39,38 +43,31 @@ public class MedicineController extends ParentController {
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private Table<MedicineRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    helper = new TableHelper<>(medicineRequests, 0);
-    helper.linkColumns(MedicineRequest.class);
+    //    helper = new TableHelper<>(medicineRequests, 0);
+    //    helper.linkColumns(MedicineRequest.class);
 
-    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
+    //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-    priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
-
-    try {
-      medicineRequests.getItems().addAll(new ArrayList(medicineRequestDAO.getAll().values()));
-      //      System.out.println("Created table");
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.print("Error, Medicine Request table was unable to be created\n");
-    }
-    setListeners();
+    priorityIn.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+    t = new Table<>(table, 0);
+    createTable();
     onClearClicked();
   }
 
-  private void setListeners() {
-    TableListeners.addListener(
-        new MedicineRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              medicineRequests.getItems().clear();
-              medicineRequests
-                  .getItems()
-                  .addAll(new ArrayList(medicineRequestDAO.getAll().values()));
-            }));
+  private void createTable() {
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    List<MedicineRequest> reqs =
+        new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
+    t.setRows(reqs);
+    t.setListeners(new MedicineRequest());
+    t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(7, 2, Request.Priority.class);
   }
 
   /** Clears the fields when clicked */
@@ -213,7 +210,7 @@ public class MedicineController extends ParentController {
   private boolean addItem(MedicineRequest request) {
     boolean hasClearance = false;
     hasClearance = medicineRequestDAO.add(request);
-    if (hasClearance) medicineRequests.getItems().add(request);
+    //    if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
   }

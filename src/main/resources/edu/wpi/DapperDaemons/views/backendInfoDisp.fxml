@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -24,21 +25,21 @@
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
+                        <HBox fx:id="header" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <TableView id="table" fx:id="patientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <columns>
-                        <TableColumn id="col" fx:id="PatientID" prefWidth="75.0" text="ID" />
-                        <TableColumn id="col" fx:id="PatientFirst" prefWidth="75.0" text="First" />
-                        <TableColumn id="col" fx:id="PatientLast" prefWidth="75.0" text="Last" />
-                        <TableColumn id="col" fx:id="PatientDOB" prefWidth="75.0" text="DOB" />
-                        <TableColumn id="col" fx:id="PatientBT" prefWidth="75.0" text="BloodType" />
-                        <TableColumn id="col" fx:id="PatientRoomID" prefWidth="75.0" text="RoomID" />
-                     </columns>
-                  </TableView>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="111.0" prefWidth="375.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="table" alignment="CENTER" style="-fx-background-color: f1f0f0;" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
@@ -50,23 +51,21 @@
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
+                        <HBox fx:id="header2" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <TableView id="table" fx:id="locationsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <columns>
-                        <TableColumn id="col" fx:id="LocationID" prefWidth="75.0" text="ID" />
-                        <TableColumn id="col" fx:id="LocationX" prefWidth="75.0" text="X" />
-                        <TableColumn id="col" fx:id="LocationY" prefWidth="75.0" text="Y" />
-                        <TableColumn id="col" fx:id="LocationFloor" prefWidth="75.0" text="Floor" />
-                        <TableColumn id="col" fx:id="LocationBuilding" prefWidth="75.0" text="Building" />
-                        <TableColumn id="col" fx:id="LocationType" prefWidth="75.0" text="Type" />
-                        <TableColumn id="col" fx:id="LocationLongName" prefWidth="75.0" text="LongName" />
-                        <TableColumn id="col" fx:id="LocationShortName" prefWidth="75.0" text="ShortName" />
-                     </columns>
-                  </TableView>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="111.0" prefWidth="375.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="table2" alignment="CENTER" style="-fx-background-color: f1f0f0;" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
          </children>
@@ -82,21 +81,21 @@
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
+                        <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <TableView id="table" fx:id="employeesTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <columns>
-                        <TableColumn id="col" fx:id="EmployeeID" prefWidth="75.0" text="ID" />
-                        <TableColumn id="col" fx:id="EmployeeFirst" prefWidth="75.0" text="First" />
-                        <TableColumn id="col" fx:id="EmployeeLast" prefWidth="75.0" text="Last" />
-                        <TableColumn id="col" fx:id="EmployeeDOB" prefWidth="75.0" text="DOB" />
-                        <TableColumn id="col" fx:id="EmployeeType" prefWidth="75.0" text="Type" />
-                        <TableColumn id="col" fx:id="EmployeeClearance" prefWidth="75.0" text="Clearance" />
-                     </columns>
-                  </TableView>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="111.0" prefWidth="375.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="table1" alignment="CENTER" style="-fx-background-color: f1f0f0;" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
@@ -108,20 +107,21 @@
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
+                        <HBox fx:id="header3" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <TableView id="table" fx:id="equipmentTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <columns>
-                        <TableColumn id="col" fx:id="EquipmentID" prefWidth="75.0" text="ID" />
-                        <TableColumn id="col" fx:id="EquipmentName" prefWidth="75.0" text="Name" />
-                        <TableColumn id="col" fx:id="EquipmentType" prefWidth="75.0" text="Type" />
-                        <TableColumn id="col" fx:id="EquipmentSerialNum" prefWidth="75.0" text="SerialNum" />
-                        <TableColumn id="col" fx:id="EquipmentCleanStatus" prefWidth="75.0" text="CleanStatus" />
-                     </columns>
-                  </TableView>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="111.0" prefWidth="375.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="table3" alignment="CENTER" style="-fx-background-color: f1f0f0;" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
          </children>

@@ -9,14 +9,17 @@
 
 #jButton {
     -fx-background-color: #f1f0f0;
+    -fx-border-color: #D5D3D2;
     -jfx-focus-color: #aaaaaa;
     -jfx-unfocus-color: #aaaaaa;
     -fx-background-radius: 7.5;
+    -fx-border-radius: 7.5;
     -fx-cursor: hand;
 }
 
 #slider.button{
     -fx-cursor: hand;
+    /*admin: ;*/
 }
 
 #slider.button:hover {

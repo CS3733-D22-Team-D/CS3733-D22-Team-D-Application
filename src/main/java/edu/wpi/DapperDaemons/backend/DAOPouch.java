@@ -188,7 +188,7 @@ public class DAOPouch {
     } else if (tableName.equals("MEALDELIVERYREQUESTS")) {
       return mealDeliveryRequestDAO;
     } else if (tableName.equals("MEDICALEQUIPMENTREQUESTS")) {
-      return medicineRequestDAO;
+      return medicalEquipmentRequestDAO;
     } else if (tableName.equals("MEDICINEREQUESTS")) {
       return medicineRequestDAO;
     } else if (tableName.equals("PATIENTTRANSPORTREQUESTS")) {

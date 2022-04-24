@@ -8,6 +8,47 @@ import java.util.Date;
 import java.util.List;
 
 public class MealDeliveryRequest extends TableObject implements Request {
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    MealDeliveryRequest that = (MealDeliveryRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assigneeID.equals(that.assigneeID)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    if (!patientID.equals(that.patientID)) return false;
+    if (!entree.equals(that.entree)) return false;
+    if (!side.equals(that.side)) return false;
+    if (!drink.equals(that.drink)) return false;
+    if (!dessert.equals(that.dessert)) return false;
+    return dateNeeded.equals(that.dateNeeded);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assigneeID.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + patientID.hashCode();
+    result = 31 * result + entree.hashCode();
+    result = 31 * result + side.hashCode();
+    result = 31 * result + drink.hashCode();
+    result = 31 * result + dessert.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
+  }
 
   /*
 

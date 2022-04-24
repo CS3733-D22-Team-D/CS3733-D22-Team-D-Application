@@ -54,10 +54,6 @@ public class ParentController extends AppController {
   @FXML private VBox userDropdown;
   @FXML private ToggleButton userSettingsToggle;
 
-  /* Background */
-  @FXML private ImageView BGImage;
-  @FXML private Pane BGContainer;
-
   /* Common UI */
   @FXML protected ImageView homeIcon;
   @FXML private JFXHamburger burg;
@@ -84,10 +80,19 @@ public class ParentController extends AppController {
     super.initialize(location, resources);
     OverdueHandler.init();
     CleanEquipmentHandler.init();
-    if (!AutoSave.started()) AutoSave.start(1, autoSaveIcon);
-    bindImage(BGImage, BGContainer);
+    if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
     menuSlider(slider, burg, burgBack);
     initSequence();
+    sceneBox.setOnMouseClicked(
+        e -> {
+          if (burgBack.isVisible()) closeSlider();
+          serverToggle.setSelected(false);
+          openServerDropdown();
+          userSettingsToggle.setSelected(false);
+          openUserDropdown();
+          alertButton.setSelected(false);
+          notificationsScroller.setVisible(alertButton.isSelected());
+        });
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -141,16 +146,28 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
   }
 
   @FXML
   void openServerDropdown() {
     serverDropdown.setVisible(serverToggle.isSelected());
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   @FXML
   void openNotifications() {
     notificationsScroller.setVisible(alertButton.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   private void setServerToggleMenu() {
@@ -299,7 +316,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    NotificationHandler.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }
@@ -375,7 +392,7 @@ public class ParentController extends AppController {
 
   @FXML
   void switchToSecurity() {
-    swapPage("SecurityRequest", "Security Services");
+    swapPage("security", "Security Services");
   }
 
   @FXML

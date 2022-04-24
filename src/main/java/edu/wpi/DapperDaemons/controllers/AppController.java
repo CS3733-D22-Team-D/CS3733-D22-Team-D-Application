@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 public class AppController implements Initializable {
 
   @FXML private StackPane windowContents;
-  @FXML private VBox sceneBox;
+  @FXML protected VBox sceneBox;
 
   private static VBox error;
   private static VBox confirmation;

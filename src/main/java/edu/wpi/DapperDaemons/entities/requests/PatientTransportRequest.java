@@ -167,7 +167,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 6)
   public Priority getPriority() {
     return priority;
   }
@@ -222,7 +222,6 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   // SETTERS AND GETTERS
   @Override
-  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -235,7 +234,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 0)
   public String getRoomID() {
     return roomID;
   }
@@ -244,7 +243,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 1)
   public String getRequesterID() {
     return requesterID;
   }
@@ -253,7 +252,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 2)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -262,7 +261,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
-  @TableHandler(table = 0, col = 5)
+  @TableHandler(table = 0, col = 3)
   public String getPatientID() {
     return patientID;
   }
@@ -271,7 +270,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
-  @TableHandler(table = 0, col = 6)
+  @TableHandler(table = 0, col = 4)
   public String getNextRoomID() {
     return nextRoomID;
   }
@@ -280,7 +279,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.nextRoomID = nextRoomID;
   }
 
-  @TableHandler(table = 0, col = 7)
+  @TableHandler(table = 0, col = 5)
   public RequestStatus getStatus() {
     return status;
   }
@@ -305,13 +304,47 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.dateTime = dateTime;
   }
 
-  @Override
-  @TableHandler(table = 0, col = 8)
   public String getDateNeeded() {
     return dateNeeded;
   }
 
   public void setDateNeeded(String dateNeeded) {
     this.dateNeeded = dateNeeded;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    PatientTransportRequest that = (PatientTransportRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requesterID.equals(that.requesterID)) return false;
+    if (!assigneeID.equals(that.assigneeID)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    if (!patientID.equals(that.patientID)) return false;
+    if (!nextRoomID.equals(that.nextRoomID)) return false;
+    return dateNeeded.equals(that.dateNeeded);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requesterID.hashCode();
+    result = 31 * result + assigneeID.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + patientID.hashCode();
+    result = 31 * result + nextRoomID.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
   }
 }

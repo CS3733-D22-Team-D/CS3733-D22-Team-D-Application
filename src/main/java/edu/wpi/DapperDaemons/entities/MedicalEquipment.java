@@ -6,10 +6,37 @@ import java.util.List;
 public class MedicalEquipment extends TableObject {
 
   private String nodeID;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    MedicalEquipment that = (MedicalEquipment) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (!equipmentName.equals(that.equipmentName)) return false;
+    if (equipmentType != that.equipmentType) return false;
+    if (!serialNumber.equals(that.serialNumber)) return false;
+    if (cleanStatus != that.cleanStatus) return false;
+    return locationID.equals(that.locationID);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + equipmentName.hashCode();
+    result = 31 * result + equipmentType.hashCode();
+    result = 31 * result + serialNumber.hashCode();
+    result = 31 * result + cleanStatus.hashCode();
+    result = 31 * result + locationID.hashCode();
+    return result;
+  }
+
   private String equipmentName;
   private EquipmentType equipmentType;
   private String serialNumber;
-  private CleanStatus cleanStatus;
+  private CleanStatus cleanStatus = CleanStatus.UNCLEAN;;
 
   private String locationID;
 

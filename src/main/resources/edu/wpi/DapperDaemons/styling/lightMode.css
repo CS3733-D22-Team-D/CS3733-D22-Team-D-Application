@@ -1,0 +1,91 @@
+
+/* file url: ../resources/edu/wpi/DapperDaemons/styling/lightMode.css */
+
+@font-face {
+    font-family: interBold;
+    src: url('interBold.ttf');
+}
+
+@font-face {
+    font-family: interSemiBold;
+    src: url('interSemiBold.ttf');
+}
+/* Header and Parent */
+#normalText{
+    -fx-font-family: "interSemiBold" !important;
+    -fx-fill: #FFFFFF !important;
+    -fx-font-size: 14px !important;
+}
+#title{
+    -fx-font-family: "interBold" !important;
+    -fx-fill: #FFFFFF !important;
+    -fx-font-size: 28px !important;
+}
+
+#headerBackground{
+    -fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) !important;
+    -fx-background-attachment: fixed !important;
+}
+
+#sliderBackground{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%,#057DA7,#065799) !important;
+}
+
+
+/* Request Page Elements */
+
+#pageBackground {
+    -fx-background-color: #F1F0F0;
+}
+
+#pageCard{
+    -fx-border-radius: 7.5;
+    -fx-border-width: 1px;
+    -fx-border-color: #323232 15%;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, #323232 ,8, 0.15, -2, 2);
+}
+
+#cardTitle{
+    -fx-font-family: interSemiBold;
+    -fx-fill: #052F92;
+    -fx-font-size: 18px;
+}
+
+#cardText{
+    -fx-font-family: interSemiBold;
+    -fx-fill: #2F2F2F;
+    -fx-font-size: 14px;
+}
+
+#cardInput{
+    -fx-border-radius: 7.5;
+    -fx-border-width: 1px;
+    -fx-border-color: #323232 15%;
+    -fx-background-color: #F1F0F0;
+    -fx-effect: dropshadow(gaussian, #323232 ,8, 0.15, -2, 2);
+
+}
+
+#confirmButton {
+    -fx-border-radius: 7.5;
+    -fx-background-color: #052F92;
+}
+
+#cancelButton{
+
+
+}
+
+
+/* Table Specific Elements */
+.columnLabel{
+    -fx-font-family: interRegular;
+    -fx-color: #2F2F2F;
+    -fx-font-size: 12px;
+}
+
+
+
+
+

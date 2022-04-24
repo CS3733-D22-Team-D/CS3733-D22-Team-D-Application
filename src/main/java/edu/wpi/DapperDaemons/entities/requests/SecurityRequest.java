@@ -15,6 +15,38 @@ public class SecurityRequest extends TableObject implements Request {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    SecurityRequest that = (SecurityRequest) o;
+
+    if (!nodeID.equals(that.nodeID)) return false;
+    if (priority != that.priority) return false;
+    if (!roomID.equals(that.roomID)) return false;
+    if (!requester.equals(that.requester)) return false;
+    if (!assignee.equals(that.assignee)) return false;
+    if (status != that.status) return false;
+    if (!notes.equals(that.notes)) return false;
+    if (!dateTime.equals(that.dateTime)) return false;
+    return dateNeeded.equals(that.dateNeeded);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + priority.hashCode();
+    result = 31 * result + roomID.hashCode();
+    result = 31 * result + requester.hashCode();
+    result = 31 * result + assignee.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + notes.hashCode();
+    result = 31 * result + dateTime.hashCode();
+    result = 31 * result + dateNeeded.hashCode();
+    return result;
+  }
+
+  @Override
   public String getRequesterID() {
     return getRequester();
   }

@@ -6,6 +6,36 @@ import java.util.List;
 
 public class Location extends TableObject {
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Location location = (Location) o;
+
+    if (xcoord != location.xcoord) return false;
+    if (ycoord != location.ycoord) return false;
+    if (!nodeID.equals(location.nodeID)) return false;
+    if (!floor.equals(location.floor)) return false;
+    if (!building.equals(location.building)) return false;
+    if (!nodeType.equals(location.nodeType)) return false;
+    if (!longName.equals(location.longName)) return false;
+    return shortName.equals(location.shortName);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = nodeID.hashCode();
+    result = 31 * result + xcoord;
+    result = 31 * result + ycoord;
+    result = 31 * result + floor.hashCode();
+    result = 31 * result + building.hashCode();
+    result = 31 * result + nodeType.hashCode();
+    result = 31 * result + longName.hashCode();
+    result = 31 * result + shortName.hashCode();
+    return result;
+  }
+
   private String nodeID;
   private int xcoord = -1;
   private int ycoord = -1;
