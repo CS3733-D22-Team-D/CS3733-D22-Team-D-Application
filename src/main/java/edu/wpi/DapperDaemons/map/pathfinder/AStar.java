@@ -145,9 +145,30 @@ public class AStar {
     return walkableNode; // returns connected nodeID's
   }
 
+  public String findClosestPathnode(Location startLocation){
+    List<Location> filteredToPathNodes =
+            new ArrayList<>(DAOPouch.getLocationDAO().filter(6, "PATH").values()); // Gives all PATH nodes
+    filteredToPathNodes = new ArrayList<>(DAOPouch.getLocationDAO().filter(filteredToPathNodes,4,startLocation.getFloor()).values()); // Filters out to only current floor
+    Double bestDist = 10000.0;
+    Location bestLocation = new Location();
+    for(Location location : filteredToPathNodes) {
+      if(getDistance(startLocation.getNodeID(), location.getNodeID()) < bestDist) {
+        bestDist = getDistance(startLocation.getNodeID(), location.getNodeID());
+        bestLocation = location;
+      }
+      int xDistance = location.getXcoord() - startLocation.getXcoord();
+      int yDistance = location.getYcoord() - startLocation.getYcoord();
+      if(xDistance > 50 && xDistance < 150 && yDistance < 50 && yDistance > -50){
+        bestLocation = location;
+        break;
+      }
+    }
+    return bestLocation.getNodeID();
+  }
+
   /**
    * Gets the distance utilizing the Location database and the XCoord and YCoord
-   *
+   * Takes in the two nodeID's of the input locations
    * @param currentLocation
    * @param nextLocation
    * @return

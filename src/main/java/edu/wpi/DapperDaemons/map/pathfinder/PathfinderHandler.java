@@ -85,7 +85,14 @@ public class PathfinderHandler extends AppController implements Initializable {
       toLoc = filterDos.get(0);
       if (checkIfConnectedNode(startLoc.getNodeID())) {
         if (checkIfConnectedNode(toLoc.getNodeID())) {
-          showPather(startLoc.getNodeID(), toLoc.getNodeID());
+
+          String startNode;
+          String endNode;
+          AStar ppFinder = new AStar();
+          startNode = ppFinder.findClosestPathnode(startLoc);
+          endNode = ppFinder.findClosestPathnode(toLoc);
+
+          showPather(startLoc.getNodeID(), toLoc.getNodeID()); // TODO : Make this take in the correct nodes instead
         } else {
           showError("Not a valid end location!");
         }
