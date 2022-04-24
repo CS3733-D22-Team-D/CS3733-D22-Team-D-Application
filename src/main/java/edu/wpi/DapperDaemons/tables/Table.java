@@ -265,11 +265,20 @@ public class Table<R> {
                         TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
                         item.setAttribute(sqlCol, elems.getValue());
                         DAOPouch.getDAO(item).update(item);
+
+                        // Reset
+                        ((VBox) box).getChildren().clear();
+                        ((VBox) box).getChildren().add(old);
+                        editTextWithin(
+                            old,
+                            ((TableObject) getItem(getRowIndexAsInteger(box)))
+                                .getAttribute(sqlCol));
+                        addDropDownEditProperty(col, sqlCol, elements);
                       });
                   ((VBox) box).getChildren().add(elems);
 
                   // Toggle reset line
-                  box.setOnMouseClicked(
+                  table.setOnMouseClicked(
                       toggle -> {
                         ((VBox) box).getChildren().clear();
                         ((VBox) box).getChildren().add(old);
