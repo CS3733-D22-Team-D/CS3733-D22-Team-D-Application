@@ -294,7 +294,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    NotificationHandler.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }
