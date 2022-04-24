@@ -16,7 +16,6 @@ import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
-import edu.wpi.DapperDaemons.map.pathfinder.ShowConnections;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -113,7 +112,7 @@ public class MapController extends ParentController {
   private PinHandler pin;
 
   private PathfinderHandler pathfinder;
-  private ShowConnections connectionShower;
+  //  private ShowConnections connectionShower; // Uncomment when you want to see all paths
 
   /* Database stuff */
   private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -143,7 +142,15 @@ public class MapController extends ParentController {
     List<PositionInfo> origPositions = new ArrayList<>();
     // Initialize DAO objects
     try {
-      locationDAO.getAll().values().forEach(l -> origPositions.add(new PositionInfo(l)));
+      locationDAO
+          .getAll()
+          .values()
+          .forEach(
+              l -> {
+                if (!l.getNodeType()
+                    .equals("PATH")) // As long as its not a path, add it to the positions
+                origPositions.add(new PositionInfo(l));
+              });
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
     }
@@ -168,9 +175,9 @@ public class MapController extends ParentController {
 
     pathfinder.filterByFloor(MapDashboardController.floor);
 
-    connectionShower = new ShowConnections(pathPane, this);
-
-    connectionShower.showAllLines(MapDashboardController.floor);
+    //    connectionShower = new ShowConnections(pathPane, this);
+    // Comment out connectionShower if you want to see all the nodes
+    //    connectionShower.showAllLines(MapDashboardController.floor);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -455,7 +462,7 @@ public class MapController extends ParentController {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
-    connectionShower.showAllLines("1");
+    //    connectionShower.showAllLines("1");
   }
 
   @FXML
@@ -463,7 +470,7 @@ public class MapController extends ParentController {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
     pathfinder.filterByFloor("2");
-    connectionShower.showAllLines("2");
+    //    connectionShower.showAllLines("2");
   }
 
   @FXML
@@ -471,7 +478,7 @@ public class MapController extends ParentController {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
     pathfinder.filterByFloor("3");
-    connectionShower.showAllLines("3");
+    //    connectionShower.showAllLines("3");
   }
 
   @FXML
@@ -479,7 +486,7 @@ public class MapController extends ParentController {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
     pathfinder.filterByFloor("4");
-    connectionShower.showAllLines("4");
+    //    connectionShower.showAllLines("4");
   }
 
   @FXML
@@ -487,7 +494,7 @@ public class MapController extends ParentController {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
     pathfinder.filterByFloor("5");
-    connectionShower.showAllLines("5");
+    //    connectionShower.showAllLines("5");
   }
 
   @FXML
@@ -495,7 +502,7 @@ public class MapController extends ParentController {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
     pathfinder.filterByFloor("L1");
-    connectionShower.showAllLines("L1");
+    //    connectionShower.showAllLines("L1");
   }
 
   @FXML
@@ -503,7 +510,7 @@ public class MapController extends ParentController {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");
-    connectionShower.showAllLines("L2");
+    //    connectionShower.showAllLines("L2");
   }
 
   @FXML
