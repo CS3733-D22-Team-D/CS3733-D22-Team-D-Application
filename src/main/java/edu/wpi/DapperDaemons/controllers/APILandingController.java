@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
+import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamZ.api.API;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,7 +47,10 @@ public class APILandingController implements Initializable {
   }
 
   /** Allows for requests submitted by the API to be saved to our database */
-  public void saveToDatabase() {}
+  public void saveToDatabase() {
+    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
+
+  }
 
   /**
    * Checks team D's location database for a given location ID
