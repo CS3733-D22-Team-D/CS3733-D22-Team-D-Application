@@ -177,6 +177,7 @@ public class DAOFacade {
 
   /**
    * Finds the closest medical equipment to your current location and what you are looking for
+   *
    * @param type
    * @param location
    * @return

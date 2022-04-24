@@ -267,7 +267,6 @@ public class PathfinderHandler extends AppController implements Initializable {
     for (int i = 0;
         i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
-      // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);

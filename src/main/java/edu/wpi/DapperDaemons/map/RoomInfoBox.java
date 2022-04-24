@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.map;
 
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
@@ -28,6 +29,7 @@ public class RoomInfoBox {
   private TableView<MedicalEquipment> equipTable;
   private TableView<Patient> patientTable;
   private TableView<Request> requestTable;
+  private Location pos;
 
   public RoomInfoBox(
       VBox roomInfoBox,
@@ -115,6 +117,8 @@ public class RoomInfoBox {
     typeTxt.setText(pos.getType());
     buildingTxt.setText(pos.getBuilding());
 
+    this.pos = pos.getLoc();
+
     equipTable.getItems().clear();
     equipTable.getItems().addAll(equipment);
 
@@ -123,6 +127,11 @@ public class RoomInfoBox {
 
     requestTable.getItems().clear();
     requestTable.getItems().addAll(requests);
+  }
+
+  public Location getPosition() {
+    App.LOG.info("Returning position info for request showing on map");
+    return pos;
   }
 
   public Location change(PositionInfo selected) {
