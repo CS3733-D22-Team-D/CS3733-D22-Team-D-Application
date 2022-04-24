@@ -9,8 +9,11 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -21,6 +24,7 @@ public class Table<R> {
   private List<R> rows = new ArrayList<>();
   private GridPane table;
   private final int tableNum;
+  private R instance;
 
   public Table(GridPane table, int tableNum) {
     this.table = table;
@@ -28,6 +32,7 @@ public class Table<R> {
   }
 
   public void setListeners(R type) {
+    this.instance = type;
     TableListeners.addListener(
         ((TableObject) type).tableName(),
         TableListeners.eventListener(
@@ -69,6 +74,14 @@ public class Table<R> {
 
   public static int getRowIndexAsInteger(Node node) {
     final var a = GridPane.getRowIndex(node);
+    if (a == null) {
+      return 0;
+    }
+    return a;
+  }
+
+  public static int getColumnIndexAsInteger(Node node) {
+    final var a = GridPane.getColumnIndex(node);
     if (a == null) {
       return 0;
     }
@@ -118,6 +131,19 @@ public class Table<R> {
         .forEach(
             node -> {
               if (getRowIndexAsInteger(node) == rowNum) {
+                ret.add(node);
+              }
+            });
+    return ret;
+  }
+
+  public List<Node> getColumn(int colNum) {
+    List<Node> ret = new ArrayList<>();
+    table
+        .getChildren()
+        .forEach(
+            node -> {
+              if (getColumnIndexAsInteger(node) == colNum) {
                 ret.add(node);
               }
             });
@@ -219,5 +245,75 @@ public class Table<R> {
               })
           .start();
     }
+  }
+
+  public void addDropDownEditProperty(int col, int sqlCol, String... elements) {
+    List<Node> boxesInCol = getColumn(col);
+    boxesInCol.forEach(
+        box ->
+            box.setOnMouseClicked(
+                mouse -> {
+                  // Store old value
+                  Node old = ((VBox) box).getChildren().get(0);
+                  ((VBox) box).getChildren().clear();
+
+                  ComboBox<String> elems = new ComboBox<>();
+                  elems.getItems().addAll(elements);
+                  elems.setValue(getTextWithin(old));
+                  elems.setOnAction(
+                      e -> {
+                        TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                        item.setAttribute(sqlCol, elems.getValue());
+                        DAOPouch.getDAO(item).update(item);
+                      });
+                  ((VBox) box).getChildren().add(elems);
+
+                  // Toggle reset line
+                  box.setOnMouseClicked(
+                      toggle -> {
+                        ((VBox) box).getChildren().clear();
+                        ((VBox) box).getChildren().add(old);
+                        editTextWithin(
+                            old,
+                            ((TableObject) getItem(getRowIndexAsInteger(box)))
+                                .getAttribute(sqlCol));
+                        addDropDownEditProperty(col, sqlCol, elements);
+                      });
+                }));
+  }
+
+  public <E extends Enum<E>> void addEnumEditProperty(int col, int sqlCol, Class<E> enumClass) {
+    List<Node> boxesInCol = getColumn(col);
+    boxesInCol.forEach(
+        box -> {
+          Node editable = ((VBox) box).getChildren().get(0);
+          if (editable instanceof ComboBox) {
+            ComboBox<String> editBox = ((ComboBox<String>) editable);
+            editBox.setItems(FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+            editBox.setOnAction(
+                e -> {
+                  TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                  item.setAttribute(sqlCol, editBox.getValue());
+                  DAOPouch.getDAO(item).update(item);
+                });
+          }
+        });
+  }
+
+  private void editTextWithin(Node n, String toEdit) {
+    if (n instanceof Text) ((Text) n).setText(toEdit);
+    else if (n instanceof ComboBox) ((ComboBox<String>) n).setValue(toEdit);
+    else if (n instanceof TextField) ((TextField) n).setText(toEdit);
+  }
+
+  private String getTextWithin(Node n) {
+    if (n instanceof Text) return ((Text) n).getText();
+    else if (n instanceof ComboBox) return ((ComboBox<String>) n).getValue();
+    else if (n instanceof TextField) return ((TextField) n).getText();
+    else return "";
+  }
+
+  public R getItem(int row) {
+    return rows.get(row);
   }
 }
