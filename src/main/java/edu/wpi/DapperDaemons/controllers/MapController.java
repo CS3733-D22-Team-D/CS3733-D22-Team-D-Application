@@ -242,7 +242,8 @@ public class MapController extends ParentController {
                       locationDAO.getAll().values().forEach(l -> newPos.add(new PositionInfo(l)));
                     } catch (Exception e) {
                       System.err.println("DAO could not be created in MapController\n");
-                    };
+                    }
+                    ;
                     difference(newPos, origPositions);
                     glyphs.setFloorFilter(maps.getFloor());
                   });
@@ -252,17 +253,19 @@ public class MapController extends ParentController {
         TableListeners.eventListener(
             () -> {
               Platform.runLater(
-                      () -> {
-//                        List<PositionInfo> newPos = new ArrayList<>();
-//                        // Initialize DAO objects
-//                        try {
-//                          equipmentDAO.getAll().values().forEach(l -> newPos.add(new PositionInfo(l)));
-//                        } catch (Exception e) {
-//                          System.err.println("DAO could not be created in MapController\n");
-//                        };
-//                        difference(newPos, origPositions);
-//                        glyphs.setFloorFilter(maps.getFloor());
-                      });
+                  () -> {
+                    //                        List<PositionInfo> newPos = new ArrayList<>();
+                    //                        // Initialize DAO objects
+                    //                        try {
+                    //                          equipmentDAO.getAll().values().forEach(l ->
+                    // newPos.add(new PositionInfo(l)));
+                    //                        } catch (Exception e) {
+                    //                          System.err.println("DAO could not be created in
+                    // MapController\n");
+                    //                        };
+                    //                        difference(newPos, origPositions);
+                    //                        glyphs.setFloorFilter(maps.getFloor());
+                  });
             }));
     TableListeners.addListeners(
         DAOFacade.getAllRequests().stream()
@@ -274,17 +277,19 @@ public class MapController extends ParentController {
         TableListeners.eventListener(
             () -> {
               Platform.runLater(
-                      () -> {
-//                        List<PositionInfo> newPos = new ArrayList<>();
-//                        // Initialize DAO objects
-//                        try {
-//                          DAOFacade.getAllRequests().stream().forEach(l -> newPos.add(new PositionInfo(l)));
-//                        } catch (Exception e) {
-//                          System.err.println("DAO could not be created in MapController\n");
-//                        };
-//                        difference(newPos, origPositions);
-//                        glyphs.setFloorFilter(maps.getFloor());
-                      });
+                  () -> {
+                    //                        List<PositionInfo> newPos = new ArrayList<>();
+                    //                        // Initialize DAO objects
+                    //                        try {
+                    //                          DAOFacade.getAllRequests().stream().forEach(l ->
+                    // newPos.add(new PositionInfo(l)));
+                    //                        } catch (Exception e) {
+                    //                          System.err.println("DAO could not be created in
+                    // MapController\n");
+                    //                        };
+                    //                        difference(newPos, origPositions);
+                    //                        glyphs.setFloorFilter(maps.getFloor());
+                  });
             }));
   }
 

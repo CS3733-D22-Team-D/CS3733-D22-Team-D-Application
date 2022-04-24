@@ -7,7 +7,6 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.*;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -60,27 +59,27 @@ public class MapDashboardController extends ParentController {
   public static String floor;
 
   @FXML private ImageView mapImage;
-  @FXML private Pane mapImageContainer;
+  @FXML private Pane mapContainer;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
 
-    bindImage(mapImage, mapImageContainer);
+    bindImage(mapImage, mapContainer); // nice
 
-    setListeners();
+    // setListeners();
 
     // Init tables
-    new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
-    new TableHelper<>(locTable, 2).linkColumns(Location.class);
-    new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
-    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
+    //    new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
+    //    new TableHelper<>(locTable, 2).linkColumns(Location.class);
+    //    new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
+    //    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
+    //    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
+    //    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
 
     // Default floor
     floor = "1";
-    updatePage();
+    // updatePage();
   }
 
   private void setListeners() {
