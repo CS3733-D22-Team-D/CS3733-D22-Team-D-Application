@@ -53,6 +53,8 @@ public class MedicineController extends ParentController {
     //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
+    priorityIn.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     t = new Table<>(table, 0);
     createTable();
     onClearClicked();

@@ -10,7 +10,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
-import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -56,7 +55,7 @@ public class EquipmentCleaningController extends ParentController {
   private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   @FXML private GridPane table;
   @FXML private HBox header;
-  private Table<MedicalEquipmentRequest> t;
+  private Table<EquipmentCleaning> t;
 
   @FXML
   public void startFuzzySearch() {
@@ -76,10 +75,10 @@ public class EquipmentCleaningController extends ParentController {
 
   private void createTable() {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
-    List<MedicalEquipmentRequest> reqs =
-        new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
+    List<EquipmentCleaning> reqs =
+        new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values());
     t.setRows(reqs);
-    t.setListeners(new MedicalEquipmentRequest());
+    t.setListeners(new EquipmentCleaning());
   }
 
   private void setListeners() {

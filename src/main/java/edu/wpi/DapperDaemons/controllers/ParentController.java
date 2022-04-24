@@ -83,6 +83,16 @@ public class ParentController extends AppController {
     if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
     menuSlider(slider, burg, burgBack);
     initSequence();
+    sceneBox.setOnMouseClicked(
+        e -> {
+          if (burgBack.isVisible()) closeSlider();
+          serverToggle.setSelected(false);
+          openServerDropdown();
+          userSettingsToggle.setSelected(false);
+          openUserDropdown();
+          alertButton.setSelected(false);
+          notificationsScroller.setVisible(alertButton.isSelected());
+        });
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -136,16 +146,28 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
   }
 
   @FXML
   void openServerDropdown() {
     serverDropdown.setVisible(serverToggle.isSelected());
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   @FXML
   void openNotifications() {
     notificationsScroller.setVisible(alertButton.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   private void setServerToggleMenu() {
@@ -294,7 +316,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    NotificationHandler.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }
