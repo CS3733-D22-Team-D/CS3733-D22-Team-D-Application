@@ -50,6 +50,7 @@ public class APILandingController implements Initializable {
 
   /** Allows for requests submitted by the API to be saved to our database */
   public void saveToDatabase() {
+    dSave.setVisible(false);
     databaseSaverTeamD();
   }
 
@@ -99,6 +100,7 @@ public class APILandingController implements Initializable {
     }
     errorLabel.setText("You may have unsaved requests!");
     errorLabel.setTextFill(Paint.valueOf("EF5353"));
+    dSave.setVisible(true);
   }
 
   /** Saves all requests (that do not already exist) from the API to the program database */
