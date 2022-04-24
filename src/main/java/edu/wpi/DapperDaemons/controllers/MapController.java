@@ -256,7 +256,6 @@ public class MapController extends ParentController {
                     } catch (Exception e) {
                       System.err.println("DAO could not be created in MapController\n");
                     }
-                    ;
                     difference(newPos, origPositions);
                     glyphs.setFloorFilter(maps.getFloor());
                   });
@@ -267,17 +266,8 @@ public class MapController extends ParentController {
             () -> {
               Platform.runLater(
                   () -> {
-                    //                        List<PositionInfo> newPos = new ArrayList<>();
-                    //                        // Initialize DAO objects
-                    //                        try {
-                    //                          equipmentDAO.getAll().values().forEach(l ->
-                    // newPos.add(new PositionInfo(l)));
-                    //                        } catch (Exception e) {
-                    //                          System.err.println("DAO could not be created in
-                    // MapController\n");
-                    //                        };
-                    //                        difference(newPos, origPositions);
-                    //                        glyphs.setFloorFilter(maps.getFloor());
+                    glyphs.updateEquipment();
+                    glyphs.setFloorFilter(maps.getFloor());
                   });
             }));
     TableListeners.addListeners(
@@ -289,20 +279,7 @@ public class MapController extends ParentController {
             .collect(Collectors.toCollection(ArrayList<String>::new)),
         TableListeners.eventListener(
             () -> {
-              Platform.runLater(
-                  () -> {
-                    //                        List<PositionInfo> newPos = new ArrayList<>();
-                    //                        // Initialize DAO objects
-                    //                        try {
-                    //                          DAOFacade.getAllRequests().stream().forEach(l ->
-                    // newPos.add(new PositionInfo(l)));
-                    //                        } catch (Exception e) {
-                    //                          System.err.println("DAO could not be created in
-                    // MapController\n");
-                    //                        };
-                    //                        difference(newPos, origPositions);
-                    //                        glyphs.setFloorFilter(maps.getFloor());
-                  });
+              Platform.runLater(() -> {});
             }));
   }
 
@@ -385,13 +362,9 @@ public class MapController extends ParentController {
     List<MedicalEquipment> equipment = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
-    try {
-      equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
-      patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
-      requests = DAOFacade.getFilteredRequests(pos.getId());
-    } catch (Exception e) {
-      System.err.println("Could not filter through DAO");
-    }
+    equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
+    patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
+    requests = DAOFacade.getFilteredRequests(pos.getId());
     System.out.println(patients);
     infoBox.openLoc(pos, equipment, patients, requests);
     infoBox.open();

@@ -79,6 +79,7 @@ public class GlyphHandler {
 
     for (int i = 0; i < equipLocs.size(); i++) {
       ImageView image = (ImageView) equipLayer.getChildren().get(i);
+      image.setPickOnBounds(true);
       image.setOnMouseDragged(
           e -> {
             PositionInfo snapped = getNearestPos((int) e.getX(), (int) e.getY());
@@ -146,10 +147,9 @@ public class GlyphHandler {
           ds.setOffsetY(4.00);
           equip.setEffect(ds);
 
-          image.setOnMouseClicked(i -> controller.onMapClicked(i));
           equipLayer.getChildren().add(equip);
         });
-
+    image.setOnMouseClicked(i -> controller.onMapClicked(i));
     imageLocs.add(pos);
     return true;
   }
@@ -320,6 +320,30 @@ public class GlyphHandler {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
     }
+  }
+
+  public void updateEquipment() {
+    equipLayer.getChildren().clear();
+    equipLocs.clear();
+    imageLocs.forEach(
+        pos -> {
+          List<MedicalEquipment> all =
+              new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
+          equipLocs.addAll(all);
+          all.forEach(
+              e -> {
+                ImageView equip = getEquipImage(e.getEquipmentType().name());
+                equip.setX(pos.getX() - 16);
+                equip.setY(pos.getY() - 16);
+                equip.setVisible(true);
+                equip.setPickOnBounds(true);
+                DropShadow ds = new DropShadow();
+                ds.setOffsetX(-2.00);
+                ds.setOffsetY(4.00);
+                equip.setEffect(ds);
+                equipLayer.getChildren().add(equip);
+              });
+        });
   }
 
   public void filter() {
