@@ -48,6 +48,7 @@ public class ShowRequestPaths {
   }
 
   public void showAllPaths(Location location) {
+    clearPath();
     List<Request> requests = DAOFacade.getFilteredRequests(location.getNodeID());
     AStar ppHelper = new AStar();
     startingOffset = requests.size() / 2 * lineOffset;
@@ -78,8 +79,8 @@ public class ShowRequestPaths {
 
     AStar ppFinder = new AStar();
 
-    System.out.println("Start node is " + startNode);
-    System.out.println("End node is " + endNode);
+    //    System.out.println("Start node is " + startNode);
+    //    System.out.println("End node is " + endNode);
 
     startNode = ppFinder.findClosestPathnode(startLoc);
     endNode = ppFinder.findClosestPathnode(endLoc);
@@ -87,11 +88,7 @@ public class ShowRequestPaths {
 
     int offsetX = necessaryOffsetX + lineOffset * numberOfLines - startingOffset;
     int offsetY = necessaryOffsetY + lineOffset * numberOfLines - startingOffset;
-    try {
-      locations.add(DAOPouch.getLocationDAO().get(endNode));
-    } catch (Exception e) {
-      App.LOG.info("Something went wrong adding the last location");
-    }
+
     for (String node : nodePath) {
       try {
         locations.add(DAOPouch.getLocationDAO().get(node));
@@ -99,11 +96,6 @@ public class ShowRequestPaths {
         e.printStackTrace();
         App.LOG.info("Location " + node + " not found");
       }
-    }
-    try {
-      locations.add(DAOPouch.getLocationDAO().get(startNode));
-    } catch (Exception e) {
-      System.out.println("Something went wrong adding the start location");
     }
 
     //    for (int i = lastStart; i < locations.size() - 1; i++) {
@@ -207,16 +199,32 @@ public class ShowRequestPaths {
     setCurrentFloor(floor);
     makeAllInVisible();
     for (int i = 0;
-        i < locations.size() - 1;
+        i < locations.size() - 2;
         i++) { // for every child, add make the locations on this floor visible
-      System.out.println(locations.get(i).getNodeID());
+      //      System.out.println(locations.get(i).getNodeID());
       if (locations.get(i).getFloor().equals(floor)) {
-        lineLayer.getChildren().get(i).setVisible(true);
+        // Need to check a double filter to make sure the two nodes are connected
+        if (checkConnected(locations.get(i).getNodeID(), locations.get(i + 1).getNodeID()))
+          lineLayer.getChildren().get(i).setVisible(true);
       }
     }
   }
 
   public void makeAllInVisible() {
     lineLayer.getChildren().forEach(c -> c.setVisible(false));
+  }
+
+  private boolean checkConnected(String leftNode, String rightNode) {
+    List<LocationNodeConnections> nodeConnectionsJuan =
+        new ArrayList<>(DAOPouch.getLocationNodeDAO().filter(2, leftNode).values());
+    nodeConnectionsJuan =
+        new ArrayList<>(
+            DAOPouch.getLocationNodeDAO().filter(nodeConnectionsJuan, 3, rightNode).values());
+    List<LocationNodeConnections> nodeConnectionsDos =
+        new ArrayList<>(DAOPouch.getLocationNodeDAO().filter(3, leftNode).values());
+    nodeConnectionsDos =
+        new ArrayList<>(
+            DAOPouch.getLocationNodeDAO().filter(nodeConnectionsDos, 2, rightNode).values());
+    return nodeConnectionsJuan.size() > 0 || nodeConnectionsDos.size() > 0;
   }
 }

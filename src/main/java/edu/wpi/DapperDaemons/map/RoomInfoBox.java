@@ -1,7 +1,7 @@
 package edu.wpi.DapperDaemons.map;
 
-import edu.wpi.DapperDaemons.App;
 import com.google.firebase.database.ValueEventListener;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
