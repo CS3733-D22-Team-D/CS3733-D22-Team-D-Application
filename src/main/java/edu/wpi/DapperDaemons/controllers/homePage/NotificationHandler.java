@@ -70,9 +70,16 @@ public class NotificationHandler {
           new ValueEventListener() {
             @Override
             public synchronized void onDataChange(DataSnapshot snapshot) {
-              System.out.println(
-                  "Notification listener for " + SecurityController.getUser().getAttribute(1));
-              new Thread(() -> Platform.runLater(() -> setNotifications())).start();
+              new Thread(
+                      () -> {
+                        try {
+                          Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                          throw new RuntimeException(e);
+                        }
+                        Platform.runLater(() -> setNotifications());
+                      })
+                  .start();
             }
 
             @Override
@@ -117,11 +124,6 @@ public class NotificationHandler {
         }
       }
       for (Notification n : unRead) {
-        //        VBox notif = new VBox();
-        //        Label notifSubject = new Label(n.getSubject());
-        //        Label notifBody = new Label(n.getBody());
-        //        notif.getChildren().add(notifSubject);
-        //        notif.getChildren().add(notifBody);
         this.notifications.getChildren().add(createNotification(n));
       }
     }
@@ -129,5 +131,10 @@ public class NotificationHandler {
 
   public ValueEventListener getListener() {
     return notifListener;
+  }
+
+  public static void removeListener() {
+    DatabaseReference ref = FireBase.getReference().child("NOTIFICATIONS");
+    ref.removeEventListener(notifListener);
   }
 }

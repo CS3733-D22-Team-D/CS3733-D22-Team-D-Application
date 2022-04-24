@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -52,7 +53,8 @@ public class MedicineController extends ParentController {
     //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
 
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
-    priorityIn.getItems().addAll(TableHelper.convertEnum(Request.Priority.class));
+    priorityIn.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
     t = new Table<>(table, 0);
     createTable();
     onClearClicked();
@@ -64,6 +66,8 @@ public class MedicineController extends ParentController {
         new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
     t.setRows(reqs);
     t.setListeners(new MedicineRequest());
+    t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(7, 2, Request.Priority.class);
   }
 
   /** Clears the fields when clicked */

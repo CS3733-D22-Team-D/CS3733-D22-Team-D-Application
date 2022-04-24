@@ -9,8 +9,11 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -21,6 +24,8 @@ public class Table<R> {
   private List<R> rows = new ArrayList<>();
   private GridPane table;
   private final int tableNum;
+  private R instance;
+  private List<Runnable> editProperties = new ArrayList<>();
 
   public Table(GridPane table, int tableNum) {
     this.table = table;
@@ -28,6 +33,7 @@ public class Table<R> {
   }
 
   public void setListeners(R type) {
+    this.instance = type;
     TableListeners.addListener(
         ((TableObject) type).tableName(),
         TableListeners.eventListener(
@@ -75,10 +81,18 @@ public class Table<R> {
     return a;
   }
 
+  public static int getColumnIndexAsInteger(Node node) {
+    final var a = GridPane.getColumnIndex(node);
+    if (a == null) {
+      return 0;
+    }
+    return a;
+  }
+
   public void removeRow(R type) {
     final int targetRowIndex = rows.indexOf(type);
     List<Node> r = getRow(targetRowIndex);
-    animate(0.92F, 0.25F, 0.11F, r);
+    animate(0.92, 0.25, 0.11, r);
     Platform.runLater(
         () -> {
           table.getChildren().removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
@@ -124,6 +138,19 @@ public class Table<R> {
     return ret;
   }
 
+  public List<Node> getColumn(int colNum) {
+    List<Node> ret = new ArrayList<>();
+    table
+        .getChildren()
+        .forEach(
+            node -> {
+              if (getColumnIndexAsInteger(node) == colNum) {
+                ret.add(node);
+              }
+            });
+    return ret;
+  }
+
   public void setRows(List<R> newRows) {
     this.rows = newRows;
     for (R r : newRows) {
@@ -137,29 +164,64 @@ public class Table<R> {
     removeChildren(old);
     addRow(targetRowIndex, newObj);
     List<Node> r = getRow(targetRowIndex);
-    animate(0.98F, 0.73F, 0.01F, r);
+    animate(0.98, 0.73, 0.01, r);
     rows.remove(old);
     rows.add(targetRowIndex, newObj);
   }
 
   private void restyleRow(List<Node> row) {
-    row.forEach(
-        n -> {
-          ((VBox) n).setBackground(Background.EMPTY);
-          n.setStyle("-fx-background-color: FFFEFE;");
-        });
+    ((VBox) row.get(0))
+        .setBackground(
+            new Background(
+                new BackgroundFill(
+                    Color.WHITE, new CornerRadii(10, 0, 0, 10, false), Insets.EMPTY)));
+    ((VBox) row.get(row.size() - 1))
+        .setBackground(
+            new Background(
+                new BackgroundFill(
+                    Color.WHITE, new CornerRadii(0, 10, 10, 0, false), Insets.EMPTY)));
+    for (int i = row.size() - 2; i >= 1; i--) {
+      ((VBox) row.get(i))
+          .setBackground(
+              new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+      row.get(i)
+          .setStyle(
+              "-fx-background-color: FFFFFF;"
+                  + "-fx-opacity: 1;"
+                  + "-fx-border-style: solid hidden solid hidden;"
+                  + "-fx-border-color: #F1F0F0;"
+                  + "    -fx-border-width: 1;"
+                  + "-fx-effect:dropshadow(three-pass-box,rgba(0,0,0,0.15),3,0.15,3,3);");
+    }
     if (row.size() > 0) {
-      row.get(0).setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 10 0 0 10;");
+      row.get(0)
+          .setStyle(
+              "-fx-background-color: FFFFFF;"
+                  + "-fx-opacity: 1;"
+                  + "-fx-border-style: solid hidden solid solid;"
+                  + "-fx-border-color: #F1F0F0;"
+                  + "-fx-border-radius: 10 0 0 10;"
+                  + "-fx-border-width: 1;"
+                  + "-fx-background-radius: 10 0 0 10;"
+                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.15),3,0.15,3,3);");
       ((VBox) row.get(0)).setPadding(new Insets(0, 0, 0, 15));
       row.get(row.size() - 1)
-          .setStyle("-fx-background-color: FFFEFE;" + "-fx-background-radius: 0 10 10 0;");
+          .setStyle(
+              "-fx-background-color: FFFFFF;"
+                  + "-fx-opacity: 1;"
+                  + "-fx-border-style: solid solid solid hidden;"
+                  + "-fx-border-color: #F1F0F0;"
+                  + "-fx-border-radius: 0 10 10 0;"
+                  + "-fx-border-width: 1;"
+                  + "-fx-background-radius: 0 10 10 0;"
+                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.15),3,0.15,3,3);");
       Insets norm = ((VBox) row.get(row.size() - 1)).getPadding();
       ((VBox) row.get(row.size() - 1))
           .setPadding(new Insets(norm.getTop(), 15, norm.getBottom(), norm.getLeft()));
     }
   }
 
-  private void animate(float r, float g, float b, List<Node> row) {
+  private void animate(double r, double g, double b, List<Node> row) {
     Platform.runLater(
         () -> {
           for (Node node : row) {
@@ -172,11 +234,16 @@ public class Table<R> {
 
                   @Override
                   protected void interpolate(double frac) {
-                    Color vColor = new Color(r, g, b, 1 - frac);
+                    Color vColor =
+                        new Color((1 - r) * frac + r, (1 - g) * frac + g, (1 - b) * frac + b, 1);
+                    Background old = ((VBox) node).getBackground();
                     ((VBox) node)
                         .setBackground(
                             new Background(
-                                new BackgroundFill(vColor, CornerRadii.EMPTY, Insets.EMPTY)));
+                                new BackgroundFill(
+                                    vColor,
+                                    old.getFills().get(0).getRadii(),
+                                    old.getFills().get(0).getInsets())));
                   }
                 };
             animation.play();
@@ -207,17 +274,100 @@ public class Table<R> {
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);
-      animate(0.38F, 1, 0.51F, r);
-      new Thread(
-              () -> {
-                try {
-                  Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                }
-                System.out.println("RESTLING");
-                restyleRow(row);
-              })
-          .start();
+      animate(0.38, 1, 0.51, r);
+      //      update();
     }
+  }
+
+  public void update() {
+    editProperties.forEach(r -> r.run());
+  }
+
+  public void addDropDownEditProperty(int col, int sqlCol, String... elements) {
+    editProperties.add(
+        () -> {
+          List<Node> boxesInCol = getColumn(col);
+          boxesInCol.forEach(
+              box ->
+                  box.setOnMouseClicked(
+                      mouse -> {
+                        // Store old value
+                        Node old = ((VBox) box).getChildren().get(0);
+                        ((VBox) box).getChildren().clear();
+
+                        ComboBox<String> elems = new ComboBox<>();
+                        elems.getItems().addAll(elements);
+                        elems.setValue(getTextWithin(old));
+                        elems.setOnAction(
+                            e -> {
+                              TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                              item.setAttribute(sqlCol, elems.getValue());
+                              DAOPouch.getDAO(item).update(item);
+
+                              // Reset
+                              ((VBox) box).getChildren().clear();
+                              ((VBox) box).getChildren().add(old);
+                              editTextWithin(
+                                  old,
+                                  ((TableObject) getItem(getRowIndexAsInteger(box)))
+                                      .getAttribute(sqlCol));
+                              addDropDownEditProperty(col, sqlCol, elements);
+                            });
+                        ((VBox) box).getChildren().add(elems);
+
+                        // Toggle reset line
+                        box.setOnMouseClicked(
+                            toggle -> {
+                              ((VBox) box).getChildren().clear();
+                              ((VBox) box).getChildren().add(old);
+                              editTextWithin(
+                                  old,
+                                  ((TableObject) getItem(getRowIndexAsInteger(box)))
+                                      .getAttribute(sqlCol));
+                              addDropDownEditProperty(col, sqlCol, elements);
+                            });
+                      }));
+        });
+    update();
+  }
+
+  public <E extends Enum<E>> void addEnumEditProperty(int col, int sqlCol, Class<E> enumClass) {
+    editProperties.add(
+        () -> {
+          List<Node> boxesInCol = getColumn(col);
+          boxesInCol.forEach(
+              box -> {
+                Node editable = ((VBox) box).getChildren().get(0);
+                if (editable instanceof ComboBox) {
+                  ComboBox<String> editBox = ((ComboBox<String>) editable);
+                  editBox.setItems(
+                      FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+                  editBox.setOnAction(
+                      e -> {
+                        TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                        item.setAttribute(sqlCol, editBox.getValue());
+                        DAOPouch.getDAO(item).update(item);
+                      });
+                }
+              });
+        });
+    update();
+  }
+
+  private void editTextWithin(Node n, String toEdit) {
+    if (n instanceof Text) ((Text) n).setText(toEdit);
+    else if (n instanceof ComboBox) ((ComboBox<String>) n).setValue(toEdit);
+    else if (n instanceof TextField) ((TextField) n).setText(toEdit);
+  }
+
+  private String getTextWithin(Node n) {
+    if (n instanceof Text) return ((Text) n).getText();
+    else if (n instanceof ComboBox) return ((ComboBox<String>) n).getValue();
+    else if (n instanceof TextField) return ((TextField) n).getText();
+    else return "";
+  }
+
+  public R getItem(int row) {
+    return rows.get(row);
   }
 }

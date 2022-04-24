@@ -83,6 +83,16 @@ public class ParentController extends AppController {
     if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
     menuSlider(slider, burg, burgBack);
     initSequence();
+    sceneBox.setOnMouseClicked(
+        e -> {
+          if (burgBack.isVisible()) closeSlider();
+          serverToggle.setSelected(false);
+          openServerDropdown();
+          userSettingsToggle.setSelected(false);
+          openUserDropdown();
+          alertButton.setSelected(false);
+          notificationsScroller.setVisible(alertButton.isSelected());
+        });
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -294,7 +304,7 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    NotificationHandler.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }
