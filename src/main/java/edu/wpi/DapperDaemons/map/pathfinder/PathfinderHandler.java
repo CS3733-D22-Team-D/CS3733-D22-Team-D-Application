@@ -35,10 +35,10 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static Double lineSize;
   private static String currentFloor;
 
-  private final int necessaryOffsetX = -110;
-  private final int necessaryOffsetY = -5;
-  private static int lineOffset = 0;
-  private static int numberOfLines = 0;
+  public final int necessaryOffsetX = -110;
+  public final int necessaryOffsetY = -5;
+  public static int lineOffset = 0;
+  public static int numberOfLines = 0;
 
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
