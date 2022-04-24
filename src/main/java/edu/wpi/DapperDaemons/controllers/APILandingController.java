@@ -75,8 +75,11 @@ public class APILandingController implements Initializable {
    */
   public boolean checkIfSanitationReqExists(SanitationRequest req) {
     for (SanitationRequest dbReq : DAOPouch.getSanitationRequestDAO().getAll().values()) {
-      if (req.getNodeID().equals(dbReq.getNodeID())
-          && req.getPriority().equals(dbReq.getPriority())) return true;
+      if (req.getRoomID().equals(dbReq.getRoomID())
+          && req.getPriority().equals(dbReq.getPriority())
+          && req.getNotes().equals(dbReq.getNotes())
+          && req.getAssigneeID().equals(dbReq.getAssigneeID())
+          && req.getRequesterID().equals(dbReq.getRequesterID())) return true;
     }
     return false;
   }
