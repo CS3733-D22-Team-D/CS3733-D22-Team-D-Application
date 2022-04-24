@@ -24,14 +24,17 @@ public class ShowRequestPaths {
   private static AnchorPane lineLayer;
   private static MapController controller;
   List<LocationNodeConnections> actualConnections;
+  List<String> nodeGrid;
 
   private final Double lineSize = 4.0;
   private static String currentFloor;
 
   private final int necessaryOffsetX = -110;
   private final int necessaryOffsetY = -5;
-  private static int lineOffset = 0;
+  private static int lineOffset = 4;
   private static int numberOfLines = 0;
+
+  private int lastStart = 0;
 
   private static List<Location> locations;
 
@@ -40,6 +43,7 @@ public class ShowRequestPaths {
     this.controller = controller;
     actualConnections = new ArrayList<>();
     locations = new ArrayList<>();
+    nodeGrid = new ArrayList<>();
   }
 
   public void showAllPaths(Location location) {
@@ -48,9 +52,10 @@ public class ShowRequestPaths {
     for (Request request : requests) {
       if (request.requiresTransport()) {
         makeLinePath(
-            request.getNodeID(),
+            request.getRoomID(),
             request.transportFromRoomID(),
             getLineColor(request.requestType()));
+        numberOfLines++;
       }
     }
     filterByFloor(currentFloor);
@@ -59,11 +64,23 @@ public class ShowRequestPaths {
   public void clearPath() {
     lineLayer.getChildren().clear();
     locations.clear();
+    numberOfLines = 0;
+    lastStart = 0;
   }
 
   private void makeLinePath(String startNode, String endNode, Color color) {
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
+    Location startLoc = DAOPouch.getLocationDAO().get(startNode);
+    Location endLoc = DAOPouch.getLocationDAO().get(endNode);
+
+    AStar ppFinder = new AStar();
+
+    System.out.println("Start node is " + startNode);
+    System.out.println("End node is " + endNode);
+
+    startNode = ppFinder.findClosestPathnode(startLoc);
+    endNode = ppFinder.findClosestPathnode(endLoc);
     List<String> nodePath = ppPlanner.getPath(startNode, endNode);
 
     int offsetX = necessaryOffsetX + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
@@ -87,8 +104,15 @@ public class ShowRequestPaths {
       System.out.println("Something went wrong adding the start location");
     }
 
+//    for (int i = lastStart; i < locations.size() - 1; i++) {
+//      if (locations.get(i).getNodeID().equals(locations.get(i + 1).getNodeID())) {
+//        locations.remove(i);
+//        i--;
+//      }
+//    } // Gets rid of duplicates I hope
+
     double overflow = 0.0;
-    for (int i = 0; i < locations.size() - 1; i++) {
+    for (int i = lastStart; i < locations.size() - 1; i++) {
       Line pathLine;
       Circle ifNecessary;
       if (!locations
@@ -146,9 +170,9 @@ public class ShowRequestPaths {
                         pathLine.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
         lineLayer.getChildren().add(pathLine);
       }
+      lastStart++;
     }
   }
 
@@ -183,8 +207,8 @@ public class ShowRequestPaths {
     for (int i = 0;
         i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
+      System.out.println(locations.get(i).getNodeID());
       if (locations.get(i).getFloor().equals(floor)) {
-        //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);
       }
     }
