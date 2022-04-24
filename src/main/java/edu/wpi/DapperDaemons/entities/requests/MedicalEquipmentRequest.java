@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
@@ -40,7 +41,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         + "equipmentID varchar(1000),"
         + "equipmentType varchar(1000),"
         + "cleanStatus varchar(1000),"
-        + "dateNeed varchar(1000))";
+        + "dateNeed varchar(1000),"
+        + "originID varchar(1000))";
   }
 
   @Override
@@ -75,6 +77,8 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         return cleanStatus.toString();
       case 12:
         return dateNeeded;
+      case 13:
+        return originID;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -119,6 +123,9 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
         break;
       case 12:
         dateNeeded = newAttribute;
+        break;
+      case 13:
+        originID = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -178,6 +185,9 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
       case "dateTime":
         dateTime = newAttribute;
         break;
+      case "destinationID":
+        originID = newAttribute;
+        break;
       default:
         throw new IndexOutOfBoundsException();
     }
@@ -207,6 +217,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   private MedicalEquipment.EquipmentType equipmentType;
   private MedicalEquipment.CleanStatus cleanStatus;
   private String dateNeeded;
+  private String originID = "";
 
   // CONSTRUCTORS
 
@@ -235,6 +246,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.equipmentType = equipmentType;
     this.cleanStatus = cleanStatus;
     this.dateNeeded = dateNeeded;
+    this.originID = DAOFacade.getClosestMedicalEquipment(equipmentType.toString(),roomID);
   }
 
   public MedicalEquipmentRequest() {}
@@ -256,6 +268,11 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
+  }
+
+  @Override
+  public String transportFromRoomID() {
+    return originID;
   }
 
   public void setRoomID(String roomID) {

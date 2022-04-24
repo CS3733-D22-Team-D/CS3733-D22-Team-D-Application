@@ -179,7 +179,7 @@ public class AStar {
    * @param nextLocation
    * @return
    */
-  private Double getDistance(String currentLocation, String nextLocation) {
+  public Double getDistance(String currentLocation, String nextLocation) {
     DAO<Location> locationDAO = DAOPouch.getLocationDAO();
     // If it can't find the position, then this is basically saying that the node parser won't let
     // it break everything

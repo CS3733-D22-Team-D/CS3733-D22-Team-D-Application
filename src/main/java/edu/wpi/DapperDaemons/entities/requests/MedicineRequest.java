@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
@@ -180,7 +181,7 @@ public class MedicineRequest extends TableObject implements Request {
 
   @Override
   public boolean requiresTransport() {
-    return false;
+    return true;
   }
 
   // ATTRIBUTES
@@ -243,6 +244,11 @@ public class MedicineRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 0)
   public String getRoomID() {
     return roomID;
+  }
+
+  @Override
+  public String transportFromRoomID() {
+    return RandomizeFields.getRandomStor();
   }
 
   public void setRoomID(String roomID) {

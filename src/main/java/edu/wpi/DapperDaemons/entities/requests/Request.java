@@ -36,6 +36,8 @@ public interface Request {
   @TableHandler(table = 2, col = 2)
   String getRoomID();
 
+  String transportFromRoomID();
+
   String getNodeID();
 
   @TableHandler(table = 2, col = 3)
