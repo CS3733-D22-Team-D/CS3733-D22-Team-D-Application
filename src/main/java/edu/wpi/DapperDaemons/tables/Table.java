@@ -139,8 +139,7 @@ public class Table<R> {
           item.setMaxHeight(Control.USE_PREF_SIZE);
           item.setPadding(new Insets(0, 0, -8, 30));
           Text t = new Text(s);
-          t.setFont(
-              Font.font(t.getFont().getFamily(), FontWeight.NORMAL, t.getFont().getSize() + 2));
+          t.setFont(Font.font(t.getFont().getFamily(), FontWeight.BOLD, t.getFont().getSize() + 2));
           item.getChildren().add(t);
           item.setBackground(
               new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -215,8 +214,8 @@ public class Table<R> {
               "-fx-background-color: FFFFFF;"
                   + "-fx-opacity: 1;"
                   + "-fx-border-style: solid hidden solid hidden;"
-                  + "-fx-border-color: #C4C4C4;"
-                  + "    -fx-border-width: 0;"
+                  + "-fx-border-color: #F1F0F0;"
+                  + "    -fx-border-width: 1;"
                   + "-fx-effect:dropshadow(three-pass-box,rgba(0,0,0,0.1),5,0.15,3,3);");
     }
     if (row.size() > 0) {
@@ -225,11 +224,11 @@ public class Table<R> {
               "-fx-background-color: FFFFFF;"
                   + "-fx-opacity: 1;"
                   + "-fx-border-style: solid hidden solid solid;"
-                  + "-fx-border-color: #C4C4C4;"
+                  + "-fx-border-color: #F1F0F0;"
                   + "-fx-border-radius: 10 0 0 10;"
-                  + "-fx-border-width:0;"
+                  + "-fx-border-width:1;"
                   + "-fx-background-radius: 10 0 0 10;"
-                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1),5,0.15,-3,3);");
+                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1),5,0.15,3,3);");
       ((VBox) row.get(0)).setPadding(new Insets(0, 0, 0, 15));
       setPriority(row);
     }
@@ -244,7 +243,7 @@ public class Table<R> {
                   .getValue()
                   .toString());
       DropShadow ds =
-          new DropShadow(BlurType.THREE_PASS_BOX, new Color(0, 0, 0, 0.15), 3, 0.15, 3, 3);
+          new DropShadow(BlurType.THREE_PASS_BOX, new Color(0, 0, 0, 0.1), 5, 0.15, 3, 3);
       priority.setEffect(ds);
       //      row.remove(row.size() - 1);
       switch (p) {
@@ -285,7 +284,7 @@ public class Table<R> {
           //          row.add(priority);
           break;
       }
-    } catch (ClassCastException ignored) {
+    } catch (ClassCastException | IllegalArgumentException ignored) {
       ((VBox) row.get(row.size() - 1))
           .setBackground(
               new Background(
@@ -300,7 +299,7 @@ public class Table<R> {
                   + "-fx-border-radius: 0 10 10 0;"
                   + "-fx-border-width: 1;"
                   + "-fx-background-radius: 0 10 10 0;"
-                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.15),3,0.15,3,3);");
+                  + "-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1),5,0.15,-3,3);");
       Insets norm = ((VBox) row.get(row.size() - 1)).getPadding();
       ((VBox) row.get(row.size() - 1))
           .setPadding(new Insets(norm.getTop(), 15, norm.getBottom(), norm.getLeft()));

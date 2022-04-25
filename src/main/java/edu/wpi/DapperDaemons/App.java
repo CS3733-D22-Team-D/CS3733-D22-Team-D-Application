@@ -140,76 +140,67 @@ public class App extends Application {
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interThin.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interRegular.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interExtraLight.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
 
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interRegular.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interSemiBold.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interBold.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interExtraBold.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
       ge.registerFont(
           java.awt.Font.createFont(
               java.awt.Font.TRUETYPE_FONT,
-              new File(
+              Objects.requireNonNull(
                   App.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interBlack.ttf")
-                      .toString())));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/styling/interLight.ttf"))));
     } catch (FontFormatException e) {
       e.printStackTrace();
     } catch (IOException e) {

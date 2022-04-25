@@ -16,8 +16,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class RowFactory {
@@ -54,17 +52,18 @@ public class RowFactory {
         box.setBackground(Background.EMPTY);
         box.setMaxWidth(100);
         box.setMinWidth(100);
-        box.getEditor()
-            .setFont(
-                Font.font(
-                    box.getEditor().getFont().getFamily(),
-                    FontWeight.BOLD,
-                    box.getEditor().getFont().getSize()));
+        //                box.getEditor()
+        //                    .setFont(
+        //                        Font.font(
+        //                            box.getEditor().getFont().getFamily(),
+        //                            FontWeight.BOLD,
+        //                            box.getEditor().getFont().getSize()));
         item.getChildren().add(box);
       } else {
         Text text = new Text(attr.toString());
-        text.setFont(
-            Font.font(text.getFont().getFamily(), FontWeight.BOLD, text.getFont().getSize()));
+        //        text.setFont(
+        //            Font.font(text.getFont().getFamily(), FontWeight.BOLD,
+        // text.getFont().getSize()));
         item.getChildren().add(text);
       }
       row.getChildren().add(item);
@@ -117,7 +116,7 @@ public class RowFactory {
           ret.add(priority);
           break;
       }
-    } catch (ClassCastException ignored) {
+    } catch (ClassCastException | IllegalArgumentException ignored) {
     }
     return ret;
   }
