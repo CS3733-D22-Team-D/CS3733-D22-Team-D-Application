@@ -193,7 +193,7 @@
                             <children>
                                 <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="732.0">
                                     <children>
-                                        <VBox prefHeight="112.0" prefWidth="732.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                                        <VBox id="foreground" prefHeight="112.0" prefWidth="732.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                                             <effect>
                                                 <DropShadow>
                                                     <color>
@@ -235,7 +235,7 @@
                                                 </HBox>
                                             </children>
                                         </VBox>
-                                        <ToggleButton id="foreground" alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Security Access" textAlignment="RIGHT" textFill="WHITE">
+                                        <ToggleButton alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Security Access" textAlignment="RIGHT" textFill="WHITE">
                                             <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                             </graphic>
@@ -250,7 +250,7 @@
                                 </StackPane>
                                 <StackPane alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="732.0">
                                     <children>
-                                        <VBox prefHeight="112.0" prefWidth="732.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+                                        <VBox id="foreground" prefHeight="112.0" prefWidth="732.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                                             <effect>
                                                 <DropShadow>
                                                     <color>
@@ -300,8 +300,11 @@
                                                       </Text>
                                                    </children>
                                                                 </HBox>
-                                                <TextField fx:id="numberBox" prefHeight="33.0" prefWidth="227.0" text="000-000-0000" />
-                                                <JFXComboBox fx:id="type2FABox" prefHeight="26.0" prefWidth="234.0" promptText="Select...">
+                                                <TextField id="specialField" fx:id="numberBox" prefHeight="33.0" prefWidth="227.0" text="000-000-0000">
+                                                   <cursor>
+                                                      <Cursor fx:constant="TEXT" />
+                                                   </cursor></TextField>
+                                                <JFXComboBox id="specialField" fx:id="type2FABox" prefHeight="26.0" prefWidth="234.0" promptText="Select...">
                                                    <VBox.margin>
                                                       <Insets top="5.0" />
                                                    </VBox.margin>
@@ -315,7 +318,7 @@
                                                 </HBox>
                                             </children>
                                         </VBox>
-                                        <ToggleButton id="foreground" alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Two-Factor Authentication" textAlignment="RIGHT" textFill="WHITE">
+                                        <ToggleButton alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Two-Factor Authentication" textAlignment="RIGHT" textFill="WHITE">
                                             <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                             </graphic>
@@ -335,7 +338,7 @@
                         </VBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="740.0" spacing="20.0">
                      <children>
-                        <JFXButton onAction="#onReset" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Reset" textFill="WHITE">
+                        <JFXButton id="jButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" onAction="#onReset" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: #C1C5D4;" stylesheets="@../assets/buttons.css" text="Reset" textAlignment="CENTER" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -343,7 +346,7 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton onAction="#onSaveChanges" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Save Changes" textFill="WHITE">
+                        <JFXButton id="jButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" onAction="#onSaveChanges" prefHeight="32.0" prefWidth="131.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

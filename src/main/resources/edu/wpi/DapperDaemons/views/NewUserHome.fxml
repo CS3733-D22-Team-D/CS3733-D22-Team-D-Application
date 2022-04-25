@@ -180,7 +180,7 @@
                <children>
                   <StackPane alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#switchToUserRequests" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#switchToUserRequests" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
                            <children>
                               <VBox fx:id="reqContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>
@@ -191,7 +191,7 @@
                                     </ImageView>
                                  </children>
                               </VBox>
-                              <Label text="My Requests" textFill="#012d5a">
+                              <Label id="label" text="My Requests" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -227,7 +227,7 @@
                   </StackPane>
                   <StackPane alignment="TOP_RIGHT" layoutX="317.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openNotifications" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openNotifications" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
                            <children>
                               <VBox fx:id="notContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>
@@ -241,7 +241,7 @@
                                     </ImageView>
                                  </children>
                               </VBox>
-                              <Label text="My Notifications" textFill="#012d5a">
+                              <Label id="label" text="My Notifications" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -277,7 +277,7 @@
                   </StackPane>
                   <StackPane alignment="TOP_RIGHT" layoutX="457.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openAccountSettings" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openAccountSettings" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
                            <children>
                               <VBox fx:id="settingContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
                                  <children>
@@ -288,7 +288,7 @@
                                     </ImageView>
                                  </children>
                               </VBox>
-                              <Label text="Settings" textFill="#012d5a">
+                              <Label id="label" text="Settings" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
