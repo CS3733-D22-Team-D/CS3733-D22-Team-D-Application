@@ -138,7 +138,8 @@ public class Table<R> {
           item.setMaxHeight(Control.USE_PREF_SIZE);
           item.setPadding(new Insets(0, 0, -15, 30));
           Text t = new Text(s);
-          t.setFont(Font.font(t.getFont().getFamily(), FontWeight.BOLD, t.getFont().getSize()));
+          t.setFont(
+              Font.font(t.getFont().getFamily(), FontWeight.NORMAL, t.getFont().getSize() + 2));
           item.getChildren().add(t);
           item.setBackground(
               new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
