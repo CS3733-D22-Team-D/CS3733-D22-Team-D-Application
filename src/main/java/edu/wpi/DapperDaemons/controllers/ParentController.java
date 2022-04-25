@@ -124,10 +124,7 @@ public class ParentController extends AppController {
     if (EasterEggController.player != null) EasterEggController.player.stop();
 
     try {
-      /* Animation */
-      Color backgroundEnd = new Color(255, 255, 255, 0);
-      Color backgroundStart = new Color(255, 255, 255, 255);
-      AnimationHelper.fadeNode(mainBox, backgroundStart, backgroundEnd, 400);
+
       HBox childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
       mainBox.getChildren().add(childPage);
@@ -157,27 +154,6 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
-
-    /* Animation */
-    Color textStart = new Color(255, 255, 255, 255);
-    Color textEnd = new Color(8, 67, 154, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 255);
-    if (userSettingsToggle.isSelected()) {
-
-      AnimationHelper.slideNodeWithText(
-          userSettingsToggle, textStart, textEnd, backgroundStart, backgroundEnd, 400);
-      AnimationHelper.slideNodeWithText(
-          accountName, textStart, textEnd, backgroundStart, backgroundEnd, 400);
-
-    } else {
-
-      AnimationHelper.slideNodeWithText(
-          userSettingsToggle, textEnd, textStart, backgroundEnd, backgroundStart, 400);
-      AnimationHelper.slideNodeWithText(
-          accountName, textEnd, textStart, backgroundEnd, backgroundStart, 400);
-    }
-
     serverToggle.setSelected(false);
     serverDropdown.setVisible(false);
     alertButton.setSelected(false);
