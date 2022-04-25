@@ -76,7 +76,6 @@ public class ParentController extends AppController {
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
   @FXML private ScrollPane notificationsScroller;
-
   @FXML private ImageView notifBell;
   @FXML private ImageView autoSaveIcon;
 
@@ -125,13 +124,19 @@ public class ParentController extends AppController {
     if (EasterEggController.player != null) EasterEggController.player.stop();
 
     try {
+      /* Animation */
+      Color backgroundEnd = new Color(255, 255, 255, 0);
+      Color backgroundStart = new Color(255, 255, 255, 255);
+      AnimationHelper.fadeNode(mainBox, backgroundStart, backgroundEnd, 400);
       HBox childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
       mainBox.getChildren().add(childPage);
       bindChild(childPage);
       headerName.setText(pageName);
+      bindChild(childPage);
+
     } catch (IOException e) {
-      e.printStackTrace();
+        e.printStackTrace();
     }
     ThemeHandler.setTheme();
   }
