@@ -279,7 +279,7 @@
                            <children>
                               <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
-                                    <Image url="@../assets/BrighamLogo.png" />
+                                    <Image url="@../assets/BrighamLogoWhite.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="12.0" />
@@ -331,7 +331,7 @@
                         <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label id="normalText" fx:id="tempLabel" styleClass="normalText" stylesheets="@../styling/lightMode.css" text="64" textFill="WHITE">
+                              <Label id="normalText" fx:id="tempLabel" prefHeight="30.0" styleClass="normalText" stylesheets="@../styling/lightMode.css" text="64" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
