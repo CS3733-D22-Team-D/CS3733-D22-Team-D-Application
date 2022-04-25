@@ -453,7 +453,6 @@ public class Table<R> {
   }
 
   public R getItem(int row) {
-    if (rows.get(0) == null) return rows.get(row - 1);
-    else return rows.get(row);
+    return rows.get(row);
   }
 }

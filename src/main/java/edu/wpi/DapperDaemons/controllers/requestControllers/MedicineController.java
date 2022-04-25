@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -74,8 +75,8 @@ public class MedicineController extends ParentController {
             "Date needed",
             "Priority"));
     t.setListeners(new MedicineRequest());
-    //    t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
-    //    t.addEnumEditProperty(7, 2, Request.Priority.class);
+    t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(7, 2, Request.Priority.class);
   }
 
   /** Clears the fields when clicked */
