@@ -171,7 +171,11 @@ public class Table<R> {
         .forEach(
             node -> {
               if (getColumnIndexAsInteger(node) == colNum) {
-                ret.add(node);
+                if (rows.get(0) == null && getRowIndexAsInteger(node) == 0) {
+                  // Ignore header
+                } else {
+                  ret.add(node);
+                }
               }
             });
     return ret;
