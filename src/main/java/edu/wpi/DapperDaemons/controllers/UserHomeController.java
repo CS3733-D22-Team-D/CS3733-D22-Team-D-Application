@@ -52,7 +52,7 @@ public class UserHomeController extends ParentController {
 
   @FXML
   public void openAccountSettings() {
-    swapPage("userAccountSettings", "User Account Settings");
+    swapPage("NewUserSettings", "User Account Settings");
   }
 
   @FXML

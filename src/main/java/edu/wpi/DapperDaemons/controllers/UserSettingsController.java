@@ -28,12 +28,14 @@ public class UserSettingsController extends ParentController {
   @FXML private Circle profilePic;
   @FXML private Text accountName;
   @FXML private Text accountUserName;
+  @FXML private Label email;
+  @FXML private Label employeeID;
 
   // account settings
   @FXML private Label username;
   @FXML private Label name;
   @FXML private Label birthday;
-  @FXML private TextField email;
+  @FXML private TextField emailBox;
   @FXML private JFXComboBox<String> themeBox;
   @FXML private JFXComboBox<String> soundBox;
   @FXML private JFXButton resetButton;
@@ -52,7 +54,7 @@ public class UserSettingsController extends ParentController {
 
   @FXML
   public void openAccountSettings(ActionEvent event) {
-    swapPage("userAccountSettings", "User Account Settings");
+    swapPage("NewUserSettings", "User Account Settings");
   }
 
   @FXML
@@ -73,7 +75,6 @@ public class UserSettingsController extends ParentController {
     name.setText(employeeName);
 
     accountUserName.setText(DAOFacade.getUsername());
-
     username.setText(DAOFacade.getUsername());
 
     // set profile picture
@@ -92,6 +93,10 @@ public class UserSettingsController extends ParentController {
     // set birthday
     String employeeBirth = SecurityController.getUser().getDateOfBirth();
     birthday.setText(employeeBirth);
+
+    // set employeeID
+    String empID = DAOFacade.getUserAccount().getAttribute(2);
+    employeeID.setText(empID);
 
     // set email
     email.setText(DAOFacade.getUserAccount().getAttribute(7));

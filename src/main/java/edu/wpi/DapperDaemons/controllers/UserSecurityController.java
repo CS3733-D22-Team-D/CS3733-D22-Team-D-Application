@@ -43,7 +43,7 @@ public class UserSecurityController extends ParentController {
 
   @FXML
   public void openAccountSettings(ActionEvent event) {
-    swapPage("userAccountSettings", "User Account Settings");
+    swapPage("NewUserSettings", "User Account Settings");
   }
 
   @FXML
