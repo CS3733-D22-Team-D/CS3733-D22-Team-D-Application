@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.TableObject;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -67,8 +69,56 @@ public class RowFactory {
       }
       row.getChildren().add(item);
     }
+    // FB6962 - RED
+    // F5EC42 - YELLOW
+    // 79DE79 - GREEN
     List<Node> ret = new ArrayList<>();
     ret.addAll(row.getChildren());
+    VBox priority = (VBox) loaded.getChildren().get(1);
+    try {
+      switch (Request.Priority.valueOf(
+          ((ComboBox) ((VBox) ret.get(ret.size() - 1)).getChildren().get(0))
+              .getValue()
+              .toString())) {
+        case LOW:
+          priority.setBackground(
+              new Background(
+                  new BackgroundFill(
+                      Color.color(.47, .87, .47, .8),
+                      new CornerRadii(0, 10, 10, 0, false),
+                      Insets.EMPTY)));
+          ret.add(priority);
+          break;
+        case MEDIUM:
+          priority.setBackground(
+              new Background(
+                  new BackgroundFill(
+                      Color.color(.96, .93, .26, .8),
+                      new CornerRadii(0, 10, 10, 0, false),
+                      Insets.EMPTY)));
+          ret.add(priority);
+          break;
+        case HIGH:
+          priority.setBackground(
+              new Background(
+                  new BackgroundFill(
+                      Color.color(.98, .41, .38, .8),
+                      new CornerRadii(0, 10, 10, 0, false),
+                      Insets.EMPTY)));
+          ret.add(priority);
+          break;
+        default:
+          priority.setBackground(
+              new Background(
+                  new BackgroundFill(
+                      Color.color(1, 0, 0, 1),
+                      new CornerRadii(0, 10, 10, 0, false),
+                      Insets.EMPTY)));
+          ret.add(priority);
+          break;
+      }
+    } catch (ClassCastException ignored) {
+    }
     return ret;
   }
 }
