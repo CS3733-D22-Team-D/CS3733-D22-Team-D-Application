@@ -17,7 +17,6 @@ import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
-import edu.wpi.DapperDaemons.map.pathfinder.ShowConnections;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
 import java.io.IOException;
 import java.net.URL;
@@ -119,7 +118,7 @@ public class MapController extends ParentController {
 
   private PathfinderHandler pathfinder;
   private ShowRequestPaths requestPaths;
-//  private ShowConnections connectionShower; // Uncomment when you want to see all paths
+  //  private ShowConnections connectionShower; // Uncomment when you want to see all paths
 
   /* Database stuff */
   private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -185,9 +184,9 @@ public class MapController extends ParentController {
     requestPaths = new ShowRequestPaths(pathPane, this);
     requestPaths.setCurrentFloor(MapDashboardController.floor);
 
-//    connectionShower = new ShowConnections(pathPane, this);
+    //    connectionShower = new ShowConnections(pathPane, this);
     // Comment out connectionShower if you want to see all the nodes
-//    connectionShower.showAllLines(MapDashboardController.floor);
+    //    connectionShower.showAllLines(MapDashboardController.floor);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -512,7 +511,7 @@ public class MapController extends ParentController {
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
     requestPaths.filterByFloor("1");
-//    connectionShower.showAllLines("1");
+    //    connectionShower.showAllLines("1");
   }
 
   @FXML
