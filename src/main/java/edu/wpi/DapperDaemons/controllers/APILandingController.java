@@ -104,12 +104,12 @@ public class APILandingController implements Initializable {
     StartAPI api = new StartAPI();
     try {
       api.run(
-              (int) zOrigin.getScene().getWindow().getX(),
-              (int) zOrigin.getScene().getWindow().getY(),
-              (int) zOrigin.getScene().getWindow().getHeight(),
-              (int) zOrigin.getScene().getWindow().getWidth(),
+          (int) zOrigin.getScene().getWindow().getX(),
+          (int) zOrigin.getScene().getWindow().getY(),
+          (int) zOrigin.getScene().getWindow().getHeight(),
+          (int) zOrigin.getScene().getWindow().getWidth(),
           "edu/wpi/DapperDaemons/assets/themeBlue.css",
-              destIDTeamD);
+          destIDTeamD);
     } catch (Exception e) {
       errorLabel.setText("Team-D API Broke");
       return;

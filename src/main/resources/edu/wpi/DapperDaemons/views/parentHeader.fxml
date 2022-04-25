@@ -279,7 +279,7 @@
                            <children>
                               <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
-                                    <Image url="@../assets/BrighamLogoWithBG.png" />
+                                    <Image url="@../assets/BrighamLogo.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="12.0" />
@@ -379,7 +379,7 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;" textFill="WHITE">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
