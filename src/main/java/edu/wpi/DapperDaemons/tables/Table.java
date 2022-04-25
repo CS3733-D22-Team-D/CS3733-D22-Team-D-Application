@@ -17,6 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -195,6 +197,7 @@ public class Table<R> {
     animate(0.98, 0.73, 0.01, r);
     rows.remove(old);
     rows.add(targetRowIndex, newObj);
+    update();
   }
 
   private void restyleRow(List<Node> row) {
@@ -240,6 +243,9 @@ public class Table<R> {
               ((ComboBox) ((VBox) row.get(row.size() - 2)).getChildren().get(0))
                   .getValue()
                   .toString());
+      DropShadow ds =
+          new DropShadow(BlurType.THREE_PASS_BOX, new Color(0, 0, 0, 0.15), 3, 0.15, 3, 3);
+      priority.setEffect(ds);
       //      row.remove(row.size() - 1);
       switch (p) {
         case LOW:
@@ -273,7 +279,7 @@ public class Table<R> {
           priority.setBackground(
               new Background(
                   new BackgroundFill(
-                      Color.color(1, 0, 0, 1),
+                      Color.color(0, 0, 0, 1),
                       new CornerRadii(0, 10, 10, 0, false),
                       Insets.EMPTY)));
           //          row.add(priority);
@@ -356,7 +362,7 @@ public class Table<R> {
     if (!rows.contains(type)) {
       rows.add(type);
       animate(0.38, 1, 0.51, r);
-      //      update();
+      update();
     }
   }
 
@@ -416,25 +422,25 @@ public class Table<R> {
     editProperties.add(
         () -> {
           List<Node> boxesInCol = getColumn(col);
-          boxesInCol.forEach(
-              box -> {
-                Node editable = ((VBox) box).getChildren().get(0);
-                if (editable instanceof ComboBox) {
-                  ComboBox<String> editBox = ((ComboBox<String>) editable);
-                  editBox.setItems(null);
-                  editBox.setItems(
-                      FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
-                  TableObject t = (TableObject) getItem(getRowIndexAsInteger(box));
-                  editTextWithin(editBox, t.getAttribute(2));
-                  editBox.setOnAction(
-                      e -> {
-                        TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
-                        item.setAttribute(sqlCol, editBox.getValue());
-                        DAOPouch.getDAO(item).update(item);
-                        restyleRow(getRow(getRowIndexAsInteger(box)));
-                      });
-                }
-              });
+          for (Node box : boxesInCol) {
+            Node editable = ((VBox) box).getChildren().get(0);
+            if (editable instanceof ComboBox) {
+              ComboBox<String> editBox = ((ComboBox<String>) editable);
+              editBox.setItems(null);
+              editBox.setItems(
+                  FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+              TableObject t = (TableObject) getItem(getRowIndexAsInteger(box));
+              editTextWithin(editBox, t.getAttribute(2));
+              editBox.setOnAction(
+                  e -> {
+                    TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));
+                    if (editBox.getValue() == null) return;
+                    item.setAttribute(sqlCol, editBox.getValue());
+                    DAOPouch.getDAO(item).update(item);
+                    restyleRow(getRow(getRowIndexAsInteger(box)));
+                  });
+            }
+          }
         });
     update();
   }
