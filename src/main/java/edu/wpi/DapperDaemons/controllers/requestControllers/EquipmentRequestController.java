@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
@@ -8,7 +9,6 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -29,13 +29,6 @@ import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentRequestController extends ParentController {
-
-  /* Table Object */
-  @FXML private TableView<MedicalEquipmentRequest> equipmentRequestsTable;
-
-  /* Table Helper */
-  private TableHelper<MedicalEquipmentRequest> tableHelper;
-
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentTypeBox;
@@ -87,24 +80,13 @@ public class EquipmentRequestController extends ParentController {
     t.setListeners(new MedicalEquipmentRequest());
   }
 
-  private void setListeners() {
-    TableListeners.addListener(
-        new MedicalEquipmentRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              equipmentRequestsTable.getItems().clear();
-              equipmentRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(medicalEquipmentRequestDAO.getAll().values()));
-            }));
-  }
-
   public boolean addItem(MedicalEquipmentRequest request) {
     boolean hadClearance = false;
 
     hadClearance = medicalEquipmentRequestDAO.add(request);
     if (hadClearance) {
-      equipmentRequestsTable.getItems().add(request);
+      t.addRow(request);
+      App.LOG.info("Made a new medical equipment request using the pp!!");
     }
     return hadClearance;
   }

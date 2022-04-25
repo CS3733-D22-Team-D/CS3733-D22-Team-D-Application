@@ -16,6 +16,7 @@ import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
+import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -113,6 +114,7 @@ public class MapController extends ParentController {
   private PinHandler pin;
 
   private PathfinderHandler pathfinder;
+  private ShowRequestPaths requestPaths;
   //  private ShowConnections connectionShower; // Uncomment when you want to see all paths
 
   /* Database stuff */
@@ -175,6 +177,9 @@ public class MapController extends ParentController {
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
     pathfinder.filterByFloor(MapDashboardController.floor);
+
+    requestPaths = new ShowRequestPaths(pathPane, this);
+    requestPaths.setCurrentFloor(MapDashboardController.floor);
 
     //    connectionShower = new ShowConnections(pathPane, this);
     // Comment out connectionShower if you want to see all the nodes
@@ -473,6 +478,7 @@ public class MapController extends ParentController {
   @FXML
   void showReqList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
+    requestPaths.showAllPaths(infoBox.getPosition());
   }
 
   private boolean onFilterRequestType() {
@@ -500,6 +506,7 @@ public class MapController extends ParentController {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
+    requestPaths.filterByFloor("1");
     //    connectionShower.showAllLines("1");
   }
 
@@ -508,6 +515,7 @@ public class MapController extends ParentController {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
     pathfinder.filterByFloor("2");
+    requestPaths.filterByFloor("2");
     //    connectionShower.showAllLines("2");
   }
 
@@ -516,6 +524,7 @@ public class MapController extends ParentController {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
     pathfinder.filterByFloor("3");
+    requestPaths.filterByFloor("3");
     //    connectionShower.showAllLines("3");
   }
 
@@ -524,6 +533,7 @@ public class MapController extends ParentController {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
     pathfinder.filterByFloor("4");
+    requestPaths.filterByFloor("4");
     //    connectionShower.showAllLines("4");
   }
 
@@ -532,6 +542,7 @@ public class MapController extends ParentController {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
     pathfinder.filterByFloor("5");
+    requestPaths.filterByFloor("5");
     //    connectionShower.showAllLines("5");
   }
 
@@ -540,6 +551,7 @@ public class MapController extends ParentController {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
     pathfinder.filterByFloor("L1");
+    requestPaths.filterByFloor("L1");
     //    connectionShower.showAllLines("L1");
   }
 
@@ -548,6 +560,7 @@ public class MapController extends ParentController {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");
+    requestPaths.filterByFloor("L2");
     //    connectionShower.showAllLines("L2");
   }
 

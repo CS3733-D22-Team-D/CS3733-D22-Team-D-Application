@@ -262,6 +262,11 @@ public class LabRequest extends TableObject implements Request {
     return roomID;
   }
 
+  @Override
+  public String transportFromRoomID() {
+    return roomID;
+  }
+
   public void setRoomID(String roomID) {
     this.roomID = roomID;
   }

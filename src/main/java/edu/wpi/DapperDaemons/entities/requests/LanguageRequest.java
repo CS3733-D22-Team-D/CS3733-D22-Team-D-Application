@@ -81,12 +81,17 @@ public class LanguageRequest extends TableObject implements Request {
 
   @Override
   public boolean requiresTransport() {
-    return false;
+    return true;
   }
 
   @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
+  }
+
+  @Override
+  public String transportFromRoomID() {
+    return RandomizeFields.getRandomExit();
   }
 
   @TableHandler(table = 0, col = 3)

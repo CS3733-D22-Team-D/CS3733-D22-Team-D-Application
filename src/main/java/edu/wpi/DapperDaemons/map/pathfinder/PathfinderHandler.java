@@ -35,10 +35,10 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static Double lineSize;
   private static String currentFloor;
 
-  private final int necessaryOffsetX = -110;
-  private final int necessaryOffsetY = -5;
-  private static int lineOffset = 0;
-  private static int numberOfLines = 0;
+  public final int necessaryOffsetX = -110;
+  public final int necessaryOffsetY = -5;
+  public static int lineOffset = 0;
+  public static int numberOfLines = 0;
 
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
@@ -62,7 +62,7 @@ public class PathfinderHandler extends AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
     fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
-    setLineSize(4.0);
+    setLineSize(6.0); // Change this if you want to change the line size
   }
 
   public void setLineSize(Double size) {
@@ -267,7 +267,6 @@ public class PathfinderHandler extends AppController implements Initializable {
     for (int i = 0;
         i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
-      // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);

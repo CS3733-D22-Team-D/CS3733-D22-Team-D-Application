@@ -241,6 +241,11 @@ public class EquipmentCleaning extends TableObject implements Request {
     return roomID;
   }
 
+  @Override
+  public String transportFromRoomID() {
+    return RandomizeFields.getRandomDirt();
+  }
+
   public void setRoomID(String roomID) {
     this.roomID = roomID;
   }

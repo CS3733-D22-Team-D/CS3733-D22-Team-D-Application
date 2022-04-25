@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.map;
 
 import com.google.firebase.database.ValueEventListener;
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
@@ -35,6 +36,8 @@ public class RoomInfoBox {
   private TableView<MedicalEquipment> equipTable;
   private TableView<Patient> patientTable;
   private TableView<Request> requestTable;
+  private Location loc;
+  private PositionInfo pos;
 
   public RoomInfoBox(
       VBox roomInfoBox,
@@ -151,8 +154,6 @@ public class RoomInfoBox {
     TableListeners.removeAllListeners();
   }
 
-  private PositionInfo pos;
-
   public void openLoc(
       PositionInfo pos,
       List<MedicalEquipment> equipment,
@@ -165,6 +166,8 @@ public class RoomInfoBox {
     typeTxt.setText(pos.getType());
     buildingTxt.setText(pos.getBuilding());
 
+    this.loc = pos.getLoc();
+
     equipTable.getItems().clear();
     equipTable.getItems().addAll(equipment);
 
@@ -173,6 +176,11 @@ public class RoomInfoBox {
 
     requestTable.getItems().clear();
     requestTable.getItems().addAll(requests);
+  }
+
+  public Location getPosition() {
+    App.LOG.info("Returning position info for request showing on map");
+    return loc;
   }
 
   public Location change(PositionInfo selected) {

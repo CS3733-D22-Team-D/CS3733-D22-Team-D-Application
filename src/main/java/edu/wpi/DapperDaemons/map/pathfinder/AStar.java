@@ -21,8 +21,8 @@ public class AStar {
       locations = new ArrayList(DAOPouch.getLocationDAO().getAll().values());
       nodeConnections = new ArrayList(DAOPouch.getLocationNodeDAO().getAll().values());
     } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("The connection failed to locations or nodeConnections");
+      //      e.printStackTrace();
+      //      System.out.println("The connection failed to locations or nodeConnections");
     }
   }
 
@@ -48,7 +48,7 @@ public class AStar {
       //      System.out.println("Currently at " + current.getLocationName());
 
       if (current.getLocationName().equals(endLocation)) {
-        System.out.println("It Reached the goal!!");
+        //        System.out.println("It Reached the goal!!");
         break;
       }
 
@@ -64,13 +64,13 @@ public class AStar {
           // the cost is less than the one already there, and the node is not in the moveOrder yet
           costSoFar.put(nextLocation, new_cost); // save it in the costSoFar and add it to the queue
           Double priority = new_cost + Math.pow(getDistance(nextLocation, endLocation), 3);
-          System.out.println(
-              "Going from "
-                  + nextLocation
-                  + " To "
-                  + endLocation
-                  + " Had a distance of "
-                  + getDistance(nextLocation, endLocation));
+          //          System.out.println(
+          //              "Going from "
+          //                  + nextLocation
+          //                  + " To "
+          //                  + endLocation
+          //                  + " Had a distance of "
+          //                  + getDistance(nextLocation, endLocation));
           // Priority is the distance from this node to the goal + costSoFar of this node
           queue.add(new WalkableNode(nextLocation, priority));
           moveOrder.put(nextLocation, current);
@@ -95,8 +95,8 @@ public class AStar {
     //      path.add("Path Not Found");
     //    }
 
-    System.out.println("Printing out the path from A*");
-    for (String node : path) System.out.println(node);
+    //    System.out.println("Printing out the path from A*");
+    //    for (String node : path) System.out.println(node);
 
     return path;
   }
@@ -179,7 +179,7 @@ public class AStar {
    * @param nextLocation
    * @return
    */
-  private Double getDistance(String currentLocation, String nextLocation) {
+  public Double getDistance(String currentLocation, String nextLocation) {
     DAO<Location> locationDAO = DAOPouch.getLocationDAO();
     // If it can't find the position, then this is basically saying that the node parser won't let
     // it break everything
@@ -196,7 +196,7 @@ public class AStar {
           new ArrayList<Location>(locationDAO.filter(locations, 1, nextLocation).values()).get(0);
     } catch (Exception e) {
       //      e.printStackTrace();
-      System.out.println("Couldn't find location in table");
+      //      System.out.println("Couldn't find location in table");
     }
     Double distance =
         Math.sqrt(
