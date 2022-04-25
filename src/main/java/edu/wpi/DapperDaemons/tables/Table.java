@@ -18,6 +18,8 @@ import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -129,14 +131,17 @@ public class Table<R> {
     labels.forEach(
         s -> {
           VBox item = new VBox();
-          item.setAlignment(Pos.CENTER_LEFT);
+          item.setAlignment(Pos.BOTTOM_LEFT);
           HBox.setHgrow(item, Priority.ALWAYS);
-          item.setPrefHeight(30);
+          item.setPrefHeight(15);
           item.setMinHeight(Control.USE_PREF_SIZE);
           item.setMaxHeight(Control.USE_PREF_SIZE);
           item.setPadding(new Insets(0, 0, 0, 30));
-          item.getChildren().add(new Text(s));
-          item.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+          Text t = new Text(s);
+          t.setFont(Font.font(t.getFont().getFamily(), FontWeight.BOLD, t.getFont().getSize()));
+          item.getChildren().add(t);
+          item.setBackground(
+              new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
           headerRow.add(item);
         });
     table.getChildren().forEach(n -> GridPane.setRowIndex(n, getRowIndexAsInteger(n) + 2));
