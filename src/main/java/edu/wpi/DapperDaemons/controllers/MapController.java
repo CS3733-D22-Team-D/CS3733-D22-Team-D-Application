@@ -407,19 +407,7 @@ public class MapController extends ParentController {
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
 
-        Location createdNode =
-            new Location(
-                create.getNodeID(),
-                create.getXcoord() + 100,
-                create.getYcoord() - 50,
-                create.getFloor(),
-                create.getBuilding(),
-                create.getNodeType(),
-                create.getLongName() + "NODE",
-                create.getShortName() + "N");
-        App.LOG.info("Adding a new location to the path stuff");
-        NodeConnectionHandler.addNode(createdNode);
-        locationDAO.add(createdNode);
+        NodeConnectionHandler.addPathNode(create);
 
         closeCreate();
       } catch (Exception e) {

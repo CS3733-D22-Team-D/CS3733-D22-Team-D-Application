@@ -7,6 +7,7 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.LocationNodeConnections;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class NodeConnectionHandler {
 
@@ -48,6 +49,30 @@ public class NodeConnectionHandler {
       DAOPouch.getLocationNodeDAO().add(newConnection);
       App.LOG.info("Node should have been added to the locationNodeDAO");
     }
+  }
+
+  public static void addPathNode(Location loc) {
+    // Create a follow up node to allow for pathing to this location
+    Map<String, Location> locationList = DAOPouch.getLocationDAO().filter(6, "PATH");
+    String numberRoomTypes =
+        Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, loc.getFloor()).size());
+    numberRoomTypes = "000" + numberRoomTypes;
+    numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
+    System.out.println("Room number for my test is : " + numberRoomTypes);
+    String nodeID = "dPATH" + numberRoomTypes + loc.getFloor();
+    Location createdNode =
+        new Location(
+            nodeID,
+            loc.getXcoord() + 100,
+            loc.getYcoord() + 30,
+            loc.getFloor(),
+            loc.getBuilding(),
+            "PATH",
+            loc.getLongName() + "NODE",
+            loc.getShortName() + "N");
+    App.LOG.info("Adding a new location to the path stuff");
+    NodeConnectionHandler.addNode(createdNode);
+    DAOPouch.getLocationDAO().add(createdNode);
   }
 
   private static Double getDistance(Location currentLocation, Location nextLocation) {
