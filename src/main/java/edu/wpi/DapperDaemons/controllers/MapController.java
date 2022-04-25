@@ -346,9 +346,7 @@ public class MapController extends ParentController {
     int x = (int) click.getX();
     int y = (int) click.getY();
     String floor = maps.getFloor();
-    System.out.println("Location " + x + " " + y + " clicked!");
-
-    System.out.println(x + " " + y);
+    //System.out.println("Location " + x + " " + y + " clicked!");
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
