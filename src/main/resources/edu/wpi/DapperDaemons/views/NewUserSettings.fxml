@@ -296,28 +296,34 @@
                                     <Insets top="20.0" />
                                  </StackPane.margin>
                                  <children>
-                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="740.0">
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="147.0" prefWidth="740.0">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="303.0" spacing="15.0">
+                                          <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="303.0" spacing="25.0">
                                              <children>
                                                 <Label id="label" text="Theme:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
                                                 </Label>
                                                 <Label id="label" text="Notification Sound:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
                                                 </Label>
                                              </children>
                                              <HBox.margin>
                                                 <Insets bottom="15.0" left="35.0" top="25.0" />
                                              </HBox.margin>
                                           </VBox>
-                                          <VBox prefHeight="154.0" prefWidth="264.0" spacing="10.0">
+                                          <VBox prefHeight="154.0" prefWidth="264.0" spacing="20.0">
                                              <children>
-                                                <JFXComboBox id="jButton" fx:id="themeBox" focusColor="#059da7" prefHeight="28.0" prefWidth="132.0" promptText="Select Theme" unFocusColor="#4b5b81">
+                                                <JFXComboBox id="jButton" fx:id="themeBox" focusColor="#059da7" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="132.0" promptText="Select Theme" unFocusColor="#4b5b81">
                                                    <opaqueInsets>
                                                       <Insets />
                                                    </opaqueInsets>
@@ -330,7 +336,7 @@
                                                 </JFXComboBox>
                                                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                                                    <children>
-                                                      <JFXComboBox id="jButton" fx:id="soundBox" focusColor="#059da7" prefHeight="28.0" prefWidth="132.0" promptText="Select Sound" unFocusColor="#4b5b81">
+                                                      <JFXComboBox id="jButton" fx:id="soundBox" focusColor="#059da7" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="132.0" promptText="Select Sound" unFocusColor="#4b5b81">
                                                          <opaqueInsets>
                                                             <Insets />
                                                          </opaqueInsets>
@@ -341,10 +347,13 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </JFXComboBox>
-                                                      <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTestSound" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #059DA7;" text="Test Sound" textFill="WHITE">
+                                                      <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTestSound" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #059DA7;" text="Test Sound" textFill="WHITE">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
                                                       </JFXButton>
                                                    </children>
                                                 </HBox>
@@ -377,32 +386,44 @@
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="740.0" spacing="20.0">
                      <children>
-                        <JFXButton fx:id="saveChangesButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveToCSV" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #059DA7;" text="Save To csv" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveToCSV" prefHeight="32.0" prefWidth="108.0" style="-fx-background-color: #059DA7;" text="Save To CSV" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                         </JFXButton>
-                        <JFXButton fx:id="saveChangesButton11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadFromCSV" prefHeight="26.0" prefWidth="103.0" style="-fx-background-color: #059DA7;" text="Load From csv" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadFromCSV" prefHeight="32.0" prefWidth="123.0" style="-fx-background-color: #059DA7;" text="Load From CSV" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
-                              <Insets right="330.0" />
+                              <Insets right="260.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                         </JFXButton>
-                        <JFXButton fx:id="resetButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onReset" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #C1C5D4;" text="Reset" textFill="WHITE">
+                        <JFXButton fx:id="resetButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onReset" prefHeight="32.0" prefWidth="67.0" style="-fx-background-color: #C1C5D4;" text="Reset" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                         </JFXButton>
-                        <JFXButton fx:id="saveChangesButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSaveChanges" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #059DA7;" text="Save Changes" textFill="WHITE">
+                        <JFXButton fx:id="saveChangesButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSaveChanges" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #059DA7;" text="Save Changes" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                         </JFXButton>
                      </children>
                      <VBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="50.0" top="20.0" />
                      </VBox.margin>
                   </HBox>
                   </children>

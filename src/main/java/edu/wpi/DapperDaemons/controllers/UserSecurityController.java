@@ -22,6 +22,8 @@ public class UserSecurityController extends ParentController {
   @FXML private Circle profilePic;
   @FXML private Text accountName;
   @FXML private Text accountUserName;
+  @FXML private Label email;
+  @FXML private Label employeeID;
 
   // security page
   @FXML private Label securityLevel;
@@ -48,7 +50,7 @@ public class UserSecurityController extends ParentController {
 
   @FXML
   public void openUserSecurity(ActionEvent event) {
-    swapPage("userSecurity", "User Security");
+    swapPage("NewUserSecurity", "User Security");
   }
 
   @Override
@@ -82,7 +84,14 @@ public class UserSecurityController extends ParentController {
     securityLevel.setText(Integer.toString(SecurityController.getUser().getSecurityClearance()));
 
     // set phone number
-    numberBox.setText(DAOFacade.getUserAccount().getAttribute(4));
+    String number = DAOFacade.getUserAccount().getAttribute(4);
+    numberBox.setText(
+        "+1 "
+            + number.substring(0, 2)
+            + "-"
+            + number.substring(3, 5)
+            + "-"
+            + number.substring(6, 9));
 
     // set types of 2FA types
     type2FABox.setItems(FXCollections.observableArrayList("SMS", "rfid", "none"));

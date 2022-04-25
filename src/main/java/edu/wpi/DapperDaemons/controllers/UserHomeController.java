@@ -57,7 +57,7 @@ public class UserHomeController extends ParentController {
 
   @FXML
   public void openUserSecurity() {
-    swapPage("userSecurity", "User Security");
+    swapPage("NewUserSecurity", "User Security");
   }
 
   @FXML // TODO: make notifications page?

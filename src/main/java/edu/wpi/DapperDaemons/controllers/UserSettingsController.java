@@ -59,7 +59,7 @@ public class UserSettingsController extends ParentController {
 
   @FXML
   public void openUserSecurity(ActionEvent event) {
-    swapPage("userSecurity", "User Security");
+    swapPage("NewUserSecurity", "User Security");
   }
 
   @Override
