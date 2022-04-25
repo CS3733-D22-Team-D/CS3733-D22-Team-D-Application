@@ -45,21 +45,19 @@ public class Table<R> {
             () -> {
               Platform.runLater(
                   () -> {
-                    difference(
-                        new ArrayList<R>(DAOPouch.getDAO(((TableObject) type)).getAll().values()),
-                        rows);
+                    difference(rows);
                   });
             }));
   }
 
-  private void difference(List<R> cons, List<R> update) {
-    boolean hasHeader = update.get(0) == null;
-    if (hasHeader) update.remove(0);
+  private void difference(List<R> update) {
+    List<R> cons = new ArrayList<R>(DAOPouch.getDAO((TableObject) instance).getAll().values());
     List<R> dif = new ArrayList<>(update);
     for (int i = 0; i < cons.size(); i++) {
       if (!update.contains(cons.get(i))) {
         boolean added = false;
         for (int j = 0; j < update.size(); j++) {
+          if (update.get(j) == null) continue;
           if (((TableObject) cons.get(i))
               .getAttribute(1)
               .equals(((TableObject) update.get(j)).getAttribute(1))) {
@@ -75,10 +73,10 @@ public class Table<R> {
         dif.remove(cons.get(i));
       }
     }
+    dif.remove(null);
     for (R r : dif) {
       removeRow(r);
     }
-    if (hasHeader) update.add(0, null);
   }
 
   public static int getRowIndexAsInteger(Node node) {
@@ -98,7 +96,7 @@ public class Table<R> {
   }
 
   public void removeRow(R type) {
-    final int targetRowIndex = rows.indexOf(type) + 2;
+    final int targetRowIndex = rows.indexOf(type);
     List<Node> r = getRow(targetRowIndex);
     animate(0.92, 0.25, 0.11, r);
     Platform.runLater(
@@ -137,7 +135,7 @@ public class Table<R> {
           item.setPrefHeight(15);
           item.setMinHeight(Control.USE_PREF_SIZE);
           item.setMaxHeight(Control.USE_PREF_SIZE);
-          item.setPadding(new Insets(0, 0, -15, 30));
+          item.setPadding(new Insets(0, 0, -8, 30));
           Text t = new Text(s);
           t.setFont(
               Font.font(t.getFont().getFamily(), FontWeight.NORMAL, t.getFont().getSize() + 2));
@@ -146,7 +144,7 @@ public class Table<R> {
               new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
           headerRow.add(item);
         });
-    table.getChildren().forEach(n -> GridPane.setRowIndex(n, getRowIndexAsInteger(n) + 2));
+    table.getChildren().forEach(n -> GridPane.setRowIndex(n, getRowIndexAsInteger(n) + 1));
     headerRow.forEach(n -> table.addRow(0, n));
     rows.add(0, null);
   }
@@ -363,7 +361,7 @@ public class Table<R> {
   }
 
   public void update() {
-    editProperties.forEach(r -> r.run());
+    editProperties.forEach(Runnable::run);
   }
 
   public void addDropDownEditProperty(int col, int sqlCol, String... elements) {
@@ -423,8 +421,11 @@ public class Table<R> {
                 Node editable = ((VBox) box).getChildren().get(0);
                 if (editable instanceof ComboBox) {
                   ComboBox<String> editBox = ((ComboBox<String>) editable);
+                  editBox.setItems(null);
                   editBox.setItems(
                       FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+                  TableObject t = (TableObject) getItem(getRowIndexAsInteger(box));
+                  editTextWithin(editBox, t.getAttribute(2));
                   editBox.setOnAction(
                       e -> {
                         TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));

@@ -15,6 +15,7 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
 import java.io.IOException;
@@ -79,6 +80,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton directionTG;
   @FXML private ToggleButton bedTG;
   @FXML private ToggleButton pumpTG;
+  @FXML private ToggleButton xrayTG;
+  @FXML private ToggleButton reclinerTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -344,9 +347,7 @@ public class MapController extends ParentController {
     int x = (int) click.getX();
     int y = (int) click.getY();
     String floor = maps.getFloor();
-    System.out.println("Location " + x + " " + y + " clicked!");
-
-    System.out.println(x + " " + y);
+    // System.out.println("Location " + x + " " + y + " clicked!");
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
@@ -403,6 +404,9 @@ public class MapController extends ParentController {
         locationDAO.add(create);
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
+
+        NodeConnectionHandler.addPathNode(create);
+
         closeCreate();
       } catch (Exception e) {
         System.err.println("Could not add to DAO");
@@ -772,6 +776,24 @@ public class MapController extends ParentController {
       glyphs.addEquipTypeFilter("INFUSIONPUMP");
     } else {
       glyphs.removeEquipTypeFilter("INFUSIONPUMP");
+    }
+  }
+
+  @FXML
+  void xrayToggle() {
+    if (xrayTG.isSelected()) {
+      glyphs.addEquipTypeFilter("XRAY");
+    } else {
+      glyphs.removeEquipTypeFilter("XRAY");
+    }
+  }
+
+  @FXML
+  void reclinerToggle() {
+    if (reclinerTG.isSelected()) {
+      glyphs.addEquipTypeFilter("RECLINER");
+    } else {
+      glyphs.removeEquipTypeFilter("RECLINER");
     }
   }
 

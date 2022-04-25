@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.controllers.MapController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Node;
@@ -75,6 +76,7 @@ public class GlyphHandler {
                     oldPos.getLongName(),
                     oldPos.getShortName());
             DAOPouch.getLocationDAO().update(newLoc);
+            NodeConnectionHandler.addPathNode(newLoc);
           });
     }
 
@@ -233,6 +235,9 @@ public class GlyphHandler {
         break;
       case "BED":
         png = "bed.png";
+        break;
+      case "RECLINER":
+        png = "recliner.png";
         break;
       default:
         png = "error.png";
