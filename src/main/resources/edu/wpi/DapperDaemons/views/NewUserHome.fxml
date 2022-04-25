@@ -35,7 +35,7 @@
                   <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="48.0" fitWidth="43.0">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/house.png" />
+                        <Image url="@../assets/house.png" />
                      </image>
                      <StackPane.margin>
                         <Insets left="8.0" />
@@ -62,7 +62,7 @@
                   <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="46.0" fitWidth="48.0">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/blueGears.png" />
+                        <Image url="@../assets/blueGears.png" />
                      </image>
                      <StackPane.margin>
                         <Insets left="6.0" />
@@ -89,7 +89,7 @@
                   <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/lock.png" />
+                        <Image url="@../assets/lock.png" />
                      </image>
                      <StackPane.margin>
                         <Insets left="7.0" />
@@ -116,7 +116,7 @@
                   <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="46.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/about.png" />
+                        <Image url="@../assets/about.png" />
                      </image>
                      <StackPane.margin>
                         <Insets left="7.0" />
@@ -183,7 +183,7 @@
                                  <children>
                                     <ImageView fx:id="reqImage">
                                        <image>
-                                          <Image url="@../../../../../../../../Downloads/requests.png" />
+                                          <Image url="@../assets/requests.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -230,7 +230,7 @@
                                  <children>
                                     <ImageView fx:id="notImage" fitHeight="137.0" fitWidth="141.0">
                                        <image>
-                                          <Image url="@../../../../../../../../Downloads/bell.png" />
+                                          <Image url="@../assets/bell.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets right="5.0" />
@@ -280,7 +280,7 @@
                                  <children>
                                     <ImageView fx:id="settingImage" fitHeight="168.0" fitWidth="170.0">
                                        <image>
-                                          <Image url="@../../../../../../../../Downloads/settingsHome.png" />
+                                          <Image url="@../assets/settingsHome.png" />
                                        </image>
                                     </ImageView>
                                  </children>
