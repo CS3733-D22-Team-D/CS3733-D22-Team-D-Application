@@ -55,7 +55,8 @@ public class NodeConnectionHandler {
     // Create a follow up node to allow for pathing to this location
     Map<String, Location> locationList = DAOPouch.getLocationDAO().filter(6, "PATH");
     String numberRoomTypes =
-        Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, loc.getFloor()).size());
+        Integer.toString(
+            DAOPouch.getLocationDAO().filter(locationList, 4, loc.getFloor()).size() + 2);
     numberRoomTypes = "000" + numberRoomTypes;
     numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
     System.out.println("Room number for my test is : " + numberRoomTypes);

@@ -79,7 +79,7 @@ public class CreateBox {
     try {
       Map<String, Location> locationList = DAOPouch.getLocationDAO().filter(6, nodeType);
       String numberRoomTypes =
-          Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, floor).size());
+          Integer.toString(DAOPouch.getLocationDAO().filter(locationList, 4, floor).size() + 2); // Added the two to make sure we don't overite anyone's data
       numberRoomTypes = "000" + numberRoomTypes;
       numberRoomTypes = numberRoomTypes.substring(numberRoomTypes.length() - 3);
       System.out.println("Room number for my test is : " + numberRoomTypes);
