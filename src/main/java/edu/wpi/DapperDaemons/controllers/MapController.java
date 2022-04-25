@@ -15,6 +15,7 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
 import java.io.IOException;
@@ -403,6 +404,9 @@ public class MapController extends ParentController {
         locationDAO.add(create);
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
+
+        NodeConnectionHandler.addPathNode(create);
+
         closeCreate();
       } catch (Exception e) {
         System.err.println("Could not add to DAO");
