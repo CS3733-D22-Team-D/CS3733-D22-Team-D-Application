@@ -1,9 +1,10 @@
 package edu.wpi.DapperDaemons.controllers.homePage;
 
+import static edu.wpi.DapperDaemons.App.interSemiBold;
+
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class AccountHandler {
@@ -23,7 +24,8 @@ public class AccountHandler {
             + " "
             + SecurityController.getUser().getLastName();
     accountName.setText(employeeName);
-    accountName.setFont(Font.font("Comic Sans", 14));
+    accountName.setFont(interSemiBold);
+    accountName.setId("normalText");
     profilePic.setFill(Images.getAccountImage());
   }
 }
