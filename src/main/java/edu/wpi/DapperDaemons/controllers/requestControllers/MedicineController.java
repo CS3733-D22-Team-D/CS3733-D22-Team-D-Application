@@ -61,10 +61,19 @@ public class MedicineController extends ParentController {
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicineRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
     t.setRows(reqs);
+    t.setHeader(
+        List.of(
+            "Room",
+            "Requester",
+            "Assignee",
+            "Patient",
+            "Name",
+            "Quantity",
+            "Date needed",
+            "Priority"));
     t.setListeners(new MedicineRequest());
     t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
     t.addEnumEditProperty(7, 2, Request.Priority.class);

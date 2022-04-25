@@ -32,7 +32,7 @@
                <content>
                   <StackPane fx:id="mapAssets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="4375.0" prefWidth="4868.0" scaleX="0.4" scaleY="0.4">
                      <children>
-                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onScroll="#scrollMap" preserveRatio="true">
+                        <ImageView fx:id="mapView" fitHeight="4375.0" fitWidth="4968.0" onMouseClicked="#onMapClicked" onScroll="#scrollMap" preserveRatio="true">
                            <image>
                               <Image url="@../assets/Maps/00_thelowerlevel1.png" />
                            </image>
@@ -391,6 +391,18 @@
                                                       <ImageView fx:id="bedDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
                                                          <image>
                                                             <Image url="@../assets/Glyphs/MapIcons/bed.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.43" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
+                                                <ToggleButton id="foreground" fx:id="reclinerTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#reclinerToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Recliners">
+                                                   <graphic>
+                                                      <ImageView fx:id="reclinerDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/recliner.png" />
                                                          </image>
                                                          <effect>
                                                             <ColorAdjust brightness="-0.43" />

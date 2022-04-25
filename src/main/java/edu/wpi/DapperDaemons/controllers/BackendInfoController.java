@@ -66,22 +66,22 @@ public class BackendInfoController extends ParentController {
   }
 
   private void createTables() {
-    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t.setHeader(new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<Patient> reqs = new ArrayList<>(DAOPouch.getPatientDAO().getAll().values());
     t.setRows(reqs);
     t.setListeners(new Patient());
 
-    t1.setHeader(header1, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t1.setHeader(new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<Employee> reqs1 = new ArrayList<>(DAOPouch.getEmployeeDAO().getAll().values());
     t1.setRows(reqs1);
     t1.setListeners(new Employee());
 
-    t2.setHeader(header2, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t2.setHeader(new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<Location> reqs2 = new ArrayList<>(DAOPouch.getLocationDAO().getAll().values());
     t2.setRows(reqs2);
     t2.setListeners(new Location());
 
-    t3.setHeader(header3, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t3.setHeader(new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicalEquipment> reqs3 =
         new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().getAll().values());
     t3.setRows(reqs3);
