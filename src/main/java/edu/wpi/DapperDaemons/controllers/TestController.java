@@ -17,8 +17,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class TestController extends ParentController {
-
-  public static Boolean inAnimation = false;
   @FXML private ImageView floorLL1;
   @FXML private ImageView floorLL2;
   @FXML private ImageView floor1;
@@ -30,11 +28,17 @@ public class TestController extends ParentController {
   @FXML private Label floorSummary;
   @FXML private Pane mapContainer;
   @FXML private ImageView mapImage;
+  public static List<Boolean> floorsInAnimation =
+      new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+  public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+  private final double ANIMATION_TIME = 0.3;
 
   private int floorNum = 2;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Collections.fill(floorsInAnimation, Boolean.FALSE);
+    Collections.fill(isSelected, Boolean.FALSE);
     try {
       String floorTxtPath = "floorSummary.txt";
       String floorText = getFileText(floorTxtPath, floorNum);
@@ -53,6 +57,78 @@ public class TestController extends ParentController {
     initSlide(floor3, 4);
     initSlide(floor4, 5);
     initSlide(floor5, 6);
+  }
+
+  private void initSlide(ImageView floor, int level) {
+    floor.setOnMouseEntered(
+        event -> {
+          TestController.isSelected.set(level, true);
+          if (!TestController.floorsInAnimation.get(level)) {
+            floorNum = level;
+            floor.setImage(Images.selectedSegment);
+            TranslateTransition slide = new TranslateTransition();
+            TestController.floorsInAnimation.set(level, true);
+            slide.setDuration(Duration.seconds(ANIMATION_TIME));
+            slide.setNode(floor);
+
+            slide.setToX(20);
+            slide.setToY(floor.getTranslateY() + 23);
+            slide.play();
+
+            slide.setOnFinished(
+                (ActionEvent e) -> {
+                  try {
+                    String floorTxtPath = "floorSummary.txt";
+                    String floorText = getFileText(floorTxtPath, floorNum);
+                    floorSummary.setText(floorText);
+                    floorNumberLabel.setText(getFloor());
+                    mapImage.setImage(getImage());
+                  } catch (IOException ex) {
+                    ex.printStackTrace();
+                  }
+
+                  TestController.floorsInAnimation.set(level, false);
+
+                  if (!TestController.isSelected.get(level)) {
+                    TranslateTransition slideBack = new TranslateTransition();
+                    TestController.floorsInAnimation.set(level, true);
+                    slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
+                    slideBack.setNode(floor);
+
+                    slideBack.setToX(0);
+                    slideBack.setToY(floor.getTranslateY() - 23);
+                    slideBack.play();
+
+                    slideBack.setOnFinished(
+                        (ActionEvent e2) -> {
+                          floor.setImage(Images.floorSegment);
+                          TestController.floorsInAnimation.set(level, false);
+                        });
+                  }
+                });
+          }
+        });
+
+    floor.setOnMouseExited(
+        event -> {
+          if (TestController.isSelected.get(level)
+              && !TestController.floorsInAnimation.get(level)) {
+            TranslateTransition slideBack = new TranslateTransition();
+            slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
+            slideBack.setNode(floor);
+
+            slideBack.setToX(0);
+            slideBack.setToY(floor.getTranslateY() - 23);
+            slideBack.play();
+
+            slideBack.setOnFinished(
+                (ActionEvent e2) -> {
+                  floor.setImage(Images.floorSegment);
+                  TestController.floorsInAnimation.set(level, true);
+                });
+          }
+          TestController.isSelected.set(level, false);
+        });
   }
 
   private String getFloor() {
@@ -112,64 +188,5 @@ public class TestController extends ParentController {
       l++;
     }
     return "";
-  }
-
-  private void initSlide(ImageView floor, int level) {
-    floor.setOnMouseClicked(
-        event -> {
-          if (!inAnimation) {
-            floorNum = level;
-            floor.setImage(Images.selectedSegment);
-            TranslateTransition slide = new TranslateTransition();
-            TestController.inAnimation = true;
-            slide.setDuration(Duration.seconds(0.2));
-            slide.setNode(floor);
-
-            slide.setToX(20);
-            slide.setToY(floor.getTranslateY() + 23);
-            slide.setAutoReverse(true);
-            slide.play();
-
-            slide.setOnFinished(
-                (ActionEvent e) -> {
-                  try {
-                    String floorTxtPath = "floorSummary.txt";
-                    String floorText = getFileText(floorTxtPath, floorNum);
-                    floorSummary.setText(floorText);
-                    floorNumberLabel.setText(getFloor());
-                    mapImage.setImage(getImage());
-                  } catch (IOException ex) {
-                    ex.printStackTrace();
-                  }
-
-                  TranslateTransition slideBack = new TranslateTransition();
-                  slideBack.setDuration(Duration.seconds(0.2));
-                  slideBack.setNode(floor);
-
-                  slideBack.setToX(0);
-                  slideBack.setToY(floor.getTranslateY() - 23);
-                  slideBack.setAutoReverse(true);
-                  slideBack.play();
-
-                  slideBack.setOnFinished(
-                      (ActionEvent e2) -> {
-                        inAnimation = false;
-                        floor.setImage(Images.floorSegment);
-                      });
-                });
-          }
-        });
-
-    //    floor.setOnMouseExited(
-    //        event -> {
-    //          TranslateTransition slide = new TranslateTransition();
-    //          slide.setDuration(Duration.seconds(0.4));
-    //          slide.setNode(floor);
-    //
-    //          slide.setToX(0);
-    //          slide.setToY(floor.getTranslateY() - 23);
-    //          slide.setAutoReverse(true);
-    //          slide.play();
-    //        });
   }
 }
