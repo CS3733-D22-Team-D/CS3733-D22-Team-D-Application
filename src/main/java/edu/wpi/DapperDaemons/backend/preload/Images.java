@@ -61,6 +61,22 @@ public class Images {
                     .getClassLoader()
                     .getResourceAsStream("edu/wpi/DapperDaemons/assets/refresh.gif")));
 
+    floorSegment =
+        new Image(
+            Objects.requireNonNull(
+                AutoSave.class
+                    .getClassLoader()
+                    .getResourceAsStream(
+                        "edu/wpi/DapperDaemons/assets/MapDash/floorLayers/floorlayer.png")));
+
+    selectedSegment =
+        new Image(
+            Objects.requireNonNull(
+                AutoSave.class
+                    .getClassLoader()
+                    .getResourceAsStream(
+                        "edu/wpi/DapperDaemons/assets/MapDash/floorLayers/floorlayerSelected.png")));
+
     mapFloorL2 = new Image(MAP_PATH + "00_thelowerlevel1.png");
     mapFloorL1 = new Image(MAP_PATH + "00_thelowerlevel2.png");
     mapFloor1 = new Image(MAP_PATH + "01_thefirstfloor.png");
@@ -85,6 +101,9 @@ public class Images {
   public static Image mapFloor3;
   public static Image mapFloor4;
   public static Image mapFloor5;
+
+  public static Image floorSegment;
+  public static Image selectedSegment;
 
   public static ImagePattern getAccountImage() {
     try {

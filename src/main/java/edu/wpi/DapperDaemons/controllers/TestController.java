@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.*;
+import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import java.io.*;
 import java.net.URL;
@@ -35,12 +36,13 @@ public class TestController extends ParentController {
   }
 
   private void initSlide(ImageView floor, int level) {
-    floor.setOnMouseEntered(
+    floor.setOnMouseClicked(
         event -> {
           if (!inAnimation) {
+            floor.setImage(Images.selectedSegment);
             TranslateTransition slide = new TranslateTransition();
             TestController.inAnimation = true;
-            slide.setDuration(Duration.seconds(0.1));
+            slide.setDuration(Duration.seconds(0.2));
             slide.setNode(floor);
 
             slide.setToX(20);
@@ -51,7 +53,7 @@ public class TestController extends ParentController {
             slide.setOnFinished(
                 (ActionEvent e) -> {
                   TranslateTransition slideBack = new TranslateTransition();
-                  slideBack.setDuration(Duration.seconds(0.1));
+                  slideBack.setDuration(Duration.seconds(0.2));
                   slideBack.setNode(floor);
 
                   slideBack.setToX(0);
@@ -62,6 +64,7 @@ public class TestController extends ParentController {
                   slideBack.setOnFinished(
                       (ActionEvent e2) -> {
                         inAnimation = false;
+                        floor.setImage(Images.floorSegment);
                       });
                 });
           }
