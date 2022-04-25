@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.map.pathfinder.AStar;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,7 +20,15 @@ public class DAOFacade {
   /** Gets a list of all long names of locations */
   public static List<String> getAllLocationLongNames() {
     List<String> all = new ArrayList<>();
-    DAOPouch.getLocationDAO().getAll().values().forEach(e -> all.add(e.getLongName()));
+    DAOPouch.getLocationDAO()
+        .getAll()
+        .values()
+        .forEach(
+            e -> {
+              if (!e.getNodeType().equals("PATH")) { // If its not a path node
+                all.add(e.getLongName());
+              }
+            });
     return all;
   }
 
@@ -164,5 +173,47 @@ public class DAOFacade {
 
   public static Account getUserAccount() {
     return DAOPouch.getAccountDAO().get(getUsername());
+  }
+
+  /**
+   * Finds the closest medical equipment to your current location and what you are looking for
+   *
+   * @param type
+   * @param location
+   * @return
+   */
+  public static String getClosestMedicalEquipment(String type, String location) {
+    AStar ppHelper = new AStar();
+    List<MedicalEquipment> equipmentList =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(3, type).values());
+    Double bestDistance = Double.MAX_VALUE;
+    Double currentDistance = 0.0;
+    String bestNodeID = equipmentList.get(0).getNodeID();
+    Double previousBest = Double.MAX_VALUE;
+    for (MedicalEquipment equipment : equipmentList) {
+      if (DAOPouch.getLocationDAO().get(equipment.getLocationID()).getXcoord() != -1) {
+        String startLocation =
+            new ArrayList<>(DAOPouch.getLocationDAO().filter(7, location).values())
+                .get(0)
+                .getNodeID();
+
+        List<String> ppPath = ppHelper.getPath(equipment.getLocationID(), startLocation);
+
+        for (int i = 0; i < ppPath.size() - 2; i++) {
+          currentDistance += ppHelper.getDistance(ppPath.get(i), ppPath.get(i + 1));
+        }
+        if (currentDistance < bestDistance) {
+          bestNodeID = equipment.getNodeID();
+          previousBest = bestDistance;
+          bestDistance = currentDistance;
+          if (previousBest - bestDistance < 800
+              && Math.abs(bestDistance - Double.MAX_VALUE) < 1.0) {
+            break;
+          }
+        }
+        currentDistance = 0.0;
+      }
+    }
+    return bestNodeID;
   }
 }

@@ -1,11 +1,19 @@
 package edu.wpi.DapperDaemons.map;
 
+import com.google.firebase.database.ValueEventListener;
+import edu.wpi.DapperDaemons.App;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
+import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -28,6 +36,8 @@ public class RoomInfoBox {
   private TableView<MedicalEquipment> equipTable;
   private TableView<Patient> patientTable;
   private TableView<Request> requestTable;
+  private Location loc;
+  private PositionInfo pos;
 
   public RoomInfoBox(
       VBox roomInfoBox,
@@ -56,8 +66,46 @@ public class RoomInfoBox {
     new TableHelper<>(requestTable, 1).linkColumns(Request.class);
   }
 
+  private ValueEventListener equipListener;
+  private ValueEventListener patListener;
+  private ValueEventListener reqListener;
+
+  private void setListeners() {
+    TableListeners.addListener(
+        new MedicalEquipment().tableName(),
+        TableListeners.eventListener(
+            () -> {
+              List<MedicalEquipment> equipment =
+                  new ArrayList<>(
+                      DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
+              System.out.println("Map equip listener");
+              equipTable.getItems().clear();
+              equipTable.getItems().addAll(equipment);
+            }));
+    TableListeners.addListener(
+        new Patient().tableName(),
+        TableListeners.eventListener(
+            () -> {
+              List<Patient> patients =
+                  new ArrayList<>(DAOPouch.getPatientDAO().filter(6, pos.getId()).values());
+              patientTable.getItems().clear();
+              patientTable.getItems().addAll(patients);
+            }));
+    TableListeners.addListeners(
+        DAOFacade.getAllRequests().stream()
+            .map((r) -> ((TableObject) r).tableName())
+            .collect(Collectors.toCollection(ArrayList<String>::new)),
+        TableListeners.eventListener(
+            () -> {
+              List<Request> requests = DAOFacade.getFilteredRequests(pos.getId());
+              requestTable.getItems().clear();
+              requestTable.getItems().addAll(requests);
+            }));
+  }
+
   public void open() {
     roomInfoBox.setVisible(true);
+    setListeners();
   }
 
   public void toggleTable(TableDisplayType type) {
@@ -103,6 +151,7 @@ public class RoomInfoBox {
   public void close() {
     roomInfoBox.setVisible(false);
     infoTables.setVisible(false);
+    TableListeners.removeAllListeners();
   }
 
   public void openLoc(
@@ -110,10 +159,14 @@ public class RoomInfoBox {
       List<MedicalEquipment> equipment,
       List<Patient> patients,
       List<Request> requests) {
+    this.pos = pos;
+
     nameTxt.setText(pos.getLongName());
     floorTxt.setText(pos.getFloor());
     typeTxt.setText(pos.getType());
     buildingTxt.setText(pos.getBuilding());
+
+    this.loc = pos.getLoc();
 
     equipTable.getItems().clear();
     equipTable.getItems().addAll(equipment);
@@ -123,6 +176,11 @@ public class RoomInfoBox {
 
     requestTable.getItems().clear();
     requestTable.getItems().addAll(requests);
+  }
+
+  public Location getPosition() {
+    App.LOG.info("Returning position info for request showing on map");
+    return loc;
   }
 
   public Location change(PositionInfo selected) {

@@ -247,7 +247,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
 
   @Override
   public boolean requiresTransport() {
-    return false;
+    return true;
   }
 
   // ATTRIBUTES
@@ -327,6 +327,11 @@ public class MealDeliveryRequest extends TableObject implements Request {
   @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
+  }
+
+  @Override
+  public String transportFromRoomID() {
+    return RandomizeFields.getRandomFood();
   }
 
   public void setRoomID(String roomID) {
