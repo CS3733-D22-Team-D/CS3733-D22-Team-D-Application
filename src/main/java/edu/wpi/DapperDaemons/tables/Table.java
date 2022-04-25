@@ -363,7 +363,7 @@ public class Table<R> {
   }
 
   public void update() {
-    editProperties.forEach(r -> r.run());
+    editProperties.forEach(Runnable::run);
   }
 
   public void addDropDownEditProperty(int col, int sqlCol, String... elements) {
@@ -423,6 +423,7 @@ public class Table<R> {
                 Node editable = ((VBox) box).getChildren().get(0);
                 if (editable instanceof ComboBox) {
                   ComboBox<String> editBox = ((ComboBox<String>) editable);
+                  editBox.setItems(null);
                   editBox.setItems(
                       FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
                   editBox.setOnAction(
@@ -452,6 +453,7 @@ public class Table<R> {
   }
 
   public R getItem(int row) {
-    return rows.get(row);
+    if (rows.get(0) == null) return rows.get(row - 1);
+    else return rows.get(row);
   }
 }
