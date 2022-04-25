@@ -11,8 +11,10 @@ import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -48,6 +50,8 @@ public class Table<R> {
   }
 
   private void difference(List<R> cons, List<R> update) {
+    boolean hasHeader = update.get(0) == null;
+    if (hasHeader) update.remove(0);
     List<R> dif = new ArrayList<>(update);
     for (int i = 0; i < cons.size(); i++) {
       if (!update.contains(cons.get(i))) {
@@ -71,6 +75,7 @@ public class Table<R> {
     for (R r : dif) {
       removeRow(r);
     }
+    if (hasHeader) update.add(0, null);
   }
 
   public static int getRowIndexAsInteger(Node node) {
@@ -119,10 +124,24 @@ public class Table<R> {
     rows.remove(type);
   }
 
-  public void setHeader(HBox header, List<String> labels) {
-    for (String label : labels) {
-      header.getChildren().add(new Text(label));
-    }
+  public void setHeader(List<String> labels) {
+    List<Node> headerRow = new ArrayList<>();
+    labels.forEach(
+        s -> {
+          VBox item = new VBox();
+          item.setAlignment(Pos.CENTER_LEFT);
+          HBox.setHgrow(item, Priority.ALWAYS);
+          item.setPrefHeight(30);
+          item.setMinHeight(Control.USE_PREF_SIZE);
+          item.setMaxHeight(Control.USE_PREF_SIZE);
+          item.setPadding(new Insets(0, 0, 0, 30));
+          item.getChildren().add(new Text(s));
+          item.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+          headerRow.add(item);
+        });
+    table.getChildren().forEach(n -> GridPane.setRowIndex(n, getRowIndexAsInteger(n) + 2));
+    headerRow.forEach(n -> table.addRow(0, n));
+    rows.add(0, null);
   }
 
   public List<Node> getRow(int rowNum) {

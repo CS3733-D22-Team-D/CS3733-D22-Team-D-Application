@@ -40,6 +40,7 @@ public class RowFactory {
       item.setPrefHeight(50);
       item.setMinHeight(Control.USE_PREF_SIZE);
       item.setMaxHeight(Control.USE_PREF_SIZE);
+      item.setPadding(new Insets(0, 0, 0, 30));
       if (attr instanceof Node) row.getChildren().add((Node) attr);
       if (attr instanceof Enum) {
         Enum<?> e = (Enum<?>) attr;
@@ -47,7 +48,6 @@ public class RowFactory {
         ComboBox<String> box = new ComboBox<>(FXCollections.observableArrayList(allAttrs));
         box.setValue(attr.toString());
         box.setBackground(Background.EMPTY);
-        item.setPadding(new Insets(0, 0, 0, 30));
         box.setMaxWidth(100);
         box.setMinWidth(100);
         item.getChildren().add(box);
