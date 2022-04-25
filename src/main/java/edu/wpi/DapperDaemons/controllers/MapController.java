@@ -79,6 +79,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton directionTG;
   @FXML private ToggleButton bedTG;
   @FXML private ToggleButton pumpTG;
+  @FXML private ToggleButton xrayTG;
+  @FXML private ToggleButton reclinerTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -772,6 +774,24 @@ public class MapController extends ParentController {
       glyphs.addEquipTypeFilter("INFUSIONPUMP");
     } else {
       glyphs.removeEquipTypeFilter("INFUSIONPUMP");
+    }
+  }
+
+  @FXML
+  void xrayToggle() {
+    if (xrayTG.isSelected()) {
+      glyphs.addEquipTypeFilter("XRAY");
+    } else {
+      glyphs.removeEquipTypeFilter("XRAY");
+    }
+  }
+
+  @FXML
+  void reclinerToggle() {
+    if (reclinerTG.isSelected()) {
+      glyphs.addEquipTypeFilter("RECLINER");
+    } else {
+      glyphs.removeEquipTypeFilter("RECLINER");
     }
   }
 

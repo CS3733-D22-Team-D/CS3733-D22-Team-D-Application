@@ -234,6 +234,9 @@ public class GlyphHandler {
       case "BED":
         png = "bed.png";
         break;
+      case "RECLINER":
+        png = "recliner.png";
+        break;
       default:
         png = "error.png";
     }
