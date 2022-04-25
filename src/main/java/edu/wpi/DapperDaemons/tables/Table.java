@@ -426,6 +426,8 @@ public class Table<R> {
                   editBox.setItems(null);
                   editBox.setItems(
                       FXCollections.observableArrayList(TableHelper.convertEnum(enumClass)));
+                  TableObject t = (TableObject) getItem(getRowIndexAsInteger(box));
+                  editTextWithin(editBox, t.getAttribute(2));
                   editBox.setOnAction(
                       e -> {
                         TableObject item = (TableObject) getItem(getRowIndexAsInteger(box));

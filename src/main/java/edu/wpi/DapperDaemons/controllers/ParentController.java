@@ -136,7 +136,7 @@ public class ParentController extends AppController {
       bindChild(childPage);
 
     } catch (IOException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
     ThemeHandler.setTheme();
   }
