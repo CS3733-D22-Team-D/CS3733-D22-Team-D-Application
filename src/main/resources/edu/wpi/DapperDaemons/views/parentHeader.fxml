@@ -331,7 +331,7 @@
                         <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label id="normalText" fx:id="tempLabel" stylesheets="@../styling/lightMode.css" textFill="WHITE">
+                              <Label id="normalText" fx:id="tempLabel" styleClass="normalText" stylesheets="@../styling/lightMode.css" text="64" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -395,11 +395,11 @@
                               <Insets left="7.0" />
                            </HBox.margin>
                         </ToggleButton>
-                        <ToggleButton id="normalText" fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent;" stylesheets="@../styling/lightMode.css" textFill="WHITE">
+                        <ToggleButton id="normalText" fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-radius: 7.5; -fx-background-color: transparent;" stylesheets="@../styling/lightMode.css" textFill="WHITE">
                            <graphic>
-                              <HBox id="normalText" accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0" stylesheets="@../styling/lightMode.css">
+                              <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="190.0" style="-fx-background-radius: 7.5;" stylesheets="@../styling/lightMode.css">
                                  <children>
-                                    <Text id="normalText" fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="normalText" text="account Name">
+                                    <Text id="normalText" fx:id="accountName" fill="WHITE" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="normalText" text="account Name">
                                        <font>
                                           <Font name="Inter SemiBold" size="14.0" />
                                        </font>
@@ -411,7 +411,7 @@
                                     </Circle>
                                  </children>
                                  <padding>
-                                    <Insets right="5.0" />
+                                    <Insets right="10.0" />
                                  </padding>
                               </HBox>
                            </graphic>

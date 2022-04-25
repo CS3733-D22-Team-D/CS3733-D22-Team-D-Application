@@ -86,48 +86,81 @@
 
 .pageCard{
     -fx-border-radius: 7.5;
+    -fx-background-radius: 7.5;
     -fx-border-width: 1px;
     -fx-border-color: rgba(50, 50, 50, 0.15);
     -fx-background-color: #ffffff;
-    -fx-effect: dropshadow(three-pass-box, rgba(50, 50, 50, 0.15),0, 0, -1, 1);
+    -fx-effect: dropshadow(three-pass-box, #32323218, 4, 0.15, -2, 2);
+
 }
 
 .cardTitle{
     -fx-font-family: "Inter SemiBold"!important;
-    -fx-fill: #052F92;
-    -fx-text-fill: #052F92;
-    -fx-font-size: 18px;
+    -fx-fill: #052F92 !important;
+    -fx-text-fill: #052F92 !important;
+    -fx-font-size: 23px !important;
 }
 
 .cardText{
     -fx-font-family: "Inter Regular"!important;
-    -fx-fill: #2F2F2F;
-    -fx-font-size: 14px;
+    -fx-fill: #2F2F2F !important;
+    -fx-font-size: 14px !important;
 }
 
 .cardInput{
     -fx-font-family: "Inter Regular"!important;
-    -fx-fill: #2F2F2F;
+    -fx-text-fill: #2F2F2F;
     -fx-font-size: 14px;
     -fx-border-radius: 7.5;
+    -fx-background-radius: 7.5;
     -fx-border-width: 1px;
-    -fx-border-color: #323232 15%;
+    -fx-border-color:  #D5D3D2;
     -fx-background-color: #F1F0F0;
-    -fx-effect: dropshadow(gaussian, #323232 ,8, 0.15, -2, 2);
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, #32323218, 4, 0.15, -2, 2);
 
 }
 
 .confirmButton {
+    -fx-background-radius: 7.5;
+    -fx-background-color: #FFFFFF00;
+    -fx-border-width: 2;
     -fx-border-radius: 7.5;
-    -fx-background-color: #052F92;
+    -fx-border-color: #052F92;
+    -fx-font-family: "Inter SemiBold"!important;
+    -fx-text-fill: #052F92;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.confirmButton:pressed{
+    -fx-translate-y: 2;
+    -fx-opacity: 0.9;
 
 }
 
 .cancelButton{
+    -fx-background-color: #FFFFFF00;
+    -fx-font-family: "Inter SemiBold"!important;
+    -fx-font-size: 14px;
+    -fx-border-width: 2;
+    -fx-border-radius: 7.5;
+    -fx-background-radius: 7.5;
+    -fx-cursor: hand;
 
 
+    -fx-border-color:  #81A0CF;
+    -fx-text-fill:  #81A0CF;
 }
 
+
+
+.cancelButton:pressed{
+    -fx-background-color: #6887B6 !important;
+    -fx-translate-y: 2;
+    -fx-border-color:  #6887B6;
+
+}
 
 /* Table Specific Elements */
 .columnLabel{
