@@ -64,7 +64,7 @@ public class LabRequestController extends ParentController {
     //      System.err.print("Error, Lab Req table was unable to be created\n");
     //    }
     //    setListeners();
-    t = new Table(table, 0);
+    t = new Table<>(LabRequest.class, table, 0);
     createTable();
   }
 

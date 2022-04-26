@@ -295,7 +295,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
 
   @Override
   public RequestStatus getStatus() {
-    return null;
+    return status;
   }
 
   public void setAssigneeID(String assigneeID) {

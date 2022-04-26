@@ -75,7 +75,7 @@ public class ExternalPatientTransportController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
 
-    t = new Table(table, 0);
+    t = new Table<>(PatientTransportRequest.class, table, 0);
     createTable();
   }
 

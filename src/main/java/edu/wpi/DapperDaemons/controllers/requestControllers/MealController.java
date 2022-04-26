@@ -82,7 +82,7 @@ public class MealController extends ParentController {
     initBoxes();
     onClearClicked();
 
-    t = new Table(table, 0);
+    t = new Table<>(MealDeliveryRequest.class, table, 0);
     createTable();
   }
 

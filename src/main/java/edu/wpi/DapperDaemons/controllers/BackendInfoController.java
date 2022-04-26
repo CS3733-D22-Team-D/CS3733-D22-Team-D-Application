@@ -58,10 +58,10 @@ public class BackendInfoController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // TODO : The patient DAO is broken :(
-    t = new Table<>(table, 0);
-    t1 = new Table<>(table1, 0);
-    t2 = new Table<>(table2, 0);
-    t3 = new Table<>(table3, 0);
+    t = new Table<>(Patient.class, table, 0);
+    t1 = new Table<>(Employee.class, table1, 0);
+    t2 = new Table<>(Location.class, table2, 0);
+    t3 = new Table<>(MedicalEquipment.class, table3, 0);
     createTables();
   }
 
