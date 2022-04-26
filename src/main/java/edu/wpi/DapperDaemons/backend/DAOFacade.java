@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -121,9 +122,19 @@ public class DAOFacade {
     LinkedList<Request> assigneeReq = new LinkedList<>();
     for (Request request : allReq) {
       // If correct user and it hasn't been marked as completed or cancelled
-      if (request.getAssigneeID().equals(assignee)
-          && (!request.getStatus().equals("COMPLETED") || !request.getStatus().equals("CANCELLED")))
-        assigneeReq.add(request);
+      try {
+        if (request.getAssigneeID().equals(assignee)
+            && (!request.getStatus().equals("COMPLETED")
+                || !request.getStatus().equals("CANCELLED"))) assigneeReq.add(request);
+      } catch (Exception e) {
+        App.LOG.info(
+            "Something went wrong trying to find requests for "
+                + assignee
+                + " With request "
+                + request.getNodeID()
+                + " In "
+                + request.requestType());
+      }
     }
     return assigneeReq;
   }
@@ -213,27 +224,29 @@ public class DAOFacade {
     String bestNodeID = equipmentList.get(0).getNodeID();
     Double previousBest = Double.MAX_VALUE;
     for (MedicalEquipment equipment : equipmentList) {
-      if (DAOPouch.getLocationDAO().get(equipment.getLocationID()).getXcoord() != -1) {
-        String startLocation =
-            new ArrayList<>(DAOPouch.getLocationDAO().filter(7, location).values())
-                .get(0)
-                .getNodeID();
+      if (DAOPouch.getLocationDAO().get(equipment.getLocationID()) != null) {
+        if (DAOPouch.getLocationDAO().get(equipment.getLocationID()).getXcoord() != -1) {
+          String startLocation =
+              new ArrayList<>(DAOPouch.getLocationDAO().filter(7, location).values())
+                  .get(0)
+                  .getNodeID();
 
-        List<String> ppPath = ppHelper.getPath(equipment.getLocationID(), startLocation);
+          List<String> ppPath = ppHelper.getPath(equipment.getLocationID(), startLocation);
 
-        for (int i = 0; i < ppPath.size() - 2; i++) {
-          currentDistance += ppHelper.getDistance(ppPath.get(i), ppPath.get(i + 1));
-        }
-        if (currentDistance < bestDistance) {
-          bestNodeID = equipment.getNodeID();
-          previousBest = bestDistance;
-          bestDistance = currentDistance;
-          if (previousBest - bestDistance < 800
-              && Math.abs(bestDistance - Double.MAX_VALUE) < 1.0) {
-            break;
+          for (int i = 0; i < ppPath.size() - 2; i++) {
+            currentDistance += ppHelper.getDistance(ppPath.get(i), ppPath.get(i + 1));
           }
+          if (currentDistance < bestDistance) {
+            bestNodeID = equipment.getNodeID();
+            previousBest = bestDistance;
+            bestDistance = currentDistance;
+            if (previousBest - bestDistance < 800
+                && Math.abs(bestDistance - Double.MAX_VALUE) < 1.0) {
+              break;
+            }
+          }
+          currentDistance = 0.0;
         }
-        currentDistance = 0.0;
       }
     }
     return bestNodeID;
