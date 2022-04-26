@@ -8,7 +8,6 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -23,7 +22,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -200,7 +198,6 @@ public class ExternalPatientTransportController extends ParentController {
     // TODO FIGURE OUT WHY THE FUCK THIS SEARCH SHIT DOESNT WORK
     // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH
     // roomBox.getEditor().setOnKeyPressed(E -> searchRoomsDropDown());
-
 
   }
 
