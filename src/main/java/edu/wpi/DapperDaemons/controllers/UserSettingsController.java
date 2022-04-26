@@ -118,7 +118,8 @@ public class UserSettingsController extends ParentController {
             "DooDooooo",
             "Ring",
             "Shing",
-            "Ayo"));
+            "Ayo",
+            "TeamD"));
   }
 
   @FXML
