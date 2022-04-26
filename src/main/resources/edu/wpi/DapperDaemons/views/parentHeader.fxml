@@ -383,7 +383,7 @@
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
-                                    <ImageView fx:id="notifBell" fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT">
+                                    <ImageView fx:id="notifBell" fitHeight="28.0" fitWidth="28.0" nodeOrientation="INHERIT">
                                        <image>
                                           <Image url="@../assets/Glyphs/bell.png" />
                                        </image>
