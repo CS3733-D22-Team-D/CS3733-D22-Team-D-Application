@@ -35,7 +35,10 @@ public class APILandingController implements Initializable {
   private static String teamZOriginID;
   private static String teamZDestinationID;
 
-  // Team X JFX
+  // Team  JFX
+
+ // private static String teamXOriginID;
+ // private static String teamXDestinationID;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -195,5 +198,10 @@ public class APILandingController implements Initializable {
           && req.getPatientID().equals(dbReq.getPatientID())) return true;
     }
     return false;
+  }
+
+  /** Start team 's Request API */
+  public void startTeamAPI() {
+
   }
 }
