@@ -24,12 +24,11 @@ public interface Request {
   String requestType();
 
   /** @return the priority of a given request */
-  @TableHandler(table = 1, col = 1)
+  @TableHandler(table = 1, col = 2)
   @TableHandler(table = 2, col = 1)
   Priority getPriority();
 
   /** @return whether or not this is a request that requires things to be moved */
-  @TableHandler(table = 1, col = 2)
   boolean requiresTransport();
 
   /** @return roomID of a given request */
@@ -43,6 +42,7 @@ public interface Request {
   @TableHandler(table = 2, col = 3)
   String getRequesterID();
 
+  @TableHandler(table = 1, col = 1)
   @TableHandler(table = 2, col = 4)
   String getAssigneeID();
 

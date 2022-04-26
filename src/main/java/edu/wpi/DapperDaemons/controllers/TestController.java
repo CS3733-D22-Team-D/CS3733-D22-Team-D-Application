@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class TestController extends ParentController {
+  @FXML private GridPane table;
   @FXML private ImageView floorLL1;
   @FXML private ImageView floorLL2;
   @FXML private ImageView floor1;
@@ -46,9 +47,7 @@ public class TestController extends ParentController {
   public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
 
-  @FXML private GridPane table;
   private Table<Request> t;
-
   private int floorNum = 2;
 
   @Override
@@ -78,9 +77,9 @@ public class TestController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(Request.class, table, 2);
+    t = new Table<>(Request.class, table, 1);
     t.setRows(DAOFacade.getAllRequests());
-    t.setHeader(List.of("Type", "Priority", "Room", "Requester", "Assignee", "Status"));
+    t.setHeader(List.of("Type", "Assignee", "Priority"));
     t.setRequestListeners();
   }
 
