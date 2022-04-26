@@ -74,7 +74,7 @@ public class TestController extends ParentController {
     bindImage(floor4, FourContainer);
     bindImage(floor5, FiveContainer);
 
-    //createTable();
+    createTable();
   }
 
   private void createTable() {
