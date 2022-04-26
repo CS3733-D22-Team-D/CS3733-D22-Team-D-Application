@@ -8,7 +8,7 @@ import javafx.util.Duration;
 
 public class AnimationHelper {
 
-  /* Tranisitions the Node's background color over the course of milliseconds*/
+  /* Transitions the Node's background color over the course of milliseconds*/
 
   public static void fadeNode(
       Node node, Color backgroundStart, Color backgroundEnd, int durationInMillis) {
@@ -39,7 +39,7 @@ public class AnimationHelper {
     transition.play();
   }
 
-  /* Tranisitions the Node's background color and text color over the course of milliseconds*/
+  /* Transitions the Node's background color and text color over the course of milliseconds*/
   public static void fadeNodeWithText(
       Node node,
       Color textStart,
