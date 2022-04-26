@@ -4,7 +4,6 @@ import edu.wpi.DapperDaemons.APIConverters.ExternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.InternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
-import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.cs3733.D22.teamB.api.DatabaseController;
@@ -68,24 +67,6 @@ public class APILandingController implements Initializable {
     // Team B API Init
     bSave.setVisible(false);
     bErrorLabel.setText("");
-    DatabaseController databaseController = new DatabaseController();
-    for (Employee employee : DAOPouch.getEmployeeDAO().getAll().values()) {
-        IPTEmployee empToAdd = new IPTEmployee(employee.getNodeID(),
-                employee.getLastName(),
-                employee.getFirstName(),
-                "Hospital Staff",
-                employee.getEmployeeType().toString()
-                );
-        if(!checkIfEmployeeExistsTeamB(empToAdd)) databaseController.add(empToAdd);
-    }
-  }
-  public boolean checkIfEmployeeExistsTeamB(IPTEmployee employee) {
-    DatabaseController databaseController = new DatabaseController();
-    for (IPTEmployee emp : databaseController.listEmployees()) {
-          if(emp.getFirstName().equals(employee.getFirstName())
-            && emp.getLastName().equals(employee.getLastName())) return true;
-    }
-    return false;
   }
 
   /** Allows for requests submitted by the API to be saved to our database */

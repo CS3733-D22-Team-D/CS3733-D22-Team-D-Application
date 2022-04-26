@@ -17,15 +17,14 @@ public class InternalReqConverter extends Converter {
 
     String employeeId;
 
-    if(internalRequest.getEmployeeID() == null) employeeId = "null";
+    if (internalRequest.getEmployeeID() == null) employeeId = "null";
     else employeeId = internalRequest.getEmployeeID();
-
 
     return new PatientTransportRequest(
         parsePriority(internalRequest.getPriority()),
         internalRequest.getStartLocation().getNodeID(),
-            employeeId,
-            employeeId,
+        employeeId,
+        employeeId,
         internalRequest.getInformation(),
         internalRequest.getRequestID(),
         internalRequest.getFinishLocation().getNodeID(),
