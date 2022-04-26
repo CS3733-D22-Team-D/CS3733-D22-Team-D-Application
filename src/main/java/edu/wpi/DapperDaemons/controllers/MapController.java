@@ -461,7 +461,7 @@ public class MapController extends ParentController {
     scroll.consume();
   }
 
-  private double zoomIntensity = 0.02;
+  private double zoomIntensity = 0.0001;
 
   private void onScroll(double wheelDelta, Point2D mousePoint) {
     double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
