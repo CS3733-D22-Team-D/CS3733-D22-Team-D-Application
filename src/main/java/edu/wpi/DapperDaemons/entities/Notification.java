@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities;
 
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -63,6 +64,20 @@ public class Notification extends TableObject {
     this.body = body;
     this.userID = userID;
     this.nodeID = userID + subject + LocalDateTime.now();
+  }
+
+  public Notification(Notification old, Request updated) {
+    this.subject = old.getSubject();
+    this.body = old.getBody();
+    this.userID = updated.getAssigneeID();
+    this.nodeID = old.getNodeID();
+  }
+
+  public Notification(String subject, String body, Request r) {
+    this.subject = subject;
+    this.body = body;
+    this.userID = r.getAssigneeID();
+    this.nodeID = "not" + r.getNodeID();
   }
 
   @Override

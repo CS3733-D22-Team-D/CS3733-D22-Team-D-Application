@@ -21,7 +21,7 @@ public class RowFactory {
 
   private RowFactory() {}
 
-  public static List<Node> createRow(List<Object> attributes) {
+  public static List<Node> createRow(List<Object> attributes, int padding) {
     HBox row;
     FXMLLoader loader;
     loader =
@@ -40,7 +40,7 @@ public class RowFactory {
       item.setPrefHeight(50);
       item.setMinHeight(Control.USE_PREF_SIZE);
       item.setMaxHeight(Control.USE_PREF_SIZE);
-      item.setPadding(new Insets(0, 0, 0, 30));
+      item.setPadding(new Insets(0, 0, 0, padding));
       if (attr instanceof Node) row.getChildren().add((Node) attr);
       if (attr instanceof Enum) {
         Enum<?> e = (Enum<?>) attr;

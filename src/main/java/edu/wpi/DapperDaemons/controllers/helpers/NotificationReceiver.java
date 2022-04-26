@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.controllers.homePage;
+package edu.wpi.DapperDaemons.controllers.helpers;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,13 +20,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javax.sound.sampled.LineUnavailableException;
 
-public class NotificationHandler {
+public class NotificationReceiver {
 
   private static ValueEventListener notifListener;
   private final VBox notifications;
   private final ImageView notifBell;
 
-  public NotificationHandler(VBox notificationsBox, ImageView notifBell) {
+  public NotificationReceiver(VBox notificationsBox, ImageView notifBell) {
     this.notifications = notificationsBox;
     this.notifBell = notifBell;
     setNotificationListener();

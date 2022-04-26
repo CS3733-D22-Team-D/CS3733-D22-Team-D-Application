@@ -53,6 +53,8 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    floorNum = 2;
+    floor = getFloor();
     Collections.fill(floorsInAnimation, Boolean.FALSE);
     Collections.fill(isHovered, Boolean.FALSE);
     Collections.fill(isSelected, Boolean.FALSE);
@@ -178,7 +180,7 @@ public class MapDashboardController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(Request.class, table, 1);
+    t = new Table<>(Request.class, table, 1, 0);
     t.setRows(DAOFacade.getAllRequests());
     t.setHeader(List.of("Type", "Assignee", "Priority"));
     t.setRequestListeners();
