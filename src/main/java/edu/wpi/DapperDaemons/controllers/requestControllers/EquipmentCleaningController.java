@@ -28,12 +28,6 @@ import javafx.stage.Stage;
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentCleaningController extends ParentController {
 
-  /* Table Object */
-  @FXML private TableView<EquipmentCleaning> equipmentCleanTable;
-
-  /* Table Helper */
-  private TableHelper<EquipmentCleaning> tableHelper;
-
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentIDBox;
@@ -85,23 +79,11 @@ public class EquipmentCleaningController extends ParentController {
     t.setListeners(new EquipmentCleaning());
   }
 
-  private void setListeners() {
-    TableListeners.addListener(
-        new EquipmentCleaning().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              equipmentCleanTable.getItems().clear();
-              equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
-            }));
-  }
-
   public boolean addItem(EquipmentCleaning request) {
     boolean hadClearance = false;
 
     hadClearance = equipmentCleaningDAO.add(request);
-    if (hadClearance) {
-      equipmentCleanTable.getItems().add(request);
-    }
+
     return hadClearance;
   }
 
