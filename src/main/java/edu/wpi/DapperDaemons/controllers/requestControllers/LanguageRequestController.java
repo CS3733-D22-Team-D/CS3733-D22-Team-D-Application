@@ -63,7 +63,7 @@ public class LanguageRequestController extends ParentController {
     //    bindImage(BGImage, BGContainer);
 
     onClearClicked();
-    t = new Table<>(table, 0);
+    t = new Table<>(LanguageRequest.class, table, 0);
     createTable();
   }
 

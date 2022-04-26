@@ -4,6 +4,7 @@ import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.requests.*;
+import edu.wpi.DapperDaemons.tables.Table;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
@@ -39,12 +40,14 @@ public class TestController extends ParentController {
   @FXML private Label floorSummary;
   @FXML private Pane mapContainer;
   @FXML private ImageView mapImage;
-  @FXML private GridPane table;
 
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
+
+  @FXML private GridPane table;
+  private Table<Request> t;
 
   private int floorNum = 2;
 
@@ -70,6 +73,15 @@ public class TestController extends ParentController {
     bindImage(floor3, ThreeContainer);
     bindImage(floor4, FourContainer);
     bindImage(floor5, FiveContainer);
+
+    createTable();
+  }
+
+  private void createTable() {
+    t = new Table<>(Request.class, table, 2);
+    t.setRows(DAOFacade.getAllRequests());
+    t.setHeader(List.of("Type", "Priority", "Room", "Requester", "Assignee", "Status"));
+    t.setRequestListeners();
   }
 
   @FXML

@@ -65,18 +65,7 @@ public class MapDashboardController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     DAOPouch.getAlertDAO().add(new Alert("Testing", "234", Request.Priority.HIGH, "1"));
 
-    bindImage(mapImage, mapContainer); // nice
-
-    // setListeners();
-
-    // Init tables
-    //    new TableHelper<>(equipTable, 2).linkColumns(MedicalEquipment.class);
-    //    new TableHelper<>(locTable, 2).linkColumns(Location.class);
-    //    new TableHelper<>(patientTable, 2).linkColumns(Patient.class);
-    //    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    //    new TableHelper<>(reqTable, 1).linkColumns(Request.class);
-    //    new TableHelper<>(alertTable, 1).linkColumns(Alert.class);
-
+    bindImage(mapImage, mapContainer);
     // Default floor
     floor = "1";
     // updatePage();

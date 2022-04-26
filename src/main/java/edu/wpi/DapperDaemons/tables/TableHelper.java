@@ -98,10 +98,10 @@ public class TableHelper<R> {
     return count + 1;
   }
 
-  public static List<Object> getDataList(Object instance, int tableNum) {
+  public static <I> List<Object> getDataList(Class<I> type, I instance, int tableNum) {
     HashMap<Integer, Object> indexes = new HashMap<>();
     // Search for any TableHandler methods
-    for (Method m : instance.getClass().getDeclaredMethods()) {
+    for (Method m : type.getDeclaredMethods()) {
       m.setAccessible(true);
       TableHandler[] annotations = m.getAnnotationsByType(TableHandler.class);
 
