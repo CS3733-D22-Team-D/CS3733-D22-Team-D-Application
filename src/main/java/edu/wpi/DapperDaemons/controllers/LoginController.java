@@ -3,19 +3,23 @@ package edu.wpi.DapperDaemons.controllers;
 import arduino.Arduino;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
 import edu.wpi.DapperDaemons.map.serial.SerialCOM;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -39,7 +43,7 @@ public class LoginController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    bindImage(BGImage, BGContainer);
+    //    bindImage(BGImage, BGContainer);
 
     code.setOnKeyPressed(
         e -> {
@@ -155,5 +159,26 @@ public class LoginController extends AppController {
     if (event.getCode().equals(KeyCode.ENTER)) {
       authenticate();
     }
+  }
+
+  /* Animations */
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }
