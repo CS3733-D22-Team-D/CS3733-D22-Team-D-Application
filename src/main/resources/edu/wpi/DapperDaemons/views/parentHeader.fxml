@@ -430,13 +430,16 @@
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.png" />
                                        </image>
                                     </ImageView>
                                     <Text strokeWidth="0.0" text="User Settings">
                                        <HBox.margin>
-                                          <Insets left="5.0" />
+                                          <Insets left="13.0" />
                                        </HBox.margin>
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
@@ -454,8 +457,11 @@
                                     </ImageView>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
                                        <HBox.margin>
-                                          <Insets left="5.0" />
+                                          <Insets left="13.0" />
                                        </HBox.margin>
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
@@ -473,8 +479,11 @@
                                     </ImageView>
                                     <Text strokeWidth="0.0" text="Exit">
                                        <HBox.margin>
-                                          <Insets left="5.0" />
+                                          <Insets left="13.0" />
                                        </HBox.margin>
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
