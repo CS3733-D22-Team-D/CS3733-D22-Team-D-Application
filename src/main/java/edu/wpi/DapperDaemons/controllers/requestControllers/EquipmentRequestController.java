@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
@@ -33,6 +34,7 @@ public class EquipmentRequestController extends ParentController {
   @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentTypeBox;
   @FXML private JFXComboBox<String> locationBox;
+  @FXML private JFXComboBox<String> assigneeBox;
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
@@ -51,6 +53,7 @@ public class EquipmentRequestController extends ParentController {
       DAOPouch.getMedicalEquipmentRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
   @FXML private HBox header;
@@ -61,13 +64,14 @@ public class EquipmentRequestController extends ParentController {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentTypeBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(assigneeBox, new FuzzySearchComparatorMethod());
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
-    t = new Table(table, 0);
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
@@ -96,7 +100,7 @@ public class EquipmentRequestController extends ParentController {
     priorityIn.setValue("");
     equipmentTypeBox.setValue("");
     locationBox.setValue("");
-    // notes.setText("");
+    assigneeBox.setValue("");
     dateNeeded.setValue(null);
     notes.setText("");
   }
@@ -110,7 +114,6 @@ public class EquipmentRequestController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "none";
       MedicalEquipment.EquipmentType equipmentType =
           MedicalEquipment.EquipmentType.valueOf(equipmentTypeBox.getValue());
       MedicalEquipment.CleanStatus cleanStatus = MedicalEquipment.CleanStatus.UNCLEAN;
@@ -171,32 +174,70 @@ public class EquipmentRequestController extends ParentController {
       if (equipmentExists) {
 
         // check if room exists
-        cleanStatus = equipment.getCleanStatus();
-        roomID = locationBox.getValue();
-        int numCorrectLocations = 0;
-        numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
-        if (numCorrectLocations >= 1) {
 
-          boolean hadClearance =
-              addItem(
-                  new MedicalEquipmentRequest(
-                      priority,
-                      roomID,
-                      requesterID,
-                      assigneeID,
-                      notes.getText(),
-                      equipment.getNodeID(),
-                      equipmentType,
-                      cleanStatus,
-                      dateStr));
-          // check if user has permission
-          if (!hadClearance) {
-            showError("You do not have permission to do this.");
+        if (assigneeBox.getValue().equals("") || assigneeBox.getValue().equals("Auto Assign")) {
+          // Auto assign
+          cleanStatus = equipment.getCleanStatus();
+          roomID = locationBox.getValue();
+          int numCorrectLocations = 0;
+          numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
+          if (numCorrectLocations >= 1) {
+
+            boolean hadClearance =
+                addItem(
+                    new MedicalEquipmentRequest(
+                        priority,
+                        roomID,
+                        requesterID,
+                        notes.getText(),
+                        equipment.getNodeID(),
+                        equipmentType,
+                        cleanStatus,
+                        dateStr));
+            // check if user has permission
+            if (!hadClearance) {
+              showError("You do not have permission to do this.");
+            }
+
+          } else {
+            // throw error that room does not exist
+            showError("A room with that name does not exist.");
           }
+        } else { // Or Check if the input assigneeID exists
+          if (DAOPouch.getEmployeeDAO()
+              .get(assigneeBox.getValue())
+              .getEmployeeType()
+              .equals(Employee.EmployeeType.JANITOR)) {
+            cleanStatus = equipment.getCleanStatus();
+            roomID = locationBox.getValue();
+            int numCorrectLocations = 0;
+            numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
+            if (numCorrectLocations >= 1) {
 
-        } else {
-          // throw error that room does not exist
-          showError("A room with that name does not exist.");
+              boolean hadClearance =
+                  addItem(
+                      new MedicalEquipmentRequest(
+                          priority,
+                          roomID,
+                          requesterID,
+                          assigneeBox.getValue(),
+                          notes.getText(),
+                          equipment.getNodeID(),
+                          equipmentType,
+                          cleanStatus,
+                          dateStr));
+              // check if user has permission
+              if (!hadClearance) {
+                showError("You do not have permission to do this.");
+              }
+
+            } else {
+              // throw error that room does not exist
+              showError("A room with that name does not exist.");
+            }
+          } else {
+            showError("Invalid Assignee ID!");
+          }
         }
 
       } else {
@@ -224,6 +265,12 @@ public class EquipmentRequestController extends ParentController {
         FXCollections.observableArrayList(
             TableHelper.convertEnum(MedicalEquipment.EquipmentType.class)));
     locationBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+
+    List<Employee> employees = new ArrayList<>(employeeDAO.filter(5, "NURSE").values());
+    List<String> employeeNames = new ArrayList<>();
+    employeeNames.add("Auto Assign");
+    for (Employee employee : employees) employeeNames.add(employee.getNodeID());
+    assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

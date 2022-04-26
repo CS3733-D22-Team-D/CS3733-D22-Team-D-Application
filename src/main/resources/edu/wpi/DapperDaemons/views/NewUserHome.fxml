@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -15,9 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="837.0" prefWidth="1405.0" stylesheets="@../assets/buttons.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserHomeController">
+<HBox prefHeight="554.0" prefWidth="760.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserHomeController">
     <children>
-          <VBox id="background" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="547.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;">
+          <VBox id="background" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="628.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" HBox.hgrow="ALWAYS">
               <children>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="225.0">
                <children>
@@ -132,9 +133,9 @@
             <Insets bottom="30.0" top="30.0" />
          </HBox.margin>
           </VBox>
-      <VBox prefHeight="633.0" prefWidth="827.0">
+      <VBox prefHeight="600.0" prefWidth="606.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="205.0" prefWidth="500.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;">
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="205.0" prefWidth="500.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;" VBox.vgrow="ALWAYS">
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
@@ -144,7 +145,7 @@
                         <Insets bottom="25.0" />
                      </HBox.margin>
                   </StackPane>
-                  <VBox alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="284.0" spacing="10.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="284.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Text fx:id="accountName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                            <font>
@@ -173,25 +174,29 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets left="50.0" right="50.0" top="50.0" />
+                  <Insets left="50.0" right="100.0" top="50.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="260.0" prefWidth="823.0" spacing="50.0">
+            <HBox alignment="TOP_CENTER" prefHeight="181.0" prefWidth="712.0" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
-                  <StackPane alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
+                  <StackPane alignment="TOP_RIGHT" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#switchToUserRequests" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#switchToUserRequests" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox fx:id="reqContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" styleClass="headerBackground" stylesheets="@../styling/lightMode.css">
                                  <children>
-                                    <ImageView fx:id="reqImage">
-                                       <image>
-                                          <Image url="@../assets/requests.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Pane fx:id="reqContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fx:id="reqImage" fitHeight="109.0" fitWidth="103.0" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/requests.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </VBox>
-                              <Label id="label" text="My Requests" textFill="#012d5a">
+                              <Label styleClass="cardText" stylesheets="@../styling/lightMode.css" text="My Requests" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -214,7 +219,10 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </VBox>
-                        <Circle fx:id="requestNot" fill="#e10202" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="requestNot" fill="#e10202" radius="20.0" stroke="BLACK" strokeType="INSIDE">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin></Circle>
                         <Label fx:id="requestNum" text="2" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
@@ -225,23 +233,24 @@
                         </Label>
                      </children>
                   </StackPane>
-                  <StackPane alignment="TOP_RIGHT" layoutX="317.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
+                  <StackPane alignment="TOP_RIGHT" layoutX="317.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openNotifications" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openNotifications" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox fx:id="notContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" styleClass="headerBackground" stylesheets="@../styling/lightMode.css">
                                  <children>
-                                    <ImageView fx:id="notImage" fitHeight="137.0" fitWidth="141.0">
-                                       <image>
-                                          <Image url="@../assets/bell.png" />
-                                       </image>
-                                       <VBox.margin>
-                                          <Insets right="5.0" />
-                                       </VBox.margin>
-                                    </ImageView>
+                                    <Pane fx:id="notContainer" prefHeight="138.0" prefWidth="157.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fx:id="notImage" fitHeight="101.0" fitWidth="116.0" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/bell.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </VBox>
-                              <Label id="label" text="My Notifications" textFill="#012d5a">
+                              <Label styleClass="cardText" text="My Notifications" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -264,7 +273,10 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </VBox>
-                        <Circle fx:id="notificationNot" fill="#e10202" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="notificationNot" fill="#e10202" radius="20.0" stroke="BLACK" strokeType="INSIDE">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin></Circle>
                         <Label fx:id="notificationNum" text="10" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
@@ -275,20 +287,24 @@
                         </Label>
                      </children>
                   </StackPane>
-                  <StackPane alignment="TOP_RIGHT" layoutX="457.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="230.0">
+                  <StackPane alignment="TOP_RIGHT" layoutX="457.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox id="foreground" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openAccountSettings" prefHeight="235.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1; -fx-background-radius: 7.5;">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openAccountSettings" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox fx:id="settingContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" styleClass="headerBackground" stylesheets="@../styling/lightMode.css">
                                  <children>
-                                    <ImageView fx:id="settingImage" fitHeight="168.0" fitWidth="170.0">
-                                       <image>
-                                          <Image url="@../assets/settingsHome.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Pane fx:id="settingContainer" prefHeight="128.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fx:id="settingImage" fitHeight="114.0" fitWidth="103.0" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/settingsHome.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </VBox>
-                              <Label id="label" text="Settings" textFill="#012d5a">
+                              <Label styleClass="cardText" text="Settings" textFill="#012d5a">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -312,18 +328,18 @@
                            </cursor>
                         </VBox>
                      </children>
+                     <HBox.margin>
+                        <Insets right="150.0" />
+                     </HBox.margin>
                   </StackPane>
                </children>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets left="20.0" top="50.0" />
                </VBox.margin>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
             </HBox>
          </children>
          <HBox.margin>
-            <Insets left="150.0" />
+            <Insets />
          </HBox.margin>
       </VBox>
     </children>
