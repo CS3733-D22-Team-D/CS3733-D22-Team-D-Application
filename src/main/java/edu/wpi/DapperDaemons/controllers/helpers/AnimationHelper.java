@@ -162,9 +162,30 @@ public class AnimationHelper {
           protected void interpolate(double frac) {
             node.setStyle(
                 "-fx-translate-x: "
-                    + ((int) frac * xTrans)
+                    + ((frac * (double) xTrans))
                     + "; -fx-translate-y: "
-                    + ((int) frac * yTrans)
+                    + ((frac * (double) xTrans))
+                    + ";");
+          }
+        };
+    transition.play();
+  }
+
+  public static void ColesTransReverse(Node node, int xTrans, int yTrans, int durationInMillis) {
+
+    Animation transition =
+        new Transition() {
+          {
+            setCycleDuration(Duration.millis(durationInMillis));
+          }
+
+          @Override
+          protected void interpolate(double frac) {
+            node.setStyle(
+                "-fx-translate-x: "
+                    + (xTrans - (frac * (double) xTrans))
+                    + "; -fx-translate-y: "
+                    + (yTrans - (frac * (double) yTrans))
                     + ";");
           }
         };
