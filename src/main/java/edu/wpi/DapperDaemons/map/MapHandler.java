@@ -3,8 +3,12 @@ package edu.wpi.DapperDaemons.map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 
 public class MapHandler {
@@ -89,11 +93,41 @@ public class MapHandler {
     }
   }
 
-  public void zoom(double multiplier) {
+  public void zoom(double multiplier, ScrollPane mapContents, ScrollEvent scroll) {
+    double zoomIntensity = 0.02;
     if (((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) > 0.12)
         && ((mapAssets.getScaleX() + (ZOOM_PROP * multiplier)) < 1.00)) {
-      mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
-      mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+      //      mapAssets.setScaleX(mapAssets.getScaleX() + (ZOOM_PROP * multiplier));
+      //      mapAssets.setScaleY(mapAssets.getScaleY() + (ZOOM_PROP * multiplier));
+      double zoomFactor = Math.exp(scroll.getDeltaY() / scroll.getDeltaX() * zoomIntensity);
+
+      Bounds innerBounds = mapAssets.getLayoutBounds();
+      Bounds viewportBounds = mapContents.getViewportBounds();
+
+      // calculate pixel offsets from [0, 1] range
+      double valX = mapAssets.getScaleX() * (innerBounds.getWidth() - viewportBounds.getWidth());
+      double valY = mapAssets.getScaleY() * (innerBounds.getHeight() - viewportBounds.getHeight());
+
+      // convert target coordinates to zoomTarget coordinates
+      Point2D posInZoomTarget =
+          mapContents.parentToLocal(
+              mapAssets.parentToLocal(new Point2D(scroll.getX(), scroll.getY())));
+
+      // calculate adjustment of scroll position (pixels)
+      Point2D adjustment =
+          mapContents
+              .getLocalToParentTransform()
+              .deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
+
+      // convert back to [0, 1] range
+      // (too large/small values are automatically corrected by ScrollPane)
+      Bounds updatedInnerBounds = mapAssets.getBoundsInLocal();
+      mapAssets.setScaleX(
+          ((valX + adjustment.getX())
+              / (updatedInnerBounds.getWidth() - viewportBounds.getWidth())));
+      mapAssets.setScaleY(
+          (valY + adjustment.getY())
+              / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
     }
   }
 }

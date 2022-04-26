@@ -28,8 +28,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -444,51 +442,20 @@ public class MapController extends ParentController {
 
   @FXML
   public void zoomIn() {
-    maps.zoom(3);
+    //    maps.zoom(3);
   }
 
   @FXML
   public void zoomOut() {
-    maps.zoom(-3);
+    //    maps.zoom(-3);
   }
 
   @FXML
   public void scrollMap(ScrollEvent scroll) {
-    onScroll(scroll.getDeltaY(), new Point2D(scroll.getX(), scroll.getY()));
-    //    maps.zoom(scroll.getDeltaY() / scroll.getMultiplierY());
+    maps.zoom(scroll.getDeltaY() / scroll.getMultiplierY(), mapContents, scroll);
     glyphs.deselect();
     infoBox.close();
     scroll.consume();
-  }
-
-  private double zoomIntensity = 0.0001;
-
-  private void onScroll(double wheelDelta, Point2D mousePoint) {
-    double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
-
-    Bounds innerBounds = mapAssets.getLayoutBounds();
-    Bounds viewportBounds = mapContents.getViewportBounds();
-
-    // calculate pixel offsets from [0, 1] range
-    double valX = mapAssets.getScaleX() * (innerBounds.getWidth() - viewportBounds.getWidth());
-    double valY = mapAssets.getScaleY() * (innerBounds.getHeight() - viewportBounds.getHeight());
-
-    // convert target coordinates to zoomTarget coordinates
-    Point2D posInZoomTarget = mapContents.parentToLocal(mapAssets.parentToLocal(mousePoint));
-
-    // calculate adjustment of scroll position (pixels)
-    Point2D adjustment =
-        mapContents
-            .getLocalToParentTransform()
-            .deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
-
-    // convert back to [0, 1] range
-    // (too large/small values are automatically corrected by ScrollPane)
-    Bounds updatedInnerBounds = mapAssets.getBoundsInLocal();
-    mapAssets.setScaleX(
-        ((valX + adjustment.getX()) / (updatedInnerBounds.getWidth() - viewportBounds.getWidth())));
-    mapAssets.setScaleY(
-        (valY + adjustment.getY()) / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
   }
 
   @FXML
