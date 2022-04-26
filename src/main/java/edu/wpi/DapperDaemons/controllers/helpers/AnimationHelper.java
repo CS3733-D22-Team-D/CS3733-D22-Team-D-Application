@@ -148,7 +148,7 @@ public class AnimationHelper {
         };
     transition.play();
   }
-  
+
   /* Performs an X and Y translation for Cole <3 */
     public static void ColesTrans(
             Node node,
