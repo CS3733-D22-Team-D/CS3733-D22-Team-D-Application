@@ -1,4 +1,3 @@
 package edu.wpi.DapperDaemons.APIConverters;
 
-public class InternalReqConverter {
-}
+public class InternalReqConverter extends Converter {}

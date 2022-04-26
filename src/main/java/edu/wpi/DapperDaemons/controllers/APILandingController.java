@@ -36,8 +36,6 @@ public class APILandingController implements Initializable {
   private static String teamZDestinationID;
 
   // Team  JFX
-  @FXML private TextField bOrigin;
-  @FXML private TextField bDest;
   @FXML private Button bSave;
   @FXML private Label bErrorLabel;
   private static String teamBOriginID;
@@ -61,6 +59,9 @@ public class APILandingController implements Initializable {
     teamZOriginID = "null";
     teamZDestinationID = "null";
     zSave.setVisible(false);
+
+    // Team B API Init
+    bSave.setVisible(false);
   }
 
   /** Allows for requests submitted by the API to be saved to our database */
@@ -213,8 +214,8 @@ public class APILandingController implements Initializable {
           (int) zOrigin.getScene().getWindow().getWidth(),
           (int) zOrigin.getScene().getWindow().getHeight(),
           "edu/wpi/DapperDaemons/assets/buttons.css",
-          teamBDestinationID,
-          teamBOriginID);
+          "",
+          "");
     } catch (Exception e) {
       System.err.println("Team-B API Broke");
       return;
