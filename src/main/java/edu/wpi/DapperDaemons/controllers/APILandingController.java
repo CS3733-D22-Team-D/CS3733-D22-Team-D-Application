@@ -1,10 +1,13 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.APIConverters.ExternalReqConverter;
+import edu.wpi.DapperDaemons.APIConverters.InternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
+import edu.wpi.cs3733.D22.teamB.api.DatabaseController;
+import edu.wpi.cs3733.D22.teamB.api.Request;
 import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
@@ -68,8 +71,10 @@ public class APILandingController implements Initializable {
   public void saveToDatabase() {
     dSave.setVisible(false);
     zSave.setVisible(false);
+    bSave.setVisible(false);
     databaseSaverTeamD();
     databaseSaverTeamZ();
+    databaseSaverTeamB();
   }
 
   /**
@@ -228,7 +233,12 @@ public class APILandingController implements Initializable {
   /** Saves team B's Internal Patient Transport to our patient transport DAO */
   public void databaseSaverTeamB() {
     bSave.setVisible(false);
-    // TODO: implement converter to save the requests to the database
+    DatabaseController databaseController = new DatabaseController();
+    for (Request request : databaseController.listRequests()) {
+      if (!checkIfPatitentReqExists(InternalReqConverter.convert(request))) {
+        DAOPouch.getPatientTransportRequestDAO().add(InternalReqConverter.convert(request));
+      }
+    }
     bErrorLabel.setText("Changes Saved!");
     bErrorLabel.setTextFill(Paint.valueOf("00FF00"));
   }
