@@ -136,7 +136,6 @@ public class SanitationController extends ParentController {
                     priority,
                     roomID,
                     requesterID,
-                    assigneeID,
                     notes.getText(),
                     sanitationType,
                     dateStr));
