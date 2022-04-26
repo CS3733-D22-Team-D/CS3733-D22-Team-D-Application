@@ -2,7 +2,6 @@ package edu.wpi.DapperDaemons.controllers;
 
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
-import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.requests.*;
 import edu.wpi.DapperDaemons.tables.Table;
 import java.awt.*;
@@ -10,16 +9,17 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class TestController extends ParentController {
   @FXML private GridPane table;
@@ -73,7 +73,80 @@ public class TestController extends ParentController {
     bindImage(floor4, FourContainer);
     bindImage(floor5, FiveContainer);
 
+    initSlide(floorLL2, 0);
+    initSlide(floorLL1, 1);
+    initSlide(floor1, 2);
+    initSlide(floor2, 3);
+    initSlide(floor3, 4);
+    initSlide(floor4, 5);
+    initSlide(floor5, 6);
+
     createTable();
+  }
+
+  private void initSlide(ImageView floor, int level) {
+    floor.setOnMouseEntered(
+        event -> {
+          if (!TestController.floorsInAnimation.get(level)) {
+            TestController.isSelected.set(level, true);
+            floorNum = level;
+            floor.setImage(Images.selectedSegment);
+            TranslateTransition slide = new TranslateTransition();
+            TestController.floorsInAnimation.set(level, true);
+            slide.setDuration(Duration.seconds(ANIMATION_TIME));
+            slide.setNode(floor);
+            slide.setToX(20);
+            slide.setToY(floor.getTranslateY() + 23);
+            slide.play();
+            slide.setOnFinished(
+                (ActionEvent e) -> {
+                  try {
+                    String floorTxtPath = "floorSummary.txt";
+                    String floorText = getFileText(floorTxtPath, floorNum);
+                    floorSummary.setText(floorText);
+                    floorNumberLabel.setText(getFloor());
+                    mapImage.setImage(getImage());
+                  } catch (IOException ex) {
+                    ex.printStackTrace();
+                  }
+                  TestController.floorsInAnimation.set(level, false);
+                  if (!TestController.isSelected.get(level)) {
+                    TranslateTransition slideBack = new TranslateTransition();
+                    TestController.floorsInAnimation.set(level, true);
+                    slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
+                    slideBack.setNode(floor);
+                    slideBack.setToX(0);
+                    slideBack.setToY(floor.getTranslateY() - 23);
+                    slideBack.play();
+                    slideBack.setOnFinished(
+                        (ActionEvent e2) -> {
+                          floor.setImage(Images.floorSegment);
+                          TestController.floorsInAnimation.set(level, false);
+                        });
+                  }
+                });
+          }
+        });
+
+    floor.setOnMouseExited(
+        event -> {
+          if (TestController.isSelected.get(level)
+              && !TestController.floorsInAnimation.get(level)) {
+            TestController.floorsInAnimation.set(level, true);
+            TranslateTransition slideBack = new TranslateTransition();
+            slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
+            slideBack.setNode(floor);
+            slideBack.setToX(0);
+            slideBack.setToY(floor.getTranslateY() - 23);
+            slideBack.play();
+            slideBack.setOnFinished(
+                (ActionEvent e2) -> {
+                  floor.setImage(Images.floorSegment);
+                  TestController.floorsInAnimation.set(level, false);
+                });
+          }
+          TestController.isSelected.set(level, false);
+        });
   }
 
   private void createTable() {
@@ -81,20 +154,6 @@ public class TestController extends ParentController {
     t.setRows(DAOFacade.getAllRequests());
     t.setHeader(List.of("Type", "Assignee", "Priority"));
     t.setRequestListeners();
-  }
-  /* Animations */
-  @FXML
-  private void hoveredFloor(MouseEvent event) {
-    Node node = (Node) event.getSource();
-    ((ImageView) node).setImage(Images.selectedSegment);
-    AnimationHelper.ColesTrans(node, 23, 23, 1000);
-  }
-
-  @FXML
-  private void unhoveredFloor(MouseEvent event) {
-    Node node = (Node) event.getSource();
-    ((ImageView) node).setImage(Images.floorSegment);
-    AnimationHelper.ColesTransReverse(node, 23, 23, 1000);
   }
 
   private String getFloor() {
