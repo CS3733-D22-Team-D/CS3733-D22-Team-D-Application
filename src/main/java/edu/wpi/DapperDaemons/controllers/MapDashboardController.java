@@ -41,8 +41,10 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   public static String floor;
 
+  public static List<ImageView> floorList = new ArrayList<ImageView>();
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+  public static List<Boolean> isHovered = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
 
@@ -52,6 +54,7 @@ public class MapDashboardController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Collections.fill(floorsInAnimation, Boolean.FALSE);
+    Collections.fill(isHovered, Boolean.FALSE);
     Collections.fill(isSelected, Boolean.FALSE);
     try {
       String floorTxtPath = "floorSummary.txt";
@@ -72,6 +75,8 @@ public class MapDashboardController extends ParentController {
     bindImage(floor4, FourContainer);
     bindImage(floor5, FiveContainer);
 
+    floorList.addAll(List.of(floorLL2, floorLL1, floor1, floor2, floor3, floor4, floor5));
+
     initSlide(floorLL2, 0);
     initSlide(floorLL1, 1);
     initSlide(floor1, 2);
@@ -86,61 +91,39 @@ public class MapDashboardController extends ParentController {
   private void initSlide(ImageView floor, int level) {
     floor.setOnMouseEntered(
         event -> {
-          if (!MapDashboardController.floorsInAnimation.get(level)) {
-            MapDashboardController.isSelected.set(level, true);
-            floor.setImage(Images.hoveredSegment);
-            TranslateTransition slide = new TranslateTransition();
-            MapDashboardController.floorsInAnimation.set(level, true);
-            slide.setDuration(Duration.seconds(ANIMATION_TIME));
-            slide.setNode(floor);
-            slide.setToX(20);
-            slide.setToY(floor.getTranslateY() + 23);
-            slide.play();
-            slide.setOnFinished(
-                (ActionEvent e) -> {
-                  MapDashboardController.floorsInAnimation.set(level, false);
-                  if (!MapDashboardController.isSelected.get(level)) {
-                    TranslateTransition slideBack = new TranslateTransition();
-                    MapDashboardController.floorsInAnimation.set(level, true);
-                    slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
-                    slideBack.setNode(floor);
-                    slideBack.setToX(0);
-                    slideBack.setToY(floor.getTranslateY() - 23);
-                    slideBack.play();
-                    slideBack.setOnFinished(
-                        (ActionEvent e2) -> {
-                          floor.setImage(Images.floorSegment);
-                          MapDashboardController.floorsInAnimation.set(level, false);
-                        });
-                  }
-                });
-          }
+          slideOut(floor, level);
         });
 
     floor.setOnMouseExited(
         event -> {
-          if (MapDashboardController.isSelected.get(level)
-              && !MapDashboardController.floorsInAnimation.get(level)) {
-            MapDashboardController.floorsInAnimation.set(level, true);
-            TranslateTransition slideBack = new TranslateTransition();
-            slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
-            slideBack.setNode(floor);
-            slideBack.setToX(0);
-            slideBack.setToY(floor.getTranslateY() - 23);
-            slideBack.play();
-            slideBack.setOnFinished(
-                (ActionEvent e2) -> {
-                  floor.setImage(Images.floorSegment);
-                  MapDashboardController.floorsInAnimation.set(level, false);
-                });
+          if (MapDashboardController.isHovered.get(level)
+              && !MapDashboardController.floorsInAnimation.get(level)
+              && !MapDashboardController.isSelected.get(level)) {
+            returnToStack(floor, level);
           }
-          MapDashboardController.isSelected.set(level, false);
+          MapDashboardController.isHovered.set(level, false);
         });
 
     floor.setOnMouseClicked(
         event -> {
           try {
             floorNum = level;
+            for (int i = 0; i < 7; i++) {
+              ImageView fromList = floorList.get(i);
+              if (fromList.getTranslateX() == 20 && i != level) {
+                returnToStack(fromList, i);
+                MapDashboardController.isSelected.set(i, false);
+                MapDashboardController.isHovered.set(i, false);
+              }
+            }
+
+            if (floor.getTranslateX() == 0) {
+              slideOut(floor, level);
+            }
+
+            Collections.fill(isSelected, Boolean.FALSE);
+            MapDashboardController.isSelected.set(level, true);
+            floor.setImage(Images.selectedSegment);
             String floorTxtPath = "floorSummary.txt";
             String floorText = getFileText(floorTxtPath, floorNum);
             floorSummary.setText(floorText);
@@ -151,6 +134,43 @@ public class MapDashboardController extends ParentController {
             ex.printStackTrace();
           }
         });
+  }
+
+  private void returnToStack(ImageView floor, int level) {
+    MapDashboardController.floorsInAnimation.set(level, true);
+    TranslateTransition slideBack = new TranslateTransition();
+    slideBack.setDuration(Duration.seconds(ANIMATION_TIME));
+    slideBack.setNode(floor);
+    slideBack.setToX(0);
+    slideBack.setToY(floor.getTranslateY() - 23);
+    slideBack.play();
+    slideBack.setOnFinished(
+        (ActionEvent e2) -> {
+          floor.setImage(Images.floorSegment);
+          MapDashboardController.floorsInAnimation.set(level, false);
+        });
+  }
+
+  private void slideOut(ImageView floor, int level) {
+    if (!MapDashboardController.floorsInAnimation.get(level)
+        && !MapDashboardController.isSelected.get(level)) {
+      MapDashboardController.isHovered.set(level, true);
+      floor.setImage(Images.hoveredSegment);
+      TranslateTransition slide = new TranslateTransition();
+      MapDashboardController.floorsInAnimation.set(level, true);
+      slide.setDuration(Duration.seconds(ANIMATION_TIME));
+      slide.setNode(floor);
+      slide.setToX(20);
+      slide.setToY(floor.getTranslateY() + 23);
+      slide.play();
+      slide.setOnFinished(
+          (ActionEvent e) -> {
+            MapDashboardController.floorsInAnimation.set(level, false);
+            if (!MapDashboardController.isHovered.get(level)) {
+              returnToStack(floor, level);
+            }
+          });
+    }
   }
 
   private void setFloor(String floor) {
