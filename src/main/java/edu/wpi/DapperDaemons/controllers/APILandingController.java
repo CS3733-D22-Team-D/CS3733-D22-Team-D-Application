@@ -225,9 +225,7 @@ public class APILandingController implements Initializable {
     bSave.setVisible(true);
   }
 
-  /**
-   * Saves team B's Internal Patient Transport to our patient transport DAO
-   */
+  /** Saves team B's Internal Patient Transport to our patient transport DAO */
   public void databaseSaverTeamB() {
     bSave.setVisible(false);
     // TODO: implement converter to save the requests to the database
