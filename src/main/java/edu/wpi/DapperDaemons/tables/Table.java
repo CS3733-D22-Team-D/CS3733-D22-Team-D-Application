@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.animation.Animation;
@@ -31,10 +32,11 @@ import javafx.util.Duration;
 public class Table<R> {
 
   private List<R> rows = new ArrayList<>();
-  private GridPane table;
+  private final GridPane table;
   private final int tableNum;
+  private final List<Runnable> editProperties = new ArrayList<>();
+  private final HashMap<Integer, String> filters = new HashMap<>();
   private final Class<R> instance;
-  private List<Runnable> editProperties = new ArrayList<>();
 
   public Table(Class<R> classinst, GridPane table, int tableNum) {
     this.instance = classinst;
@@ -52,6 +54,7 @@ public class Table<R> {
                     difference(
                         new ArrayList<R>(DAOPouch.getDAO((TableObject) type).getAll().values()),
                         rows);
+                    filter();
                   });
             }));
   }
@@ -478,5 +481,25 @@ public class Table<R> {
 
   public R getItem(int row) {
     return rows.get(row);
+  }
+
+  public void addFilter(int col, String toFilter) {
+    filters.put(col, toFilter);
+    filter();
+  }
+
+  private void filter() {
+    filters.forEach(
+        (col, filter) -> {
+          getColumn(col)
+              .forEach(
+                  n -> {
+                    int i;
+                    if (!getTextWithin(((VBox) n).getChildren().get(0)).equals(filter)) {
+                      i = getRowIndexAsInteger(n);
+                      if (i < rows.size()) removeRow(rows.get(i));
+                    }
+                  });
+        });
   }
 }
