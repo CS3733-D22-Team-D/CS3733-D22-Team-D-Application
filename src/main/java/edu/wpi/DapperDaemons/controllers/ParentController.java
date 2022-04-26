@@ -538,9 +538,9 @@ public class ParentController extends AppController {
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(8, 67, 154, 255);
     Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 255);
+    Color backgroundEnd = new Color(255, 255, 255, 192);
     AnimationHelper.slideNodeWithText(
-        node, textStart, textEnd, backgroundStart, backgroundEnd, 400);
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -549,8 +549,8 @@ public class ParentController extends AppController {
     Color textStart = new Color(8, 67, 154, 255);
     Color textEnd = new Color(255, 255, 255, 255);
     Color backgroundEnd = new Color(255, 255, 255, 0);
-    Color backgroundStart = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(255, 255, 255, 192);
     AnimationHelper.slideNodeWithText(
-        node, textStart, textEnd, backgroundStart, backgroundEnd, 400);
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 }
