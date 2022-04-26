@@ -1,11 +1,11 @@
-package edu.wpi.DapperDaemons.APIConverters;
+package edu.wpi.DapperDaemons.APIAdapters;
 
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.cs3733.D22.teamB.api.Request;
 
-public class InternalReqConverter extends Converter {
+public class InternalReqAdapter extends Adapter {
 
-  public InternalReqConverter() {}
+  public InternalReqAdapter() {}
 
   /**
    * Converts from a team B patient req to our patient req
