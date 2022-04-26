@@ -107,7 +107,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
   @FXML private ToggleButton circle3;
-  @FXML private StackPane circle4;
+  @FXML private ToggleButton circle4;
+  @FXML private StackPane circle5;
 
   /* Map Handlers */
   private MapHandler maps;
@@ -324,6 +325,12 @@ public class MapController extends ParentController {
       translateTransition3.setNode(circle4);
       translateTransition3.setByX(-168);
       translateTransition3.play();
+
+      TranslateTransition translateTransition4 = new TranslateTransition();
+      translateTransition4.setDuration(Duration.millis(300));
+      translateTransition4.setNode(circle5);
+      translateTransition4.setByX(-224);
+      translateTransition4.play();
     } else {
       TranslateTransition translateTransition = new TranslateTransition();
       translateTransition.setDuration(Duration.millis(300));
@@ -342,6 +349,12 @@ public class MapController extends ParentController {
       translateTransition3.setNode(circle4);
       translateTransition3.setByX(168);
       translateTransition3.play();
+
+      TranslateTransition translateTransition4 = new TranslateTransition();
+      translateTransition4.setDuration(Duration.millis(300));
+      translateTransition4.setNode(circle5);
+      translateTransition4.setByX(224);
+      translateTransition4.play();
     }
   }
 

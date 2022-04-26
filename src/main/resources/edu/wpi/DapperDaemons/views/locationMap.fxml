@@ -100,7 +100,7 @@
                                        <children>
                                           <StackPane maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="40.0" prefWidth="20.0">
                                              <children>
-                                                <StackPane fx:id="circle4" onMouseClicked="#switchToMapDashboard" prefHeight="150.0" prefWidth="20.0">
+                                                <StackPane fx:id="circle5" onMouseClicked="#switchToMapDashboard" prefHeight="150.0" prefWidth="20.0">
                                                    <children>
                                                       <Circle fill="#059da7" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE">
                                                          <effect>
@@ -118,6 +118,25 @@
                                                       </ImageView>
                                                    </children>
                                                 </StackPane>
+                                                <ToggleButton fx:id="circle4" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" styleClass="bubbles" stylesheets="@../../../../toggleButton.css" text="ToggleButton">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color opacity="0.15000000596046448" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <graphic>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/footprints.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="1.0" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
                                                 <ToggleButton fx:id="circle3" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" styleClass="bubbles" stylesheets="@../../../../toggleButton.css" text="ToggleButton">
                                                    <effect>
                                                       <DropShadow>
