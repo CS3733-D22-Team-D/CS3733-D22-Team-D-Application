@@ -102,6 +102,9 @@
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
@@ -235,6 +238,9 @@
                                        </color>
                                     </DropShadow>
                                  </effect>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
@@ -251,6 +257,9 @@
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
@@ -315,7 +324,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets bottom="10.0" />
                                  </HBox.margin>
                                  <effect>
                                     <DropShadow>
@@ -340,6 +349,9 @@
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
