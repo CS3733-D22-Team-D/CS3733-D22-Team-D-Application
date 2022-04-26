@@ -370,6 +370,7 @@ public class Table<R> {
   public void addRow(R type) {
     List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum));
     restyleRow(row);
+    if (table == null) return;
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
