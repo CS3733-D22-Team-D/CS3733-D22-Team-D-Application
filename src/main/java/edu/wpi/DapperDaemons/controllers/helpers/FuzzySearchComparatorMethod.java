@@ -6,6 +6,6 @@ public class FuzzySearchComparatorMethod implements AutoCompleteFuzzy.AutoComple
 
   @Override
   public boolean matches(String typedText, Object objectToCompare) {
-    return FuzzySearch.weightedRatio(typedText, objectToCompare.toString()) > 30;
+    return FuzzySearch.weightedRatio(typedText, objectToCompare.toString()) > 70;
   }
 }

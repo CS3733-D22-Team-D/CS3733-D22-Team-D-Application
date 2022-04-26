@@ -5,6 +5,7 @@ import edu.wpi.DapperDaemons.controllers.MapController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Node;
@@ -53,6 +54,7 @@ public class GlyphHandler {
   }
 
   public void enableEditing() {
+    editing = true;
     for (int i = 0; i < imageLocs.size(); i++) {
       ImageView image = (ImageView) glyphLayer.getChildren().get(i);
       image.setOnMouseDragged(
@@ -74,11 +76,13 @@ public class GlyphHandler {
                     oldPos.getLongName(),
                     oldPos.getShortName());
             DAOPouch.getLocationDAO().update(newLoc);
+            NodeConnectionHandler.addPathNode(newLoc);
           });
     }
 
     for (int i = 0; i < equipLocs.size(); i++) {
       ImageView image = (ImageView) equipLayer.getChildren().get(i);
+      image.setPickOnBounds(true);
       image.setOnMouseDragged(
           e -> {
             PositionInfo snapped = getNearestPos((int) e.getX(), (int) e.getY());
@@ -107,6 +111,7 @@ public class GlyphHandler {
   }
 
   public void disableEditing() {
+    editing = false;
     for (int i = 0; i < imageLocs.size(); i++) {
       ImageView image = (ImageView) glyphLayer.getChildren().get(i);
       image.setOnMouseDragged(event -> {});
@@ -146,10 +151,9 @@ public class GlyphHandler {
           ds.setOffsetY(4.00);
           equip.setEffect(ds);
 
-          image.setOnMouseClicked(i -> controller.onMapClicked(i));
           equipLayer.getChildren().add(equip);
         });
-
+    image.setOnMouseClicked(i -> controller.onMapClicked(i));
     imageLocs.add(pos);
     return true;
   }
@@ -231,6 +235,9 @@ public class GlyphHandler {
         break;
       case "BED":
         png = "bed.png";
+        break;
+      case "RECLINER":
+        png = "recliner.png";
         break;
       default:
         png = "error.png";
@@ -320,6 +327,33 @@ public class GlyphHandler {
         glyphLayer.getChildren().get(i).setVisible(false);
       }
     }
+  }
+
+  private boolean editing;
+
+  public void updateEquipment() {
+    equipLayer.getChildren().clear();
+    equipLocs.clear();
+    imageLocs.forEach(
+        pos -> {
+          List<MedicalEquipment> all =
+              new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
+          equipLocs.addAll(all);
+          all.forEach(
+              e -> {
+                ImageView equip = getEquipImage(e.getEquipmentType().name());
+                equip.setX(pos.getX() - 16);
+                equip.setY(pos.getY() - 16);
+                equip.setVisible(true);
+                equip.setPickOnBounds(true);
+                DropShadow ds = new DropShadow();
+                ds.setOffsetX(-2.00);
+                ds.setOffsetY(4.00);
+                equip.setEffect(ds);
+                equipLayer.getChildren().add(equip);
+              });
+        });
+    if (editing) enableEditing();
   }
 
   public void filter() {

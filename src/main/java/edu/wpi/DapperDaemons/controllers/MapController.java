@@ -15,7 +15,9 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
+import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -78,6 +80,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton directionTG;
   @FXML private ToggleButton bedTG;
   @FXML private ToggleButton pumpTG;
+  @FXML private ToggleButton xrayTG;
+  @FXML private ToggleButton reclinerTG;
 
   /* Labels for Room Information */
   private RoomInfoBox infoBox;
@@ -113,6 +117,8 @@ public class MapController extends ParentController {
   private PinHandler pin;
 
   private PathfinderHandler pathfinder;
+  private ShowRequestPaths requestPaths;
+  //  private ShowConnections connectionShower; // Uncomment when you want to see all paths
 
   /* Database stuff */
   private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
@@ -142,7 +148,15 @@ public class MapController extends ParentController {
     //    bindImage(BGImage, BGContainer);
     // Initialize DAO objects
     try {
-      locationDAO.getAll().values().forEach(l -> origPositions.add(new PositionInfo(l)));
+      locationDAO
+          .getAll()
+          .values()
+          .forEach(
+              l -> {
+                if (!l.getNodeType()
+                    .equals("PATH")) // As long as its not a path, add it to the positions
+                origPositions.add(new PositionInfo(l));
+              });
     } catch (Exception e) {
       System.err.println("DAO could not be created in MapController\n");
     }
@@ -166,6 +180,13 @@ public class MapController extends ParentController {
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
     pathfinder.filterByFloor(MapDashboardController.floor);
+
+    requestPaths = new ShowRequestPaths(pathPane, this);
+    requestPaths.setCurrentFloor(MapDashboardController.floor);
+
+    //    connectionShower = new ShowConnections(pathPane, this);
+    // Comment out connectionShower if you want to see all the nodes
+    //    connectionShower.showAllLines(MapDashboardController.floor);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -243,9 +264,9 @@ public class MapController extends ParentController {
                     } catch (Exception e) {
                       System.err.println("DAO could not be created in MapController\n");
                     }
-                    ;
                     difference(newPos, origPositions);
                     glyphs.setFloorFilter(maps.getFloor());
+                    editMode();
                   });
             }));
     TableListeners.addListener(
@@ -254,17 +275,8 @@ public class MapController extends ParentController {
             () -> {
               Platform.runLater(
                   () -> {
-                    //                        List<PositionInfo> newPos = new ArrayList<>();
-                    //                        // Initialize DAO objects
-                    //                        try {
-                    //                          equipmentDAO.getAll().values().forEach(l ->
-                    // newPos.add(new PositionInfo(l)));
-                    //                        } catch (Exception e) {
-                    //                          System.err.println("DAO could not be created in
-                    // MapController\n");
-                    //                        };
-                    //                        difference(newPos, origPositions);
-                    //                        glyphs.setFloorFilter(maps.getFloor());
+                    glyphs.updateEquipment();
+                    glyphs.setFloorFilter(maps.getFloor());
                   });
             }));
     TableListeners.addListeners(
@@ -290,6 +302,7 @@ public class MapController extends ParentController {
                     //                        difference(newPos, origPositions);
                     //                        glyphs.setFloorFilter(maps.getFloor());
                   });
+              Platform.runLater(() -> {});
             }));
   }
 
@@ -348,9 +361,7 @@ public class MapController extends ParentController {
     int x = (int) click.getX();
     int y = (int) click.getY();
     String floor = maps.getFloor();
-    System.out.println("Location " + x + " " + y + " clicked!");
-
-    System.out.println(x + " " + y);
+    // System.out.println("Location " + x + " " + y + " clicked!");
 
     // Check if clicking should place pins
     if (createBox.isVisible()) {
@@ -372,13 +383,9 @@ public class MapController extends ParentController {
     List<MedicalEquipment> equipment = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
     List<Request> requests = new LinkedList<>();
-    try {
-      equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
-      patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
-      requests = DAOFacade.getFilteredRequests(pos.getId());
-    } catch (Exception e) {
-      System.err.println("Could not filter through DAO");
-    }
+    equipment = new ArrayList<>(equipmentDAO.filter(6, pos.getId()).values());
+    patients = new ArrayList<>(patientDAO.filter(6, pos.getId()).values());
+    requests = DAOFacade.getFilteredRequests(pos.getId());
     System.out.println(patients);
     infoBox.openLoc(pos, equipment, patients, requests);
     infoBox.open();
@@ -411,6 +418,9 @@ public class MapController extends ParentController {
         locationDAO.add(create);
         PositionInfo p = new PositionInfo(create);
         glyphs.addPosition(p);
+
+        NodeConnectionHandler.addPathNode(create);
+
         closeCreate();
       } catch (Exception e) {
         System.err.println("Could not add to DAO");
@@ -486,6 +496,7 @@ public class MapController extends ParentController {
   @FXML
   void showReqList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
+    requestPaths.showAllPaths(infoBox.getPosition());
   }
 
   private boolean onFilterRequestType() {
@@ -513,6 +524,8 @@ public class MapController extends ParentController {
     maps.setMap("1");
     glyphs.setFloorFilter("1");
     pathfinder.filterByFloor("1");
+    requestPaths.filterByFloor("1");
+    //    connectionShower.showAllLines("1");
   }
 
   @FXML
@@ -520,6 +533,8 @@ public class MapController extends ParentController {
     maps.setMap("2");
     glyphs.setFloorFilter("2");
     pathfinder.filterByFloor("2");
+    requestPaths.filterByFloor("2");
+    //    connectionShower.showAllLines("2");
   }
 
   @FXML
@@ -527,6 +542,8 @@ public class MapController extends ParentController {
     maps.setMap("3");
     glyphs.setFloorFilter("3");
     pathfinder.filterByFloor("3");
+    requestPaths.filterByFloor("3");
+    //    connectionShower.showAllLines("3");
   }
 
   @FXML
@@ -534,6 +551,8 @@ public class MapController extends ParentController {
     maps.setMap("4");
     glyphs.setFloorFilter("4");
     pathfinder.filterByFloor("4");
+    requestPaths.filterByFloor("4");
+    //    connectionShower.showAllLines("4");
   }
 
   @FXML
@@ -541,6 +560,8 @@ public class MapController extends ParentController {
     maps.setMap("5");
     glyphs.setFloorFilter("5");
     pathfinder.filterByFloor("5");
+    requestPaths.filterByFloor("5");
+    //    connectionShower.showAllLines("5");
   }
 
   @FXML
@@ -548,6 +569,8 @@ public class MapController extends ParentController {
     maps.setMap("L1");
     glyphs.setFloorFilter("L1");
     pathfinder.filterByFloor("L1");
+    requestPaths.filterByFloor("L1");
+    //    connectionShower.showAllLines("L1");
   }
 
   @FXML
@@ -555,13 +578,16 @@ public class MapController extends ParentController {
     maps.setMap("L2");
     glyphs.setFloorFilter("L2");
     pathfinder.filterByFloor("L2");
+    requestPaths.filterByFloor("L2");
+    //    connectionShower.showAllLines("L2");
   }
 
   @FXML
-  public void editMode(ActionEvent event) {
+  public void editMode() {
     if (circle3.isSelected()) {
       mapContents.setPannable(false);
       glyphs.enableEditing();
+      closeRoom();
       bedDrag = new DragHandler(dragPane, mapAssets, bedDragImage, glyphs);
       infusionDrag = new DragHandler(dragPane, mapAssets, infusionDragImage, glyphs);
       bedDrag.enable();
@@ -764,6 +790,24 @@ public class MapController extends ParentController {
       glyphs.addEquipTypeFilter("INFUSIONPUMP");
     } else {
       glyphs.removeEquipTypeFilter("INFUSIONPUMP");
+    }
+  }
+
+  @FXML
+  void xrayToggle() {
+    if (xrayTG.isSelected()) {
+      glyphs.addEquipTypeFilter("XRAY");
+    } else {
+      glyphs.removeEquipTypeFilter("XRAY");
+    }
+  }
+
+  @FXML
+  void reclinerToggle() {
+    if (reclinerTG.isSelected()) {
+      glyphs.addEquipTypeFilter("RECLINER");
+    } else {
+      glyphs.removeEquipTypeFilter("RECLINER");
     }
   }
 

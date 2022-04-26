@@ -35,6 +35,11 @@ public class PathfinderHandler extends AppController implements Initializable {
   private static Double lineSize;
   private static String currentFloor;
 
+  public final int necessaryOffsetX = -110;
+  public final int necessaryOffsetY = -5;
+  public static int lineOffset = 0;
+  public static int numberOfLines = 0;
+
   /* Pathfinder handler info */
   @FXML private JFXComboBox<String> fromLocation;
   @FXML private JFXComboBox<String> toLocation;
@@ -57,7 +62,7 @@ public class PathfinderHandler extends AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     toLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
     fromLocation.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
-    setLineSize(4.0);
+    setLineSize(6.0); // Change this if you want to change the line size
   }
 
   public void setLineSize(Double size) {
@@ -76,30 +81,36 @@ public class PathfinderHandler extends AppController implements Initializable {
     List<Location> filterDos;
     Location startLoc = new Location();
     Location toLoc;
-    try {
-      filterJuan =
-          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
-      filterDos =
-          new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
-      startLoc = filterJuan.get(0);
-      toLoc = filterDos.get(0);
-      if (checkIfConnectedNode(startLoc.getNodeID())) {
-        if (checkIfConnectedNode(toLoc.getNodeID())) {
-          //          System.out.println("Showing path but everything might be broken");
-          //          System.out.println(
-          //              "Starting at " + startLoc.getNodeID() + " And going to " +
-          // toLoc.getNodeID());
-          showPather(startLoc.getNodeID(), toLoc.getNodeID());
-        } else {
-          showError("Not a valid end location!");
+    if (!fromLocation.getValue().isEmpty()) { // If they are good, lets goo
+      if (!toLocation.getValue().isEmpty()) { // Else tell the user to input an actual location
+        try {
+          filterJuan =
+              new ArrayList<>(
+                  DAOPouch.getLocationDAO().filter(7, fromLocation.getValue()).values());
+          filterDos =
+              new ArrayList<>(DAOPouch.getLocationDAO().filter(7, toLocation.getValue()).values());
+          startLoc = filterJuan.get(0);
+          toLoc = filterDos.get(0);
+
+          String startNode;
+          String endNode;
+          AStar ppFinder = new AStar();
+          startNode = ppFinder.findClosestPathnode(startLoc);
+          endNode = ppFinder.findClosestPathnode(toLoc);
+
+          showPather(startNode, endNode);
+
+        } catch (Exception e) {
+          e.printStackTrace();
+          // TODO : Show the error message?
         }
       } else {
-        showError("Not a valid start location!");
+        showError("Invalid Destination");
       }
-    } catch (Exception e) {
-      e.printStackTrace();
-      // TODO : Show the error message?
+    } else {
+      showError("Invalid Starting Location");
     }
+
     makeAllInVisible();
     try {
       //      System.out.println("Current floor is " + currentFloor);
@@ -133,6 +144,9 @@ public class PathfinderHandler extends AppController implements Initializable {
     AStar ppPlanner = new AStar(); // The path plan planner
     // Gives all nodeID's of the path
     List<String> nodePath = ppPlanner.getPath(startNode, endNode);
+
+    int offsetX = necessaryOffsetX + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
+    int offsetY = necessaryOffsetY + PathfinderHandler.lineOffset * PathfinderHandler.numberOfLines;
     try {
       locations.add(DAOPouch.getLocationDAO().get(endNode));
     } catch (Exception e) {
@@ -175,17 +189,19 @@ public class PathfinderHandler extends AppController implements Initializable {
           .getFloor()
           .equals(
               locations.get(i + 1).getFloor())) { // If on different floor, create point particle
-        ifNecessary = new Circle(locations.get(i).getXcoord(), locations.get(i).getYcoord(), 6);
+        ifNecessary =
+            new Circle(
+                locations.get(i).getXcoord() + offsetX, locations.get(i).getYcoord() + offsetY, 6);
         ifNecessary.setFill(Color.RED);
         lineLayer.getChildren().add(ifNecessary);
         //        System.out.println("Added new point since it went up a floor");
       } else { // If on the same floor, show the path
         pathLine =
             new Line(
-                locations.get(i).getXcoord(),
-                locations.get(i).getYcoord(),
-                locations.get(i + 1).getXcoord(),
-                locations.get(i + 1).getYcoord());
+                locations.get(i).getXcoord() + offsetX,
+                locations.get(i).getYcoord() + offsetY,
+                locations.get(i + 1).getXcoord() + offsetX,
+                locations.get(i + 1).getYcoord() + offsetY);
         pathLine.setFill(Color.RED);
         pathLine.setStroke(Color.RED);
         pathLine.setStrokeWidth(lineSize);
@@ -251,7 +267,6 @@ public class PathfinderHandler extends AppController implements Initializable {
     for (int i = 0;
         i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
-      // TODO : For some reason the last node is currently showing up on the wrong floor
       if (locations.get(i).getFloor().equals(floor)) {
         //        System.out.println("Showing " + locations.get(i).getNodeID());
         lineLayer.getChildren().get(i).setVisible(true);

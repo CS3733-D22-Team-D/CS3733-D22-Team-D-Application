@@ -398,6 +398,18 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
+                                                <ToggleButton id="foreground" fx:id="reclinerTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#reclinerToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Recliners">
+                                                   <graphic>
+                                                      <ImageView fx:id="reclinerDragImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/recliner.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.43" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
                                                 <ToggleButton id="foreground" fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Get Directions">
                                                    <graphic>
                                                       <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">

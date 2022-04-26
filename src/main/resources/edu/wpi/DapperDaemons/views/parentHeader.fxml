@@ -36,9 +36,9 @@
             </HBox>
             <BorderPane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <VBox id="headerBackground" fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
+                  <VBox id="headerBackground" fx:id="slider" pickOnBounds="false" prefHeight="541.0" prefWidth="225.0" style="-fx-background-color: #012D5A;" styleClass="headerBackground" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton id="slider" onMouseClicked="#goHome" stylesheets="@../assets/buttons.css" text="Home" textFill="WHITE">
+                        <JFXButton onMouseClicked="#goHome" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" ripplerFill="#ffffff00" styleClass="burger" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -53,7 +53,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToMedicine" stylesheets="@../assets/buttons.css" text="Medication Delivery" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToMedicine" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" ripplerFill="#ffffff00" styleClass="burger" stylesheets="@../assets/buttons.css" text="Medication Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -68,7 +68,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToLabRequest" stylesheets="@../assets/buttons.css" text="Lab Request" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToLabRequest" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Lab Request" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -83,7 +83,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToMeal" stylesheets="@../assets/buttons.css" text="Meal Delivery" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToMeal" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Meal Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -98,7 +98,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToPatientTransport" stylesheets="@../assets/buttons.css" text="Int. Patient Transport" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToPatientTransport" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Int. Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -113,7 +113,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToExtPatientTransport" stylesheets="@../assets/buttons.css" text="Ext. Patient Transport" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToExtPatientTransport" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Ext. Patient Transport" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -128,7 +128,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToSanitation" stylesheets="@../assets/buttons.css" text="Sanitation Service" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToSanitation" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Sanitation Service" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -143,7 +143,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToEquipSani" stylesheets="@../assets/buttons.css" text="Equipment Sanitation" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToEquipSani" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Equipment Sanitation" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -158,7 +158,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToEquipment" stylesheets="@../assets/buttons.css" text="Equipment Delivery" textFill="WHITE">
+                        <JFXButton id="burger" onMouseClicked="#switchToEquipment" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Equipment Delivery" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -173,7 +173,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToLanguage" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToLanguage" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -188,7 +188,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
+                        <JFXButton layoutX="10.0" layoutY="279.0" onMouseClicked="#switchToSecurity" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Security Services" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -203,7 +203,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToUserRequests" stylesheets="@../assets/buttons.css" text="User Requests" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToUserRequests" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="User Requests" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -218,7 +218,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToEmployeeManager" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToEmployeeManager" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="All Employees" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -233,7 +233,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#switchToMapDashboard" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToMapDashboard" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Map" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -249,12 +249,12 @@
                            </graphic>
                         </JFXButton>
 
-                        <JFXButton id="slider" onMouseClicked="#switchToAboutUs" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToAboutUs" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text=" ?   About Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton id="slider" onMouseClicked="#quitProgram" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
+                        <JFXButton onMouseClicked="#quitProgram" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Quit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -273,13 +273,13 @@
                   </VBox>
                </left>
                <top>
-                  <HBox id="headerBackground" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
+                  <HBox id="headerBackground" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="528.0" style="-fx-background-color: #012D5A;" styleClass="headerBackground" stylesheets="@../styling/lightMode.css" BorderPane.alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER" onMouseClicked="#goHome" prefHeight="51.0" prefWidth="42.0">
                            <children>
                               <ImageView fx:id="homeIcon" fitHeight="37.0" fitWidth="29.0" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
-                                    <Image url="@../assets/BrighamLogoWithBG.png" />
+                                    <Image url="@../assets/BrighamLogoWhite.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="12.0" />
@@ -331,7 +331,7 @@
                         <HBox alignment="CENTER_LEFT" minWidth="-Infinity" onMouseClicked="#updateWeather" prefHeight="100.0" prefWidth="85.0">
                            <children>
                               <ImageView fx:id="weatherIcon" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="tempLabel" textFill="WHITE">
+                              <Label id="normalText" fx:id="tempLabel" prefHeight="30.0" styleClass="normalText" stylesheets="@../styling/lightMode.css" text="64" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -349,9 +349,9 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text id="title" fx:id="headerNameField" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Name" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Text id="title" fx:id="headerNameField" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Page Name" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="Unispace-Bold" size="28.0" />
+                                    <Font name="Gill Sans MT Ext Condensed Bold" size="39.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
@@ -362,9 +362,9 @@
                               <Insets left="70.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="85.0">
+                        <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
                            <children>
-                              <Label id="normalText" fx:id="time" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="85.0" stylesheets="@../styling/lightMode.css" text="00:00 - 00/00" textAlignment="RIGHT" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label id="normalText" fx:id="time" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="130.0" styleClass="normalText" stylesheets="@../styling/lightMode.css" text="00:00 - 00/00" textAlignment="RIGHT" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -379,7 +379,7 @@
                               <Line endX="-100.0" endY="27.82622528076172" startX="-100.0" stroke="WHITE" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #012D5A;" textFill="WHITE">
+                        <ToggleButton fx:id="alertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNotifications" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;" textFill="WHITE">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
@@ -395,13 +395,13 @@
                               <Insets left="7.0" />
                            </HBox.margin>
                         </ToggleButton>
-                        <ToggleButton fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                        <ToggleButton id="normalText" fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-radius: 7.5; -fx-background-color: transparent;" stylesheets="@../styling/lightMode.css" textFill="WHITE">
                            <graphic>
-                              <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="170.0">
+                              <HBox accessibleRole="TOGGLE_BUTTON" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="190.0" style="-fx-background-radius: 7.5;" stylesheets="@../styling/lightMode.css">
                                  <children>
-                                    <Text id="normalText" fx:id="accountName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="account Name">
+                                    <Text id="normalText" fx:id="accountName" fill="WHITE" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="normalText" text="account Name">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="Inter SemiBold" size="14.0" />
                                        </font>
                                     </Text>
                                     <Circle fx:id="profilePic" fill="#d2d2d2" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" HBox.hgrow="ALWAYS">
@@ -411,7 +411,7 @@
                                     </Circle>
                                  </children>
                                  <padding>
-                                    <Insets right="5.0" />
+                                    <Insets right="10.0" />
                                  </padding>
                               </HBox>
                            </graphic>
@@ -420,18 +420,11 @@
                   </HBox>
                </top>
             </BorderPane>
-            <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="accountSettingsHBox" alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 0 0 7.5 7.5;" visible="false">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
+                  <VBox id="pageCard" fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../styling/lightMode.css" visible="false">
                      <children>
-                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                        <JFXButton id="cardText" fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -450,7 +443,7 @@
                            </graphic>
                         </JFXButton>
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" textFill="TRANSPARENT">
+                        <JFXButton id="cardText" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -469,7 +462,7 @@
                            </graphic>
                         </JFXButton>
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" text="Button" textFill="TRANSPARENT">
+                        <JFXButton id="cardText" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Button" textFill="TRANSPARENT">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>

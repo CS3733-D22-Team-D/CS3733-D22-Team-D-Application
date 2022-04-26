@@ -6,19 +6,23 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.CleanEquipmentHandler;
 import edu.wpi.DapperDaemons.controllers.helpers.OverdueHandler;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.controllers.homePage.*;
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -26,6 +30,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -71,18 +76,28 @@ public class ParentController extends AppController {
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
   @FXML private ScrollPane notificationsScroller;
-
   @FXML private ImageView notifBell;
   @FXML private ImageView autoSaveIcon;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+
     OverdueHandler.init();
     CleanEquipmentHandler.init();
     if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
     menuSlider(slider, burg, burgBack);
     initSequence();
+    sceneBox.setOnMouseClicked(
+        e -> {
+          if (burgBack.isVisible()) closeSlider();
+          serverToggle.setSelected(false);
+          openServerDropdown();
+          userSettingsToggle.setSelected(false);
+          openUserDropdown();
+          alertButton.setSelected(false);
+          notificationsScroller.setVisible(alertButton.isSelected());
+        });
     if (childContainer != null) mainBox = childContainer;
     if (headerNameField != null) headerName = headerNameField;
 
@@ -109,11 +124,14 @@ public class ParentController extends AppController {
     if (EasterEggController.player != null) EasterEggController.player.stop();
 
     try {
+
       HBox childPage =
           FXMLLoader.load(Objects.requireNonNull(App.class.getResource("views/" + page + ".fxml")));
       mainBox.getChildren().add(childPage);
       bindChild(childPage);
       headerName.setText(pageName);
+      bindChild(childPage);
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -136,16 +154,28 @@ public class ParentController extends AppController {
   @FXML
   void openUserDropdown() {
     userDropdown.setVisible(userSettingsToggle.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
   }
 
   @FXML
   void openServerDropdown() {
     serverDropdown.setVisible(serverToggle.isSelected());
+    alertButton.setSelected(false);
+    notificationsScroller.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   @FXML
   void openNotifications() {
     notificationsScroller.setVisible(alertButton.isSelected());
+    serverToggle.setSelected(false);
+    serverDropdown.setVisible(false);
+    userSettingsToggle.setSelected(false);
+    userDropdown.setVisible(false);
   }
 
   private void setServerToggleMenu() {
@@ -289,12 +319,12 @@ public class ParentController extends AppController {
   public void openUserSettings() {
     userSettingsToggle.setSelected(false);
     openUserDropdown();
-    swapPage("userHome", "User Home");
+    swapPage("NewUserHome", "User Home");
   }
 
   @FXML
   public void logout() throws IOException {
-    FireBase.getReference().child("NOTIFICATIONS").removeEventListener(notifs.getListener());
+    NotificationHandler.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }
@@ -499,5 +529,28 @@ public class ParentController extends AppController {
     } else {
       easterEggInd = 0;
     }
+  }
+
+  /* Hover Animations for buttons */
+  @FXML
+  private void hoveredBurger(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(8, 67, 154, 255);
+    Color backgroundStart = new Color(255, 255, 255, 0);
+    Color backgroundEnd = new Color(255, 255, 255, 255);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 400);
+  }
+
+  @FXML
+  private void unhoveredBurger(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(8, 67, 154, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundEnd = new Color(255, 255, 255, 0);
+    Color backgroundStart = new Color(255, 255, 255, 255);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 400);
   }
 }
