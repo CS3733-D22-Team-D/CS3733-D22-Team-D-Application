@@ -36,9 +36,12 @@ public class APILandingController implements Initializable {
   private static String teamZDestinationID;
 
   // Team  JFX
-
- // private static String teamXOriginID;
- // private static String teamXDestinationID;
+  @FXML private TextField bOrigin;
+  @FXML private TextField bDest;
+  @FXML private Button bSave;
+  @FXML private Label bErrorLabel;
+  private static String teamBOriginID;
+  private static String teamBDestinationID;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -201,7 +204,20 @@ public class APILandingController implements Initializable {
   }
 
   /** Start team 's Request API */
-  public void startTeamAPI() {
-
+  public void startTeamBAPI() {
+    edu.wpi.cs3733.D22.teamB.api.API teamBAPI = new edu.wpi.cs3733.D22.teamB.api.API();
+    try {
+      teamBAPI.run(
+          (int) zOrigin.getScene().getWindow().getX(),
+          (int) zOrigin.getScene().getWindow().getY(),
+          (int) zOrigin.getScene().getWindow().getWidth(),
+          (int) zOrigin.getScene().getWindow().getHeight(),
+          "edu/wpi/DapperDaemons/assets/buttons.css",
+          teamBDestinationID,
+          teamBOriginID);
+    } catch (Exception e) {
+      System.err.println("Team-B API Broke");
+      return;
+    }
   }
 }
