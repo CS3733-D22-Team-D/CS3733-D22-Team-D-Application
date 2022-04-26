@@ -18,65 +18,65 @@
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
    <children>
-      <VBox prefHeight="200.0" prefWidth="200.0">
+      <VBox prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
-            <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0">
+            <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="LL2Container" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floorLL2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="138.0">
+                        <ImageView fx:id="floorLL2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="300.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="LL1Container" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floorLL1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="115.0">
+                        <ImageView fx:id="floorLL1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="250.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="OneContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floor1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="92.0">
+                        <ImageView fx:id="floor1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="200.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="TwoContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floor2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="69.0">
+                        <ImageView fx:id="floor2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="150.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="ThreeContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floor3" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="46.0">
+                        <ImageView fx:id="floor3" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="100.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="FourContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="floor4" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="23.0">
+                        <ImageView fx:id="floor4" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="50.0">
                            <image>
                               <Image url="@../assets/MapDash/floorLayers/floorlayer.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="FiveContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor5" fitHeight="150.0" fitWidth="200.0" preserveRatio="true">
                            <image>

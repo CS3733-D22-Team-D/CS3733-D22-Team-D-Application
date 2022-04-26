@@ -24,6 +24,13 @@ public class TestController extends ParentController {
   @FXML private ImageView floor3;
   @FXML private ImageView floor4;
   @FXML private ImageView floor5;
+  @FXML private Pane LL2Container;
+  @FXML private Pane LL1Container;
+  @FXML private Pane OneContainer;
+  @FXML private Pane TwoContainer;
+  @FXML private Pane ThreeContainer;
+  @FXML private Pane FourContainer;
+  @FXML private Pane FiveContainer;
   @FXML private Text floorNumberLabel;
   @FXML private Label floorSummary;
   @FXML private Pane mapContainer;
@@ -31,7 +38,7 @@ public class TestController extends ParentController {
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
-  private final double ANIMATION_TIME = 0.3;
+  private final double ANIMATION_TIME = 0.2;
 
   private int floorNum = 2;
 
@@ -49,6 +56,14 @@ public class TestController extends ParentController {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+
+    bindImage(floorLL2, LL2Container);
+    bindImage(floorLL1, LL1Container);
+    bindImage(floor1, OneContainer);
+    bindImage(floor2, TwoContainer);
+    bindImage(floor3, ThreeContainer);
+    bindImage(floor4, FourContainer);
+    bindImage(floor5, FiveContainer);
 
     initSlide(floorLL2, 0);
     initSlide(floorLL1, 1);
