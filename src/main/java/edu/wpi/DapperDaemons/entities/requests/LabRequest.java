@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.AutoAssigner;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
@@ -230,6 +231,30 @@ public class LabRequest extends TableObject implements Request {
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assigneeID = assigneeID;
+    this.patientID = patientID;
+    this.labType = labType;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
+    this.dateNeeded = dateNeeded;
+  }
+
+  public LabRequest(
+          Priority priority,
+          String roomID,
+          String requesterID,
+          String notes,
+          String patientID,
+          LabType labType,
+          String dateNeeded) {
+    this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
+
+    this.priority = priority;
+    this.roomID = roomID;
+    this.requesterID = requesterID;
+    this.assigneeID = AutoAssigner.assignDoctor();
     this.patientID = patientID;
     this.labType = labType;
     this.notes = notes;

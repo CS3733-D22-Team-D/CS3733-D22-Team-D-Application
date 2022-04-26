@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.AutoAssigner;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
@@ -136,6 +137,25 @@ public class SecurityRequest extends TableObject implements Request {
     this.priority = priority;
     this.roomID = roomID;
     this.assignee = assigneeID;
+    this.requester = requesterID;
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = Request.RequestStatus.REQUESTED;
+    this.dateNeeded = dateNeeded;
+  }
+
+  public SecurityRequest(
+          Request.Priority priority,
+          String roomID,
+          String requesterID,
+          String notes,
+          String dateNeeded) {
+    this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
+    this.priority = priority;
+    this.roomID = roomID;
+    this.assignee = AutoAssigner.assignAdmin();
     this.requester = requesterID;
     this.notes = notes;
     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");

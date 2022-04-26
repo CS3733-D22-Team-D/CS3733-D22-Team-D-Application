@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.AutoAssigner;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.tables.TableHandler;
 import java.text.SimpleDateFormat;
@@ -190,6 +191,29 @@ public class LanguageRequest extends TableObject implements Request {
     this.roomID = roomID;
     this.requesterID = requesterID;
     this.assignee = assignee;
+    // This is what you add Joanna
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
+    this.language = language;
+    this.dateNeeded = dateNeeded;
+  }
+
+  public LanguageRequest(
+          Priority priority,
+          String roomID,
+          String requesterID,
+          String notes,
+          Language language,
+          String dateNeeded) {
+    this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
+
+    this.priority = priority;
+    this.roomID = roomID;
+    this.requesterID = requesterID;
+    this.assignee = AutoAssigner.assignAny();
     // This is what you add Joanna
     this.notes = notes;
     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");

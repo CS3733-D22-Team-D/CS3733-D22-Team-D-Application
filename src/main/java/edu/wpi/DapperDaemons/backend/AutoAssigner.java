@@ -139,4 +139,27 @@ public class AutoAssigner {
         return bestPick;
     }
 
+    public static String assignAny() {
+        List<Employee> employeeList = new ArrayList<>(DAOPouch.getEmployeeDAO().getAll().values());
+
+        if(employeeList.isEmpty())
+            return "Unassigned";
+
+        String bestPick = employeeList.get(0).getNodeID();
+
+        int weightedWithFewest = 10000; // No one should have 10000 tasks ever
+        for(Employee employee : employeeList) {
+            List<Request> requests = DAOFacade.searchRequestsByAssignee(employee.getNodeID());
+            int currentWeight = 0;
+            for(Request request : requests) {
+                currentWeight += findWeight(request.getPriority().name());
+            }
+            if(currentWeight < weightedWithFewest) {
+                bestPick = employee.getNodeID();
+                weightedWithFewest = currentWeight;
+            }
+        }
+        return bestPick;
+    }
+
 }
