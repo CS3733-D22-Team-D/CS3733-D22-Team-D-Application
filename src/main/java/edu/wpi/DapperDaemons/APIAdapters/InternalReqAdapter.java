@@ -5,6 +5,8 @@ import edu.wpi.cs3733.D22.teamB.api.Request;
 
 public class InternalReqAdapter extends Adapter {
 
+  public static String currentEmployee;
+
   public InternalReqAdapter() {}
 
   /**
@@ -15,16 +17,12 @@ public class InternalReqAdapter extends Adapter {
    */
   public static PatientTransportRequest convert(Request internalRequest) {
 
-    String employeeId;
-
-    if (internalRequest.getEmployeeID() == null) employeeId = "null";
-    else employeeId = internalRequest.getEmployeeID();
 
     return new PatientTransportRequest(
         parsePriority(internalRequest.getPriority()),
         internalRequest.getStartLocation().getNodeID(),
-        employeeId,
-        employeeId,
+            currentEmployee,
+            currentEmployee,
         internalRequest.getInformation(),
         internalRequest.getRequestID(),
         internalRequest.getFinishLocation().getNodeID(),
