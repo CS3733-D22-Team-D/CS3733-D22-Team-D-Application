@@ -151,7 +151,8 @@ public class AnimationHelper {
 
   /* Performs an X and Y translation for Cole <3 */
   public static void ColesTrans(Node node, int xTrans, int yTrans, int durationInMillis) {
-
+    double currentOffsetX = node.getTranslateX();
+    double currentOffsetY = node.getTranslateY();
     Animation transition =
         new Transition() {
           {
@@ -162,9 +163,31 @@ public class AnimationHelper {
           protected void interpolate(double frac) {
             node.setStyle(
                 "-fx-translate-x: "
-                    + ((int) frac * xTrans)
+                    + (currentOffsetX + (frac * (double) xTrans))
                     + "; -fx-translate-y: "
-                    + ((int) frac * yTrans)
+                    + (currentOffsetY + (frac * (double) yTrans))
+                    + ";");
+          }
+        };
+    transition.play();
+  }
+
+  public static void ColesTransReverse(Node node, int xTrans, int yTrans, int durationInMillis) {
+    double currentOffsetX = node.getTranslateX();
+    double currentOffsetY = node.getTranslateY();
+    Animation transition =
+        new Transition() {
+          {
+            setCycleDuration(Duration.millis(durationInMillis));
+          }
+
+          @Override
+          protected void interpolate(double frac) {
+            node.setStyle(
+                "-fx-translate-x: "
+                    + (currentOffsetX - (frac * (double) xTrans))
+                    + "; -fx-translate-y: "
+                    + (currentOffsetY - (frac * (double) yTrans))
                     + ";");
           }
         };

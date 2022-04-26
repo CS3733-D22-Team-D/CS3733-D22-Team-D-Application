@@ -82,7 +82,7 @@ public class TestController extends ParentController {
     t.setHeader(List.of("Type", "Assignee", "Priority"));
     t.setRequestListeners();
   }
-
+  /* Animations */
   @FXML
   private void hoveredFloor(MouseEvent event) {
     Node node = (Node) event.getSource();
@@ -94,7 +94,7 @@ public class TestController extends ParentController {
   private void unhoveredFloor(MouseEvent event) {
     Node node = (Node) event.getSource();
     ((ImageView) node).setImage(Images.floorSegment);
-    AnimationHelper.ColesTrans(node, -23, -23, 1000);
+    AnimationHelper.ColesTransReverse(node, 23, 23, 1000);
   }
 
   private String getFloor() {
