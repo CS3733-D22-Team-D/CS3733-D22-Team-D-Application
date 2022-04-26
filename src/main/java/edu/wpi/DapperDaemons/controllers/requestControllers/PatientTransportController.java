@@ -8,6 +8,7 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
@@ -17,6 +18,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -30,6 +33,7 @@ public class PatientTransportController extends ParentController {
   /* Dropdown boxes */
   @FXML private JFXComboBox<String> roomBox;
   @FXML private JFXComboBox<String> priorityIn;
+  @FXML private JFXComboBox<String> assigneeBox;
 
   @FXML private GridPane table;
   private Table<PatientTransportRequest> requestTable;
@@ -48,6 +52,7 @@ public class PatientTransportController extends ParentController {
       DAOPouch.getPatientTransportRequestDAO();
   DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
   DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
@@ -66,6 +71,7 @@ public class PatientTransportController extends ParentController {
     priorityIn.setValue("");
     patientName.setText("");
     patientLastName.setText("");
+    assigneeBox.setValue("");
     patientDOB.setValue(null);
     notes.setText("");
     dateNeeded.setValue(null);
@@ -75,6 +81,7 @@ public class PatientTransportController extends ParentController {
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(roomBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(assigneeBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -84,7 +91,6 @@ public class PatientTransportController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID;
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "none";
       String patientID;
       String nextRoomID = "";
       Request.RequestStatus status = Request.RequestStatus.REQUESTED;
@@ -127,24 +133,50 @@ public class PatientTransportController extends ParentController {
         if (isAPatient) {
 
           // now send request and get back whether it went through.
-
           roomID = patient.getLocationID();
-          boolean hadPermission =
-              addItem(
-                  new PatientTransportRequest(
-                      priority,
-                      roomID,
-                      requesterID,
-                      assigneeID,
-                      notes.getText(),
-                      patientID,
-                      nextRoomID,
-                      dateStr));
-          if (!hadPermission) {
-            // display error that employee does not have permission
 
-            showError("You do not have permission to do this.");
+          if (assigneeBox.getValue().equals("")
+              || assigneeBox
+                  .getValue()
+                  .equals("Auto Assign")) { // check if the user inputs an assignee
+            boolean hadPermission =
+                addItem(
+                    new PatientTransportRequest(
+                        priority,
+                        roomID,
+                        requesterID,
+                        notes.getText(),
+                        patientID,
+                        nextRoomID,
+                        dateStr));
+            if (!hadPermission) {
+              // display error that employee does not have permission
+              showError("You do not have permission to do this.");
+            }
+          } else {
+            if (DAOPouch.getEmployeeDAO()
+                .get(assigneeBox.getValue())
+                .getEmployeeType()
+                .equals(Employee.EmployeeType.NURSE)) {
+              boolean hadPermission =
+                  addItem(
+                      new PatientTransportRequest(
+                          priority,
+                          roomID,
+                          requesterID,
+                          assigneeBox.getValue(),
+                          notes.getText(),
+                          patientID,
+                          nextRoomID,
+                          dateStr));
+              if (!hadPermission) {
+                showError("You do not have permission to do this.");
+              }
+            } else {
+              showError("Invalid Assignee ID!");
+            }
           }
+
         } else {
           // display error that patient does not exist
           showError("Could not find a patient that matches.");
@@ -172,6 +204,15 @@ public class PatientTransportController extends ParentController {
 
   private void initializeInputs() {
     roomBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+
+    List<Employee> employees = new ArrayList<>(employeeDAO.filter(5, "NURSE").values());
+    List<String> employeeNames = new ArrayList<>();
+    employeeNames.add("Auto Assign");
+    for (Employee employee : employees) employeeNames.add(employee.getNodeID());
+    assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
+
+    priorityIn.setItems(
+            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
   }
 
   private boolean addItem(PatientTransportRequest request) {
