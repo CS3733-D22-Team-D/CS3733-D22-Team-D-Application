@@ -37,9 +37,9 @@ public class Table<R> {
   private List<Runnable> editProperties = new ArrayList<>();
   private int padding;
 
-    public Table(Class<R> classinst, GridPane table, int tableNum) {
-        this(classinst, table, tableNum, 30);
-    }
+  public Table(Class<R> classinst, GridPane table, int tableNum) {
+    this(classinst, table, tableNum, 30);
+  }
 
   public Table(Class<R> classinst, GridPane table, int tableNum, int padding) {
     this.instance = classinst;
@@ -363,7 +363,8 @@ public class Table<R> {
   }
 
   public void addRow(int ind, R type) {
-    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum),padding);
+    List<Node> row =
+        RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
@@ -374,7 +375,8 @@ public class Table<R> {
   }
 
   public void addRow(R type) {
-    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum),padding);
+    List<Node> row =
+        RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
