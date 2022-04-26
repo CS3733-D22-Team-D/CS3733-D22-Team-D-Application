@@ -80,7 +80,7 @@ public class TestController extends ParentController {
   private void unhoveredFloor(MouseEvent event) {
     Node node = (Node) event.getSource();
     ((ImageView) node).setImage(Images.floorSegment);
-    AnimationHelper.ColesTransReverse(node, -23, -23, 1000);
+    AnimationHelper.ColesTransReverse(node, 23, 23, 1000);
   }
 
   private String getFloor() {
