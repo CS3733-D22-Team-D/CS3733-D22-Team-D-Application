@@ -106,11 +106,19 @@ public class DAOFacade {
     return searchReq;
   }
 
+  /**
+   * Searches for requests based on the assignee's name and returns list of all tasks assigned to them
+   * Only returns tasks which have not been marked as "COMPLETED" or "CANCELLED"
+   * @param assignee
+   * @return
+   */
   public static List<Request> searchRequestsByAssignee(String assignee) {
     List<Request> allReq = getAllRequests();
     LinkedList<Request> assigneeReq = new LinkedList<>();
     for(Request request : allReq) {
-      if(request.getAssigneeID().equals(assignee))
+      // If correct user and it hasn't been marked as completed or cancelled
+      if(request.getAssigneeID().equals(assignee) &&
+              (!request.getStatus().equals("COMPLETED") || !request.getStatus().equals("CANCELLED")))
         assigneeReq.add(request);
     }
     return assigneeReq;
