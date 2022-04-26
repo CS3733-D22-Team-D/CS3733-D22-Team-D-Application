@@ -220,4 +220,6 @@ public class APILandingController implements Initializable {
       return;
     }
   }
+
+  public void databaseSaverTeamB() {}
 }
