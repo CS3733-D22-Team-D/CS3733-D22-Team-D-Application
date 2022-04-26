@@ -7,7 +7,7 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -27,15 +27,10 @@ import javafx.stage.Stage;
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class EquipmentCleaningController extends ParentController {
 
-  /* Table Object */
-  @FXML private TableView<EquipmentCleaning> equipmentCleanTable;
-
-  /* Table Helper */
-  private TableHelper<EquipmentCleaning> tableHelper;
-
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> equipmentIDBox;
+  @FXML private JFXComboBox<String> assigneeBox;
   @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
 
@@ -53,6 +48,7 @@ public class EquipmentCleaningController extends ParentController {
   /* DAO Object */
   private final DAO<EquipmentCleaning> equipmentCleaningDAO = DAOPouch.getEquipmentCleaningDAO();
   private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   @FXML private GridPane table;
   @FXML private HBox header;
   private Table<EquipmentCleaning> t;
@@ -61,6 +57,7 @@ public class EquipmentCleaningController extends ParentController {
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(equipmentIDBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(assigneeBox, new FuzzySearchComparatorMethod());
   }
 
   @Override
@@ -81,23 +78,11 @@ public class EquipmentCleaningController extends ParentController {
     t.setListeners(new EquipmentCleaning());
   }
 
-  private void setListeners() {
-    TableListeners.addListener(
-        new EquipmentCleaning().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              equipmentCleanTable.getItems().clear();
-              equipmentCleanTable.getItems().addAll(equipmentCleaningDAO.getAll().values());
-            }));
-  }
-
   public boolean addItem(EquipmentCleaning request) {
     boolean hadClearance = false;
 
     hadClearance = equipmentCleaningDAO.add(request);
-    if (hadClearance) {
-      equipmentCleanTable.getItems().add(request);
-    }
+
     return hadClearance;
   }
 
@@ -105,6 +90,7 @@ public class EquipmentCleaningController extends ParentController {
   public void onClearClicked() {
     priorityIn.setValue("");
     equipmentIDBox.setValue("");
+    assigneeBox.setValue("");
     dateNeeded.setValue(null);
     notes.setText("");
   }
@@ -136,23 +122,53 @@ public class EquipmentCleaningController extends ParentController {
             medicalEquipment); // Show in the medical equipment that it has been requested / put in
         // progress
 
-        boolean hadClearance =
-            addItem(
-                new EquipmentCleaning(
-                    priority,
-                    roomID,
-                    requesterID,
-                    assigneeID,
-                    notes.getText(),
-                    medicalEquipment.getNodeID(),
-                    medicalEquipment.getEquipmentType(),
-                    MedicalEquipment.CleanStatus.INPROGRESS,
-                    dateStr));
-        // check if user has permission
-        if (!hadClearance) {
-          showError("You do not have permission to do this.");
+        if (assigneeBox.getValue().equals("")
+            || assigneeBox
+                .getValue()
+                .equals("Auto Assign")) { // check if the user inputs an assignee
+          boolean hadClearance =
+              addItem(
+                  new EquipmentCleaning(
+                      priority,
+                      roomID,
+                      requesterID,
+                      notes.getText(),
+                      medicalEquipment.getNodeID(),
+                      medicalEquipment.getEquipmentType(),
+                      MedicalEquipment.CleanStatus.INPROGRESS,
+                      dateStr));
+          // check if user has permission
+          if (!hadClearance) {
+            showError("You do not have permission to do this.");
+          } else {
+            onClearClicked();
+          }
         } else {
-          onClearClicked();
+          if (DAOPouch.getEmployeeDAO()
+              .get(assigneeBox.getValue())
+              .getEmployeeType()
+              .equals(Employee.EmployeeType.JANITOR)) {
+            boolean hadClearance =
+                addItem(
+                    new EquipmentCleaning(
+                        priority,
+                        roomID,
+                        requesterID,
+                        assigneeBox.getValue(),
+                        notes.getText(),
+                        medicalEquipment.getNodeID(),
+                        medicalEquipment.getEquipmentType(),
+                        MedicalEquipment.CleanStatus.INPROGRESS,
+                        dateStr));
+            // check if user has permission
+            if (!hadClearance) {
+              showError("You do not have permission to do this.");
+            } else {
+              onClearClicked();
+            }
+          } else {
+            showError("Invalid Assignee ID!");
+          }
         }
       }
     } else {
@@ -174,7 +190,14 @@ public class EquipmentCleaningController extends ParentController {
         new ArrayList<>(medicalEquipmentDAO.getAll().values());
     List<String> idNames = new ArrayList<>();
     for (MedicalEquipment equipment : medicalEquipmentList) idNames.add(equipment.getNodeID());
+
     equipmentIDBox.setItems(FXCollections.observableArrayList(idNames));
+
+    List<Employee> employees = new ArrayList<>(employeeDAO.filter(5, "JANITOR").values());
+    List<String> employeeNames = new ArrayList<>();
+    employeeNames.add("Auto Assign");
+    for (Employee employee : employees) employeeNames.add(employee.getNodeID());
+    assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

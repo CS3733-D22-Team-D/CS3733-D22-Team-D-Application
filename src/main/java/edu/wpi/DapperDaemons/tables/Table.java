@@ -35,11 +35,17 @@ public class Table<R> {
   private final int tableNum;
   private final Class<R> instance;
   private List<Runnable> editProperties = new ArrayList<>();
+  private int padding;
 
-  public Table(Class<R> classinst, GridPane table, int tableNum) {
+    public Table(Class<R> classinst, GridPane table, int tableNum) {
+        this(classinst, table, tableNum, 30);
+    }
+
+  public Table(Class<R> classinst, GridPane table, int tableNum, int padding) {
     this.instance = classinst;
     this.table = table;
     this.tableNum = tableNum;
+    this.padding = padding;
   }
 
   public void setListeners(R type) {
@@ -357,7 +363,7 @@ public class Table<R> {
   }
 
   public void addRow(int ind, R type) {
-    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum));
+    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum),padding);
     restyleRow(row);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
@@ -368,7 +374,7 @@ public class Table<R> {
   }
 
   public void addRow(R type) {
-    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum));
+    List<Node> row = RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum),padding);
     restyleRow(row);
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
