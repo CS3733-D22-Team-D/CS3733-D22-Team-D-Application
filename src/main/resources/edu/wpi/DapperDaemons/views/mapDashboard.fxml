@@ -92,24 +92,9 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="169.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor">
-                           <font>
-                              <Font name="System Bold" size="23.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #08439C; -fx-border-style: solid hidden solid hidden; -fx-border-width: 3;" VBox.vgrow="ALWAYS">
                      <children>
                         <Text fx:id="floorNumberLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
                            <font>
@@ -122,8 +107,20 @@
                            </font>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="4.0" />
+                     </padding>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="12.5" right="12.5" top="10.0" />
+               </padding>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
