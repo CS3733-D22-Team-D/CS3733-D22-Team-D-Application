@@ -220,7 +220,12 @@ public class APILandingController implements Initializable {
       System.err.println("Team-B API Broke");
       return;
     }
+    zErrorLabel.setText("You may have unsaved requests!");
+    zErrorLabel.setTextFill(Paint.valueOf("EF5353"));
+    zSave.setVisible(true);
   }
 
-  public void databaseSaverTeamB() {}
+  public void databaseSaverTeamB() {
+    // TODO: implement converter to save the requests to the database
+  }
 }
