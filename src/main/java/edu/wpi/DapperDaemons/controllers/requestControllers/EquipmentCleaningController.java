@@ -101,7 +101,7 @@ public class EquipmentCleaningController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityIn.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
-
+      
       MedicalEquipment medicalEquipment =
           medicalEquipmentDAO.get(equipmentIDBox.getValue()); // Gets the current EQ
       if (medicalEquipment == null) {
