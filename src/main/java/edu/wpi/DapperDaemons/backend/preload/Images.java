@@ -69,6 +69,14 @@ public class Images {
                     .getResourceAsStream(
                         "edu/wpi/DapperDaemons/assets/MapDash/floorLayers/floorlayer.png")));
 
+    hoveredSegment =
+        new Image(
+            Objects.requireNonNull(
+                AutoSave.class
+                    .getClassLoader()
+                    .getResourceAsStream(
+                        "edu/wpi/DapperDaemons/assets/MapDash/floorLayers/floorlayerHovered.png")));
+
     selectedSegment =
         new Image(
             Objects.requireNonNull(
@@ -159,6 +167,7 @@ public class Images {
   public static Image mapFloor5;
 
   public static Image floorSegment;
+  public static Image hoveredSegment;
   public static Image selectedSegment;
 
   public static Image floorDashL2;
