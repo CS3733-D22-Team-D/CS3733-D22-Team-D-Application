@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -38,6 +39,8 @@ public class TestController extends ParentController {
   @FXML private Label floorSummary;
   @FXML private Pane mapContainer;
   @FXML private ImageView mapImage;
+  @FXML private GridPane table;
+
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
