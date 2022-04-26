@@ -65,7 +65,7 @@ public class EquipmentCleaningController extends ParentController {
 
     initBoxes();
 
-    t = new Table(table, 0);
+    t = new Table<>(EquipmentCleaning.class, table, 0);
     createTable();
     onClearClicked();
   }

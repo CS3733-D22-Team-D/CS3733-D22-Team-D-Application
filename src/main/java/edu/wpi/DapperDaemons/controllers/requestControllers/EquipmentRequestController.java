@@ -71,7 +71,7 @@ public class EquipmentRequestController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
-    t = new Table(table, 0);
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     createTable();
     onClearClicked();
   }

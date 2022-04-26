@@ -1,7 +1,6 @@
 package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.App;
-import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class RowFactory {
 
   private RowFactory() {}
 
-  public static List<Node> createRow(TableObject type, int tableNum) {
+  public static List<Node> createRow(List<Object> attributes) {
     HBox row;
     FXMLLoader loader;
     loader =
@@ -34,7 +33,6 @@ public class RowFactory {
       throw new RuntimeException(e);
     }
     row = (HBox) loader.getNamespace().get("contents");
-    List<Object> attributes = TableHelper.getDataList(type, tableNum);
     for (Object attr : attributes) {
       VBox item = new VBox();
       item.setAlignment(Pos.CENTER_LEFT);
@@ -71,8 +69,7 @@ public class RowFactory {
     // FB6962 - RED
     // F5EC42 - YELLOW
     // 79DE79 - GREEN
-    List<Node> ret = new ArrayList<>();
-    ret.addAll(row.getChildren());
+    List<Node> ret = new ArrayList<>(row.getChildren());
     VBox priority = (VBox) loaded.getChildren().get(1);
     try {
       switch (Request.Priority.valueOf(

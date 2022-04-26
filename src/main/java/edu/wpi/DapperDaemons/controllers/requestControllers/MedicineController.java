@@ -27,14 +27,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
   @FXML private GridPane table;
-  @FXML private HBox header;
-  private TableHelper<MedicineRequest> helper;
-  @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
@@ -51,15 +47,10 @@ public class MedicineController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    helper = new TableHelper<>(medicineRequests, 0);
-    //    helper.linkColumns(MedicineRequest.class);
-
-    //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
-
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
     priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-    t = new Table<>(table, 0);
+    t = new Table<>(MedicineRequest.class, table, 0);
     createTable();
     onClearClicked();
   }

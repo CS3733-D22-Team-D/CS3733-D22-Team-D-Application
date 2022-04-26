@@ -54,7 +54,7 @@ public class PatientTransportController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
 
-    requestTable = new Table<>(table, 0);
+    requestTable = new Table<>(PatientTransportRequest.class, table, 0);
     requestTable.setRows(
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values()));
     requestTable.setListeners(new PatientTransportRequest());

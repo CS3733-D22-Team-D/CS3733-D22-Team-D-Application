@@ -42,6 +42,7 @@ public class TableTest {
   public void testGetRowData() {
     List<Object> help =
         TableHelper.getDataList(
+            MedicalEquipment.class,
             new MedicalEquipment(
                 "TestEquip", MedicalEquipment.EquipmentType.BED, "10032", "something"),
             99);
