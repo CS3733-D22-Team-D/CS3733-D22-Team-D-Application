@@ -106,6 +106,16 @@ public class DAOFacade {
     return searchReq;
   }
 
+  public static List<Request> searchRequestsByAssignee(String assignee) {
+    List<Request> allReq = getAllRequests();
+    LinkedList<Request> assigneeReq = new LinkedList<>();
+    for(Request request : allReq) {
+      if(request.getAssigneeID().equals(assignee))
+        assigneeReq.add(request);
+    }
+    return assigneeReq;
+  }
+
   /**
    * Filters Medical Equipment in a certain LOCATION by a given TYPE and a given CLEANSTATUS
    *
