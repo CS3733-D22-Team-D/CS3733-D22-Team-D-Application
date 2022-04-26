@@ -21,17 +21,21 @@ import javafx.scene.paint.Paint;
 
 public class APILandingController implements Initializable {
 
+  // Team D JFX
   @FXML private TextField teamDLoc;
   @FXML private Label errorLabel;
   @FXML private Button dSave;
   private static String destIDTeamD;
 
+  // Team Z JFX
   @FXML private TextField zDest;
   @FXML private Label zErrorLabel;
   @FXML private TextField zOrigin;
   @FXML private Button zSave;
   private static String teamZOriginID;
   private static String teamZDestinationID;
+
+  // Team X JFX
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
