@@ -14,12 +14,11 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
+import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -212,7 +211,7 @@ public class PatientTransportController extends ParentController {
     assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
 
     priorityIn.setItems(
-            FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
   }
 
   private boolean addItem(PatientTransportRequest request) {
