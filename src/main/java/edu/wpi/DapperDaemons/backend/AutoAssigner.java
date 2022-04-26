@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.backend;
 
+import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
@@ -128,9 +129,11 @@ public class AutoAssigner {
       for (Request request : requests) {
         currentWeight += findWeight(request.getPriority().name());
       }
+      System.out.println(bestPick + " " + currentWeight);
       if (currentWeight < weightedWithFewest) {
         bestPick = employee.getNodeID();
         weightedWithFewest = currentWeight;
+        App.LOG.info(bestPick + " Is the next best with a weight of " + currentWeight);
       }
     }
     return bestPick;

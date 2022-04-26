@@ -66,6 +66,9 @@ public class DAOFacade {
     allReq.addAll(new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values()));
     allReq.addAll(new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values()));
     allReq.addAll(new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values()));
+    allReq.addAll(new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values()));
+    allReq.addAll(new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values()));
+    allReq.addAll(new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values()));
     return allReq;
   }
 
