@@ -67,6 +67,7 @@ public class APILandingController implements Initializable {
 
     // Team B API Init
     bSave.setVisible(false);
+    bErrorLabel.setText("");
     DatabaseController databaseController = new DatabaseController();
     for (Employee employee : DAOPouch.getEmployeeDAO().getAll().values()) {
         IPTEmployee empToAdd = new IPTEmployee(employee.getNodeID(),
