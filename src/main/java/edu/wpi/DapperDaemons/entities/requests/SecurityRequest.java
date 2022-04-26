@@ -147,11 +147,11 @@ public class SecurityRequest extends TableObject implements Request {
   }
 
   public SecurityRequest(
-          Request.Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String dateNeeded) {
+      Request.Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String dateNeeded) {
     this.nodeID = String.valueOf(priority) + roomID + LocalDateTime.now();
     this.priority = priority;
     this.roomID = roomID;

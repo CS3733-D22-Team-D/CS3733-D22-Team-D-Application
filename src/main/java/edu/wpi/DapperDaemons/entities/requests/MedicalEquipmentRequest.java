@@ -251,14 +251,14 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
   }
 
   public MedicalEquipmentRequest(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String equipmentID,
-          MedicalEquipment.EquipmentType equipmentType,
-          MedicalEquipment.CleanStatus cleanStatus,
-          String dateNeeded) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String equipmentID,
+      MedicalEquipment.EquipmentType equipmentType,
+      MedicalEquipment.CleanStatus cleanStatus,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

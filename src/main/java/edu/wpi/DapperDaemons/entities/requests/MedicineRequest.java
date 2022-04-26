@@ -227,14 +227,14 @@ public class MedicineRequest extends TableObject implements Request {
   }
 
   public MedicineRequest(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String patientID,
-          String medicationName,
-          int quantity,
-          String dateNeeded) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String patientID,
+      String medicationName,
+      int quantity,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

@@ -233,12 +233,12 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   public SanitationRequest(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String sanitationType,
-          String dateNeeded) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String sanitationType,
+      String dateNeeded) {
 
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 

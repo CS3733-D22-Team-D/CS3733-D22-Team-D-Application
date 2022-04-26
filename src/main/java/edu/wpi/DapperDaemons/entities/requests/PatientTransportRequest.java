@@ -220,13 +220,13 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   public PatientTransportRequest(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String patientID,
-          String nextRoomID,
-          String dateNeeded) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String patientID,
+      String nextRoomID,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

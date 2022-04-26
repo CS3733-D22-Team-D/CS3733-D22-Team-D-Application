@@ -222,14 +222,14 @@ public class EquipmentCleaning extends TableObject implements Request {
   }
 
   public EquipmentCleaning(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String equipmentID,
-          MedicalEquipment.EquipmentType equipmentType,
-          MedicalEquipment.CleanStatus cleanStatus,
-          String cleanBy) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String equipmentID,
+      MedicalEquipment.EquipmentType equipmentType,
+      MedicalEquipment.CleanStatus cleanStatus,
+      String cleanBy) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;

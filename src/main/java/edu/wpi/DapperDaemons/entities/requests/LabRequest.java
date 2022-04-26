@@ -242,13 +242,13 @@ public class LabRequest extends TableObject implements Request {
   }
 
   public LabRequest(
-          Priority priority,
-          String roomID,
-          String requesterID,
-          String notes,
-          String patientID,
-          LabType labType,
-          String dateNeeded) {
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String patientID,
+      LabType labType,
+      String dateNeeded) {
     this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
 
     this.priority = priority;
