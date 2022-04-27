@@ -69,7 +69,7 @@ public class SanitationController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(SanitationRequest.class, table, 0);
+    t = new Table<>(SanitationRequest.class, table, 0, 0);
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
 

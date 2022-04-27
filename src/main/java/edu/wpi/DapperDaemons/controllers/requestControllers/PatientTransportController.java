@@ -65,7 +65,7 @@ public class PatientTransportController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(PatientTransportRequest.class, table, 0);
+    t = new Table<>(PatientTransportRequest.class, table, 0, 0);
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
 

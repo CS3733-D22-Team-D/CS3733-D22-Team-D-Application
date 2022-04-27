@@ -78,7 +78,7 @@ public class MedicineController extends ParentController {
       }
     }
 
-    t = new Table<>(MedicineRequest.class, table, 0);
+    t = new Table<>(MedicineRequest.class, table, 0, 0);
     t.setRows(reqs);
     t.setHeader(
         List.of(
