@@ -50,7 +50,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="First Name:" />
-                              <TextField id="field" fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
+                              <TextField fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
@@ -125,7 +125,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Extra Notes:" />
-                              <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
+                              <TextField fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
                            </children>
                         </VBox>
                      </children>

@@ -395,6 +395,7 @@ public class Table<R> {
     c.setHgrow(Priority.ALWAYS);
     table.getColumnConstraints().clear();
     row.forEach(e -> table.getColumnConstraints().add(c));
+
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);
