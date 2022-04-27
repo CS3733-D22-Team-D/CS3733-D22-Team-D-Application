@@ -57,9 +57,14 @@ public class Table<R> {
             () -> {
               Platform.runLater(
                   () -> {
-                    difference(
-                        new ArrayList<R>(DAOPouch.getDAO((TableObject) type).getAll().values()),
-                        rows);
+                    List<R> req =
+                        new ArrayList<R>(
+                            DAOPouch.getDAO((TableObject) type).filter(6, "REQUESTED").values());
+                    List<R> inprog =
+                        new ArrayList(
+                            DAOPouch.getDAO((TableObject) type).filter(6, "IN_PROGRESS").values());
+                    req.addAll(inprog);
+                    difference(req, rows);
                   });
             }));
   }

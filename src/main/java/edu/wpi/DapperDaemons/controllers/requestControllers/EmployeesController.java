@@ -7,7 +7,6 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -142,8 +141,6 @@ public class EmployeesController extends ParentController implements Initializab
   public void saveToCSV() {
     super.saveToCSV(new Employee(), (Stage) employees.getScene().getWindow());
   }
-
-
 
   /* Animations */
   @FXML

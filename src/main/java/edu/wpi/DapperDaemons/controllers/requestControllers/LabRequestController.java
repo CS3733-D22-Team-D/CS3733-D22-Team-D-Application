@@ -15,7 +15,6 @@ import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -232,8 +231,6 @@ public class LabRequestController extends ParentController {
       assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
     }
   }
-
-
 
   /* Animations */
   @FXML

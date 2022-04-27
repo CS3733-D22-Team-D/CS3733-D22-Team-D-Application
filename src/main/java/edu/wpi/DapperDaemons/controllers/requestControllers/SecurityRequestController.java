@@ -15,7 +15,6 @@ import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -172,8 +171,6 @@ public class SecurityRequestController extends ParentController {
   public void saveToCSV() {
     super.saveToCSV(new SecurityRequest(), (Stage) priorityIn.getScene().getWindow());
   }
-
-
 
   /* Animations */
   @FXML

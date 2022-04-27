@@ -71,7 +71,7 @@ public class MedicineController extends ParentController {
 
     for (int i = 0; i < reqs.size(); i++) {
       MedicineRequest req = reqs.get(i);
-      System.out.println(req.getNodeID());
+      //      System.out.println(req.getNodeID());
       if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
           || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
         reqs.remove(i);
@@ -309,8 +309,4 @@ public class MedicineController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
-
-
-
-
 }

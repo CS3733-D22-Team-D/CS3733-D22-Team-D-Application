@@ -15,7 +15,6 @@ import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -214,8 +213,6 @@ public class EquipmentCleaningController extends ParentController {
     super.saveToCSV(new EquipmentCleaning(), (Stage) priorityIn.getScene().getWindow());
   }
 
-
-
   /* Animations */
   @FXML
   void hoveredSubmit(MouseEvent event) {
@@ -256,5 +253,4 @@ public class EquipmentCleaningController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
-
 }

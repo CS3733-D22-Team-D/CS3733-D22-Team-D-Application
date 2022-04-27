@@ -19,7 +19,6 @@ import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -853,9 +852,6 @@ public class MapController extends ParentController {
     return maps.getFloor();
   }
 
-
-
-
   /* Animations */
   @FXML
   void hoveredSubmit(MouseEvent event) {
@@ -896,6 +892,4 @@ public class MapController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
-
-
 }

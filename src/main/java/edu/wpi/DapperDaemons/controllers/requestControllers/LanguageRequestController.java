@@ -15,7 +15,6 @@ import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -165,7 +164,6 @@ public class LanguageRequestController extends ParentController {
   public void saveToCSV() {
     super.saveToCSV(new LanguageRequest(), (Stage) locationBox.getScene().getWindow());
   }
-
 
   /* Animations */
   @FXML

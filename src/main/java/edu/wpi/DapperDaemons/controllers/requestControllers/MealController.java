@@ -13,7 +13,6 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -249,7 +248,6 @@ public class MealController extends ParentController {
   public void saveToCSV() {
     super.saveToCSV(new MealDeliveryRequest(), (Stage) patientName.getScene().getWindow());
   }
-
 
   /* Animations */
   @FXML
