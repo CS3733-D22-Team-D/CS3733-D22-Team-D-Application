@@ -44,21 +44,24 @@ public class PatientTransportController extends ParentController {
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
-  List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
-  DAO<PatientTransportRequest> patientTransportRequestDAO =
+  private final DAO<PatientTransportRequest> patientTransportRequestDAO =
       DAOPouch.getPatientTransportRequestDAO();
-  DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
-  DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
+    createTable();
+  }
 
+  private void createTable() {
     requestTable = new Table<>(PatientTransportRequest.class, table, 0);
+    requestTable.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
     requestTable.setRows(
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values()));
     requestTable.setListeners(new PatientTransportRequest());
