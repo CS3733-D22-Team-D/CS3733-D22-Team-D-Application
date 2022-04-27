@@ -70,10 +70,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID:" />
-                              <JFXComboBox id="jButton" fx:id="assigneeBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select">
-                                 <stylesheets>
-                                    <URL value="@../../../../../../../../../3041/Application%20High%20Fi/src/main/resources/edu/wpi/DapperDaemons/assets/buttons.css" />
-                                 </stylesheets>
+                              <JFXComboBox id="jButton" fx:id="assigneeBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select" styleClass="cardInput">
                                  <effect>
                                     <DropShadow offsetX="-2.0" offsetY="2.0">
                                        <color>
