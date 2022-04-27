@@ -34,6 +34,7 @@ public class ShowRequestPaths {
   private static int lineOffset = 4;
   private static int numberOfLines = 0;
   private static int startingOffset = 0;
+  private static boolean showing = false;
 
   private int lastStart = 0;
 
@@ -49,19 +50,24 @@ public class ShowRequestPaths {
 
   public void showAllPaths(Location location) {
     clearPath();
-    List<Request> requests = DAOFacade.getFilteredRequests(location.getNodeID());
-    AStar ppHelper = new AStar();
-    startingOffset = requests.size() / 2 * lineOffset;
-    for (Request request : requests) {
-      if (request.requiresTransport()) {
-        makeLinePath(
-            request.getRoomID(),
-            request.transportFromRoomID(),
-            getLineColor(request.requestType()));
-        numberOfLines++;
+    if (!showing) {
+      List<Request> requests = DAOFacade.getFilteredRequests(location.getNodeID());
+      AStar ppHelper = new AStar();
+      startingOffset = requests.size() / 2 * lineOffset;
+      for (Request request : requests) {
+        if (request.requiresTransport()) {
+          makeLinePath(
+              request.getRoomID(),
+              request.transportFromRoomID(),
+              getLineColor(request.requestType()));
+          numberOfLines++;
+        }
       }
+      filterByFloor(currentFloor);
+      showing = true;
+    } else {
+      showing = false;
     }
-    filterByFloor(currentFloor);
   }
 
   public void clearPath() {
@@ -173,19 +179,19 @@ public class ShowRequestPaths {
   private Color getLineColor(String reqType) {
     switch (reqType) {
       case "Equipment Cleaning Request":
-        return Color.BLUE;
+        return Color.rgb(20, 33, 61);
       case "Language Request":
-        return Color.YELLOW;
+        return Color.rgb(240, 156, 120);
       case "Meal Delivery Request":
-        return Color.MEDIUMVIOLETRED;
+        return Color.rgb(0, 157, 148);
       case "Medical Equipment Request":
-        return Color.GREEN;
+        return Color.rgb(153, 204, 153);
       case "Medicine Request":
-        return Color.CORNFLOWERBLUE;
+        return Color.rgb(247, 127, 0);
       case "Patient Transport Request":
-        return Color.ORANGERED;
+        return Color.rgb(100, 60, 180);
       case "Security Request":
-        return Color.ORCHID;
+        return Color.rgb(153, 102, 204);
       default:
         return Color.GOLD;
     }

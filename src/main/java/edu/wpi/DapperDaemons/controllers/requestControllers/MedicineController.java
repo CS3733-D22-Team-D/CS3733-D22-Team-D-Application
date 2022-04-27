@@ -60,7 +60,6 @@ public class MedicineController extends ParentController {
     for (Employee employee : employees) employeeNames.add(employee.getNodeID());
     assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
 
-    t = new Table<>(MedicineRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
@@ -79,6 +78,7 @@ public class MedicineController extends ParentController {
       }
     }
 
+    t = new Table<>(MedicineRequest.class, table, 0);
     t.setRows(reqs);
     t.setHeader(
         List.of(

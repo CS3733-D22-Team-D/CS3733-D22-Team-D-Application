@@ -262,12 +262,12 @@ public class PatientTransportRequest extends TableObject implements Request {
 
   @TableHandler(table = 0, col = 3)
   public String getRoomID() {
-    return roomID;
+    return nextRoomID;
   }
 
   @Override
   public String transportFromRoomID() {
-    return nextRoomID;
+    return roomID;
   }
 
   public void setRoomID(String roomID) {

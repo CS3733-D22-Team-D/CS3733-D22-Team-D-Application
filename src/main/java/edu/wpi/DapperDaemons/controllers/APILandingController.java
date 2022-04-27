@@ -4,11 +4,13 @@ import edu.wpi.DapperDaemons.APIConverters.ExternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.InternalReqConverter;
 import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
 import edu.wpi.cs3733.D22.teamB.api.DatabaseController;
 import edu.wpi.cs3733.D22.teamB.api.Request;
 import edu.wpi.cs3733.D22.teamD.API.*;
+import edu.wpi.cs3733.D22.teamD.entities.EmployeeObj;
 import edu.wpi.cs3733.D22.teamD.entities.LocationObj;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamZ.api.API;
@@ -66,6 +68,30 @@ public class APILandingController implements Initializable {
     // Team B API Init
     bSave.setVisible(false);
     bErrorLabel.setText("");
+
+    EmployeeAPI employeeAPI = new EmployeeAPI();
+    for (EmployeeObj employeeObj : employeeAPI.getAllEmployees()) {
+      employeeAPI.removeEmployee(employeeObj);
+    }
+    /*
+    SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
+    for (SanitationIRequest iReq : sanitationReqAPI.getAllRequests()) {
+      sanitationReqAPI.deleteRequest(iReq);
+    }
+    */
+
+    // EmployeeAPI employeeAPI = new EmployeeAPI();
+    for (Employee employee : DAOPouch.getEmployeeDAO().getAll().values()) {
+      EmployeeObj employeeObj =
+          new EmployeeObj(
+              employee.getFirstName(),
+              employee.getLastName(),
+              employee.getDateOfBirth(),
+              EmployeeObj.EmployeeType.valueOf(employee.getEmployeeType().toString()),
+              employee.getSecurityClearance());
+      employeeObj.setNodeID(employee.getNodeID());
+      employeeAPI.addEmployee(employeeObj);
+    }
   }
 
   /** Allows for requests submitted by the API to be saved to our database */
@@ -73,9 +99,9 @@ public class APILandingController implements Initializable {
     dSave.setVisible(false);
     zSave.setVisible(false);
     bSave.setVisible(false);
-    databaseSaverTeamD();
-    databaseSaverTeamZ();
-    databaseSaverTeamB();
+    // databaseSaverTeamD();
+    // databaseSaverTeamZ();
+    // databaseSaverTeamB();
   }
 
   /**

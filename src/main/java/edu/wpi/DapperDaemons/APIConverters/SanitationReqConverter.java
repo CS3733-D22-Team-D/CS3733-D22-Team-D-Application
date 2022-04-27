@@ -20,8 +20,8 @@ public class SanitationReqConverter extends Converter {
     return new SanitationRequest(
         parsePriority(request),
         request.getRoomID(),
-        request.getRequesterID(),
-        request.getAssigneeID(),
+        request.getRequesterID().substring(0, request.getRequesterID().indexOf(" ")).trim(),
+        request.getAssigneeID().substring(0, request.getAssigneeID().indexOf(" ")).trim(),
         "Created Using API",
         request.getSanitationType(),
         determineDateNeeded(1440));

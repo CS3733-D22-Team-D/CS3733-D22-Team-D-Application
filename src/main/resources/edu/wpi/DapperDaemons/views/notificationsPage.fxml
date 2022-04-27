@@ -11,7 +11,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
          <children>
-            <ScrollPane hbarPolicy="NEVER" minHeight="0.0" prefHeight="200.0" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" minHeight="0.0" prefHeight="457.0" prefWidth="1054.0" vbarPolicy="NEVER">
                <content>
                   <VBox prefHeight="200.0" prefWidth="857.0">
                      <children>
