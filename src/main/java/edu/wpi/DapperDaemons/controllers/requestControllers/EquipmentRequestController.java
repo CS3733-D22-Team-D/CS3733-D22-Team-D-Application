@@ -183,13 +183,14 @@ public class EquipmentRequestController extends ParentController {
           roomID = locationBox.getValue();
           int numCorrectLocations = 0;
           numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
+          Location room = new ArrayList<Location>(locationDAO.filter(locationDAO.getAll(), 7, roomID).values()).get(0);
           if (numCorrectLocations >= 1) {
 
             boolean hadClearance =
                 addItem(
                     new MedicalEquipmentRequest(
                         priority,
-                        roomID,
+                        room.getNodeID(),
                         requesterID,
                         notes.getText(),
                         equipment.getNodeID(),
