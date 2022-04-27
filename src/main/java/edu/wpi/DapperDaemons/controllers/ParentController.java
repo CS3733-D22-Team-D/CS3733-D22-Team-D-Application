@@ -392,7 +392,7 @@ public class ParentController extends AppController {
 
   @FXML
   void switchToMedicine() {
-    swapPage("medicine", "Medication Request");
+    swapPage("medicine", "Medication Delivery");
   }
 
   @FXML

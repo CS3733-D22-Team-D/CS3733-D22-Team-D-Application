@@ -60,6 +60,7 @@ public class MapController extends ParentController {
   @FXML private AnchorPane requestsPane;
   @FXML private VBox centerBox;
   @FXML private VBox emptyBox;
+  @FXML private VBox lineInfoBox;
 
   /* Map Filter */
   @FXML private StackPane mapFilter;
@@ -123,6 +124,8 @@ public class MapController extends ParentController {
 
   private PathfinderHandler pathfinder;
   private ShowRequestPaths requestPaths;
+  private boolean chancla = false;
+
   //  private ShowConnections connectionShower; // Uncomment when you want to see all paths
 
   /* Database stuff */
@@ -513,6 +516,11 @@ public class MapController extends ParentController {
   void showReqList() {
     infoBox.toggleTable(RoomInfoBox.TableDisplayType.REQUEST);
     requestPaths.showAllPaths(infoBox.getPosition());
+    if (requestPaths.showing) {
+      lineInfoBox.setVisible(true);
+    } else {
+      lineInfoBox.setVisible(false);
+    }
   }
 
   private boolean onFilterRequestType() {
