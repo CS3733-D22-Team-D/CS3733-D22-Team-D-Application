@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -238,6 +239,7 @@ public class Table<R> {
   }
 
   private void restyleRow(List<Node> row) {
+    if (row.size() == 0) return;
     ((VBox) row.get(0))
         .setBackground(
             new Background(
@@ -521,7 +523,7 @@ public class Table<R> {
 
   public void filter() {
     ArrayList<R> toKeep = new ArrayList<>(rows);
-    toKeep.remove(null);
+    toKeep.removeIf(Objects::isNull);
     for (int col : filters.keySet()) {
       toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
     }

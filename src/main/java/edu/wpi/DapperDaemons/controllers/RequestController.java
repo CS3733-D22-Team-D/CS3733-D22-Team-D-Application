@@ -1,179 +1,95 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
-import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
-import edu.wpi.DapperDaemons.entities.Notification;
-import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
-import edu.wpi.DapperDaemons.tables.TableHelper;
+import edu.wpi.DapperDaemons.tables.Table;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class RequestController extends ParentController implements Initializable {
-  private TableHelper<Request> tableHelper;
-  private TableHelper<Request> tableHelper1;
-  private TableHelper<Request> tableHelper2;
-  @FXML private TableColumn<Request, String> Assignee22;
-  @FXML private TableColumn<Request, String> Assignee221;
-  @FXML private TableColumn<Request, String> Assignee222;
-  @FXML private TableColumn<Request, String> Priority22;
-  @FXML private TableColumn<Request, String> Priority221;
-  @FXML private TableColumn<Request, String> Priority222;
-  @FXML private TableColumn<Request, String> ReqID22;
-  @FXML private TableColumn<Request, String> ReqID221;
-  @FXML private TableColumn<Request, String> ReqID222;
-  @FXML private TableColumn<Request, String> Requester22;
-  @FXML private TableColumn<Request, String> Requester221;
-  @FXML private TableColumn<Request, String> Requester222;
-  @FXML private TableColumn<Request, String> RoomID22;
-  @FXML private TableColumn<Request, String> RoomID221;
-  @FXML private TableColumn<Request, String> RoomID222;
-  @FXML private TableColumn<Request, Request.RequestStatus> Status22;
-  @FXML private TableColumn<Request, Request.RequestStatus> Status221;
-  @FXML private TableColumn<Request, Request.RequestStatus> Status222;
+
+  @FXML private GridPane assignedTable;
+  @FXML private GridPane createTable;
+  @FXML private GridPane relevantTable;
+  private Table<Request> createT;
+  private Table<Request> assignedT;
+  private Table<Request> relevantT;
+  @FXML private VBox createBox;
+  @FXML private VBox assignBox;
+  @FXML private VBox relevantBox;
+
   @FXML private ToggleButton assignedRequests;
-  @FXML private TableView<Request> assignedRequestsTable;
   @FXML private ToggleButton createdRequests;
-  @FXML private TableView<Request> createdRequestsTable;
   @FXML private ToggleButton relevantRequests;
-  @FXML private TableView<Request> relevantRequestsTable;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     tableinit();
-    selectCreated(new ActionEvent());
+    selectCreated();
   }
 
   @FXML
-  void selectAssigned(ActionEvent event) {
-    assignedRequestsTable.setVisible(true);
-    createdRequestsTable.setVisible(false);
-    relevantRequestsTable.setVisible(false);
-    assignedRequestsTable.setPickOnBounds(true);
-    createdRequestsTable.setPickOnBounds(false);
-    relevantRequestsTable.setPickOnBounds(false);
+  void selectAssigned() {
+    assignBox.setVisible(true);
+    createBox.setVisible(false);
+    relevantBox.setVisible(false);
+    assignedTable.setPickOnBounds(true);
+    createTable.setPickOnBounds(false);
+    relevantTable.setPickOnBounds(false);
   }
 
   @FXML
-  void selectCreated(ActionEvent event) {
-    assignedRequestsTable.setVisible(false);
-    createdRequestsTable.setVisible(true);
-    relevantRequestsTable.setVisible(false);
-    assignedRequestsTable.setPickOnBounds(false);
-    createdRequestsTable.setPickOnBounds(true);
-    relevantRequestsTable.setPickOnBounds(false);
+  void selectCreated() {
+    assignBox.setVisible(false);
+    createBox.setVisible(true);
+    relevantBox.setVisible(false);
+    assignedTable.setPickOnBounds(false);
+    createTable.setPickOnBounds(true);
+    relevantTable.setPickOnBounds(false);
   }
 
   @FXML
-  void selectRelevant(ActionEvent event) {
-    assignedRequestsTable.setVisible(false);
-    createdRequestsTable.setVisible(false);
-    relevantRequestsTable.setVisible(true);
-    assignedRequestsTable.setPickOnBounds(false);
-    createdRequestsTable.setPickOnBounds(false);
-    relevantRequestsTable.setPickOnBounds(true);
-  }
-
-  @FXML
-  void assigneeNewPleb(TableColumn.CellEditEvent<Request, String> event) {
-    Request request = event.getRowValue();
-    DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
-
-    ((TableObject) request).setAttribute(5, event.getNewValue());
-    if (requestDAO.update(((TableObject) request))) {
-      DAOPouch.getNotificationDAO()
-          .add(
-              new Notification(
-                  request.requestType(),
-                  "You have been assigned by"
-                      + SecurityController.getUser().getFirstName()
-                      + " "
-                      + SecurityController.getUser().getLastName()
-                      + ".",
-                  event.getNewValue()));
-    }
-    tableupdate();
-  }
-
-  @FXML
-  void onEditStatus(TableColumn.CellEditEvent<Request, Request.RequestStatus> event) {
-    Request request = event.getRowValue();
-    DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
-
-    ((TableObject) request).setAttribute(6, event.getNewValue().toString());
-    if (requestDAO.update(((TableObject) request))) {
-      DAOPouch.getNotificationDAO()
-          .add(
-              new Notification(
-                  request.requestType(),
-                  "You have been assigned by"
-                      + SecurityController.getUser().getFirstName()
-                      + " "
-                      + SecurityController.getUser().getLastName()
-                      + ".",
-                  SecurityController.getUser().getNodeID()));
-    }
-    tableupdate();
-  }
-
-  @FXML
-  void onVolunteer(TableColumn.CellEditEvent<Request, String> event) {
-    Request request = event.getRowValue();
-    DAO<TableObject> requestDAO = DAOPouch.getDAO((TableObject) request);
-
-    ((TableObject) request).setAttribute(5, SecurityController.getUser().getNodeID());
-    ((TableObject) request).setAttribute(6, Request.RequestStatus.IN_PROGRESS.toString());
-    if (requestDAO.update(((TableObject) request))) {
-      DAOPouch.getNotificationDAO()
-          .add(
-              new Notification(
-                  request.requestType(),
-                  "You have been assigned by"
-                      + SecurityController.getUser().getFirstName()
-                      + " "
-                      + SecurityController.getUser().getLastName()
-                      + ".",
-                  SecurityController.getUser().getNodeID()));
-    }
-    tableupdate();
+  void selectRelevant() {
+    assignBox.setVisible(false);
+    createBox.setVisible(false);
+    relevantBox.setVisible(true);
+    assignedTable.setPickOnBounds(false);
+    createTable.setPickOnBounds(false);
+    relevantTable.setPickOnBounds(true);
   }
 
   public void tableinit() {
-    tableHelper = new TableHelper<>(assignedRequestsTable, 2);
-    tableHelper.linkColumns(Request.class);
-    tableHelper.addFilter(Assignee221, SecurityController.getUser().getNodeID());
+    createT = new Table<>(Request.class, createTable, 2);
+    createT.setRows(DAOFacade.getAllRequests());
+    createT.setHeader(
+        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
+    createT.addFilter(4, SecurityController.getUser().getNodeID());
+    createT.filter();
+    createT.addDropDownEditProperty(4, 6, "CANCELLED");
+    createT.addEnumEditProperty(5, 2, Request.Priority.class);
+    createT.addDropDownEditProperty(3, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
 
-    tableHelper1 = new TableHelper<>(createdRequestsTable, 2);
-    tableHelper1.linkColumns(Request.class);
-    tableHelper1.addFilter(Requester22, SecurityController.getUser().getNodeID());
+    assignedT = new Table<>(Request.class, assignedTable, 2);
+    assignedT.setRows(DAOFacade.getAllRequests());
+    assignedT.setHeader(
+        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
+    assignedT.addFilter(5, SecurityController.getUser().getNodeID());
+    assignedT.filter();
+    assignedT.addEnumEditProperty(4, 6, Request.RequestStatus.class);
 
-    tableHelper2 = new TableHelper<>(relevantRequestsTable, 2);
-    tableHelper2.linkColumns(Request.class);
-    tableHelper2.addFilter(Status222, Request.RequestStatus.REQUESTED);
-
-    tableupdate();
-
-    assignedRequestsTable.setPickOnBounds(false);
-    createdRequestsTable.setPickOnBounds(false);
-    relevantRequestsTable.setPickOnBounds(false);
-
-    String[] plebs = DAOFacade.getAllPlebs().toArray(new String[] {});
-    tableHelper.addEnumEditProperty(Status221, Request.RequestStatus.class);
-    tableHelper1.addDropDownEditProperty(Assignee22, plebs);
-    tableHelper2.addDropDownEditProperty(Assignee222, "admin");
-  }
-
-  private void tableupdate() {
-    tableHelper.update(DAOFacade.getAllRequests());
-    tableHelper1.update(DAOFacade.getAllRequests());
-    tableHelper2.update(DAOFacade.getAllRequests());
+    relevantT = new Table<>(Request.class, relevantTable, 2);
+    relevantT.setRows(DAOFacade.getAllRequests());
+    relevantT.setHeader(
+        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
+    relevantT.addFilter(6, "REQUESTED");
+    relevantT.filter();
+    relevantT.addDropDownEditProperty(3, 5, SecurityController.getUser().getNodeID());
   }
 }

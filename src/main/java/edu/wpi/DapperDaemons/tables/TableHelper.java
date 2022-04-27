@@ -107,7 +107,7 @@ public class TableHelper<R> {
 
       // Find methods with the same table number association (or none)
       for (int i = 0; i < annotations.length; i++) {
-        if (annotations[i].table() == tableNum) {
+        if (annotations[i].table() == tableNum && instance != null) {
           try {
             indexes.put(annotations[i].col(), m.invoke(instance));
           } catch (IllegalAccessException | InvocationTargetException e) {
