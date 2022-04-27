@@ -34,7 +34,7 @@ public class ShowRequestPaths {
   private static int lineOffset = 4;
   private static int numberOfLines = 0;
   private static int startingOffset = 0;
-  private static boolean showing = false;
+  public static boolean showing = false;
 
   private int lastStart = 0;
 
