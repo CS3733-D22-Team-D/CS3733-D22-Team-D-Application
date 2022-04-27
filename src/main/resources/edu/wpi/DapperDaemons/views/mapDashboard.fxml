@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -9,17 +10,18 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="467.0" prefWidth="742.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
+<HBox id="background" prefHeight="969.0" prefWidth="1388.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
    <children>
-      <VBox prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+      <VBox prefHeight="200.0" prefWidth="200.0">
          <children>
             <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
@@ -122,6 +124,42 @@
                   <Insets bottom="10.0" left="12.5" right="12.5" top="10.0" />
                </padding>
             </VBox>
+            <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Interactive Map">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
+         <children>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
@@ -157,42 +195,6 @@
                   </VBox>
                </children>
             </VBox>
-         </children>
-      </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0">
-         <children>
-            <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
-               <children>
-                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Interactive Map">
-                           <font>
-                              <Font name="System Bold" size="23.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
@@ -210,7 +212,29 @@
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <GridPane HBox.hgrow="ALWAYS">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <PieChart fx:id="pumpChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                 </children>
+                              </StackPane>
+                              <PieChart labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" fx:id="xrayChart" />
+                              <PieChart fx:id="reclinerChart" labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                              <PieChart fx:id="bedChart" labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                           </children>
+                        </GridPane>
+                     </children></HBox>
                </children>
             </VBox>
          </children>

@@ -9,8 +9,11 @@ import java.net.URL;
 import java.util.*;
 import java.util.List;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +44,11 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   public static String floor;
 
+  @FXML private PieChart pumpChart;
+  @FXML private PieChart xrayChart;
+  @FXML private PieChart reclinerChart;
+  @FXML private PieChart bedChart;
+
   public static List<ImageView> floorList = new ArrayList<ImageView>();
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
@@ -53,6 +61,23 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<PieChart.Data> pumpData =
+        FXCollections.observableArrayList(
+            new PieChart.Data("dirty", 55), new PieChart.Data("clean", 45));
+    ObservableList<PieChart.Data> xrayData =
+        FXCollections.observableArrayList(
+            new PieChart.Data("dirty", 20), new PieChart.Data("clean", 80));
+    ObservableList<PieChart.Data> reclinerData =
+        FXCollections.observableArrayList(
+            new PieChart.Data("dirty", 13), new PieChart.Data("clean", 87));
+    ObservableList<PieChart.Data> bedData =
+        FXCollections.observableArrayList(
+            new PieChart.Data("dirty", 42), new PieChart.Data("clean", 58));
+    pumpChart.setData(pumpData);
+    xrayChart.setData(xrayData);
+    reclinerChart.setData(reclinerData);
+    bedChart.setData(bedData);
+
     floorNum = 2;
     floor = getFloor();
     Collections.fill(floorsInAnimation, Boolean.FALSE);
