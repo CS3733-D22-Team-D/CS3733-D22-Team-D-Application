@@ -149,6 +149,29 @@ public class AnimationHelper {
     transition.play();
   }
 
+
+  /* Performs an X and Y translation for Cole <3 */
+  public static void ColesTrans(Node node, int xTrans, int yTrans, int durationInMillis) {
+
+    Animation transition =
+        new Transition() {
+          {
+            setCycleDuration(Duration.millis(durationInMillis));
+          }
+
+          @Override
+          protected void interpolate(double frac) {
+            node.setStyle(
+                "-fx-translate-x: "
+                    + ((int) frac * xTrans)
+                    + "; -fx-translate-y: "
+                    + ((int) frac * yTrans)
+                    + ";");
+          }
+        };
+    transition.play();
+  }
+
   /* Finds the average color between two colors given a percentage weight */
   public static java.awt.Color blend(Color color1, Color color2, double ratio) {
     float r = (float) ratio;
