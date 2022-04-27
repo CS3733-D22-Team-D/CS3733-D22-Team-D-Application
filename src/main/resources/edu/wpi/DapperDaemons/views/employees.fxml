@@ -14,20 +14,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="542.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EmployeesController">
+<HBox prefHeight="542.0" prefWidth="696.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.EmployeesController">
    <children>
       <VBox prefHeight="542.0" prefWidth="433.0">
          <children>
-            <VBox id="foreground" maxHeight="350.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+            <VBox maxHeight="350.0" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="433.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                  <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="433.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Employee">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Add Employee">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
                      </children>
+                     <padding>
+                        <Insets left="20.0" top="20.0" />
+                     </padding>
                   </VBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="307.0">
                      <children>
@@ -132,13 +135,6 @@
                      </padding>
                   </HBox>
                </children>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color opacity="0.15000000596046448" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </VBox>
          </children>
          <HBox.margin>
@@ -150,16 +146,22 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="508.0" style="-fx-background-color: #4b5b81; -fx-background-radius: 7.5 7.5 0 0;">
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="508.0" stylesheets="@../styling/lightMode.css">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Employees">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Text>
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="20.0" top="20.0" />
+                     </padding>
                   </HBox>
                   <VBox prefHeight="177.0" prefWidth="508.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -179,13 +181,6 @@
                      </children>
                   </VBox>
                </children>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color opacity="0.15000000596046448" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="96.0">
                <children>

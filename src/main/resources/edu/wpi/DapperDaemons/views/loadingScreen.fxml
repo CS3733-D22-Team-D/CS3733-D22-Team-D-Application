@@ -26,7 +26,7 @@
             </Pane>
             <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loadingIcon" fitHeight="144.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/loading.gif" />
                      </image>

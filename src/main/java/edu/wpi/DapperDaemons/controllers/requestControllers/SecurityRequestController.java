@@ -132,7 +132,6 @@ public class SecurityRequestController extends ParentController {
               Request.Priority.valueOf(priorityIn.getValue()),
               roomID,
               requesterID,
-              assignee,
               notes.getText(),
               dateRep));
     } else {
