@@ -61,6 +61,8 @@ public class NotificationsPageController extends ParentController {
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
       if (n.getNodeID().equals("not" + r.getNodeID())) {
+        ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
+            .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
             .setText(DAOPouch.getEmployeeDAO().get(r.getAssigneeID()).getFirstName());
         Background b =
