@@ -35,7 +35,7 @@ public class PatientTransportController extends ParentController {
   @FXML private JFXComboBox<String> assigneeBox;
 
   @FXML private GridPane table;
-  private Table<PatientTransportRequest> requestTable;
+  private Table<PatientTransportRequest> t;
 
   /* Text Boxes */
   @FXML private TextField patientName;
@@ -57,9 +57,12 @@ public class PatientTransportController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
+    createTable();
+  }
 
-    requestTable = new Table<>(PatientTransportRequest.class, table, 0);
-
+  private void createTable() {
+    t = new Table<>(PatientTransportRequest.class, table, 0);
+    t.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
 
@@ -72,9 +75,8 @@ public class PatientTransportController extends ParentController {
         i--;
       }
     }
-
-    requestTable.setRows(reqs);
-    requestTable.setListeners(new PatientTransportRequest());
+    t.setRows(reqs);
+    t.setListeners(new PatientTransportRequest());
   }
 
   @FXML
@@ -229,7 +231,7 @@ public class PatientTransportController extends ParentController {
 
   private boolean addItem(PatientTransportRequest request) {
     if (patientTransportRequestDAO.add(request)) {
-      requestTable.addRow(request);
+      t.addRow(request);
       return true;
     }
     return false;

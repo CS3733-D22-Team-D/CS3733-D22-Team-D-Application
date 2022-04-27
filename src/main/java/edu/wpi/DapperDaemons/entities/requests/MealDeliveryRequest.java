@@ -180,6 +180,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 8)
   public Priority getPriority() {
     return priority;
   }
