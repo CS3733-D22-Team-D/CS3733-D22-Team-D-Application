@@ -25,6 +25,7 @@ public class Notification extends TableObject {
     if (!nodeID.equals(that.nodeID)) return false;
     if (!userID.equals(that.userID)) return false;
     if (!subject.equals(that.subject)) return false;
+    if (!date.equals(that.date)) return false;
     return body.equals(that.body);
   }
 
