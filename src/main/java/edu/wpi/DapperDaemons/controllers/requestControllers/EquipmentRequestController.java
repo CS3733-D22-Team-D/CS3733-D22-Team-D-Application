@@ -67,7 +67,7 @@ public class EquipmentRequestController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0, 0);
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {

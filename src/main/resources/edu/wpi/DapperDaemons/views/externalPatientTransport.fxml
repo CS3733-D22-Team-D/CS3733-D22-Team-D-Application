@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -33,14 +34,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="7.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="First Name:" />
-                              <TextField id="field" fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput">
+                              <TextField fx:id="patientName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput">
                                  <effect>
                                     <DropShadow offsetX="-2.0" offsetY="2.0">
                                        <color>
@@ -54,7 +55,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Last Name:" />
-                              <TextField id="field" fx:id="patientLastName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
+                              <TextField fx:id="patientLastName" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
@@ -158,6 +159,12 @@
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="7.0" />
+               </padding>
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
@@ -181,9 +188,9 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+      <VBox minWidth="480.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pageCard">
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
                <children>
                   <HBox prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
                      <children>
@@ -202,14 +209,18 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <GridPane fx:id="table" vgap="10.0" HBox.hgrow="ALWAYS">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </GridPane>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <content>
+                              <GridPane fx:id="table" vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </padding>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
                      </children>
                   </HBox>
                </children>
