@@ -27,7 +27,7 @@ public class DefaultController extends ParentController {
   @FXML private Pane patientPageContainer;
   @FXML private ImageView patientPageImage;
   @FXML private Pane backendPageContainer;
-  @FXML private ImageView backendPageImage;
+  @FXML private ImageView apiPageImage;
   @FXML private Pane equipSaniPageContainer;
   @FXML private ImageView equipSaniPageImage;
   @FXML private Pane languagePageContainer;
@@ -50,7 +50,7 @@ public class DefaultController extends ParentController {
     bindImage(mealPageImage, mealPageContainer);
     bindImage(mapPageImage, mapPageContainer);
     bindImage(patientPageImage, patientPageContainer);
-    bindImage(backendPageImage, backendPageContainer);
+    bindImage(apiPageImage, backendPageContainer);
     bindImage(equipSaniPageImage, equipSaniPageContainer);
     bindImage(languagePageImage, languagePageContainer);
     bindImage(securityPageImage, securityPageContainer);

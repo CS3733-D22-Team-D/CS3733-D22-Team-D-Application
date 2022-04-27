@@ -556,13 +556,13 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToDB" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToAPI" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
                            <children>
                               <Pane fx:id="backendPageContainer" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="backendPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fx:id="apiPageImage" fitHeight="162.0" fitWidth="200.0">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/databaseIcon.png" />
+                                          <Image url="@../assets/HomeIcons/apiIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -572,7 +572,7 @@
                                     <Insets />
                                  </VBox.margin>
                                  <children>
-                                    <Label id="label" text="Backend Info Display" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
+                                    <Label id="label" text="API Landing Page" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
                                        <padding>
                                           <Insets left="10.0" right="10.0" />
                                        </padding>
@@ -587,7 +587,7 @@
                               </HBox>
                               <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
                                  <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View all databases in use." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Make a service request using an API" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
