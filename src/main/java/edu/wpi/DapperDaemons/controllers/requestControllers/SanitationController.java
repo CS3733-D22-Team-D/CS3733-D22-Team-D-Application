@@ -193,9 +193,6 @@ public class SanitationController extends ParentController {
     boolean hasClearance = false;
     hasClearance = sanitationRequestDAO.add(request);
 
-    if (hasClearance) {
-      pendingRequests.getItems().add(request);
-    }
     return hasClearance;
   }
 
