@@ -21,6 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -55,48 +56,52 @@
                            <children>
                               <VBox alignment="CENTER_RIGHT" minWidth="-Infinity" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../assets/buttons.css" text="5" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="4" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="3" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 2" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 1" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="L1" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" stylesheets="@../assets/buttons.css" text="L2" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Button>
+                                          <VBox fx:id="roomInfoBox1" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="370.0" prefWidth="326.0" styleClass="pageCard">
+                                             <children>
+                                                <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="212.0" styleClass="cardTitle" text="Path Information" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="19.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets bottom="5.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="70.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Medical Equipment Request" />
+                                                      <Line endX="85.0" startX="-100.0" style="-fx-stroke-dash-array: 12; -fx-stroke-width: 2;">
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </Line>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                   <padding>
+                                                      <Insets left="15.0" right="15.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <effect>
+                                                <DropShadow>
+                                                   <color>
+                                                      <Color opacity="0.15000000596046448" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </VBox>
                                        </children>
-                                       <padding>
-                                          <Insets right="15.0" />
-                                       </padding>
-                                    </VBox>
+                                    </StackPane>
                                     <HBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <StackPane maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="40.0" prefWidth="20.0">
