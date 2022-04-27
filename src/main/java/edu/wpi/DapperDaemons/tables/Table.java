@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.MapDashboardController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -66,13 +67,18 @@ public class Table<R> {
                         new ArrayList<R>(
                             DAOPouch.getDAO((TableObject) type).filter(6, "IN_PROGRESS").values());
                     req.addAll(inprog);
+
+                    for (int col : filters.keySet()) {
+                      req.removeIf(
+                          r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                    }
+
                     difference(req, rows);
-                    filter();
                   });
             }));
   }
 
-  public void setRequestListeners() {
+  public void setDashboardListeners() {
     List<String> allTableNames =
         DAOFacade.getAllRequests().stream()
             .map(n -> ((TableObject) n).tableName())
@@ -83,8 +89,8 @@ public class Table<R> {
             () -> {
               Platform.runLater(
                   () -> {
-                    difference((List<R>) DAOFacade.getAllRequests(), rows);
-                    filter();
+                    difference(
+                        (List<R>) DAOFacade.getRequestsByFloor(MapDashboardController.floor), rows);
                   });
             }));
   }
@@ -501,6 +507,7 @@ public class Table<R> {
   }
 
   public void clear() {
+    if (rows.size() == 0) return;
     int i = rows.get(0) == null ? 1 : 0;
     List<R> row2 = new ArrayList<>(rows);
     for (; i < row2.size(); i++) {

@@ -7,6 +7,8 @@ public class InternalReqConverter extends Converter {
 
   public InternalReqConverter() {}
 
+  public static String employeeID;
+
   /**
    * Converts from a team B patient req to our patient req
    *
@@ -15,16 +17,16 @@ public class InternalReqConverter extends Converter {
    */
   public static PatientTransportRequest convert(Request internalRequest) {
 
-    String employeeId;
+    String currID;
 
-    if (internalRequest.getEmployeeID() == null) employeeId = "null";
-    else employeeId = internalRequest.getEmployeeID();
+    if (employeeID == null) currID = "null";
+    else currID = employeeID;
 
     return new PatientTransportRequest(
         parsePriority(internalRequest.getPriority()),
         internalRequest.getStartLocation().getNodeID(),
-        employeeId,
-        employeeId,
+        currID,
+        currID,
         internalRequest.getInformation(),
         internalRequest.getRequestID(),
         internalRequest.getFinishLocation().getNodeID(),
