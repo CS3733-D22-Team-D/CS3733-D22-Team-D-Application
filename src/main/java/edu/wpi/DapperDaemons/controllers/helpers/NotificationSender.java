@@ -53,11 +53,7 @@ public class NotificationSender {
                                     .add(
                                         new Notification(
                                             r.requestType(),
-                                            "You have been assigned by "
-                                                + assigner.getFirstName()
-                                                + " "
-                                                + assigner.getLastName()
-                                                + ".",
+                                            "You have been assigned to " + r.requestType(),
                                             r));
                               }
                             });

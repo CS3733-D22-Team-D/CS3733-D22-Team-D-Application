@@ -52,52 +52,43 @@ public class NotificationsPageController extends ParentController {
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
       if (n.getNodeID().equals("not" + r.getNodeID())) {
-        ((Label) ((VBox) notif.getChildren().get(4)).getChildren().get(0))
+        ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
             .setText(DAOPouch.getEmployeeDAO().get(r.getAssigneeID()).getFirstName());
+        Background b =
+            new Background(
+                new BackgroundFill(new Color(1, 1, 1, 1), CornerRadii.EMPTY, Insets.EMPTY));
         switch (r.getPriority()) {
           case LOW:
-            ((HBox) notif.getChildren().get(2))
-                .setBackground(
-                    new Background(
-                        new BackgroundFill(
-                            Color.color(.47, .87, .47, .8),
-                            new CornerRadii(0, 10, 10, 0, false),
-                            Insets.EMPTY)));
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.47, .87, .47, .8), new CornerRadii(5), Insets.EMPTY));
             break;
           case MEDIUM:
-            ((HBox) notif.getChildren().get(2))
-                .setBackground(
-                    new Background(
-                        new BackgroundFill(
-                            Color.color(.96, .93, .26, .8),
-                            new CornerRadii(0, 10, 10, 0, false),
-                            Insets.EMPTY)));
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.96, .93, .26, .8), new CornerRadii(5), Insets.EMPTY));
             break;
           case HIGH:
-            ((HBox) notif.getChildren().get(2))
-                .setBackground(
-                    new Background(
-                        new BackgroundFill(
-                            Color.color(.98, .41, .38, .8),
-                            new CornerRadii(0, 10, 10, 0, false),
-                            Insets.EMPTY)));
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.98, .41, .38, .8), new CornerRadii(5), Insets.EMPTY));
             break;
           case OVERDUE:
-            ((HBox) notif.getChildren().get(2))
-                .setBackground(
-                    new Background(
-                        new BackgroundFill(
-                            Color.color(0, 0, 0, 1),
-                            new CornerRadii(0, 10, 10, 0, false),
-                            Insets.EMPTY)));
+            b =
+                new Background(
+                    new BackgroundFill(Color.color(0, 0, 0, 1), new CornerRadii(5), Insets.EMPTY));
             break;
           default:
             break;
         }
+        ((HBox) notif.getChildren().get(2)).setBackground(b);
         break;
       }
     }
-    ((Label) ((VBox) notif.getChildren().get(4)).getChildren().get(1)).setText(n.getBody());
+    ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(1)).setText(n.getBody());
     return notif;
   }
 

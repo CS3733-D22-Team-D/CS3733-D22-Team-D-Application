@@ -8,7 +8,7 @@
 
 <HBox alignment="CENTER" prefHeight="592.0" prefWidth="957.0" spacing="30.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.NotificationsPageController">
    <children>
-      <VBox maxWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+      <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
          <children>
             <VBox fx:id="todayBox" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
@@ -35,6 +35,9 @@
                </children>
             </VBox>
          </children>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding>
       </VBox>
    </children>
 </HBox>
