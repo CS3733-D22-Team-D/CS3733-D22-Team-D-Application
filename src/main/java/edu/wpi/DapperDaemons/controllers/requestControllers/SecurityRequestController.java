@@ -64,7 +64,6 @@ public class SecurityRequestController extends ParentController {
     //    bindImage(BGImage, BGContainer);
 
     onClearClicked();
-    t = new Table<>(SecurityRequest.class, table, 0);
     createTable();
   }
 
@@ -74,7 +73,8 @@ public class SecurityRequestController extends ParentController {
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(SecurityRequest.class, table, 0);
+    t.setHeader(List.of("Requester", "Assignee", "Room", "Priority"));
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
     t.setRows(reqs);
