@@ -63,6 +63,15 @@ public class OverdueHandler {
         );
   }
 
+  private boolean isFrontIsAMonth(String frontTwo) {
+    if (Integer.parseInt(frontTwo.substring(0, 1)) >= 2
+        && Integer.parseInt(frontTwo.substring(0, 1)) <= 9) {
+      // if front is a month
+      return true;
+    }
+    return false;
+  }
+
   private List<Request> checkOverdue(List<Request> requestList) {
     List<Request> overdueList = new ArrayList<>();
     for (Request req : requestList) {
@@ -70,8 +79,30 @@ public class OverdueHandler {
       int dateOf;
       try {
         String reqDate = req.getDateNeeded();
-        if (reqDate.length() < 8) {
-          reqDate = "0" + reqDate;
+        if (reqDate.length() == 6) {
+          reqDate = "0" + reqDate.substring(0, 1) + "0" + reqDate.substring(1);
+        }
+        if (reqDate.length() == 7) {
+          String frontString = reqDate.substring(0, 3);
+          if (isFrontIsAMonth(frontString.substring(0, 2))) { // If front number is a month
+            frontString = "0" + frontString;
+          } else {
+            if (Integer.parseInt(frontString.substring(0, 2)) == 10) { // If its october
+              frontString = "100" + frontString.substring(2);
+            } else {
+              if (Integer.parseInt(frontString.substring(0, 2))
+                  >= 13) { // If the first two aren't a month
+                frontString = "0" + frontString;
+              } else {
+                if (frontString.substring(2).equals("0")) { // If the second one is for sure a date
+                  frontString = "0" + frontString;
+                } else {
+                  frontString = frontString.substring(0, 2) + "0" + frontString.substring(2);
+                }
+              }
+            }
+          }
+          reqDate = frontString + reqDate.substring(3);
         }
         dateOf = Integer.parseInt(reqDate.substring(4) + reqDate.substring(0, 4));
 
