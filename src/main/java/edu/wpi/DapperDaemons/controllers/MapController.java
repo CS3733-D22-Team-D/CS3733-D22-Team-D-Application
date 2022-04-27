@@ -451,12 +451,16 @@ public class MapController extends ParentController {
   @FXML
   void onRandomizeToLocation() {
     String destinationID = infoBox.getPosition().getNodeID();
-    List<Location> locations = new ArrayList<>(DAOPouch.getLocationDAO().filter(6,"PATH").values());
-    int randindex = (int) Math.random() * locations.size();
+    List<Location> locations =
+        new ArrayList<>(DAOPouch.getLocationDAO().filter(6, "PATH").values());
+    int randindex = (int) (Math.random() * locations.size());
     String endNode;
     AStar ppFinder = new AStar();
     endNode = ppFinder.findClosestPathnode(DAOPouch.getLocationDAO().get(destinationID));
+    System.out.println("Going from " + locations.get(randindex).getNodeID() + " To " + endNode);
+    pathfinder.clearPath();
     pathfinder.showPather(locations.get(randindex).getNodeID(), endNode);
+    pathfinder.filterByFloor(infoBox.getPosition().getFloor());
   }
 
   @FXML

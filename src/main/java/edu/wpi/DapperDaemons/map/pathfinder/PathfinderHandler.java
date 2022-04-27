@@ -247,7 +247,7 @@ public class PathfinderHandler extends AppController implements Initializable {
                 locations.get(i + 1).getYcoord() + offsetY);
         pathLine.setFill(Color.RED);
         pathLine.setStroke(Color.RED);
-        pathLine.setStrokeWidth(lineSize);
+        pathLine.setStrokeWidth(6.0);
         pathLine.setStrokeLineCap(StrokeLineCap.SQUARE);
         double lineLength =
             Math.sqrt(
