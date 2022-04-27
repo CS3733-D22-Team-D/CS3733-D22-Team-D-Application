@@ -38,17 +38,12 @@
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="3.0" style="-fx-background-color: #DFDFDF; -fx-background-radius: 15;" />
       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;">
          <children>
-            <Label text="Start">
+            <Label text="Date Needed:">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="10.0" text="🡒">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="10.0" layoutY="27.0" text="End">
+            <Label>
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
