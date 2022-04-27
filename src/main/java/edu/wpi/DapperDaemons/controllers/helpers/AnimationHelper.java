@@ -8,7 +8,7 @@ import javafx.util.Duration;
 
 public class AnimationHelper {
 
-  /* Transitions the Node's background color over the course of milliseconds*/
+  /* Tranisitions the Node's background color over the course of milliseconds*/
 
   public static void fadeNode(
       Node node, Color backgroundStart, Color backgroundEnd, int durationInMillis) {
@@ -39,7 +39,7 @@ public class AnimationHelper {
     transition.play();
   }
 
-  /* Transitions the Node's background color and text color over the course of milliseconds*/
+  /* Tranisitions the Node's background color and text color over the course of milliseconds*/
   public static void fadeNodeWithText(
       Node node,
       Color textStart,
@@ -144,6 +144,28 @@ public class AnimationHelper {
                     + ","
                     + textColor.getAlpha() / 255.0
                     + ");");
+          }
+        };
+    transition.play();
+  }
+
+  /* Performs an X and Y translation for Cole <3 */
+  public static void ColesTrans(Node node, int xTrans, int yTrans, int durationInMillis) {
+
+    Animation transition =
+        new Transition() {
+          {
+            setCycleDuration(Duration.millis(durationInMillis));
+          }
+
+          @Override
+          protected void interpolate(double frac) {
+            node.setStyle(
+                "-fx-translate-x: "
+                    + ((int) frac * xTrans)
+                    + "; -fx-translate-y: "
+                    + ((int) frac * yTrans)
+                    + ";");
           }
         };
     transition.play();
