@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.animation.Animation;
@@ -31,11 +32,12 @@ import javafx.util.Duration;
 public class Table<R> {
 
   private List<R> rows = new ArrayList<>();
-  private GridPane table;
+  private final GridPane table;
   private final int tableNum;
   private final Class<R> instance;
-  private List<Runnable> editProperties = new ArrayList<>();
-  private int padding;
+  private final List<Runnable> editProperties = new ArrayList<>();
+  private final int padding;
+  private final HashMap<Integer, String> filters = new HashMap<>();
 
   public Table(Class<R> classinst, GridPane table, int tableNum) {
     this(classinst, table, tableNum, 30);
@@ -61,10 +63,11 @@ public class Table<R> {
                         new ArrayList<R>(
                             DAOPouch.getDAO((TableObject) type).filter(6, "REQUESTED").values());
                     List<R> inprog =
-                        new ArrayList(
+                        new ArrayList<R>(
                             DAOPouch.getDAO((TableObject) type).filter(6, "IN_PROGRESS").values());
                     req.addAll(inprog);
                     difference(req, rows);
+                    filter();
                   });
             }));
   }
@@ -133,23 +136,19 @@ public class Table<R> {
     final int targetRowIndex = rows.indexOf(type);
     List<Node> r = getRow(targetRowIndex);
     animate(0.92, 0.25, 0.11, r);
-    Platform.runLater(
-        () -> {
-          table.getChildren().removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
+    table.getChildren().removeIf(node -> getRowIndexAsInteger(node) == targetRowIndex);
 
-          // Update indexes for elements in further rows
-          table
-              .getChildren()
-              .forEach(
-                  node -> {
-                    final int rowIndex = getRowIndexAsInteger(node);
-                    if (targetRowIndex < rowIndex) {
-                      GridPane.setRowIndex(node, rowIndex - 1);
-                    }
-                  });
-          rows.remove(type);
-        });
-    // Remove children from row
+    // Update indexes for elements in further rows
+    table
+        .getChildren()
+        .forEach(
+            node -> {
+              final int rowIndex = getRowIndexAsInteger(node);
+              if (targetRowIndex < rowIndex) {
+                GridPane.setRowIndex(node, rowIndex - 1);
+              }
+            });
+    rows.remove(type);
   }
 
   public void removeChildren(R type) {
@@ -493,5 +492,23 @@ public class Table<R> {
 
   public R getItem(int row) {
     return rows.get(row);
+  }
+
+  public void addFilter(int attrNum, String toFilter) {
+    filters.put(attrNum, toFilter);
+    filter();
+  }
+
+  private void filter() {
+    ArrayList<R> toRemove = new ArrayList<>();
+    filters.forEach(
+        (col, filter) ->
+            rows.forEach(
+                r -> {
+                  if (r != null && !((TableObject) r).getAttribute(col).equals(filter)) {
+                    toRemove.add(r);
+                  }
+                }));
+    toRemove.forEach(this::removeRow);
   }
 }
