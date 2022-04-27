@@ -361,7 +361,9 @@ public class ParentController extends AppController {
   }
 
   @FXML
-  void switchToAPI() { swapPage("apiLandingPage", "API Landing Page"); }
+  void switchToAPI() {
+    swapPage("apiLandingPage", "API Landing Page");
+  }
 
   @FXML
   void switchToEquipment() {
