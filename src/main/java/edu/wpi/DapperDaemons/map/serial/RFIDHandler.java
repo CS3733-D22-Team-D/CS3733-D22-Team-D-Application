@@ -4,7 +4,6 @@ import edu.wpi.DapperDaemons.backend.SHA;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.ArduinoTimeOutException;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
-import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UserNotAuthorizedException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +29,9 @@ public class RFIDHandler {
    * @return true if the scan was valid, false otherwise
    */
   public boolean scan(String COM)
-      throws UnableToConnectException, ArduinoTimeOutException, UserNotAuthorizedException,
-          NoSuchAlgorithmException {
+      throws UnableToConnectException, ArduinoTimeOutException, NoSuchAlgorithmException {
     SerialCOM reader = new SerialCOM();
-    String inputID;
-    if (!(user.getEmployeeType().equals(Employee.EmployeeType.ADMINISTRATOR)))
-      throw new UserNotAuthorizedException(user.getEmployeeType());
-    else {
-      inputID = reader.readData(COM);
-      return UIDs.contains(SHA.toHexString(SHA.getSHA(inputID)));
-    }
+    String inputID = reader.readData(COM);
+    return UIDs.contains(SHA.toHexString(SHA.getSHA(inputID)));
   }
 }

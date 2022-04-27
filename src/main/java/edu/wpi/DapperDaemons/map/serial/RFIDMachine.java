@@ -3,7 +3,6 @@ package edu.wpi.DapperDaemons.map.serial;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.ArduinoTimeOutException;
 import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UnableToConnectException;
-import edu.wpi.DapperDaemons.map.serial.ArduinoExceptions.UserNotAuthorizedException;
 import java.security.NoSuchAlgorithmException;
 
 /** Handles login of user using RFID, to interact directly with UI */
@@ -33,9 +32,6 @@ public class RFIDMachine {
     boolean loginAttempt;
     try {
       loginAttempt = handler.scan(COM);
-    } catch (UserNotAuthorizedException e) {
-      System.out.println("ACCESSED DENIED: INVALID USER TYPE " + e.getEmployeeType());
-      return LoginState.INVALIDUSER;
     } catch (ArduinoTimeOutException e) {
       System.out.println("ACCESSED DENIED: RFID SCAN TIMEOUT");
       return LoginState.TIMEOUT;
