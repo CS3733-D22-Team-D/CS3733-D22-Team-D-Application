@@ -65,7 +65,6 @@ public class SanitationController extends ParentController {
 
   private void createTable() {
     t = new Table<>(SanitationRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Type", "Room", "Priority"));
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
 
@@ -78,9 +77,11 @@ public class SanitationController extends ParentController {
         i--;
       }
     }
-
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Type", "Room", "Priority"));
     t.setListeners(new SanitationRequest());
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
   }
 
   private void setListeners() {

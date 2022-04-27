@@ -74,7 +74,6 @@ public class SecurityRequestController extends ParentController {
 
   private void createTable() {
     t = new Table<>(SecurityRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Room", "Priority"));
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
 
@@ -89,7 +88,10 @@ public class SecurityRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Room", "Priority"));
     t.setListeners(new SecurityRequest());
+    t.addEnumEditProperty(3, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   private void setListeners() {

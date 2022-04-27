@@ -62,7 +62,6 @@ public class PatientTransportController extends ParentController {
 
   private void createTable() {
     t = new Table<>(PatientTransportRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
 
@@ -76,7 +75,10 @@ public class PatientTransportController extends ParentController {
       }
     }
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
     t.setListeners(new PatientTransportRequest());
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(5, 2, Request.Priority.class);
   }
 
   @FXML

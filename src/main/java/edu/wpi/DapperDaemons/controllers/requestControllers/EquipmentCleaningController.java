@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -69,7 +70,6 @@ public class EquipmentCleaningController extends ParentController {
 
   private void createTable() {
     t = new Table<>(EquipmentCleaning.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     List<EquipmentCleaning> reqs =
         new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values());
     for (EquipmentCleaning equipmentCleaning : reqs)
@@ -77,7 +77,10 @@ public class EquipmentCleaningController extends ParentController {
           || equipmentCleaning.getStatus().equals(Request.RequestStatus.CANCELLED))
         reqs.remove(equipmentCleaning);
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     t.setListeners(new EquipmentCleaning());
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   public boolean addItem(EquipmentCleaning request) {

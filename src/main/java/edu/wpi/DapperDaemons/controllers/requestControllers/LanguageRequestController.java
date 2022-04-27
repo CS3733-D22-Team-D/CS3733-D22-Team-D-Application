@@ -8,7 +8,6 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
@@ -73,7 +72,6 @@ public class LanguageRequestController extends ParentController {
 
   private void createTable() {
     t = new Table<>(LanguageRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Language", "Room", "Priority"));
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
 
@@ -88,20 +86,10 @@ public class LanguageRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Language", "Room", "Priority"));
     t.setListeners(new LanguageRequest());
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new LanguageRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              System.out.println("LanguageRequestsTable");
-              languageRequestsTable.getItems().clear();
-              languageRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(languageRequestDAO.getAll().values()));
-            }));
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   @FXML

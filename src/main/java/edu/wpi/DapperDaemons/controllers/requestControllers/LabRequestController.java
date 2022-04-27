@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -58,8 +59,6 @@ public class LabRequestController extends ParentController {
 
   private void createTable() {
     t = new Table<>(LabRequest.class, table, 0);
-    t.setHeader(
-        List.of("Requester", "Assignee", "Procedure", "Room", "Patient", "Status", "Priority"));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
 
     for (int i = 0; i < reqs.size(); i++) {
@@ -73,7 +72,11 @@ public class LabRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(
+        List.of("Requester", "Assignee", "Procedure", "Room", "Patient", "Status", "Priority"));
     t.setListeners(new LabRequest());
+    t.addEnumEditProperty(6, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   @FXML

@@ -63,7 +63,6 @@ public class EquipmentRequestController extends ParentController {
 
   private void createTable() {
     t = new Table<>(MedicalEquipmentRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {
@@ -76,7 +75,10 @@ public class EquipmentRequestController extends ParentController {
       }
     }
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     t.setListeners(new MedicalEquipmentRequest());
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   public boolean addItem(MedicalEquipmentRequest request) {
