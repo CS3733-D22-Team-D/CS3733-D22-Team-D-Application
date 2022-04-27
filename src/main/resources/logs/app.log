@@ -1,48 +1,46 @@
-2022-04-27 15:06:16:602 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
-2022-04-27 15:06:16:603 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
-2022-04-27 15:06:23:050 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
-2022-04-27 15:06:23:050 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
-2022-04-27 15:06:23:052 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
-2022-04-27 15:06:23:052 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
-2022-04-27 15:06:23:052 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
-2022-04-27 15:06:23:053 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
-2022-04-27 15:06:23:053 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
-2022-04-27 15:06:23:053 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
-2022-04-27 15:06:23:053 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
-2022-04-27 15:06:23:053 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
-2022-04-27 15:06:23:054 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
-2022-04-27 15:06:23:055 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
-2022-04-27 15:06:23:055 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
-2022-04-27 15:06:23:055 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
-2022-04-27 15:06:23:055 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
-2022-04-27 15:06:23:056 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
-2022-04-27 15:06:23:056 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-27 15:06:23:056 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-27 15:06:23:056 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Languages
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Languages has been produced
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
-2022-04-27 15:06:23:057 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
-2022-04-27 15:06:23:058 [Thread-4] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
-2022-04-27 15:06:23:058 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-27 15:06:23:058 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-27 15:06:25:335 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
-2022-04-27 15:06:25:519 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
-2022-04-27 15:06:25:521 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
-2022-04-27 15:06:25:522 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
-2022-04-27 15:06:25:524 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
-2022-04-27 15:06:25:524 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
-2022-04-27 15:06:25:524 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
-2022-04-27 15:06:25:546 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-27 15:06:26:572 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <medicine>
-2022-04-27 15:06:28:580 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-27 15:06:29:236 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <sanitation>
-2022-04-27 15:06:31:332 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-27 15:06:31:988 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <meal>
+2022-04-27 15:26:17:603 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
+2022-04-27 15:26:17:605 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
+2022-04-27 15:26:23:970 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
+2022-04-27 15:26:23:971 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
+2022-04-27 15:26:23:973 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
+2022-04-27 15:26:23:974 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
+2022-04-27 15:26:23:975 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
+2022-04-27 15:26:23:975 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
+2022-04-27 15:26:23:975 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
+2022-04-27 15:26:23:975 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
+2022-04-27 15:26:23:976 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
+2022-04-27 15:26:23:976 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 15:26:23:976 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 15:26:23:976 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Languages
+2022-04-27 15:26:23:977 [Thread-4] INFO edu.wpi.DapperDaemons.App - Languages has been produced
+2022-04-27 15:26:23:977 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
+2022-04-27 15:26:23:977 [Thread-4] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
+2022-04-27 15:26:23:977 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
+2022-04-27 15:26:23:978 [Thread-4] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
+2022-04-27 15:26:23:978 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
+2022-04-27 15:26:23:978 [Thread-4] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
+2022-04-27 15:26:23:978 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 15:26:23:979 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 15:26:26:276 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
+2022-04-27 15:26:26:462 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-27 15:26:26:463 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
+2022-04-27 15:26:26:464 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
+2022-04-27 15:26:26:465 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
+2022-04-27 15:26:26:466 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
+2022-04-27 15:26:26:466 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
+2022-04-27 15:26:26:487 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
+2022-04-27 15:26:27:678 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <medicine>
+2022-04-27 15:27:21:123 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Closing program
+2022-04-27 15:27:21:145 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Successfully saved all files!

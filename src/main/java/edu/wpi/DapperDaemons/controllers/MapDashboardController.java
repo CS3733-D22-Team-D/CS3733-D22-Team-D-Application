@@ -226,14 +226,14 @@ public class MapDashboardController extends ParentController {
   private void setFloor(String floor) {
     this.floor = floor;
     t.clear();
-    createTable();
+    t.setRows(DAOFacade.getRequestsByFloor(floor));
   }
 
   private void createTable() {
     t = new Table<>(Request.class, table, 1, 0);
     t.setRows(DAOFacade.getRequestsByFloor(floor));
     t.setHeader(List.of("Type", "Assignee", "Priority"));
-    // t.setRequestListeners();
+    t.setDashboardListeners();
   }
 
   private String getFloor() {
