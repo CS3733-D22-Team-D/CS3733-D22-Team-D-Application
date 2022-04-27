@@ -1,13 +1,11 @@
-package edu.wpi.DapperDaemons.APIAdapters;
+package edu.wpi.DapperDaemons.APIConverters;
 
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.cs3733.D22.teamB.api.Request;
 
-public class InternalReqAdapter extends Adapter {
+public class InternalReqConverter extends Converter {
 
-  public static String currentEmployee;
-
-  public InternalReqAdapter() {}
+  public InternalReqConverter() {}
 
   /**
    * Converts from a team B patient req to our patient req
@@ -17,11 +15,16 @@ public class InternalReqAdapter extends Adapter {
    */
   public static PatientTransportRequest convert(Request internalRequest) {
 
+    String employeeId;
+
+    if (internalRequest.getEmployeeID() == null) employeeId = "null";
+    else employeeId = internalRequest.getEmployeeID();
+
     return new PatientTransportRequest(
         parsePriority(internalRequest.getPriority()),
         internalRequest.getStartLocation().getNodeID(),
-        currentEmployee,
-        currentEmployee,
+        employeeId,
+        employeeId,
         internalRequest.getInformation(),
         internalRequest.getRequestID(),
         internalRequest.getFinishLocation().getNodeID(),

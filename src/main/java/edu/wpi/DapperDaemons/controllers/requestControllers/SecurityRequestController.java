@@ -77,6 +77,17 @@ public class SecurityRequestController extends ParentController {
     t.setHeader(List.of("Requester", "Assignee", "Room", "Priority"));
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      SecurityRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new SecurityRequest());
   }

@@ -1,13 +1,13 @@
-package edu.wpi.DapperDaemons.APIAdapters;
+package edu.wpi.DapperDaemons.APIConverters;
 
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 
 /** Converts from Team Z's external patient request to our external patient requests */
-public class ExternalReqAdapter extends Adapter {
+public class ExternalReqConverter extends Converter {
 
-  public ExternalReqAdapter() {}
+  public ExternalReqConverter() {}
 
   /**
    * Converts Team Z's External Patient Request to our Patient Request Class

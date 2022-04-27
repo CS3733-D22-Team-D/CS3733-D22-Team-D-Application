@@ -1,4 +1,4 @@
-package edu.wpi.DapperDaemons.APIAdapters;
+package edu.wpi.DapperDaemons.APIConverters;
 
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
@@ -6,9 +6,9 @@ import edu.wpi.cs3733.D22.teamD.request.IRequest;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 
 /** This class contains methods to convert between the two different Sanitation Request */
-public class SanitationReqAdapter extends Adapter {
+public class SanitationReqConverter extends Converter {
 
-  public SanitationReqAdapter() {}
+  public SanitationReqConverter() {}
 
   /**
    * Converts from a SanitationIRequest (Team D API) to a SanitationRequest (our object)

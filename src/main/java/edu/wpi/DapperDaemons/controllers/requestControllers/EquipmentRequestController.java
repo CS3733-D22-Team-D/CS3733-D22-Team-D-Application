@@ -25,6 +25,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -48,13 +49,14 @@ public class EquipmentRequestController extends ParentController {
   @FXML private TableColumn<MedicalEquipmentRequest, String> cleanStatus;
 
   /* DAO Object */
-  private final DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
+  private DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
       DAOPouch.getMedicalEquipmentRequestDAO();
-  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
-  private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
+  @FXML private HBox header;
   private Table<MedicalEquipmentRequest> t;
 
   @FXML
@@ -69,15 +71,24 @@ public class EquipmentRequestController extends ParentController {
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
     //    bindImage(BGImage, BGContainer);
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
 
   private void createTable() {
-    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
-    t.setHeader(List.of("Requester", "Assignee", "Type", "ID", "To", "Priority"));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
+    for (int i = 0; i < reqs.size(); i++) {
+      MedicalEquipmentRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
     t.setRows(reqs);
     t.setListeners(new MedicalEquipmentRequest());
   }

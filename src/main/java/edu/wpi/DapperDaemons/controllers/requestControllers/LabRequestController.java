@@ -60,6 +60,17 @@ public class LabRequestController extends ParentController {
     t = new Table<>(LabRequest.class, table, 0);
     t.setHeader(List.of("Test", "Test", "Test"));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      LabRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new LabRequest());
   }

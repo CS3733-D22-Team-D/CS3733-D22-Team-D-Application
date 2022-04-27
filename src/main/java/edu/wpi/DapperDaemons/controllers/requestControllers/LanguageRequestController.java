@@ -76,6 +76,17 @@ public class LanguageRequestController extends ParentController {
     t.setHeader(List.of("Requester", "Assignee", "Language", "Room", "Priority"));
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      LanguageRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new LanguageRequest());
   }

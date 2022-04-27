@@ -44,26 +44,36 @@ public class PatientTransportController extends ParentController {
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
+  List<String> names;
   // PatientTransportRequestHandler handler = new PatientTransportRequestHandler();
 
-  private final DAO<PatientTransportRequest> patientTransportRequestDAO =
+  DAO<PatientTransportRequest> patientTransportRequestDAO =
       DAOPouch.getPatientTransportRequestDAO();
-  private final DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
-  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  DAO<edu.wpi.DapperDaemons.entities.Patient> patientDAO = DAOPouch.getPatientDAO();
+  DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
-    createTable();
-  }
 
-  private void createTable() {
     requestTable = new Table<>(PatientTransportRequest.class, table, 0);
-    requestTable.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
-    requestTable.setRows(
-        new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values()));
+
+    List<PatientTransportRequest> reqs =
+        new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      PatientTransportRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
+    requestTable.setRows(reqs);
     requestTable.setListeners(new PatientTransportRequest());
   }
 

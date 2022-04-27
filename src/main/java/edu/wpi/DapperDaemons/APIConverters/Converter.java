@@ -1,10 +1,10 @@
-package edu.wpi.DapperDaemons.APIAdapters;
+package edu.wpi.DapperDaemons.APIConverters;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class Adapter {
+public abstract class Converter {
 
   /**
    * Get string formatted time

@@ -73,15 +73,26 @@ public class MealController extends ParentController {
     /* Init Request table */
     initBoxes();
     onClearClicked();
+
+    t = new Table<>(MealDeliveryRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
-    t = new Table<>(MealDeliveryRequest.class, table, 0);
-    t.setHeader(
-        List.of("Requester", "Assignee", "Patient", "Room", "Entree", "Side", "Drink", "Dessert"));
+    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MealDeliveryRequest> reqs =
         new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      MealDeliveryRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new MealDeliveryRequest());
   }

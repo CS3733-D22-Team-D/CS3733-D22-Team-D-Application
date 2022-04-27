@@ -1,8 +1,8 @@
 package edu.wpi.DapperDaemons.controllers;
 
-import edu.wpi.DapperDaemons.APIAdapters.ExternalReqAdapter;
-import edu.wpi.DapperDaemons.APIAdapters.InternalReqAdapter;
-import edu.wpi.DapperDaemons.APIAdapters.SanitationReqAdapter;
+import edu.wpi.DapperDaemons.APIConverters.ExternalReqConverter;
+import edu.wpi.DapperDaemons.APIConverters.InternalReqConverter;
+import edu.wpi.DapperDaemons.APIConverters.SanitationReqConverter;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
@@ -141,8 +141,8 @@ public class APILandingController implements Initializable {
     dSave.setVisible(false);
     SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
     for (SanitationIRequest iReq : sanitationReqAPI.getAllRequests()) {
-      if (!checkIfSanitationReqExists(SanitationReqAdapter.convert(iReq)))
-        DAOPouch.getSanitationRequestDAO().add(SanitationReqAdapter.convert(iReq));
+      if (!checkIfSanitationReqExists(SanitationReqConverter.convert(iReq)))
+        DAOPouch.getSanitationRequestDAO().add(SanitationReqConverter.convert(iReq));
     }
     errorLabel.setText("Changes Saved!");
     errorLabel.setTextFill(Paint.valueOf("00FF00"));
@@ -186,9 +186,9 @@ public class APILandingController implements Initializable {
     API teamZAPI = new API();
     for (ExternalTransportRequest extReq : teamZAPI.getAllExternalTransportRequests()) {
       if (!checkIfPatitentReqExists(
-          ExternalReqAdapter.convert(extReq, teamZOriginID, teamZDestinationID)))
+          ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID)))
         DAOPouch.getPatientTransportRequestDAO()
-            .add(ExternalReqAdapter.convert(extReq, teamZOriginID, teamZDestinationID));
+            .add(ExternalReqConverter.convert(extReq, teamZOriginID, teamZDestinationID));
     }
     zErrorLabel.setText("Changes Saved!");
     zErrorLabel.setTextFill(Paint.valueOf("00FF00"));
@@ -236,8 +236,8 @@ public class APILandingController implements Initializable {
     bSave.setVisible(false);
     DatabaseController databaseController = new DatabaseController();
     for (Request request : databaseController.listRequests()) {
-      if (!checkIfPatitentReqExists(InternalReqAdapter.convert(request))) {
-        DAOPouch.getPatientTransportRequestDAO().add(InternalReqAdapter.convert(request));
+      if (!checkIfPatitentReqExists(InternalReqConverter.convert(request))) {
+        DAOPouch.getPatientTransportRequestDAO().add(InternalReqConverter.convert(request));
       }
     }
     bErrorLabel.setText("Changes Saved!");

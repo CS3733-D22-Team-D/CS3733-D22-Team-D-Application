@@ -180,6 +180,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 1)
   public Priority getPriority() {
     return priority;
   }
@@ -343,6 +344,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   // SETTERS AND GETTERS
 
   @Override
+  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -355,7 +357,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -369,7 +371,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 0)
+  @TableHandler(table = 0, col = 3)
   public String getRequesterID() {
     return requesterID;
   }
@@ -378,7 +380,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 4)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -387,7 +389,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 5)
   public String getPatientID() {
     return patientID;
   }
@@ -396,7 +398,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 6)
   public String getEntree() {
     return entree;
   }
@@ -405,7 +407,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.entree = entree;
   }
 
-  @TableHandler(table = 0, col = 5)
+  @TableHandler(table = 0, col = 7)
   public String getSide() {
     return side;
   }
@@ -414,7 +416,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.side = side;
   }
 
-  @TableHandler(table = 0, col = 6)
+  @TableHandler(table = 0, col = 8)
   public String getDrink() {
     return drink;
   }
@@ -423,7 +425,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
     this.drink = drink;
   }
 
-  @TableHandler(table = 0, col = 7)
+  @TableHandler(table = 0, col = 9)
   public String getDessert() {
     return dessert;
   }
@@ -458,6 +460,7 @@ public class MealDeliveryRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 10)
   public String getDateNeeded() {
     return dateNeeded;
   }

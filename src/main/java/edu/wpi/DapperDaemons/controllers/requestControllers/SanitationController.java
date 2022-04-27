@@ -68,6 +68,17 @@ public class SanitationController extends ParentController {
     t.setHeader(List.of("Requester", "Assignee", "Type", "Room", "Priority"));
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      SanitationRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new SanitationRequest());
   }

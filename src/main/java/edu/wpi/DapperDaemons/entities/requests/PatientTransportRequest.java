@@ -168,7 +168,7 @@ public class PatientTransportRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 5)
+  @TableHandler(table = 0, col = 6)
   public Priority getPriority() {
     return priority;
   }
@@ -260,7 +260,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 0)
   public String getRoomID() {
     return roomID;
   }
@@ -274,7 +274,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 0)
+  @TableHandler(table = 0, col = 1)
   public String getRequesterID() {
     return requesterID;
   }
@@ -283,7 +283,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 2)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -292,7 +292,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 3)
   public String getPatientID() {
     return patientID;
   }
@@ -310,6 +310,7 @@ public class PatientTransportRequest extends TableObject implements Request {
     this.nextRoomID = nextRoomID;
   }
 
+  @TableHandler(table = 0, col = 5)
   public RequestStatus getStatus() {
     return status;
   }
