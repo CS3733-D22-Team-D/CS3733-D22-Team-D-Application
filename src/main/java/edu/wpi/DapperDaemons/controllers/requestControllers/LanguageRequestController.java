@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -40,6 +41,7 @@ public class LanguageRequestController extends ParentController {
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> languageBox;
   @FXML private JFXComboBox<String> locationBox;
+  @FXML private JFXComboBox<String> priorityIn;
   @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
   /* Table Columns */
@@ -52,6 +54,7 @@ public class LanguageRequestController extends ParentController {
   /* DAO Object */
   private DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
   private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   @FXML private GridPane table;
   @FXML private HBox header;
   private Table<LanguageRequest> t;
@@ -63,7 +66,7 @@ public class LanguageRequestController extends ParentController {
     //    bindImage(BGImage, BGContainer);
 
     onClearClicked();
-    t = new Table<>(table, 0);
+    t = new Table<>(LanguageRequest.class, table, 0);
     createTable();
   }
 
@@ -71,6 +74,7 @@ public class LanguageRequestController extends ParentController {
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(languageBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(locationBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
   }
 
   private void createTable() {
@@ -98,6 +102,7 @@ public class LanguageRequestController extends ParentController {
   public void onClearClicked() {
     languageBox.setValue("");
     locationBox.setValue("");
+    priorityIn.setValue("");
     dateNeeded.setValue(null);
     notes.setText("");
   }
@@ -120,22 +125,20 @@ public class LanguageRequestController extends ParentController {
               + dateNeeded.getValue().getDayOfMonth()
               + dateNeeded.getValue().getYear();
       String requesterID = SecurityController.getUser().getNodeID();
-      String assignee = "none";
       String roomID =
           (new ArrayList<Location>(
                   DAOPouch.getLocationDAO().filter(7, locationBox.getValue()).values())
               .get(0)
               .getNodeID());
+
       if (!addItem(
           new LanguageRequest(
-              Request.Priority.LOW,
+              Request.Priority.valueOf(priorityIn.getValue()),
               roomID,
               requesterID,
-              assignee,
               notes.getText(),
               LanguageRequest.Language.valueOf(languageBox.getValue()),
               dateRep))) {
-
         showError("you do not have access to do this");
       }
 
@@ -156,6 +159,8 @@ public class LanguageRequestController extends ParentController {
     languageBox.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(LanguageRequest.Language.class)));
     locationBox.setItems(FXCollections.observableArrayList(DAOFacade.getAllLocationLongNames()));
+    priorityIn.setItems(
+        FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
   }
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {

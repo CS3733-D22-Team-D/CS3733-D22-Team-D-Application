@@ -7,12 +7,10 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
-import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +24,6 @@ import javafx.stage.Stage;
 
 /** Controller for Meal UI Page UPDATED 4/5/22 at 12:08 AM */
 public class MealController extends ParentController {
-
-  /* Table Helper */
-  private TableHelper<MealDeliveryRequest> helper;
-
-  /* Table Object */
-  @FXML private TableView<MealDeliveryRequest> mealRequestsTable;
 
   /* Table Columns for Request Table */
   @FXML private TableColumn<MealDeliveryRequest, String> reqID;
@@ -82,7 +74,7 @@ public class MealController extends ParentController {
     initBoxes();
     onClearClicked();
 
-    t = new Table(table, 0);
+    t = new Table<>(MealDeliveryRequest.class, table, 0);
     createTable();
   }
 
@@ -92,18 +84,6 @@ public class MealController extends ParentController {
         new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
     t.setRows(reqs);
     t.setListeners(new MealDeliveryRequest());
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new MealDeliveryRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              mealRequestsTable.getItems().clear();
-              mealRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(mealDeliveryRequestDAO.getAll().values()));
-            }));
   }
 
   @FXML
@@ -121,7 +101,6 @@ public class MealController extends ParentController {
       Request.Priority priority = Request.Priority.LOW;
       String roomID;
       String requesterID;
-      String assigneeID = "none";
       String patientID;
       String entree = entreeBox.getValue();
       String side = sideBox.getValue();
@@ -155,13 +134,13 @@ public class MealController extends ParentController {
         // request is formed correctly and the patient exists send it and check for clearance
         roomID = patient.getLocationID();
         requesterID = SecurityController.getUser().getNodeID();
+
         boolean hadClearance =
             addMealRequest(
                 new MealDeliveryRequest(
                     priority,
                     roomID,
                     requesterID,
-                    assigneeID,
                     notes.getText(),
                     patientID,
                     entree,
@@ -172,7 +151,6 @@ public class MealController extends ParentController {
 
         if (!hadClearance) {
           // throw error that user aint got no clearance
-
           showError("You do not have permission to do this.");
         }
 
@@ -208,9 +186,8 @@ public class MealController extends ParentController {
    */
   public boolean addMealRequest(MealDeliveryRequest request) {
     boolean hadClearance = false;
-    hadClearance = mealDeliveryRequestDAO.add(request);
 
-    if (hadClearance) mealRequestsTable.getItems().add(request);
+    hadClearance = mealDeliveryRequestDAO.add(request);
 
     return hadClearance;
   }

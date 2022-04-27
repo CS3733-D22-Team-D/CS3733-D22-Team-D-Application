@@ -3,6 +3,7 @@ package edu.wpi.DapperDaemons.controllers;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.entities.Notification;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -12,9 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -28,11 +31,11 @@ public class UserHomeController extends ParentController {
   @FXML private Label employeeID;
 
   // buttons
-  @FXML private VBox reqContainer;
+  @FXML private Pane reqContainer;
   @FXML private ImageView reqImage;
-  @FXML private VBox notContainer;
+  @FXML private Pane notContainer;
   @FXML private ImageView notImage;
-  @FXML private VBox settingContainer;
+  @FXML private Pane settingContainer;
   @FXML private ImageView settingImage;
   @FXML private Label requestNum;
   @FXML private Label notificationNum;
@@ -142,5 +145,28 @@ public class UserHomeController extends ParentController {
     bindImage(reqImage, reqContainer);
     bindImage(notImage, notContainer);
     bindImage(settingImage, settingContainer);
+  }
+
+  /* Hover Animations for buttons */
+  @FXML
+  private void hoveredButton(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(8, 67, 154, 255);
+    Color backgroundStart = new Color(255, 255, 255, 0);
+    Color backgroundEnd = new Color(255, 255, 255, 192);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  private void unhoveredButton(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(8, 67, 154, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundEnd = new Color(255, 255, 255, 0);
+    Color backgroundStart = new Color(255, 255, 255, 192);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 }

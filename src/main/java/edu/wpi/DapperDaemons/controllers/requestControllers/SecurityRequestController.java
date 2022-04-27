@@ -64,7 +64,7 @@ public class SecurityRequestController extends ParentController {
     //    bindImage(BGImage, BGContainer);
 
     onClearClicked();
-    t = new Table(table, 0);
+    t = new Table<>(SecurityRequest.class, table, 0);
     createTable();
   }
 
@@ -132,7 +132,6 @@ public class SecurityRequestController extends ParentController {
               Request.Priority.valueOf(priorityIn.getValue()),
               roomID,
               requesterID,
-              assignee,
               notes.getText(),
               dateRep));
     } else {

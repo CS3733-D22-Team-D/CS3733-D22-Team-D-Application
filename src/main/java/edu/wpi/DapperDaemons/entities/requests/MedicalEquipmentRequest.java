@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.entities.requests;
 
+import edu.wpi.DapperDaemons.backend.AutoAssigner;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.TableObject;
@@ -249,6 +250,33 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
     this.originID = DAOFacade.getClosestMedicalEquipment(equipmentType.toString(), roomID);
   }
 
+  public MedicalEquipmentRequest(
+      Priority priority,
+      String roomID,
+      String requesterID,
+      String notes,
+      String equipmentID,
+      MedicalEquipment.EquipmentType equipmentType,
+      MedicalEquipment.CleanStatus cleanStatus,
+      String dateNeeded) {
+    this.nodeID = priority.toString() + requesterID + LocalDateTime.now().toString();
+
+    this.priority = priority;
+    this.roomID = roomID;
+    this.requesterID = requesterID;
+    this.assigneeID = AutoAssigner.assignNurse();
+    this.notes = notes;
+    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm - MM/dd");
+    Date now = new Date();
+    this.dateTime = formatter.format(now);
+    this.status = RequestStatus.REQUESTED;
+    this.equipmentID = equipmentID;
+    this.equipmentType = equipmentType;
+    this.cleanStatus = cleanStatus;
+    this.dateNeeded = dateNeeded;
+    this.originID = DAOFacade.getClosestMedicalEquipment(equipmentType.toString(), roomID);
+  }
+
   public MedicalEquipmentRequest() {}
 
   // SETTERS AND GETTERS
@@ -295,7 +323,7 @@ public class MedicalEquipmentRequest extends TableObject implements Request {
 
   @Override
   public RequestStatus getStatus() {
-    return null;
+    return status;
   }
 
   public void setAssigneeID(String assigneeID) {

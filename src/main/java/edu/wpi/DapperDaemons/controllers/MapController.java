@@ -40,7 +40,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import javax.swing.*;
 
 /** Controller Class for interactive Map Page */
 public class MapController extends ParentController {
@@ -108,7 +107,8 @@ public class MapController extends ParentController {
   @FXML private ToggleButton bubbleMenu;
   @FXML private StackPane circle2;
   @FXML private ToggleButton circle3;
-  @FXML private StackPane circle4;
+  @FXML private ToggleButton circle4;
+  @FXML private StackPane circle5;
 
   /* Map Handlers */
   private MapHandler maps;
@@ -179,14 +179,13 @@ public class MapController extends ParentController {
 
     this.pathfinder = new PathfinderHandler(pathPane, this);
 
-    pathfinder.filterByFloor(MapDashboardController.floor);
+    pathfinder.filterByFloor(getFloor());
 
     requestPaths = new ShowRequestPaths(pathPane, this);
-    requestPaths.setCurrentFloor(MapDashboardController.floor);
+    requestPaths.setCurrentFloor(getFloor());
 
     //    connectionShower = new ShowConnections(pathPane, this);
     // Comment out connectionShower if you want to see all the nodes
-    //    connectionShower.showAllLines(MapDashboardController.floor);
 
     this.positions = new PositionHandler(origPositions);
 
@@ -288,6 +287,20 @@ public class MapController extends ParentController {
             .collect(Collectors.toCollection(ArrayList<String>::new)),
         TableListeners.eventListener(
             () -> {
+              Platform.runLater(
+                  () -> {
+                    //                        List<PositionInfo> newPos = new ArrayList<>();
+                    //                        // Initialize DAO objects
+                    //                        try {
+                    //                          DAOFacade.getAllRequests().stream().forEach(l ->
+                    // newPos.add(new PositionInfo(l)));
+                    //                        } catch (Exception e) {
+                    //                          System.err.println("DAO could not be created in
+                    // MapController\n");
+                    //                        };
+                    //                        difference(newPos, origPositions);
+                    //                        glyphs.setFloorFilter(maps.getFloor());
+                  });
               Platform.runLater(() -> {});
             }));
   }
@@ -312,6 +325,12 @@ public class MapController extends ParentController {
       translateTransition3.setNode(circle4);
       translateTransition3.setByX(-168);
       translateTransition3.play();
+
+      TranslateTransition translateTransition4 = new TranslateTransition();
+      translateTransition4.setDuration(Duration.millis(300));
+      translateTransition4.setNode(circle5);
+      translateTransition4.setByX(-224);
+      translateTransition4.play();
     } else {
       TranslateTransition translateTransition = new TranslateTransition();
       translateTransition.setDuration(Duration.millis(300));
@@ -330,6 +349,12 @@ public class MapController extends ParentController {
       translateTransition3.setNode(circle4);
       translateTransition3.setByX(168);
       translateTransition3.play();
+
+      TranslateTransition translateTransition4 = new TranslateTransition();
+      translateTransition4.setDuration(Duration.millis(300));
+      translateTransition4.setNode(circle5);
+      translateTransition4.setByX(224);
+      translateTransition4.play();
     }
   }
 

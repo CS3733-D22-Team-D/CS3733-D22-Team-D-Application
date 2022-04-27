@@ -1,11 +1,13 @@
 package edu.wpi.DapperDaemons.tables;
 
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
@@ -31,29 +33,52 @@ public class Table<R> {
   private List<R> rows = new ArrayList<>();
   private GridPane table;
   private final int tableNum;
-  private R instance;
+  private final Class<R> instance;
   private List<Runnable> editProperties = new ArrayList<>();
+  private int padding;
 
-  public Table(GridPane table, int tableNum) {
+  public Table(Class<R> classinst, GridPane table, int tableNum) {
+    this(classinst, table, tableNum, 30);
+  }
+
+  public Table(Class<R> classinst, GridPane table, int tableNum, int padding) {
+    this.instance = classinst;
     this.table = table;
     this.tableNum = tableNum;
+    this.padding = padding;
   }
 
   public void setListeners(R type) {
-    this.instance = type;
     TableListeners.addListener(
         ((TableObject) type).tableName(),
         TableListeners.eventListener(
             () -> {
               Platform.runLater(
                   () -> {
-                    difference(rows);
+                    difference(
+                        new ArrayList<R>(DAOPouch.getDAO((TableObject) type).getAll().values()),
+                        rows);
                   });
             }));
   }
 
-  private void difference(List<R> update) {
-    List<R> cons = new ArrayList<R>(DAOPouch.getDAO((TableObject) instance).getAll().values());
+  public void setRequestListeners() {
+    List<String> allTableNames =
+        DAOFacade.getAllRequests().stream()
+            .map(n -> ((TableObject) n).tableName())
+            .collect(Collectors.toList());
+    TableListeners.addListeners(
+        allTableNames,
+        TableListeners.eventListener(
+            () -> {
+              Platform.runLater(
+                  () -> {
+                    difference((List<R>) DAOFacade.getAllRequests(), rows);
+                  });
+            }));
+  }
+
+  private void difference(List<R> cons, List<R> update) {
     List<R> dif = new ArrayList<>(update);
     for (int i = 0; i < cons.size(); i++) {
       if (!update.contains(cons.get(i))) {
@@ -137,7 +162,7 @@ public class Table<R> {
           item.setPrefHeight(15);
           item.setMinHeight(Control.USE_PREF_SIZE);
           item.setMaxHeight(Control.USE_PREF_SIZE);
-          item.setPadding(new Insets(0, 0, -8, 30));
+          item.setPadding(new Insets(0, 0, -8, padding));
           Text t = new Text(s);
           t.setFont(Font.font(t.getFont().getFamily(), FontWeight.BOLD, t.getFont().getSize() + 2));
           item.getChildren().add(t);
@@ -338,7 +363,8 @@ public class Table<R> {
   }
 
   public void addRow(int ind, R type) {
-    List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
+    List<Node> row =
+        RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
@@ -349,7 +375,8 @@ public class Table<R> {
   }
 
   public void addRow(R type) {
-    List<Node> row = RowFactory.createRow((TableObject) type, tableNum);
+    List<Node> row =
+        RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
