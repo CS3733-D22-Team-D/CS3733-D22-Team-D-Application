@@ -8,15 +8,18 @@ import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.entities.Notification;
+import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javax.sound.sampled.LineUnavailableException;
 
@@ -42,24 +45,76 @@ public class NotificationReceiver {
     this.notifications.getChildren().add(createNotification(n));
   }
 
-  public VBox createNotification(Notification n) {
-    VBox notif = new VBox();
+  public HBox createNotification(Notification n) {
+    //    VBox notif = new VBox();
+    //    try {
+    //      notif =
+    //          FXMLLoader.load(
+    //              Objects.requireNonNull(App.class.getResource("views/" + "notification" +
+    // ".fxml")));
+    //    } catch (IOException ignored) {
+    //    }
+    //    notif.setOnMouseClicked(
+    //        event -> {
+    //          System.out.println("Notif Handler");
+    //          n.setAttribute(5, "true"); // sets action when clicking on notification
+    //          DAOPouch.getNotificationDAO().add(n);
+    //        });
+    //    Label sub = (Label) notif.getChildren().get(0);
+    //    sub.setText(n.getSubject());
+    //    Label body = (Label) notif.getChildren().get(1);
+    //    body.setText(n.getBody());
+    //    return notif;
+    HBox notif = new HBox();
     try {
       notif =
           FXMLLoader.load(
-              Objects.requireNonNull(App.class.getResource("views/" + "notification" + ".fxml")));
+              Objects.requireNonNull(App.class.getResource("views/" + "notification2" + ".fxml")));
     } catch (IOException ignored) {
     }
-    notif.setOnMouseClicked(
-        event -> {
-          System.out.println("Notif Handler");
-          n.setAttribute(5, "true"); // sets action when clicking on notification
-          DAOPouch.getNotificationDAO().add(n);
-        });
-    Label sub = (Label) notif.getChildren().get(0);
-    sub.setText(n.getSubject());
+    String message = "";
+    List<Request> reqs = DAOFacade.getAllRequests();
+    for (Request r : reqs) {
+      if (n.getNodeID().equals("not" + r.getNodeID())) {
+        message += r.requestType() + " from ";
+        message += DAOPouch.getEmployeeDAO().get(r.getAssigneeID()).getFirstName();
+        Background b =
+            new Background(
+                new BackgroundFill(new Color(1, 1, 1, 1), CornerRadii.EMPTY, Insets.EMPTY));
+        switch (r.getPriority()) {
+          case LOW:
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.47, .87, .47, .8), new CornerRadii(5), Insets.EMPTY));
+            break;
+          case MEDIUM:
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.96, .93, .26, .8), new CornerRadii(5), Insets.EMPTY));
+            break;
+          case HIGH:
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(.98, .41, .38, .8), new CornerRadii(5), Insets.EMPTY));
+            break;
+          case OVERDUE:
+            b =
+                new Background(
+                    new BackgroundFill(
+                        Color.color(0, 0, 0, 0.5), new CornerRadii(5), Insets.EMPTY));
+            break;
+          default:
+            break;
+        }
+        ((HBox) notif.getChildren().get(0)).setBackground(b);
+        break;
+      }
+    }
     Label body = (Label) notif.getChildren().get(1);
-    body.setText(n.getBody());
+    body.setText(message);
     return notif;
   }
 

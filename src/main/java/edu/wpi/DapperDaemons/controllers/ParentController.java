@@ -79,7 +79,10 @@ public class ParentController extends AppController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-
+    notificationsScroller.setOnMouseClicked(
+        e -> {
+          swapPage("notificationsPage", "Notifications");
+        });
     NotificationSender.start();
     OverdueHandler.init();
     CleanEquipmentHandler.init();
