@@ -1,6 +1,7 @@
 package edu.wpi.DapperDaemons.controllers;
 
 import arduino.Arduino;
+import edu.wpi.DapperDaemons.APIAdapters.InternalReqAdapter;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.loadingScreen.LoadingScreen;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
@@ -109,6 +110,9 @@ public class LoginController extends AppController {
       showError("Either your username or password is incorrect.");
       return;
     }
+    // Since Team B's API does not give an option to assign an employee, the logged in employee is
+    // assigned manually
+    InternalReqAdapter.currentEmployee = acc.getAttribute(1);
 
     // Get valid Employee (throws error if system has a problem)
     switch (acc.getAttribute(6)) {
@@ -117,6 +121,7 @@ public class LoginController extends AppController {
         Authentication.sendAuthCode(acc);
         break;
       case "rfid":
+        RFIDPageController.user = DAOFacade.getEmployee(username.getText());
         loadRFID();
         break;
       default:
