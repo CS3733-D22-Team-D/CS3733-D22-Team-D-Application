@@ -89,7 +89,7 @@ public class NotificationsPageController extends ParentController {
             b =
                 new Background(
                     new BackgroundFill(
-                        Color.color(0, 0, 0, 0.05), new CornerRadii(5), Insets.EMPTY));
+                        Color.color(0, 0, 0, 0.5), new CornerRadii(5), Insets.EMPTY));
             break;
           default:
             break;

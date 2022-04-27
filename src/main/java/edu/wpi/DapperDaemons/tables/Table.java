@@ -310,7 +310,7 @@ public class Table<R> {
           priority.setBackground(
               new Background(
                   new BackgroundFill(
-                      Color.color(0, 0, 0, 1),
+                      Color.color(0, 0, 0, 0.5),
                       new CornerRadii(0, 10, 10, 0, false),
                       Insets.EMPTY)));
           //          row.add(priority);
