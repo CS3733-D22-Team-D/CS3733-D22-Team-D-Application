@@ -37,7 +37,7 @@ public class Table<R> {
   private final Class<R> instance;
   private final List<Runnable> editProperties = new ArrayList<>();
   private final int padding;
-  private final HashMap<Integer, String> filters = new HashMap<>();
+  private final HashMap<Integer, List<String>> filters = new HashMap<>();
 
   public Table(Class<R> classinst, GridPane table, int tableNum) {
     this(classinst, table, tableNum, 30);
@@ -503,15 +503,17 @@ public class Table<R> {
   }
 
   public void addFilter(int attrNum, String toFilter) {
-    filters.put(attrNum, toFilter);
+    if (filters.containsKey(attrNum)) filters.get(attrNum).add(toFilter);
+    else filters.put(attrNum, new ArrayList<>(List.of(toFilter)));
     filter();
   }
 
   private void filter() {
     ArrayList<R> toKeep = new ArrayList<>(rows);
     toKeep.remove(null);
+
     for (int col : filters.keySet()) {
-      toKeep.removeIf(r -> !((TableObject) r).getAttribute(col).equals(filters.get(col)));
+      toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
     }
     clear();
     toKeep.forEach(r -> addRow(r, false));
