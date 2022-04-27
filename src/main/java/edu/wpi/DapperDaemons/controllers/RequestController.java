@@ -7,6 +7,7 @@ import edu.wpi.DapperDaemons.tables.Table;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
@@ -67,32 +68,70 @@ public class RequestController extends ParentController implements Initializable
 
   public void tableinit() {
     createT = new Table<>(Request.class, createTable, 2);
-    createT.setRows(DAOFacade.getAllRequests());
-    createT.setHeader(
-        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
-    createT.addFilter(4, SecurityController.getUser().getNodeID());
-    createT.filter();
-    createT.addDropDownEditProperty(4, 6, "CANCELLED");
-    createT.addEnumEditProperty(5, 2, Request.Priority.class);
-    createT.addDropDownEditProperty(3, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
-    createT.setRequestListeners();
+    new Thread(
+            () ->
+                Platform.runLater(
+                    () -> {
+                      createT.setRows(DAOFacade.getAllRequests());
+                      createT.setHeader(
+                          List.of(
+                              "Request Type",
+                              "Room",
+                              "Requester",
+                              "Assignee",
+                              "Status",
+                              "Priority"));
+                      createT.addFilter(4, SecurityController.getUser().getNodeID());
+                      createT.filter();
+                      createT.addDropDownEditProperty(4, 6, "CANCELLED");
+                      createT.addEnumEditProperty(5, 2, Request.Priority.class);
+                      createT.addDropDownEditProperty(
+                          3, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+                      createT.setRequestListeners();
+                    }))
+        .start();
 
     assignedT = new Table<>(Request.class, assignedTable, 2);
-    assignedT.setRows(DAOFacade.getAllRequests());
-    assignedT.setHeader(
-        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
-    assignedT.addFilter(5, SecurityController.getUser().getNodeID());
-    assignedT.filter();
-    assignedT.addEnumEditProperty(4, 6, Request.RequestStatus.class);
-    assignedT.setRequestListeners();
+    new Thread(
+            () ->
+                Platform.runLater(
+                    () -> {
+                      assignedT.setRows(DAOFacade.getAllRequests());
+                      assignedT.setHeader(
+                          List.of(
+                              "Request Type",
+                              "Room",
+                              "Requester",
+                              "Assignee",
+                              "Status",
+                              "Priority"));
+                      assignedT.addFilter(5, SecurityController.getUser().getNodeID());
+                      assignedT.filter();
+                      assignedT.addEnumEditProperty(4, 6, Request.RequestStatus.class);
+                      assignedT.setRequestListeners();
+                    }))
+        .start();
 
     relevantT = new Table<>(Request.class, relevantTable, 2);
-    relevantT.setRows(DAOFacade.getAllRequests());
-    relevantT.setHeader(
-        List.of("Request Type", "Room", "Requester", "Assignee", "Status", "Priority"));
-    relevantT.addFilter(6, "REQUESTED");
-    relevantT.filter();
-    relevantT.addDropDownEditProperty(3, 5, SecurityController.getUser().getNodeID());
-    relevantT.setRequestListeners();
+    new Thread(
+            () ->
+                Platform.runLater(
+                    () -> {
+                      relevantT.setRows(DAOFacade.getAllRequests());
+                      relevantT.setHeader(
+                          List.of(
+                              "Request Type",
+                              "Room",
+                              "Requester",
+                              "Assignee",
+                              "Status",
+                              "Priority"));
+                      relevantT.addFilter(6, "REQUESTED");
+                      relevantT.filter();
+                      relevantT.addDropDownEditProperty(
+                          3, 5, SecurityController.getUser().getNodeID());
+                      relevantT.setRequestListeners();
+                    }))
+        .start();
   }
 }
