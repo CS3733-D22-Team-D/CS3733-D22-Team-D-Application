@@ -75,7 +75,7 @@ public class NotificationReceiver {
     String message = "";
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
-      if (n.getNodeID().equals("not" + r.getNodeID())) {
+      if (n.getNodeID().equals("not" + r.getNodeID()) && !r.getAssigneeID().equals("none")) {
         message += r.requestType() + " from ";
         message += DAOPouch.getEmployeeDAO().get(r.getAssigneeID()).getFirstName();
         Background b =
