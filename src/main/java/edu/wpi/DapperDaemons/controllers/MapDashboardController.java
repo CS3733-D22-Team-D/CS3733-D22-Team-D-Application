@@ -52,8 +52,7 @@ public class MapDashboardController extends ParentController {
   public static List<ImageView> floorList = new ArrayList<>();
   public static List<PieChart.Data> cleanData = new ArrayList<>();
   public static List<PieChart.Data> dirtyData = new ArrayList<>();
-  public static List<Boolean> floorsInAnimation =
-      new ArrayList<>(Arrays.asList(new Boolean[7]));
+  public static List<Boolean> floorsInAnimation = new ArrayList<>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isHovered = new ArrayList<>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isSelected = new ArrayList<>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
@@ -139,8 +138,7 @@ public class MapDashboardController extends ParentController {
   }
 
   private void initSlide(ImageView floor, int level) {
-    floor.setOnMouseEntered(
-        event -> slideOut(floor, level));
+    floor.setOnMouseEntered(event -> slideOut(floor, level));
 
     floor.setOnMouseExited(
         event -> {
