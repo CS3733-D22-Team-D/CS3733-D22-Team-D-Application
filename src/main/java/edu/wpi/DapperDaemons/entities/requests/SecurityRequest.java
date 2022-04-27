@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SecurityRequest extends TableObject implements Request {
 
-  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -62,7 +61,7 @@ public class SecurityRequest extends TableObject implements Request {
     return "Security Request";
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 3)
   public Request.Priority getPriority() {
     return priority;
   }
@@ -82,12 +81,12 @@ public class SecurityRequest extends TableObject implements Request {
     return "FINFO00101";
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 0)
   public String getRequester() {
     return requester;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 1)
   public String getAssignee() {
     return assignee;
   }

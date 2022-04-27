@@ -45,7 +45,6 @@ public class LanguageRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -65,7 +64,7 @@ public class LanguageRequest extends TableObject implements Request {
     return status;
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 2)
   public Language getLanguage() {
     return language;
   }
@@ -76,6 +75,7 @@ public class LanguageRequest extends TableObject implements Request {
   }
 
   @Override
+  @TableHandler(table = 0, col = 4)
   public Request.Priority getPriority() {
     return priority;
   }
@@ -85,7 +85,7 @@ public class LanguageRequest extends TableObject implements Request {
     return true;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 3)
   public String getRoomID() {
     return roomID;
   }
@@ -95,12 +95,12 @@ public class LanguageRequest extends TableObject implements Request {
     return RandomizeFields.getRandomExit();
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 0)
   public String getRequester() {
     return requesterID;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 1)
   public String getAssignee() {
     return assignee;
   }
@@ -134,7 +134,6 @@ public class LanguageRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 5)
   public String getDateNeeded() {
     return dateNeeded;
   }

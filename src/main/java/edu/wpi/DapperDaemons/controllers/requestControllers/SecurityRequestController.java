@@ -69,7 +69,6 @@ public class SecurityRequestController extends ParentController {
     //    bindImage(BGImage, BGContainer);
 
     onClearClicked();
-    t = new Table<>(SecurityRequest.class, table, 0);
     createTable();
   }
 
@@ -79,7 +78,7 @@ public class SecurityRequestController extends ParentController {
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(SecurityRequest.class, table, 0);
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
 
@@ -94,7 +93,10 @@ public class SecurityRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Room", "Priority"));
     t.setListeners(new SecurityRequest());
+    t.addEnumEditProperty(3, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   private void setListeners() {

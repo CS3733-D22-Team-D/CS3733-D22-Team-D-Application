@@ -774,7 +774,7 @@ public class MapController extends ParentController {
 
   @FXML
   void dirToggle() {
-    if (directionTG.isSelected()) {
+    if (circle4.isSelected()) {
       try {
         directionsFields =
             FXMLLoader.load(

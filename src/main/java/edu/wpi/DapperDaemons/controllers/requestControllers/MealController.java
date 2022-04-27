@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
@@ -80,13 +81,11 @@ public class MealController extends ParentController {
     /* Init Request table */
     initBoxes();
     onClearClicked();
-
-    t = new Table<>(MealDeliveryRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(MealDeliveryRequest.class, table, 0);
     List<MealDeliveryRequest> reqs =
         new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
 
@@ -101,7 +100,20 @@ public class MealController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(
+        List.of(
+            "Requester",
+            "Assignee",
+            "Patient",
+            "Room",
+            "Entree",
+            "Side",
+            "Drink",
+            "Dessert",
+            "Priority"));
     t.setListeners(new MealDeliveryRequest());
+    t.addEnumEditProperty(8, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   @FXML

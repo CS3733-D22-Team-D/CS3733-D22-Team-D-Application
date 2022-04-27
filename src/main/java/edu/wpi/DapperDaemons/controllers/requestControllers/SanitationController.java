@@ -29,7 +29,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class SanitationController extends ParentController {
@@ -58,23 +57,20 @@ public class SanitationController extends ParentController {
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
-  DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
-  DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<SanitationRequest> sanitationRequestDAO = DAOPouch.getSanitationRequestDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   @FXML private GridPane table;
-  @FXML private HBox header;
   private Table<SanitationRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     onClearClicked();
     initializeInputs();
-
-    t = new Table<>(SanitationRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(SanitationRequest.class, table, 0);
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
 
@@ -87,9 +83,11 @@ public class SanitationController extends ParentController {
         i--;
       }
     }
-
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Type", "Room", "Priority"));
     t.setListeners(new SanitationRequest());
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
   }
 
   private void setListeners() {
@@ -100,7 +98,7 @@ public class SanitationController extends ParentController {
               pendingRequests.getItems().clear();
               pendingRequests
                   .getItems()
-                  .addAll(new ArrayList(sanitationRequestDAO.getAll().values()));
+                  .addAll(new ArrayList<>(sanitationRequestDAO.getAll().values()));
             }));
   }
 

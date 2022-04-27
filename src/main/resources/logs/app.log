@@ -1,70 +1,99 @@
-2022-04-26 00:20:08:608 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
-2022-04-26 00:20:08:609 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
-2022-04-26 00:20:12:641 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
-2022-04-26 00:20:12:641 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
-2022-04-26 00:20:12:642 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
-2022-04-26 00:20:12:643 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Languages
-2022-04-26 00:20:12:644 [Thread-6] INFO edu.wpi.DapperDaemons.App - Languages has been produced
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
-2022-04-26 00:20:12:645 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-26 00:20:12:646 [Thread-6] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-26 00:20:20:192 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
-2022-04-26 00:20:20:327 [Timer-2] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
-2022-04-26 00:20:20:327 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-25T15:15:58.893169800 Was overdue, updating priority
-2022-04-26 00:20:20:327 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-25T23:28:55.030925 Was overdue, updating priority
-2022-04-26 00:20:20:327 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T21:00:04.948392500 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:59:17.470490 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-21T12:59:53.118606900 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:15:27.525405600 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T17:31:16.585565 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-21T12:00:36.879103300 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:17:26.482345 Was overdue, updating priority
-2022-04-26 00:20:20:328 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T23:10:27.591652 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-19T23:18:46.893013 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-23T17:40:58.811473700 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T15:57:18.454168300 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMADMIN02022-04-19T23:52:49.638362800 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:14:27.675485100 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T21:35:01.203169 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:17:58.488909 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
-2022-04-26 00:20:20:329 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
-2022-04-26 00:20:20:329 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:19:40.657107 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWIssuerTest2022-04-24T19:33:17.447003500 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-20T12:22:13.478641 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-20T10:49:56.821021200 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-22T00:12:22.445727 Was overdue, updating priority
-2022-04-26 00:20:20:329 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:56:13.514048 Was overdue, updating priority
-2022-04-26 00:20:20:339 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-26 00:21:04:278 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <medicine>
-2022-04-26 00:21:11:065 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <labRequest>
-2022-04-26 00:21:25:187 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Closing program
-2022-04-26 00:21:25:206 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Successfully saved all files!
+2022-04-26 21:49:18:495 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
+2022-04-26 21:49:18:496 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
+2022-04-26 21:49:24:653 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
+2022-04-26 21:49:24:653 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
+2022-04-26 21:49:24:655 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
+2022-04-26 21:49:24:656 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
+2022-04-26 21:49:24:657 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
+2022-04-26 21:49:24:657 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
+2022-04-26 21:49:24:657 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
+2022-04-26 21:49:24:657 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-26 21:49:24:658 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Languages
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Languages has been produced
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
+2022-04-26 21:49:24:659 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
+2022-04-26 21:49:24:660 [Thread-6] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
+2022-04-26 21:49:24:660 [Thread-6] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-26 21:49:24:660 [Thread-6] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-26 21:49:27:223 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
+2022-04-26 21:49:27:417 [Timer-2] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-26 21:49:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-25T15:15:58.893169800 Was overdue, updating priority
+2022-04-26 21:49:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-25T23:28:55.030925 Was overdue, updating priority
+2022-04-26 21:49:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:59:17.470490 Was overdue, updating priority
+2022-04-26 21:49:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-21T12:59:53.118606900 Was overdue, updating priority
+2022-04-26 21:49:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:15:27.525405600 Was overdue, updating priority
+2022-04-26 21:49:27:419 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T17:31:16.585565 Was overdue, updating priority
+2022-04-26 21:49:27:419 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-21T12:00:36.879103300 Was overdue, updating priority
+2022-04-26 21:49:27:420 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:17:26.482345 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T23:10:27.591652 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-19T23:18:46.893013 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-23T17:40:58.811473700 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T19:11:12.853278 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T15:57:18.454168300 Was overdue, updating priority
+2022-04-26 21:49:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMADMIN02022-04-19T23:52:49.638362800 Was overdue, updating priority
+2022-04-26 21:49:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:14:27.675485100 Was overdue, updating priority
+2022-04-26 21:49:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T21:35:01.203169 Was overdue, updating priority
+2022-04-26 21:49:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:17:58.488909 Was overdue, updating priority
+2022-04-26 21:49:27:421 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
+2022-04-26 21:49:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T15:35:19.479843 Was overdue, updating priority
+2022-04-26 21:49:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:19:40.657107 Was overdue, updating priority
+2022-04-26 21:49:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T19:27:16.512664 Was overdue, updating priority
+2022-04-26 21:49:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWIssuerTest2022-04-24T19:33:17.447003500 Was overdue, updating priority
+2022-04-26 21:49:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-20T12:22:13.478641 Was overdue, updating priority
+2022-04-26 21:49:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-20T10:49:56.821021200 Was overdue, updating priority
+2022-04-26 21:49:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-22T00:12:22.445727 Was overdue, updating priority
+2022-04-26 21:49:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:56:13.514048 Was overdue, updating priority
+2022-04-26 21:49:27:426 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
+2022-04-26 21:49:27:426 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
+2022-04-26 21:49:27:426 [Timer-3] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
+2022-04-26 21:49:27:448 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
+2022-04-26 21:49:30:439 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <aboutUs>
+2022-04-26 21:49:32:023 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <apiLandingPage>
+2022-04-26 21:52:27:417 [Timer-2] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-25T15:15:58.893169800 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-25T23:28:55.030925 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:59:17.470490 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-21T12:59:53.118606900 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:15:27.525405600 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T17:31:16.585565 Was overdue, updating priority
+2022-04-26 21:52:27:418 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-21T12:00:36.879103300 Was overdue, updating priority
+2022-04-26 21:52:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:17:26.482345 Was overdue, updating priority
+2022-04-26 21:52:27:421 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T23:10:27.591652 Was overdue, updating priority
+2022-04-26 21:52:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-19T23:18:46.893013 Was overdue, updating priority
+2022-04-26 21:52:27:422 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-23T17:40:58.811473700 Was overdue, updating priority
+2022-04-26 21:52:27:423 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T19:11:12.853278 Was overdue, updating priority
+2022-04-26 21:52:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-24T15:57:18.454168300 Was overdue, updating priority
+2022-04-26 21:52:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMADMIN02022-04-19T23:52:49.638362800 Was overdue, updating priority
+2022-04-26 21:52:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:14:27.675485100 Was overdue, updating priority
+2022-04-26 21:52:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T21:35:01.203169 Was overdue, updating priority
+2022-04-26 21:52:27:424 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T19:17:58.488909 Was overdue, updating priority
+2022-04-26 21:52:27:427 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T15:35:19.479843 Was overdue, updating priority
+2022-04-26 21:52:27:427 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-19T23:19:40.657107 Was overdue, updating priority
+2022-04-26 21:52:27:427 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-26T19:27:16.512664 Was overdue, updating priority
+2022-04-26 21:52:27:427 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWIssuerTest2022-04-24T19:33:17.447003500 Was overdue, updating priority
+2022-04-26 21:52:27:428 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-20T12:22:13.478641 Was overdue, updating priority
+2022-04-26 21:52:27:428 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request LOWadmin2022-04-20T10:49:56.821021200 Was overdue, updating priority
+2022-04-26 21:52:27:430 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request HIGHadmin2022-04-22T00:12:22.445727 Was overdue, updating priority
+2022-04-26 21:52:27:430 [Timer-2] INFO edu.wpi.DapperDaemons.App - Request MEDIUMadmin2022-04-19T20:56:13.514048 Was overdue, updating priority
+2022-04-26 21:53:53:722 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
+2022-04-26 21:53:55:660 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Closing program
+2022-04-26 21:53:55:737 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Successfully saved all files!

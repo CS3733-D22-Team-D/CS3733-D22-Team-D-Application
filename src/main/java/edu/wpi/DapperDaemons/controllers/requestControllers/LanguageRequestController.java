@@ -9,7 +9,6 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
@@ -31,7 +30,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -57,21 +55,16 @@ public class LanguageRequestController extends ParentController {
   @FXML private TableColumn<LanguageRequest, String> assignee;
 
   /* DAO Object */
-  private DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
-  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   @FXML private GridPane table;
-  @FXML private HBox header;
   private Table<LanguageRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //        super.initialize(location, resources);
     initBoxes();
-    //    bindImage(BGImage, BGContainer);
-
     onClearClicked();
-    t = new Table<>(LanguageRequest.class, table, 0);
     createTable();
   }
 
@@ -83,7 +76,7 @@ public class LanguageRequestController extends ParentController {
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(LanguageRequest.class, table, 0);
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
 
@@ -98,20 +91,10 @@ public class LanguageRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Language", "Room", "Priority"));
     t.setListeners(new LanguageRequest());
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new LanguageRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              System.out.println("LanguageRequestsTable");
-              languageRequestsTable.getItems().clear();
-              languageRequestsTable
-                  .getItems()
-                  .addAll(new ArrayList(languageRequestDAO.getAll().values()));
-            }));
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   @FXML
