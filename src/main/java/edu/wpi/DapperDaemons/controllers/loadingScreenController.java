@@ -79,7 +79,7 @@ public class loadingScreenController extends AppController {
   }
 
   public static void stop() {
-    loading.cancel();
-    backgroundImages.cancel();
+//    loading.cancel();
+//    backgroundImages.cancel();
   }
 }

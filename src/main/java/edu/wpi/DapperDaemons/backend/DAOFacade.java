@@ -254,14 +254,17 @@ public class DAOFacade {
 
   /**
    * Gets a list of all equipment that is dirty in the DAOs
+   *
    * @param type - the type of equipment to check for
    */
   public static List<MedicalEquipment> getDirtyEquipment(MedicalEquipment.EquipmentType type) {
-      List<MedicalEquipment> dirty = new ArrayList<>();
-      List<MedicalEquipment> ofType = new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(3,type.name()).values());
-      ofType.forEach(equip -> {
-        if (equip.getCleanStatus().equals(MedicalEquipment.CleanStatus.UNCLEAN)) dirty.add(equip);
-      });
-      return dirty;
+    List<MedicalEquipment> dirty = new ArrayList<>();
+    List<MedicalEquipment> ofType =
+        new ArrayList<>(DAOPouch.getMedicalEquipmentDAO().filter(3, type.name()).values());
+    ofType.forEach(
+        equip -> {
+          if (equip.getCleanStatus().equals(MedicalEquipment.CleanStatus.UNCLEAN)) dirty.add(equip);
+        });
+    return dirty;
   }
 }
