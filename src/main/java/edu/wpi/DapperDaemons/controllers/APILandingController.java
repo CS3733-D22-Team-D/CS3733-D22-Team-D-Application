@@ -73,12 +73,12 @@ public class APILandingController implements Initializable {
     for (EmployeeObj employeeObj : employeeAPI.getAllEmployees()) {
       employeeAPI.removeEmployee(employeeObj);
     }
-    /* Remove all requests
+    /*
     SanitationReqAPI sanitationReqAPI = new SanitationReqAPI();
     for (SanitationIRequest iReq : sanitationReqAPI.getAllRequests()) {
       sanitationReqAPI.deleteRequest(iReq);
     }
-        */
+    */
 
     // EmployeeAPI employeeAPI = new EmployeeAPI();
     for (Employee employee : DAOPouch.getEmployeeDAO().getAll().values()) {
@@ -89,8 +89,7 @@ public class APILandingController implements Initializable {
               employee.getDateOfBirth(),
               EmployeeObj.EmployeeType.valueOf(employee.getEmployeeType().toString()),
               employee.getSecurityClearance());
-      employeeObj.setNodeID(
-          employee.getFirstName() + employee.getLastName() + employee.getDateOfBirth());
+      employeeObj.setNodeID(employee.getNodeID());
       employeeAPI.addEmployee(employeeObj);
     }
   }
