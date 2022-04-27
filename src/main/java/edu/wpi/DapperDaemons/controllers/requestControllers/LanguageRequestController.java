@@ -26,7 +26,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -52,21 +51,16 @@ public class LanguageRequestController extends ParentController {
   @FXML private TableColumn<LanguageRequest, String> assignee;
 
   /* DAO Object */
-  private DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
-  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<LanguageRequest> languageRequestDAO = DAOPouch.getLanguageRequestDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
   @FXML private GridPane table;
-  @FXML private HBox header;
   private Table<LanguageRequest> t;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //        super.initialize(location, resources);
     initBoxes();
-    //    bindImage(BGImage, BGContainer);
-
     onClearClicked();
-    t = new Table<>(LanguageRequest.class, table, 0);
     createTable();
   }
 
@@ -78,7 +72,8 @@ public class LanguageRequestController extends ParentController {
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(LanguageRequest.class, table, 0);
+    t.setHeader(List.of("Requester", "Assignee", "Language", "Room", "Priority"));
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
     t.setRows(reqs);
