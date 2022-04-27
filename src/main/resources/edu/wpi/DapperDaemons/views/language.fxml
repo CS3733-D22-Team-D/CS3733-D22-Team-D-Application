@@ -94,12 +94,12 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onClearClicked" prefHeight="35.0" prefWidth="90.0" styleClass="cancelButton" text="Clear" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#onClearClicked" onMouseEntered="#hoveredCancel" onMouseExited="#unhoveredCancel" prefHeight="35.0" prefWidth="90.0" styleClass="cancelButton" text="Clear" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -156,7 +156,7 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="110.0" styleClass="confirmButton" text="Save to CSV" textFill="WHITE">
+                  <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="35.0" prefWidth="110.0" styleClass="confirmButton" text="Save to CSV" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="20.0" />
                      </HBox.margin>

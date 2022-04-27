@@ -102,7 +102,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" onMouseExited="#hoveredSubmit" onMouseMoved="#unhoveredSubmit" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>

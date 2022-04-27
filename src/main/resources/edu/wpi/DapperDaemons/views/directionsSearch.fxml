@@ -65,12 +65,12 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#clearPath" styleClass="cancelButton" text="Clear" textFill="WHITE">
+                  <Button mnemonicParsing="false" onDragEntered="#hoveredCancel" onDragExited="#unhoveredCancel" onMouseClicked="#clearPath" onMouseEntered="#hoveredCancel" onMouseExited="#unhoveredCancel" styleClass="cancelButton" text="Clear" textFill="WHITE">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#showPath" styleClass="confirmButton" text="Go" textFill="WHITE">
+                  <Button mnemonicParsing="false" onMouseClicked="#showPath" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" styleClass="confirmButton" text="Go" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
