@@ -12,7 +12,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
-import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -69,9 +68,17 @@ public class MedicineController extends ParentController {
   private void createTable() {
     List<MedicineRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
-    for(MedicineRequest medicineRequest : reqs)
-      if(medicineRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || medicineRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(medicineRequest);
+
+    for (int i = 0; i < reqs.size(); i++) {
+      MedicineRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setHeader(
         List.of(

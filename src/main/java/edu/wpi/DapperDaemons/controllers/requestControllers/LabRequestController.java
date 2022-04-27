@@ -11,7 +11,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
-import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -77,9 +76,15 @@ public class LabRequestController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
 
-    for(LabRequest labRequest : reqs)
-      if(labRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || labRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(labRequest);
+    for (int i = 0; i < reqs.size(); i++) {
+      LabRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
 
     t.setRows(reqs);
     t.setListeners(new LabRequest());

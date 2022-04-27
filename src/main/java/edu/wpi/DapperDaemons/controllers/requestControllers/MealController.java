@@ -9,7 +9,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
-import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import java.net.URL;
@@ -84,9 +83,15 @@ public class MealController extends ParentController {
     List<MealDeliveryRequest> reqs =
         new ArrayList<>(DAOPouch.getMealDeliveryRequestDAO().getAll().values());
 
-    for(MealDeliveryRequest mealDeliveryRequest : reqs)
-      if(mealDeliveryRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || mealDeliveryRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(mealDeliveryRequest);
+    for (int i = 0; i < reqs.size(); i++) {
+      MealDeliveryRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
 
     t.setRows(reqs);
     t.setListeners(new MealDeliveryRequest());

@@ -10,7 +10,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
-import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -78,9 +77,17 @@ public class SecurityRequestController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
-    for(SecurityRequest securityRequest : reqs)
-      if(securityRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || securityRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(securityRequest);
+
+    for (int i = 0; i < reqs.size(); i++) {
+      SecurityRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new SecurityRequest());
   }

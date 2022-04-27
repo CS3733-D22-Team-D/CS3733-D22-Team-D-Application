@@ -11,7 +11,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
-import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -62,11 +61,17 @@ public class PatientTransportController extends ParentController {
     requestTable = new Table<>(PatientTransportRequest.class, table, 0);
 
     List<PatientTransportRequest> reqs =
-            new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
+        new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
 
-    for(PatientTransportRequest patientTransportRequest : reqs)
-      if(patientTransportRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || patientTransportRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(patientTransportRequest);
+    for (int i = 0; i < reqs.size(); i++) {
+      PatientTransportRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
 
     requestTable.setRows(reqs);
     requestTable.setListeners(new PatientTransportRequest());

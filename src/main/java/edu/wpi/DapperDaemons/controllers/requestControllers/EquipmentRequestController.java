@@ -12,7 +12,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.EquipmentCleaning;
 import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -81,9 +80,15 @@ public class EquipmentRequestController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
-    for(MedicalEquipmentRequest medicalEquipment : reqs)
-      if(medicalEquipment.getStatus().equals(Request.RequestStatus.COMPLETED) || medicalEquipment.getStatus().equals(Request.RequestStatus.CANCELLED))
-        reqs.remove(medicalEquipment);
+    for (int i = 0; i < reqs.size(); i++) {
+      MedicalEquipmentRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
     t.setRows(reqs);
     t.setListeners(new MedicalEquipmentRequest());
   }
