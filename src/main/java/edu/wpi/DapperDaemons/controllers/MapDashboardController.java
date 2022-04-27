@@ -9,8 +9,11 @@ import java.net.URL;
 import java.util.*;
 import java.util.List;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,7 +44,14 @@ public class MapDashboardController extends ParentController {
   @FXML private ImageView mapImage;
   public static String floor;
 
+  @FXML private PieChart pumpChart;
+  @FXML private PieChart xrayChart;
+  @FXML private PieChart reclinerChart;
+  @FXML private PieChart bedChart;
+
   public static List<ImageView> floorList = new ArrayList<ImageView>();
+  public static List<PieChart.Data> cleanData = new ArrayList<PieChart.Data>();
+  public static List<PieChart.Data> dirtyData = new ArrayList<PieChart.Data>();
   public static List<Boolean> floorsInAnimation =
       new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
   public static List<Boolean> isHovered = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
@@ -53,6 +63,44 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    PieChart.Data cleanPumps = new PieChart.Data("clean", 45);
+    PieChart.Data dirtyPumps = new PieChart.Data("dirty", 55);
+    PieChart.Data cleanXray = new PieChart.Data("clean", 80);
+    PieChart.Data dirtyXray = new PieChart.Data("dirty", 20);
+    PieChart.Data cleanRecliner = new PieChart.Data("clean", 87);
+    PieChart.Data dirtyRecliner = new PieChart.Data("dirty", 13);
+    PieChart.Data cleanBed = new PieChart.Data("clean", 30);
+    PieChart.Data dirtyBed = new PieChart.Data("dirty", 70);
+
+    cleanData.addAll(List.of(cleanPumps, cleanXray, cleanRecliner, cleanBed));
+    dirtyData.addAll(List.of(dirtyPumps, dirtyXray, dirtyRecliner, dirtyBed));
+
+    ObservableList<PieChart.Data> pumpData =
+        FXCollections.observableArrayList(cleanPumps, dirtyPumps);
+    ObservableList<PieChart.Data> xrayData =
+        FXCollections.observableArrayList(cleanXray, dirtyXray);
+    ObservableList<PieChart.Data> reclinerData =
+        FXCollections.observableArrayList(cleanRecliner, dirtyRecliner);
+    ObservableList<PieChart.Data> bedData = FXCollections.observableArrayList(cleanBed, dirtyBed);
+    pumpChart.setData(pumpData);
+    xrayChart.setData(xrayData);
+    reclinerChart.setData(reclinerData);
+    bedChart.setData(bedData);
+
+    for (PieChart.Data data : cleanData) {
+      data.getNode().setStyle("-fx-pie-color: #F1F0F0;");
+    }
+
+    for (PieChart.Data data : dirtyData) {
+      if (data.getPieValue() < 34) {
+        data.getNode().setStyle("-fx-pie-color: #79DE79;");
+      } else if (data.getPieValue() < 67) {
+        data.getNode().setStyle("-fx-pie-color: #F5EC42;");
+      } else {
+        data.getNode().setStyle("-fx-pie-color: #FF4C43;");
+      }
+    }
+
     floorNum = 2;
     floor = getFloor();
     Collections.fill(floorsInAnimation, Boolean.FALSE);
