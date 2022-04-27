@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="errorPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="350.0" styleClass="pageCard" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.ErrorController">
+<VBox fx:id="errorPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="281.0" style="-fx-background-radius: 8.5; -fx-background-color: #fffefe;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.requestControllers.ErrorController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
          <children>
@@ -23,7 +23,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Oops! Something Went Wong">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oops! Something went Wong">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -32,12 +32,12 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="230.0" spacing="6.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="errorText" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Error Text" textFill="#ff4747">
+            <Label fx:id="errorText" text="Error Text" textFill="#ff4646">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#hideError" prefHeight="36.0" prefWidth="246.0" styleClass="cancelButton" stylesheets="@../styling/lightMode.css" text="Close" textFill="WHITE">
+            <Button id="defaultButton" fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#hideError" prefHeight="36.0" prefWidth="246.0" style="-fx-background-color: #999DAF;" stylesheets="@../assets/buttons.css" text="Close" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" />
                </VBox.margin>
