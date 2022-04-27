@@ -383,7 +383,7 @@
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                                  <children>
-                                    <ImageView fx:id="notifBell" fitHeight="28.0" fitWidth="28.0" nodeOrientation="INHERIT">
+                                    <ImageView fx:id="notifBell" fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT">
                                        <image>
                                           <Image url="@../assets/Glyphs/bell.png" />
                                        </image>
@@ -430,16 +430,13 @@
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.png" />
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
                                        </image>
                                     </ImageView>
                                     <Text strokeWidth="0.0" text="User Settings">
                                        <HBox.margin>
-                                          <Insets left="13.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
@@ -457,11 +454,8 @@
                                     </ImageView>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
                                        <HBox.margin>
-                                          <Insets left="13.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
@@ -479,11 +473,8 @@
                                     </ImageView>
                                     <Text strokeWidth="0.0" text="Exit">
                                        <HBox.margin>
-                                          <Insets left="13.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
                                     </Text>
                                  </children>
                               </HBox>
