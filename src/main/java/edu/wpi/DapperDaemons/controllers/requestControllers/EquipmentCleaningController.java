@@ -74,7 +74,7 @@ public class EquipmentCleaningController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(EquipmentCleaning.class, table, 0);
+    t = new Table<>(EquipmentCleaning.class, table, 0, 0);
     List<EquipmentCleaning> reqs =
         new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values());
     for (EquipmentCleaning equipmentCleaning : reqs)

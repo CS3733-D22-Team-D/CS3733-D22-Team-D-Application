@@ -75,7 +75,7 @@ public class LanguageRequestController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(LanguageRequest.class, table, 0);
+    t = new Table<>(LanguageRequest.class, table, 0, 0);
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
 

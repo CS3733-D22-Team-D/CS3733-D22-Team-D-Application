@@ -25,28 +25,28 @@ public interface Request {
 
   /** @return the priority of a given request */
   @TableHandler(table = 1, col = 2)
-  @TableHandler(table = 2, col = 1)
+  @TableHandler(table = 2, col = 5)
   Priority getPriority();
 
   /** @return whether or not this is a request that requires things to be moved */
   boolean requiresTransport();
 
   /** @return roomID of a given request */
-  @TableHandler(table = 2, col = 2)
+  @TableHandler(table = 2, col = 1)
   String getRoomID();
 
   String transportFromRoomID();
 
   String getNodeID();
 
-  @TableHandler(table = 2, col = 3)
+  @TableHandler(table = 2, col = 2)
   String getRequesterID();
 
   @TableHandler(table = 1, col = 1)
-  @TableHandler(table = 2, col = 4)
+  @TableHandler(table = 2, col = 3)
   String getAssigneeID();
 
-  @TableHandler(table = 2, col = 5)
+  @TableHandler(table = 2, col = 4)
   RequestStatus getStatus();
 
   String getDateNeeded();
