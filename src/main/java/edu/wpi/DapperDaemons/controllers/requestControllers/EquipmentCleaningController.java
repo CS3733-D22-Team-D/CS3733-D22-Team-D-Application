@@ -62,16 +62,14 @@ public class EquipmentCleaningController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     initBoxes();
-
-    t = new Table<>(EquipmentCleaning.class, table, 0);
     createTable();
     onClearClicked();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(EquipmentCleaning.class, table, 0);
+    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     List<EquipmentCleaning> reqs =
         new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values());
     t.setRows(reqs);
