@@ -41,6 +41,7 @@
                         <AnchorPane fx:id="equipLayer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="4375.0" prefWidth="4968.0" />
                         <AnchorPane fx:id="dragPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pinPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane fx:id="requestsPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane fx:id="pathPane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>

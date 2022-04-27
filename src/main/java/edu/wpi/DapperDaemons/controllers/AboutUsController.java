@@ -18,4 +18,13 @@ public class AboutUsController extends ParentController {
   public void startAPI() throws IOException {
     swapPage("apiLandingPage", "API Landing Page");
   }
+
+  /**
+   * Allows for access to the credits page
+   *
+   * @throws IOException if the page is unable to switched
+   */
+  public void gotToCredits() throws IOException {
+    swapPage("credits", "Credits");
+  }
 }

@@ -57,6 +57,7 @@ public class MapController extends ParentController {
   @FXML private StackPane mapAssets;
   @FXML private ScrollPane mapContents;
   @FXML private AnchorPane pathPane;
+  @FXML private AnchorPane requestsPane;
   @FXML private VBox centerBox;
   @FXML private VBox emptyBox;
 
@@ -185,7 +186,7 @@ public class MapController extends ParentController {
 
     pathfinder.filterByFloor(getFloor());
 
-    requestPaths = new ShowRequestPaths(pathPane, this);
+    requestPaths = new ShowRequestPaths(requestsPane, this);
     requestPaths.setCurrentFloor(getFloor());
 
     //    connectionShower = new ShowConnections(pathPane, this);
