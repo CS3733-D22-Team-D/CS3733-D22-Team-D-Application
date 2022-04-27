@@ -62,7 +62,7 @@ public class UserHomeController extends ParentController {
 
   @FXML // TODO: make notifications page?
   public void openNotifications() {
-    swapPage("", "Notifications");
+    swapPage("notificationsPage", "Notifications");
   }
 
   @Override
