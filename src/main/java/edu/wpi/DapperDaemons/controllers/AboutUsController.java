@@ -2,14 +2,13 @@ package edu.wpi.DapperDaemons.controllers;
 
 // import edu.wpi.cs3733.D22.teamD.API.*;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 
 public class AboutUsController extends ParentController {
 
@@ -33,8 +32,6 @@ public class AboutUsController extends ParentController {
   public void gotToCredits() throws IOException {
     swapPage("credits", "Credits");
   }
-
-
 
   /* Animations */
   @FXML
@@ -76,6 +73,4 @@ public class AboutUsController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
-
-
 }

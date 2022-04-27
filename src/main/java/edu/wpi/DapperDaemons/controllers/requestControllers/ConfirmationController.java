@@ -1,14 +1,13 @@
 package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
+import java.awt.*;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-
-import java.awt.*;
 
 public class ConfirmationController {
   /*ErrorPopup*/
@@ -34,7 +33,6 @@ public class ConfirmationController {
     errorPopup.setVisible(false);
     return true;
   }
-
 
   /* Animations */
   @FXML
