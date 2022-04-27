@@ -13,7 +13,7 @@
          <children>
             <ScrollPane hbarPolicy="NEVER" minHeight="0.0" prefHeight="200.0" vbarPolicy="NEVER">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="857.0">
                      <children>
                         <Label text="Today">
                            <font>
@@ -34,7 +34,7 @@
             </ScrollPane>
             <ScrollPane hbarPolicy="NEVER" minHeight="0.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="856.0">
                      <children>
                         <Label text="Earlier">
                            <font>

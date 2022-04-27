@@ -50,8 +50,8 @@ public class NotificationsPageController extends ParentController {
           .setOnMouseClicked(
               e -> {
                 n.setAttribute(5, "true");
-                DAOPouch.getNotificationDAO().add(n);
                 finalNotif.getChildren().get(6).setVisible(false);
+                DAOPouch.getNotificationDAO().add(n);
               });
     } else {
       notif.getChildren().get(6).setVisible(false);
@@ -132,6 +132,7 @@ public class NotificationsPageController extends ParentController {
 
   private void setNotifications() {
     this.todayBox.getChildren().clear();
+    this.earlierBox.getChildren().clear();
     List<Notification> notifications =
         new ArrayList<>(
             DAOPouch.getNotificationDAO()
