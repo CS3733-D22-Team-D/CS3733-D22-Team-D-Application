@@ -30,7 +30,6 @@ public class SerialCOM {
 
     // Open Connection
     boolean connection = arduino.openConnection();
-    System.out.println("Opening connection...");
 
     // Throw exception if unable to connect to serial port
     if (!connection) {
@@ -39,19 +38,16 @@ public class SerialCOM {
     }
     // otherwise, attempt to collect data, timeout if it has been over 10 seconds
     else {
-      System.out.println("Connected!");
       while (this.input.equals("")) {
         input = arduino.serialRead();
         if (containsLetters(input)) input = "";
         long currentTime = System.currentTimeMillis();
         if (currentTime >= startTime + 10000) {
-          System.out.println("Timeout!");
           arduino.closeConnection();
           throw new ArduinoTimeOutException();
         }
       }
       arduino.closeConnection();
-      System.out.println("Received input: " + input);
       input = input.trim();
     }
     return input;
@@ -86,15 +82,12 @@ public class SerialCOM {
    */
   public Arduino setupArduino() throws UnableToConnectException {
     List<String> ports = this.getAvailableCOMs();
-    //    System.out.println("Check system serial ports...");
     // For each available port
     for (String port : ports) {
       // Create arduino object on that port
       Arduino arduino = new Arduino(port, 9600);
-      //      System.out.println("Checking Serial Port: " + port);
       // Check if arduino has a connection and sends buffer message
       if (arduino.openConnection() && this.checkForBuffer(arduino)) {
-        //        System.out.println("Port " + port + " has correct connection");
         arduino.closeConnection();
         return arduino;
       } else arduino.closeConnection();
@@ -114,7 +107,6 @@ public class SerialCOM {
     String aIn = "";
     while (!containsLetters(aIn)) {
       aIn = arduino.serialRead();
-      //      System.out.println("Test signal: " + aIn);
       long currentTime = System.currentTimeMillis();
       if (currentTime >= startTime + 2000) {
         return false;
