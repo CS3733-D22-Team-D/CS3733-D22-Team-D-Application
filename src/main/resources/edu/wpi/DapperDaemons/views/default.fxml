@@ -2,41 +2,49 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
                <children>
                   <Label text="General" textFill="#052f92">
                      <font>
                         <Font name="Inter Regular" size="20.0" />
                      </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-5.png" />
                                  </image>
                               </ImageView>
-                              <Label text="Map" textFill="WHITE" />
+                              <Label text="Map" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin></Label>
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToDB" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToDB" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-4.png" />
                                  </image>
@@ -48,11 +56,18 @@
                            </padding>
                         </VBox>
                      </children>
-                     <padding>
-                        <Insets bottom="25.0" left="15.0" right="15.0" top="10.0" />
-                     </padding>
                   </HBox>
                </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.14000000059604645" green="0.13019999861717224" blue="0.13019999861717224" opacity="0.1599999964237213" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
                <children>
@@ -63,9 +78,9 @@
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-13.png" />
                                  </image>
@@ -76,9 +91,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-15.png" />
                                  </image>
@@ -89,9 +104,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-8.png" />
                                  </image>
@@ -102,9 +117,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-9.png" />
                                  </image>
@@ -115,9 +130,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-6.png" />
                                  </image>
@@ -130,14 +145,14 @@
                         </VBox>
                      </children>
                      <padding>
-                        <Insets bottom="25.0" left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                      </padding>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-7.png" />
                                  </image>
@@ -148,9 +163,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-14.png" />
                                  </image>
@@ -161,9 +176,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-11.png" />
                                  </image>
@@ -174,9 +189,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-12.png" />
                                  </image>
@@ -187,9 +202,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
+                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A) linear-gradient(from 0% 0% to 50% 50%, reflect,#057DA7,#08349A); -fx-background-radius: 15;">
                            <children>
-                              <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-10.png" />
                                  </image>
@@ -206,6 +221,13 @@
                      </padding>
                   </HBox>
                </children>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.14000000059604645" green="0.13019999861717224" blue="0.13019999861717224" opacity="0.1599999964237213" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </VBox>
          </children>
          <padding>
