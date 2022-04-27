@@ -7,7 +7,6 @@ import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
@@ -22,14 +21,9 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
-
-  /* Table Object and Helper */
-  @FXML private HBox header;
-  private TableHelper<LabRequest> tableHelper;
 
   /* UI Fields */
   @FXML private TextField patientName;
@@ -42,8 +36,8 @@ public class LabRequestController extends ParentController {
   @FXML private JFXComboBox<String> assigneeBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
-  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
@@ -58,36 +52,16 @@ public class LabRequestController extends ParentController {
     onClearClicked();
     LabRequestInitializer init = new LabRequestInitializer();
 
-    init.initializeTable();
     init.initializeInputs();
-
-    //    try {
-    //      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
-    //    } catch (Exception e) {
-    //      e.printStackTrace();
-    //      System.err.print("Error, Lab Req table was unable to be created\n");
-    //    }
-    //    setListeners();
-    t = new Table<>(LabRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(LabRequest.class, table, 0);
+    t.setHeader(List.of("Test", "Test", "Test"));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
     t.setRows(reqs);
     t.setListeners(new LabRequest());
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new LabRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              labReqTable.getItems().clear();
-              //              labReqTable.getItems().addAll(new
-              // ArrayList(labRequestDAO.getAll().values()));
-            }));
   }
 
   @FXML
@@ -223,12 +197,6 @@ public class LabRequestController extends ParentController {
   }
 
   private class LabRequestInitializer {
-    private void initializeTable() {
-      // Bind values to column values
-      //      tableHelper = new TableHelper<>(labReqTable, 0);
-      //      tableHelper.linkColumns(LabRequest.class);
-    }
-
     private void initializeInputs() {
       procedureComboBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
