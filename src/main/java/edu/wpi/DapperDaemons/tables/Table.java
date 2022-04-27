@@ -37,7 +37,7 @@ public class Table<R> {
   private final Class<R> instance;
   private final List<Runnable> editProperties = new ArrayList<>();
   private final int padding;
-  private final HashMap<Integer, List<String>> filters = new HashMap<>();
+  private HashMap<Integer, List<String>> filters = new HashMap<>();
 
   public Table(Class<R> classinst, GridPane table, int tableNum) {
     this(classinst, table, tableNum, 30);
@@ -84,6 +84,7 @@ public class Table<R> {
               Platform.runLater(
                   () -> {
                     difference((List<R>) DAOFacade.getAllRequests(), rows);
+                    filter();
                   });
             }));
   }
@@ -499,23 +500,33 @@ public class Table<R> {
   }
 
   public void clear() {
-    new ArrayList<>(rows).forEach(this::removeRow);
+    int i = rows.get(0) == null ? 1 : 0;
+    List<R> row2 = new ArrayList<>(rows);
+    for (; i < row2.size(); i++) {
+      removeRow(row2.get(i));
+    }
   }
 
   public void addFilter(int attrNum, String toFilter) {
     if (filters.containsKey(attrNum)) filters.get(attrNum).add(toFilter);
     else filters.put(attrNum, new ArrayList<>(List.of(toFilter)));
-    filter();
   }
 
-  private void filter() {
+  public void filter() {
     ArrayList<R> toKeep = new ArrayList<>(rows);
     toKeep.remove(null);
-
     for (int col : filters.keySet()) {
       toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
     }
     clear();
     toKeep.forEach(r -> addRow(r, false));
+  }
+
+  public void removeFilter(int attrNum) {
+    filters.remove(attrNum);
+  }
+
+  public void clearFilters() {
+    filters = new HashMap<>();
   }
 }
