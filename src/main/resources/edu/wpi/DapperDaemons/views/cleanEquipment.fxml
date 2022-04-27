@@ -69,8 +69,8 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID:" />
-                              <JFXComboBox id="jButton" fx:id="assigneeBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select" styleClass="cardInput">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Employee ID:" />
+                              <JFXComboBox fx:id="assigneeBox" focusColor="#405aa800" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select" styleClass="cardInput" unFocusColor="#4d4d4d00">
                                  <effect>
                                     <DropShadow offsetX="-2.0" offsetY="2.0">
                                        <color>
@@ -88,7 +88,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Extra Notes:" />
-                              <TextField id="field" fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #F1F0F1; -fx-background-radius: 7.5; -fx-border-color: #D5D3D2; -fx-border-radius: 7.5;" />
+                              <TextField fx:id="notes" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="250.0" styleClass="cardInput" />
                            </children>
                         </VBox>
                      </children>
@@ -97,12 +97,12 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onClearClicked" prefHeight="35.0" prefWidth="90.0" styleClass="cancelButton" text="Clear" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#onClearClicked" onMouseEntered="#hoveredCancel" onMouseExited="#unhoveredCancel" prefHeight="35.0" prefWidth="90.0" styleClass="cancelButton" text="Clear" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#onSubmitClicked" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="35.0" prefWidth="90.0" styleClass="confirmButton" text="Submit" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -159,7 +159,7 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" prefHeight="35.0" prefWidth="110.0" styleClass="confirmButton" text="Save to CSV" textFill="WHITE">
+                  <Button fx:id="csvButton" mnemonicParsing="false" onAction="#saveToCSV" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="35.0" prefWidth="110.0" styleClass="confirmButton" text="Save to CSV" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="20.0" />
                      </HBox.margin>

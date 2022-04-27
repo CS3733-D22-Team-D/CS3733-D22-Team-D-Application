@@ -12,15 +12,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="46.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.AboutUsController">
+<HBox prefHeight="46.0" prefWidth="301.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.AboutUsController">
    <children>
       <VBox prefHeight="542.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" styleClass="pageCard">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meet The Team">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Meet The Team">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
@@ -76,11 +76,11 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Us">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Contact Us">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
@@ -100,13 +100,6 @@
                            </children>
                         </VBox>
                      </children>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color opacity="0.15000000596046448" />
-                           </color>
-                        </DropShadow>
-                     </effect>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -118,11 +111,11 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Donations">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Donations">
                                  <font>
                                     <Font name="System Bold" size="23.0" />
                                  </font>
@@ -162,7 +155,7 @@
                   <Insets right="20.0" />
                </padding>
                <children>
-                  <JFXButton id="about us service page" onAction="#switchToDB" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="View Backend Database" textFill="WHITE">
+                  <JFXButton onAction="#switchToDB" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" styleClass="confirmButton" text="View Backend Database" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -170,7 +163,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="about us service page" onAction="#goToServicePage" onMouseClicked="#goToServicePage" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Requet Landing Page" textFill="WHITE">
+                  <JFXButton onAction="#goToServicePage" onMouseClicked="#goToServicePage" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="31.0" prefWidth="177.0" styleClass="confirmButton" stylesheets="@../assets/buttons.css" text="Requet Landing Page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -178,7 +171,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="about us service page" onAction="#gotToCredits" onMouseClicked="#goToServicePage" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #059DA7;" stylesheets="@../assets/buttons.css" text="Credits" textFill="WHITE">
+                  <JFXButton id="about us service page" onAction="#gotToCredits" onMouseClicked="#goToServicePage" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="31.0" prefWidth="122.0" styleClass="confirmButton" stylesheets="@../assets/buttons.css" text="Credits" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

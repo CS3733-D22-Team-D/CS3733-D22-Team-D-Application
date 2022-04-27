@@ -225,21 +225,23 @@ public class MapDashboardController extends ParentController {
 
   private void setFloor(String floor) {
     this.floor = floor;
+    t.clear();
+    t.setRows(DAOFacade.getRequestsByFloor(floor));
   }
 
   private void createTable() {
     t = new Table<>(Request.class, table, 1, 0);
-    t.setRows(DAOFacade.getAllRequests());
+    t.setRows(DAOFacade.getRequestsByFloor(floor));
     t.setHeader(List.of("Type", "Assignee", "Priority"));
-    t.setRequestListeners();
+    t.setDashboardListeners();
   }
 
   private String getFloor() {
     switch (floorNum) {
       case 0:
-        return "LL2";
+        return "L2";
       case 1:
-        return "LL1";
+        return "L1";
       case 2:
         return "1";
       case 3:

@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.tables;
 
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
+import edu.wpi.DapperDaemons.controllers.MapDashboardController;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -37,7 +38,7 @@ public class Table<R> {
   private final Class<R> instance;
   private final List<Runnable> editProperties = new ArrayList<>();
   private final int padding;
-  private final HashMap<Integer, String> filters = new HashMap<>();
+  private HashMap<Integer, List<String>> filters = new HashMap<>();
 
   public Table(Class<R> classinst, GridPane table, int tableNum) {
     this(classinst, table, tableNum, 30);
@@ -66,13 +67,18 @@ public class Table<R> {
                         new ArrayList<R>(
                             DAOPouch.getDAO((TableObject) type).filter(6, "IN_PROGRESS").values());
                     req.addAll(inprog);
+
+                    for (int col : filters.keySet()) {
+                      req.removeIf(
+                          r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                    }
+
                     difference(req, rows);
-                    filter();
                   });
             }));
   }
 
-  public void setRequestListeners() {
+  public void setDashboardListeners() {
     List<String> allTableNames =
         DAOFacade.getAllRequests().stream()
             .map(n -> ((TableObject) n).tableName())
@@ -83,7 +89,8 @@ public class Table<R> {
             () -> {
               Platform.runLater(
                   () -> {
-                    difference((List<R>) DAOFacade.getAllRequests(), rows);
+                    difference(
+                        (List<R>) DAOFacade.getRequestsByFloor(MapDashboardController.floor), rows);
                   });
             }));
   }
@@ -104,7 +111,7 @@ public class Table<R> {
           }
         }
         if (!added) {
-          addRow(cons.get(i));
+          addRow(cons.get(i), true);
         }
       } else {
         dif.remove(cons.get(i));
@@ -214,7 +221,7 @@ public class Table<R> {
   public void setRows(List<R> newRows) {
     this.rows = newRows;
     for (R r : newRows) {
-      addRow(r);
+      addRow(r, false);
     }
   }
 
@@ -381,6 +388,10 @@ public class Table<R> {
   }
 
   public void addRow(R type) {
+    addRow(type, true);
+  }
+
+  public void addRow(R type, boolean animate) {
     List<Node> row =
         RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
@@ -393,7 +404,7 @@ public class Table<R> {
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);
-      animate(0.38, 1, 0.51, r);
+      if (animate) animate(0.38, 1, 0.51, r);
       update();
     }
   }
@@ -494,21 +505,35 @@ public class Table<R> {
     return rows.get(row);
   }
 
-  public void addFilter(int attrNum, String toFilter) {
-    filters.put(attrNum, toFilter);
-    filter();
+  public void clear() {
+    if (rows.size() == 0) return;
+    int i = rows.get(0) == null ? 1 : 0;
+    List<R> row2 = new ArrayList<>(rows);
+    for (; i < row2.size(); i++) {
+      removeRow(row2.get(i));
+    }
   }
 
-  private void filter() {
-    ArrayList<R> toRemove = new ArrayList<>();
-    filters.forEach(
-        (col, filter) ->
-            rows.forEach(
-                r -> {
-                  if (r != null && !((TableObject) r).getAttribute(col).equals(filter)) {
-                    toRemove.add(r);
-                  }
-                }));
-    toRemove.forEach(this::removeRow);
+  public void addFilter(int attrNum, String toFilter) {
+    if (filters.containsKey(attrNum)) filters.get(attrNum).add(toFilter);
+    else filters.put(attrNum, new ArrayList<>(List.of(toFilter)));
+  }
+
+  public void filter() {
+    ArrayList<R> toKeep = new ArrayList<>(rows);
+    toKeep.remove(null);
+    for (int col : filters.keySet()) {
+      toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+    }
+    clear();
+    toKeep.forEach(r -> addRow(r, false));
+  }
+
+  public void removeFilter(int attrNum) {
+    filters.remove(attrNum);
+  }
+
+  public void clearFilters() {
+    filters = new HashMap<>();
   }
 }
