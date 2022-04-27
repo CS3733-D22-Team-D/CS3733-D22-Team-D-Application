@@ -60,7 +60,7 @@ public class NotificationsPageController extends ParentController {
     //        ((ImageView)notif.getChildren().get(1)).setImage();
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
-      if (n.getNodeID().equals("not" + r.getNodeID())) {
+      if (n.getNodeID().equals("not" + r.getNodeID()) && !r.getAssigneeID().equals("none")) {
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))

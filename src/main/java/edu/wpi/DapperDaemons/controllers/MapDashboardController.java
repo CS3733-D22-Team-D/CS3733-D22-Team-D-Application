@@ -49,13 +49,12 @@ public class MapDashboardController extends ParentController {
   @FXML private PieChart reclinerChart;
   @FXML private PieChart bedChart;
 
-  public static List<ImageView> floorList = new ArrayList<ImageView>();
-  public static List<PieChart.Data> cleanData = new ArrayList<PieChart.Data>();
-  public static List<PieChart.Data> dirtyData = new ArrayList<PieChart.Data>();
-  public static List<Boolean> floorsInAnimation =
-      new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
-  public static List<Boolean> isHovered = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
-  public static List<Boolean> isSelected = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+  public static List<ImageView> floorList = new ArrayList<>();
+  public static List<PieChart.Data> cleanData = new ArrayList<>();
+  public static List<PieChart.Data> dirtyData = new ArrayList<>();
+  public static List<Boolean> floorsInAnimation = new ArrayList<>(Arrays.asList(new Boolean[7]));
+  public static List<Boolean> isHovered = new ArrayList<>(Arrays.asList(new Boolean[7]));
+  public static List<Boolean> isSelected = new ArrayList<>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
 
   private Table<Request> t;
@@ -139,10 +138,7 @@ public class MapDashboardController extends ParentController {
   }
 
   private void initSlide(ImageView floor, int level) {
-    floor.setOnMouseEntered(
-        event -> {
-          slideOut(floor, level);
-        });
+    floor.setOnMouseEntered(event -> slideOut(floor, level));
 
     floor.setOnMouseExited(
         event -> {
@@ -223,10 +219,10 @@ public class MapDashboardController extends ParentController {
     }
   }
 
-  private void setFloor(String floor) {
-    this.floor = floor;
+  private void setFloor(String f) {
+    floor = f;
     t.clear();
-    t.setRows(DAOFacade.getRequestsByFloor(floor));
+    DAOFacade.getRequestsByFloor(floor).forEach(r -> t.addRow(r, false));
   }
 
   private void createTable() {
