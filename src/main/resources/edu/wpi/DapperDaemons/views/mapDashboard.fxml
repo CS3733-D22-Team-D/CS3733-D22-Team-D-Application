@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -21,7 +23,7 @@
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
    <children>
-      <VBox prefHeight="200.0" prefWidth="200.0">
+      <VBox maxWidth="370.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
             <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
@@ -158,7 +160,7 @@
             </VBox>
          </children>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
+      <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="440.0" spacing="30.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
                <children>
@@ -179,7 +181,7 @@
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" pannable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <content>
                               <GridPane fx:id="table" vgap="10.0">
                                  <columnConstraints>
@@ -227,11 +229,79 @@
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <PieChart fx:id="pumpChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/pump.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="-1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </StackPane>
-                              <PieChart labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" fx:id="xrayChart" />
-                              <PieChart fx:id="reclinerChart" labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-                              <PieChart fx:id="bedChart" labelsVisible="false" legendVisible="false" rotate="-90.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <PieChart labelsVisible="false" legendVisible="false" rotate="-90.0" fx:id="xrayChart" />
+                                    <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/pump.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="-1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <PieChart fx:id="reclinerChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/recliner.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="-1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <PieChart fx:id="bedChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/bed.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="-1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </GridPane>
                      </children></HBox>
