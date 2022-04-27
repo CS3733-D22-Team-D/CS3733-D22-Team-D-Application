@@ -7,7 +7,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,15 +16,6 @@
     <children>
         <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <children>
-            <Pane fx:id="BGContainer" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="BGImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../assets/BrighamOverlayAssetForDark.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="650.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
