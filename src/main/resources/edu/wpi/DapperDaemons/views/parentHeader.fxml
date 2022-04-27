@@ -173,7 +173,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onMouseClicked="#switchToLanguage" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Language" textFill="WHITE">
+                        <JFXButton onMouseClicked="#switchToLanguage" onMouseEntered="#hoveredBurger" onMouseExited="#unhoveredBurger" styleClass="burger" stylesheets="@../assets/buttons.css" text="Request Interpreter" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
