@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DAOFacade {
 
@@ -266,5 +267,19 @@ public class DAOFacade {
           if (equip.getCleanStatus().equals(MedicalEquipment.CleanStatus.UNCLEAN)) dirty.add(equip);
         });
     return dirty;
+  }
+
+  public static List<Request> getRequestsByFloor(String floor) {
+    List<Request> allReqs = new ArrayList<>();
+    Collection<String> floorIDS =
+        DAOPouch.getLocationDAO().filter(4, floor).values().stream()
+            .map(Location::getNodeID)
+            .collect(Collectors.toList());
+    getAllRequests()
+        .forEach(
+            r -> {
+              if (floorIDS.contains(r.getRoomID())) allReqs.add(r);
+            });
+    return allReqs;
   }
 }
