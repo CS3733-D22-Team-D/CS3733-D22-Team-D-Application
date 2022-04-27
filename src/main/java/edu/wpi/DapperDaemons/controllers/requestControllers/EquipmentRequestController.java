@@ -210,7 +210,7 @@ public class EquipmentRequestController extends ParentController {
           if (DAOPouch.getEmployeeDAO()
               .get(assigneeBox.getValue())
               .getEmployeeType()
-              .equals(Employee.EmployeeType.JANITOR)) {
+              .equals(Employee.EmployeeType.NURSE)) {
             cleanStatus = equipment.getCleanStatus();
             roomID = locationBox.getValue();
             int numCorrectLocations = 0;
