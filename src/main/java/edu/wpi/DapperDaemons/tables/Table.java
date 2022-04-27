@@ -79,6 +79,27 @@ public class Table<R> {
             }));
   }
 
+  public void setRequestListeners() {
+    List<String> allTableNames =
+        DAOFacade.getAllRequests().stream()
+            .map(n -> ((TableObject) n).tableName())
+            .collect(Collectors.toList());
+    TableListeners.addListeners(
+        allTableNames,
+        TableListeners.eventListener(
+            () -> {
+              Platform.runLater(
+                  () -> {
+                    List<R> updated = (List<R>) new ArrayList<>(DAOFacade.getAllRequests());
+                    for (int col : filters.keySet()) {
+                      updated.removeIf(
+                          r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                    }
+                    difference(updated, rows);
+                  });
+            }));
+  }
+
   public void setDashboardListeners() {
     List<String> allTableNames =
         DAOFacade.getAllRequests().stream()
