@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.AppController;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
@@ -19,6 +20,8 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -71,6 +74,46 @@ public class PathfinderHandler extends AppController implements Initializable {
 
   public void setCurrentFloor(String floor) {
     this.currentFloor = floor;
+  }
+
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    java.awt.Color textStart = new java.awt.Color(5, 47, 146, 255);
+    java.awt.Color textEnd = new java.awt.Color(255, 255, 255, 255);
+    java.awt.Color backgroundStart = new java.awt.Color(5, 47, 146, 0);
+    java.awt.Color backgroundEnd = new java.awt.Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    java.awt.Color textStart = new java.awt.Color(5, 47, 146, 255);
+    java.awt.Color textEnd = new java.awt.Color(255, 255, 255, 255);
+    java.awt.Color backgroundStart = new java.awt.Color(5, 47, 146, 0);
+    java.awt.Color backgroundEnd = new java.awt.Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    java.awt.Color textStart = new java.awt.Color(129, 160, 207, 255);
+    java.awt.Color textEnd = new java.awt.Color(255, 255, 255, 255);
+    java.awt.Color backgroundStart = new java.awt.Color(129, 160, 207, 0);
+    java.awt.Color backgroundEnd = new java.awt.Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    java.awt.Color textStart = new java.awt.Color(129, 160, 207, 255);
+    java.awt.Color textEnd = new java.awt.Color(255, 255, 255, 255);
+    java.awt.Color backgroundStart = new java.awt.Color(129, 160, 207, 0);
+    java.awt.Color backgroundEnd = new java.awt.Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 
   @FXML

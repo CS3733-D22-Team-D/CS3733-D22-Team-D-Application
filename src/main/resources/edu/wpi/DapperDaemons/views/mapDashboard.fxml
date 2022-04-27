@@ -126,9 +126,9 @@
                   <Insets bottom="10.0" left="12.5" right="12.5" top="10.0" />
                </padding>
             </VBox>
-            <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fffefe; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+            <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="NEVER">
                      <children>
                         <Text fill="#052f92" strokeType="OUTSIDE" strokeWidth="0.0" text="Interactive Map">
                            <font>
