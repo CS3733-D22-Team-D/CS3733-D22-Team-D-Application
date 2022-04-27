@@ -500,7 +500,11 @@ public class Table<R> {
   }
 
   public void clear() {
-    new ArrayList<>(rows).forEach(this::removeRow);
+    int i = rows.get(0) == null ? 1 : 0;
+    List<R> row2 = new ArrayList<>(rows);
+    for (; i < row2.size(); i++) {
+      removeRow(row2.get(i));
+    }
   }
 
   public void addFilter(int attrNum, String toFilter) {
@@ -511,7 +515,6 @@ public class Table<R> {
   public void filter() {
     ArrayList<R> toKeep = new ArrayList<>(rows);
     toKeep.remove(null);
-
     for (int col : filters.keySet()) {
       toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
     }
