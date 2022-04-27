@@ -25,7 +25,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-5.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-5.png" />
                                  </image>
                               </ImageView>
                               <Label text="Map" textFill="WHITE" />
@@ -38,7 +38,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-4.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-4.png" />
                                  </image>
                               </ImageView>
                               <Label text="Server" textFill="WHITE" />
@@ -67,7 +67,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-13.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-13.png" />
                                  </image>
                               </ImageView>
                               <Label text="Medicine" textFill="WHITE" />
@@ -80,7 +80,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-15.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-15.png" />
                                  </image>
                               </ImageView>
                               <Label text="Lab" textFill="WHITE" />
@@ -93,7 +93,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-8.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-8.png" />
                                  </image>
                               </ImageView>
                               <Label text="Equipment" textFill="WHITE" />
@@ -106,7 +106,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-9.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-9.png" />
                                  </image>
                               </ImageView>
                               <Label text="Security" textFill="WHITE" />
@@ -119,7 +119,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-6.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-6.png" />
                                  </image>
                               </ImageView>
                               <Label text="Cleaning" textFill="WHITE" />
@@ -139,7 +139,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-7.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-7.png" />
                                  </image>
                               </ImageView>
                               <Label text="Food" textFill="WHITE" />
@@ -152,7 +152,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-14.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-14.png" />
                                  </image>
                               </ImageView>
                               <Label text="Sanitation" textFill="WHITE" />
@@ -165,7 +165,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-11.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-11.png" />
                                  </image>
                               </ImageView>
                               <Label text="Ext Transport" textFill="WHITE" />
@@ -178,7 +178,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-12.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-12.png" />
                                  </image>
                               </ImageView>
                               <Label text="Int Transport" textFill="WHITE" />
@@ -191,7 +191,7 @@
                            <children>
                               <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/output-onlinepngtools-10.png" />
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-10.png" />
                                  </image>
                               </ImageView>
                               <Label text="Interpreter" textFill="WHITE" />
