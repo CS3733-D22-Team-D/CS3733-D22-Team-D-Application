@@ -8,6 +8,7 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -38,10 +39,13 @@ public class LabRequestController extends ParentController {
   @FXML private JFXComboBox<String> procedureComboBox;
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
+  @FXML private JFXComboBox<String> assigneeBox;
 
   /* Lab request DAO */
   private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
   private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
+
   @FXML private GridPane table;
   private Table<LabRequest> t;
 
@@ -64,13 +68,24 @@ public class LabRequestController extends ParentController {
     //      System.err.print("Error, Lab Req table was unable to be created\n");
     //    }
     //    setListeners();
-    t = new Table(table, 0);
+    t = new Table<>(LabRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      LabRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new LabRequest());
   }
@@ -92,6 +107,7 @@ public class LabRequestController extends ParentController {
         priorityChoiceBox, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(
         procedureComboBox, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(assigneeBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -103,6 +119,7 @@ public class LabRequestController extends ParentController {
     priorityChoiceBox.setValue("");
     notes.setText("");
     dateNeeded.setValue(null);
+    assigneeBox.setValue("");
   }
 
   @FXML
@@ -113,7 +130,6 @@ public class LabRequestController extends ParentController {
       Request.Priority priority = Request.Priority.valueOf(priorityChoiceBox.getValue());
       String roomID = "";
       String requesterID = SecurityController.getUser().getNodeID();
-      String assigneeID = "none";
       String patientID =
           patientName.getText()
               + patientLastName.getText()
@@ -140,22 +156,45 @@ public class LabRequestController extends ParentController {
                 + dateNeeded.getValue().getDayOfMonth()
                 + dateNeeded.getValue().getYear();
 
-        boolean hadClearance =
-            addItem(
-                new LabRequest(
-                    priority,
-                    roomID,
-                    requesterID,
-                    assigneeID,
-                    notes.getText(),
-                    patientID,
-                    labType,
-                    dateStr));
+        if (assigneeBox.getValue().equals("")
+            || assigneeBox
+                .getValue()
+                .equals("Auto Assign")) { // check if the user inputs an assignee
+          boolean hadClearance =
+              addItem(
+                  new LabRequest(
+                      priority, roomID, requesterID, notes.getText(), patientID, labType, dateStr));
 
-        if (!hadClearance) {
-          //  throw error saying that the user does not have clearance yada yada
+          if (!hadClearance) {
+            //  throw error saying that the user does not have clearance yada yada
 
-          showError("You do not have permission to do this.");
+            showError("You do not have permission to do this.");
+          }
+        } else {
+          if (DAOPouch.getEmployeeDAO()
+              .get(assigneeBox.getValue())
+              .getEmployeeType()
+              .equals(Employee.EmployeeType.DOCTOR)) {
+            boolean hadClearance =
+                addItem(
+                    new LabRequest(
+                        priority,
+                        roomID,
+                        requesterID,
+                        assigneeBox.getValue(),
+                        notes.getText(),
+                        patientID,
+                        labType,
+                        dateStr));
+
+            if (!hadClearance) {
+              //  throw error saying that the user does not have clearance yada yada
+
+              showError("You do not have permission to do this.");
+            }
+          } else {
+            showError("Invalid Assignee ID!");
+          }
         }
 
       } else {
@@ -206,6 +245,12 @@ public class LabRequestController extends ParentController {
           FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
       priorityChoiceBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
+
+      List<Employee> employees = new ArrayList<>(employeeDAO.filter(5, "DOCTOR").values());
+      List<String> employeeNames = new ArrayList<>();
+      employeeNames.add("Auto Assign");
+      for (Employee employee : employees) employeeNames.add(employee.getNodeID());
+      assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
     }
   }
 }

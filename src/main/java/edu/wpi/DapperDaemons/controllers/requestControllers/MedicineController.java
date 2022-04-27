@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
+import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -27,14 +28,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MedicineController extends ParentController {
   @FXML private GridPane table;
-  @FXML private HBox header;
-  private TableHelper<MedicineRequest> helper;
-  @FXML private TableColumn<MedicineRequest, Request.Priority> priorityCol;
 
   @FXML private JFXComboBox<String> medNameIn;
   @FXML private TextField quantityIn;
@@ -44,22 +41,26 @@ public class MedicineController extends ParentController {
   @FXML private DatePicker patientDOB;
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
+  @FXML private JFXComboBox<String> assigneeBox;
 
   private final DAO<MedicineRequest> medicineRequestDAO = DAOPouch.getMedicineRequestDAO();
   private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   private Table<MedicineRequest> t;
+  private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    helper = new TableHelper<>(medicineRequests, 0);
-    //    helper.linkColumns(MedicineRequest.class);
-
-    //    helper.addEnumEditProperty(priorityCol, Request.Priority.class);
-
     medNameIn.setItems(FXCollections.observableArrayList("Morphine", "OxyCodine", "Lexapro"));
     priorityIn.setItems(
         FXCollections.observableArrayList(TableHelper.convertEnum(Request.Priority.class)));
-    t = new Table<>(table, 0);
+
+    List<Employee> employees = new ArrayList<>(employeeDAO.filter(5, "NURSE").values());
+    List<String> employeeNames = new ArrayList<>();
+    employeeNames.add("Auto Assign");
+    for (Employee employee : employees) employeeNames.add(employee.getNodeID());
+    assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
+
+    t = new Table<>(MedicineRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
@@ -67,6 +68,17 @@ public class MedicineController extends ParentController {
   private void createTable() {
     List<MedicineRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicineRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      MedicineRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setHeader(
         List.of(
@@ -94,12 +106,14 @@ public class MedicineController extends ParentController {
     patientDOB.setValue(null);
     notes.setText("");
     dateNeeded.setValue(null);
+    assigneeBox.setValue("");
   }
 
   @FXML
   public void startFuzzySearch() {
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(priorityIn, new FuzzySearchComparatorMethod());
     AutoCompleteFuzzy.autoCompleteComboBoxPlus(medNameIn, new FuzzySearchComparatorMethod());
+    AutoCompleteFuzzy.autoCompleteComboBoxPlus(assigneeBox, new FuzzySearchComparatorMethod());
   }
 
   @FXML
@@ -176,27 +190,55 @@ public class MedicineController extends ParentController {
 
           roomID = patient.getLocationID();
           requesterID = SecurityController.getUser().getNodeID();
-          assigneeID = "none";
           priority = Request.Priority.valueOf(priorityIn.getValue());
           medName = medNameIn.getValue();
 
-          boolean wentThrough =
-              addItem(
-                  new MedicineRequest(
-                      priority,
-                      roomID,
-                      requesterID,
-                      assigneeID,
-                      notes.getText(),
-                      patientID,
-                      medName,
-                      quantity,
-                      dateStr));
+          if (assigneeBox.getValue().equals("")
+              || assigneeBox
+                  .getValue()
+                  .equals("Auto Assign")) { // check if the user inputs an assignee
+            boolean wentThrough =
+                addItem(
+                    new MedicineRequest(
+                        priority,
+                        roomID,
+                        requesterID,
+                        notes.getText(),
+                        patientID,
+                        medName,
+                        quantity,
+                        dateStr));
 
-          if (!wentThrough) {
+            if (!wentThrough) {
+              // throw error saying no clearance allowed
+              showError("You do not have permission to do this.");
+            }
+          } else {
+            if (DAOPouch.getEmployeeDAO()
+                .get(assigneeBox.getValue())
+                .getEmployeeType()
+                .equals(Employee.EmployeeType.NURSE)) {
+              boolean wentThrough =
+                  addItem(
+                      new MedicineRequest(
+                          priority,
+                          roomID,
+                          requesterID,
+                          assigneeBox.getValue(),
+                          notes.getText(),
+                          patientID,
+                          medName,
+                          quantity,
+                          dateStr));
 
-            // throw error saying no clearance allowed
-            showError("You do not have permission to do this.");
+              if (!wentThrough) {
+
+                // throw error saying no clearance allowed
+                showError("You do not have permission to do this.");
+              }
+            } else {
+              showError("Invalid Assignee ID!");
+            }
           }
 
         } else {
@@ -223,7 +265,6 @@ public class MedicineController extends ParentController {
   private boolean addItem(MedicineRequest request) {
     boolean hasClearance = false;
     hasClearance = medicineRequestDAO.add(request);
-    //    if (hasClearance) medicineRequests.getItems().add(request);
 
     return hasClearance;
   }

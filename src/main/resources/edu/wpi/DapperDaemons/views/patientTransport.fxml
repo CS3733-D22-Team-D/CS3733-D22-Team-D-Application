@@ -137,6 +137,24 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Text id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID:" />
+                              <JFXComboBox id="jButton" fx:id="assigneeBox" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="500.0" promptText="Select">
+                                 <effect>
+                                    <DropShadow offsetX="-2.0" offsetY="2.0">
+                                       <color>
+                                          <Color red="0.19607843458652496" green="0.19607843458652496" blue="0.19607843458652496" opacity="0.15000000596046448" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </JFXComboBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">

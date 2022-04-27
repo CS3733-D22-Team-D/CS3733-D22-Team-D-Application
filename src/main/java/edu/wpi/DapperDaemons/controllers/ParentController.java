@@ -6,10 +6,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.DapperDaemons.App;
 import edu.wpi.DapperDaemons.backend.*;
 import edu.wpi.DapperDaemons.backend.preload.Images;
-import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
-import edu.wpi.DapperDaemons.controllers.helpers.CleanEquipmentHandler;
-import edu.wpi.DapperDaemons.controllers.helpers.OverdueHandler;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
+import edu.wpi.DapperDaemons.controllers.helpers.*;
 import edu.wpi.DapperDaemons.controllers.homePage.*;
 import edu.wpi.DapperDaemons.wongSweeper.MinesweeperZN;
 import java.awt.*;
@@ -72,7 +69,7 @@ public class ParentController extends AppController {
   private static Text headerName;
   private static WeatherHandler weather;
   private static DBSwitchHandler dbSwitch;
-  private static NotificationHandler notifs;
+  private static NotificationReceiver notifs;
   @FXML private ToggleButton alertButton;
   @FXML private VBox notifications;
   @FXML private ScrollPane notificationsScroller;
@@ -83,6 +80,7 @@ public class ParentController extends AppController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
 
+    NotificationSender.start();
     OverdueHandler.init();
     CleanEquipmentHandler.init();
     if (!AutoSave.started()) AutoSave.start(10, autoSaveIcon);
@@ -107,7 +105,7 @@ public class ParentController extends AppController {
     new DateHandler(time);
     new AccountHandler(accountName, profilePic);
     weather = new WeatherHandler(weatherIcon, tempLabel);
-    notifs = new NotificationHandler(notifications, notifBell);
+    notifs = new NotificationReceiver(notifications, notifBell);
     ThemeHandler themeHandler = new ThemeHandler(mainBox);
 
     updateWeather();
@@ -324,7 +322,8 @@ public class ParentController extends AppController {
 
   @FXML
   public void logout() throws IOException {
-    NotificationHandler.removeListener();
+    NotificationSender.stop();
+    NotificationReceiver.removeListener();
     switchScene("login.fxml", 575, 575);
     SecurityController.setUser(null);
   }

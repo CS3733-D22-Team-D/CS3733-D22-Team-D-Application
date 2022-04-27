@@ -63,7 +63,7 @@ public class SanitationController extends ParentController {
     onClearClicked();
     initializeInputs();
 
-    t = new Table(table, 0);
+    t = new Table<>(SanitationRequest.class, table, 0);
     createTable();
   }
 
@@ -71,6 +71,17 @@ public class SanitationController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
+
+    for (int i = 0; i < reqs.size(); i++) {
+      SanitationRequest req = reqs.get(i);
+      System.out.println(req.getNodeID());
+      if (req.getStatus().equals(Request.RequestStatus.COMPLETED)
+          || req.getStatus().equals(Request.RequestStatus.CANCELLED)) {
+        reqs.remove(i);
+        i--;
+      }
+    }
+
     t.setRows(reqs);
     t.setListeners(new SanitationRequest());
   }
@@ -133,13 +144,7 @@ public class SanitationController extends ParentController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority,
-                    roomID,
-                    requesterID,
-                    assigneeID,
-                    notes.getText(),
-                    sanitationType,
-                    dateStr));
+                    priority, roomID, requesterID, notes.getText(), sanitationType, dateStr));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.
