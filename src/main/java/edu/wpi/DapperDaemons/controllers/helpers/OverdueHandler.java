@@ -85,7 +85,7 @@ public class OverdueHandler {
         if (reqDate.length() == 7) {
           String frontString = reqDate.substring(0, 3);
           if (isFrontIsAMonth(frontString.substring(0, 2))) { // If front number is a month
-            frontString = "0" + reqDate;
+            frontString = "0" + frontString;
           } else {
             if (Integer.parseInt(frontString.substring(0, 2)) == 10) { // If its october
               frontString = "100" + frontString.substring(2);
