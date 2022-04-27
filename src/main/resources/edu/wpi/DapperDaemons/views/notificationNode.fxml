@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="134" prefWidth="826" spacing="20.0" style="-fx-background-radius: 14; -fx-background-color: FFFEFE;" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" prefHeight="134" prefWidth="1000.0" spacing="20.0" style="-fx-background-radius: 14; -fx-background-color: FFFEFE;" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="DODGERBLUE" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />

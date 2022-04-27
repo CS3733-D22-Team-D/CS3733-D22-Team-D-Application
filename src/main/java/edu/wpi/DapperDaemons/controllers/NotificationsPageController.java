@@ -64,7 +64,11 @@ public class NotificationsPageController extends ParentController {
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
-            .setText(DAOPouch.getEmployeeDAO().get(r.getAssigneeID()).getFirstName());
+            .setText(
+                "Requester: "
+                    + DAOPouch.getEmployeeDAO().get(r.getRequesterID()).getFirstName()
+                    + " "
+                    + DAOPouch.getEmployeeDAO().get(r.getRequesterID()).getLastName());
         Background b =
             new Background(
                 new BackgroundFill(new Color(1, 1, 1, 1), CornerRadii.EMPTY, Insets.EMPTY));
