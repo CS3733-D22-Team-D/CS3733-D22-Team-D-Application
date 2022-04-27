@@ -19,7 +19,7 @@ public class InternalReqConverter extends Converter {
 
     String currID;
 
-    if (employeeID == null) currID = "null";
+    if (employeeID == null) currID = "admin"; // default to admin
     else currID = employeeID;
 
     return new PatientTransportRequest(
