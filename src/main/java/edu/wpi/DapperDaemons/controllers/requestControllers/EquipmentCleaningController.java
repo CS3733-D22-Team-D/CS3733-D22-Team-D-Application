@@ -74,6 +74,9 @@ public class EquipmentCleaningController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<EquipmentCleaning> reqs =
         new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().getAll().values());
+    for(EquipmentCleaning equipmentCleaning : reqs)
+      if(equipmentCleaning.getStatus().equals(Request.RequestStatus.COMPLETED) || equipmentCleaning.getStatus().equals(Request.RequestStatus.CANCELLED))
+        reqs.remove(equipmentCleaning);
     t.setRows(reqs);
     t.setListeners(new EquipmentCleaning());
   }

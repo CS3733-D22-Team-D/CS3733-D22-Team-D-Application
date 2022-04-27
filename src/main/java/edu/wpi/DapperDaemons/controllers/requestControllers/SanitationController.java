@@ -10,6 +10,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SanitationRequest;
@@ -71,6 +72,9 @@ public class SanitationController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<SanitationRequest> reqs =
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().getAll().values());
+    for(SanitationRequest sanitationRequest : reqs)
+      if(sanitationRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || sanitationRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
+        reqs.remove(sanitationRequest);
     t.setRows(reqs);
     t.setListeners(new SanitationRequest());
   }
@@ -133,12 +137,7 @@ public class SanitationController extends ParentController {
         boolean hadClearance =
             addItem(
                 new SanitationRequest(
-                    priority,
-                    roomID,
-                    requesterID,
-                    notes.getText(),
-                    sanitationType,
-                    dateStr));
+                    priority, roomID, requesterID, notes.getText(), sanitationType, dateStr));
 
         if (!hadClearance) {
           // throw error saying that the user does not have permission to make the request.

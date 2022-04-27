@@ -10,6 +10,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.Patient;
+import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -75,6 +76,9 @@ public class ExternalPatientTransportController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
+    for(PatientTransportRequest patientTransportRequest : reqs)
+      if(patientTransportRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || patientTransportRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
+        reqs.remove(patientTransportRequest);
     t.setRows(reqs);
     t.setListeners(new PatientTransportRequest());
   }

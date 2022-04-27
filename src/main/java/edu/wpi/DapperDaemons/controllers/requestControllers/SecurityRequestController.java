@@ -10,6 +10,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
+import edu.wpi.DapperDaemons.entities.requests.MedicineRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -77,6 +78,9 @@ public class SecurityRequestController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
+    for(SecurityRequest securityRequest : reqs)
+      if(securityRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || securityRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
+        reqs.remove(securityRequest);
     t.setRows(reqs);
     t.setListeners(new SecurityRequest());
   }

@@ -12,6 +12,7 @@ import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.LanguageRequest;
+import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
@@ -81,6 +82,11 @@ public class LanguageRequestController extends ParentController {
     //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
     List<LanguageRequest> reqs =
         new ArrayList<>(DAOPouch.getLanguageRequestDAO().getAll().values());
+
+    for(LanguageRequest languageRequest : reqs)
+      if(languageRequest.getStatus().equals(Request.RequestStatus.COMPLETED) || languageRequest.getStatus().equals(Request.RequestStatus.CANCELLED))
+        reqs.remove(languageRequest);
+
     t.setRows(reqs);
     t.setListeners(new LanguageRequest());
   }
