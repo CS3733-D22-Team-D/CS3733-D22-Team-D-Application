@@ -1,7 +1,9 @@
 package edu.wpi.DapperDaemons.entities;
 
 import edu.wpi.DapperDaemons.entities.requests.Request;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class Notification extends TableObject {
@@ -57,6 +59,18 @@ public class Notification extends TableObject {
 
   private boolean chimed = false;
 
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+  SimpleDateFormat f = new SimpleDateFormat("MMddyyyy");
+
+  private String date = f.format(new Date());
+
   public Notification() {}
 
   public Notification(String subject, String body, String userID) {
@@ -64,6 +78,7 @@ public class Notification extends TableObject {
     this.body = body;
     this.userID = userID;
     this.nodeID = userID + subject + LocalDateTime.now();
+    this.date = f.format(new Date());
   }
 
   public Notification(Notification old, Request updated) {
@@ -71,6 +86,7 @@ public class Notification extends TableObject {
     this.body = old.getBody();
     this.userID = updated.getAssigneeID();
     this.nodeID = old.getNodeID();
+    this.date = old.getDate();
   }
 
   public Notification(String subject, String body, Request r) {
@@ -78,6 +94,7 @@ public class Notification extends TableObject {
     this.body = body;
     this.userID = r.getAssigneeID();
     this.nodeID = "not" + r.getNodeID();
+    this.date = f.format(new Date());
   }
 
   @Override
@@ -87,7 +104,8 @@ public class Notification extends TableObject {
         + "subject varchar(100),"
         + "body varchar(255),"
         + "isRead varchar(5),"
-        + "chimed varchar(5))";
+        + "chimed varchar(5),"
+        + "date varchar(100))";
   }
 
   @Override
@@ -110,6 +128,8 @@ public class Notification extends TableObject {
         return String.valueOf(read);
       case 6:
         return String.valueOf(chimed);
+      case 7:
+        return date;
       default:
         throw new ArrayIndexOutOfBoundsException();
     }
@@ -135,6 +155,9 @@ public class Notification extends TableObject {
         break;
       case 6:
         this.chimed = Boolean.parseBoolean(newAttribute);
+        break;
+      case 7:
+        this.date = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();
@@ -170,6 +193,9 @@ public class Notification extends TableObject {
         break;
       case "chimed":
         this.chimed = Boolean.parseBoolean(newAttribute);
+        break;
+      case "date":
+        this.date = newAttribute;
         break;
       default:
         throw new IndexOutOfBoundsException();

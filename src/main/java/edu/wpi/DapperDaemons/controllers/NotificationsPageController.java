@@ -10,10 +10,9 @@ import edu.wpi.DapperDaemons.entities.Notification;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,11 +41,21 @@ public class NotificationsPageController extends ParentController {
                   App.class.getResource("views/" + "notificationNode" + ".fxml")));
     } catch (IOException ignored) {
     }
-    notif.setOnMouseClicked(
-        event -> {
-          n.setAttribute(5, "true"); // sets action when clicking on notification
-          DAOPouch.getNotificationDAO().add(n);
-        });
+    if (!n.getRead()) {
+      notif.getChildren().get(6).setVisible(true);
+      HBox finalNotif = notif;
+      ((VBox) notif.getChildren().get(6))
+          .getChildren()
+          .get(0)
+          .setOnMouseClicked(
+              e -> {
+                n.setAttribute(5, "true");
+                DAOPouch.getNotificationDAO().add(n);
+                finalNotif.getChildren().get(6).setVisible(false);
+              });
+    } else {
+      notif.getChildren().get(6).setVisible(false);
+    }
     notif.getChildren().get(0).setVisible(!n.getRead());
     //        ((ImageView)notif.getChildren().get(1)).setImage();
     List<Request> reqs = DAOFacade.getAllRequests();
@@ -79,7 +88,8 @@ public class NotificationsPageController extends ParentController {
           case OVERDUE:
             b =
                 new Background(
-                    new BackgroundFill(Color.color(0, 0, 0, 1), new CornerRadii(5), Insets.EMPTY));
+                    new BackgroundFill(
+                        Color.color(0, 0, 0, 0.5), new CornerRadii(5), Insets.EMPTY));
             break;
           default:
             break;
@@ -127,9 +137,17 @@ public class NotificationsPageController extends ParentController {
             DAOPouch.getNotificationDAO()
                 .filter(2, SecurityController.getUser().getAttribute(1))
                 .values());
-
+    SimpleDateFormat f = new SimpleDateFormat("MMddyyy");
     for (Notification n : notifications) {
-      this.todayBox.getChildren().add(createNotification(n));
+      try {
+        if (f.parse(n.getDate()).before(f.parse(f.format(new Date())))) {
+          this.earlierBox.getChildren().add(createNotification(n));
+        } else {
+          this.todayBox.getChildren().add(createNotification(n));
+        }
+      } catch (ParseException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
