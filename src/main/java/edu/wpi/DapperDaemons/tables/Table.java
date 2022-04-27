@@ -44,6 +44,8 @@ public class Table<R> {
   public Table(Class<R> classinst, GridPane table, int tableNum, int padding) {
     this.instance = classinst;
     this.table = table;
+    table.getColumnConstraints().clear();
+    table.getRowConstraints().clear();
     this.tableNum = tableNum;
     this.padding = padding;
   }

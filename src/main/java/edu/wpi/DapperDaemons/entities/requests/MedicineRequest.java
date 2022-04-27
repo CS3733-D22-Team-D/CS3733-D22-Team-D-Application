@@ -266,7 +266,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 0)
+  @TableHandler(table = 0, col = 2)
   public String getRoomID() {
     return roomID;
   }
@@ -280,7 +280,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 0)
   public String getRequesterID() {
     return requesterID;
   }
@@ -289,7 +289,7 @@ public class MedicineRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 1)
   public String getAssigneeID() {
     return assigneeID;
   }

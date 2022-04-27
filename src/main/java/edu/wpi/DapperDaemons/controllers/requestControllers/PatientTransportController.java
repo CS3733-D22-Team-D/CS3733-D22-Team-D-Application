@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
@@ -15,14 +16,18 @@ import edu.wpi.DapperDaemons.entities.requests.PatientTransportRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -35,7 +40,7 @@ public class PatientTransportController extends ParentController {
   @FXML private JFXComboBox<String> assigneeBox;
 
   @FXML private GridPane table;
-  private Table<PatientTransportRequest> requestTable;
+  private Table<PatientTransportRequest> t;
 
   /* Text Boxes */
   @FXML private TextField patientName;
@@ -57,9 +62,11 @@ public class PatientTransportController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initializeInputs();
+    createTable();
+  }
 
-    requestTable = new Table<>(PatientTransportRequest.class, table, 0);
-
+  private void createTable() {
+    t = new Table<>(PatientTransportRequest.class, table, 0);
     List<PatientTransportRequest> reqs =
         new ArrayList<>(DAOPouch.getPatientTransportRequestDAO().getAll().values());
 
@@ -72,9 +79,11 @@ public class PatientTransportController extends ParentController {
         i--;
       }
     }
-
-    requestTable.setRows(reqs);
-    requestTable.setListeners(new PatientTransportRequest());
+    t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Patient", "From", "To", "Priority"));
+    t.setListeners(new PatientTransportRequest());
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addEnumEditProperty(5, 2, Request.Priority.class);
   }
 
   @FXML
@@ -229,7 +238,7 @@ public class PatientTransportController extends ParentController {
 
   private boolean addItem(PatientTransportRequest request) {
     if (patientTransportRequestDAO.add(request)) {
-      requestTable.addRow(request);
+      t.addRow(request);
       return true;
     }
     return false;
@@ -251,5 +260,47 @@ public class PatientTransportController extends ParentController {
 
   public void saveToCSV() {
     super.saveToCSV(new PatientTransportRequest(), (Stage) roomBox.getScene().getWindow());
+  }
+
+
+  /* Animations */
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

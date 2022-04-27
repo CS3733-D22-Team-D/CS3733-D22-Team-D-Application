@@ -7,25 +7,29 @@ import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -38,25 +42,14 @@ public class EquipmentRequestController extends ParentController {
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
-  /* Table Columns */
-  @FXML private TableColumn<MealDeliveryRequest, String> reqID;
-  @FXML private TableColumn<MealDeliveryRequest, String> priority;
-  @FXML private TableColumn<MealDeliveryRequest, String> roomID;
-  @FXML private TableColumn<MealDeliveryRequest, String> requester;
-  @FXML private TableColumn<MealDeliveryRequest, String> assignee;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> equipID;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> equipType;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> cleanStatus;
-
   /* DAO Object */
-  private DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
+  private final DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
       DAOPouch.getMedicalEquipmentRequestDAO();
-  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
-  private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
-  @FXML private HBox header;
   private Table<MedicalEquipmentRequest> t;
 
   @FXML
@@ -70,14 +63,12 @@ public class EquipmentRequestController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
-    //    bindImage(BGImage, BGContainer);
-    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {
@@ -90,7 +81,10 @@ public class EquipmentRequestController extends ParentController {
       }
     }
     t.setRows(reqs);
+    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     t.setListeners(new MedicalEquipmentRequest());
+    t.addEnumEditProperty(4, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   public boolean addItem(MedicalEquipmentRequest request) {
@@ -284,5 +278,47 @@ public class EquipmentRequestController extends ParentController {
   /** Saves a given service request to a CSV by opening the CSV window */
   public void saveToCSV() {
     super.saveToCSV(new MedicalEquipmentRequest(), (Stage) locationBox.getScene().getWindow());
+  }
+
+
+  /* Animations */
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

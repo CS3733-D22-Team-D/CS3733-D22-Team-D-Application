@@ -282,7 +282,7 @@ public class LabRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 3)
   public String getRoomID() {
     return roomID;
   }
@@ -296,7 +296,7 @@ public class LabRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 0)
   public String getRequesterID() {
     return requesterID;
   }
@@ -305,7 +305,7 @@ public class LabRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 1)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -323,7 +323,7 @@ public class LabRequest extends TableObject implements Request {
     this.patientID = patientID;
   }
 
-  @TableHandler(table = 0, col = 0)
+  @TableHandler(table = 0, col = 2)
   public LabType getLabType() {
     return labType;
   }

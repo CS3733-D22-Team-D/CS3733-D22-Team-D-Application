@@ -2,34 +2,36 @@ package edu.wpi.DapperDaemons.controllers.requestControllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAO;
+import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.ParentController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.requests.LabRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class LabRequestController extends ParentController {
-
-  /* Table Object and Helper */
-  @FXML private HBox header;
-  private TableHelper<LabRequest> tableHelper;
 
   /* UI Fields */
   @FXML private TextField patientName;
@@ -42,8 +44,8 @@ public class LabRequestController extends ParentController {
   @FXML private JFXComboBox<String> assigneeBox;
 
   /* Lab request DAO */
-  private DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
-  private DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
+  private final DAO<LabRequest> labRequestDAO = DAOPouch.getLabRequestDAO();
+  private final DAO<Patient> patientDAO = DAOPouch.getPatientDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
@@ -58,22 +60,12 @@ public class LabRequestController extends ParentController {
     onClearClicked();
     LabRequestInitializer init = new LabRequestInitializer();
 
-    init.initializeTable();
     init.initializeInputs();
-
-    //    try {
-    //      labReqTable.getItems().addAll(new ArrayList(labRequestDAO.getAll().values()));
-    //    } catch (Exception e) {
-    //      e.printStackTrace();
-    //      System.err.print("Error, Lab Req table was unable to be created\n");
-    //    }
-    //    setListeners();
-    t = new Table<>(LabRequest.class, table, 0);
     createTable();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(LabRequest.class, table, 0);
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
 
     for (int i = 0; i < reqs.size(); i++) {
@@ -87,18 +79,11 @@ public class LabRequestController extends ParentController {
     }
 
     t.setRows(reqs);
+    t.setHeader(
+        List.of("Requester", "Assignee", "Procedure", "Room", "Patient", "Status", "Priority"));
     t.setListeners(new LabRequest());
-  }
-
-  private void setListeners() {
-    TableListeners.addListener(
-        new LabRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              labReqTable.getItems().clear();
-              //              labReqTable.getItems().addAll(new
-              // ArrayList(labRequestDAO.getAll().values()));
-            }));
+    t.addEnumEditProperty(6, 2, Request.Priority.class);
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
   @FXML
@@ -234,12 +219,6 @@ public class LabRequestController extends ParentController {
   }
 
   private class LabRequestInitializer {
-    private void initializeTable() {
-      // Bind values to column values
-      //      tableHelper = new TableHelper<>(labReqTable, 0);
-      //      tableHelper.linkColumns(LabRequest.class);
-    }
-
     private void initializeInputs() {
       procedureComboBox.setItems(
           FXCollections.observableArrayList(TableHelper.convertEnum(LabRequest.LabType.class)));
@@ -252,5 +231,48 @@ public class LabRequestController extends ParentController {
       for (Employee employee : employees) employeeNames.add(employee.getNodeID());
       assigneeBox.setItems(FXCollections.observableArrayList(employeeNames));
     }
+  }
+
+
+
+  /* Animations */
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

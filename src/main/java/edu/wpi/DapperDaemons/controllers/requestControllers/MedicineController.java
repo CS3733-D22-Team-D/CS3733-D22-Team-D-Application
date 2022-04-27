@@ -82,16 +82,16 @@ public class MedicineController extends ParentController {
     t.setRows(reqs);
     t.setHeader(
         List.of(
-            "Room",
             "Requester",
             "Assignee",
+            "Room",
             "Patient",
             "Name",
             "Quantity",
             "Date needed",
             "Priority"));
     t.setListeners(new MedicineRequest());
-    t.addDropDownEditProperty(2, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
     t.addEnumEditProperty(7, 2, Request.Priority.class);
   }
 
@@ -309,4 +309,8 @@ public class MedicineController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
+
+
+
+
 }

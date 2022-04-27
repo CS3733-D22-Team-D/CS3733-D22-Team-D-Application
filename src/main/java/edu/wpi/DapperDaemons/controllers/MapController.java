@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAO;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.preload.Images;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
@@ -18,9 +19,12 @@ import edu.wpi.DapperDaemons.map.*;
 import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -29,6 +33,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -769,7 +774,7 @@ public class MapController extends ParentController {
 
   @FXML
   void dirToggle() {
-    if (directionTG.isSelected()) {
+    if (circle4.isSelected()) {
       try {
         directionsFields =
             FXMLLoader.load(
@@ -847,4 +852,50 @@ public class MapController extends ParentController {
   public String getFloor() {
     return maps.getFloor();
   }
+
+
+
+
+  /* Animations */
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+
 }

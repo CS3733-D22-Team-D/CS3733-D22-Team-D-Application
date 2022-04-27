@@ -184,7 +184,7 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 1)
+  @TableHandler(table = 0, col = 4)
   public Priority getPriority() {
     return priority;
   }
@@ -258,7 +258,6 @@ public class SanitationRequest extends TableObject implements Request {
   public SanitationRequest() {}
 
   // SETTERS AND GETTERS
-  @TableHandler(table = 0, col = 0)
   public String getNodeID() {
     return nodeID;
   }
@@ -271,7 +270,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.priority = priority;
   }
 
-  @TableHandler(table = 0, col = 2)
+  @TableHandler(table = 0, col = 3)
   public String getRoomID() {
     return roomID;
   }
@@ -285,7 +284,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.roomID = roomID;
   }
 
-  @TableHandler(table = 0, col = 3)
+  @TableHandler(table = 0, col = 0)
   public String getRequesterID() {
     return requesterID;
   }
@@ -294,7 +293,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.requesterID = requesterID;
   }
 
-  @TableHandler(table = 0, col = 4)
+  @TableHandler(table = 0, col = 1)
   public String getAssigneeID() {
     return assigneeID;
   }
@@ -303,7 +302,7 @@ public class SanitationRequest extends TableObject implements Request {
     this.assigneeID = assigneeID;
   }
 
-  @TableHandler(table = 0, col = 5)
+  @TableHandler(table = 0, col = 2)
   public String getSanitationType() {
     return sanitationType;
   }
@@ -312,7 +311,6 @@ public class SanitationRequest extends TableObject implements Request {
     this.sanitationType = sanitationType;
   }
 
-  @TableHandler(table = 0, col = 6)
   public RequestStatus getStatus() {
     return status;
   }
@@ -338,7 +336,6 @@ public class SanitationRequest extends TableObject implements Request {
   }
 
   @Override
-  @TableHandler(table = 0, col = 7)
   public String getDateNeeded() {
     return dateNeeded;
   }
