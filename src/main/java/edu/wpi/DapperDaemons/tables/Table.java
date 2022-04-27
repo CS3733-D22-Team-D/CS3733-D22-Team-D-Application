@@ -104,7 +104,7 @@ public class Table<R> {
           }
         }
         if (!added) {
-          addRow(cons.get(i));
+          addRow(cons.get(i), true);
         }
       } else {
         dif.remove(cons.get(i));
@@ -214,7 +214,7 @@ public class Table<R> {
   public void setRows(List<R> newRows) {
     this.rows = newRows;
     for (R r : newRows) {
-      addRow(r);
+      addRow(r, false);
     }
   }
 
@@ -381,6 +381,10 @@ public class Table<R> {
   }
 
   public void addRow(R type) {
+    addRow(type, true);
+  }
+
+  public void addRow(R type, boolean animate) {
     List<Node> row =
         RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
     restyleRow(row);
@@ -393,7 +397,7 @@ public class Table<R> {
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);
-      animate(0.38, 1, 0.51, r);
+      if (animate) animate(0.38, 1, 0.51, r);
       update();
     }
   }
@@ -494,21 +498,22 @@ public class Table<R> {
     return rows.get(row);
   }
 
+  public void clear() {
+    new ArrayList<>(rows).forEach(this::removeRow);
+  }
+
   public void addFilter(int attrNum, String toFilter) {
     filters.put(attrNum, toFilter);
     filter();
   }
 
   private void filter() {
-    ArrayList<R> toRemove = new ArrayList<>();
-    filters.forEach(
-        (col, filter) ->
-            rows.forEach(
-                r -> {
-                  if (r != null && !((TableObject) r).getAttribute(col).equals(filter)) {
-                    toRemove.add(r);
-                  }
-                }));
-    toRemove.forEach(this::removeRow);
+    ArrayList<R> toKeep = new ArrayList<>(rows);
+    toKeep.remove(null);
+    for (int col : filters.keySet()) {
+      toKeep.removeIf(r -> !((TableObject) r).getAttribute(col).equals(filters.get(col)));
+    }
+    clear();
+    toKeep.forEach(r -> addRow(r, false));
   }
 }
