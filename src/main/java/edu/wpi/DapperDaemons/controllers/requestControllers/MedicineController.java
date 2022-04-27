@@ -309,4 +309,8 @@ public class MedicineController extends ParentController {
     Color backgroundEnd = new Color(129, 160, 207, 255);
     AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
+
+
+
+
 }
