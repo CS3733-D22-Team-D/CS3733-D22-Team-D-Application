@@ -37,7 +37,8 @@ public class NotificationSender {
                             new ArrayList<>(DAOPouch.getNotificationDAO().getAll().values());
                         for (Request r : new ArrayList<>(requests)) {
                           for (Notification n : notifs) {
-                            if (n.getAttribute(1).equals("not" + r.getNodeID())) {
+                            if (n.getAttribute(1).equals("not" + r.getNodeID())
+                                && !r.getAssigneeID().equals("none")) {
                               if (!n.getAttribute(2).equals(r.getAssigneeID())) {
                                 DAOPouch.getNotificationDAO().add(new Notification(n, r));
                               }

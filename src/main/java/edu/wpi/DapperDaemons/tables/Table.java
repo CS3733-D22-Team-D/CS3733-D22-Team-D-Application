@@ -9,6 +9,7 @@ import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -238,6 +239,7 @@ public class Table<R> {
   }
 
   private void restyleRow(List<Node> row) {
+    if (row.size() == 0) return;
     ((VBox) row.get(0))
         .setBackground(
             new Background(
@@ -275,6 +277,11 @@ public class Table<R> {
   private void setPriority(List<Node> row) {
     try {
       VBox priority = (VBox) row.get(row.size() - 1);
+      ColumnConstraints prioritycons = new ColumnConstraints();
+      prioritycons.setHgrow(Priority.SOMETIMES);
+      prioritycons.setFillWidth(false);
+      HBox.setHgrow(priority, Priority.NEVER);
+      table.getColumnConstraints().set(table.getColumnCount() - 1, prioritycons);
       Request.Priority p =
           Request.Priority.valueOf(
               ((ComboBox) ((VBox) row.get(row.size() - 2)).getChildren().get(0))
@@ -378,13 +385,13 @@ public class Table<R> {
   public void addRow(int ind, R type) {
     List<Node> row =
         RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
-    restyleRow(row);
     table.addRow(ind, row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
     c.setHgrow(Priority.ALWAYS);
     table.getColumnConstraints().clear();
     row.forEach(e -> table.getColumnConstraints().add(c));
+    restyleRow(row);
   }
 
   public void addRow(R type) {
@@ -394,13 +401,14 @@ public class Table<R> {
   public void addRow(R type, boolean animate) {
     List<Node> row =
         RowFactory.createRow(TableHelper.getDataList(instance, type, tableNum), padding);
-    restyleRow(row);
+
     table.addRow(table.getRowCount(), row.toArray(new Node[] {}));
     ColumnConstraints c = new ColumnConstraints();
     c.setFillWidth(true);
     c.setHgrow(Priority.ALWAYS);
     table.getColumnConstraints().clear();
     row.forEach(e -> table.getColumnConstraints().add(c));
+    restyleRow(row);
     List<Node> r = getRow(table.getRowCount() - 1);
     if (!rows.contains(type)) {
       rows.add(type);
@@ -521,7 +529,7 @@ public class Table<R> {
 
   public void filter() {
     ArrayList<R> toKeep = new ArrayList<>(rows);
-    toKeep.remove(null);
+    toKeep.removeIf(Objects::isNull);
     for (int col : filters.keySet()) {
       toKeep.removeIf(r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
     }

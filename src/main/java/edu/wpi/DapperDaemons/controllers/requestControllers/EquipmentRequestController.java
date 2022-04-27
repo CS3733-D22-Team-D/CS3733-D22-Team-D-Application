@@ -67,7 +67,7 @@ public class EquipmentRequestController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0, 0);
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {
@@ -214,7 +214,11 @@ public class EquipmentRequestController extends ParentController {
               .getEmployeeType()
               .equals(Employee.EmployeeType.NURSE)) {
             cleanStatus = equipment.getCleanStatus();
-            roomID = locationBox.getValue();
+            Location room =
+                new ArrayList<Location>(
+                        locationDAO.filter(locationDAO.getAll(), 7, roomID).values())
+                    .get(0);
+            roomID = room.getNodeID();
             int numCorrectLocations = 0;
             numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
             if (numCorrectLocations >= 1) {

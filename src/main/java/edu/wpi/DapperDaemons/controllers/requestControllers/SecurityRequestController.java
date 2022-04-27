@@ -77,7 +77,7 @@ public class SecurityRequestController extends ParentController {
   }
 
   private void createTable() {
-    t = new Table<>(SecurityRequest.class, table, 0);
+    t = new Table<>(SecurityRequest.class, table, 0, 0);
     List<SecurityRequest> reqs =
         new ArrayList<>(DAOPouch.getSecurityRequestDAO().getAll().values());
 

@@ -113,7 +113,7 @@ public class RowFactory {
           ret.add(priority);
           break;
       }
-    } catch (ClassCastException | IllegalArgumentException ignored) {
+    } catch (ClassCastException | IllegalArgumentException | IndexOutOfBoundsException ignored) {
     }
     return ret;
   }
