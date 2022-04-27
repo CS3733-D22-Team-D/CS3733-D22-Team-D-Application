@@ -118,7 +118,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </StackPane>
-                                                <ToggleButton fx:id="circle4" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMode" prefHeight="40.0" prefWidth="40.0" styleClass="bubbles" stylesheets="@../../../../toggleButton.css" text="ToggleButton">
+                                                <ToggleButton fx:id="circle4" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefHeight="40.0" prefWidth="40.0" styleClass="bubbles" stylesheets="@../../../../toggleButton.css" text="ToggleButton">
                                                    <effect>
                                                       <DropShadow>
                                                          <color>
@@ -425,18 +425,6 @@
                                                          </image>
                                                          <effect>
                                                             <ColorAdjust brightness="-0.43" />
-                                                         </effect>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </ToggleButton>
-                                                <ToggleButton id="foreground" fx:id="directionTG" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#dirToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Get Directions">
-                                                   <graphic>
-                                                      <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../assets/Glyphs/route_map.png" />
-                                                         </image>
-                                                         <effect>
-                                                            <ColorAdjust brightness="0.43" />
                                                          </effect>
                                                       </ImageView>
                                                    </graphic>
