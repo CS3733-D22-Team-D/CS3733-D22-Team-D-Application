@@ -547,7 +547,7 @@
                         <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
                      </children>
                      <HBox.margin>
-                        <Insets left="254.0" top="50.0" />
+                        <Insets left="200.0" top="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
