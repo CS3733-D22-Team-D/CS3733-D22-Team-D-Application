@@ -17,12 +17,11 @@ public class InternalReqAdapter extends Adapter {
    */
   public static PatientTransportRequest convert(Request internalRequest) {
 
-
     return new PatientTransportRequest(
         parsePriority(internalRequest.getPriority()),
         internalRequest.getStartLocation().getNodeID(),
-            currentEmployee,
-            currentEmployee,
+        currentEmployee,
+        currentEmployee,
         internalRequest.getInformation(),
         internalRequest.getRequestID(),
         internalRequest.getFinishLocation().getNodeID(),

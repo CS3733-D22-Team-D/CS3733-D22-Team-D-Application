@@ -110,7 +110,8 @@ public class LoginController extends AppController {
       showError("Either your username or password is incorrect.");
       return;
     }
-    // Since Team B's API does not give an option to assign an employee, the logged in employee is assigned manually
+    // Since Team B's API does not give an option to assign an employee, the logged in employee is
+    // assigned manually
     InternalReqAdapter.currentEmployee = acc.getAttribute(1);
 
     // Get valid Employee (throws error if system has a problem)
@@ -120,6 +121,7 @@ public class LoginController extends AppController {
         Authentication.sendAuthCode(acc);
         break;
       case "rfid":
+        RFIDPageController.user = DAOFacade.getEmployee(username.getText());
         loadRFID();
         break;
       default:
