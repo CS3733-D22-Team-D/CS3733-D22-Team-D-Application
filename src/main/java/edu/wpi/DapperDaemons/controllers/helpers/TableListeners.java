@@ -51,5 +51,9 @@ public class TableListeners {
         });
   }
 
+  public static void removeListener(String tableName, ValueEventListener listener) {
+    ref.child(tableName).removeEventListener(listener);
+  }
+
   private TableListeners() {}
 }
