@@ -32,7 +32,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="36.0" prefWidth="246.0" styleClass="cancelButton" stylesheets="@../assets/buttons.css" text="Cancel" textFill="WHITE">
+                  <Button fx:id="tryAgainButton" mnemonicParsing="false" onMouseClicked="#cancel" onMouseEntered="#hoveredCancel" onMouseExited="#unhoveredCancel" prefHeight="36.0" prefWidth="246.0" styleClass="cancelButton" text="Cancel" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -40,7 +40,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="tryAgainButton1" mnemonicParsing="false" onMouseClicked="#confirm" prefHeight="36.0" prefWidth="246.0" styleClass="confirmButton" stylesheets="@../styling/lightMode.css" text="Confirm" textFill="WHITE">
+                  <Button fx:id="tryAgainButton1" mnemonicParsing="false" onMouseClicked="#confirm" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="36.0" prefWidth="246.0" styleClass="confirmButton" stylesheets="@../styling/lightMode.css" text="Confirm" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
