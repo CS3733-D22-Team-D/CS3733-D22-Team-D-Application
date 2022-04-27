@@ -75,6 +75,7 @@ public class RequestController extends ParentController implements Initializable
     createT.addDropDownEditProperty(4, 6, "CANCELLED");
     createT.addEnumEditProperty(5, 2, Request.Priority.class);
     createT.addDropDownEditProperty(3, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
+    createT.setRequestListeners();
 
     assignedT = new Table<>(Request.class, assignedTable, 2);
     assignedT.setRows(DAOFacade.getAllRequests());
@@ -83,6 +84,7 @@ public class RequestController extends ParentController implements Initializable
     assignedT.addFilter(5, SecurityController.getUser().getNodeID());
     assignedT.filter();
     assignedT.addEnumEditProperty(4, 6, Request.RequestStatus.class);
+    assignedT.setRequestListeners();
 
     relevantT = new Table<>(Request.class, relevantTable, 2);
     relevantT.setRows(DAOFacade.getAllRequests());
@@ -91,5 +93,6 @@ public class RequestController extends ParentController implements Initializable
     relevantT.addFilter(6, "REQUESTED");
     relevantT.filter();
     relevantT.addDropDownEditProperty(3, 5, SecurityController.getUser().getNodeID());
+    relevantT.setRequestListeners();
   }
 }
