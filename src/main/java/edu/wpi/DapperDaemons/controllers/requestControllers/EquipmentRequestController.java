@@ -12,7 +12,6 @@ import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
-import edu.wpi.DapperDaemons.entities.requests.MealDeliveryRequest;
 import edu.wpi.DapperDaemons.entities.requests.MedicalEquipmentRequest;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.tables.Table;
@@ -25,7 +24,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
@@ -38,25 +36,14 @@ public class EquipmentRequestController extends ParentController {
   @FXML private TextField notes;
   @FXML private DatePicker dateNeeded;
 
-  /* Table Columns */
-  @FXML private TableColumn<MealDeliveryRequest, String> reqID;
-  @FXML private TableColumn<MealDeliveryRequest, String> priority;
-  @FXML private TableColumn<MealDeliveryRequest, String> roomID;
-  @FXML private TableColumn<MealDeliveryRequest, String> requester;
-  @FXML private TableColumn<MealDeliveryRequest, String> assignee;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> equipID;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> equipType;
-  @FXML private TableColumn<MedicalEquipmentRequest, String> cleanStatus;
-
   /* DAO Object */
-  private DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
+  private final DAO<MedicalEquipmentRequest> medicalEquipmentRequestDAO =
       DAOPouch.getMedicalEquipmentRequestDAO();
-  private DAO<Location> locationDAO = DAOPouch.getLocationDAO();
-  private DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
+  private final DAO<Location> locationDAO = DAOPouch.getLocationDAO();
+  private final DAO<MedicalEquipment> medicalEquipmentDAO = DAOPouch.getMedicalEquipmentDAO();
   private final DAO<Employee> employeeDAO = DAOPouch.getEmployeeDAO();
 
   @FXML private GridPane table;
-  @FXML private HBox header;
   private Table<MedicalEquipmentRequest> t;
 
   @FXML
@@ -70,14 +57,13 @@ public class EquipmentRequestController extends ParentController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initBoxes();
-    //    bindImage(BGImage, BGContainer);
-    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
     createTable();
     onClearClicked();
   }
 
   private void createTable() {
-    //    t.setHeader(header, new ArrayList<>(List.of(new String[] {"Test", "Test", "Test"})));
+    t = new Table<>(MedicalEquipmentRequest.class, table, 0);
+    t.setHeader(List.of("Requester", "Assignee", "Equip Type", "Room", "Priority"));
     List<MedicalEquipmentRequest> reqs =
         new ArrayList<>(DAOPouch.getMedicalEquipmentRequestDAO().getAll().values());
     for (int i = 0; i < reqs.size(); i++) {

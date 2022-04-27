@@ -58,7 +58,8 @@ public class LabRequestController extends ParentController {
 
   private void createTable() {
     t = new Table<>(LabRequest.class, table, 0);
-    t.setHeader(List.of("Test", "Test", "Test"));
+    t.setHeader(
+        List.of("Requester", "Assignee", "Procedure", "Room", "Patient", "Status", "Priority"));
     List<LabRequest> reqs = new ArrayList<>(DAOPouch.getLabRequestDAO().getAll().values());
 
     for (int i = 0; i < reqs.size(); i++) {
