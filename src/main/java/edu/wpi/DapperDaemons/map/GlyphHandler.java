@@ -2,6 +2,7 @@ package edu.wpi.DapperDaemons.map;
 
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.MapController;
+import edu.wpi.DapperDaemons.controllers.MapDashboardController;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.Request;
@@ -51,6 +52,16 @@ public class GlyphHandler {
       "STOR", "PATI", "DIRT"
     };
     nodeTypeFilter.addAll(List.of(allFilters));
+  }
+
+  public GlyphHandler(AnchorPane glyphLayer, AnchorPane equipLayer, List<PositionInfo> imageLocs) {
+    this.glyphLayer = glyphLayer;
+    this.equipLayer = equipLayer;
+    this.equipLocs = new ArrayList<>();
+    this.imageLocs = new ArrayList<>();
+    imageLocs.forEach(this::addPosition);
+    this.imageLocs = imageLocs;
+    clearFilters();
   }
 
   public void enableEditing() {
@@ -133,7 +144,7 @@ public class GlyphHandler {
     Blend multiEffect = new Blend(BlendMode.SRC_OVER, dropShadow, getPriorityColor(pos));
     image.setEffect(multiEffect);
 
-    image.setOnMouseClicked(e -> controller.onMapClicked(e));
+    if (controller != null) image.setOnMouseClicked(e -> controller.onMapClicked(e));
     glyphLayer.getChildren().add(image);
 
     List<MedicalEquipment> all =
@@ -153,14 +164,14 @@ public class GlyphHandler {
 
           equipLayer.getChildren().add(equip);
         });
-    image.setOnMouseClicked(i -> controller.onMapClicked(i));
+    if (controller != null) image.setOnMouseClicked(i -> controller.onMapClicked(i));
     imageLocs.add(pos);
     return true;
   }
 
   public boolean moveEquipment(int x, int y, MedicalEquipment equipment) {
     for (PositionInfo p : imageLocs) {
-      if (p.isNear(x, y, controller.getFloor())) {
+      if (p.isNear(x, y, MapDashboardController.floor)) {
         equipment.setLocationID(p.getId());
         DAOPouch.getMedicalEquipmentDAO().update(equipment);
         filter();
@@ -172,7 +183,7 @@ public class GlyphHandler {
 
   public PositionInfo getNearestPos(int x, int y) {
     for (PositionInfo p : imageLocs) {
-      if (p.isNear(x, y, controller.getFloor())) return p;
+      if (p.isNear(x, y, MapDashboardController.floor)) return p;
     }
     return null;
   }

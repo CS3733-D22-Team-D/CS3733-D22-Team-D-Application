@@ -7,6 +7,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -147,11 +148,17 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </Pane>
+                                    <AnchorPane fx:id="glyphsLayer" prefHeight="200.0" prefWidth="200.0" />
+                                    <AnchorPane fx:id="equipLayer" prefHeight="200.0" prefWidth="200.0" />
                                  </children>
-                              </Pane>
+                              </StackPane>
                            </children>
                         </VBox>
                      </children>
