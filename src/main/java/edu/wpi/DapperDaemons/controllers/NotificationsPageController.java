@@ -149,7 +149,10 @@ public class NotificationsPageController extends ParentController {
                         .getResourceAsStream("edu/wpi/DapperDaemons/assets/BrighamLogo.png"));
             break;
         }
-        ((ImageView) notif.getChildren().get(1)).setImage(i);
+        ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)).setImage(i);
+        bindImage(
+            ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)),
+            ((Pane) notif.getChildren().get(1)));
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
