@@ -177,3 +177,25 @@
     -fx-background-radius: 20;
 }
 
+/* User Request Page Buttons*/
+
+.userToggleButton{
+
+    -fx-font-family: "Inter SemiBold"!important;
+    -fx-text-fill: #052F92 !important;
+    -fx-font-size: 18px !important;
+    -fx-background-color: #FFFFFFC0;
+    -fx-background-radius: 7.5 7.5 0 0;
+    -fx-pref-height: 75;
+}
+
+.userToggleButton:selected{
+
+    -fx-font-family: "Inter SemiBold"!important;
+    -fx-text-fill: #052F92 !important;
+    -fx-font-size: 18px !important;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 7.5 7.5 0 0;
+
+}
+
