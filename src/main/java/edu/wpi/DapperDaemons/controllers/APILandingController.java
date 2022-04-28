@@ -240,7 +240,7 @@ public class APILandingController implements Initializable {
   /** Start team 's Request API */
   public void startTeamBAPI() {
     String patientID = bPatient.getText().trim();
-    if(patientID.equals("") || !patInDatabase(patientID)) {
+    if (patientID.equals("") || !patInDatabase(patientID)) {
       bErrorLabel.setText("Error Please Input a Valid patient ID");
       bErrorLabel.setTextFill(Paint.valueOf("EF5353"));
       return;
@@ -282,12 +282,13 @@ public class APILandingController implements Initializable {
 
   /**
    * Checks if a patient is in the database
+   *
    * @param patID patient ID
    * @return true if in the database
    */
   public boolean patInDatabase(String patID) {
-    for(Patient patient : DAOPouch.getPatientDAO().getAll().values()) {
-      if(patient.getNodeID().equals(patID)) return true;
+    for (Patient patient : DAOPouch.getPatientDAO().getAll().values()) {
+      if (patient.getNodeID().equals(patID)) return true;
     }
     return false;
   }
