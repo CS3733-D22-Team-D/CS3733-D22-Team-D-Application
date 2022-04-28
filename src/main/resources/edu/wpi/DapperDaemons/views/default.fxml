@@ -11,11 +11,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
       <VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="pageBackground" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label styleClass="cardTitle" text="General" textFill="#052f92">
                      <font>
@@ -153,7 +153,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label styleClass="cardTitle" text="Requests" textFill="#052f92">
                      <font>
