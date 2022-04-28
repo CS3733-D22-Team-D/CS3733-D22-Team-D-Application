@@ -230,10 +230,7 @@ public class DAOFacade {
     for (MedicalEquipment equipment : equipmentList) {
       if (DAOPouch.getLocationDAO().get(equipment.getLocationID()) != null) {
         if (DAOPouch.getLocationDAO().get(equipment.getLocationID()).getXcoord() != -1) {
-          String startLocation =
-              new ArrayList<>(DAOPouch.getLocationDAO().filter(7, location).values())
-                  .get(0)
-                  .getNodeID();
+          String startLocation = location;
 
           List<String> ppPath = ppHelper.getPath(equipment.getLocationID(), startLocation);
 

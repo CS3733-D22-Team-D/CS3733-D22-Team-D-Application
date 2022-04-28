@@ -214,11 +214,14 @@ public class EquipmentRequestController extends ParentController {
               .getEmployeeType()
               .equals(Employee.EmployeeType.NURSE)) {
             cleanStatus = equipment.getCleanStatus();
+            roomID = locationBox.getValue();
             Location room =
                 new ArrayList<Location>(
-                        locationDAO.filter(locationDAO.getAll(), 7, roomID).values())
+                        locationDAO
+                            .filter(new ArrayList<>(locationDAO.getAll().values()), 7, roomID)
+                            .values())
                     .get(0);
-            roomID = room.getNodeID();
+
             int numCorrectLocations = 0;
             numCorrectLocations = locationDAO.filter(locationDAO.getAll(), 7, roomID).size();
             if (numCorrectLocations >= 1) {
@@ -227,7 +230,7 @@ public class EquipmentRequestController extends ParentController {
                   addItem(
                       new MedicalEquipmentRequest(
                           priority,
-                          roomID,
+                          room.getNodeID(),
                           requesterID,
                           assigneeBox.getValue(),
                           notes.getText(),
