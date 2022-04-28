@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -60,41 +61,44 @@
                                        <children>
                                           <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../assets/buttons.css" text="5" textFill="WHITE">
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor5" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 7.5 7.5 0 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="5" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="4" textFill="WHITE">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="floorSwitches" />
+                                                   </toggleGroup>
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor4" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="4" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="3" textFill="WHITE">
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor3" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="3" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 2" textFill="WHITE">
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="2" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text=" 1" textFill="WHITE">
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="1" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" stylesheets="@../assets/buttons.css" text="L1" textFill="WHITE">
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloorL1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="L1" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
-                                                <Button id="mapButton" mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" stylesheets="@../assets/buttons.css" text="L2" textFill="WHITE">
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloorL2" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0 0 7.5 7.5;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="L2" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                </Button>
+                                                </ToggleButton>
                                              </children>
                                              <padding>
                                                 <Insets right="15.0" />

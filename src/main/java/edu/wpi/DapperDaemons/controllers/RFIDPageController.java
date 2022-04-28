@@ -1,5 +1,6 @@
 package edu.wpi.DapperDaemons.controllers;
 
+import edu.wpi.DapperDaemons.backend.SecurityController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.Employee;
 import edu.wpi.DapperDaemons.map.serial.RFIDMachine;
@@ -23,6 +24,7 @@ public class RFIDPageController extends AppController {
   @FXML private Button backButton;
   public static String COM;
   public static String errorOS;
+  public static Employee user;
 
   /**
    * On page init, determines status of Arduino port
@@ -76,6 +78,7 @@ public class RFIDPageController extends AppController {
       sButton.setVisible(false);
       backButton.setVisible(false);
       continueButton.setVisible(true);
+      SecurityController.setUser(user);
     } else if (state.equals(RFIDMachine.LoginState.INVALIDUSER)) {
       sLabel.setText("");
       resultLabel.setTextFill(Paint.valueOf("#eb4034"));
@@ -114,14 +117,10 @@ public class RFIDPageController extends AppController {
     switchScene("login.fxml", 780, 548);
   }
 
-  /**
-   * changes to go home
-   *
-   * @throws IOException
-   */
+  /** changes to go home */
   @FXML
-  public void goHome() throws IOException {
-    switchScene("default.fxml", 635, 510);
+  public void continuePressed() throws IOException {
+    switchScene("parentHeader.fxml", 635, 510);
   }
 
   /* Animations */
