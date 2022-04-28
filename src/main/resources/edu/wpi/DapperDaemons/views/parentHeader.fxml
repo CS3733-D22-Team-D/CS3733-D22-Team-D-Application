@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
+<VBox fx:id="sceneBox" onKeyPressed="#konami" prefHeight="592.0" prefWidth="941.0" styleClass="home" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.ParentController">
    <children>
       <StackPane id="pageBackground" fx:id="windowContents" prefHeight="150.0" prefWidth="200.0" stylesheets="@../styling/lightMode.css" VBox.vgrow="ALWAYS">
          <children>
@@ -394,6 +394,9 @@
                            <HBox.margin>
                               <Insets left="7.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                         <ToggleButton id="normalText" fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-radius: 7.5; -fx-background-color: transparent;" stylesheets="@../styling/lightMode.css" textFill="WHITE">
                            <graphic>
@@ -415,6 +418,9 @@
                                  </padding>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                      </children>
                   </HBox>
@@ -447,6 +453,9 @@
                            <font>
                               <Font name="Inter Medium" size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
                         <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="#ffffff00">
@@ -469,6 +478,9 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
                         <JFXButton id="cardText" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Button" textFill="#ffffff00">
@@ -491,6 +503,9 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                      </children>
                      <HBox.margin>
@@ -557,12 +572,12 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
                <children>
-                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="70.0" minHeight="0.0" prefHeight="0.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" visible="false">
+                  <ScrollPane fx:id="notificationsScroller" hbarPolicy="NEVER" maxHeight="100.0" minHeight="0.0" prefHeight="0.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" visible="false">
                      <HBox.margin>
                         <Insets right="180.0" top="49.0" />
                      </HBox.margin>
                      <content>
-                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="70.0" styleClass="pageCard" />
+                        <VBox fx:id="notifications" alignment="CENTER" prefHeight="100.0" spacing="10.0" styleClass="pageCard" />
                      </content>
                   </ScrollPane>
                </children>
