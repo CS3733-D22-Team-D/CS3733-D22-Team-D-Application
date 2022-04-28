@@ -84,7 +84,7 @@
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
                                                 </ToggleButton>
-                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="1" textFill="WHITE" toggleGroup="$floorSwitches">
+                                                <ToggleButton mnemonicParsing="false" onMouseClicked="#setFloor1" prefHeight="32.0" prefWidth="38.0" selected="true" style="-fx-background-color: #535353; -fx-background-radius: 0;" styleClass="map" stylesheets="@../../../../toggleButton.css" text="1" textFill="WHITE" toggleGroup="$floorSwitches">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -248,6 +248,9 @@
                                                    </color>
                                                 </DropShadow>
                                              </effect>
+                                             <StackPane.margin>
+                                                <Insets right="70.0" />
+                                             </StackPane.margin>
                                           </VBox>
                                        </children>
                                     </StackPane>

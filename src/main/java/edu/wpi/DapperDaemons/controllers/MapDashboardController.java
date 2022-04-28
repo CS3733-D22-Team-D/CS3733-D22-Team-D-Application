@@ -114,6 +114,7 @@ public class MapDashboardController extends ParentController {
     initSlide(floor5, 6);
 
     createTable();
+
     List<PositionInfo> allpos = new ArrayList<>();
     DAOPouch.getLocationDAO().getAll().values().forEach(l -> allpos.add(new PositionInfo(l)));
     glyphs = new GlyphHandler(glyphsLayer, equipLayer, allpos, 256);
@@ -122,6 +123,38 @@ public class MapDashboardController extends ParentController {
     glyphs.addEquipTypeFilter("INFUSIONPUMP");
     glyphs.addEquipTypeFilter("XRAY");
     glyphs.addEquipTypeFilter("RECLINER");
+
+    try {
+      floorNum = 2;
+      for (int i = 0; i < 7; i++) {
+        ImageView fromList = floorList.get(i);
+        if (fromList.getTranslateX() == 20 && i != 2) {
+          returnToStack(fromList, i);
+          MapDashboardController.isSelected.set(i, false);
+          MapDashboardController.isHovered.set(i, false);
+        }
+      }
+
+      if (floor1.getTranslateX() == 0) {
+        slideOut(floor1, 2);
+      }
+
+      Collections.fill(isSelected, Boolean.FALSE);
+      MapDashboardController.isSelected.set(2, true);
+      floor1.setImage(Images.selectedSegment);
+      String floorTxtPath = "floorSummary.txt";
+      String floorText = getFileText(floorTxtPath, floorNum);
+      floorSummary.setText(floorText);
+      floorNumberLabel.setText(getFloor());
+      mapImage.setImage(getImage());
+
+      t.clear();
+      DAOFacade.getRequestsByFloor(floor).forEach(r -> t.addRow(r, false));
+      updateCharts();
+      glyphs.setFloorFilter(floor);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 
   @FXML
