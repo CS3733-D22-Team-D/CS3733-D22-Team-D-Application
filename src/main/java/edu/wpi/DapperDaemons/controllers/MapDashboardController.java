@@ -5,6 +5,8 @@ import edu.wpi.DapperDaemons.backend.preload.Images;
 import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.MedicalEquipment;
 import edu.wpi.DapperDaemons.entities.requests.*;
+import edu.wpi.DapperDaemons.map.GlyphHandler;
+import edu.wpi.DapperDaemons.map.PositionInfo;
 import edu.wpi.DapperDaemons.tables.Table;
 import java.io.*;
 import java.net.URL;
@@ -20,6 +22,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -45,6 +48,8 @@ public class MapDashboardController extends ParentController {
   @FXML private Label floorSummary;
   @FXML private Pane mapContainer;
   @FXML private ImageView mapImage;
+  @FXML private AnchorPane glyphsLayer;
+  @FXML private AnchorPane equipLayer;
   public static String floor;
 
   @FXML private PieChart pumpChart;
@@ -82,6 +87,7 @@ public class MapDashboardController extends ParentController {
   public static List<Boolean> isSelected = new ArrayList<>(Arrays.asList(new Boolean[7]));
   private final double ANIMATION_TIME = 0.2;
 
+  private GlyphHandler glyphs;
   private Table<Request> t;
   private int floorNum = 2;
 
@@ -149,6 +155,9 @@ public class MapDashboardController extends ParentController {
     initSlide(floor5, 6);
 
     createTable();
+    List<PositionInfo> allpos = new ArrayList<>();
+    DAOPouch.getLocationDAO().getAll().values().forEach(l -> allpos.add(new PositionInfo(l)));
+    glyphs = new GlyphHandler(glyphsLayer,equipLayer,allpos);
   }
 
   private void setListeners() {
