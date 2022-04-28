@@ -22,6 +22,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -121,6 +122,11 @@ public class MapDashboardController extends ParentController {
     glyphs.addEquipTypeFilter("INFUSIONPUMP");
     glyphs.addEquipTypeFilter("XRAY");
     glyphs.addEquipTypeFilter("RECLINER");
+  }
+
+  @FXML
+  void consumeScroll(ScrollEvent event) {
+    event.consume();
   }
 
   private void setListeners() {
