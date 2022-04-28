@@ -228,7 +228,7 @@
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pumpChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <PieChart fx:id="pumpChart" labelsVisible="false" legendVisible="false" startAngle="90.0" />
                                     <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
@@ -240,33 +240,33 @@
                                                 <ColorAdjust brightness="-1.0" />
                                              </effect>
                                           </ImageView>
-                                          <Label text="Label" />
+                                          <Label fx:id="pumpLabel" text="Label" />
                                        </children>
                                     </VBox>
                                  </children>
                               </StackPane>
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <PieChart labelsVisible="false" legendVisible="false" rotate="-90.0" fx:id="xrayChart" />
+                                    <PieChart labelsVisible="false" legendVisible="false" startAngle="90.0" fx:id="xrayChart" />
                                     <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../assets/Glyphs/MapIcons/pump.png" />
+                                                <Image url="@../assets/Glyphs/MapIcons/xray.png" />
                                              </image>
                                              <effect>
                                                 <ColorAdjust brightness="-1.0" />
                                              </effect>
                                           </ImageView>
-                                          <Label text="Label" />
+                                          <Label text="Label" fx:id="xrayLabel" />
                                        </children>
                                     </VBox>
                                  </children>
                               </StackPane>
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="reclinerChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <PieChart fx:id="reclinerChart" labelsVisible="false" legendVisible="false" startAngle="90.0" />
                                     <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
@@ -278,14 +278,14 @@
                                                 <ColorAdjust brightness="-1.0" />
                                              </effect>
                                           </ImageView>
-                                          <Label text="Label" />
+                                          <Label fx:id="reclinerLabel" text="Label" />
                                        </children>
                                     </VBox>
                                  </children>
                               </StackPane>
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="bedChart" labelsVisible="false" legendVisible="false" rotate="-90.0" />
+                                    <PieChart fx:id="bedChart" labelsVisible="false" legendVisible="false" startAngle="90.0" />
                                     <Circle fill="#fffefe" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
@@ -297,7 +297,7 @@
                                                 <ColorAdjust brightness="-1.0" />
                                              </effect>
                                           </ImageView>
-                                          <Label text="Label" />
+                                          <Label fx:id="bedLabel" text="Label" />
                                        </children>
                                     </VBox>
                                  </children>
