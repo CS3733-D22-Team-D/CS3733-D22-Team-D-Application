@@ -10,7 +10,6 @@ import edu.wpi.DapperDaemons.entities.Notification;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javafx.application.Platform;
@@ -25,7 +24,6 @@ import javafx.scene.paint.Color;
 
 public class NotificationsPageController extends ParentController {
   @FXML private VBox todayBox;
-  @FXML private VBox earlierBox;
   private static ValueEventListener notifListener;
 
   @Override
@@ -230,7 +228,6 @@ public class NotificationsPageController extends ParentController {
 
   private void setNotifications() {
     this.todayBox.getChildren().clear();
-    this.earlierBox.getChildren().clear();
     List<Notification> notifications =
         new ArrayList<>(
             DAOPouch.getNotificationDAO()
@@ -238,15 +235,7 @@ public class NotificationsPageController extends ParentController {
                 .values());
     SimpleDateFormat f = new SimpleDateFormat("MMddyyy");
     for (Notification n : notifications) {
-      try {
-        if (f.parse(n.getDate()).before(f.parse(f.format(new Date())))) {
-          this.earlierBox.getChildren().add(createNotification(n));
-        } else {
-          this.todayBox.getChildren().add(createNotification(n));
-        }
-      } catch (ParseException e) {
-        throw new RuntimeException(e);
-      }
+      this.todayBox.getChildren().add(createNotification(n));
     }
   }
 
