@@ -16,6 +16,7 @@ import edu.wpi.DapperDaemons.entities.Patient;
 import edu.wpi.DapperDaemons.entities.TableObject;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.map.*;
+import edu.wpi.DapperDaemons.map.pathfinder.AStar;
 import edu.wpi.DapperDaemons.map.pathfinder.NodeConnectionHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.PathfinderHandler;
 import edu.wpi.DapperDaemons.map.pathfinder.ShowRequestPaths;
@@ -445,6 +446,21 @@ public class MapController extends ParentController {
         System.err.println("Could not add to DAO");
       }
     }
+  }
+
+  @FXML
+  void onRandomizeToLocation() {
+    String destinationID = infoBox.getPosition().getNodeID();
+    List<Location> locations =
+        new ArrayList<>(DAOPouch.getLocationDAO().filter(6, "PATH").values());
+    int randindex = (int) (Math.random() * locations.size());
+    String endNode;
+    AStar ppFinder = new AStar();
+    endNode = ppFinder.findClosestPathnode(DAOPouch.getLocationDAO().get(destinationID));
+    System.out.println("Going from " + locations.get(randindex).getNodeID() + " To " + endNode);
+    pathfinder.clearPath();
+    pathfinder.showPather(locations.get(randindex).getNodeID(), endNode);
+    pathfinder.filterByFloor(infoBox.getPosition().getFloor());
   }
 
   @FXML

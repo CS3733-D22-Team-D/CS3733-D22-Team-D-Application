@@ -71,36 +71,39 @@ public class RoomInfoBox {
   private ValueEventListener reqListener;
 
   private void setListeners() {
-    TableListeners.addListener(
-        new MedicalEquipment().tableName(),
+    equipListener =
         TableListeners.eventListener(
             () -> {
               List<MedicalEquipment> equipment =
                   new ArrayList<>(
                       DAOPouch.getMedicalEquipmentDAO().filter(6, pos.getId()).values());
-              System.out.println("Map equip listener");
               equipTable.getItems().clear();
               equipTable.getItems().addAll(equipment);
-            }));
-    TableListeners.addListener(
-        new Patient().tableName(),
+            });
+    TableListeners.addListener(new MedicalEquipment().tableName(), equipListener);
+
+    patListener =
         TableListeners.eventListener(
             () -> {
               List<Patient> patients =
                   new ArrayList<>(DAOPouch.getPatientDAO().filter(6, pos.getId()).values());
               patientTable.getItems().clear();
               patientTable.getItems().addAll(patients);
-            }));
-    TableListeners.addListeners(
-        DAOFacade.getAllRequests().stream()
-            .map((r) -> ((TableObject) r).tableName())
-            .collect(Collectors.toCollection(ArrayList<String>::new)),
+            });
+    TableListeners.addListener(new Patient().tableName(), patListener);
+
+    reqListener =
         TableListeners.eventListener(
             () -> {
               List<Request> requests = DAOFacade.getFilteredRequests(pos.getId());
               requestTable.getItems().clear();
               requestTable.getItems().addAll(requests);
-            }));
+            });
+    TableListeners.addListeners(
+        DAOFacade.getAllRequests().stream()
+            .map((r) -> ((TableObject) r).tableName())
+            .collect(Collectors.toCollection(ArrayList<String>::new)),
+        reqListener);
   }
 
   public void open() {
@@ -151,7 +154,13 @@ public class RoomInfoBox {
   public void close() {
     roomInfoBox.setVisible(false);
     infoTables.setVisible(false);
-    TableListeners.removeAllListeners();
+    if (equipListener != null)
+      TableListeners.removeListener(new MedicalEquipment().tableName(), equipListener);
+    if (patListener != null) TableListeners.removeListener(new Patient().tableName(), patListener);
+    if (reqListener != null)
+      DAOFacade.getAllRequests().stream()
+          .map((r) -> ((TableObject) r).tableName())
+          .forEach(s -> TableListeners.removeListener(s, reqListener));
   }
 
   public void openLoc(

@@ -580,6 +580,18 @@
                                                       </ImageView>
                                                    </graphic>
                                                 </ToggleButton>
+                                                <ToggleButton id="foreground" alignment="CENTER_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#xrayToggle" prefWidth="220.0" styleClass="nodesToggle" stylesheets="@../../../../toggleButton.css" text="Xrays" fx:id="xrayTG">
+                                                   <graphic>
+                                                      <ImageView fx:id="reclinerDragImage1" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                                         <image>
+                                                            <Image url="@../assets/Glyphs/MapIcons/xray.png" />
+                                                         </image>
+                                                         <effect>
+                                                            <ColorAdjust brightness="-0.43" />
+                                                         </effect>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </ToggleButton>
                                              </children>
                                           </VBox>
                                        </children>
@@ -825,7 +837,7 @@
                                     </VBox>
                                  </children>
                               </VBox>
-                              <VBox fx:id="roomInfoBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="370.0" prefWidth="326.0" styleClass="pageCard" visible="false">
+                              <VBox fx:id="roomInfoBox" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="370.0" prefWidth="326.0" styleClass="pageCard">
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0">
                                        <children>
@@ -893,6 +905,11 @@
                                           <ImageView fx:id="requestList" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#showReqList" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../assets/Glyphs/MapIcons/clipboard.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="getDirections" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#onRandomizeToLocation" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/Glyphs/MapIcons/directionsIcon.png" />
                                              </image>
                                           </ImageView>
                                        </children>

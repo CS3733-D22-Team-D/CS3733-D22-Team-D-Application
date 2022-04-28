@@ -8,6 +8,7 @@ public class InternalReqConverter extends Converter {
   public InternalReqConverter() {}
 
   public static String employeeID;
+  public static String patientID;
 
   /**
    * Converts from a team B patient req to our patient req
@@ -19,7 +20,7 @@ public class InternalReqConverter extends Converter {
 
     String currID;
 
-    if (employeeID == null) currID = "null";
+    if (employeeID == null) currID = "admin"; // default to admin
     else currID = employeeID;
 
     return new PatientTransportRequest(
@@ -28,7 +29,7 @@ public class InternalReqConverter extends Converter {
         currID,
         currID,
         internalRequest.getInformation(),
-        internalRequest.getRequestID(),
+        patientID,
         internalRequest.getFinishLocation().getNodeID(),
         determineDateNeeded(120));
   }

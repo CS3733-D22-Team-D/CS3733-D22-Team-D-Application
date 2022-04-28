@@ -315,6 +315,28 @@
                         <Insets bottom="45.0" />
                      </VBox.margin>
                   </HBox>
+                  <HBox id="foreground" fillHeight="false" prefHeight="34.0" prefWidth="270.0" style="-fx-background-radius: 7.5;">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label id="label" alignment="CENTER" prefHeight="137.0" prefWidth="110.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Specify Patient ID:" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox id="foreground" alignment="CENTER_LEFT" fillHeight="false" prefHeight="27.0" prefWidth="169.0" style="-fx-background-radius: 7.5;">
+                           <children>
+                              <TextField fx:id="bPatient" prefHeight="42.0" prefWidth="124.0">
+                                 <HBox.margin>
+                                    <Insets right="15.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="270.0">
                      <children>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
