@@ -176,17 +176,17 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="0.5" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.6" VBox.vgrow="ALWAYS">
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="0.5" nodeOrientation="LEFT_TO_RIGHT" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" vvalue="0.492" VBox.vgrow="ALWAYS">
                                  <content>
-                                    <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0" scaleX="0.135" scaleY="0.135">
+                                    <StackPane alignment="TOP_LEFT" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" prefHeight="150.0" prefWidth="200.0" scaleX="0.135" scaleY="0.135">
                                        <children>
-                                          <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0">
+                                          <Pane fx:id="mapContainer" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </Pane>
-                                          <AnchorPane fx:id="glyphsLayer" prefHeight="200.0" prefWidth="200.0" />
-                                          <AnchorPane fx:id="equipLayer" prefHeight="200.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="glyphsLayer" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" prefHeight="200.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="equipLayer" onScroll="#consumeScroll" onScrollFinished="#consumeScroll" onScrollStarted="#consumeScroll" prefHeight="200.0" prefWidth="200.0" />
                                        </children>
                                     </StackPane>
                                  </content>
@@ -220,7 +220,7 @@
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" pannable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" pannable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                            <content>
                               <GridPane fx:id="table" style="-fx-background-color: FFFFFF;" vgap="10.0">
                                  <columnConstraints>
