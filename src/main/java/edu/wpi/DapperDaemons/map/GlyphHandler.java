@@ -239,6 +239,9 @@ public class GlyphHandler {
       case "RECLINER":
         png = "recliner.png";
         break;
+      case "XRAY":
+        png = "xray.png";
+        break;
       default:
         png = "error.png";
     }
