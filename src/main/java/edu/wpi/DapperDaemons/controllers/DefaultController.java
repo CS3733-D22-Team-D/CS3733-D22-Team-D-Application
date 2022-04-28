@@ -43,17 +43,17 @@ public class DefaultController extends ParentController {
   }
 
   private void initGraphics() {
-    bindImage(labPageImage, labPageContainer);
-    bindImage(equipmentPageImage, equipmentPageContainer);
-    bindImage(sanitationPageImage, sanitationPageContainer);
-    bindImage(medicinePageImage, medicinePageContainer);
-    bindImage(mealPageImage, mealPageContainer);
-    bindImage(mapPageImage, mapPageContainer);
-    bindImage(patientPageImage, patientPageContainer);
-    bindImage(apiPageImage, backendPageContainer);
-    bindImage(equipSaniPageImage, equipSaniPageContainer);
-    bindImage(languagePageImage, languagePageContainer);
-    bindImage(securityPageImage, securityPageContainer);
-    bindImage(extTransportPageImage, extTransportPageContainer);
+    //    bindImage(labPageImage, labPageContainer);
+    //    bindImage(equipmentPageImage, equipmentPageContainer);
+    //    bindImage(sanitationPageImage, sanitationPageContainer);
+    //    bindImage(medicinePageImage, medicinePageContainer);
+    //    bindImage(mealPageImage, mealPageContainer);
+    //    bindImage(mapPageImage, mapPageContainer);
+    //    bindImage(patientPageImage, patientPageContainer);
+    //    bindImage(apiPageImage, backendPageContainer);
+    //    bindImage(equipSaniPageImage, equipSaniPageContainer);
+    //    bindImage(languagePageImage, languagePageContainer);
+    //    bindImage(securityPageImage, securityPageContainer);
+    //    bindImage(extTransportPageImage, extTransportPageContainer);
   }
 }
