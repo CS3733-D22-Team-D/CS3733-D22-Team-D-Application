@@ -56,6 +56,15 @@ public class MapDashboardController extends ParentController {
   @FXML private PieChart bedChart;
   @FXML private Label bedLabel;
 
+  private PieChart.Data cleanPumps;
+  private PieChart.Data dirtyPumps;
+  private PieChart.Data cleanXray;
+  private PieChart.Data dirtyXray;
+  private PieChart.Data cleanRecliner;
+  private PieChart.Data dirtyRecliner;
+  private PieChart.Data cleanBed;
+  private PieChart.Data dirtyBed;
+
   private static double pumpsDirty = 0;
   private static double pumpsClean = 0;
   private static double xrayDirty = 0;
@@ -78,14 +87,14 @@ public class MapDashboardController extends ParentController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    PieChart.Data cleanPumps = new PieChart.Data("clean", bedClean);
-    PieChart.Data dirtyPumps = new PieChart.Data("dirty", bedDirty);
-    PieChart.Data cleanXray = new PieChart.Data("clean", xrayClean);
-    PieChart.Data dirtyXray = new PieChart.Data("dirty", xrayDirty);
-    PieChart.Data cleanRecliner = new PieChart.Data("clean", reclinerClean);
-    PieChart.Data dirtyRecliner = new PieChart.Data("dirty", reclinerDirty);
-    PieChart.Data cleanBed = new PieChart.Data("clean", bedClean);
-    PieChart.Data dirtyBed = new PieChart.Data("dirty", bedDirty);
+    cleanPumps = new PieChart.Data("clean", pumpsClean);
+    dirtyPumps = new PieChart.Data("dirty", pumpsDirty);
+    cleanXray = new PieChart.Data("clean", xrayClean);
+    dirtyXray = new PieChart.Data("dirty", xrayDirty);
+    cleanRecliner = new PieChart.Data("clean", reclinerClean);
+    dirtyRecliner = new PieChart.Data("dirty", reclinerDirty);
+    cleanBed = new PieChart.Data("clean", bedClean);
+    dirtyBed = new PieChart.Data("dirty", bedDirty);
 
     cleanData.addAll(List.of(cleanPumps, cleanXray, cleanRecliner, cleanBed));
     dirtyData.addAll(List.of(dirtyPumps, dirtyXray, dirtyRecliner, dirtyBed));
@@ -155,22 +164,37 @@ public class MapDashboardController extends ParentController {
   }
 
   private void updateCharts() {
-    bedDirty = DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.INFUSIONPUMP, floor)
+    bedDirty = DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.BED, floor).size();
+    reclinerDirty =
+        DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.RECLINER, floor).size();
+    xrayDirty =
+        DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.XRAY, floor).size();
+    pumpsDirty =
+        DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.INFUSIONPUMP, floor)
             .size();
-    reclinerDirty = DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.RECLINER, floor)
-            .size();
-    xrayDirty = DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.XRAY, floor).size();
-    pumpsDirty = DAOFacade.getDirtyEquipmentByFloor(MedicalEquipment.EquipmentType.INFUSIONPUMP, floor)
-                    .size();
 
-    bedLabel.setText(
-        String.valueOf(bedDirty));
-    reclinerLabel.setText(
-        String.valueOf(reclinerDirty));
-    xrayLabel.setText(
-        String.valueOf(xrayDirty));
-    pumpLabel.setText(
-        String.valueOf(pumpsDirty));
+    int beds = DAOFacade.getEquipmentOnFloor(MedicalEquipment.EquipmentType.BED, floor).size();
+    int recliners =
+        DAOFacade.getEquipmentOnFloor(MedicalEquipment.EquipmentType.RECLINER, floor).size();
+    int xrays = DAOFacade.getEquipmentOnFloor(MedicalEquipment.EquipmentType.XRAY, floor).size();
+    int pumps =
+        DAOFacade.getEquipmentOnFloor(MedicalEquipment.EquipmentType.INFUSIONPUMP, floor).size();
+
+    //    cleanBed.setPieValue(((beds - bedDirty) / beds) * 100);
+    System.out.println(((beds - bedDirty) / beds) * 100);
+    dirtyBed.setPieValue((bedDirty / beds) * 100);
+    System.out.println((bedDirty / beds) * 100);
+    cleanRecliner.setPieValue(((recliners - reclinerDirty) / recliners) * 100);
+    dirtyRecliner.setPieValue((reclinerDirty / recliners) * 100);
+    cleanXray.setPieValue(((xrays - xrayDirty) / xrays) * 100);
+    dirtyXray.setPieValue((xrayDirty / xrays) * 100);
+    cleanPumps.setPieValue(((pumps - pumpsDirty) / pumps) * 100);
+    dirtyPumps.setPieValue((pumpsDirty / pumps) * 100);
+
+    bedLabel.setText(String.valueOf(bedDirty));
+    reclinerLabel.setText(String.valueOf(reclinerDirty));
+    xrayLabel.setText(String.valueOf(xrayDirty));
+    pumpLabel.setText(String.valueOf(pumpsDirty));
 
     for (PieChart.Data data : cleanData) {
       data.getNode().setStyle("-fx-pie-color: #F1F0F0;");
