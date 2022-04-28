@@ -394,6 +394,9 @@
                            <HBox.margin>
                               <Insets left="7.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                         <ToggleButton id="normalText" fx:id="userSettingsToggle" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserDropdown" prefHeight="45.0" prefWidth="180.0" style="-fx-background-radius: 7.5; -fx-background-color: transparent;" stylesheets="@../styling/lightMode.css" textFill="WHITE">
                            <graphic>
@@ -415,6 +418,9 @@
                                  </padding>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                      </children>
                   </HBox>
@@ -447,6 +453,9 @@
                            <font>
                               <Font name="Inter Medium" size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
                         <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="#ffffff00">
@@ -469,6 +478,9 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
                         <JFXButton id="cardText" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Button" textFill="#ffffff00">
@@ -491,6 +503,9 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                      </children>
                      <HBox.margin>
