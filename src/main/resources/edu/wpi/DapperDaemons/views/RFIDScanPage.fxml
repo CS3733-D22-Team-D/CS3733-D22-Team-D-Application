@@ -120,7 +120,7 @@
                            </children></HBox>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="71.0" prefWidth="228.0">
                            <children>
-                              <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#goHome" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="25.0" prefWidth="97.0" styleClass="confirmButton" text="Continue" textFill="WHITE">
+                              <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#continuePressed" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="25.0" prefWidth="97.0" styleClass="confirmButton" text="Continue" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
