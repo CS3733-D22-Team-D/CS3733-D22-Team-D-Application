@@ -158,6 +158,8 @@ public class GlyphHandler {
     all.forEach(
         e -> {
           ImageView equip = getEquipImage(e.getEquipmentType().name());
+          equip.setFitWidth(imageSize);
+          equip.setFitHeight(imageSize);
           equip.setX(pos.getX() - imageSize / 2.0);
           equip.setY(pos.getY() - imageSize / 2.0);
           equip.setVisible(true);
