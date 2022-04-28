@@ -33,7 +33,7 @@ public class GlyphHandler {
   private List<String> nodeTypeFilter;
   private List<String> longNameFilter;
   private List<String> equipTypeFilter;
-  private int imageSize = 32;
+  private int imageSize = 72;
 
   public GlyphHandler(
       AnchorPane glyphLayer,
@@ -71,8 +71,8 @@ public class GlyphHandler {
       ImageView image = (ImageView) glyphLayer.getChildren().get(i);
       image.setOnMouseDragged(
           event -> {
-            image.setX(event.getX() - imageSize/2.0);
-            image.setY(event.getY() - imageSize/2.0);
+            image.setX(event.getX() - imageSize / 2.0);
+            image.setY(event.getY() - imageSize / 2.0);
           });
       Location oldPos = imageLocs.get(i).getLoc();
       image.setOnMouseReleased(
@@ -99,11 +99,11 @@ public class GlyphHandler {
           e -> {
             PositionInfo snapped = getNearestPos((int) e.getX(), (int) e.getY());
             if (snapped != null) {
-              image.setX(snapped.getX() - imageSize/2.0);
-              image.setY(snapped.getY() - imageSize/2.0);
+              image.setX(snapped.getX() - imageSize / 2.0);
+              image.setY(snapped.getY() - imageSize / 2.0);
             } else {
-              image.setX(e.getX() - imageSize/2.0);
-              image.setY(e.getY() - imageSize/2.0);
+              image.setX(e.getX() - imageSize / 2.0);
+              image.setY(e.getY() - imageSize / 2.0);
             }
           });
       int finalI = i;
@@ -111,12 +111,14 @@ public class GlyphHandler {
           e -> {
             boolean worked =
                 moveEquipment(
-                    (int) image.getX() + imageSize/2, (int) image.getY() + imageSize/2, equipLocs.get(finalI));
+                    (int) image.getX() + imageSize / 2,
+                    (int) image.getY() + imageSize / 2,
+                    equipLocs.get(finalI));
             if (!worked) {
               Location original =
                   DAOPouch.getLocationDAO().get(equipLocs.get(finalI).getLocationID());
-              image.setX(original.getXcoord() - imageSize/2.0);
-              image.setY(original.getYcoord() - imageSize/2.0);
+              image.setX(original.getXcoord() - imageSize / 2.0);
+              image.setY(original.getYcoord() - imageSize / 2.0);
             }
           });
     }
@@ -136,8 +138,8 @@ public class GlyphHandler {
     image.setVisible(true);
     image.setFitHeight(imageSize);
     image.setFitWidth(imageSize);
-    image.setX(pos.getX() - imageSize/2.0);
-    image.setY(pos.getY() - imageSize/2.0);
+    image.setX(pos.getX() - imageSize / 2.0);
+    image.setY(pos.getY() - imageSize / 2.0);
     image.setPickOnBounds(true);
 
     DropShadow dropShadow = new DropShadow();
@@ -156,8 +158,8 @@ public class GlyphHandler {
     all.forEach(
         e -> {
           ImageView equip = getEquipImage(e.getEquipmentType().name());
-          equip.setX(pos.getX() - imageSize/2.0);
-          equip.setY(pos.getY() - imageSize/2.0);
+          equip.setX(pos.getX() - imageSize / 2.0);
+          equip.setY(pos.getY() - imageSize / 2.0);
           equip.setVisible(true);
           equip.setPickOnBounds(true);
           DropShadow ds = new DropShadow();
@@ -361,8 +363,8 @@ public class GlyphHandler {
                 ImageView equip = getEquipImage(e.getEquipmentType().name());
                 equip.setFitWidth(imageSize);
                 equip.setFitHeight(imageSize);
-                equip.setX(pos.getX() - imageSize/2.0);
-                equip.setY(pos.getY() - imageSize/2.0);
+                equip.setX(pos.getX() - imageSize / 2.0);
+                equip.setY(pos.getY() - imageSize / 2.0);
                 equip.setVisible(true);
                 equip.setPickOnBounds(true);
                 DropShadow ds = new DropShadow();
@@ -470,5 +472,7 @@ public class GlyphHandler {
     filter();
   }
 
-  public void setImageSize(int imageSize) {this.imageSize = imageSize;}
+  public void setImageSize(int imageSize) {
+    this.imageSize = imageSize;
+  }
 }
