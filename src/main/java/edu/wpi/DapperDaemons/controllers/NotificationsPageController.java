@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -57,10 +59,97 @@ public class NotificationsPageController extends ParentController {
       notif.getChildren().get(6).setVisible(false);
     }
     notif.getChildren().get(0).setVisible(!n.getRead());
-    //        ((ImageView)notif.getChildren().get(1)).setImage();
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
       if (n.getNodeID().equals("not" + r.getNodeID()) && !r.getAssigneeID().equals("none")) {
+        Image i =
+            new Image(
+                getClass()
+                    .getClassLoader()
+                    .getResourceAsStream(
+                        "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-4.png"));
+        switch (r.requestType()) {
+          case "Equipment Cleaning Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-14.png"));
+            break;
+          case "Lab Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-15.png"));
+            break;
+          case "Language Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-10.png"));
+            break;
+          case "Meal Delivery Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-7.png"));
+            break;
+          case "Medical Equipment Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-8.png"));
+            break;
+          case "Medicine Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-13.png"));
+            break;
+          case "Patient Transport Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-12.png"));
+            break;
+          case "Sanitation Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-6.png"));
+            break;
+          case "Security Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-9.png"));
+            break;
+          default:
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream("edu/wpi/DapperDaemons/assets/BrighamLogo.png"));
+            break;
+        }
+        ((ImageView) notif.getChildren().get(1)).setImage(i);
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
