@@ -13,11 +13,11 @@
 
 <HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
-      <VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+      <VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="General" textFill="#052f92">
+                  <Label styleClass="cardTitle" text="General" textFill="#052f92">
                      <font>
                         <Font name="Inter Regular" size="20.0" />
                      </font>
@@ -27,7 +27,7 @@
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -40,7 +40,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Map">
+                              <Label styleClass="cardText" text="Map">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -56,7 +56,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="125.0" layoutY="10.0" onMouseClicked="#switchToAPI" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="125.0" layoutY="10.0" onMouseClicked="#switchToAPI" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -69,7 +69,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="API">
+                              <Label styleClass="cardText" text="API">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
@@ -92,17 +92,10 @@
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.14000000059604645" green="0.13019999861717224" blue="0.13019999861717224" opacity="0.1599999964237213" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" styleClass="pageCard" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Requests" textFill="#052f92">
+                  <Label styleClass="cardTitle" text="Requests" textFill="#052f92">
                      <font>
                         <Font name="Inter Regular" size="20.0" />
                      </font>
@@ -112,7 +105,7 @@
                   </Label>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -125,7 +118,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Medicine">
+                              <Label styleClass="cardText" text="Medicine">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -141,7 +134,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -154,7 +147,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Lab">
+                              <Label styleClass="cardText" text="Lab">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -170,7 +163,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -183,7 +176,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Equipment">
+                              <Label styleClass="cardText" text="Equipment">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -199,7 +192,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -212,7 +205,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Security">
+                              <Label styleClass="cardText" text="Security">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -228,7 +221,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -241,7 +234,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Cleaning">
+                              <Label styleClass="cardText" text="Cleaning">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -261,7 +254,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -274,7 +267,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Food">
+                              <Label styleClass="cardText" text="Food">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -290,7 +283,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -303,7 +296,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Sanitation">
+                              <Label styleClass="cardText" text="Eq. Sanitation">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -319,7 +312,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -332,7 +325,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Ext Transport">
+                              <Label styleClass="cardText" text="Ext. Transport">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -348,7 +341,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -361,7 +354,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Int Transport">
+                              <Label styleClass="cardText" text="Int.Transport">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -377,7 +370,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
@@ -390,7 +383,7 @@
                                     <ColorAdjust brightness="0.31" />
                                  </effect>
                               </ImageView>
-                              <Label text="Interpreter">
+                              <Label styleClass="cardText" text="Interpreter">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin></Label>
@@ -409,13 +402,6 @@
                      </children>
                   </HBox>
                </children>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.14000000059604645" green="0.13019999861717224" blue="0.13019999861717224" opacity="0.1599999964237213" />
-                     </color>
-                  </DropShadow>
-               </effect>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
