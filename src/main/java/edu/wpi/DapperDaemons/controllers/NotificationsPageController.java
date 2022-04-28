@@ -24,7 +24,6 @@ import javafx.scene.paint.Color;
 
 public class NotificationsPageController extends ParentController {
   @FXML private VBox todayBox;
-  @FXML private VBox earlierBox;
   private static ValueEventListener notifListener;
 
   @Override
@@ -149,6 +148,9 @@ public class NotificationsPageController extends ParentController {
             break;
         }
         ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)).setImage(i);
+        bindImage(
+            ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)),
+            ((Pane) notif.getChildren().get(1)));
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
