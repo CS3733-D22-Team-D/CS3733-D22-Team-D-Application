@@ -213,7 +213,7 @@ public class ShowRequestPaths {
     setCurrentFloor(floor);
     makeAllInVisible();
     for (int i = 0;
-        i < locations.size() - 2;
+        i < locations.size() - 1;
         i++) { // for every child, add make the locations on this floor visible
       //      System.out.println(locations.get(i).getNodeID());
       if (locations.get(i).getFloor().equals(floor)) {

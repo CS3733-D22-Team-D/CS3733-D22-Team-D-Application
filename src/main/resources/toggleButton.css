@@ -40,3 +40,11 @@
     -fx-background-radius: 20;
 
 }
+
+.map.toggle-button{
+    -fx-opacity: 75%;
+}
+
+.map.toggle-button:selected{
+    -fx-opacity: 90%;
+}
