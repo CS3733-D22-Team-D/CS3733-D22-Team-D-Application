@@ -61,20 +61,27 @@ public class Table<R> {
             () -> {
               Platform.runLater(
                   () -> {
-                    List<R> req =
-                        new ArrayList<R>(
-                            DAOPouch.getDAO((TableObject) type).filter(6, "REQUESTED").values());
-                    List<R> inprog =
-                        new ArrayList<R>(
-                            DAOPouch.getDAO((TableObject) type).filter(6, "IN_PROGRESS").values());
-                    req.addAll(inprog);
+                    if (type instanceof Request) {
+                      List<R> req =
+                          new ArrayList<R>(
+                              DAOPouch.getDAO((TableObject) type).filter(6, "REQUESTED").values());
+                      List<R> inprog =
+                          new ArrayList<R>(
+                              DAOPouch.getDAO((TableObject) type)
+                                  .filter(6, "IN_PROGRESS")
+                                  .values());
+                      req.addAll(inprog);
 
-                    for (int col : filters.keySet()) {
-                      req.removeIf(
-                          r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                      for (int col : filters.keySet()) {
+                        req.removeIf(
+                            r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                      }
+                      difference(req, rows);
+                    } else {
+                      List<R> req =
+                          new ArrayList<R>(DAOPouch.getDAO((TableObject) type).getAll().values());
+                      difference(req, rows);
                     }
-
-                    difference(req, rows);
                   });
             }));
   }

@@ -6,6 +6,7 @@ import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.entities.Employee;
+import edu.wpi.DapperDaemons.tables.Table;
 import edu.wpi.DapperDaemons.tables.TableHelper;
 import java.awt.*;
 import java.net.URL;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /** Patient Transport Controller UPDATED 4/5/22 12:42 PM */
@@ -28,6 +30,7 @@ public class EmployeesController extends ParentController implements Initializab
 
   /* Table Object */
   @FXML private TableView<Employee> employees;
+  @FXML private GridPane table;
 
   /*Table Helper */
   private TableHelper<Employee> tableHelper;
@@ -48,6 +51,8 @@ public class EmployeesController extends ParentController implements Initializab
   @FXML private TextField employeeFirstName;
   @FXML private TextField employeeLastName;
   @FXML private DatePicker employeeDOB;
+
+  private Table<Employee> t;
   List<String> names;
 
   /* DAO */
@@ -56,9 +61,17 @@ public class EmployeesController extends ParentController implements Initializab
   /** Initializes the controller objects (After runtime, before graphics creation) */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    initializeTable();
     initializeInputs();
     onClearClicked();
+    t = new Table<Employee>(Employee.class, table, 0);
+    createTable();
+  }
+
+  private void createTable() {
+    List<Employee> emps = new ArrayList<>(DAOPouch.getEmployeeDAO().getAll().values());
+    t.setRows(emps);
+    t.setHeader(List.of("ID", "First Name", "Last Name", "D.O.B.", "Dept", "Clearance"));
+    t.setListeners(new Employee());
   }
 
   @FXML
