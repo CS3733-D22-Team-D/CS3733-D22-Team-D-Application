@@ -421,6 +421,11 @@ public class ParentController extends AppController {
   }
 
   @FXML
+  void switchToCredits() {
+    swapPage("credits", "Credits");
+  }
+
+  @FXML
   void switchToDB() {
     swapPage("backendInfoDisp", "Backend Information Display");
   }
