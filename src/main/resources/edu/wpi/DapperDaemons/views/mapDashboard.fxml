@@ -19,15 +19,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="background" prefHeight="969.0" prefWidth="1388.0" spacing="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
+<HBox prefHeight="969.0" prefWidth="1388.0" spacing="30.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.MapDashboardController">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
    <children>
       <VBox maxWidth="370.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
-            <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
+                  <Label styleClass="cardTitle" text="5" translateY="100.0" />
                   <Pane fx:id="LL2Container" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floorLL2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="300.0">
@@ -36,7 +37,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="4" translateY="150.0" />
                   <Pane fx:id="LL1Container" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floorLL1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="250.0">
@@ -45,7 +50,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="3" translateY="200.0" />
                   <Pane fx:id="OneContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor1" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="200.0">
@@ -54,7 +63,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="2" translateY="250.0" />
                   <Pane fx:id="TwoContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor2" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="150.0">
@@ -63,7 +76,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="1" translateY="300.0" />
                   <Pane fx:id="ThreeContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor3" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="100.0">
@@ -72,7 +89,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="L1" translateY="350.0" />
                   <Pane fx:id="FourContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor4" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" translateY="50.0">
@@ -81,7 +102,11 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
+                  <Label styleClass="cardTitle" text="L2" translateY="400.0" />
                   <Pane fx:id="FiveContainer" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="floor5" fitHeight="150.0" fitWidth="200.0" preserveRatio="true">
@@ -90,6 +115,9 @@
                            </image>
                         </ImageView>
                      </children>
+                     <StackPane.margin>
+                        <Insets left="35.0" />
+                     </StackPane.margin>
                   </Pane>
                </children>
             </StackPane>
