@@ -1,298 +1,88 @@
-2022-04-27 21:38:20:435 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
-2022-04-27 21:38:20:437 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
-2022-04-27 21:38:26:831 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
-2022-04-27 21:38:26:832 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
-2022-04-27 21:38:26:833 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
-2022-04-27 21:38:26:834 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Languages
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Languages has been produced
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
-2022-04-27 21:38:26:835 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
-2022-04-27 21:38:26:836 [Thread-4] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
-2022-04-27 21:38:26:836 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
-2022-04-27 21:38:26:837 [Thread-4] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
-2022-04-27 21:38:26:837 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
-2022-04-27 21:38:26:837 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
-2022-04-27 21:38:28:335 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
-2022-04-27 21:38:28:497 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
-2022-04-27 21:38:28:500 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
-2022-04-27 21:38:28:500 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
-2022-04-27 21:38:28:502 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
-2022-04-27 21:38:28:502 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
-2022-04-27 21:38:28:502 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
-2022-04-27 21:38:28:527 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-27 21:38:29:623 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <mapDashboard>
-2022-04-27 21:38:30:954 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <locationMap>
-2022-04-27 21:38:37:270 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:38:39:757 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:38:55:792 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:38:56:528 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:40:41:024 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:40:58:718 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:00:614 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:05:782 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:07:487 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:14:027 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:14:079 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:14:533 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:14:573 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:15:336 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:16:075 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:16:700 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:16:907 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:17:921 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:18:329 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:18:741 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:18:990 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:21:781 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:21:848 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:22:260 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:22:293 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:22:649 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:22:699 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:23:949 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:23:982 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:24:312 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:24:363 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:26:885 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:27:452 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:27:977 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:28:039 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:28:498 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
-2022-04-27 21:41:28:649 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:28:704 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:33:276 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:33:893 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:40:775 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:41:686 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:42:330 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:42:771 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:43:159 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:43:512 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:44:097 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:44:383 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:139 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:173 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:607 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:641 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:833 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:46:885 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:032 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:072 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:202 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:246 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:373 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:427 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:549 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:600 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:722 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:47:754 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:48:964 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:49:014 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:53:318 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:53:390 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:53:799 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:53:882 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:53:967 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:050 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:135 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:170 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:317 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:371 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:502 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:555 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:695 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:744 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:905 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:54:949 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:55:198 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:55:237 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:55:694 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:55:744 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:56:137 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:56:198 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:56:519 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:56:566 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:059 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:113 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:422 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:475 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:597 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:648 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:784 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:834 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:57:961 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:039 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:169 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:219 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:366 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:430 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:559 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:611 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:749 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:779 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:935 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:58:982 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:59:200 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:59:231 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:59:749 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:41:59:790 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:152 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:195 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:375 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:411 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:576 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:614 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:775 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:812 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:00:965 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:002 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:159 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:206 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:367 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:410 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:832 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:01:876 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:351 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:386 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:557 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:592 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:742 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:794 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:944 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:02:991 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:161 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:210 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:359 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:402 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:575 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:612 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:803 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:03:856 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:021 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:054 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:202 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:237 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:380 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:421 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:543 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:592 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:707 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:04:753 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:05:159 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:05:211 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:05:630 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:05:663 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:06:057 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:06:118 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:06:520 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:06:569 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:032 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:087 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:499 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:535 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:949 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:07:984 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:08:395 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:08:460 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:08:840 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:08:872 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:09:084 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:09:132 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:09:501 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:09:534 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:10:058 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:10:137 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:10:561 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:10:612 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:10:986 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:11:032 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:11:382 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:11:427 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:11:882 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:11:930 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:12:277 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:12:334 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:12:711 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:12:745 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:011 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:044 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:202 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:237 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:381 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:432 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:575 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:13:640 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:14:215 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:14:266 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:14:423 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:14:462 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:000 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:077 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:188 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:222 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:370 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:417 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:578 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:620 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:789 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:838 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:15:977 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:055 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:153 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:204 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:434 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:471 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:855 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:16:889 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:038 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:107 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:221 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:271 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:389 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:476 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:570 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:605 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:818 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:17:854 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:18:263 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:18:299 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:18:830 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:18:864 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:19:459 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:19:509 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:27:018 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:29:134 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:42:34:030 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <mapDashboard>
-2022-04-27 21:42:35:290 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <locationMap>
-2022-04-27 21:42:39:565 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Returning position info for request showing on map
-2022-04-27 21:43:28:501 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
-2022-04-27 21:43:28:501 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
-2022-04-27 21:43:28:501 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
-2022-04-27 21:43:28:501 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
-2022-04-27 21:43:28:501 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
-2022-04-27 21:44:28:498 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
-2022-04-27 21:44:30:365 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <mapDashboard>
-2022-04-27 21:45:01:334 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
-2022-04-27 21:45:10:207 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Closing program
-2022-04-27 21:45:10:229 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Successfully saved all files!
+2022-04-27 21:32:22:232 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
+2022-04-27 21:32:22:235 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
+2022-04-27 21:32:36:137 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
+2022-04-27 21:32:36:138 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
+2022-04-27 21:32:36:141 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
+2022-04-27 21:32:36:141 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
+2022-04-27 21:32:36:141 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
+2022-04-27 21:32:36:141 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
+2022-04-27 21:32:36:142 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
+2022-04-27 21:32:36:142 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
+2022-04-27 21:32:36:143 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
+2022-04-27 21:32:36:143 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
+2022-04-27 21:32:36:143 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
+2022-04-27 21:32:36:143 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
+2022-04-27 21:32:36:144 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
+2022-04-27 21:32:36:144 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
+2022-04-27 21:32:36:144 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
+2022-04-27 21:32:36:144 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
+2022-04-27 21:32:36:144 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
+2022-04-27 21:32:36:145 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
+2022-04-27 21:32:36:146 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
+2022-04-27 21:32:36:146 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
+2022-04-27 21:32:36:147 [Thread-4] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
+2022-04-27 21:32:36:147 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 21:32:36:147 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 21:32:36:147 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Languages
+2022-04-27 21:32:36:148 [Thread-4] INFO edu.wpi.DapperDaemons.App - Languages has been produced
+2022-04-27 21:32:36:148 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
+2022-04-27 21:32:36:149 [Thread-4] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
+2022-04-27 21:32:36:149 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
+2022-04-27 21:32:36:151 [Thread-4] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
+2022-04-27 21:32:36:151 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
+2022-04-27 21:32:36:153 [Thread-4] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
+2022-04-27 21:32:36:153 [Thread-4] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 21:32:36:153 [Thread-4] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 21:32:42:448 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
+2022-04-27 21:32:42:933 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-27 21:32:42:934 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
+2022-04-27 21:32:42:935 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
+2022-04-27 21:32:42:939 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
+2022-04-27 21:32:42:939 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
+2022-04-27 21:32:42:940 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
+2022-04-27 21:32:43:224 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
+2022-04-27 21:33:03:306 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - TESTING LOG FILE
+2022-04-27 21:33:03:307 [JavaFX-Launcher] INFO edu.wpi.DapperDaemons.App - Starting Up
+2022-04-27 21:33:06:602 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Lab Request DAO
+2022-04-27 21:33:06:603 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Meal Delivery Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Meal Delivery Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Medicine Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medicine Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Patient Transport Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient Transport Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Sanitation Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Sanitation Request DAO
+2022-04-27 21:33:06:604 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Account DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Account DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Employee DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Employee DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Location DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Location DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Medical Equipment DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Medical Equipment DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Patient DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Successfully constructed Patient DAO
+2022-04-27 21:33:06:605 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Languages
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Languages has been produced
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Security Requests
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Security Requests has been produced
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Notifications
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Notifications has been produced
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Cleaning Requests
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Cleaning Request has been produced
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Initializing Node Connections
+2022-04-27 21:33:06:606 [Thread-5] INFO edu.wpi.DapperDaemons.App - Node connections have been produced
+2022-04-27 21:33:09:070 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <parentHeader.fxml>
+2022-04-27 21:33:09:186 [Timer-0] INFO edu.wpi.DapperDaemons.App - Checking for overdue things
+2022-04-27 21:33:09:187 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking if things must be cleaned
+2022-04-27 21:33:09:187 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking BED For if it needs cleaning
+2022-04-27 21:33:09:189 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking RECLINER For if it needs cleaning
+2022-04-27 21:33:09:189 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking XRAY For if it needs cleaning
+2022-04-27 21:33:09:189 [Timer-1] INFO edu.wpi.DapperDaemons.App - Checking INFUSIONPUMP For if it needs cleaning
+2022-04-27 21:33:09:200 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Switching to page: <default>
+2022-04-27 21:33:40:649 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Closing program
+2022-04-27 21:33:40:675 [JavaFX Application Thread] INFO edu.wpi.DapperDaemons.App - Successfully saved all files!

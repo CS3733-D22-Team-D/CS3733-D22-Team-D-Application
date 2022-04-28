@@ -86,6 +86,66 @@
                               </DropShadow>
                            </effect>
                         </VBox>
+                        <VBox alignment="CENTER" layoutX="277.0" layoutY="10.0" onMouseClicked="#switchToAboutUs" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-4.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="About Us">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="428.0" layoutY="10.0" onMouseClicked="#switchToCredits" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-4.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Credits">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
                      </children>
                   </HBox>
                </children>
