@@ -195,7 +195,7 @@ public class Images {
               Objects.requireNonNull(
                   Images.class
                       .getClassLoader()
-                      .getResourceAsStream("edu/wpi/DapperDaemons/profilepictures/wwrong2.png"))));
+                      .getResourceAsStream("edu/wpi/DapperDaemons/profilepictures/bwhlogo.png"))));
     }
   }
 }
