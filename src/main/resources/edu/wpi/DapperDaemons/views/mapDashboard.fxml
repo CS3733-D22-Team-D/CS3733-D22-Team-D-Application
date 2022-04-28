@@ -155,7 +155,7 @@
                   <Insets bottom="10.0" left="12.5" right="12.5" top="10.0" />
                </padding>
             </VBox>
-            <VBox onMouseClicked="#switchToMap" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0" prefWidth="200.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="NEVER">
                      <children>
@@ -176,17 +176,21 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0">
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="0.5" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="0.6" VBox.vgrow="ALWAYS">
+                                 <content>
+                                    <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0" scaleX="0.135" scaleY="0.135">
                                        <children>
-                                          <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Pane fx:id="mapContainer" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ImageView fx:id="mapImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </Pane>
+                                          <AnchorPane fx:id="glyphsLayer" prefHeight="200.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="equipLayer" prefHeight="200.0" prefWidth="200.0" />
                                        </children>
-                                    </Pane>
-                                    <AnchorPane fx:id="glyphsLayer" prefHeight="200.0" prefWidth="200.0" />
-                                    <AnchorPane fx:id="equipLayer" prefHeight="200.0" prefWidth="200.0" />
-                                 </children>
-                              </StackPane>
+                                    </StackPane>
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </VBox>
                      </children>

@@ -115,7 +115,12 @@ public class MapDashboardController extends ParentController {
     createTable();
     List<PositionInfo> allpos = new ArrayList<>();
     DAOPouch.getLocationDAO().getAll().values().forEach(l -> allpos.add(new PositionInfo(l)));
-    // glyphs = new GlyphHandler(glyphsLayer,equipLayer,allpos);
+    glyphs = new GlyphHandler(glyphsLayer, equipLayer, allpos);
+    glyphs.setFloorFilter(floor);
+    glyphs.addEquipTypeFilter("BED");
+    glyphs.addEquipTypeFilter("INFUSIONPUMP");
+    glyphs.addEquipTypeFilter("XRAY");
+    glyphs.addEquipTypeFilter("RECLINER");
   }
 
   private void setListeners() {
@@ -283,6 +288,7 @@ public class MapDashboardController extends ParentController {
     t.clear();
     DAOFacade.getRequestsByFloor(floor).forEach(r -> t.addRow(r, false));
     updateCharts();
+    glyphs.setFloorFilter(floor);
   }
 
   private void createTable() {
