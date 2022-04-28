@@ -516,7 +516,7 @@
                                  <children>
                                     <ImageView fx:id="serverSlotOne" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.png" />
                                        </image>
                                     </ImageView>
                                     <Text fx:id="serverSlotOneText" strokeWidth="0.0" text="User Settings">
