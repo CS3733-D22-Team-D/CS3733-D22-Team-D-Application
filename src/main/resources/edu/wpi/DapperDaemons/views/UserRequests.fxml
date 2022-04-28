@@ -55,7 +55,7 @@
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="createTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
@@ -75,7 +75,7 @@
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="assignedTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
@@ -95,7 +95,7 @@
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="relevantTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
