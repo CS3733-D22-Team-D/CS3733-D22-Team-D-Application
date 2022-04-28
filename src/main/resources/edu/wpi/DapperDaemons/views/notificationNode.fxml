@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="134" prefWidth="826" spacing="10.0" style="-fx-background-radius: 14; -fx-background-color: FFFEFE;" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="DODGERBLUE" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" />
@@ -40,7 +39,7 @@
          </padding>
       </VBox>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="3.0" style="-fx-background-color: #DFDFDF; -fx-background-radius: 15;" />
-      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: transparent;">
          <children>
             <Label text="Date Needed:">
                <font>
@@ -54,7 +53,7 @@
             </Label>
          </children>
          <padding>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </padding>
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: transparent;">
