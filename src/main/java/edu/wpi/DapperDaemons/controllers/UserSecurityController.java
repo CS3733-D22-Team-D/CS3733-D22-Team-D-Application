@@ -4,15 +4,19 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.DapperDaemons.backend.DAOFacade;
 import edu.wpi.DapperDaemons.backend.DAOPouch;
 import edu.wpi.DapperDaemons.backend.SecurityController;
+import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.entities.Account;
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -24,6 +28,10 @@ public class UserSecurityController extends ParentController {
   @FXML private Text accountUserName;
   @FXML private Label email;
   @FXML private Label employeeID;
+  @FXML private Circle home;
+  @FXML private Circle accountSettings;
+  @FXML private Circle security;
+  @FXML private Circle about;
 
   // security page
   @FXML private Label securityLevel;
@@ -138,7 +146,184 @@ public class UserSecurityController extends ParentController {
     /*oldPasswordBox.setText("");
     newPasswordBox.setText("");*/
 
-    // set phone number
-    numberBox.setText(DAOFacade.getUserAccount().getAttribute(4));
+    // reset phone number
+    String number = DAOFacade.getUserAccount().getAttribute(4);
+    numberBox.setText(
+        "+1 "
+            + number.substring(0, 2)
+            + "-"
+            + number.substring(3, 5)
+            + "-"
+            + number.substring(6, 9));
+
+    // reset type of 2FA
+    type2FABox.setValue("");
+  }
+
+  /* Animations */
+  @FXML
+  void hoveredCenterButton(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(0, 0, 0, 255);
+    Color textEnd = new Color(0, 0, 0, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 128);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCenterButton(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(0, 0, 0, 255);
+    Color textEnd = new Color(0, 0, 0, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 128);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton1(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton1(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton2(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton2(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton3(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton3(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton4(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton4(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

@@ -20,17 +20,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="753.0" prefWidth="861.0" stylesheets="@../assets/buttons.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserSettingsController">
+<HBox prefHeight="822.0" prefWidth="861.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserSettingsController">
     <children>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="723.0" prefWidth="884.0" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="723.0" prefWidth="884.0" styleClass="pageBackground" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
          <content>
-            <HBox prefHeight="746.0" prefWidth="879.0">
+            <HBox prefHeight="746.0" prefWidth="879.0" styleClass="pageBackground">
                <children>
-                    <VBox id="background" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="786.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" HBox.hgrow="ALWAYS">
+                    <VBox maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="786.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" styleClass="pageBackground" HBox.hgrow="ALWAYS">
                         <children>
                             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="225.0">
                                 <children>
-                                    <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Home" textAlignment="RIGHT" textFill="WHITE">
+                                    <ToggleButton fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" onMouseEntered="#hoveredSideButton1" onMouseExited="#unhoveredSideButton1" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Home" textAlignment="RIGHT" textFill="WHITE">
                                         <graphic>
                                             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                         </graphic>
@@ -41,7 +41,7 @@
                                             <Cursor fx:constant="HAND" />
                                         </cursor>
                                     </ToggleButton>
-                                    <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                                    <Circle fx:id="home" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                                     <ImageView fitHeight="48.0" fitWidth="43.0">
                                         <image>
                                             <Image url="@../assets/house.png" />
@@ -57,7 +57,7 @@
                             </StackPane>
                             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                                 <children>
-                                    <ToggleButton id="foreground" fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
+                                    <ToggleButton fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" onMouseEntered="#hoveredSideButton2" onMouseExited="#unhoveredSideButton2" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
                                         <graphic>
                                             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                         </graphic>
@@ -68,7 +68,7 @@
                                             <Cursor fx:constant="HAND" />
                                         </cursor>
                                     </ToggleButton>
-                                    <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                                    <Circle fx:id="accountSettings" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                                     <ImageView fitHeight="46.0" fitWidth="48.0">
                                         <image>
                                             <Image url="@../assets/blueGears.png" />
@@ -84,7 +84,7 @@
                             </StackPane>
                             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                                 <children>
-                                    <ToggleButton id="foreground" fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Security" textAlignment="RIGHT" textFill="WHITE">
+                                    <ToggleButton fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" onMouseEntered="#hoveredSideButton3" onMouseExited="#unhoveredSideButton3" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Security" textAlignment="RIGHT" textFill="WHITE">
                                         <graphic>
                                             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                         </graphic>
@@ -95,7 +95,7 @@
                                             <Cursor fx:constant="HAND" />
                                         </cursor>
                                     </ToggleButton>
-                                    <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                                    <Circle fx:id="security" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                                     <ImageView fitHeight="45.0" fitWidth="45.0">
                                         <image>
                                             <Image url="@../assets/lock.png" />
@@ -111,7 +111,7 @@
                             </StackPane>
                             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                                 <children>
-                                    <ToggleButton id="foreground" fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="About" textAlignment="RIGHT" textFill="WHITE">
+                                    <ToggleButton fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" onMouseEntered="#hoveredSideButton4" onMouseExited="#unhoveredSideButton4" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="About" textAlignment="RIGHT" textFill="WHITE">
                                         <graphic>
                                             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                                         </graphic>
@@ -122,7 +122,7 @@
                                             <Cursor fx:constant="HAND" />
                                         </cursor>
                                     </ToggleButton>
-                                    <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                                    <Circle fx:id="about" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                                     <ImageView fitHeight="46.0" fitWidth="45.0">
                                         <image>
                                             <Image url="@../assets/about.png" />
@@ -141,7 +141,7 @@
                         <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
                     </VBox>
-                    <VBox prefHeight="754.0" prefWidth="639.0" HBox.hgrow="ALWAYS">
+                    <VBox prefHeight="754.0" prefWidth="639.0" styleClass="pageBackground" HBox.hgrow="ALWAYS">
                         <children>
                             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="205.0" prefWidth="500.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;" VBox.vgrow="ALWAYS">
                                 <children>
@@ -193,9 +193,9 @@
                                     <Insets left="50.0" right="50.0" top="50.0" />
                                 </VBox.margin>
                             </HBox>
-                        <VBox prefHeight="405.0" prefWidth="539.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                        <VBox prefHeight="401.0" prefWidth="539.0" spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="190.0" prefWidth="539.0" VBox.vgrow="ALWAYS">
+                              <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="235.0" prefWidth="539.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="-Infinity" prefHeight="200.0" prefWidth="686.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                                        <effect>
@@ -209,6 +209,15 @@
                                           <Insets top="20.0" />
                                        </StackPane.margin>
                                        <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label styleClass="cardTitle" text="Information">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                           <HBox prefHeight="200.0" prefWidth="675.0">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="135.0" prefWidth="303.0" spacing="15.0" HBox.hgrow="ALWAYS">
@@ -235,7 +244,7 @@
                                                       </Label>
                                                    </children>
                                                    <HBox.margin>
-                                                      <Insets bottom="15.0" left="35.0" top="30.0" />
+                                                      <Insets bottom="15.0" left="35.0" top="15.0" />
                                                    </HBox.margin>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="368.0" spacing="15.0" HBox.hgrow="ALWAYS">
@@ -265,27 +274,16 @@
                                                       </TextField>
                                                    </children>
                                                    <HBox.margin>
-                                                      <Insets bottom="15.0" right="20.0" top="30.0" />
+                                                      <Insets bottom="15.0" right="20.0" top="15.0" />
                                                    </HBox.margin>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <ToggleButton alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Information" textAlignment="RIGHT" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <cursor>
-                                          <Cursor fx:constant="DEFAULT" />
-                                       </cursor>
-                                    </ToggleButton>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="157.0" prefWidth="539.0" VBox.vgrow="ALWAYS">
+                              <StackPane alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="209.0" prefWidth="539.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox id="foreground" maxHeight="154.0" prefHeight="112.0" prefWidth="732.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                                        <effect>
@@ -299,6 +297,15 @@
                                           <Insets top="20.0" />
                                        </StackPane.margin>
                                        <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label styleClass="cardTitle" text="Display">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                           <HBox prefHeight="147.0" prefWidth="647.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="303.0" spacing="25.0" HBox.hgrow="ALWAYS">
@@ -321,7 +328,7 @@
                                                       </Label>
                                                    </children>
                                                    <HBox.margin>
-                                                      <Insets bottom="15.0" left="35.0" top="25.0" />
+                                                      <Insets bottom="15.0" left="35.0" top="15.0" />
                                                    </HBox.margin>
                                                 </VBox>
                                                 <VBox prefHeight="107.0" prefWidth="369.0" spacing="20.0" HBox.hgrow="ALWAYS">
@@ -350,7 +357,7 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </JFXComboBox>
-                                                            <JFXButton id="jButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTestSound" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #059DA7;" text="Test Sound" textAlignment="CENTER" textFill="WHITE">
+                                                            <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTestSound" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="32.0" prefWidth="113.0" styleClass="confirmButton" text="Test Sound" textAlignment="CENTER" textFill="WHITE">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -362,24 +369,13 @@
                                                       </HBox>
                                                    </children>
                                                    <HBox.margin>
-                                                      <Insets bottom="15.0" right="20.0" top="40.0" />
+                                                      <Insets bottom="15.0" right="20.0" top="25.0" />
                                                    </HBox.margin>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <ToggleButton alignment="CENTER_LEFT" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="524.0" style="-fx-background-color: #012D5A; -fx-background-radius: 20;" text="Display" textAlignment="RIGHT" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <cursor>
-                                          <Cursor fx:constant="DEFAULT" />
-                                       </cursor>
-                                    </ToggleButton>
                                  </children>
                               </StackPane>
                            </children>
@@ -389,7 +385,7 @@
                         </VBox>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="62.0" prefWidth="539.0" spacing="20.0">
                            <children>
-                              <JFXButton id="jButton" fx:id="saveChangesButton1" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveToCSV" prefHeight="32.0" prefWidth="108.0" style="-fx-background-color: #059DA7;" text="Save To CSV" textAlignment="CENTER" textFill="WHITE">
+                              <JFXButton fx:id="saveChangesButton1" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveToCSV" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="32.0" prefWidth="121.0" styleClass="confirmButton" text="Save To CSV" textAlignment="CENTER" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -397,18 +393,18 @@
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton id="jButton" fx:id="saveChangesButton11" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadFromCSV" prefHeight="32.0" prefWidth="123.0" style="-fx-background-color: #059DA7;" text="Load From CSV" textAlignment="CENTER" textFill="WHITE">
+                              <JFXButton fx:id="saveChangesButton11" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadFromCSV" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="32.0" prefWidth="133.0" styleClass="confirmButton" text="Load From CSV" textAlignment="CENTER" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <HBox.margin>
-                                    <Insets right="60.0" />
+                                    <Insets right="50.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton id="jButton" fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onReset" prefHeight="32.0" prefWidth="67.0" style="-fx-background-color: #C1C5D4;" text="Reset" textAlignment="CENTER" textFill="WHITE">
+                              <JFXButton fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onReset" onMouseEntered="#hoveredCancel" onMouseExited="#unhoveredCancel" prefHeight="32.0" prefWidth="67.0" styleClass="cancelButton" text="Reset" textAlignment="CENTER" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -416,7 +412,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton id="jButton" fx:id="saveChangesButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSaveChanges" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #059DA7;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
+                              <JFXButton fx:id="saveChangesButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSaveChanges" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="32.0" prefWidth="121.0" styleClass="confirmButton" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

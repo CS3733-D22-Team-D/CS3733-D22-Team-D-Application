@@ -309,8 +309,7 @@ public class DAOFacade {
             .map(Location::getNodeID)
             .collect(Collectors.toList());
     for (MedicalEquipment equip : DAOPouch.getMedicalEquipmentDAO().getAll().values()) {
-      if (equip.getEquipmentType().equals(type) && locIDSFloor.contains(equip.getLocationID()))
-        toReturn.add(equip);
+      if (locIDSFloor.contains(equip.getLocationID())) toReturn.add(equip);
     }
     return toReturn;
   }

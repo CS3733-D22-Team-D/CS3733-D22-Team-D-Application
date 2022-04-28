@@ -29,6 +29,10 @@ public class UserHomeController extends ParentController {
   @FXML private Text accountUserName;
   @FXML private Label email;
   @FXML private Label employeeID;
+  @FXML private Circle home;
+  @FXML private Circle accountSettings;
+  @FXML private Circle security;
+  @FXML private Circle about;
 
   // buttons
   @FXML private Pane reqContainer;
@@ -148,25 +152,130 @@ public class UserHomeController extends ParentController {
   }
 
   /* Hover Animations for buttons */
+  /* Animations */
   @FXML
-  private void hoveredButton(MouseEvent event) {
+  void hoveredCenterButton(MouseEvent event) {
     Node node = (Node) event.getSource();
-    Color textStart = new Color(255, 255, 255, 255);
-    Color textEnd = new Color(8, 67, 154, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
+    Color textStart = new Color(0, 0, 0, 255);
+    Color textEnd = new Color(0, 0, 0, 255);
+    Color backgroundStart = new Color(255, 255, 255, 255);
     Color backgroundEnd = new Color(255, 255, 255, 192);
     AnimationHelper.slideNodeWithText(
         node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
-  private void unhoveredButton(MouseEvent event) {
+  void unhoveredCenterButton(MouseEvent event) {
     Node node = (Node) event.getSource();
-    Color textStart = new Color(8, 67, 154, 255);
-    Color textEnd = new Color(255, 255, 255, 255);
-    Color backgroundEnd = new Color(255, 255, 255, 0);
-    Color backgroundStart = new Color(255, 255, 255, 192);
+    Color textStart = new Color(0, 0, 0, 255);
+    Color textEnd = new Color(0, 0, 0, 255);
+    Color backgroundStart = new Color(255, 255, 255, 255);
+    Color backgroundEnd = new Color(255, 255, 255, 192);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton1(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
     AnimationHelper.slideNodeWithText(
         node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton1(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton2(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton2(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton3(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton3(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSideButton4(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSideButton4(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(255, 255, 255, 255);
+    Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

@@ -170,6 +170,10 @@
 }
 
 
+/* Joanna's buttons*/
 
-
+.joButton{
+    -fx-background-color: #059DA7;
+    -fx-background-radius: 20;
+}
 
