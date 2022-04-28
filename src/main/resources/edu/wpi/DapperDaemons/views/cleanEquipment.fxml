@@ -51,7 +51,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Text fill="#2f2f2f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Priority:" />
-                              <JFXComboBox fx:id="priorityIn" focusColor="#059ea600" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="    Select" styleClass="cardInput" unFocusColor="#4b5b8000">
+                              <JFXComboBox fx:id="priorityIn" focusColor="#059ea600" minHeight="-Infinity" onKeyTyped="#startFuzzySearch" prefHeight="30.0" prefWidth="250.0" promptText="Select" styleClass="cardInput" unFocusColor="#4b5b8000">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

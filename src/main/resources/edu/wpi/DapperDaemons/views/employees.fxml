@@ -96,7 +96,7 @@
                               <Insets left="50.0" right="50.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="clearanceBox" focusColor="#059da7" prefHeight="34.0" prefWidth="353.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
+                        <JFXComboBox id="jButton" fx:id="clearanceBox" focusColor="#059da7" prefHeight="34.0" prefWidth="353.0" promptText="Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
                            <VBox.margin>
                               <Insets left="50.0" right="50.0" />
                            </VBox.margin>
@@ -110,7 +110,7 @@
                               <Insets left="50.0" right="50.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXComboBox id="jButton" fx:id="typeBox" focusColor="#059da7" prefHeight="34.0" prefWidth="314.0" promptText="    Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
+                        <JFXComboBox id="jButton" fx:id="typeBox" focusColor="#059da7" prefHeight="34.0" prefWidth="314.0" promptText="Select" stylesheets="@../assets/buttons.css" unFocusColor="#4b5b81" visibleRowCount="3">
                            <VBox.margin>
                               <Insets left="50.0" right="50.0" />
                            </VBox.margin>
