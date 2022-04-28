@@ -22,7 +22,7 @@
               <children>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="201.0">
                <children>
-                        <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Home" textAlignment="RIGHT" textFill="WHITE">
+                        <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" onMouseEntered="#hoveredSideButton1" onMouseExited="#unhoveredSideButton1" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Home" textAlignment="RIGHT" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                             </graphic>
@@ -33,7 +33,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </ToggleButton>
-                  <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Circle fx:id="home" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="48.0" fitWidth="43.0">
                      <image>
                         <Image url="@../assets/house.png" />
@@ -49,7 +49,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton id="foreground" fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" onMouseEntered="#hoveredSideButton2" onMouseExited="#unhoveredSideButton2" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -60,7 +60,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ToggleButton>
-                  <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Circle fx:id="accountSettings" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="46.0" fitWidth="48.0">
                      <image>
                         <Image url="@../assets/blueGears.png" />
@@ -76,7 +76,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Security" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton id="foreground" fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" onMouseEntered="#hoveredSideButton3" onMouseExited="#unhoveredSideButton3" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Security" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -87,7 +87,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ToggleButton>
-                  <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Circle fx:id="security" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../assets/lock.png" />
@@ -103,7 +103,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="About" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton id="foreground" fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" onMouseEntered="#hoveredSideButton4" onMouseExited="#unhoveredSideButton4" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="About" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -114,7 +114,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ToggleButton>
-                  <Circle fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Circle fx:id="about" fill="WHITE" radius="30.0" stroke="#059da7" strokeType="INSIDE" strokeWidth="2.0" />
                   <ImageView fitHeight="46.0" fitWidth="45.0">
                      <image>
                         <Image url="@../assets/about.png" />
@@ -181,7 +181,7 @@
                <children>
                   <StackPane alignment="TOP_RIGHT" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#switchToUserRequests" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#switchToUserRequests" onMouseEntered="#hoveredCenterButton" onMouseExited="#unhoveredCenterButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
@@ -235,13 +235,13 @@
                   </StackPane>
                   <StackPane alignment="TOP_RIGHT" layoutX="317.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openNotifications" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openNotifications" onMouseEntered="#hoveredCenterButton" onMouseExited="#unhoveredCenterButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
                                     <Pane fx:id="notContainer" prefHeight="138.0" prefWidth="157.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fx:id="notImage" fitHeight="101.0" fitWidth="116.0" preserveRatio="true">
+                                          <ImageView fx:id="notImage" fitHeight="96.0" fitWidth="93.0" preserveRatio="true">
                                              <image>
                                                 <Image url="@../assets/bell.png" />
                                              </image>
@@ -289,15 +289,15 @@
                   </StackPane>
                   <StackPane alignment="TOP_RIGHT" layoutX="457.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="250.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openAccountSettings" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openAccountSettings" onMouseEntered="#hoveredCenterButton" onMouseExited="#unhoveredCenterButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
                                     <Pane fx:id="settingContainer" prefHeight="128.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fx:id="settingImage" fitHeight="114.0" fitWidth="103.0" preserveRatio="true">
+                                          <ImageView fitHeight="103.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../assets/settingsHome.png" />
+                                                <Image url="@../assets/userSettings.png" />
                                              </image>
                                           </ImageView>
                                        </children>
