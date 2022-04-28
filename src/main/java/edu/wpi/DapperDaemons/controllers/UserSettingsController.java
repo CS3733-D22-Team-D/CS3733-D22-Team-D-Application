@@ -11,7 +11,6 @@ import edu.wpi.DapperDaemons.controllers.homePage.AccountHandler;
 import edu.wpi.DapperDaemons.controllers.homePage.ThemeHandler;
 import edu.wpi.DapperDaemons.entities.Account;
 import edu.wpi.DapperDaemons.tables.TableHelper;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -183,16 +182,16 @@ public class UserSettingsController extends ParentController {
     player.play();
   }
 
-
   /* Animations */
   @FXML
   void hoveredCenterButton(MouseEvent event) {
     Node node = (Node) event.getSource();
     Color textStart = new Color(0, 0, 0, 255);
     Color textEnd = new Color(0, 0, 0, 255);
-    Color backgroundStart =new Color(5, 47, 146, 0);
+    Color backgroundStart = new Color(5, 47, 146, 0);
     Color backgroundEnd = new Color(5, 47, 146, 128);
-    AnimationHelper.slideNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -200,9 +199,10 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(0, 0, 0, 255);
     Color textEnd = new Color(0, 0, 0, 255);
-    Color backgroundStart =new Color(5, 47, 146, 0);
+    Color backgroundStart = new Color(5, 47, 146, 0);
     Color backgroundEnd = new Color(5, 47, 146, 128);
-    AnimationHelper.slideNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 
   @FXML
@@ -210,10 +210,12 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 128);
-    AnimationHelper.slideNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
-    AnimationHelper.slideNodeWithText(home, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -221,20 +223,25 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(129, 160, 207, 0);
-    Color backgroundEnd = new Color(129, 160, 207, 255);
-    AnimationHelper.slideNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
-    AnimationHelper.slideNodeWithText(home, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        home, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
+
   @FXML
   void hoveredSideButton2(MouseEvent event) {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 128);
-    AnimationHelper.slideNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
-    AnimationHelper.slideNodeWithText(accountSettings, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -242,20 +249,25 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(129, 160, 207, 0);
-    Color backgroundEnd = new Color(129, 160, 207, 255);
-    AnimationHelper.slideNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
-    AnimationHelper.slideNodeWithText(accountSettings, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        accountSettings, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
+
   @FXML
   void hoveredSideButton3(MouseEvent event) {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 128);
-    AnimationHelper.slideNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
-    AnimationHelper.slideNodeWithText(security, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -263,22 +275,25 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(129, 160, 207, 0);
-    Color backgroundEnd = new Color(129, 160, 207, 255);
-    AnimationHelper.slideNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
-    AnimationHelper.slideNodeWithText(security, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        security, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
-
 
   @FXML
   void hoveredSideButton4(MouseEvent event) {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
-    Color backgroundStart = new Color(255, 255, 255, 0);
-    Color backgroundEnd = new Color(255, 255, 255, 128);
-    AnimationHelper.slideNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
-    AnimationHelper.slideNodeWithText(about, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textStart, textEnd, backgroundStart, backgroundEnd, 300);
   }
 
   @FXML
@@ -286,9 +301,51 @@ public class UserSettingsController extends ParentController {
     Node node = (Node) event.getSource();
     Color textStart = new Color(255, 255, 255, 255);
     Color textEnd = new Color(5, 157, 167, 255);
+    Color backgroundStart = new Color(5, 157, 167, 255);
+    Color backgroundEnd = new Color(5, 157, 167, 191);
+    AnimationHelper.slideNodeWithText(
+        node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.slideNodeWithText(
+        about, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredSubmit(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(5, 47, 146, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(5, 47, 146, 0);
+    Color backgroundEnd = new Color(5, 47, 146, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+  }
+
+  @FXML
+  void hoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
     Color backgroundStart = new Color(129, 160, 207, 0);
     Color backgroundEnd = new Color(129, 160, 207, 255);
-    AnimationHelper.slideNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
-    AnimationHelper.slideNodeWithText(about, textEnd, textStart, backgroundEnd, backgroundStart, 300);
+    AnimationHelper.fadeNodeWithText(node, textStart, textEnd, backgroundStart, backgroundEnd, 300);
+  }
+
+  @FXML
+  void unhoveredCancel(MouseEvent event) {
+    Node node = (Node) event.getSource();
+    Color textStart = new Color(129, 160, 207, 255);
+    Color textEnd = new Color(255, 255, 255, 255);
+    Color backgroundStart = new Color(129, 160, 207, 0);
+    Color backgroundEnd = new Color(129, 160, 207, 255);
+    AnimationHelper.fadeNodeWithText(node, textEnd, textStart, backgroundEnd, backgroundStart, 300);
   }
 }

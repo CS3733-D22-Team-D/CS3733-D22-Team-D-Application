@@ -18,11 +18,11 @@
 
 <HBox prefHeight="554.0" prefWidth="760.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.UserHomeController">
     <children>
-          <VBox id="background" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="628.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" HBox.hgrow="ALWAYS">
+          <VBox maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="628.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" styleClass="pageBackground" HBox.hgrow="ALWAYS">
               <children>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="201.0">
                <children>
-                        <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" onMouseEntered="#hoveredSideButton1" onMouseExited="#unhoveredSideButton1" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Home" textAlignment="RIGHT" textFill="WHITE">
+                        <ToggleButton fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" onMouseEntered="#hoveredSideButton1" onMouseExited="#unhoveredSideButton1" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Home" textAlignment="RIGHT" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                             </graphic>
@@ -49,7 +49,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" onMouseEntered="#hoveredSideButton2" onMouseExited="#unhoveredSideButton2" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton fx:id="homeButton111" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAccountSettings" onMouseEntered="#hoveredSideButton2" onMouseExited="#unhoveredSideButton2" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Account Settings" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -76,7 +76,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" onMouseEntered="#hoveredSideButton3" onMouseExited="#unhoveredSideButton3" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Security" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton fx:id="homeButton11" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openUserSecurity" onMouseEntered="#hoveredSideButton3" onMouseExited="#unhoveredSideButton3" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="Security" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -103,7 +103,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <ToggleButton id="foreground" fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" onMouseEntered="#hoveredSideButton4" onMouseExited="#unhoveredSideButton4" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="About" textAlignment="RIGHT" textFill="WHITE">
+                  <ToggleButton fx:id="homeButton1" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAboutUs" onMouseEntered="#hoveredSideButton4" onMouseExited="#unhoveredSideButton4" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" styleClass="joButton" text="About" textAlignment="RIGHT" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -133,7 +133,7 @@
             <Insets bottom="30.0" top="30.0" />
          </HBox.margin>
           </VBox>
-      <VBox prefHeight="512.0" prefWidth="570.0" HBox.hgrow="ALWAYS">
+      <VBox prefHeight="512.0" prefWidth="570.0" styleClass="pageBackground" HBox.hgrow="ALWAYS">
          <children>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="205.0" prefWidth="500.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 0 2 0;" VBox.vgrow="ALWAYS">
                <children>
@@ -295,7 +295,7 @@
                                  <children>
                                     <Pane fx:id="settingContainer" prefHeight="128.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <ImageView fitHeight="103.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="settingImage" fitHeight="103.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../assets/userSettings.png" />
                                              </image>
