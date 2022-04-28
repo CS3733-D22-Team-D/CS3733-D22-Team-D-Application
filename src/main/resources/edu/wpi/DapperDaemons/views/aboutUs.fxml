@@ -163,7 +163,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#goToServicePage" onMouseClicked="#goToServicePage" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="31.0" prefWidth="177.0" styleClass="confirmButton" stylesheets="@../assets/buttons.css" text="Requet Landing Page" textFill="WHITE">
+                  <JFXButton onAction="#goToServicePage" onMouseClicked="#goToServicePage" onMouseEntered="#hoveredSubmit" onMouseExited="#unhoveredSubmit" prefHeight="31.0" prefWidth="177.0" styleClass="confirmButton" stylesheets="@../assets/buttons.css" text="Request Landing Page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
