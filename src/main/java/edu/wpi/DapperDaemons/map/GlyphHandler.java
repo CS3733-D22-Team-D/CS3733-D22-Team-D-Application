@@ -65,6 +65,18 @@ public class GlyphHandler {
     clearFilters();
   }
 
+  public GlyphHandler(
+      AnchorPane glyphLayer, AnchorPane equipLayer, List<PositionInfo> imageLocs, int imageSize) {
+    this.glyphLayer = glyphLayer;
+    this.equipLayer = equipLayer;
+    this.equipLocs = new ArrayList<>();
+    this.imageLocs = new ArrayList<>();
+    this.imageSize = imageSize;
+    imageLocs.forEach(this::addPosition);
+    this.imageLocs = imageLocs;
+    clearFilters();
+  }
+
   public void enableEditing() {
     editing = true;
     for (int i = 0; i < imageLocs.size(); i++) {

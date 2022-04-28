@@ -115,8 +115,7 @@ public class MapDashboardController extends ParentController {
     createTable();
     List<PositionInfo> allpos = new ArrayList<>();
     DAOPouch.getLocationDAO().getAll().values().forEach(l -> allpos.add(new PositionInfo(l)));
-    glyphs = new GlyphHandler(glyphsLayer, equipLayer, allpos);
-    glyphs.setImageSize(300);
+    glyphs = new GlyphHandler(glyphsLayer, equipLayer, allpos, 256);
     glyphs.setFloorFilter(floor);
     glyphs.addEquipTypeFilter("BED");
     glyphs.addEquipTypeFilter("INFUSIONPUMP");
