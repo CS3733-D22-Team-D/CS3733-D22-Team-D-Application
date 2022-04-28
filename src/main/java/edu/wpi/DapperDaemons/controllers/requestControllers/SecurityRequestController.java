@@ -9,7 +9,6 @@ import edu.wpi.DapperDaemons.controllers.ParentController;
 import edu.wpi.DapperDaemons.controllers.helpers.AnimationHelper;
 import edu.wpi.DapperDaemons.controllers.helpers.AutoCompleteFuzzy;
 import edu.wpi.DapperDaemons.controllers.helpers.FuzzySearchComparatorMethod;
-import edu.wpi.DapperDaemons.controllers.helpers.TableListeners;
 import edu.wpi.DapperDaemons.entities.Location;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import edu.wpi.DapperDaemons.entities.requests.SecurityRequest;
@@ -24,8 +23,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -35,24 +32,11 @@ import javafx.stage.Stage;
 /** Equipment Request UI Controller UPDATED 4/5/22 12:30AM */
 public class SecurityRequestController extends ParentController {
 
-  /* Table Object */
-  @FXML private TableView<SecurityRequest> SecurityRequestTable;
-
-  /* Table Helper */
-  private TableHelper<SecurityRequest> tableHelper;
-
   /* Sexy MOTHERFUCKING  JFXComboBoxes */
   @FXML private JFXComboBox<String> priorityIn;
   @FXML private JFXComboBox<String> locationBox;
   @FXML private DatePicker dateNeeded;
   @FXML private TextField notes;
-
-  /* Table Columns */
-  @FXML private TableColumn<SecurityRequest, String> reqID;
-  @FXML private TableColumn<SecurityRequest, Request.Priority> priority;
-  @FXML private TableColumn<SecurityRequest, String> roomID;
-  @FXML private TableColumn<SecurityRequest, String> requester;
-  @FXML private TableColumn<SecurityRequest, String> assignee;
 
   /* DAO Object */
   private DAO<SecurityRequest> securityRequestDAO = DAOPouch.getSecurityRequestDAO();
@@ -98,24 +82,12 @@ public class SecurityRequestController extends ParentController {
     t.addDropDownEditProperty(1, 5, DAOFacade.getAllPlebs().toArray(new String[] {}));
   }
 
-  private void setListeners() {
-    TableListeners.addListener(
-        new SecurityRequest().tableName(),
-        TableListeners.eventListener(
-            () -> {
-              //              System.out.println("LanguageRequestsTable");
-              SecurityRequestTable.getItems().clear();
-              SecurityRequestTable.getItems()
-                  .addAll(new ArrayList(securityRequestDAO.getAll().values()));
-            }));
-  }
-
   public boolean addItem(SecurityRequest request) {
     boolean hadClearance = true;
 
     hadClearance = securityRequestDAO.add(request);
     if (hadClearance) {
-      SecurityRequestTable.getItems().add(request);
+      t.addRow(request);
     }
     return hadClearance;
   }
