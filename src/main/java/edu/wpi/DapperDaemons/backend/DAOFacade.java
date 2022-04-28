@@ -91,7 +91,10 @@ public class DAOFacade {
     allReq.addAll(
         new ArrayList<>(DAOPouch.getSanitationRequestDAO().filter(3, locationID).values()));
     allReq.addAll(new ArrayList<>(DAOPouch.getMedicineRequestDAO().filter(3, locationID).values()));
-
+    allReq.addAll(
+        new ArrayList<>(DAOPouch.getEquipmentCleaningDAO().filter(3, locationID).values()));
+    allReq.addAll(new ArrayList<>(DAOPouch.getLanguageRequestDAO().filter(3, locationID).values()));
+    allReq.addAll(new ArrayList<>(DAOPouch.getSecurityRequestDAO().filter(3, locationID).values()));
     return allReq;
   }
 
@@ -267,6 +270,48 @@ public class DAOFacade {
           if (equip.getCleanStatus().equals(MedicalEquipment.CleanStatus.UNCLEAN)) dirty.add(equip);
         });
     return dirty;
+  }
+
+  /**
+   * Gets a list of all equipment on a specified floor that is dirty in the DAOs
+   *
+   * @param type - the type of equipment to check for
+   * @param floor - the floor number/string
+   */
+  public static List<MedicalEquipment> getDirtyEquipmentByFloor(
+      MedicalEquipment.EquipmentType type, String floor) {
+    List<MedicalEquipment> toReturn = new ArrayList<>();
+
+    List<MedicalEquipment> byType = getDirtyEquipment(type);
+    List<String> locIDSFloor =
+        DAOPouch.getLocationDAO().filter(4, floor).values().stream()
+            .map(Location::getNodeID)
+            .collect(Collectors.toList());
+    for (MedicalEquipment equip : byType) {
+      if (locIDSFloor.contains(equip.getLocationID())) {
+        toReturn.add(equip);
+      }
+    }
+    return toReturn;
+  }
+
+  /**
+   * Gets all equipment of a type on a specified floor
+   *
+   * @param type - the type of equipment
+   * @param floor - the floor as a number/string
+   */
+  public static List<MedicalEquipment> getEquipmentOnFloor(
+      MedicalEquipment.EquipmentType type, String floor) {
+    List<MedicalEquipment> toReturn = new ArrayList<>();
+    List<String> locIDSFloor =
+        DAOPouch.getLocationDAO().filter(4, floor).values().stream()
+            .map(Location::getNodeID)
+            .collect(Collectors.toList());
+    for (MedicalEquipment equip : DAOPouch.getMedicalEquipmentDAO().getAll().values()) {
+      if (locIDSFloor.contains(equip.getLocationID())) toReturn.add(equip);
+    }
+    return toReturn;
   }
 
   public static List<Request> getRequestsByFloor(String floor) {

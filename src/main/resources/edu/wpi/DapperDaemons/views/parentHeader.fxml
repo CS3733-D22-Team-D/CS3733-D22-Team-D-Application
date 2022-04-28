@@ -422,9 +422,9 @@
             </BorderPane>
             <HBox fx:id="accountSettingsHBox" alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox id="pageCard" fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;" stylesheets="@../styling/lightMode.css" visible="false">
+                  <VBox id="pageCard" fx:id="userDropdown" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="120.0" prefWidth="160.0" style="-fx-background-color: FFFEFE; -fx-background-radius: 7.5;" styleClass="pageCard" stylesheets="@../styling/lightMode.css" visible="false">
                      <children>
-                        <JFXButton id="cardText" fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="TRANSPARENT">
+                        <JFXButton fx:id="userSettingsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserSettings" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="#2e2e2e">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -433,7 +433,7 @@
                                           <Image url="@../assets/HomeIcons/UserSettingsGlyph.png" />
                                        </image>
                                     </ImageView>
-                                    <Text strokeWidth="0.0" text="User Settings">
+                                    <Text fill="#faf8f8" strokeWidth="0.0" styleClass="cardText" text="User Settings">
                                        <HBox.margin>
                                           <Insets left="13.0" />
                                        </HBox.margin>
@@ -444,9 +444,12 @@
                                  </children>
                               </HBox>
                            </graphic>
+                           <font>
+                              <Font name="Inter Medium" size="14.0" />
+                           </font>
                         </JFXButton>
-                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton id="cardText" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="TRANSPARENT">
+                        <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
+                        <JFXButton fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" textFill="#ffffff00">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -455,7 +458,7 @@
                                           <Image url="@../assets/HomeIcons/userLogoutIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardText" text="Logout">
                                        <HBox.margin>
                                           <Insets left="13.0" />
                                        </HBox.margin>
@@ -467,8 +470,8 @@
                               </HBox>
                            </graphic>
                         </JFXButton>
-                        <Line endX="30.0" startX="-90.0" stroke="#d2d2d2" />
-                        <JFXButton id="cardText" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Button" textFill="TRANSPARENT">
+                        <Line endX="50.0" startX="-90.0" stroke="#d2d2d2" />
+                        <JFXButton id="cardText" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#quitProgram" prefHeight="40.0" prefWidth="140.0" styleClass="cardText" stylesheets="@../styling/lightMode.css" text="Button" textFill="#ffffff00">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="120.0">
                                  <children>
@@ -477,7 +480,7 @@
                                           <Image url="@../assets/HomeIcons/userExitIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <Text strokeWidth="0.0" text="Exit">
+                                    <Text fill="WHITE" strokeWidth="0.0" styleClass="cardText" text="Exit">
                                        <HBox.margin>
                                           <Insets left="13.0" />
                                        </HBox.margin>
@@ -513,7 +516,7 @@
                                  <children>
                                     <ImageView fx:id="serverSlotOne" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.jpg" />
+                                          <Image url="@../assets/HomeIcons/UserSettingsGlyph.png" />
                                        </image>
                                     </ImageView>
                                     <Text fx:id="serverSlotOneText" strokeWidth="0.0" text="User Settings">

@@ -10,7 +10,6 @@ import edu.wpi.DapperDaemons.entities.Notification;
 import edu.wpi.DapperDaemons.entities.requests.Request;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javafx.application.Platform;
@@ -18,12 +17,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class NotificationsPageController extends ParentController {
   @FXML private VBox todayBox;
-  @FXML private VBox earlierBox;
   private static ValueEventListener notifListener;
 
   @Override
@@ -57,10 +57,100 @@ public class NotificationsPageController extends ParentController {
       notif.getChildren().get(6).setVisible(false);
     }
     notif.getChildren().get(0).setVisible(!n.getRead());
-    //        ((ImageView)notif.getChildren().get(1)).setImage();
     List<Request> reqs = DAOFacade.getAllRequests();
     for (Request r : reqs) {
       if (n.getNodeID().equals("not" + r.getNodeID()) && !r.getAssigneeID().equals("none")) {
+        Image i =
+            new Image(
+                getClass()
+                    .getClassLoader()
+                    .getResourceAsStream(
+                        "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-4.png"));
+        switch (r.requestType()) {
+          case "Equipment Cleaning Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-14.png"));
+            break;
+          case "Lab Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-15.png"));
+            break;
+          case "Language Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-10.png"));
+            break;
+          case "Meal Delivery Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-7.png"));
+            break;
+          case "Medical Equipment Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-8.png"));
+            break;
+          case "Medicine Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-13.png"));
+            break;
+          case "Patient Transport Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-12.png"));
+            break;
+          case "Sanitation Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-6.png"));
+            break;
+          case "Security Request":
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream(
+                            "edu/wpi/DapperDaemons/assets/HomeIcons/output-onlinepngtools-9.png"));
+            break;
+          default:
+            i =
+                new Image(
+                    getClass()
+                        .getClassLoader()
+                        .getResourceAsStream("edu/wpi/DapperDaemons/assets/BrighamLogo.png"));
+            break;
+        }
+        ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)).setImage(i);
+        bindImage(
+            ((ImageView) ((Pane) notif.getChildren().get(1)).getChildren().get(0)),
+            ((Pane) notif.getChildren().get(1)));
         ((Label) ((VBox) notif.getChildren().get(5)).getChildren().get(1))
             .setText(r.getDateNeeded());
         ((Label) ((VBox) notif.getChildren().get(3)).getChildren().get(0))
@@ -138,7 +228,6 @@ public class NotificationsPageController extends ParentController {
 
   private void setNotifications() {
     this.todayBox.getChildren().clear();
-    this.earlierBox.getChildren().clear();
     List<Notification> notifications =
         new ArrayList<>(
             DAOPouch.getNotificationDAO()
@@ -146,15 +235,7 @@ public class NotificationsPageController extends ParentController {
                 .values());
     SimpleDateFormat f = new SimpleDateFormat("MMddyyy");
     for (Notification n : notifications) {
-      try {
-        if (f.parse(n.getDate()).before(f.parse(f.format(new Date())))) {
-          this.earlierBox.getChildren().add(createNotification(n));
-        } else {
-          this.todayBox.getChildren().add(createNotification(n));
-        }
-      } catch (ParseException e) {
-        throw new RuntimeException(e);
-      }
+      this.todayBox.getChildren().add(createNotification(n));
     }
   }
 

@@ -2,233 +2,52 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="defaultPage" alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="973.0" prefWidth="1067.0" stylesheets="@../assets/buttons.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
+<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
-      <ScrollPane id="mainScrollPane" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" pannable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@../assets/mainScrollPane.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
-         <content>
-            <GridPane alignment="CENTER" prefHeight="950.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+      <VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="pageBackground" HBox.hgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <Label styleClass="cardTitle" text="General" textFill="#052f92">
+                     <font>
+                        <Font name="Inter Regular" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMedicine" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane fx:id="medicinePageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="medicinePageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/medicineDeliveryIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="158.0" VBox.vgrow="ALWAYS">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-5.png" />
+                                 </image>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="Medication Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Send out a delivery request for a given patient, date, medicine type, and quantity." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSanitation" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="sanitationPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="sanitationPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/sanitationIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Sanitation Service" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify sanitation services of an area that needs to be cleaned." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipSani" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="equipSaniPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="equipSaniPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/equipmentCleanRequestIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Equipment Cleaning" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify sanitation services of equipment that needs to be cleaned." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLabRequest" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="labPageContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fx:id="labPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/labRequestIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Map">
                                  <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="Lab Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request any type lab test for a given date and patient." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
                            </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                            <effect>
                               <DropShadow>
                                  <color>
@@ -237,310 +56,28 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToEquipment" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="125.0" layoutY="10.0" onMouseClicked="#switchToAPI" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane fx:id="equipmentPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="equipmentPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/equipmentIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Equipment Request" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Have a selected type of equipment moved to a given room." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToLanguage" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="languagePageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="languagePageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/translateRequestIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Language Interpretation" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Send a request for a language interpreter of a given language." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMeal" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="mealPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="mealPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/mealIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/api.png" />
+                                 </image>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="Meal Delivery" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Order a meal for a patient consisting of an entree, side, drink, and dessert." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToMapDashboard" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="mapPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="mapPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/mapIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Interactive Map" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="View the interactive map, to get information or edit map data." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToSecurity" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="securityPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="securityPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/securityServiceIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="label" text="Security Services" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Notify security services of areas where additional security is required." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color opacity="0.15000000596046448" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Pane fx:id="patientPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="patientPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/patientTransportIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="API">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="Internal Patient Transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Have a patient moved to a given room." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                            <effect>
                               <DropShadow>
                                  <color>
@@ -549,52 +86,28 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToAPI" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="277.0" layoutY="10.0" onMouseClicked="#switchToAboutUs" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane fx:id="backendPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="apiPageImage" fitHeight="162.0" fitWidth="200.0">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/apiIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/info.png" />
+                                 </image>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="API Landing Page" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Make a service request using an API" textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="About Us">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                            <effect>
                               <DropShadow>
                                  <color>
@@ -603,52 +116,28 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <VBox id="default" maxHeight="260.0" maxWidth="270.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" styleClass="default" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" layoutX="428.0" layoutY="10.0" onMouseClicked="#switchToCredits" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane fx:id="extTransportPageContainer" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="extTransportPageImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false">
-                                       <image>
-                                          <Image url="@../assets/HomeIcons/externalPatientTransportIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <HBox id="foreground" alignment="CENTER_LEFT" maxHeight="126.0" prefHeight="100.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/page.png" />
+                                 </image>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <Label id="label" text="External Patient Transport" textFill="#2f2f2f" wrapText="true" HBox.hgrow="NEVER">
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox id="foreground" fillHeight="false" prefHeight="100.0" prefWidth="269.0" style="-fx-background-radius: 7.5;">
-                                 <children>
-                                    <Label id="label" prefHeight="137.0" prefWidth="362.0" style="-fx-max-width: &quot;Infinity&quot;;" text="Request patient transport outside of the hospital." textFill="#2f2f2f" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Credits">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                            <effect>
                               <DropShadow>
                                  <color>
@@ -658,13 +147,329 @@
                            </effect>
                         </VBox>
                      </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
+                  </HBox>
                </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label styleClass="cardTitle" text="Requests" textFill="#052f92">
+                     <font>
+                        <Font name="Inter Regular" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-13.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Medicine">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-15.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Lab">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-8.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Equipment">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-9.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Security">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-6.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Cleaning">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-7.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Food">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-14.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Eq. Sanitation">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-11.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Ext. Transport">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-12.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Int.Transport">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="200.0" prefWidth="100.0" styleClass="pageCard" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../assets/HomeIcons/output-onlinepngtools-10.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <ColorAdjust brightness="0.31" />
+                                 </effect>
+                              </ImageView>
+                              <Label styleClass="cardText" text="Interpreter">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </HBox>

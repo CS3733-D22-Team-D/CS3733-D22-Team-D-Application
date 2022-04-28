@@ -15,9 +15,9 @@
             <children>
                 <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;">
                     <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                             <children>
-                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="API Credits">
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="API Credits">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
@@ -166,9 +166,9 @@
                     <children>
                         <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                             <children>
-                                <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Library Credits">
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Library Credits">
                                             <font>
                                                 <Font name="System Bold" size="23.0" />
                                             </font>
@@ -243,9 +243,9 @@
                     <children>
                         <VBox id="foreground" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #FFFEFE; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                             <children>
-                                <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-color: #4B5B81 #4B5B81; -fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="100.0" style="-fx-background-radius: 7.5 7.5 0 0;" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Resources Utilized">
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardTitle" text="Other Resources Utilized">
                                             <font>
                                                 <Font name="System Bold" size="23.0" />
                                             </font>
@@ -256,7 +256,7 @@
                                     <children>
                                         <Label id="label" text="Special Thanks to: " textAlignment="CENTER" wrapText="true">
                                             <padding>
-                                                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
                                             </padding>
                                  <font>
                                     <Font name="System Bold" size="12.0" />

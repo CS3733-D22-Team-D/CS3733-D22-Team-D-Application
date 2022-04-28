@@ -56,11 +56,19 @@ public class ShowRequestPaths {
       startingOffset = requests.size() / 2 * lineOffset;
       for (Request request : requests) {
         if (request.requiresTransport()) {
-          makeLinePath(
-              request.getRoomID(),
-              request.transportFromRoomID(),
-              getLineColor(request.requestType()));
-          numberOfLines++;
+          if (request.requestType().equals("Patient Transport Request")) {
+            makeLinePath(
+                request.transportFromRoomID(),
+                request.getRoomID(),
+                getLineColor(request.requestType()));
+            numberOfLines++;
+          } else {
+            makeLinePath(
+                request.getRoomID(),
+                request.transportFromRoomID(),
+                getLineColor(request.requestType()));
+            numberOfLines++;
+          }
         }
       }
       filterByFloor(currentFloor);
