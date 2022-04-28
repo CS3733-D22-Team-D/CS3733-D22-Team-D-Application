@@ -13,9 +13,9 @@
 
 <HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.DefaultController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+      <VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox maxHeight="180.0" maxWidth="600.0" prefHeight="178.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="178.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
                <children>
                   <Label text="General" textFill="#052f92">
                      <font>
@@ -25,9 +25,9 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMapDashboard" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -56,7 +56,7 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="125.0" layoutY="10.0" onMouseClicked="#switchToAPI" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="125.0" layoutY="10.0" onMouseClicked="#switchToAPI" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -100,7 +100,7 @@
                   </DropShadow>
                </effect>
             </VBox>
-            <VBox maxHeight="270.0" maxWidth="600.0" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-radius: 7.5; -fx-background-color: white;" VBox.vgrow="ALWAYS">
                <children>
                   <Label text="Requests" textFill="#052f92">
                      <font>
@@ -110,11 +110,11 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMedicine" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-13.png" />
                                  </image>
@@ -141,9 +141,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToLabRequest" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-15.png" />
                                  </image>
@@ -170,9 +170,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToEquipment" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-8.png" />
                                  </image>
@@ -199,9 +199,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" onMouseClicked="#switchToSecurity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-9.png" />
                                  </image>
@@ -228,9 +228,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="610.0" layoutY="10.0" onMouseClicked="#switchToSanitation" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-6.png" />
                                  </image>
@@ -259,11 +259,11 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" onMouseClicked="#switchToMeal" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-7.png" />
                                  </image>
@@ -290,9 +290,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEquipSani" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-14.png" />
                                  </image>
@@ -319,9 +319,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" onMouseClicked="#switchToExtPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-11.png" />
                                  </image>
@@ -348,9 +348,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="160.0" layoutY="10.0" onMouseClicked="#switchToPatientTransport" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-12.png" />
                                  </image>
@@ -377,9 +377,9 @@
                               </DropShadow>
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;">
+                        <VBox alignment="CENTER" layoutX="460.0" layoutY="10.0" onMouseClicked="#switchToLanguage" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 7.5;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                                  <image>
                                     <Image url="@../assets/HomeIcons/output-onlinepngtools-10.png" />
                                  </image>
