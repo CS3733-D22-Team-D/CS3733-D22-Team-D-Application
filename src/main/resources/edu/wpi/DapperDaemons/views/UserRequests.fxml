@@ -13,11 +13,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="542.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.RequestController">
+<HBox prefHeight="542.0" prefWidth="696.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.DapperDaemons.controllers.RequestController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pageBackground" stylesheets="@../styling/lightMode.css" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 7.5;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <effect>
                   <DropShadow>
                      <color>
@@ -28,7 +28,7 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ToggleButton id="tableToggle" fx:id="createdRequests" mnemonicParsing="false" onAction="#selectCreated" prefHeight="75.0" prefWidth="1000.0" selected="true" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Created Requests" textFill="WHITE" HBox.hgrow="ALWAYS">
+                        <ToggleButton fx:id="createdRequests" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#selectCreated" prefHeight="75.0" prefWidth="1000.0" selected="true" styleClass="userToggleButton" text="Created Requests" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -36,26 +36,26 @@
                               <ToggleGroup fx:id="requestTables" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton id="tableToggle" fx:id="assignedRequests" mnemonicParsing="false" onAction="#selectAssigned" prefHeight="75.0" prefWidth="1000.0" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Assigned Requests" textFill="WHITE" toggleGroup="$requestTables">
+                        <ToggleButton fx:id="assignedRequests" mnemonicParsing="false" onAction="#selectAssigned" prefHeight="75.0" prefWidth="1000.0" styleClass="userToggleButton" text="Assigned Requests" textFill="WHITE" toggleGroup="$requestTables">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton id="tableToggle" fx:id="relevantRequests" mnemonicParsing="false" onAction="#selectRelevant" prefHeight="75.0" prefWidth="1000.0" styleClass="tableToggle" stylesheets="@../../../../toggleButton.css" text="Relevant Requests" textFill="WHITE" toggleGroup="$requestTables">
+                        <ToggleButton fx:id="relevantRequests" mnemonicParsing="false" onAction="#selectRelevant" prefHeight="75.0" prefWidth="1000.0" styleClass="userToggleButton" text="Relevant Requests" textFill="WHITE" toggleGroup="$requestTables">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </ToggleButton>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="24.0" prefWidth="508.0" style="-fx-background-color: #4b5b81;" />
-                  <StackPane minWidth="-Infinity" pickOnBounds="false" prefHeight="150.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="24.0" prefWidth="508.0" style="-fx-background-color: FFFFFF; -fx-border-color: c4c4c4; -fx-border-width: 0 1 0 1;" />
+                  <StackPane minWidth="-Infinity" pickOnBounds="false" prefHeight="150.0" prefWidth="600.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 0 0 7.5 7.5;" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox fx:id="createBox" pickOnBounds="false" prefHeight="177.0" prefWidth="508.0" visible="false">
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="createTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
@@ -75,7 +75,7 @@
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="assignedTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
@@ -95,7 +95,7 @@
                            <children>
                               <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" HBox.hgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                        <content>
                                           <GridPane fx:id="relevantTable" pickOnBounds="false" vgap="10.0">
                                              <columnConstraints>
@@ -112,6 +112,13 @@
                            </children>
                         </VBox>
                      </children>
+                     <effect>
+                        <DropShadow offsetX="-2.0" offsetY="-2.0" spread="0.05">
+                           <color>
+                              <Color opacity="0.15068493783473969" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </StackPane>
                </children>
             </VBox>

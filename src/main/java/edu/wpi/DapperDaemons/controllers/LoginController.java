@@ -119,6 +119,7 @@ public class LoginController extends AppController {
         Authentication.sendAuthCode(acc);
         break;
       case "rfid":
+        RFIDPageController.user = DAOFacade.getEmployee(username.getText());
         loadRFID();
         break;
       default:
