@@ -20,7 +20,7 @@
     <children>
           <VBox id="background" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="628.0" prefWidth="240.0" style="-fx-border-color: #C4C4C4; -fx-border-width: 0 2 0 0;" HBox.hgrow="ALWAYS">
               <children>
-            <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="225.0">
+            <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="201.0">
                <children>
                         <ToggleButton id="foreground" fx:id="homeButton" alignment="CENTER_LEFT" graphicTextGap="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goUserHome" pickOnBounds="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #059DA7; -fx-background-radius: 20;" text="Home" textAlignment="RIGHT" textFill="WHITE">
                             <graphic>
@@ -183,7 +183,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#switchToUserRequests" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../styling/lightMode.css">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
                                     <Pane fx:id="reqContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
@@ -237,7 +237,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openNotifications" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../styling/lightMode.css">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
                                     <Pane fx:id="notContainer" prefHeight="138.0" prefWidth="157.0" VBox.vgrow="ALWAYS">
                                        <children>
@@ -291,7 +291,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" onMouseClicked="#openAccountSettings" onMouseEntered="#hoveredButton" onMouseExited="#unhoveredButton" prefHeight="180.0" prefWidth="150.0" styleClass="pageCard">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 7.5 7.5 0 0;" stylesheets="@../styling/lightMode.css">
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="150.0" prefWidth="150.0" stylesheets="@../styling/lightMode.css">
                                  <children>
                                     <Pane fx:id="settingContainer" prefHeight="128.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
                                        <children>
