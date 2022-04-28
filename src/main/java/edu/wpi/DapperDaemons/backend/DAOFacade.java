@@ -292,6 +292,22 @@ public class DAOFacade {
     return toReturn;
   }
 
+  /**
+   * Gets all equipment of a type on a specified floor
+   * @param type - the type of equipment
+   * @param floor - the floor as a number/string
+   */
+  public static List<MedicalEquipment> getEquipmentOnFloor(MedicalEquipment.EquipmentType type, String floor) {
+    List<MedicalEquipment> toReturn = new ArrayList<>();
+    List<String> locIDSFloor = DAOPouch.getLocationDAO().filter(4, floor).values().stream()
+            .map(Location::getNodeID)
+            .collect(Collectors.toList());
+    for (MedicalEquipment equip : DAOPouch.getMedicalEquipmentDAO().getAll().values()) {
+        if (locIDSFloor.contains(equip.getLocationID())) toReturn.add(equip);
+    }
+    return toReturn;
+  }
+
   public static List<Request> getRequestsByFloor(String floor) {
     List<Request> allReqs = new ArrayList<>();
     Collection<String> floorIDS =
