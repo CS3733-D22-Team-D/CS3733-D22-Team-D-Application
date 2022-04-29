@@ -59,30 +59,37 @@ public class Table<R> {
         ((TableObject) type).tableName(),
         TableListeners.eventListener(
             () -> {
-              Platform.runLater(
-                  () -> {
-                    if (type instanceof Request) {
-                      List<R> req =
-                          new ArrayList<R>(
-                              DAOPouch.getDAO((TableObject) type).filter(6, "REQUESTED").values());
-                      List<R> inprog =
-                          new ArrayList<R>(
-                              DAOPouch.getDAO((TableObject) type)
-                                  .filter(6, "IN_PROGRESS")
-                                  .values());
-                      req.addAll(inprog);
+              new Thread(
+                      () -> {
+                        if (type instanceof Request) {
+                          List<R> req =
+                              new ArrayList<R>(
+                                  DAOPouch.getDAO((TableObject) type)
+                                      .filter(6, "REQUESTED")
+                                      .values());
+                          List<R> inprog =
+                              new ArrayList<R>(
+                                  DAOPouch.getDAO((TableObject) type)
+                                      .filter(6, "IN_PROGRESS")
+                                      .values());
+                          req.addAll(inprog);
 
-                      for (int col : filters.keySet()) {
-                        req.removeIf(
-                            r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
-                      }
-                      difference(req, rows);
-                    } else {
-                      List<R> req =
-                          new ArrayList<R>(DAOPouch.getDAO((TableObject) type).getAll().values());
-                      difference(req, rows);
-                    }
-                  });
+                          for (int col : filters.keySet()) {
+                            req.removeIf(
+                                r ->
+                                    !filters
+                                        .get(col)
+                                        .contains(((TableObject) r).getAttribute(col)));
+                          }
+                          difference(req, rows);
+                        } else {
+                          List<R> req =
+                              new ArrayList<R>(
+                                  DAOPouch.getDAO((TableObject) type).getAll().values());
+                          difference(req, rows);
+                        }
+                      })
+                  .start();
             }));
   }
 
@@ -95,15 +102,16 @@ public class Table<R> {
         allTableNames,
         TableListeners.eventListener(
             () -> {
-              Platform.runLater(
-                  () -> {
-                    List<R> updated = (List<R>) new ArrayList<>(DAOFacade.getAllRequests());
-                    for (int col : filters.keySet()) {
-                      updated.removeIf(
-                          r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
-                    }
-                    difference(updated, rows);
-                  });
+              new Thread(
+                      () -> {
+                        List<R> updated = (List<R>) new ArrayList<>(DAOFacade.getAllRequests());
+                        for (int col : filters.keySet()) {
+                          updated.removeIf(
+                              r -> !filters.get(col).contains(((TableObject) r).getAttribute(col)));
+                        }
+                        difference(updated, rows);
+                      })
+                  .start();
             }));
   }
 
@@ -116,11 +124,13 @@ public class Table<R> {
         allTableNames,
         TableListeners.eventListener(
             () -> {
-              Platform.runLater(
-                  () -> {
-                    difference(
-                        (List<R>) DAOFacade.getRequestsByFloor(MapDashboardController.floor), rows);
-                  });
+              new Thread(
+                      () -> {
+                        difference(
+                            (List<R>) DAOFacade.getRequestsByFloor(MapDashboardController.floor),
+                            rows);
+                      })
+                  .start();
             }));
   }
 
@@ -136,11 +146,20 @@ public class Table<R> {
               .equals(((TableObject) update.get(j)).getAttribute(1))) {
             added = true;
             dif.remove(update.get(j));
-            updateRow(update.get(j), cons.get(i));
+            int finalJ = j;
+            int finalI1 = i;
+            Platform.runLater(
+                () -> {
+                  updateRow(update.get(finalJ), cons.get(finalI1));
+                });
           }
         }
         if (!added) {
-          addRow(cons.get(i), true);
+          int finalI = i;
+          Platform.runLater(
+              () -> {
+                addRow(cons.get(finalI), true);
+              });
         }
       } else {
         dif.remove(cons.get(i));
@@ -148,7 +167,10 @@ public class Table<R> {
     }
     dif.remove(null);
     for (R r : dif) {
-      removeRow(r);
+      Platform.runLater(
+          () -> {
+            removeRow(r);
+          });
     }
   }
 
